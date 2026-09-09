@@ -1,0 +1,122 @@
+[
+  {
+    "id": "2603.16910",
+    "label": "TerraLingua",
+    "topic": "cumulative-culture",
+    "artifacts": [
+      {
+        "url": "https://arxiv.org/abs/2603.16910",
+        "resolved_url": "https://arxiv.org/abs/2603.16910",
+        "path": "sources/papers/2603.16910/abstract.html",
+        "bytes": 42402,
+        "sha256": "07016bd6046b6354c349c202f2c4f083ee924ff6dd702f5dcc5f341d76105afe"
+      },
+      {
+        "url": "https://arxiv.org/pdf/2603.16910",
+        "resolved_url": "https://arxiv.org/pdf/2603.16910",
+        "path": "sources/papers/2603.16910/paper.pdf",
+        "bytes": 5067550,
+        "sha256": "7ce4c980b2666bfd088207f4fbabab4f8fd626a84cdc7ba48c1f246dd3d45e07"
+      }
+    ],
+    "metadata": {
+      "viewport": [
+        "width=device-width, initial-scale=1"
+      ],
+      "msapplication-TileColor": [
+        "#da532c"
+      ],
+      "theme-color": [
+        "#ffffff"
+      ],
+      "description": [
+        "Abstract page for arXiv paper 2603.16910: TerraLingua: Emergence and Analysis of Open-endedness in LLM Ecologies"
+      ],
+      "og:type": [
+        "website"
+      ],
+      "og:site_name": [
+        "arXiv.org"
+      ],
+      "og:title": [
+        "TerraLingua: Emergence and Analysis of Open-endedness in LLM Ecologies"
+      ],
+      "og:url": [
+        "https://arxiv.org/abs/2603.16910v1"
+      ],
+      "og:image": [
+        "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+      ],
+      "og:image:secure_url": [
+        "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+      ],
+      "og:image:width": [
+        "1200"
+      ],
+      "og:image:height": [
+        "700"
+      ],
+      "og:image:alt": [
+        "arXiv logo"
+      ],
+      "og:description": [
+        "As autonomous agents increasingly operate in real-world digital ecosystems, understanding how they coordinate, form institutions, and accumulate shared culture becomes both a scientific and practical priority. This paper introduces TerraLingua, a persistent multi-agent ecology designed to study open-ended dynamics in such systems. Unlike prior large language model simulations with static or consequence-free environments, TerraLingua imposes resource constraints and limited lifespans for the agents. As a result, agents create artifacts that persist beyond individuals, shaping future interactions and selection pressures. To characterize the dynamics, an AI Anthropologist systematically analyzes agent behavior, group structure, and artifact evolution. Across experimental conditions, the results reveal the emergence of cooperative norms, division of labor, governance attempts, and branching artifact lineages consistent with cumulative cultural processes. Divergent outcomes across experimental runs can be traced back to specific innovations and organizational structures. TerraLingua thus provides a platform for characterizing the mechanisms of cumulative culture and social organization in artificial populations, and can serve as a foundation for guiding real-world agentic populations to socially beneficial outcomes."
+      ],
+      "twitter:site": [
+        "@arxiv"
+      ],
+      "twitter:card": [
+        "summary"
+      ],
+      "twitter:title": [
+        "TerraLingua: Emergence and Analysis of Open-endedness in LLM Ecologies"
+      ],
+      "twitter:description": [
+        "As autonomous agents increasingly operate in real-world digital ecosystems, understanding how they coordinate, form institutions, and accumulate shared culture becomes both a scientific and..."
+      ],
+      "twitter:image": [
+        "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+      ],
+      "twitter:image:alt": [
+        "arXiv logo"
+      ],
+      "citation_title": [
+        "TerraLingua: Emergence and Analysis of Open-endedness in LLM Ecologies"
+      ],
+      "citation_author": [
+        "Paolo, Giuseppe",
+        "Warner, Jamieson",
+        "Shahrzad, Hormoz",
+        "Hodjat, Babak",
+        "Miikkulainen, Risto",
+        "Meyerson, Elliot"
+      ],
+      "citation_date": [
+        "2026/03/06"
+      ],
+      "citation_online_date": [
+        "2026/03/06"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2603.16910"
+      ],
+      "citation_arxiv_id": [
+        "2603.16910"
+      ],
+      "citation_abstract": [
+        "As autonomous agents increasingly operate in real-world digital ecosystems, understanding how they coordinate, form institutions, and accumulate shared culture becomes both a scientific and practical priority. This paper introduces TerraLingua, a persistent multi-agent ecology designed to study open-ended dynamics in such systems. Unlike prior large language model simulations with static or consequence-free environments, TerraLingua imposes resource constraints and limited lifespans for the agents. As a result, agents create artifacts that persist beyond individuals, shaping future interactions and selection pressures. To characterize the dynamics, an AI Anthropologist systematically analyzes agent behavior, group structure, and artifact evolution. Across experimental conditions, the results reveal the emergence of cooperative norms, division of labor, governance attempts, and branching artifact lineages consistent with cumulative cultural processes. Divergent outcomes across experimental runs can be traced back to specific innovations and organizational structures. TerraLingua thus provides a platform for characterizing the mechanisms of cumulative culture and social organization in artificial populations, and can serve as a foundation for guiding real-world agentic populations to socially beneficial outcomes."
+      ]
+    },
+    "text_extraction_ok": true
+  },
+  {
+    "repo": "cognizant-ai-lab/terralingua",
+    "topic": "cumulative-culture",
+    "path": "repositories/cognizant-ai-lab__terralingua",
+    "commit": "bf276dbe33e66b2c3b592df27df8ca42c489a4c7",
+    "commit_date": "2026-08-28T18:21:27+02:00",
+    "licenses": [
+      "LICENSE"
+    ]
+  }
+]

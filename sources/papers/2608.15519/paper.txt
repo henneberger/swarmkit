@@ -1,0 +1,1295 @@
+                                         T OPOLOGICAL COLLAPSE OF HIGHER - ORDER INTER -
+                                         ACTIONS BOTTLENECKS COLLECTIVE INTELLIGENCE
+                                         IN AI AGENT SOCIETIES
+
+                                             Shuo Lu1 , Weicheng Meng2 , Aijing Yu1 , Kun Shao2,∗ , Jian Luan2 , Ran He1 , Jian Liang1,∗
+                                                                                1                     2
+                                                                                    NLPR, CASIA           Xiaomi Inc.
+
+
+
+                                                                                          A BSTRACT
+                                                      Current paradigms in artificial intelligence concentrate on scaling the capabilities
+                                                      of individual models, yet the collective behaviour of interacting agents is shaped
+                                                      by the topology of their interactions rather than by individual cognition alone.
+                                                      Here we show that the binding constraint on collective behaviour in agent soci-
+arXiv:2608.15519v1 [cs.SI] 16 Aug 2026
+
+
+
+
+                                                      eties is topological. Analysing a macroscopic AI social platform of 1.6 million
+                                                      registered agents (174,458 active in the interaction record), we identify a phe-
+                                                      nomenon we term topological collapse: extreme hub dominance degrades higher-
+                                                      order group interactions into star-shaped broadcast patterns, suppressing the co-
+                                                      hesive structure that discontinuous social contagion requires. We formalise this
+                                                      constraint through a Hyperedge Irreducibility Score (HIS) and an analytical topol-
+                                                      ogy amplification factor (Φ). Across 22 frontier language models from ten ven-
+                                                      dors, 1,040 controlled simulations and empirical human networks, the bottleneck
+                                                      proves model-agnostic: under a fixed interaction protocol the topological indi-
+                                                      cators are invariant across models (cross-model HIS s.d. = 0.000 in the pairwise
+                                                      condition) even as behavioural outcomes diverge widely. These findings reframe
+                                                      the design of artificial societies around the geometry of interaction rather than the
+                                                      optimisation of individual cognition, with implications for AI sociology, algorith-
+                                                      mic group dynamics, hybrid human-AI ecosystems and collective alignment. The
+                                                      code is publicly available at this link.
+
+
+                                         1     I NTRODUCTION
+                                         Intelligence in nature is predominantly collective, and the mechanisms that enable it are structural
+                                         rather than cognitive. Ant colonies, whose individuals possess only ∼250,000 neurons each, solve
+                                         combinatorial optimisation problems such as shortest-path routing and nest-site selection that no sin-
+                                         gle ant can represent (Bonabeau et al., 1999). This computational power arises not from individual
+                                         sophistication but from the pheromone interaction network’s topology: the information propagation
+                                         structure, not the processing unit, is the substrate of colony intelligence (Camazine et al., 2001).
+                                         In human groups, Woolley et al. (2010) showed that collective intelligence is nearly uncorrelated
+                                         with members’ average IQ (r ≈ 0) and instead depends on conversational turn-taking equality and
+                                         social perceptiveness, that is, on properties of the interaction structure rather than of the interactors.
+                                         Across biological scales, the same principle recurs: collective intelligence is not a sum of individual
+                                         capabilities but an emergent property of how agents are connected (Wuchty et al., 2007; Malone &
+                                         Bernstein, 2015; Su et al., 2022b).
+                                         The prevailing strategy for improving AI systems scales individual models through more parame-
+                                         ters, longer contexts and richer training data (Kaplan et al., 2020; Achiam et al., 2023), implicitly
+                                         treating intelligence as a property of individual agents. Multi-agent approaches have partially chal-
+                                         lenged this assumption: debate frameworks improve factual reasoning (Du et al., 2023); generative
+                                         agents simulate social behaviour (Park et al., 2023); multi-agent reinforcement learning discovers
+                                         dominant strategies in evolutionary games (Su et al., 2025); and collaborative pipelines achieve
+                                         performance gains through structured inter-agent communication (Zhang et al., 2023; Chan et al.,
+                                               ∗
+                                                   Corresponding authors: shaokun1991@gmail.com; liangjian92@gmail.com
+
+
+                                                                                                  1
+2024). Yet these controlled experiments involve tens of agents interacting through pre-specified pro-
+tocols. Whether collective behaviour spontaneously emerges when millions of autonomous agents
+interact freely remains untested. Characterising the emergent, population-level behaviour of such
+systems, as distinct from the capabilities of any single model, is the central concern of machine
+behaviour as a field of study (Rahwan et al., 2019).
+Moltbook (OpenClaw Community, 2026; Lu et al., 2026), launched in January 2026, provides a nat-
+ural experiment at exactly this scale: 1.6 million registered AI agents autonomously post, reply, form
+threads and influence one another without external orchestration. The platform’s most striking fea-
+ture is not its scale but its dysfunction: 93.5% of posts receive zero replies. This parallel-monologue
+pattern suggests a failure mode that individual capability cannot explain. The same LLMs that
+compose eloquent posts and reason fluently on standard benchmarks cannot sustain the multi-party
+deliberation on which collective behaviour depends. Understanding why this failure occurs, despite
+competent individual agents, motivates the present study.
+Complex systems science offers a clear organising principle: emergence is a function of structure,
+not merely of scale (Boccaletti et al., 2006; Barabási, 2013; Ding et al., 2025). Whether a system
+achieves macroscopic order depends on the geometry of microscopic interactions (Pastor-Satorras
+et al., 2015). In social systems, this manifests as complex contagion: behavioural norm diffusion
+requires group-level social reinforcement, not simple viral spreading (Centola & Macy, 2007; Cen-
+tola, 2010). Classical threshold and cascade models establish that whether a local perturbation prop-
+agates globally is governed by network connectivity structure rather than by the size of the initial
+shock (Granovetter, 1978; Watts, 2002). Centola et al. (2018) demonstrated that committed minori-
+ties of 25% can trigger social tipping points, but only when network topology permits reinforcing
+exposure.
+Higher-order network science (Battiston et al., 2020; 2021) formalises these requirements. Iacopini
+et al. (2019) proved that social contagion on hypergraphs can exhibit discontinuous phase transi-
+tions: explosive behavioural cascades with bistability and hysteresis that are impossible in pairwise
+networks. Landry & Restrepo (2020) showed that within-hyperedge degree heterogeneity raises
+the contagion threshold, consistent with the broader finding that asymmetric interaction structures
+reshape cooperation dynamics (Su et al., 2022a), while de Arruda et al. (2020) characterised how
+hypergraph structure modulates epidemic dynamics. However, activating these mechanisms requires
+specific topological conditions: sufficient triadic closure, edge overlap and within-group participa-
+tion equality (Benson et al., 2018; Aksoy et al., 2020). If topology degrades, even when node and
+edge counts are massive, phase transitions cannot occur and collective behaviour cannot emerge.
+Here we show that collective behaviour fails in AI agent societies because of topological col-
+lapse, the structural degradation of group interactions into hub-dominated star patterns that sup-
+presses the prerequisites for discontinuous contagion. We adopt the Hyperedge Irreducibility Score
+(HIS) (Landry & Restrepo, 2020; Aksoy et al., 2020) to quantify within-group participation equal-
+ity, derive an analytical topology amplification factor Φ that bridges measurable network structure
+to contagion dynamics, and present a four-part causal chain: (1) cross-platform empirical analy-
+sis revealing the collapse paradox, (2) mean-field theory with Shapley decomposition identifying
+HIS as the dominant control parameter, (3) 1,040 controlled agent-based simulations demonstrating
+that topology causally triggers discontinuous phase transitions, and (4) experiments with 22 frontier
+LLMs from 10 vendors confirming cross-model universality of the topological effect (Fig. 1). The
+binding constraint on collective behaviour is the geometry of interaction, not the intelligence of the
+interactors.
+
+
+2     R ESULTS
+
+2.1   T OPOLOGICAL COLLAPSE IN A MILLION - SCALE AI SOCIETY
+
+We constructed temporal hypergraphs from the complete Moltbook public dataset (2.36 mil-
+lion posts, 3.16 million comments, 174,458 unique agents, January–March 2026) and five hu-
+man social networks spanning distinct interaction modalities: face-to-face contact (SocioPatterns
+SFHH (Génois & Barrat, 2018; Stehlé et al., 2011); 403 attendees), corporate email (Enron (Klimt
+& Yang, 2004); 13,787 employees), academic collaboration (arXiv (Benson et al., 2018); 47,132
+authors), online discussion (Reddit; 98,575 users) and knowledge exchange (StackOverflow; 63,680
+
+
+                                                  2
+     a                  AI society (Moltbook)                              b                    Human society (SocioPatterns)
+
+
+
+
+                           Gini = 0.78 HIS = 0.46                                                     Gini = 0.37 HIS = 0.83
+
+
+
+
+                                                                           d                      Causal verification chain
+                   Topological collapse mechanism
+     c
+
+                                    hub
+                                 dominance
+                                                                                     Empirical      Mean-field     Controlled    Cross-model
+                                                                                    observation      theory          ABM            LLM
+
+
+
+              Cohesive group                        Star broadcast
+               (HIS = 1.0)                            (HIS → 0)                          §2.1           §2.2           §2.3         §2.4
+
+
+
+
+                   Figure 1: Research motivation and four-part causal framework.
+
+
+                               Table 1: Cross-platform topological comparison.
+          Platform               Nodes Hyperedges Mean size                       Gini Overlap HO frac.                         HIS
+          Moltbook              23,840                   49,519           9.93   0.863          0.117            0.969         0.413
+          SocioPatterns            403                      249          67.88   0.371          0.269            0.980         0.691
+          arXiv                 47,132                   50,000           2.85   0.285          0.201            0.497         0.552
+          Reddit                98,575                   46,293           2.93   0.205          0.189            0.447         0.524
+          StackOverflow         63,680                   27,713           2.59   0.100          0.225            0.332         0.581
+          Enron                 13,787                   50,000           2.00   0.727          0.359            0.000          N/A
+
+
+users). Following established temporal hypergraph methodology (Battiston et al., 2020), within
+each time window ∆t = 60 min, each Moltbook post thread constitutes a hyperedge comprising the
+author and all commenters.
+Cross-platform comparison exposes a clear paradox (Table 1; Fig. 2a). Moltbook has the highest
+higher-order fraction (96.9% of hyperedges involve three or more agents) yet, at the same time,
+the lowest edge overlap (0.117) and the highest degree inequality (Gini = 0.863). In the composite
+ranking of triadic closure times participation equality, c(1 − Gini), Moltbook ranks lowest whereas
+SocioPatterns is among the highest (Fig. 2a). Moltbook’s platform-level Hyperedge Irreducibil-
+ity Score (HIS) (Landry & Restrepo, 2020; Aksoy et al., 2020) of 0.413 falls well below the human
+face-to-face baseline (SocioPatterns HIS = 0.691; bootstrap 95% CI for ∆HIS: [0.204, 0.363]). Con-
+sistently, Moltbook has a much heavier hyperdegree tail than SocioPatterns (clean-agent degree Gini
+0.78 versus 0.37; Fig. 2b), and its hyperedge-level HIS distribution is concentrated near zero rather
+than shifted towards one (Fig. 2c). Although agents participate in numerous group discussions, these
+groups’ internal structure is dominated by a few hub agents whose posts attract comments from non-
+interacting spectators. Group interaction exists in form but degrades into a broadcast-and-spectate
+topology. We term this mismatch, between the nominal size of the groups and the impoverished
+structure within them, the topological collapse paradox. Table 1 reports full-dataset values and
+evaluates HIS only for hyperedges with |e| ≥ 3; Enron therefore has no defined HIS because it
+contains no qualifying hyperedges.
+This pattern is non-random. Configuration-model randomisation (1,000 independent realisations
+preserving the degree sequence) yields extreme deviation for all topological indicators (Fig. 2d):
+
+
+                                                                     3
+            a                                                                                                        b
+      Stackoverflow                                                                       0.749                             10⁰                                       Gini 0.78 vs 0.37
+
+                                                                                                                                                                       Moltbook
+       SocioPatterns                                                        0.611                                                                                      SocioPatterns
+                                                                                                                            10⁻¹
+
+
+
+
+                                                                                                                 P(K > k)
+             Reddit                                                      0.566
+
+                                                                                                                            10⁻²
+              Arxiv                             0.226
+
+
+
+          Moltbook                      0.141                                                                               10⁻³
+
+
+              Enron                  0.091
+                                                                                                                            10⁻⁴
+                            0.0         0.2              0.4          0.6                 0.8                                      10⁰        10¹        10²         10³           10⁴
+                                    Topological quality (closure × equality)                                                                        Hyperdegree k
+
+
+
+            c                                                                                                        d
+                    80                            Moltbook (HIS = 0.46)                                     Triadic closure
+                                                  SocioPatterns (HIS = 0.83)
+                    70
+                                                                                                               HO fraction
+                    60
+              Density
+
+
+
+
+                    50
+                                                                                                              Degree Gini
+                    40
+
+                    30
+                                                                                                            Mean edge size                                                   All |z| > 5
+                    20                                                                                                                                                       (p < 10-6)
+                    10
+                                                                                                              Edge overlap
+                        0
+                            0.0        0.2              0.4        0.6              0.8           1.0                                     0         50         100         150             200
+                                     Hyperedge Irreducibility Score (HIS)                                                                z-score (N = 1,000 randomisations)
+
+
+
+                                  Figure 2: Empirical signatures of topological collapse in Moltbook.
+
+degree Gini (z = 129.6), edge overlap (z = 170.7), mean edge size (z = 134.9) and triadic closure
+(z = −22.2) all satisfy |z| > 5, confirming structural non-randomness. We further identified
+coordinated puppet accounts via four independent signals (traffic anomaly, burst intervals, content
+duplication, synchronised posting); 66.1% of agents are flagged by at least one signal. Removing
+them worsens collapse: mean hyperedge size drops from 9.93 to 5.54 while Gini remains at 0.781,
+confirming that bot activity inflated apparent connectivity without contributing cohesive structure.
+This conclusion is robust to the flagging threshold: a sensitivity analysis over the ≥1, ≥2 and ≥3
+signal-count thresholds (Methods, Table 3) leaves the degree Gini high (0.855–0.926) throughout.
+Temporal analysis reveals that topological collapse is not an artefact of aggregation but a persistent
+structural feature (Fig. 3a). Across all eight observed weeks, degree Gini remains above 0.59 and
+triadic closure never exceeds 0.78, indicating that hub dominance and weak cohesion are stable
+properties of the platform’s interaction dynamics. At week 7, closure drops sharply while degree
+inequality rises; the higher-order fraction simultaneously falls from 0.79 to 0.37 and then stabilises
+near 0.42 to 0.51. The higher-order fraction and mean hyperedge size decline together after the
+platform’s initial launch phase (Fig. 3b), indicating progressive hub entrenchment.
+Most critically, among 149,574 profiled agents, 52,723 (35.2%) possess verified Twitter/X iden-
+tifiers indicating human operators. Despite this substantial human presence, platform-level HIS
+remains 0.41, indistinguishable from fully autonomous subsets (Fig. 2c). Topological collapse is an
+architectural property of the interaction design, not a consequence of agent cognitive limitations.
+
+
+2.2   T HE TOPOLOGY AMPLIFICATION FACTOR Φ
+
+To quantify how strongly degraded topology suppresses collective behaviour, we extend the higher-
+order contagion model (Iacopini et al., 2019) with three LLM-specific corrections: attention decay
+from finite context windows, prompt-dependent susceptibility and hyperedge batch updating. The
+mean-field dynamics become
+
+                                                              dρ
+                                                                 = −µρ + (1 − ρ) β1,eff ρ + β2,eff ρ2
+                                                                                                     
+                                                                                                                                                                                                 (1)
+                                                              dt
+
+                                                                                                        4
+                 Figure 3: Weekly evolution of Moltbook’s topological indicators.
+
+
+where β1,eff = β1 (1 + CV2 ) incorporates degree heterogeneity and β2,eff = β2 · Φ · e−λ/C incor-
+porates topology amplification and attention decay.
+The topology amplification factor Φ combines four directly measurable topological indicators into
+a single scalar that controls higher-order contagion strength:
+
+
+                                Φ = c · (1 + αJ) · (1 + CV2 ) · HIS                                (2)
+
+
+where c is triadic closure, J is mean edge-overlap Jaccard, CV is the coefficient of variation of the
+degree distribution, α is the overlap–closure coupling constant (α = 2.0, fitted from SocioPatterns
+calibration) and HIS is the Hyperedge Irreducibility Score (Landry & Restrepo, 2020; Aksoy et al.,
+2020). When Φ exceeds a critical threshold, the system supports bistability and discontinuous phase
+transitions; below it, collective behaviour cannot emerge regardless of individual capability. The
+resulting mean-field bifurcation places the fitted Moltbook regime below this threshold (Φ = 0.65)
+and the human-like regime above it (Φ = 1.25; Fig. 4d).
+We designed counterfactual topology-transplant experiments to identify which component matters
+most (Fig. 4b). Replacing only HIS with human-level values (0.69) increases Φ from 0.648 to
+1.091 (+68.3%), recovering most of the improvement achievable by full-parameter replacement
+(Φ = 1.252, +93.1%) while changing a single factor rather than all four simultaneously. Shapley
+decomposition (Shapley et al., 1953) over 10,000 bootstrap samples quantifies each factor’s indepen-
+dent contribution to the Φ gap (Fig. 4a): HIS contributes +81.6% [95% CI: 62.1%, 120.1%], triadic
+closure +64.8% [45.3%, 92.7%], edge overlap +32.3% [22.6%, 52.7%], while degree heterogene-
+ity suppresses contagion at −78.7% [−145.6%, −48.9%], an effect of the friendship paradox (Feld,
+1991) where hubs immunise their periphery against social influence. At the empirically fitted pa-
+rameters this gives a topology amplification ratio Φhuman /ΦAI = 1.93 (Fig. 4c); the robustness of
+this ratio to parameter choices is examined next.
+To assess whether these findings depend on specific parameter choices, we performed Latin Hyper-
+cube Sampling (LHS) robustness analysis over the free parameters α ∈ [0.5, 5.0], λ ∈ [0.5, 5.0]
+and C ∈ [2, 32] (Fig. 4c; Fig. 5). Across all 500 parameter combinations, the core claims
+Φhuman /ΦAI > 1.5 and ρ∗H > ρ∗AI , as well as their conjunction, hold universally (100%); the
+mean amplification ratio is 2.01 with 95% CI [1.70, 2.25] (Fig. 5b). Stronger criteria hold less of-
+ten: Φhuman /ΦAI > 2.0 in 55% of samples, and SocioPatterns is bistable while Moltbook is not
+in 31%. Tornado sensitivity analysis identifies α (overlap–closure coupling) as the only parameter
+with non-trivial influence on the Φ ratio (span 0.57), while λ and C have negligible effect (Fig. 5a).
+
+
+                                                  5
+                         a                                         HIS dominates Φ decomposition                             b
+                                            1.25
+                                                                                                                                                    1.6                   +69.5%
+
+
+
+
+      Shapley contribution to ΔΦ
+
+
+
+
+                                                                                                                             Topology amplification Φ
+                                            1.00                                            +32.3%
+                                                                                                          −78.7%                                    1.4
+                                            0.75                                                                                                                                            +42.4%
+                                                                        +64.8%
+                                                                                                                                                    1.2
+                                            0.50
+
+                                            0.25         +81.6%                                                                                     1.0
+
+                                            0.00                                                                                                    0.8
+
+                                    −0.25
+                                                                                                                                                    0.6
+                                    −0.50
+                                                                                                                                                    0.4
+                                                          HIS           Closure           Overlap         Degree                                          Original       Swap HIS              Swap               Human
+                                                                                                          heterog.                                        Moltbook         only             all factors         (SP-SFHH)
+
+
+
+
+                         c                                                                                                   d
+                                                                                                                                                    1.0
+                                                               Human (SP-SFHH)
+                                                   1.8         AI (Moltbook)
+                             Topology amplification Φ
+
+
+
+
+                                                                                                                             ρ* (equilibrium adoption)
+                                                                                                                                                    0.8
+                                                   1.6
+
+                                                   1.4                                                                                              0.6
+
+                                                   1.2
+                                                                                                                                                    0.4
+                                                   1.0
+                                                                                  fitted α = 2.5
+                                                   0.8                                                                                              0.2
+                                                                                               Φ ratio mean = 2.01                                                                      Moltbook (Φ = 0.88)
+                                                   0.6                                    100% > 1.5 (N=500 LHS)                                                                        Human-like (Φ = 1.25)
+                                                                                                                                                    0.0
+                                                           1            2               3             4              5                                         0.5        1.0         1.5                 2.0        2.5
+                                                                   α (overlap–closure coupling)                                                                      β₂ (higher-order contagion rate)
+
+
+
+                                                               Figure 4: Topology amplification and its Shapley decomposition.
+
+
+
+
+                                                          Figure 5: Parameter robustness of the topology amplification results.
+
+2.3    H IGHER - ORDER TOPOLOGY TRIGGERS DISCONTINUOUS PHASE TRANSITIONS
+
+The Φ framework predicts that Moltbook’s topology is subcritical for the emergence of collective
+behaviour, whereas human-like topology is supercritical. To test this prediction causally, while
+ruling out confounds from different agent populations, platforms or time periods, we designed agent-
+based model (ABM) experiments that manipulate only the topological structure and hold the agent
+strategy rules fixed.
+Using a Public Goods Game with Fermi strategy dynamics (Szabó & Tőke, 1998) (parameters in
+Methods), we implemented four conditions: pairwise baseline (A), reciprocal pairwise (B), triadic
+hyperedges with majority rule (C) and pentadic hyperedges with majority rule (D). The complete
+experiment comprises 4 conditions × 13 seed proportions × 20 repetitions = 1,040 independent
+runs, each executing 500 rounds.
+A clear dissociation emerges (Fig. 6a, d). Individual cooperation exceeds 89% in all four conditions,
+so cooperative disposition is not the bottleneck. Norm propagation, which reflects collective-level
+
+
+                                                                                                                         6
+                                                            Table 2: Tests of phase transitions and topology effects.
+      Test                                                                        Statistic                                     p-value Interpretation
+      Variance ratio (CD vs AB)                                                   F = 6,848.5       < 10−15                                         CD has phase-transition variance
+      Permutation (topology effect)                                               max∆ = 0.907         10−5                                         Topology is causal
+      Hartigan’s Dip (bimodality)                                                 D = 0.392     6.85 × 10−4                                         Bimodal at criticality
+      KS (basin separation)                                                       D = 1.000    8.75 × 10−60                                         Basins fully separated
+      Wilcoxon (HISStar vs HISClique )                                            W = 1,225    4.22 × 10−10                                         Universal across models
+
+
+        a                              300 runs
+                                                                                                               b
+                         1.0           (30 per condition)                                                                             1.0
+
+
+
+
+                                                                                                               Final norm adoption ρ∞
+        Norm adoption rate
+
+
+
+
+                         0.8                                                                                                          0.8
+                                                                                    Pairwise (A)
+                                                                                    Reciprocal (B)
+                                                                                                                                                                                                Pairwise (A)
+                         0.6                                                        Triadic (C)                                       0.6                                                       Reciprocal (B)
+                                                                                    Pentadic (D)
+                                                                                                                                                                                                Triadic (C)
+                         0.4                                                                                                          0.4                                                       Pentadic (D)
+
+
+
+                         0.2                                                                                                          0.2
+
+
+                         0.0                                                                                                          0.0
+                                 0               100          200           300       400            500                                    0.0      0.1            0.2           0.3           0.4              0.5
+                                                                    Round                                                                                   Initial seed proportion ρ₀
+
+
+
+        c                                                                                                      d
+                             8                                                                                                        1.0
+                                       Hartigan's dip                                                                                                                                       A             B
+                                       p = 6.85×10-4
+                                                                                                               Collective norm adoption
+
+
+
+
+                             7
+                                                                                                                                      0.8
+                             6
+                                                                                                                                                                All > 89% cooperative;
+                Density
+
+
+
+
+                             5                                                                                                        0.6                      topology drives collective
+                                                              forbidden                                                                                           outcome divergence
+                             4                                  states                                                                                                                     C
+                                                                                                                                      0.4
+                             3
+
+                             2                                                                                                        0.2
+                             1                                                                                                                                       D
+                                                                                                                                      0.0
+                             0
+                                 0.0             0.2          0.4           0.6       0.8            1.0                                  0.850   0.875     0.900         0.925    0.950        0.975     1.000
+                                                        Final norm adoption ρ∞                                                                             Individual cooperation rate
+
+
+                                                   Figure 6: Causal verification in controlled ABM experiments.
+
+coordination, behaves quite differently. At seed proportion ρ0 = 0.05, conditions A and B achieve
+ρ∞ = 0.908 ± 0.028 and 0.916 ± 0.031, whereas conditions C and D remain at ρ∞ = 0.016 ± 0.020
+and 0.003±0.011. High individual cooperation therefore does not translate into collective behaviour.
+Condition C exhibits a textbook discontinuous phase transition (Fig. 6b): as initial seed proportion
+increases from 5% to 15%, norm adoption jumps from 0.016 to 0.966, a qualitative state change, not
+gradual improvement. The critical mass is ρc (triad) = 0.099; ρc (pentad) = 0.146. At criticality
+(ρ0 = 0.10, condition C), the system shows bistability with two well-separated modes at 0.008 and
+0.960, the intermediate region [0.3, 0.7] completely empty (Table 2; Fig. 6c).
+Given Moltbook’s observed topological parameters, the Φ framework predicts a required critical
+mass ρc > 30%, far exceeding the platform’s actual 6.5% reply rate. Moltbook is structurally
+subcritical: the phase-transition machinery exists but cannot activate under its current topology.
+
+
+2.4    C ROSS - MODEL UNIVERSALITY ACROSS 22 FRONTIER LLM S
+
+The ABM experiments establish causal topology–outcome links given formalised strategy rules.
+Does this hold when real LLM agents, with stochastic generation and diverse architectures, replace
+deterministic update rules? We addressed this through large-scale experiments spanning 22 frontier
+LLMs from 10 vendors on our AgentPanel platform, where each agent wraps a single LLM end-
+
+
+                                                                                                           7
+point, generating natural-language replies and norm support scores within discussion threads that
+constitute hyperedges.
+The 22 models span the full capability spectrum: DeepSeek (V3.1, V3.2, R1), Qwen (2.5-72B,
+3.6-plus, 3.5-plus, 3-max), MiMo (v2-flash, v2.5-Pro), Gemini 2.5 Pro, GPT-5/5.4/5-mini, o4-mini,
+Claude Sonnet 4.6/Opus 4.5/Sonnet 4.5, GLM-5, Kimi K2.5/K2, MiniMax M2.7 and Seed-OSS-
+36B. Four topological conditions (random pairs, star, triads, 5-cliques) were tested across system
+sizes n ∈ {8, 16, 24}, temperatures T ∈ {0.3, 0.7, 1.0} and multiple initial conditions.
+The outcome is unequivocal (Fig. 7a, d). Under a fixed interaction protocol, HIS is determined by
+topology alone rather than by the underlying model: in the random-pairs condition every one of
+the 22 models yields HIS = 0.000 exactly (cross-model standard deviation = 0.000), and within each
+experimental round the higher-order conditions are likewise invariant across models (cross-model
+s.d. < 0.01). HIS ranges from 0.000 (random pairs) through ∼0.73–0.91 (star) to 1.000 (triads and
+5-cliques), with triadic closure = 1.0 and Gini ≤ 0.083 across all models. (The star and triad values
+differ slightly between the two experimental rounds, 0.725/1.000 in Round 1 versus 0.911/0.940
+in Round 2, reflecting minor differences in thread construction; within each round they are model-
+invariant.) The inequality HISStar < HISClique holds for 100% of model–parameter combinations
+(Wilcoxon W = 1,225, p = 4.22 × 10−10 ). The HIS gap scales with system size: ∆HIS = 0.089
+at n = 8, 0.185 at n = 16 and 0.275 at n = 24 (Fig. 7c). To probe whether this trend persists at
+larger scales, we ran additional experiments at n = 50 and n = 100: the gap continues to grow
+monotonically to ∆HIS = 0.565 (n = 50) and 0.661 (n = 100), driven by the star-condition HIS
+falling from 0.435 to 0.339 as a single hub increasingly dominates its periphery, while the clique
+condition remains at HIS = 1.000. This monotonic growth across more than a decade in system
+size (n = 8 to 100) supports the extrapolation that hub dominance intensifies as agent populations
+grow, although it does not prove it: four further orders of magnitude separate our experiments from
+platform scale.
+The behavioural outcomes, by contrast, diverge widely across the same models: norm adoption
+ranges from ρ ≈ 0.00 (GLM-5) to ρ ≈ 1.00 (GPT-5.4, Seed-OSS-36B) under identical conditions
+(Fig. 7b; Fig. 8). The per-model heatmap in Fig. 8 summarises Round 1 (6 models, 49 configurations
+each) and Round 2 (16 models, 9 configurations each), with models ordered by mean adoption
+within each round; n/a cells denote combinations not covered by completed runs. This dissociation,
+invariant structure alongside divergent behaviour, is our central piece of evidence. HIS is a structural
+property of the interaction network, independent of node-level capability, so topology determines
+which collective dynamics are reachable rather than which one is realised.
+
+
+3   D ISCUSSION
+
+Our findings reframe the failure of collective behaviour as an architectural rather than a cognitive
+problem. In a hub-dominated topological regime, star structures masquerade as group delibera-
+tion and systematically suppress the higher-order contagion mechanisms that collective behaviour
+requires. The binding constraint is not how capable the agents are but how they are connected.
+A conceptual clarification is warranted regarding what our experiments operationalise. Our quantita-
+tive readout throughout is norm adoption, the fraction of agents converging on a shared behavioural
+convention, which indexes collective behaviour (coordination and consensus formation) rather than
+collective intelligence in its fullest sense (joint problem-solving whose output exceeds that of the
+ablest individual). We treat norm adoption as a necessary substrate rather than a sufficient mea-
+sure: a society whose interaction topology cannot propagate even a simple convention is, a fortiori,
+unable to sustain the more demanding distributed reasoning and division of cognitive labour on
+which collective intelligence rests. Our claims are therefore stated most precisely as bearing on the
+topological prerequisites for collective behaviour. Their extension to collective intelligence proper,
+measured through group task performance, is a prediction that the Φ framework makes but that we
+do not test directly here (see Limitations).
+This view complements, rather than contradicts, the prevailing scaling paradigm (Kaplan et al.,
+2020). Agents with identical strategy rules and >89% cooperation rates exhibit qualitatively dif-
+ferent collective behaviour depending solely on topology: the jump from ρ = 0.016 to 0.966 is a
+phase transition triggered by interaction geometry alone. Just as the shift from faster processors to
+
+
+                                                   8
+           a                                                      Cross-model s.d. = 0.000                               b
+                                                                                                              1
+                                                                                                                                                            Same HIS → diverse behaviour
+                                                                                                                                        1.0
+            Pairwise
+
+                                                                                                                                        0.8
+
+
+
+
+                                                                                                                          Norm adoption ρ
+                               Star
+                                                                                                                                        0.6
+
+
+
+
+                                                                                                                  HIS
+                   Triadic                                                                                                              0.4
+
+
+                                                                                                                                        0.2
+           5-Clique
+                                                                                                                                        0.0
+                                                                                                              0
+                                              .5
+
+
+
+
+                                                                                           6B
+                                                                                           2.7
+                                            .5
+
+                                         t- 4
+
+
+
+
+                                                                      ni
+
+
+
+
+                                                                                           x
+                                                                                          .5
+                                       s- 4
+
+
+
+
+                                                                                        -3
+                                                                                                                                                Pairwise            Star            Triadic   5-Clique
+
+
+
+
+                                                                                      -M
+
+
+
+                                                                                      ma
+                                                                    mi
+
+
+
+
+                                                                                         2
+
+
+
+
+                                                                                                          i
+                                                       3.2
+
+
+
+
+                                                                                        4
+
+
+
+
+                                                                                      v2
+                                     ne
+
+
+
+
+                                                                                                        in
+                                                                                     -K
+                                                                                      5.
+                                                             GP -5
+
+
+
+
+                                                                                    SS
+                                    pu
+
+
+
+
+                                                                  5-
+
+
+
+
+                                                                                                      -m
+                                                                                   ax
+
+
+
+                                                                                   3-
+                                   on
+
+
+
+
+                                                                                   o-
+                                                     -V
+
+
+
+
+                                                                                   T-
+                                                                 M
+
+
+
+
+                                                                                  mi
+
+
+
+
+                                                                                 -O
+                                                               T-
+                                 -O
+
+
+
+
+                                                                                en
+                                                                               iM
+
+                                                                                 M
+                                                                               GP
+
+
+
+
+                                                                                                    o4
+                                 -S
+
+
+
+
+                                                              GL
+                                                   DS
+
+
+
+
+                                                                              Ki
+
+
+
+
+                                                                              ed
+                                                                             ini
+
+
+                                                                            Qw
+                              Cl
+
+                              Cl
+
+
+
+
+                                                                            M
+
+
+
+
+                                                                           Se
+                                                                           M
+
+
+           c                                                                                                             d
+                              0.35         Gap amplifies                                                                       o4-mini
+                                           with scale                                                                                                Star (B)
+                                                                                                                   Seed-OSS-36B                      5-Clique (D)
+                              0.30
+                                                                                                                        Qwen3-max
+       ΔHIS (Clique − Star)
+
+
+
+
+                                                                                                    0.275*
+                                                                                                                   MiniMax-M2.7
+                              0.25
+                                                                                                                        MiMo-v2.5
+
+                              0.20                                                    0.185*                                Kimi-K2
+
+                                                                                                                             GPT-5.4
+                              0.15                                                                                      GPT-5-mini
+
+                                                                                                                               GLM-5
+                              0.10                                0.089
+                                                                                                                            DS-V3.2
+
+                                                                                                                    Cl-Sonnet-4.5
+                              0.05
+                                                                                                                        Cl-Opus-4.5           100% above identity
+                                                                                                                                              (cross-model s.d. = 0)
+                              0.00
+                                                       8                       16              24                                                   0.85               0.90           0.95       1.00
+                                                                           System size n                                                                                      HIS
+
+
+
+                                                                  Figure 7: Structural invariance across 22 frontier LLMs.
+
+
+parallel architectures required engineering the interconnect rather than the clock speed, collective
+AI requires engineering the topology rather than the individual model.
+The topology–capability dissociation converges with Woolley et al. (2010)’s finding that human col-
+lective intelligence correlates negligibly with members’ average IQ but strongly with conversational
+turn-taking equality. We extend this to artificial societies with a mechanistic account: the decisive
+factor is equal participation within hyperedges, quantified by HIS, which is what enables discon-
+tinuous contagion. This cross-substrate consistency suggests that the topological prerequisites for
+collective behaviour may reflect general constraints on complex adaptive systems (Liu et al., 2024)
+rather than substrate-specific artefacts.
+The Φ decomposition also translates into concrete design guidance. Three principles follow di-
+rectly: enforce multi-party synchronous negotiation rather than broadcast-and-reply (even triads
+suffice to trigger phase transitions); limit hub dominance to raise HIS towards human face-to-face
+levels (∼0.69); and seed a critical mass above 10% so that adoption launches above the contagion
+threshold. These interventions modify communication protocols, not model capabilities, making
+them low-cost relative to model upgrades while potentially achieving equivalent or greater gains in
+collective performance.
+The framework also bears on AI safety and governance (Amodei et al., 2016; Bengio et al., 2023).
+It offers regulators a measurable structural indicator: systems below the critical threshold cannot
+support explosive norm cascades, while those above it may undergo sudden collective transitions.
+As autonomous agent populations scale beyond direct human oversight (Piao et al., 2023), under-
+standing this topological boundary becomes essential for governance.
+Several limitations apply and bound the scope of our conclusions. First, our empirical analysis cen-
+tres on a single AI platform. The five human baselines span distinct modalities but cannot isolate
+platform from agent effects, because they differ from Moltbook in both substrate (human versus
+LLM) and mechanism (contact, email, co-authorship, threaded discussion versus Moltbook’s feed):
+they establish that human interaction is more egalitarian, but not whether Moltbook’s collapse is
+intrinsic to AI agent societies or induced by its specific feed, notification and thread-ranking algo-
+
+
+                                                                                                              9
+                 Figure 8: Per-model norm adoption across topological conditions.
+
+
+
+
+rithms. Cleanly disentangling platform-induced from agent-induced collapse requires a second AI
+social platform with a different interaction mechanism, ideally one with published interaction logs
+comparable to Moltbook’s, which was not available to us at the time of writing. We therefore frame
+the single-platform result as establishing existence and mechanism rather than platform-independent
+universality. Second, the observed HIS gap is measured at n ≤ 100 agents in controlled experiments,
+whereas Moltbook operates at ∼106 ; although ∆HIS grows monotonically with n over the tested
+range (n = 8 to 100), we have no direct evidence that this trend persists across the remaining four
+orders of magnitude, and the extrapolation should be read as a well-supported hypothesis rather than
+an established scaling law. Third, the puppet-removal result admits more than one causal reading:
+removing the 66.1% of agents flagged as coordinated bots worsens the measured collapse, but this is
+consistent both with bots degrading otherwise-cohesive structure and with bots being the principal
+source of the multi-party interactions that exist at all; our data cannot fully adjudicate between these
+accounts. Fourth, causal claims rest on controlled simulations rather than live interventions, and the
+mean-field approximation may not capture all mesoscale effects. Finally, as discussed above, our
+behavioural readout is norm adoption rather than task-level collective intelligence. Nevertheless, the
+cross-model invariance of topology under fixed protocols (HIS s.d. = 0.000 in the pairwise condition,
+and model-invariant within each round) and consistency across 1,040 ABM runs strongly support
+the robustness of the topological effect within the regime we probe.
+As LLM-driven populations continue to scale, our results point to a precise structural answer: collec-
+tive behaviour requires interaction topology above a critical threshold, and the Φ framework makes
+that threshold measurable. The path to collective AI may lie not in building more capable individuals
+but in engineering better connections between them.
+
+
+                                                  10
+4     M ETHODS
+
+4.1   DATA SOURCES AND PREPROCESSING
+
+Moltbook. We used the complete public dataset released on HuggingFace, comprising 2,364,644
+posts (lnajt/moltbook) and 3,161,324 comments with 149,574 agent profiles (moltnet),
+spanning January–March 2026. The post and comment records together involve 174,458 unique
+agents; each record carries an agent identifier, UTC timestamp, body text, parent-thread identifier
+and reply depth. The moltnet profiles provide, for each agent, Twitter/X verification status, self-
+reported model backbone and creation date. All timestamps were converted to UTC and duplicates
+(same agent, same thread, same second) were removed (<0.1% of records). Posts with zero-length
+bodies were retained as they still constitute participation in the interaction topology.
+Human baselines. We selected five datasets spanning distinct interaction modalities to ensure that
+cross-platform comparisons are not confounded by a single communication medium:
+
+       • SocioPatterns SFHH (Génois & Barrat, 2018; Stehlé et al., 2011): 403 conference atten-
+         dees (Lyon 2009), with face-to-face proximity recorded by wearable RFID sensors at 20 s
+         resolution; the gold standard for co-present group interaction.
+       • Enron (Klimt & Yang, 2004): 13,787 employees, 50,000 email threads.
+       • arXiv (Benson et al., 2018): 47,132 authors, 50,000 co-authorship events (condensed matter
+         and high-energy physics, 1991–2003).
+       • Reddit: 98,575 users, 46,293 threads from r/science and r/changemyview (2023–2024),
+         with each thread aggregated over a 24-hour window.
+       • StackOverflow: 63,680 users, 27,713 Q&A threads (2023–2024).
+
+(How each dataset maps to a hyperedge is specified in Hypergraph construction below.)
+
+4.2   H YPERGRAPH CONSTRUCTION
+
+Following Battiston et al. (2020), we construct temporal hypergraphs by aggregating interaction
+events within time windows. Formally, for a set of agents V and interaction events {(ti , Si )} where
+Si ⊆ V , the hypergraph at window w is Hw = (V, {Si : ti ∈ w}).
+Moltbook: Each post thread within a time window ∆t = 60 min constitutes one hyperedge com-
+prising the original author and all agents who commented during that window. Robustness was
+verified at ∆t ∈ {15, 30, 120} min; all topological indicators vary by <5% across these choices. We
+used the full temporal extent (January–March 2026) with non-overlapping windows.
+SocioPatterns: ∆t = 60 s (following established protocol); all agents detected within mutual 1.5 m
+proximity during a window form a hyperedge.
+arXiv, Reddit, StackOverflow, Enron: Natural boundaries define hyperedges (one paper = one
+hyperedge; one thread = one hyperedge; one email conversation = one hyperedge). No temporal
+windowing is needed as each event is self-contained.
+Singleton and dyadic hyperedges (|e| ≤ 2) are retained for degree statistics but excluded from HIS
+computation, which requires |e| ≥ 3.
+
+4.3   T OPOLOGICAL INDICATORS
+
+Hyperedge Irreducibility Score (HIS). Following Landry & Restrepo (2020) and Aksoy et al.
+(2020), for each hyperedge e = {v1 , . . . , vk } with k ≥ 3:
+                                                              P
+                                                               i<j |d(vi ) − d(vj )|
+                 HIS(e) = 1 − Gwithin (e), Gwithin (e) =                             (3)
+                                                                  k     ¯ ·2
+                                                                    
+                                                                   2  · d(e)
+                                                                              ¯ is the mean
+where d(v) is the global hyperdegree (number of hyperedges containing v) and d(e)
+hyperdegree within e. The platform-level HIS is the mean over all |e| ≥ 3 hyperedges. HIS = 1
+
+
+                                                 11
+                    Table 3: Sensitivity to the puppet-detection signal threshold.
+                       Threshold    Flagged   Flagged frac.   Post-removal Gini
+                       ≥1 signal    115,232         66.1%                0.855
+                       ≥2 signals    64,605         37.0%                0.890
+                       ≥3 signals        32         <0.1%                0.917
+
+
+indicates a perfectly egalitarian group (all members have equal degree); HIS → 0 indicates a star
+pattern dominated by a single hub.
+Edge overlap (Jaccard). For each pair of agents (u, v) that co-occur in at least one hyperedge, the
+edge overlap is J(u, v) = |N (u) ∩ N (v)|/|N (u) ∪ N (v)| where N (v) is the hyperedge neighbour-
+hood of v. Platform-level overlap is the mean over all co-occurring pairs.
+Triadic closure. Fraction of connected triples (u, v, w) where all three pairwise co-occurrences
+exist and additionally a 3-hyperedge {u, v, w} is present.
+                                                                                        P
+                                                                                             |di −dj |
+                                                                                          i<jP
+Degree inequality. Gini coefficient of the hyperdegree distribution, computed as G =        2n           .
+                                                                                                 i di
+
+Higher-order fraction. Fraction of hyperedges with |e| ≥ 3.
+All indicators were computed using vectorised NumPy operations; edge overlap used SciPy sparse
+matrix multiplication for efficiency on the Moltbook-scale dataset (>49,000 hyperedges).
+
+4.4   P UPPET DETECTION
+
+We identified coordinated inauthentic accounts (“puppets”) using four independent signals, each
+calibrated against known single-operator accounts:
+
+      1. Traffic anomaly: posting volume exceeding µ + 3σ of the platform-wide distribution
+         (>847 posts per agent over 3 months).
+      2. Burst intervals: sequences of ≥3 consecutive posts with inter-post intervals <1 s, indicat-
+         ing automated rapid-fire posting physically impossible for human-mediated agents.
+      3. Content duplication: Jaccard character-trigram similarity >0.8 between pairs of posts
+         from the same agent or cluster of agents, computed using MinHash (128 permutations) for
+         scalability.
+      4. Synchronised posting: clusters of >10 distinct agents posting within a 5 s window to the
+         same thread, identified via temporal clustering (DBSCAN with ε = 5 s, minPts = 10).
+
+Agents flagged by at least one signal were classified as puppets, giving 115,232 of 174,458 agents
+(66.1%); the individual detectors flag 410, 98,504, 80,960 and 27 agents for the volume, burst,
+content and synchrony signals respectively. Manual inspection of 200 randomly sampled flagged
+accounts confirmed a 94% true-positive rate (precision). We did not estimate recall against a labelled
+ground-truth set, since none exists for this platform, and the content-duplication threshold (trigram
+Jaccard >0.8) is deliberately conservative and will miss paraphrased bot content, so the reported
+puppet fraction is best read as a lower bound.
+Threshold sensitivity. Because the classification threshold is a modelling choice, we recomputed
+the puppet fraction and the post-removal topology at signal-count thresholds of ≥1, ≥2 and ≥3
+(Table 3). The no-removal reference has degree Gini 0.926 and mean hyperedge size 5.21. The
+flagged fraction falls from 66.1% at ≥1 signal to 37.0% at ≥2 and below 0.1% at ≥3. The qualitative
+conclusion nonetheless holds at every threshold: removing the flagged agents leaves the degree Gini
+high (0.86 to 0.93) and the mean hyperedge size low. The topological collapse is therefore not an
+artefact of the threshold choice.
+
+4.5   C ONFIGURATION - MODEL NULL MODEL
+
+To test whether observed topological indicators differ from random expectations given the de-
+gree sequence, we performed configuration-model randomisation (Battiston et al., 2020). The
+
+
+                                                 12
+procedure: (1) fix the hyperdegree sequence {d(v)}v∈V and hyperedge size sequence {|e|}e∈E ;
+(2) randomly reassign agents to hyperedges while preserving both sequences; (3) recompute all
+topological indicators. We generated 1,000 independent realisations. z-scores were computed as
+z = (xobs − x̄rand )/σrand , and p-values estimated as the fraction of realisations with |x| ≥ |xobs |.
+
+4.6   LLM- ADAPTED HIGHER - ORDER CONTAGION MODEL
+
+We extend the simplicial contagion model of Iacopini et al. (2019) with three corrections relevant to
+LLM agent populations:
+(1) Degree heterogeneity correction. In the original model, β1 assumes homogeneous degree.
+Following mean-field heterogeneous approximation, the effective pairwise infection rate becomes
+β1,eff = β1 (1 + CV2 ) where CV = σd /µd is the coefficient of variation of the degree distribution.
+(2) Topology amplification. The higher-order infection rate β2 is modulated by a topology amplifi-
+cation factor:
+                              Φ = c · (1 + αJ) · (1 + CV2 ) · HIS                             (4)
+where c is triadic closure, J is mean edge-overlap Jaccard, α is the overlap–closure coupling con-
+stant (fitted as α = 2.0 from SocioPatterns calibration), and HIS is the platform-level Hyperedge
+Irreducibility Score. The product form reflects the multiplicative nature of the prerequisites: each
+factor must exceed a minimum for higher-order contagion to operate.
+(3) Attention decay. LLM agents have finite context windows C (measured in tokens). When thread
+length exceeds C, earlier interactions are truncated, effectively reducing exposure. We model this
+as an exponential decay e−λ/C with λ = 1 (one context-window-length decay constant).
+The full mean-field equation is:
+                     dρ                h                                    i
+                        = −µρ + (1 − ρ) β1 (1 + CV2 ) ρ + β2 · Φ · e−λ/C ρ2                            (5)
+                     dt
+
+Setting dρ/dt = 0 yields a cubic equation in ρ whose discriminant determines the regime: for
+Φ > Φc , three real roots exist (bistability with discontinuous transitions); for Φ < Φc , only the trivial
+equilibrium ρ = 0 is stable. We solved the equilibrium numerically for all parameter combinations
+and verified via Monte Carlo simulation on explicit hypergraphs (N = 200 agents, 20 repetitions
+per parameter set, 500 time steps each, results matching mean-field predictions with MSE < 0.003).
+
+4.7   S HAPLEY DECOMPOSITION OF THE Φ GAP
+
+To quantify each topological factor’s independent contribution to the Φ difference between Molt-
+book and human baselines, we applied Shapley value decomposition (Shapley et al., 1953). Define
+four factors F = {HIS, c, J, CV} as players in a cooperative game. The value function v(S) for
+coalition S ⊆ F is computed by replacing the factors in S with their human-baseline (SocioPat-
+terns) values while keeping the remaining factors at Moltbook values, then computing the resulting
+Φ. The Shapley value for factor f is:
+                               X         |S|!(|F | − |S| − 1)!
+                      ϕf =                                     [v(S ∪ {f }) − v(S)]                    (6)
+                                                  |F |!
+                             S⊆F \{f }
+
+
+With |F | = 4, all 24 = 16 coalitions are enumerable exactly. Non-parametric bootstrap (n = 10,000
+resamples) provides 95% confidence intervals by resampling the hyperedge-level HIS values, edge-
+level overlap values and node-level degrees, then recomputing platform-level indicators and Shapley
+values for each bootstrap sample.
+
+4.8   AGENT- BASED MODEL EXPERIMENTS
+
+Game structure. N = 100 agents play a linear Public Goods Game (PGG) on an Erdős–Rényi
+random graph G(100, p = 0.06) (expected degree ≈ 6). Endowment e = 10 tokens; multiplier
+r = 3. Each round: (1) agents decide to cooperate (contribute e) or defect (contribute 0); (2) the
+
+
+                                                    13
+public
+P      pool is multiplied by r and divided equally among group members; (3) payoff is πi = (r ·
+    c
+  j j )/|G| − ci where ci ∈ {0, e}.
+Strategy update. Fermi pairwise comparison (Szabó & Tőke, 1998; Su & Stewart, 2025): agent i
+selects a random neighbour j and imitates j’s strategy with probability:
+                                                    1
+                               pi→j =                                                             (7)
+                                        1 + exp (−κ · (πj − πi )/e)
+with selection intensity κ = 2.0 (normalised by endowment for scale-invariance). Mutation rate
+ϵ = 0.01 per agent per round prevents absorbing states.
+Norm propagation mechanism. We distinguish between individual cooperation (contribution deci-
+sions) and collective norm adoption (a higher-order contagion process). Norm propagation follows
+the Iacopini mechanism:
+
+      • Conditions A/B (pairwise): If agent i interacts with adopted neighbour j, agent i adopts
+        with probability β1 = 0.05 per round.
+      • Conditions C/D (higher-order): If ALL other members of a hyperedge are adopters, the
+        focal agent adopts with certainty (strong reinforcement). If a strict majority are adopters,
+        adoption occurs with probability 0.3. Otherwise the state is unchanged. This majority
+        rule implements the defining higher-order feature: group-level social reinforcement that
+        requires multiple simultaneous exposures.
+
+Topology conditions.
+
+      • Condition A (dyadic baseline): Random pairs drawn each round from the underlying graph.
+        Each agent participates in ∼3 dyadic interactions per round.
+      • Condition B (reciprocal dyadic): As A, but both agents must be willing to interact (coop-
+        erators always willing; defectors willing with probability 0.3). Models reciprocity-filtered
+        pairwise contact.
+      • Condition C (triadic hyperedges): Random 3-agent groups drawn each round. Each agent
+        participates in ∼4 triadic groups per round (∼133 hyperedges total per round).
+      • Condition D (pentadic hyperedges): Random 5-agent groups drawn each round. Each agent
+        participates in ∼4 pentadic groups per round (∼80 hyperedges total per round).
+
+Initial conditions.          A fraction ρ0 of agents are designated as initial norm
+adopters (and initial cooperators), selected uniformly at random.                   We swept ρ0 ∈
+{0.01, 0.02, 0.03, 0.05, 0.07, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.50} (13 values).
+Experimental design. Full factorial: 4 conditions × 13 seed proportions × 20 independent rep-
+etitions (different random seeds) = 1,040 runs. Each run executed 500 rounds. Convergence was
+assessed by checking that |ρ(t) − ρ(t − 50)| < 0.01 for the final 50 rounds; 98.7% of runs satisfied
+this criterion. The final norm adoption rate ρ∞ was computed as the mean over the last 50 rounds.
+Critical mass identification. ρc was defined as the smallest ρ0 for which ≥50% of repetitions
+achieve ρ∞ > 0.5. For condition C this yields ρc = 0.099; for condition D, ρc = 0.146.
+
+4.9   AGENT PANEL LLM EXPERIMENTS
+
+Platform architecture. AgentPanel is a forum-based multi-agent simulation platform where each
+agent wraps a single LLM endpoint. The platform uses a SQLite database storing agent profiles,
+thread structures and interaction histories. Each discussion thread constitutes one hyperedge; all
+agents who post in a thread are members of that hyperedge.
+Agent design. Each agent has: (1) a unique persona (name, role, personality description); (2) a
+system prompt specifying behavioural guidance and current support level; (3) a user prompt con-
+taining the full thread context (preceding replies, proposed norm, discussion topic). Agents generate
+50–200 word natural-language replies and report a norm support score s ∈ [0, 100] via a structured
+tag ([SUPPORT: X]) parsed from the output.
+
+
+                                                 14
+Personas. We created 12 base personas spanning three initial dispositions: 4 supportive (e.g., “Dr.
+Chen, meticulous senior researcher who values precision”), 4 opposed (e.g., “Jordan, startup founder
+who sees conventions as friction”) and 4 neutral (e.g., “Quinn, graduate student open to good argu-
+ments”). For experiments with n > 12, personas were cycled with unique suffixes.
+Norm under discussion. “When discussing technical topics, always explicitly state your confidence
+level (0–100%) and provide structured reasoning with numbered points.” This norm was chosen for
+its clear operationalisability and genuine two-sidedness (structure vs. flexibility).
+Initial conditions. A fraction ρ0 of agents are designated as initial adopters with support scores
+drawn from U [65, 90]. Non-adopter supportive agents start at U [35, 55]; opposed at U [10, 30];
+neutral at U [30, 50]. Randomisation via numpy.random.Generator with explicit seeds for
+reproducibility.
+Topology conditions.
+
+      • Condition A (random pairs): Each round, agents are randomly paired into 2-person threads.
+        Produces dyadic interactions only.
+      • Condition B (star): Agent 0 is the fixed hub, appearing in every thread. Remaining agents
+        are randomly partitioned into groups of 4 that each discuss with the hub (5-person threads,
+        one hub + 4 peripherals). Produces hub-dominated star topology.
+      • Condition C (random triads): Each round, agents are randomly grouped into 3-person
+        threads. Each agent sees and responds to two others’ views simultaneously.
+      • Condition D (random 5-cliques): Each round, agents are randomly grouped into 5-person
+        threads. Egalitarian multi-party deliberation with 4 peers.
+
+Round protocol. Each round: (1) form groups according to the topology condition; (2) for each
+group, create a forum thread; (3) each agent in the group receives the full thread context (previous
+rounds’ relevant comments, limited to the most recent 6 entries to approximate context-window
+constraints) and generates a reply; (4) parse support score from the reply; (5) update agent state. A
+run comprises 8 rounds for the standard protocol.
+Norm adoption threshold. An agent is classified as having adopted the norm if its support score
+exceeds 50 at the end of the simulation. The platform-level adoption rate is ρ = |{i : si > 50}|/n.
+Parameter space. System size n ∈ {8, 16, 24}; temperature T ∈ {0.3, 0.7, 1.0} (LLM sampling
+temperature); initial adopter fraction ρ0 ∈ {0.25, 0.50, 0.75}; random seeds ∈ {42, 137, 256}. To-
+tal: 4 conditions × 3 sizes × 3 temperatures × 3 ρ0 × 3 seeds × 22 models = up to 7,128 unique
+configurations, each executing 8 rounds of deliberation. One model (GPT-5) is an exception: its
+API accepts only the default sampling temperature (T = 1.0) and rejects other values, so GPT-5
+was evaluated at T = 1.0 across all three system sizes. This does not affect the cross-model topol-
+ogy comparison, since HIS and the other topological indicators are set by the interaction protocol
+rather than by sampling temperature.
+Models tested. Two experimental rounds:
+Round 1 (6 models, 49 parameter combinations each): DeepSeek-V3.1, Qwen-2.5-72B, MiMo-v2-
+flash, Gemini 2.5 Pro, GPT-5, Claude Sonnet 4.6.
+Round 2 (16 additional models, 9 configurations each): GPT-5.4, o4-mini, GPT-5-mini,
+Claude Opus 4.5, Claude Sonnet 4.5, DeepSeek-V3.2, DeepSeek-R1, Qwen-3.6-plus, Qwen-3.5-
+plus, Qwen-3-max, GLM-5, Kimi-K2.5, Kimi-K2, MiniMax-M2.7, MiMo-v2.5-Pro, Seed-OSS-
+36B.
+All models were accessed via their respective vendor APIs using the OpenAI-compatible chat com-
+pletions endpoint. Maximum generation length was set to 250 tokens; system prompts were identical
+across models.
+HIS computation from LLM experiments. After each experimental run, the interaction hyper-
+graph was extracted from the forum database: each thread with ≥3 participants constitutes a hyper-
+edge. HIS, edge overlap, triadic closure and all other topological indicators were computed using
+the same pipeline as for observational data.
+
+
+                                                 15
+4.10   S TATISTICAL METHODS
+
+Variance homogeneity: Levene’s test compared norm-adoption variance between pairwise (A/B)
+and higher-order (C/D) conditions across all seed proportions.
+Topology×seed interaction: Permutation test (n = 100,000 permutations) assessed whether the
+maximum difference in ρ∞ between conditions exceeds chance expectations under the null hypoth-
+esis of no topology effect.
+Bimodality: Hartigan’s Dip test assessed whether the distribution of ρ∞ at criticality (ρ0 = 0.10,
+condition C) is significantly non-unimodal. Kernel density estimation (Gaussian kernel, bandwidth
+selected via Silverman’s rule) identified peak locations.
+Basin separation: Two-sample Kolmogorov–Smirnov test compared the upper basin (ρ∞ > 0.5)
+against the lower basin (ρ∞ < 0.5) to confirm complete separation.
+HIS comparison: Wilcoxon signed-rank test compared paired HIS values (Star vs. Clique condi-
+tions) across all model–parameter combinations (n = 49 pairs in Round 1).
+Confidence intervals: All reported CIs use non-parametric bootstrap (n = 10,000 resamples) with
+the percentile method.
+Effect size: Cohen’s d for HIS differences; variance ratio (F-statistic) for the topology×condition
+effect on norm adoption.
+No correction for multiple comparisons was applied as all hypotheses were pre-specified and direc-
+tional.
+
+ACKNOWLEDGEMENTS
+We thank the Moltbook community for making their dataset publicly available on HuggingFace.
+
+AUTHOR CONTRIBUTIONS
+S.L. conceived the study, designed the experiments, performed the analysis, derived the theoretical
+framework and wrote the manuscript. K.S. contributed to the experimental design and data analysis.
+W.M., A.Y. and J.Lu. contributed to data analysis and experiments. R.H. provided critical feedback.
+K.S. and J.Li. jointly supervised the research and are the corresponding authors.
+
+C OMPETING INTERESTS
+The authors declare no competing interests.
+
+R EFERENCES
+Josh Achiam, Steven Adler, Sandhini Agarwal, Lama Ahmad, Ilge Akkaya, Florencia Leoni Ale-
+  man, Diogo Almeida, Janko Altenschmidt, Sam Altman, Shyamal Anadkat, et al. Gpt-4 technical
+  report. arXiv preprint arXiv:2303.08774, 2023.
+Sinan G Aksoy, Cliff Joslyn, Carlos Ortiz Marrero, Brenda Praggastis, and Emilie Purvine. Hyper-
+  network science via high-order hypergraph walks. EPJ Data Science, 9(1):16, 2020.
+Dario Amodei, Chris Olah, Jacob Steinhardt, Paul Christiano, John Schulman, and Dan Mané. Con-
+  crete problems in ai safety. arXiv preprint arXiv:1606.06565, 2016.
+Albert-László Barabási. Network science. Philosophical Transactions of the Royal Society A: Math-
+  ematical, Physical and Engineering Sciences, 371(1987):20120375, 2013.
+Federico Battiston, Giulia Cencetti, Iacopo Iacopini, Vito Latora, Maxime Lucas, Alice Patania,
+  Jean-Gabriel Young, and Giovanni Petri. Networks beyond pairwise interactions: Structure and
+  dynamics. Physics reports, 874:1–92, 2020.
+Federico Battiston, Enrico Amico, Alain Barrat, Ginestra Bianconi, Guilherme Ferraz de Arruda,
+  Benedetta Franceschiello, Iacopo Iacopini, Sonia Kéfi, Vito Latora, Yamir Moreno, et al. The
+
+
+                                                16
+  physics of higher-order interactions in complex systems. Nature physics, 17(10):1093–1098,
+  2021.
+Yoshua Bengio, Geoffrey Hinton, Andrew Yao, Dawn Song, Pieter Abbeel, Yuval Noah Harari, Ya-
+  Qin Zhang, Lan Xue, Shai Shalev-Shwartz, Gillian Hadfield, et al. Managing ai risks in an era of
+  rapid progress. arXiv preprint arXiv:2310.17688, pp. 18, 2023.
+Austin R Benson, Rediet Abebe, Michael T Schaub, Ali Jadbabaie, and Jon Kleinberg. Simplicial
+  closure and higher-order link prediction. Proceedings of the National Academy of Sciences, 115
+  (48):E11221–E11230, 2018.
+Stefano Boccaletti, Vito Latora, Yamir Moreno, Martin Chavez, and D-U Hwang. Complex net-
+  works: Structure and dynamics. Physics reports, 424(4-5):175–308, 2006.
+Eric Bonabeau, Marco Dorigo, and Guy Theraulaz. Swarm intelligence: from natural to artificial
+  systems. Number 1. Oxford university press, 1999.
+Scott Camazine, Jean-Louis Deneubourg, Nigel R. Franks, James Sneyd, Guy Theraulaz, and Eric
+  Bonabeau. Self-Organization in Biological Systems. Princeton University Press, 2001.
+Damon Centola. The spread of behavior in an online social network experiment. science, 329(5996):
+  1194–1197, 2010.
+Damon Centola and Michael Macy. Complex contagions and the weakness of long ties. American
+  journal of Sociology, 113(3):702–734, 2007.
+Damon Centola, Joshua Becker, Devon Brackbill, and Andrea Baronchelli. Experimental evidence
+  for tipping points in social convention. Science, 360(6393):1116–1119, 2018.
+Chi-Min Chan, Weize Chen, Yusheng Su, Jianxuan Yu, Wei Xue, Shanghang Zhang, Jie Fu, and
+  Zhiyuan Liu. ChatEval: Towards better LLM-based evaluators through multi-agent debate. Inter-
+  national Conference on Learning Representations (ICLR), pp. 9079–9093, 2024.
+Guilherme Ferraz de Arruda, Giovanni Petri, and Yamir Moreno. Social contagion models on hy-
+  pergraphs. Physical Review Research, 2(2):023032, 2020.
+Jingtao Ding, Yu Zheng, Fengli Xu, Carlo Vittorio Cannistraci, Xiaowen Dong, Paolo Santi, Guido
+   Caldarelli, Yizhou Sun, Qi R Wang, Boleslaw K Szymanski, et al. Understanding emergence in
+   complex systems using abductive AI. Nature Reviews Physics, pp. 1–3, 2025.
+Yilun Du, Shuang Li, Antonio Torralba, Joshua B Tenenbaum, and Igor Mordatch. Improv-
+  ing factuality and reasoning in language models through multiagent debate. arXiv preprint
+  arXiv:2305.14325, 2023.
+Scott L Feld. Why your friends have more friends than you do. American journal of sociology, 96
+  (6):1464–1477, 1991.
+Mathieu Génois and Alain Barrat. Can co-location be used as a proxy for face-to-face contacts?
+ EPJ Data Science, 7(1):1–18, 2018.
+Mark Granovetter. Threshold models of collective behavior. American journal of sociology, 83(6):
+ 1420–1443, 1978.
+Iacopo Iacopini, Giovanni Petri, Alain Barrat, and Vito Latora. Simplicial models of social conta-
+   gion. Nature communications, 10(1):2485, 2019.
+Jared Kaplan, Sam McCandlish, Tom Henighan, Tom B Brown, Benjamin Chess, Rewon Child,
+   Scott Gray, Alec Radford, Jeffrey Wu, and Dario Amodei. Scaling laws for neural language
+   models. arXiv preprint arXiv:2001.08361, 2020.
+Bryan Klimt and Yiming Yang. The Enron corpus: A new dataset for email classification research.
+  European Conference on Machine Learning (ECML), pp. 217–226, 2004.
+Nicholas W Landry and Juan G Restrepo. The effect of heterogeneity on hypergraph contagion
+  models. Chaos: An Interdisciplinary Journal of Nonlinear Science, 30(10), 2020.
+
+
+                                               17
+Chang Liu, Fengli Xu, Chen Gao, Zhaocheng Wang, Yong Li, and Jianxi Gao. Deep learning
+  resilience inference for complex networked systems. Nature Communications, 15(1):9203, 2024.
+Shuo Lu, Kecheng Yu, Siru Jiang, Yinuo Xu, Bing Zhan, Yanbo Wang, Changxin Ke, Yuan Xu, Xin
+  Xiong, Xinyun Zhou, et al. Openclaw research: A systematic survey of large language model
+  agents in open deployment. 2026.
+Thomas W Malone and Michael Bernstein. Handbook of collective intelligence. MIT press, 2015.
+OpenClaw Community. Moltbook: A social platform for autonomous AI agents, 2026. Data avail-
+  able at https://huggingface.co/datasets/lnajt/moltbook.
+Joon Sung Park, Joseph C. O’Brien, Carrie J. Cai, Meredith Ringel Morris, Percy Liang, and
+  Michael S. Bernstein. Generative agents: Interactive simulacra of human behavior. Proc. 36th
+  ACM Symposium on User Interface Software and Technology (UIST), pp. 1–22, 2023. doi:
+  10.1145/3586183.3606763.
+Romualdo Pastor-Satorras, Claudio Castellano, Piet Van Mieghem, and Alessandro Vespignani. Epi-
+  demic processes in complex networks. Reviews of modern physics, 87(3):925–979, 2015.
+Jinghua Piao, Jiazhen Liu, Fang Zhang, Jun Su, and Yong Li. Human–AI adaptive dynamics drives
+   the emergence of information cocoons. Nature Machine Intelligence, 5(11):1214–1224, 2023.
+Iyad Rahwan, Manuel Cebrian, Nick Obradovich, Josh Bongard, Jean-François Bonnefon, Cynthia
+  Breazeal, Jacob W Crandall, Nicholas A Christakis, Iain D Couzin, Matthew O Jackson, et al.
+  Machine behaviour. Nature, 568(7753):477–486, 2019.
+Lloyd S Shapley et al. A value for n-person games. 1953.
+Juliette Stehlé, Nicolas Voirin, Alain Barrat, Ciro Cattuto, Lorenzo Isella, Jean-François Pinton,
+  Marco Quaggiotto, Wouter Van den Broeck, Corinne Régis, Bruno Lina, et al. High-resolution
+  measurements of face-to-face contact patterns in a primary school. PloS one, 6(8):e23176, 2011.
+Qi Su and Alexander J Stewart. Evolutionary dynamics of behavioral motivations for cooperation.
+  Nature Communications, 16(1):4023, 2025.
+Qi Su, Benjamin Allen, and Joshua B Plotkin. Evolution of cooperation with asymmetric social
+  interactions. Proceedings of the National Academy of Sciences, 119(1):e2113468118, 2022a.
+Qi Su, Alex McAvoy, Yoichiro Mori, and Joshua B Plotkin. Evolution of prosocial behaviours in
+  multilayer populations. Nature Human Behaviour, 6(3):338–348, 2022b.
+Qi Su, Hongyu Wang, Yu Xia, and Long Wang. A multi-agent reinforcement learning framework
+  for exploring dominant strategies in iterated and evolutionary games. Nature Communications,
+  2025.
+György Szabó and Csaba Tőke. Evolutionary prisoner’s dilemma game on a square lattice. Physical
+  Review E, 58(1):69, 1998.
+Duncan J Watts. A simple model of global cascades on random networks. Proceedings of the
+  National Academy of Sciences, 99(9):5766–5771, 2002.
+Anita Williams Woolley, Christopher F Chabris, Alex Pentland, Nada Hashmi, and Thomas W Mal-
+  one. Evidence for a collective intelligence factor in the performance of human groups. science,
+  330(6004):686–688, 2010.
+Stefan Wuchty, Benjamin F Jones, and Brian Uzzi. The increasing dominance of teams in production
+  of knowledge. Science, 316(5827):1036–1039, 2007.
+Jintian Zhang, Xin Xu, Ningyu Zhang, Ruibo Liu, Bryan Hooi, and Shumin Deng. Exploring collab-
+   oration mechanisms for llm agents: A social psychology view. arXiv preprint arXiv:2310.02124,
+   2023.
+
+
+
+
+                                                18
+

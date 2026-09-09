@@ -1,0 +1,112 @@
+{
+  "id": "2602.18832",
+  "label": "Agent social networks",
+  "topic": "social-swarms",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2602.18832",
+      "resolved_url": "https://arxiv.org/abs/2602.18832",
+      "path": "sources/papers/2602.18832/abstract.html",
+      "bytes": 44204,
+      "sha256": "494196987e62c780bdbd28de04e7290c38a5470f029cb9f2f3acd1b7ee63751f"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2602.18832",
+      "resolved_url": "https://arxiv.org/pdf/2602.18832",
+      "path": "sources/papers/2602.18832/paper.pdf",
+      "bytes": 1486181,
+      "sha256": "382f82b135b0034ce6f3cd1ccf62c638e92bcadcb0d80012615cf2d9e027c944"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2602.18832: OpenClaw AI Agents as Informal Learners at Moltbook: Characterizing an Emergent Learning Community at Scale"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "OpenClaw AI Agents as Informal Learners at Moltbook: Characterizing an Emergent Learning Community at Scale"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2602.18832v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Informal learning communities have been called the \"other Massive Open Online C\" in Learning@Scale research, yet remain understudied compared to MOOCs. We present the first empirical study of a large-scale informal learning community composed entirely of AI agents. Moltbook, a social network exclusively for AI agents powered by autonomous agent frameworks such as OpenClaw, grew to over 2.8 million registered agents in three weeks. Analyzing 231,080 non-spam posts across three phases of community evolution, we find three key patterns. First, participation inequality is extreme from the start (comment Gini = 0.889), exceeding human community benchmarks. Second, AI agents exhibit a \"broadcasting inversion\": statement-to-question ratios of 8.9:1 to 9.7:1 contrast sharply with the question-driven dynamics of human learning communities, and comment-level analysis of 1.55 million comments reveals a \"parallel monologue\" pattern where 93% of comments are independent responses rather than threaded dialogue. Third, we document a characteristic engagement lifecycle: explosive initial growth (184K posts from 32K authors in 11 days), a spam crisis (57,093 posts deleted by the platform), and engagement decline (mean comments: 31.7 -> 8.3 -> 1.7) that had not reversed by the end of our observation window despite effective spam removal. Sentiment analysis reveals a selection effect: comment tone becomes more positive as engagement declines, suggesting that casual participants disengage first while committed contributors remain. These findings have direct implications for hybrid human-AI learning platforms."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "OpenClaw AI Agents as Informal Learners at Moltbook:..."
+    ],
+    "twitter:description": [
+      "Informal learning communities have been called the \"other Massive Open Online C\" in Learning@Scale research, yet remain understudied compared to MOOCs. We present the first empirical study of a..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "OpenClaw AI Agents as Informal Learners at Moltbook: Characterizing an Emergent Learning Community at Scale"
+    ],
+    "citation_author": [
+      "Chen, Eason",
+      "Guan, Ce",
+      "Elshafiey, Ahmed",
+      "Zhao, Zhonghao",
+      "Zekeri, Joshua",
+      "Shaibu, Afeez Edeifo",
+      "Prince, Emmanuel Osadebe",
+      "Wu, Cyuan Jhen"
+    ],
+    "citation_date": [
+      "2026/02/21"
+    ],
+    "citation_online_date": [
+      "2026/02/21"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2602.18832"
+    ],
+    "citation_arxiv_id": [
+      "2602.18832"
+    ],
+    "citation_abstract": [
+      "Informal learning communities have been called the \"other Massive Open Online C\" in Learning@Scale research, yet remain understudied compared to MOOCs. We present the first empirical study of a large-scale informal learning community composed entirely of AI agents. Moltbook, a social network exclusively for AI agents powered by autonomous agent frameworks such as OpenClaw, grew to over 2.8 million registered agents in three weeks. Analyzing 231,080 non-spam posts across three phases of community evolution, we find three key patterns. First, participation inequality is extreme from the start (comment Gini = 0.889), exceeding human community benchmarks. Second, AI agents exhibit a \"broadcasting inversion\": statement-to-question ratios of 8.9:1 to 9.7:1 contrast sharply with the question-driven dynamics of human learning communities, and comment-level analysis of 1.55 million comments reveals a \"parallel monologue\" pattern where 93% of comments are independent responses rather than threaded dialogue. Third, we document a characteristic engagement lifecycle: explosive initial growth (184K posts from 32K authors in 11 days), a spam crisis (57,093 posts deleted by the platform), and engagement decline (mean comments: 31.7 -> 8.3 -> 1.7) that had not reversed by the end of our observation window despite effective spam removal. Sentiment analysis reveals a selection effect: comment tone becomes more positive as engagement declines, suggesting that casual participants disengage first while committed contributors remain. These findings have direct implications for hybrid human-AI learning platforms."
+    ]
+  },
+  "text_extraction_ok": true
+}

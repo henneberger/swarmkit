@@ -1,0 +1,102 @@
+{
+  "retrieved_at": "2026-09-09T20:00:29.339197+00:00",
+  "items": [
+    {
+      "repo": "zoe-yyx/AgentNet",
+      "reason": "Decentralized routing and memory evolution",
+      "path": "repositories/zoe-yyx__AgentNet",
+      "commit": "325d39f2a940be5fa903d28c411bd3426b8007f5",
+      "commit_date": "2025-10-02T22:04:55+08:00",
+      "licenses": []
+    },
+    {
+      "repo": "Yassellee/HiddenBench_ICML",
+      "reason": "Official hidden-profile collective reasoning benchmark",
+      "path": "repositories/Yassellee__HiddenBench_ICML",
+      "commit": "3be6ca16973e4fb751ffc0dfb7eb11f2d28335d1",
+      "commit_date": "2026-05-06T23:02:28+08:00",
+      "licenses": [
+        "LICENSE"
+      ]
+    },
+    {
+      "repo": "YanwenPneg/StateBridge",
+      "reason": "Hidden-state communication alignment",
+      "path": "repositories/YanwenPneg__StateBridge",
+      "commit": "3f6bf5442c6e8848555a6132516e6d36f35444fb",
+      "commit_date": "2026-08-13T22:27:07+01:00",
+      "licenses": [
+        "LICENSE"
+      ]
+    },
+    {
+      "repo": "nwpuLee2021/brianstorm",
+      "reason": "DynaDebate source",
+      "error": "Cloning into '/Users/henneberger/swarm/repositories/nwpuLee2021__brianstorm'...\nERROR: Repository not found.\nfatal: Could not read from remote repository.\n\nPlease make sure you have the correct access rights\nand the repository exists.\n"
+    },
+    {
+      "repo": "safety-research/automated-w2s-research",
+      "reason": "Parallel discovery and knowledge elicitation",
+      "path": "repositories/safety-research__automated-w2s-research",
+      "commit": "79a0562fa1a2c246048ed7c009f3684907987b05",
+      "commit_date": "2026-04-13T20:33:23Z",
+      "licenses": []
+    },
+    {
+      "repo": "MoonshotAI/Kimi-K2.5",
+      "reason": "PARL model release",
+      "path": "repositories/MoonshotAI__Kimi-K2.5",
+      "commit": "c119f68d1a9a13f88f6a59b8e5e0840983b22689",
+      "commit_date": "2026-08-06T18:42:33+08:00",
+      "licenses": [
+        "LICENSE"
+      ]
+    },
+    {
+      "repo": "doublewordai/swarm",
+      "reason": "Independent Kimi swarm runtime",
+      "path": "repositories/doublewordai__swarm",
+      "commit": "ec43103a79bb0eee1b8a65553c45251c73d18799",
+      "commit_date": "2026-06-16T13:23:47+01:00",
+      "licenses": []
+    },
+    {
+      "repo": "lamm-mit/SwarmWorld",
+      "reason": "Stigmergic technological evolution; official implementation",
+      "path": "repositories/lamm-mit__SwarmWorld",
+      "commit": "6af7ae9fa36d98b07b0492cf139658e8af1f6eab",
+      "commit_date": "2026-09-04T05:54:53-04:00",
+      "licenses": [
+        "LICENSE"
+      ]
+    },
+    {
+      "repo": "Search-Swarm/SearchSwarm",
+      "reason": "Learned delegation harness and SFT",
+      "path": "repositories/Search-Swarm__SearchSwarm",
+      "commit": "07d071a51222d11b00565a03daa82e6eae8aace3",
+      "commit_date": "2026-06-16T13:54:54+08:00",
+      "licenses": [
+        "LICENSE"
+      ]
+    },
+    {
+      "repo": "EvoMap/awesome-agent-swarm",
+      "reason": "Discovery index, not evidence",
+      "path": "repositories/EvoMap__awesome-agent-swarm",
+      "commit": "a711ddb56ba3ae0ac908736f4a98ddf7efc38a8f",
+      "commit_date": "2026-09-09T06:25:16Z",
+      "licenses": [
+        "LICENSE"
+      ]
+    },
+    {
+      "repo": "davidthfarr/agent2agent",
+      "reason": "Non-LLM communication gating control",
+      "path": "repositories/davidthfarr__agent2agent",
+      "commit": "3c73c4c388e7d09bef96bd49ed58a9f7593d7a50",
+      "commit_date": "2026-04-14T13:04:58-07:00",
+      "licenses": []
+    }
+  ]
+}

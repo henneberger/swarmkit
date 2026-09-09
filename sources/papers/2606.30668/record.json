@@ -1,0 +1,106 @@
+{
+  "id": "2606.30668",
+  "label": "Swarm expansion scan",
+  "topic": "social-collective-mechanisms",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2606.30668",
+      "resolved_url": "https://arxiv.org/abs/2606.30668",
+      "path": "sources/papers/2606.30668/abstract.html",
+      "bytes": 40147,
+      "sha256": "a9fc28d740bfa3c099893a950a3d543e3d9e184ad9e0a6d4f8d89ea807f7a78c"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2606.30668",
+      "resolved_url": "https://arxiv.org/pdf/2606.30668",
+      "path": "sources/papers/2606.30668/paper.pdf",
+      "bytes": 735977,
+      "sha256": "2ea144172f94d4a834be8a0ff0b23c19e08fead851e5d497077e8b8dfcc6d3a2"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2606.30668: Emergent Culture in Minimal LLM Systems"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Emergent Culture in Minimal LLM Systems"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2606.30668v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "What happens when LLM agents operate with no context outside a turn, minimal prompting, and simple tools? Inspired by swarm engineering, we give collectives of three agents the ability to send messages and manipulate a shared actively decaying text store, introducing evolutionary pressure. The agents spontaneously cooperate, develop storage management strategies, and generate complex evolving cultural artifacts, with no top-down engineering. Using tools from dynamical systems analysis, we show that these behaviours exhibit structured long-range coherence beyond the entropy horizon of the decaying store, consistent with emergent culture in the Sperberian sense."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Emergent Culture in Minimal LLM Systems"
+    ],
+    "twitter:description": [
+      "What happens when LLM agents operate with no context outside a turn, minimal prompting, and simple tools? Inspired by swarm engineering, we give collectives of three agents the ability to send..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Emergent Culture in Minimal LLM Systems"
+    ],
+    "citation_author": [
+      "Jones, Simon",
+      "Hauert, Sabine"
+    ],
+    "citation_date": [
+      "2026/06/21"
+    ],
+    "citation_online_date": [
+      "2026/06/21"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2606.30668"
+    ],
+    "citation_arxiv_id": [
+      "2606.30668"
+    ],
+    "citation_abstract": [
+      "What happens when LLM agents operate with no context outside a turn, minimal prompting, and simple tools? Inspired by swarm engineering, we give collectives of three agents the ability to send messages and manipulate a shared actively decaying text store, introducing evolutionary pressure. The agents spontaneously cooperate, develop storage management strategies, and generate complex evolving cultural artifacts, with no top-down engineering. Using tools from dynamical systems analysis, we show that these behaviours exhibit structured long-range coherence beyond the entropy horizon of the decaying store, consistent with emergent culture in the Sperberian sense."
+    ]
+  },
+  "text_extraction_ok": true
+}

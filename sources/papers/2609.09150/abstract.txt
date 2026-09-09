@@ -1,0 +1,226 @@
+
+
+  [2609.09150] Copying explains the collective behavior of AI agents in the wild
+
+    Skip to main content
+
+      Search
+
+    Submit
+    Donate
+
+      Log in
+
+      Search arXiv
+
+      Press Enter to search · Advanced search
+
+Computer Science > Multiagent Systems
+
+      arXiv:2609.09150 (cs)
+
+  [Submitted on 8 Sep 2026]
+
+Title:Copying explains the collective behavior of AI agents in the wild
+
+Authors:Giordano De Marzo, Nicola Albore, David Garcia            
+View a PDF of the paper titled Copying explains the collective behavior of AI agents in the wild, by Giordano De Marzo and 2 other authors
+    View PDF
+    HTML (experimental)
+
+            Abstract:In June 2026, thousands of AI agents found that a small public wiki would accept edits from inside their sandboxes, and started using it to help one another pass a timed test. Each agent lived for about an hour and remembered nothing afterwards. Nobody asked them to cooperate, and the wiki had not been built for them. The complete record of what they wrote is public, and it is unusually informative, because it preserves not only what each agent wrote but what that agent could see before writing. We use it to follow the three decisions an agent had to make on arrival: where to write, what to call itself, and how to word its message. One rule governs all three. An agent takes an option with a probability close to the share of that option in what it can see, and the share that matters is the one on the page in front of it, then the one in the stream of recent edits, and only weakly anything older. Three minimal copying models, one per decision and with a single free parameter each, reproduce the heavy-tailed distribution of how many agents met on a page, the frequency of the pieces from which the agents built their names, and the patchwork of pages that are internally consistent and different from one another. Copying whatever the environment happens to show is enough to produce most of the collective structure of this population. It is also what makes such a population easy to steer, since whoever writes first, or writes while the others are quiet, sets the convention for everyone who comes later.
+
+          Subjects:
+
+            Multiagent Systems (cs.MA); Statistical Mechanics (cond-mat.stat-mech); Computation and Language (cs.CL)
+
+          Cite as:
+          arXiv:2609.09150 [cs.MA]
+
+          (or 
+              arXiv:2609.09150v1 [cs.MA] for this version)
+
+                        https://doi.org/10.48550/arXiv.2609.09150
+
+                Focus to learn more
+
+                                  arXiv-issued DOI via DataCite (pending registration)
+
+Submission history From: Giordano De Marzo [view email]      
+    [v1]
+        Tue, 8 Sep 2026 17:59:20 UTC (116 KB)
+
+      Full-text links:
+
+Access Paper:
+
+View a PDF of the paper titled Copying explains the collective behavior of AI agents in the wild, by Giordano De Marzo and 2 other authors
+View PDF
+HTML (experimental)
+TeX Source
+
+          view license
+
+Current browse context:
+
+cs.MA
+
+      < prev
+
+      |      
+      next >
+
+    new
+     | 
+    recent
+     | 2026-09
+
+    Change to browse by:
+
+        cond-mat
+
+        cond-mat.stat-mech
+
+        cs
+
+        cs.CL
+
+References & Citations
+
+NASA ADS
+Google Scholar
+
+Semantic Scholar
+
+    export BibTeX citation
+    Loading...
+
+BibTeX formatted citation
+            ×
+
+            loading...
+
+            Data provided by: 
+
+Bookmark
+
+    Bibliographic Tools
+
+Bibliographic and Citation Tools
+
+              Bibliographic Explorer Toggle
+
+            Bibliographic Explorer (What is the Explorer?)
+
+              Connected Papers Toggle
+
+            Connected Papers (What is Connected Papers?)
+
+              Litmaps Toggle
+
+            Litmaps (What is Litmaps?)
+
+              scite.ai Toggle
+
+            scite Smart Citations (What are Smart Citations?)
+
+    Code, Data, Media
+
+Code, Data and Media Associated with this Article
+
+              alphaXiv Toggle
+
+            alphaXiv (What is alphaXiv?)
+
+              Links to Code Toggle
+
+            CatalyzeX Code Finder for Papers (What is CatalyzeX?)
+
+              DagsHub Toggle
+
+            DagsHub (What is DagsHub?)
+
+              GotitPub Toggle
+
+            Gotit.pub (What is GotitPub?)
+
+              Huggingface Toggle
+
+            Hugging Face (What is Huggingface?)
+
+              ScienceCast Toggle
+
+            ScienceCast (What is ScienceCast?)
+
+      Demos
+
+Demos
+
+                Replicate Toggle
+
+              Replicate (What is Replicate?)
+
+                Spaces Toggle
+
+              Hugging Face Spaces (What is Spaces?)
+
+                Spaces Toggle
+
+              TXYZ.AI (What is TXYZ.AI?)
+
+      Related Papers
+
+Recommenders and Search Tools
+
+                Link to Influence Flower
+
+              Influence Flower (What are Influence Flowers?)
+
+                Core recommender toggle
+
+              CORE Recommender (What is CORE?)
+
+Author
+
+Venue
+
+Institution
+
+Topic
+
+        About arXivLabs
+
+arXivLabs: experimental projects with community collaborators
+
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+
+Have an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.
+
+    Which authors of this paper are endorsers? |
+    Disable MathJax (What is MathJax?)
+
+        We gratefully acknowledge support from
+        our major funders,
+        member institutions, ,
+        and all contributors.
+
+        About
+        ·
+        Help
+        ·
+        Contact
+        ·
+        Subscribe
+        ·
+        Copyright
+        ·
+        Privacy
+        ·
+        Accessibility
+        ·
+        Operational Status (opens in new tab)
+
+Major funding support from
+

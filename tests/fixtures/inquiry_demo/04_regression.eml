@@ -1,0 +1,16 @@
+From: leo.moss@example.invalid
+To: ada.finch@example.invalid
+Date: Fri, 02 Feb 2001 08:00:00 +0000
+Subject: Aster board: zero returned
+Message-ID: <04_regression@inquiry-demo.example.invalid>
+X-Synthetic-Fixture: true
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+SYNTHETIC INQUIRY FIXTURE =E2=80=94 entirely fictional, not an Enron email.
+
+At 07:50 the Aster board showed 0 units for lot Kestrel again. Yesterday Ada =
+reported 420. I have not checked whether my saved browser tab is stale or whe=
+ther the server value changed. The board footer says destination QZ-7. Can so=
+meone distinguish a display problem from a source change?

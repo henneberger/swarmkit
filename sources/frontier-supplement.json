@@ -1,0 +1,13 @@
+{
+  "reviewed_at": "2026-09-09",
+  "records": [
+    {
+      "kind": "repository",
+      "url": "https://github.com/gdemarzo/agent-wiki-copying",
+      "source": "https://arxiv.org/abs/2609.09150v1",
+      "status": "clone_failed",
+      "error": "Repository not found; git clone exited 128",
+      "note": "Repository advertised in the paper; no source code downloaded."
+    }
+  ]
+}

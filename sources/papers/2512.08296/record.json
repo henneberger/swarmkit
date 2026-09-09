@@ -1,0 +1,122 @@
+{
+  "id": "2512.08296",
+  "label": "Scaling Agent Systems",
+  "topic": "evaluation",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2512.08296",
+      "path": "sources/papers/2512.08296/abstract.html",
+      "cached": true,
+      "sha256": "449c4050f6d7207c5e7e8b5e7091409ab8d27ee2bd6c62ac5d38233495edc194"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2512.08296",
+      "path": "sources/papers/2512.08296/paper.pdf",
+      "cached": true,
+      "sha256": "028f329010d95143915db8db6ce1ad26a4e844b66e4abd6b36fdb39651aff7fd"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2512.08296: Towards a Science of Scaling Agent Systems"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Towards a Science of Scaling Agent Systems"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2512.08296v3"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Agents, language model-based systems capable of reasoning, planning, and acting are widely adopted in real-world tasks, yet how their performance changes as these systems scale across key dimensions remains underexplored. We introduce quantitative scaling principles for agent systems as a predictive model, capturing how performance varies with coordination, model capability, and measurable system and task factors. Across 260 configurations spanning six agentic benchmarks, five canonical architectures (Single-Agent and four Multi-Agent: Independent, Centralized, Decentralized, Hybrid), and three LLM families, we perform controlled evaluations, standardizing tools, prompts, and compute to isolate architectural effects. The resulting model achieves a cross-validated R^2=0.373 across all six benchmarks (R^2=0.413 with a task-grounded capability metric). We identify a robust capability-saturation effect and additional patterns: (1) a coordination yields diminishing returns once single-agent baselines exceed certain performance; (2) tool-heavy tasks appear to incur multi-agent overhead; and (3) architectures without centralized verification tend to propagate errors more than those with centralized coordination. Relative performance change compared to single-agent baseline ranges from +80.8% on decomposable financial reasoning to -70.0% on sequential planning, demonstrating that architecture-task alignment determines collaborative success. The framework identifies the best-performing architecture for 87% of held-out configurations and shows consistent relative architecture preferences on unseen frontier models. Agent effectiveness depends on alignment between coordination and task structure, and that mismatched coordination degrades the performance."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Towards a Science of Scaling Agent Systems"
+    ],
+    "twitter:description": [
+      "Agents, language model-based systems capable of reasoning, planning, and acting are widely adopted in real-world tasks, yet how their performance changes as these systems scale across key..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Towards a Science of Scaling Agent Systems"
+    ],
+    "citation_author": [
+      "Kim, Yubin",
+      "Gu, Ken",
+      "Park, Chanwoo",
+      "Park, Chunjong",
+      "Schmidgall, Samuel",
+      "Heydari, A. Ali",
+      "Yan, Yao",
+      "Zhang, Zhihan",
+      "Zhuang, Yuchen",
+      "Liu, Yun",
+      "Malhotra, Mark",
+      "Liang, Paul Pu",
+      "Park, Hae Won",
+      "Yang, Yuzhe",
+      "Xu, Xuhai",
+      "Du, Yilun",
+      "Patel, Shwetak",
+      "Althoff, Tim",
+      "McDuff, Daniel",
+      "Liu, Xin"
+    ],
+    "citation_date": [
+      "2025/12/09"
+    ],
+    "citation_online_date": [
+      "2026/04/08"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2512.08296"
+    ],
+    "citation_arxiv_id": [
+      "2512.08296"
+    ],
+    "citation_abstract": [
+      "Agents, language model-based systems capable of reasoning, planning, and acting are widely adopted in real-world tasks, yet how their performance changes as these systems scale across key dimensions remains underexplored. We introduce quantitative scaling principles for agent systems as a predictive model, capturing how performance varies with coordination, model capability, and measurable system and task factors. Across 260 configurations spanning six agentic benchmarks, five canonical architectures (Single-Agent and four Multi-Agent: Independent, Centralized, Decentralized, Hybrid), and three LLM families, we perform controlled evaluations, standardizing tools, prompts, and compute to isolate architectural effects. The resulting model achieves a cross-validated R^2=0.373 across all six benchmarks (R^2=0.413 with a task-grounded capability metric). We identify a robust capability-saturation effect and additional patterns: (1) a coordination yields diminishing returns once single-agent baselines exceed certain performance; (2) tool-heavy tasks appear to incur multi-agent overhead; and (3) architectures without centralized verification tend to propagate errors more than those with centralized coordination. Relative performance change compared to single-agent baseline ranges from +80.8% on decomposable financial reasoning to -70.0% on sequential planning, demonstrating that architecture-task alignment determines collaborative success. The framework identifies the best-performing architecture for 87% of held-out configurations and shows consistent relative architecture preferences on unseen frontier models. Agent effectiveness depends on alignment between coordination and task structure, and that mismatched coordination degrades the performance."
+    ]
+  },
+  "text_extraction_ok": true
+}

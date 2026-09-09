@@ -1,0 +1,49 @@
+{
+  "retrieved_at": "2026-09-09T20:00:29.336285+00:00",
+  "items": [
+    {
+      "repo": "metauto-ai/gptswarm",
+      "reason": "Graph optimization",
+      "path": "repositories/metauto-ai__gptswarm",
+      "commit": "c23a827f561c934ce21dd950408f7606aa4a8821",
+      "commit_date": "2026-02-05T13:39:09+03:00",
+      "licenses": [
+        "LICENSE"
+      ]
+    },
+    {
+      "repo": "yanweiyue/AgentPrune",
+      "reason": "Communication pruning",
+      "path": "repositories/yanweiyue__AgentPrune",
+      "commit": "c544dd6a1858c02c6d5d371d23c6e6ff55e0be21",
+      "commit_date": "2025-03-23T21:10:20+08:00",
+      "licenses": []
+    },
+    {
+      "repo": "wangzx1219/AgentDropout",
+      "reason": "Dynamic agent elimination",
+      "path": "repositories/wangzx1219__AgentDropout",
+      "commit": "855befab08df60ac734c9608b3b2f317ce687e6e",
+      "commit_date": "2026-06-12T17:57:56+08:00",
+      "licenses": []
+    },
+    {
+      "repo": "Gen-Verse/LatentMAS",
+      "reason": "Latent communication",
+      "path": "repositories/Gen-Verse__LatentMAS",
+      "commit": "9a9e4d331eb11430bd9e64754c6b252b06d73031",
+      "commit_date": "2026-06-17T23:56:18-07:00",
+      "licenses": [
+        "LICENSE"
+      ]
+    },
+    {
+      "repo": "deeplearning-wisc/debate-or-vote",
+      "reason": "Debate versus ensembling",
+      "path": "repositories/deeplearning-wisc__debate-or-vote",
+      "commit": "82c929ea773d534cfb3fb0ddc4b7d14d245ab549",
+      "commit_date": "2025-10-15T14:52:32-05:00",
+      "licenses": []
+    }
+  ]
+}

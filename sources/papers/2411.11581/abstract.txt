@@ -1,0 +1,232 @@
+
+
+  [2411.11581] OASIS: Open Agent Social Interaction Simulations with One Million Agents
+
+    Skip to main content
+
+      Search
+
+    Submit
+    Donate
+
+      Log in
+
+      Search arXiv
+
+      Press Enter to search · Advanced search
+
+Computer Science > Computation and Language
+
+      arXiv:2411.11581 (cs)
+
+  [Submitted on 18 Nov 2024 (v1), last revised 23 Mar 2025 (this version, v5)]
+
+Title:OASIS: Open Agent Social Interaction Simulations with One Million Agents
+
+Authors:Ziyi Yang, Zaibin Zhang, Zirui Zheng, Yuxian Jiang, Ziyue Gan, Zhiyu Wang, Zijian Ling, Jinsong Chen, Martz Ma, Bowen Dong, Prateek Gupta, Shuyue Hu, Zhenfei Yin, Guohao Li, Xu Jia, Lijun Wang, Bernard Ghanem, Huchuan Lu, Chaochao Lu, Wanli Ouyang, Yu Qiao, Philip Torr, Jing Shao            
+View a PDF of the paper titled OASIS: Open Agent Social Interaction Simulations with One Million Agents, by Ziyi Yang and 22 other authors
+    View PDF
+    HTML (experimental)
+
+            Abstract:There has been a growing interest in enhancing rule-based agent-based models (ABMs) for social media platforms (i.e., X, Reddit) with more realistic large language model (LLM) agents, thereby allowing for a more nuanced study of complex systems. As a result, several LLM-based ABMs have been proposed in the past year. While they hold promise, each simulator is specifically designed to study a particular scenario, making it time-consuming and resource-intensive to explore other phenomena using the same ABM. Additionally, these models simulate only a limited number of agents, whereas real-world social media platforms involve millions of users. To this end, we propose OASIS, a generalizable and scalable social media simulator. OASIS is designed based on real-world social media platforms, incorporating dynamically updated environments (i.e., dynamic social networks and post information), diverse action spaces (i.e., following, commenting), and recommendation systems (i.e., interest-based and hot-score-based). Additionally, OASIS supports large-scale user simulations, capable of modeling up to one million users. With these features, OASIS can be easily extended to different social media platforms to study large-scale group phenomena and behaviors. We replicate various social phenomena, including information spreading, group polarization, and herd effects across X and Reddit platforms. Moreover, we provide observations of social phenomena at different agent group scales. We observe that the larger agent group scale leads to more enhanced group dynamics and more diverse and helpful agents' opinions. These findings demonstrate OASIS's potential as a powerful tool for studying complex systems in digital environments.
+
+          Subjects:
+
+            Computation and Language (cs.CL)
+
+          Cite as:
+          arXiv:2411.11581 [cs.CL]
+
+          (or 
+              arXiv:2411.11581v5 [cs.CL] for this version)
+
+                        https://doi.org/10.48550/arXiv.2411.11581
+
+                Focus to learn more
+
+                                  arXiv-issued DOI via DataCite
+
+Submission history From: Zaibin Zhang [view email]      
+            [v1]
+        Mon, 18 Nov 2024 13:57:35 UTC (6,882 KB)
+
+            [v2]
+        Thu, 21 Nov 2024 11:27:34 UTC (5,677 KB)
+
+            [v3]
+        Mon, 25 Nov 2024 12:16:00 UTC (5,677 KB)
+
+            [v4]
+        Tue, 26 Nov 2024 13:22:19 UTC (5,677 KB)
+
+    [v5]
+        Sun, 23 Mar 2025 13:00:03 UTC (8,776 KB)
+
+      Full-text links:
+
+Access Paper:
+
+View a PDF of the paper titled OASIS: Open Agent Social Interaction Simulations with One Million Agents, by Ziyi Yang and 22 other authors
+View PDF
+HTML (experimental)
+TeX Source
+
+view license
+
+Current browse context:
+
+cs.CL
+
+      < prev
+
+      |      
+      next >
+
+    new
+     | 
+    recent
+     | 2024-11
+
+    Change to browse by:
+
+        cs
+
+References & Citations
+
+NASA ADS
+Google Scholar
+
+Semantic Scholar
+
+    export BibTeX citation
+    Loading...
+
+BibTeX formatted citation
+            ×
+
+            loading...
+
+            Data provided by: 
+
+Bookmark
+
+    Bibliographic Tools
+
+Bibliographic and Citation Tools
+
+              Bibliographic Explorer Toggle
+
+            Bibliographic Explorer (What is the Explorer?)
+
+              Connected Papers Toggle
+
+            Connected Papers (What is Connected Papers?)
+
+              Litmaps Toggle
+
+            Litmaps (What is Litmaps?)
+
+              scite.ai Toggle
+
+            scite Smart Citations (What are Smart Citations?)
+
+    Code, Data, Media
+
+Code, Data and Media Associated with this Article
+
+              alphaXiv Toggle
+
+            alphaXiv (What is alphaXiv?)
+
+              Links to Code Toggle
+
+            CatalyzeX Code Finder for Papers (What is CatalyzeX?)
+
+              DagsHub Toggle
+
+            DagsHub (What is DagsHub?)
+
+              GotitPub Toggle
+
+            Gotit.pub (What is GotitPub?)
+
+              Huggingface Toggle
+
+            Hugging Face (What is Huggingface?)
+
+              ScienceCast Toggle
+
+            ScienceCast (What is ScienceCast?)
+
+      Demos
+
+Demos
+
+                Replicate Toggle
+
+              Replicate (What is Replicate?)
+
+                Spaces Toggle
+
+              Hugging Face Spaces (What is Spaces?)
+
+                Spaces Toggle
+
+              TXYZ.AI (What is TXYZ.AI?)
+
+      Related Papers
+
+Recommenders and Search Tools
+
+                Link to Influence Flower
+
+              Influence Flower (What are Influence Flowers?)
+
+                Core recommender toggle
+
+              CORE Recommender (What is CORE?)
+
+Author
+
+Venue
+
+Institution
+
+Topic
+
+        About arXivLabs
+
+arXivLabs: experimental projects with community collaborators
+
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+
+Have an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.
+
+    Which authors of this paper are endorsers? |
+    Disable MathJax (What is MathJax?)
+
+        We gratefully acknowledge support from
+        our major funders,
+        member institutions, ,
+        and all contributors.
+
+        About
+        ·
+        Help
+        ·
+        Contact
+        ·
+        Subscribe
+        ·
+        Copyright
+        ·
+        Privacy
+        ·
+        Accessibility
+        ·
+        Operational Status (opens in new tab)
+
+Major funding support from
+

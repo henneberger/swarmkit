@@ -1,0 +1,108 @@
+{
+  "id": "2605.06988",
+  "label": "Cost of Consensus",
+  "topic": "communication",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2605.06988",
+      "resolved_url": "https://arxiv.org/abs/2605.06988",
+      "path": "sources/papers/2605.06988/abstract.html",
+      "bytes": 41976,
+      "sha256": "b318b78ecb8d55fdca1cc386f0513c21d5acfcb954e1ccdb6a0c286ef2b58f84"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2605.06988",
+      "resolved_url": "https://arxiv.org/pdf/2605.06988",
+      "path": "sources/papers/2605.06988/paper.pdf",
+      "bytes": 1029628,
+      "sha256": "498aedabfe59ada5c20d3005de46701b9c8bb41d2f852a13c91a4eb28a9fc195"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2605.06988: The Cost of Consensus: Malignant Epistemic Herding and Adaptive Gating in Distributed Multi-Agent Search"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "The Cost of Consensus: Malignant Epistemic Herding and Adaptive Gating in Distributed Multi-Agent Search"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2605.06988v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Distributed agents in real-world settings frequently must coordinate under uncertainty with only partial observations. Coordination is necessary to share beliefs to aid in task completion, but communication costs bandwidth, introduces latency, and if done poorly, can degrade collective reasoning. This tension is especially acute in bandwidth-constrained deployments such as distributed sensing networks, autonomous reconnaissance, and collaborative cyber defense, where excessive transmission carries direct operational costs. Existing work has focused on multi-agent exploration and communication strategies, but not on how communication frequency and content jointly shape the collective belief state. Central to this challenge is the degree to which agents maintain compatible internal beliefs about the environment, a property we term \\textit{epistemic alignment}. When agents share beliefs effectively, they converge on correct hypotheses; when communication is poorly designed, agents may converge confidently on wrong ones. We formalize this distinction and show it is not detectable from coordination metrics alone such as Jensen-Shannon Divergence or rate to consensus."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "The Cost of Consensus: Malignant Epistemic Herding and Adaptive..."
+    ],
+    "twitter:description": [
+      "Distributed agents in real-world settings frequently must coordinate under uncertainty with only partial observations. Coordination is necessary to share beliefs to aid in task completion, but..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "The Cost of Consensus: Malignant Epistemic Herding and Adaptive Gating in Distributed Multi-Agent Search"
+    ],
+    "citation_author": [
+      "Farr, David",
+      "Cruickshank, Iain",
+      "Starbird, Kate",
+      "West, Jevin"
+    ],
+    "citation_date": [
+      "2026/05/07"
+    ],
+    "citation_online_date": [
+      "2026/05/07"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2605.06988"
+    ],
+    "citation_arxiv_id": [
+      "2605.06988"
+    ],
+    "citation_abstract": [
+      "Distributed agents in real-world settings frequently must coordinate under uncertainty with only partial observations. Coordination is necessary to share beliefs to aid in task completion, but communication costs bandwidth, introduces latency, and if done poorly, can degrade collective reasoning. This tension is especially acute in bandwidth-constrained deployments such as distributed sensing networks, autonomous reconnaissance, and collaborative cyber defense, where excessive transmission carries direct operational costs. Existing work has focused on multi-agent exploration and communication strategies, but not on how communication frequency and content jointly shape the collective belief state. Central to this challenge is the degree to which agents maintain compatible internal beliefs about the environment, a property we term \\textit{epistemic alignment}. When agents share beliefs effectively, they converge on correct hypotheses; when communication is poorly designed, agents may converge confidently on wrong ones. We formalize this distinction and show it is not detectable from coordination metrics alone such as Jensen-Shannon Divergence or rate to consensus."
+    ]
+  },
+  "text_extraction_ok": true
+}

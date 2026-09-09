@@ -1,0 +1,19 @@
+{
+  "id": "behavioral-determinants",
+  "url": "https://sarah-wilsxn.github.io/research/moltbook.html",
+  "artifact": {
+    "url": "https://sarah-wilsxn.github.io/research/moltbook.html",
+    "resolved_url": "https://sarah-wilsxn.github.io/research/moltbook.html",
+    "path": "sources/posts/behavioral-determinants/page.html",
+    "bytes": 5863,
+    "sha256": "a7cd38efe1b0c4a64c5d1f2f6e028c4cbc462d834c8836ab509eb84b2a70a08a"
+  },
+  "metadata": {
+    "": [
+      ""
+    ],
+    "viewport": [
+      "width=device-width, initial-scale=1.0"
+    ]
+  }
+}

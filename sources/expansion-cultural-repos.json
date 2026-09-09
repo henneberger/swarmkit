@@ -1,0 +1,27 @@
+[
+  {
+    "repo": "FLAIROx/cultural-accumulation",
+    "reason": "Population cultural-learning precursor",
+    "path": "repositories/FLAIROx__cultural-accumulation",
+    "commit": "6b0df15bf46d4453d1974dde7af04102a77819b2",
+    "commit_date": "2024-06-11T16:33:53+01:00",
+    "licenses": []
+  },
+  {
+    "repo": "desplega-ai/agent-swarm",
+    "reason": "Source associated with swarm coordination postmortem",
+    "path": "repositories/desplega-ai__agent-swarm",
+    "commit": "99d4213ec439c99030baaa7603b382dfb0d5bb7e",
+    "commit_date": "2026-09-09T19:59:51Z",
+    "licenses": [
+      "LICENSE"
+    ]
+  },
+  {
+    "repo": "hauertlab/swarm_llm",
+    "url": "https://bitbucket.org/hauertlab/swarm_llm",
+    "path": "repositories/hauertlab__swarm_llm",
+    "status": "cloned",
+    "error": null
+  }
+]

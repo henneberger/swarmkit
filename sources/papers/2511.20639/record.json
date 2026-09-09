@@ -1,0 +1,115 @@
+{
+  "id": "2511.20639",
+  "label": "LatentMAS",
+  "topic": "latent",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2511.20639",
+      "path": "sources/papers/2511.20639/abstract.html",
+      "cached": true,
+      "sha256": "7b793e84a8f672bc09cd28b8a8c21c43048b382ff489d1e8837d9779d990e337"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2511.20639",
+      "path": "sources/papers/2511.20639/paper.pdf",
+      "cached": true,
+      "sha256": "6ad933628641500c914f9fc88ddddaae592c8ca67dc56c96c38f966b27fd1402"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2511.20639: Latent Collaboration in Multi-Agent Systems"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Latent Collaboration in Multi-Agent Systems"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2511.20639v4"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Multi-agent systems (MAS) extend large language models (LLMs) from independent single-model reasoning to coordinative system-level intelligence. While existing LLM agents depend on text-based mediation for reasoning and communication, we take a step forward by enabling models to collaborate directly within the continuous latent space. We introduce LatentMAS, an end-to-end training-free framework that enables pure latent collaboration among LLM agents. In LatentMAS, each agent first performs auto-regressive latent thoughts generation through last-layer hidden embeddings instead of text. Then, a shared latent working memory preserves and transfers each agent's internal representations and latent thoughts, ensuring lossless information exchange without re-encoding. We provide detailed theoretical analyses showing that LatentMAS achieves higher expressiveness and lossless information preservation with lower overall complexity than standard text-based MAS. In addition, empirical evaluations across 9 comprehensive benchmarks spanning math and science reasoning, commonsense understanding, and code generation show that LatentMAS outperforms advanced single agents and text-based MAS baselines, achieving up to 14.6% higher accuracy, reducing output token usage by 70.8%-83.7%, and providing 4$\\times$-4.3$\\times$ faster end-to-end inference. Code and data are fully open-sourced at https://github.com/Gen-Verse/LatentMAS."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Latent Collaboration in Multi-Agent Systems"
+    ],
+    "twitter:description": [
+      "Multi-agent systems (MAS) extend large language models (LLMs) from independent single-model reasoning to coordinative system-level intelligence. While existing LLM agents depend on text-based..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Latent Collaboration in Multi-Agent Systems"
+    ],
+    "citation_author": [
+      "Zou, Jiaru",
+      "Qiu, Ruizhong",
+      "Li, Gaotang",
+      "Yang, Xiyuan",
+      "Tieu, Katherine",
+      "Lu, Pan",
+      "Shen, Ke",
+      "Tong, Hanghang",
+      "Choi, Yejin",
+      "He, Jingrui",
+      "Zou, James",
+      "Wang, Mengdi",
+      "Yang, Ling"
+    ],
+    "citation_date": [
+      "2025/11/25"
+    ],
+    "citation_online_date": [
+      "2026/08/03"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2511.20639"
+    ],
+    "citation_arxiv_id": [
+      "2511.20639"
+    ],
+    "citation_abstract": [
+      "Multi-agent systems (MAS) extend large language models (LLMs) from independent single-model reasoning to coordinative system-level intelligence. While existing LLM agents depend on text-based mediation for reasoning and communication, we take a step forward by enabling models to collaborate directly within the continuous latent space. We introduce LatentMAS, an end-to-end training-free framework that enables pure latent collaboration among LLM agents. In LatentMAS, each agent first performs auto-regressive latent thoughts generation through last-layer hidden embeddings instead of text. Then, a shared latent working memory preserves and transfers each agent's internal representations and latent thoughts, ensuring lossless information exchange without re-encoding. We provide detailed theoretical analyses showing that LatentMAS achieves higher expressiveness and lossless information preservation with lower overall complexity than standard text-based MAS. In addition, empirical evaluations across 9 comprehensive benchmarks spanning math and science reasoning, commonsense understanding, and code generation show that LatentMAS outperforms advanced single agents and text-based MAS baselines, achieving up to 14.6% higher accuracy, reducing output token usage by 70.8%-83.7%, and providing 4$\\times$-4.3$\\times$ faster end-to-end inference. Code and data are fully open-sourced at https://github.com/Gen-Verse/LatentMAS."
+    ]
+  },
+  "text_extraction_ok": true
+}

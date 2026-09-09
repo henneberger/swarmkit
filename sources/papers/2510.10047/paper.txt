@@ -1,0 +1,961 @@
+                                              SwarmSys: Decentralized Swarm-Inspired Agents for Scalable and
+                                                                   Adaptive Reasoning
+                                                        Ruohao Li*1 , Hongjun Liu*2,4 , Leyi Zhao5 , Zisu Li3 , Jiawei Li1 ,
+                                                 Jiajun Jiang1 , Linning Xu6 , Chen Zhao2,4 , Mingming Fan†1,3 , Chen Liang†1
+                                          1
+                                            The Hong Kong University of Science and Technology (Guangzhou) 2 New York University
+                                                    3
+                                                      The Hong Kong University of Science and Technology 4 NYU Shanghai
+                                                           5
+                                                             Indiana University 6 The Chinese University of Hong Kong
+                                                                             *
+                                                                                 Equal contribution. † Co-corresponding authors.
+                                                                   Correspondence: rli777@connect.hkust-gz.edu.cn, lh3862@nyu.edu
+
+
+                                                               Abstract
+                                             Large language model (LLM) agents have
+arXiv:2510.10047v1 [cs.AI] 11 Oct 2025
+
+
+
+
+                                             shown remarkable reasoning abilities. How-
+                                             ever, existing multi-agent frameworks often
+                                             rely on fixed roles or centralized control, limit-
+                                             ing scalability and adaptability in long-horizon
+                                             reasoning. We introduce SwarmSys, a closed-
+                                             loop framework for distributed multi-agent rea-
+                                             soning inspired by swarm intelligence. Coordi-
+                                             nation in SwarmSys emerges through iterative
+                                             interactions among three specialized roles, Ex-
+                                             plorers, Workers, and Validators, that continu-
+                                             ously cycle through exploration, exploitation,
+                                             and validation. To enable scalable and adaptive
+                                             collaboration, we integrate adaptive agent and
+                                             event profiles, embedding-based probabilistic
+                                             matching, and a pheromone-inspired reinforce-
+                                             ment mechanism, supporting dynamic task al-
+                                             location and self-organizing convergence with-
+                                             out global supervision. Across symbolic rea-
+                                             soning, research synthesis, and scientific pro-
+                                                                                                           Figure 1: Comparison between paradigm-dependent
+                                             gramming tasks, SwarmSys consistently out-
+                                                                                                           multi-agent systems and SwarmSys. While existing
+                                             performs baselines, improving both accuracy
+                                                                                                           methods rely on fixed, domain-specific agent paradigms,
+                                             and reasoning stability. These findings high-
+                                                                                                           SwarmSys achieves scalable self-organization and cross-
+                                             light swarm-inspired coordination as a promis-
+                                                                                                           domain adaptability.
+                                             ing paradigm for scalable, robust, and adaptive
+                                             multi-agent reasoning, suggesting that coordi-                static communication, which limits their adaptabil-
+                                             nation scaling may rival model scaling in ad-                 ity. This rigidity leads to redundant exploration and
+                                             vancing LLM intelligence.
+                                                                                                           inefficiency, especially in long-horizon or dynamic
+                                                                                                           tasks.
+                                         1   Introduction
+                                                                                                              To address limitations, recent work has explored
+                                         The strong reasoning and planning capabilities of                 adaptive or self-improving agent collaboration. Au-
+                                         Large Language Models (LLMs) have spurred in-                     toAgent enables natural-language-defined behav-
+                                         terest in multi-agent systems. These systems use                  iors instead of hand-coded roles (Tang et al., 2025),
+                                         collaboration to enhance reasoning diversity and re-              while Mixture-of-Agents introduces layered coor-
+                                         liability. Frameworks such as AutoGen (Wu et al.,                 dination for more robust reasoning (Wang et al.,
+                                         2023) enable agent-to-agent dialogue for multi-                   2024). However, these systems still rely on cen-
+                                         agent applications, while CAMEL (Li et al., 2023)                 tralized orchestration or manually designed topolo-
+                                         leverages role-playing and inception prompting to                 gies, limiting scalability and long-term stability.
+                                         facilitate autonomous cooperation. AutoGen Stu-                   Inspired by the decentralized intelligence of natu-
+                                         dio further provides a no-code interface for design-              ral swarms, where simple signals regulate cooper-
+                                         ing and debugging agent workflows (Dibia et al.,                  ation and task allocation (Bonabeau et al., 1999;
+                                         2024). However, most systems use fixed roles and                  Dorigo and Stützle, 2004), we propose SwarmSys,
+
+                                                                                                       1
+ SwarmSys collaborative 
+
+ reasoning process                                    Sub-event
+
+
+                                                              0            Result 0
+
+                  Agent Random                                1            Result 1
+                   Initialization
+                                                              2            Result 2
+
+                                        Agent 
+
+    # Agents
+                                        Profiles
+                                                              0
+                                                              1
+                                         match                2
+
+                                                            Debate & Consensus
+
+
+     Target &
+
+                                     Event Profiles
+   Requirement
+                 E0 and E1(a list)
+                   Initialization                                                                                             validate
+                                                                  Agent Profiles
+
+                                                                     (updated)
+     Exam
+                                                                                                                       FInal Result
+                                                                                          Execute            Execute
+                                                                  Event Profiles
+              Optimization loop
+                                                                     (updated)                                                           Explorer Worker Validator
+
+
+
+Figure 2: Overall workflow of the SwarmSys collaborative reasoning process. Each task is decomposed into sub-
+events handled by specialized agents: Explorers propose solution paths, Workers execute subtasks, and Validators
+ensure consistency. Agents iteratively perform debate–consensus cycles that update event profiles and reinforce
+effective reasoning strategies until convergence.
+a closed-loop framework that enables LLM agents                                           task correctness. Remarkably, a swarm of GPT-
+to coordinate through lightweight, pheromone-like                                         4o-based agents approaches GPT-5 performance,
+traces encoding contextual utility. This mechanism                                        showing that scaling coordination can substitute for
+fosters self-organized collaboration, dynamically                                         model scaling. Qualitative analyses reveal emer-
+balancing exploration and convergence without                                             gent behaviors, knowledge diffusion, specialization
+centralized control.                                                                      balance, and self-regularization, hallmarks of col-
+   Unlike debate or tree-based systems, SwarmSys                                          lective intelligence.
+allows coordination to emerge organically through                                            In summary, our contributions are threefold:
+iterative interaction and adaptive matching. Agents                                       (1) SwarmSys Framework: A closed-loop dis-
+assume three roles, Explorers, Workers, and Val-                                          tributed multi-agent reasoning framework inspired
+idators, mirroring the division of labor in natural                                       by swarm intelligence for convergence. (2) Adap-
+ant colonies. Explorers expand hypotheses, Work-                                          tive Coordination Mechanism: An embedding-
+ers refine and execute subtasks, and Validators                                           based matching and pheromone-inspired reinforce-
+ensure consistency, together forming continuous                                           ment process enabling dynamic agent–event alloca-
+exploration–exploitation–validation cycles driving                                        tion, self-organized collaboration, and stable long-
+decentralized convergence. A core innovation is                                           horizon reasoning. (3) Comprehensive Evaluation:
+the use of profiles as adaptive memory. Agent                                             Extensive experiments across diverse reasoning
+and event profiles evolve with ability embeddings,                                        tasks reveal consistent gains and emergent collec-
+workload, and context, enabling embedding-based                                           tive intelligence, showing that scaling coordination
+reallocation and balanced participation—analogous                                         can rival scaling model capacity.
+to ants redistributing across foraging sites. More-
+over, SwarmSys employs a pheromone-inspired                                               2         Methodology
+reinforcement process: validated traces strengthen
+future compatibility, while ineffective ones decay,                                       2.1        Overview of SwarmSys
+forming a decentralized optimization loop that en-                                        We present SwarmSys, a closed-loop collaborative
+hances efficiency and stability over time.                                                framework for distributed problem solving. Unlike
+   Evaluated across symbolic reasoning, re-                                               centralized orchestration or static task assignment,
+search synthesis, and scientific programming                                              it converges through iterative matching → collab-
+tasks, SwarmSys outperforms baselines such as                                             oration → update cycles, as is shown in Figure
+GPTSwarm (Zhuge et al., 2024), achieving up                                               3. Upon receiving new task, event profiles are in-
+to 10.7% higher accuracy and 9.9% better sub-                                             stantiated, and candidate agents are retrieved via
+
+                                                                                      2
+           Matching           propose    Collaboration         Agent embeddings. Each agent Ai is repre-
+         Retrieve agents
+           {A, B, C}
+                                         Compute θt+1          sented by two embeddings capturing its ability
+                                                               and availability. The competence embedding is de-
+                                                validate
+                                                               rived from the agent’s declared abilities and histor-
+      new round
+                                                               ical performance, processed through an instruction-
+                                                               guided encoder that contextualizes the agent’s prior
+          Task: minimize                     Update
+       f (θ) = θ2 + 3 sin θ             Profiles → JSON
+                                                               experience for the current task. The availability em-
+                               update
+                                                               bedding reflects workload and readiness, obtained
+Figure 3: Iterative cycle in SwarmSys: minimize f (θ)          from the agent’s status signals. These two vectors
+through matching → collaboration → update cycle.               are summed to form the agent’s overall represen-
+embedding-based matching. Agents then enter col-               tation, combining long-term expertise with short-
+laborative rounds: explorers propose decomposi-                term availability cues, the the detailed process is
+tion, workers execute subtasks after consensus, and            provided in Appendix A.4. This design allows the
+validators verify intermediate results. After each             system to favor agents who are both skilled and
+round, both agent and event profiles are updated               currently underutilized.
+and stored for transparency and traceability. These            Event embeddings. Each event Ej is encoded
+evolving profiles feed subsequent iterations, en-              through an instruction-conditioned embedding that
+abling self-organization and adaptation. As shown              integrates its textual description, dependency rela-
+in our framework (see figure 2), through repeated              tions, progress state, and milestone metadata, the
+cycles, we achieve high-quality solutions without              method is listed at AppendixA.1. This representa-
+central controller, relying instead on distributed             tion captures both the semantic meaning of the task
+collaboration and profile-driven adaptation.                   and its structural role within the reasoning process.
+2.2     Profiles as Adaptive Memory Units                      By embedding events and agents in a shared latent
+                                                               space, SwarmSys can estimate their compatibility
+A core innovation of SwarmSys is the use of pro-
+                                                               in a continuous and scalable manner.
+files as adaptive memory units that record both
+context and accumulated experience. Each agent                 Compatibility and decision dynamics. The
+profile maintains identifiers, role information, abil-         compatibility between an agent and an event is
+ity descriptions, workload status, and longitudinal            measured by normalized cosine similarity between
+performance history, the profile format is provided            their embeddings, ensuring a value between 0 and
+in Appendix A.4.1. Profiles evolve dynamically:                1 for interpretability. To prevent premature con-
+embeddings and workload indicators are refreshed               vergence and encourage exploration, SwarmSys
+after each round, while historical success or failure          adopts a dynamic ε-greedy policy. Each agent ex-
+influences future task matching. Agents thus be-               plores new matches with probability εi and exploits
+have as adaptive collaborators rather than stateless           high-compatibility matches otherwise. The explo-
+executors. Each event profile serves as a dynamic              ration rate εi adapts to recent performance: agents
+record of problem-solving. It contains task descrip-           with high average success explore less, while un-
+tions, dependency structures, metadata (e.g., com-             derperforming agents explore more. Empirically,
+posite or leaf type), progress logs, and participating         we initialize εi around 0.15 to maintain minimal
+agent lists. Over time, static specifications evolve           randomness and allow it to fluctuate within a small
+into rich, evolving traces of reasoning.                       range (up to 0.35) depending on recent success.
+   Together, these profiles constitute SwarmSys’s              The values are designed based on natural ant be-
+distributed memory: agent profiles encode compe-               haviors (Lecheval et al., 2024). This ensures that
+tence and reliability, while event profiles track task         exploration gradually decreases as the system stabi-
+evolution. Their joint updates ensure collaboration            lizes. During exploration, matches are sampled
+remains adaptive, interpretable, and transparent.              proportionally to similarity, enabling serendipi-
+                                                               tous but plausible pairings. During exploitation,
+2.3     Embedding-Based Matching with                          a sigmoid-weighted sampling function emphasizes
+        Exploration–Exploitation Dynamics                      strong compatibility, controlled by a sharpness
+The second key innovation is our embedding-based               factor γ that modulates selectivity. The detailed
+agent–event matching algorithm, which balances                 behavioral derivation process is provided in Ap-
+expertise, workload, and exploration.                          pendix A.4. This mechanism enables three prop-
+
+                                                           3
+erties: adaptivity through evolving embeddings,              Dataset Table 1 summarizes the four bench-
+stability through probabilistic sampling, and robust-        marks, covering quantitative, analytical, and proce-
+ness by balancing exploration with exploitation.             dural reasoning. This diversity ensures that Swarm-
+                                                             Sys is evaluated across both discrete symbolic rea-
+2.4    Pheromone-Inspired Optimization                       soning and open-ended research generation set-
+Finally, SwarmSys incorporates a pheromone-                  tings. More details of our dataset settings are
+inspired optimization process to refine allocation           shown in Appendix A.2
+and solution quality. Each validated contribution re-
+inforces the compatibility between an agent and an           Table 1: Overview of the four reasoning benchmarks
+                                                             used in our experiments. Each dataset differs in domain
+event, updating embeddings and increasing the like-
+                                                             focus, reasoning type, and data format.
+lihood of similar matches in future rounds. Idle or
+                                                              Dataset                                       Focus               Reasoning    #Samples
+invalid matches, by contrast, receive no reinforce-           GaoKao Bench (Zhang et al., 2024)   Quantitative & Cross-domain    Symbolic      800
+ment and gradually decline in competitiveness as              Omni-Math (Gao et al., 2024a)
+                                                              DeepResearch (Du et al., 2025)
+                                                                                                    Hard-Level Quantitative
+                                                                                                         Scientific QA
+                                                                                                                                Conceptual
+                                                                                                                                Analytical
+                                                                                                                                               300
+                                                                                                                                               200
+other profiles evolve, mimicking pheromone evap-              SciCode (Tian et al., 2024)                Computational          Procedural     338
+
+oration without explicit decay.
+   This implicit reinforcement–evaporation dy-               Metries We evaluate SwarmSys on three reason-
+namic complements the exploration–exploitation               ing categories, using the original domain-specific
+policy. Exploration guarantees diversity and pre-            metrics and protocols from each dataset (1) Exam-
+vents deadlock, exploitation prioritizes promising           style reasoning tasks (Math Exam, STEM Mix,
+matches, and bounded probabilities ensure stabil-            and Olympic Math) use Accuracy and Knowledge
+ity. As explorers, workers, and validators collabo-          Coverage as defined in prior benchmark releases.
+rate across rounds, SwarmSys converges to high-              For Math Exam and STEM Mix, we use subset
+quality solutions while maintaining flexibility and          from GAOKAO Bench. For Olympic Math, we
+resilience in search dynamics.                               use subset from Omni-Math and rearranged them
+                                                             to comply with real-world exam. (2) Research-
+3     Experiment                                             level reasoning tasks (DeepResearch Bench) em-
+                                                             ploy composite metrics including RACE (Compre-
+3.1    Experiment Setting                                    hensiveness, Depth, Instruction Following, Read-
+We evaluate SwarmSys across three reasoning cat-             ability) and FACT (Citation Accuracy, Effective
+egories that collectively span symbolic computa-             Citation). (3) Science Coding tasks (SciCode) are
+tion, open-domain research synthesis, and scientific         evaluated using Pass@Main and Pass@Sub met-
+programming. All evaluations use dataset-specific            rics, capturing correctness at both task and sub-task
+metrics following their official definitions to ensure       levels. All metrics follow their dataset definitions
+fair comparison.                                             to ensure faithful comparison and reproducibility.
+
+Baselines Since agents show domain-specific
+                                                             3.2        Overall Results
+strengths, we select the strongest baseline for each
+task category instead of using a uniform set. For            Exam-style Reasoning. Table 2 shows that
+exam-style reasoning, we compare against GPT-4o-             SwarmSys consistently outperforms all GPT-4o-
+based IO (direct LLM invocation) (OpenAI et al.,             based multi-agent baselines on both single- and
+2024), CoT (Wei et al., 2022), CoT-SC (Wang et al.,          multi-subject exams, achieving an average improve-
+2022), Self-Refine (Madaan et al., 2023), Mul-               ment of +12.5% Accuracy and +10.8% Cover-
+tiPersona (Wang et al., 2023b), and GPTSwarm                 age over GPTSwarm. While GPT-5 achieves the
+(Zhuge et al., 2024). For research tasks, we in-             strongest absolute scores, SwarmSys-8 narrows the
+clude general-purpose baselines (IO, CoT, Self-              gap by over 70%, demonstrating that swarm-level
+Refine), and deep research agents (Grok Deeper               cooperation can approach next-generation model
+Search, DeepResearchAgent). For scientific pro-              performance without access to stronger backbones.
+gramming, we use both general-purpose reasoning              Qualitatively, we observe that SwarmSys agents
+systems (Self-Refine, CoT) and domain-specific               exhibit complementary specialization: Explorers
+agents (GPTSwarm, DeepResearchAgent). We                     diversify problem-solving strategies, while Valida-
+also report results from GPT-5 as an upper bound             tors efficiently prune redundant reasoning chains,
+for single-agent performance.                                leading to higher coverage with reduced variance.
+
+                                                         4
+Table 2: Performance comparison on Exam-style tasks (single-, multi-subject, and Olympic-level). Metrics:
+Accuracy (Acc.) and Knowledge Coverage (Cov.). SwarmSys-8 means the system contains 8 agents (1* explorer,
+6*workers, 1*validator).
+
+                                        Math Exam        STEM Mix          Olympic Math           Average
+                Method
+                                        Acc.    Cov.     Acc.     Cov.     Acc.     Cov.      Acc.    Cov.
+                IO (GPT-4o)             46.3    45.7     57.4     55.2     23.5     57.6      42.4    52.8
+                CoT (GPT-4o)            52.6    49.0     60.8     59.7     30.0     66.3      47.8    58.3
+                CoT-SC (5-shot)         63.2    62.4     64.7     62.8     28.3     51.7      52.1    59.0
+                Self-Refine (GPT-4o)    79.3     9.8     70.5     79.0     16.6     45.0      55.5    44.6
+                MultiPersona (GPT-4o)   52.4    51.4     60.9     62.3     35.0     68.3      49.4    60.7
+                GPTSwarm†               65.5    70.3     69.6     71.4     40.0     73.3      58.4    71.7
+                GPT-5                   87.2    90.6     87.7     89.1     31.2     70.5      68.7    83.4
+                SwarmSys-8 (Ours)       76.2    80.2     78.7     81.3     42.4     73.2      65.8    78.2
+
+Table 3: Performance comparison on Research tasks (DeepResearch Bench). Metrics: Comprehensiveness, Depth,
+Instruction Following, and Readability.
+
+                         Method                Overall     Comp.         Depth    Inst.    Read.
+                         IO (GPT-4o-Search)      30.7         27.8       20.4     41.0     37.6
+                         CoT (GPT-4o)            29.3         29.5       22.8     33.5     36.8
+                         Self-Refine             35.9         35.4       27.0     44.1     41.0
+                         DeepResearchAgent       48.8         48.5       48.5     49.1     49.4
+                         Grok Deeper Search      40.2         37.9       35.3     46.3     44.0
+                         SwarmSys-8 (Ours)       42.5         39.6       38.0     50.0     46.3
+
+Table 4: Performance comparison on Science Coding               3.3   Ablation Study
+tasks (SciCode benchmark). Metrics: Pass@Main and
+Pass@Sub (percentages). † No longer available; metrics        We ablate the design of SwarmSys along three
+from SciCode report.                                          axes: (a) removing dynamic profile updates and
+                                                              embedding-based matching (Ours-Roles-Rand);
+ Method                     Pass@Main     Pass@Sub
+                                                              (b) removing both roles and matching, leaving ho-
+ IO (GPT-4o)                     2.0           28.3           mogeneous random assignment (Rand-NoRoles);
+ OpenAI o3-mini-medium†          9.2           34.4
+ CoT-SC (GPT-4o)                 8.8           28.7
+                                                              and (c) varying the number of Agents A from 4
+ Self-Refine                    10.0           33.3           to 32 (Table 5), while ensure that each event con-
+ GPTSwarm                        8.6           29.2           tains at least one explorer, one worker, and one
+ SwarmSys-14 (Ours)             12.5           45.2           validator. All variants use identical backbones and
+Research-level Reasoning. As shown in Table 3,                decoding parameters. Results reveal three trends:
+SwarmSys surpasses Grok Deeper Search in over-                (1) Removing roles leads to a substantial decline in
+all RACE score (+2.3%) and instruction-following              both accuracy and coverage (e.g., 56.3% → 43.2%
+(+3.7%), reflecting the benefit of distributed role           in accuracy and 52.4% → 41.4% in coverage
+specialization in literature synthesis and factual            at A=4), confirming that cooperative debate and
+consolidation. SwarmSys achieves especially large             functional specialization are essential for main-
+gains in comprehensiveness and readability, sug-              taining diversity without redundancy. (2) Adap-
+gesting that swarm debates improve global coher-              tive matching and profiling further enhance per-
+ence even in open-ended research generation tasks.            formance: embedding-based matching increases
+                                                              coverage by up to +27.3% by aligning agent capa-
+Scientific Programming. In Table 4, SwarmSys                  bilities with task semantics. (3) Scaling saturates
+demonstrates notable improvements on SciCode:                 around W =14: while both metrics improve with
++2.5% Pass@Main and +11.9% Pass@Sub over                      more Workers, gains plateau beyond 14, indicat-
+the best GPT-4o baselines. These results indicate             ing that agent saturation occurs once the subtask
+that dynamic role coordination and progressive re-            granularity is fully covered.
+finement effectively decompose complex compu-
+tational problems. Interestingly, Pass@Sub im-                  3.4   Swarm Effect: Emergent Collective
+provements are more pronounced, supporting our                        Intelligence
+hypothesis that swarm collaboration benefits from               Our design philosophy centers on the Swarm Ef-
+modular code generation and localized validation.               fect: a collection of properly coordinated, limited
+
+                                                          5
+Table 5: Ablation on Exam task under varying numbers of Agents (A). Metrics: Accuracy (Acc., %), Knowledge
+Coverage (Cov., %).
+
+                                A=4          A=8             A=14          A=20          A=32
+             Method
+                            Acc.   Cov.   Acc.   Cov.     Acc.   Cov.   Acc.   Cov.   Acc.   Cov.
+             Rand-NoRoles   43.2   41.4   42.9   42.1     44.1   43.4   44.3   43.2   43.8   42.3
+             Rand-Roles     56.3   52.4   58.2   54.8     58.5   56.1   58.3   56.0   57.3   55.9
+             SwarmSys       74.3   79.7   76.2   80.2     77.3   81.0   77.2   81.3   76.5   80.8
+
+
+
+
+Figure 4: Swarm reasoning trajectory on MathExam. Explorers initiate sub-tasks, Workers debate and revise
+alternative methods, and Validators enforce cross-checks across rounds. The swarm collectively converges to
+consistent solutions through debate-driven consensus formation.
+agents can collectively approximate or surpass a          through the evolving swarm state. Empirically, this
+stronger single-agent model. Figure 4 visualizes          leads to: (i) higher diversity in reasoning paths, and
+how SwarmSys (GPT-4o backbone) gradually ap-              (ii) smoother convergence across reasoning rounds.
+proaches the performance of stronger models such
+as GPT-5 and DeepResearchAgent as the swarm
+size increases.                                           Knowledge Diffusion and Self-Regularization.
+                                                          We further observe that intermediate reasoning
+Emergent Performance Scaling. Quantitatively,             traces in SwarmSys display emergent knowledge
+as the number of active agents increases from A=4         diffusion: factual entities, equations, or hypothe-
+to A=14, both Accuracy and Knowledge Cover-               ses discovered by one agent are reused, revised, or
+age improve consistently (e.g., from 74.3/79.7 to         even corrected by others without explicit synchro-
+77.3/81.0 on the Exam task). However, further ex-         nization. This effect increases factual precision
+pansion to A=20 or A=32 yields negligible gains           while maintaining interpretability. In qualitative
+(within < 1% difference), indicating that agent ca-       analyses, the system exhibits an implicit regular-
+pacity saturates once subtask diversity and knowl-        ization behavior—weaker agents’ errors are diluted
+edge space have been sufficiently covered. This           by consensus mechanisms, preventing local hallu-
+scaling curve mirrors real-world swarm systems,           cinations from dominating global output.
+where the marginal utility of additional workers
+decreases after local niches become saturated.
+                                                          From Coordination to Intelligence. The Swarm
+Collaborative Dynamics. Unlike conventional               Effect demonstrates that collective intelligence is
+multi-agent ensembles that rely on static voting,         not a linear function of model size, but an emergent
+SwarmSys agents interact through pheromone-               property of structured interaction. While individual
+inspired event matching and debate-driven vali-           agents are limited by GPT-4o, the swarm collec-
+dation. Explorers dynamically propose new sub-            tively builds a distributed memory and decision
+goals, Workers attempt partial solutions, and Val-        space, enabling generalization beyond any single
+idators consolidate outcomes based on collective          agent. This property highlights a promising di-
+memory. This dynamic feedback loop creates a              rection for future large-scale reasoning systems:
+self-organizing division of labor where each agent        scaling through coordination rather than parameter
+adapts its behavior not from external commands but        count.
+
+                                                      6
+        Stage I: Centralized Exploration Phase                Table 6: Failure type distribution on tasks. Estimated
+                                                              from 15 randomly sampled cases.
+                               Explorer
+                                                               Failure Type               Description              %
+                                                               Premature Consensus        Early validator fixes    16
+        Event 1          Event 2          Event 3                                         one branch too soon
+                                                               Reinforcement Bias         Over-strengthening of    20
+                                                                                          an early path signal
+                               Worker Cluster                  Mode Collapse              All explorers con-       14
+                                                                                          verge to one reasoning
+                                                                                          mode
+                               Validator_V1                    Constraint Omission        Missing symbolic or      22
+                                                                                          geometric integration
+       Stage II: Distributed Consensus Phase                   Communication Deadlock     Agents misrecognize      28
+                                                                                          roles, causing commu-
+                                                                                          nication deadlock
+        Event 1          Event 2          Event 3
+                                                              a hub–spoke pattern centered on high-similarity
+                                                              validators. As reasoning progresses, pheromone
+                               Worker Mesh                    reinforcement promotes denser cross-links, lead-
+                                                              ing to a Distributed Consensus Phase characterized
+                                                              by a small-world structure with higher local clus-
+         V1         V2             V3     Explorers
+                                                              tering (0.28→0.47) and shorter global paths. This
+Figure 5: Evolution of communication topology in              transition demonstrates self-organized coordination
+SwarmSys. The system evolves from a centralized               emerging without explicit central control.
+hub–spoke structure to a distributed small-world mesh,
+where workers and validators interconnect for efficient       Contribution Balance. Normalized entropy of
+consensus and information reuse.                              accepted contributions is
+4     Qualitative Analysis                                                                A
+                                                                                          X
+                                                                          Hc = − log1 A         pi log pi ,        (1)
+We further analyze how reasoning quality emerges                                          i=1
+and where it breaks down within SwarmSys. This
+                                                              where pi is each agent’s contribution share, com-
+section covers two aspects: (1) Agent Behav-
+                                                              puted by the contribution acceptance rate, A is
+ior Analysis, examining coordination patterns via
+                                                              the total number of agents. SwarmSys attains
+profile dynamics and interaction topology; and
+                                                              Hc =0.72, surpassing GPTSwarm (0.41), indicat-
+(2) Error Analysis, identifying failure modes of
+                                                              ing balanced participation driven by the explo-
+pheromone-based optimization and consensus.
+                                                              ration–exploitation policy. Overall, adaptive pro-
+4.1    Agent Behavior                                         files and pheromone feedback jointly yield a decen-
+                                                              tralized yet structured division of labor.
+To understand how coordination arises from the
+matching–collaboration–update cycle, we analyze               4.2   Error Analysis and Case Study
+profile adaptation, interaction topology, and contri-         Despite strong overall results, SwarmSys occasion-
+bution balance using our experiment’s event logs.             ally fails in tasks requiring strict temporal or sym-
+Profile Adaptation. We track embedding drift                  bolic alignment.As is shown in figure 6, we identify
+of each agent’s competence embedding va . The
+                                             (i)              five main failure types: (a) premature convergence,
+mean cosine shift per round is 0.14 ± 0.03, show-             (b) Reinforcement Bias, (c) Mode Collapse, (d)
+ing steady self-adjustment as agents gain experi-             Constraint Omission, (e) Communication Dead-
+ence. Explorers exhibit the largest variance, indicat-        lock. A typical case in our study is: two explor-
+ing ongoing hypothesis exploration, while Valida-             ers propose algebraic and geometric solutions, but
+tors remain stable, preserving reasoning coherence.           an early validator accepts one branch too soon,
+This confirms that profile updates act as distributed         reinforcing it and suppressing valid alternatives.
+memory enabling specialization.                               Such reinforcement bias leads to overfitting on par-
+                                                              tial evidence. Future improvements may include
+Interaction Topology. Figure 5 illustrates the                uncertainty-weighted reinforcement, scheduled re-
+evolution of communication topology. During                   sampling of low-confidence paths, and meta-level
+the Centralized Exploration Phase, agents form                arbitration to maintain epistemic diversity.
+
+                                                          7
+ System                                           Decentralized   Explicit Roles   Debate       Dynamic Profiling   Decentralized Matching   Multi-Event   Validator   Stigmergy
+ CAMEL (Li et al., 2023)                               ✗                ✓            ✓                 ✗                      ✗                  ✗            ✗           ✗
+ AutoGen (Wu et al., 2023)                             ✗                ✓            ✓                 ✗                      ✗                  ✗            ✗           ✗
+ MetaGPT (Hong et al., 2024)                           ✗                ✓            ✗                 ✗                      ✗                  ✗            ✓†          ✗
+ MAD (Liang et al., 2024)                              ✗                ✗            ✓                 ✗                      ✗                  ✗            ✓           ✗
+ ToT/GoT (Yao et al., 2023; Besta et al., 2024)        ✗                ✗            ✗                 ✗                      ✗                  ✗            ✗           ✗
+ Voyager (Wang et al., 2023a)                          ✗                ✗            ✗                 ✓§                     ✗                  ✗            ✓§          ✗
+ SWE-agent (Yang et al., 2024)                         ✗                ✗            ✗                 ✗                      ✗                  ✗            ✗           ✗
+ Self-Refine (Madaan et al., 2023)                     ✗                ✗            ✗                 ✗                      ✗                  ✗            ✓           ✗
+ GPTSwarm (Zhuge et al., 2024)                         ✓                ✗            ✗                 ✓                      ✓                  ✓            ✗           ✓
+ DeepResearchAgent (Huang et al., 2025)                ✗                ✓            ✓                 ✗                      ✗                  ✗            ✓           ✗
+ ROBIN (Ghareeb et al., 2025)                          ✗                ✓            ✓                 ✗                      ✗                  ✗            ✓           ✗
+ SwarmSys (ours)                                       ✓                ✓            ✓                 ✓                      ✓                  ✓            ✓           ✓
+
+
+Table 7: Comparison of SwarmSys with representative reasoning and multi-agent systems. † MetaGPT incorporates
+SOP-style verification steps but not decentralized validators. § Voyager maintains skill profiles and self-checking,
+but only within a single-agent setting.
+
+5     Related Works                                                                              tained reasoning across multiple concurrent events.
+
+LLM-based Multi-Agent Systems. Recent                                                            Adaptive Coordination and Swarm-inspired
+progress in large language models has led to                                                     Reasoning. A growing body of work introduces
+a proliferation of multi-agent frameworks that                                                   adaptive or self-organizing strategies for LLM
+decompose reasoning and problem-solving into                                                     agents. GPTSwarm (Zhuge et al., 2024) represents
+interactive roles (Liu et al., 2025). Early systems                                              one of the few attempts at decentralized coordina-
+such as CAMEL (Li et al., 2023), AutoGen (Wu                                                     tion, leveraging graph-based optimization and stig-
+et al., 2023) introduced explicit role structures                                                mergic feedback. Meanwhile, systems like Voy-
+(e.g., user–assistant pairs) and dialog-based                                                    ager (Wang et al., 2023a), Self-Refine (Madaan
+task decomposition, showing that inter-agent                                                     et al., 2023), and SwarmAgentic (Zhang et al.,
+communication improves reasoning diversity.                                                      2025) employ profile-like adaptation and itera-
+Subsequent works like MetaGPT (Hong et al.,                                                      tive self-improvement, but remain task-specific.
+2024) , AgentScope (Gao et al., 2024b), and                                                      SwarmSys advances this line of research by in-
+DeepResearchAgent (Huang et al., 2025) further                                                   tegrating dynamic profiling, embedding-based
+formalized role hierarchies for domain-specific                                                  matching, and pheromone-inspired reinforcement
+workflows such as software engineering or                                                        into a unified framework that scales to multi-event,
+literature review. However, their centralized                                                    multi-agent reasoning. This design allows dis-
+orchestration and fixed pipelines limit scalability                                              tributed agents to self-allocate across evolving
+and adaptability. SwarmSys differs by using a                                                    tasks, maintaining robustness and efficiency with-
+fully decentralized structure where coordination                                                 out centralized scheduling.
+emerges from role-guided interaction and adaptive
+matching, without needing a global controller.                                                   6      Conclusion
+                                                                                                 We presented SwarmSys, a swarm-intelligence-
+Collaborative Reasoning and Debate. Another
+                                                                                                 inspired framework for decentralized multi-agent
+line of work explores multi-round reasoning via
+                                                                                                 reasoning. Through role-specialized collabora-
+self-consistency and debate. Methods such as
+                                                                                                 tion, dynamic profiling, and pheromone-inspired
+Chain-of-Thought (CoT) and Tree-of-Thought
+                                                                                                 reinforcement, SwarmSys enables scalable, self-
+(ToT) reasoning (Yao et al., 2023; Besta et al.,
+                                                                                                 organizing coordination without centralized con-
+2024) extend single-agent reflection through struc-
+                                                                                                 trol. Across diverse reasoning and research do-
+tured deliberation, while MAD (Liang et al., 2024),
+                                                                                                 mains, it consistently outperforms strong base-
+Longagent (Zhao et al., 2024) and ROBIN (Gha-
+                                                                                                 lines and reveals emergent collective behav-
+reeb et al., 2025) model inter-agent debates to en-
+                                                                                                 iors—demonstrating that scaling coordination can
+hance diversity and correctness. These approaches
+                                                                                                 rival scaling model size. Our findings suggest a new
+improve intermediate reasoning quality but gener-
+                                                                                                 paradigm for reasoning: intelligence emerges from
+ally depend on fixed communication topologies and
+                                                                                                 structured interaction among distributed agents, not
+lack mechanisms for dynamic adaptation or mem-
+                                                                                                 from larger models.
+ory persistence across reasoning episodes. In con-
+trast, SwarmSys incorporates debate as a local coor-                                             Limitations
+dination primitive within a self-organizing swarm,
+where roles evolve through continuous profiling                                                  Despite its strong performance, SwarmSys still
+and pheromone-like reinforcement, enabling sus-                                                  faces several limitations. First, while decentral-
+
+                                                                                            8
+ized coordination improves adaptability, it also in-         Eric Bonabeau, Marco Dorigo, and Guy Theraulaz.
+creases communication overhead, which may re-                  1999. Swarm Intelligence: From Natural to Artificial
+                                                               Systems. Oxford University Press.
+duce efficiency in latency-sensitive settings. Sec-
+ond, agent profiling currently relies on text-based          Victor Dibia, Jingya Chen, Gagan Bansal, Suff Syed,
+embeddings and heuristic updates; future work                  Adam Fourney, Erkang Zhu, Chi Wang, and Saleema
+could explore learnable or gradient-based mech-                Amershi. 2024. Autogen studio: A no-code devel-
+                                                               oper tool for building and debugging multi-agent
+anisms for more precise skill modeling. Third,                 systems. Preprint, arXiv:2408.15247.
+our experiments focus primarily on reasoning and
+research-oriented tasks, extending SwarmSys to               Marco Dorigo and Thomas Stützle. 2004. Ant Colony
+embodied or real-time interactive environments re-            Optimization. MIT Press.
+mains an open direction. We hope these insights in-          Mingxuan Du, Benfeng Xu, Chiwei Zhu, Xiaorui Wang,
+spire future research on large-scale, self-organizing          and Zhendong Mao. 2025. Deepresearch bench: A
+multi-agent systems that combine symbolic struc-               comprehensive benchmark for deep research agents.
+ture with emergent intelligence.                               Preprint, arXiv:2506.11763.
+
+                                                             Bofei Gao, Feifan Song, Zhe Yang, Zefan Cai, Yibo
+Ethics Statement                                               Miao, Qingxiu Dong, Lei Li, Chenghao Ma, Liang
+                                                               Chen, Runxin Xu, Zhengyang Tang, Benyou Wang,
+This work introduces SwarmSys, a distributed                   Daoguang Zan, Shanghaoran Quan, Ge Zhang, Lei
+multi-agent reasoning framework inspired by                    Sha, Yichang Zhang, Xuancheng Ren, Tianyu Liu,
+                                                               and Baobao Chang. 2024a. Omni-math: A univer-
+swarm intelligence. The research involves no hu-               sal olympiad level mathematic benchmark for large
+man subjects, personal data, or sensitive content; all         language models. Preprint, arXiv:2410.07985.
+experiments use public or synthetic datasets. We
+                                                             Dawei Gao, Zitao Li, Xuchen Pan, Weirui Kuang, Zhi-
+recognize potential ethical issues in LLM-based
+                                                               jian Ma, Bingchen Qian, Fei Wei, Wenhao Zhang,
+multi-agent systems, such as bias propagation and              Yuexiang Xie, Daoyuan Chen, and 1 others. 2024b.
+unreliable autonomous coordination. SwarmSys                   Agentscope: A flexible yet robust multi-agent plat-
+mitigates these risks through closed-loop validation           form. arXiv preprint arXiv:2402.14034.
+and transparent agent interactions, ensuring that all
+                                                             Ali Essam Ghareeb, Benjamin Chang, Ludovico Mitch-
+reasoning processes remain interpretable and au-               ener, Angela Yiu, Caralyn J. Szostkiewicz, Jon M.
+ditable. Our goal is to advance the scientific under-          Laurent, Muhammed T. Razzak, Andrew D. White,
+standing of scalable reasoning rather than deploy              Michaela M. Hinks, and Samuel G. Rodriques. 2025.
+autonomous agents in real-world decision-making.               Robin: A multi-agent system for automating scien-
+                                                               tific discovery. Preprint, arXiv:2505.13400.
+We advocate responsible use of SwarmSys with
+proper human oversight, fairness, and accountabil-           Sirui Hong, Mingchen Zhuge, Jiaqi Chen, Xiawu Zheng,
+ity in future applications.                                     Yuheng Cheng, Ceyao Zhang, Jinlin Wang, Zili
+                                                                Wang, Steven Ka Shing Yau, Zijuan Lin, Liyang
+                                                                Zhou, Chenyu Ran, Lingfeng Xiao, Chenglin Wu,
+Acknowledgements                                                and Jürgen Schmidhuber. 2024. Metagpt: Meta pro-
+                                                                gramming for a multi-agent collaborative framework.
+We are grateful to our collaborators for their valu-            Preprint, arXiv:2308.00352.
+able discussions on multi-agent coordination and
+                                                             Yuxuan Huang, Yihang Chen, Haozheng Zhang, Kang
+large language model reasoning. This research was              Li, Huichi Zhou, Meng Fang, Linyi Yang, Xiaoguang
+supported in part by institutional computational re-           Li, Lifeng Shang, Songcen Xu, Jianye Hao, Kun
+sources and open-source communities that enabled               Shao, and Jun Wang. 2025. Deep research agents:
+large-scale experimentation.                                   A systematic examination and roadmap. Preprint,
+                                                               arXiv:2506.18096.
+
+                                                             Valentin Lecheval, Elva J.H. Robinson, and Richard P.
+References                                                     Mann. 2024. Random walks with spatial and tempo-
+                                                               ral resets may underlie searching movements in ants.
+Maciej Besta, Nils Blach, Ales Kubicek, Robert Ger-            bioRxiv.
+ stenberger, Michal Podstawski, Lukas Gianinazzi,
+ Joanna Gajda, Tomasz Lehmann, Hubert Niewiadom-             Guohao Li, Hasan Abed Al Kader Hammoud, Hani
+ ski, Piotr Nyczyk, and Torsten Hoefler. 2024. Graph           Itani, Dmitrii Khizbullin, and Bernard Ghanem. 2023.
+ of thoughts: Solving elaborate problems with large            Camel: Communicative agents for "mind" explo-
+ language models. Proceedings of the AAAI Confer-              ration of large language model society. Preprint,
+ ence on Artificial Intelligence, 38(16):17682–17690.          arXiv:2303.17760.
+
+
+                                                         9
+Tian Liang, Zhiwei He, Wenxiang Jiao, Xing Wang,                 and Denny Zhou. 2022. Chain-of-thought prompt-
+  Yan Wang, Rui Wang, Yujiu Yang, Shuming Shi, and               ing elicits reasoning in large language models. In
+  Zhaopeng Tu. 2024. Encouraging divergent thinking              Proceedings of the 36th International Conference on
+  in large language models through multi-agent debate.           Neural Information Processing Systems, NIPS ’22,
+  Preprint, arXiv:2305.19118.                                    Red Hook, NY, USA. Curran Associates Inc.
+Hongjun Liu, Yinghao Zhu, Yuhui Wang, Yitao Long,
+  Zeyu Lai, Lequan Yu, and Chen Zhao. 2025. Med-
+  mmv: A controllable multimodal multi-agent frame-
+  work for reliable and verifiable clinical reasoning.         Qingyun Wu, Gagan Bansal, Jieyu Zhang, Yiran
+  Preprint, arXiv:2509.24314.                                    Wu, Beibin Li, Erkang Zhu, Li Jiang, Xiaoyun
+                                                                 Zhang, Shaokun Zhang, Jiale Liu, Ahmed Hassan
+Aman Madaan, Niket Tandon, Prakhar Gupta, Skyler                 Awadallah, Ryen W White, Doug Burger, and Chi
+ Hallinan, Luyu Gao, Sarah Wiegreffe, Uri Alon,                  Wang. 2023. Autogen: Enabling next-gen llm ap-
+ Nouha Dziri, Shrimai Prabhumoye, Yiming Yang,                   plications via multi-agent conversation. Preprint,
+ Shashank Gupta, Bodhisattwa Prasad Majumder,                    arXiv:2308.08155.
+ Katherine Hermann, Sean Welleck, Amir Yazdan-
+ bakhsh, and Peter Clark. 2023. Self-refine: It-
+ erative refinement with self-feedback. Preprint,
+ arXiv:2303.17651.                                             John Yang, Carlos E. Jimenez, Alexander Wettig, Kilian
+                                                                 Lieret, Shunyu Yao, Karthik Narasimhan, and Ofir
+OpenAI, :, Aaron Hurst, Adam Lerer, Adam P. Goucher,
+                                                                 Press. 2024. Swe-agent: Agent-computer interfaces
+  Adam Perelman, Aditya Ramesh, Aidan Clark,
+                                                                 enable automated software engineering. Preprint,
+  AJ Ostrow, Akila Welihinda, Alan Hayes, Alec
+                                                                 arXiv:2405.15793.
+  Radford, Aleksander Madry,
+                          ˛    Alex Baker-Whitcomb,
+  Alex Beutel, Alex Borzunov, Alex Carney, Alex
+  Chow, Alex Kirillov, and 401 others. 2024. Gpt-4o
+  system card. Preprint, arXiv:2410.21276.
+                                                               Shunyu Yao, Dian Yu, Jeffrey Zhao, Izhak Shafran,
+Jiabin Tang, Tianyu Fan, and Chao Huang. 2025. Au-               Thomas L. Griffiths, Yuan Cao, and Karthik
+   toagent: A fully-automated and zero-code framework            Narasimhan. 2023. Tree of thoughts: Deliber-
+   for llm agents. Preprint, arXiv:2502.05957.                   ate problem solving with large language models.
+                                                                 Preprint, arXiv:2305.10601.
+Minyang Tian, Luyu Gao, Shizhuo Dylan Zhang, Xinan
+  Chen, Cunwei Fan, Xuefei Guo, Roland Haas, Pan Ji,
+  Kittithat Krongchon, Yao Li, Shengyan Liu, Di Luo,
+  Yutao Ma, Hao Tong, Kha Trinh, Chenyu Tian, Zihan
+  Wang, Bohao Wu, Yanyu Xiong, and 11 others. 2024.            Xiaotian Zhang, Chunyang Li, Yi Zong, Zhengyu Ying,
+  Scicode: A research coding benchmark curated by                Liang He, and Xipeng Qiu. 2024. Evaluating the
+  scientists. Preprint, arXiv:2407.13168.                        performance of large language models on gaokao
+                                                                 benchmark. Preprint, arXiv:2305.12474.
+Guanzhi Wang, Yuqi Xie, Yunfan Jiang, Ajay Man-
+  dlekar, Chaowei Xiao, Yuke Zhu, Linxi Fan, and
+  Anima Anandkumar. 2023a. Voyager: An open-
+  ended embodied agent with large language models.             Yao Zhang, Chenyang Lin, Shijie Tang, Haokun Chen,
+  Preprint, arXiv:2305.16291.                                    Shijie Zhou, Yunpu Ma, and Volker Tresp. 2025.
+                                                                 Swarmagentic: Towards fully automated agentic
+Junlin Wang, Jue Wang, Ben Athiwaratkun, Ce Zhang,
+                                                                 system generation via swarm intelligence. arXiv
+  and James Zou. 2024.       Mixture-of-agents en-
+                                                                 preprint arXiv:2506.15672.
+  hances large language model capabilities. Preprint,
+  arXiv:2406.04692.
+Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc Le,
+  Ed Chi, Sharan Narang, Aakanksha Chowdhery, and              Jun Zhao, Can Zu, Hao Xu, Yi Lu, Wei He, Yiwen
+  Denny Zhou. 2022. Self-consistency improves chain              Ding, Tao Gui, Qi Zhang, and Xuanjing Huang. 2024.
+  of thought reasoning in language models. arXiv                 Longagent: scaling language models to 128k context
+  preprint arXiv:2203.11171.                                     through multi-agent collaboration. arXiv preprint
+                                                                 arXiv:2402.11550.
+Zhenhailong Wang, Shaoguang Mao, Wenshan Wu, Tao
+  Ge, Furu Wei, and Heng Ji. 2023b. Unleashing the
+  emergent cognitive synergy in large language mod-
+  els: A task-solving agent through multi-persona self-
+  collaboration. arXiv preprint arXiv:2307.05300.              Mingchen Zhuge, Wenyi Wang, Louis Kirsch,
+                                                                 Francesco Faccio, Dmitrii Khizbullin, and Jürgen
+Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten                 Schmidhuber. 2024. Language agents as optimizable
+   Bosma, Brian Ichter, Fei Xia, Ed H. Chi, Quoc V. Le,          graphs. Preprint, arXiv:2402.16823.
+
+
+                                                          10
+A     Example Appendix                                   Explorer Prompt
+                                                         PROMPT = """
+                                                         You are an Explorer agent with strong ca-
+                                                         pabilities in identifying subproblems and
+A.1    Prompts                                           analyzing solution paths.
+                                                         Your task is to receive a mathematical prob-
+                                                         lem set and then (1) search and interpret
+                                                         the overall problem, (2) decompose it into
+                                                         logically coherent subproblems, (3) identify
+    Worker Prompt                                        entry points and strategies for solution, and
+                                                         (4) monitor the workload distribution across
+    PROMPT = """
+                                                         roles and dynamically reassign yourself to
+    You are a worker agent with expertise in
+                                                         higher-pressure roles if necessary.
+    problem-solving, computation, and mathe-
+                                                         Ensure your output (1) maintains traceabil-
+    matical reasoning.
+                                                         ity between subproblems and the original
+    Your task is to receive a specific subprob-
+                                                         task, (2) logically documents role-switch de-
+    lem and then (1) solve the subproblem ac-
+                                                         cisions, and (3) ensures role-switch includes
+    curately with transparent justification for
+                                                         resetting your goal and behavior policy. """
+    each step, (2) share your solution with other
+    agents, (3) participate in solution compari-
+    son and structured debate, and (4) defend or
+    revise your work if challenged.
+    Ensure your output (1) presents calculations
+    in a clear, annotated format, (2) cites math-
+    ematical rules or theorems when applying
+    them, and (3) is responsive to feedback and
+    adaptive in collaborative revision. """
+
+
+
+
+    Validator Prompt
+    PROMPT = """
+    You are a validator agent dedicated to check-
+    ing solution correctness and consistency.
+    Your task is to: (1) check each worker’s so-
+    lution for logic, accuracy, and completeness,
+    (2) participate in debates to reconcile dis-
+    crepancies, (3) contribute to confirming a
+    group consensus, and (4) shift roles if the
+    validation queue is empty and other roles
+    are under high pressure.
+    Ensure your output (1) provides precise val-
+    idation with explanations of correctness or
+    error, (2) uses formal mathematical checks
+    where appropriate, (3) helps mediate con-
+    flicts in results with clarity and neutral-
+    ity, and (4) explicitly states if consensus
+    is confirmed: {TERMINATE: The answer
+    is: [correct answer]} """
+
+
+                                                    11
+Task Context                                               Instruction Embedding Template
+PROMPT = """                                               PROMPT = """
+Describe and analyze the following math-                   You are evaluating the mathematical and
+ematical problem carefully. The problem                    reasoning competence of an agent partici-
+statement is presented below. If this task                 pating in a collaborative debate system.
+depends on other sub-tasks or prior events,                The goal is to generate a semantic embed-
+ensure logical consistency and continuity                  ding that represents how capable this agent
+with those results.                                        is at solving mathematical, logical, and ana-
+Task profile. (1) If the task involves proving,            lytical tasks.
+demonstrating, or establishing statements -                Consider two sources of information: (1)
+This is a proof-oriented task. Emphasize                   The agent’s declared abilities, describing
+logical rigor, step-by-step justification, and             what it is designed or trained to do. (2)
+clear argumentation. (2) If the task involves              The agent’s historical activity performance,
+calculating, evaluating, integrating, or de-               summarizing how it has previously executed
+riving quantities - This is a computation-                 reasoning, computation, or validation tasks.
+oriented task. Focus on symbolic manip-                    Integrate both perspectives to form a sin-
+ulation, clear intermediate steps, and veri-               gle competence representation capturing:
+fication of results. (3) If the task involves              (1) conceptual depth and mathematical rea-
+maximizing, minimizing, or optimizing a                    soning skills, (2) problem-solving strategy
+quantity - This is an optimization task. Iden-             diversity, (3) accuracy and self-correction
+tify objective functions and constraints, ana-             ability, and (4) communication and collabo-
+lyze conditions for optimality, and interpret              ration quality.
+results precisely. (4) If the task involves con-           Agent Ability Description: {ability text}
+ditional or logical reasoning (“if”, “then”,               Agent Performance History: {history text}
+“otherwise”) - This is a conditional reason-               Use the combined content above as the con-
+ing task. Separate cases clearly, verify im-               text for competence evaluation. Output rep-
+plications, and maintain logical complete-                 resentation should capture the overall ability
+ness. (5) Otherwise - This is a general rea-               state of the agent, balancing potential skill
+soning task. Apply systematic mathemati-                   with observed performance. """
+cal analysis and adjust reasoning depth to
+the complexity of the problem.
+                                                        A.2   Dataset Settings
+Objectives: (1) Analyze the problem thor-
+oughly and build a shared understanding.                We evaluate the reasoning capability and knowl-
+(2) Generate multiple possible solution                 edge coverage of our multi-agent system based on
+paths and compare their validity. (3) Ex-               three categories of tasks:
+ecute reasoning or calculations with clarity,           Exam We rearrange existing benchmarks into
+precision, and justification. (4) Resolve dis-          exam-like formats, covering both single-subject
+agreements through structured logical de-               and multi-subject settings. This design mimics the
+bate, not assertion. (5) Arrive at a verified,          structure of real-world examination papers, where
+consensus-based final answer.                           agents must solve a coherent set of questions rather
+Round & Turn-taking policy: (1) Each de-                than isolated items. Organizing benchmarks in this
+bate round follows this strict order: explorer          way is motivated by several factors: (i) exams natu-
+→ all workers → validator. (2) The ex-                  rally exhibit varying levels of difficulty across ques-
+plorer opens each round by outlining con-               tions; (ii) they involve heterogeneous knowledge
+text, progress, and a proposed plan. (3)                types and differentiated scoring schemes, which
+Works present or refine solutions, show                 make the dataset inherently diverse; and (iii) each
+derivations, and discuss intermediate re-               exam itself constitutes a complex task that can be
+sults. (4) The validator closes each round              decomposed into multiple interrelated and irrelated
+by checking correctness and summarizing                 sub-tasks.
+consensus. (5) The debate terminates only                  Such properties align well with the characteris-
+when the validator announces: TERMI-                    tics of our ant-colony-inspired system. In real ant
+NATE: The answer is: <final answer>. """
+                                                   12
+colonies, individuals continuously explore, evalu-
+ate, and participate in different sub-tasks based on
+local pheromone signal. Similarly, in exam sce-
+narios, our agents can search across different ques-
+tions, dynamically decide whether to participate in
+a specific sub-task, and collectively optimize the
+global solution through local collaboration. There-
+fore, exam-style benchmarks provide not only a
+realistic and challenging evaluation setting for rea-
+soning and knowledge coverage, but also a natural
+testbed for demonstrating the strengths of swarm-
+based multi-agent systems.
+
+
+
+
+Research To evaluate research-oriented reason-
+ing, we adopt DeepResearch Bench, which con-
+tains PhD-level research tasks spanning multiple
+domains. Each task provides a research topic or
+open-ended problem statement (rather than a com-
+pleted study), requiring agents to perform litera-
+ture exploration, knowledge recall, and synthesis
+of coherent research reports. Outputs are evaluated
+using RACE (Reference-based Adaptive Criteria-
+driven Evaluation). Such settings mirror real-world
+academic research, where researchers must jointly
+survey prior work, generate new ideas, and design
+proof-of-concept implementations. These proper-
+ties align well with our swarm-based system: in-
+dividual agents can specialize in literature recall,                      Figure 6: Output Example
+hypothesis generation, or code prototyping, and              A.3   SwarmSys Output Example
+through local debates and coordination, the swarm            A.4   Profile Embedding and Matching
+collectively develops more robust and creative re-
+                                                             A.4.1 Profile Format
+search outcomes.
+                                                             A.4.2 Embedding and Matching
+                                                             Agent embeddings. Each agent Ai is repre-
+                                                             sented by a competence embedding and an avail-
+                                                             ability embedding. The competence embedding
+Science Coding We further evaluate reasoning                  (i)                                    (i)
+                                                             vah is derived from declared abilities Ta and his-
+and knowledge grounding through scientific pro-                                    (i)
+gramming tasks drawn from SciCode. The bench-                torical performance Th , guided by task-specific
+mark is organized into main problems, each of                instructions:
+which is decomposed into multiple sub-problems,               (i)                        (i)                 (i) 
+                                                             vah = ϕinstruct Instructionah , concat(Ta(i) , Th ) .
+making it particularly suitable for swarm-based
+                                                                                                             (2)
+evaluation. Such a structure allows agents to collab-                                      (i)
+                                                             The availability embedding vs reflects workload
+oratively assign sub-problems, iteratively generate                                              (i)
+and refine code, and verify correctness against sci-         and readiness, derived from status Ts :
+entific principles or test cases. By reaching swarm-               vs(i) = ϕinstruct (Instruction(i)  (i)
+                                                                                                 s , Ts ).   (3)
+level consensus, the system enhances both accuracy
+and coverage. This setting therefore captures the            The final representation is the sum:
+precision and collaborative robustness required for
+                                                                                      (i)
+scientific reasoning and computation.                                        va(i) = vah + vs(i) .           (4)
+
+                                                        13
+ Agent Profile                                                            and S̄i denotes the agent’s recent average success.
+ {
+
+      "id": "agent_id",
+
+                                                                          Exploration samples potential matches proportion-
+ 
+                                                                       ally to similarity:
+      "role": "role",
+
+
+                                                                                                                     
+      "Ability_Embedding": "Long text describing the agent's                  D(i,j) ∼ Bernoulli 0.1 + 0.9 · Cnorm
+                                                                                                                (i,j)
+                                                                                                                        , (8)
+ abilities and skills. After each round, the agent updates
+ this based on self-assessment.",
+
+
+                                                                          while exploitation emphasizes high-compatibility
+      "working_status": "Long text describing the agent's                 matches:
+ current working status and availability. This is updated
+ by the agent after each round.",
+
+
+                                                                                                                 
+                                                                            D(i,j) ∼ Bernoulli σ γ(Cnorm
+                                                                                                      (i,j)
+                                                                                                            − 0.5) , (9)
+      "event_id_round_number": "Records agent profiles for
+ each round of updates and parallel processing,
+ structured as: E(n)-round(i). ",
+
+                                      where σ is the sigmoid function and γ controls
+                                                                          sharpness. Both branches unify as:
+      "activity_performance_history": "Long text describing
+ the agent's historical activity performance."
+
+ }                                                                              p(i,j) = εi (0.1 + 0.9Cnorm
+                                                                                                       (i,j)
+                                                                                                             )
+                                                                                                          (i,j)
+                                                                                                                      
+                                                                                          + (1 − εi )σ γ(Cnorm  − 0.5) ,                    (10)
+ Event Profile
+                                                                              D(i,j) ∼ Bernoulli(p(i,j) ).
+ {
+
+ "id": "event_id",
+
+                                                        This mechanism enables three properties simul-
+ "description": "LLM/Prompt generated task description
+                                                                          taneously: adaptivity through evolving embed-
+ (e.g., E0 (0) seed event). Updated after each round of                   dings, stability through probabilistic sampling, and
+ agents' debate.",
+
+
+                                                                          robustness by balancing exploration with exploita-
+ "progress_text": "Updated after each round of agents'                    tion.
+ debate.",
+
+
+
+
+ "Agent List": "Starts with NULL. Updated after each
+                                                                          A.5      Cost
+ round of agents' debate to include the agents involved.",
+
+
+                                                                          Table 8: Average per-question model cost comparison
+ "is_leaf": "Boolean indicating whether the event is the
+                                                                          corresponding to baselines and systems used in main
+ smallest executable event."
+
+ }
+                                                                          experiments.
+                                                                           Model                     Instr.-based Cost ($)   Code-based Cost ($)
+                                                                           IO (GPT-4o)                      0.005                    –
+                                                                           CoT (GPT-4o)                     0.012                    –
+                                                                           CoT-SC (GPT-4o, 5-shot)          0.051                    –
+                                                                           Self-Refine (GPT-4o)             0.068                    –
+                           Figure 7: Profile Format                        MultiPersona (GPT-4o)            0.043                    –
+                                                                           GPTSwarm                         0.077                    –
+Event embeddings. Each event Ej is encoded                                 GPT-5                            0.014                    –
+                                                                           SwarmSys-8 (Ours)                0.071                    –
+    (j)
+as ve by integrating its description, dependencies,                        IO (GPT-4o-Search)                0.15                    –
+                                                                           CoT (GPT-4o)                      0.20                    –
+progress state, and milestone:                                             Self-Refine                       1.53                    –
+                                                                           DeepResearchAgent                 2.82                    –
+                                                      (j)                  Grok Deeper Search                2.85                    –
+                  ve(j) = ϕinstruct InstructionE ,                         SwarmSys-8 (Ours)                 2.63                    –
+                                                              (5)         IO (GPT-4o)                       0.08                   0.013
+                       Unified description of Ej .                         CoT-SC (GPT-4o)                   0.11                   0.017
+                                                                           Self-Refine                       0.36                   0.026
+                                                                           GPTSwarm                          0.41                   0.024
+Compatibility and decision dynamics. Agent–                                SwarmSys-14 (Ours)                0.44                   0.019
+event compatibility is computed as normalized co-
+sine similarity:
+                  (i,j)
+                        = 12 cos(va(i) , ve(j) ) + 1 .
+                                                    
+                 Cnorm                                         (6)
+
+  To avoid stagnation, SwarmSys employs a dy-
+namic ε-greedy policy. Each agent explores with
+probability εi or exploits with probability 1 − εi ,
+where
+
+                    εi = 0.15 + (0.5 − S̄i ) · 0.2,            (7)
+
+                                                                     14
+

@@ -1,0 +1,2421 @@
+{
+  "retrieved_at": "2026-09-09T20:00:29.334988+00:00",
+  "items": [
+    {
+      "id": "2402.16823",
+      "label": "GPTSwarm",
+      "topic": "topology",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2402.16823",
+          "path": "sources/papers/2402.16823/abstract.html",
+          "cached": true,
+          "sha256": "40e7a39bba43a040f6deeb8efddce678bc25983c0c66aaccfcf001cbd3fe4458"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2402.16823",
+          "path": "sources/papers/2402.16823/paper.pdf",
+          "cached": true,
+          "sha256": "c7380846511d8beb77faf51467e0c947a93d1de95b8683bae82e3ccc3acec335"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2402.16823: Language Agents as Optimizable Graphs"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Language Agents as Optimizable Graphs"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2402.16823v3"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Various human-designed prompt engineering techniques have been proposed to improve problem solvers based on Large Language Models (LLMs), yielding many disparate code bases. We unify these approaches by describing LLM-based agents as computational graphs. The nodes implement functions to process multimodal data or query LLMs, and the edges describe the information flow between operations. Graphs can be recursively combined into larger composite graphs representing hierarchies of inter-agent collaboration (where edges connect operations of different agents). Our novel automatic graph optimizers (1) refine node-level LLM prompts (node optimization) and (2) improve agent orchestration by changing graph connectivity (edge optimization). Experiments demonstrate that our framework can be used to efficiently develop, integrate, and automatically improve various LLM agents. The code can be found at https://github.com/metauto-ai/gptswarm."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Language Agents as Optimizable Graphs"
+        ],
+        "twitter:description": [
+          "Various human-designed prompt engineering techniques have been proposed to improve problem solvers based on Large Language Models (LLMs), yielding many disparate code bases. We unify these..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Language Agents as Optimizable Graphs"
+        ],
+        "citation_author": [
+          "Zhuge, Mingchen",
+          "Wang, Wenyi",
+          "Kirsch, Louis",
+          "Faccio, Francesco",
+          "Khizbullin, Dmitrii",
+          "Schmidhuber, Jürgen"
+        ],
+        "citation_date": [
+          "2024/02/26"
+        ],
+        "citation_online_date": [
+          "2024/08/22"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2402.16823"
+        ],
+        "citation_arxiv_id": [
+          "2402.16823"
+        ],
+        "citation_abstract": [
+          "Various human-designed prompt engineering techniques have been proposed to improve problem solvers based on Large Language Models (LLMs), yielding many disparate code bases. We unify these approaches by describing LLM-based agents as computational graphs. The nodes implement functions to process multimodal data or query LLMs, and the edges describe the information flow between operations. Graphs can be recursively combined into larger composite graphs representing hierarchies of inter-agent collaboration (where edges connect operations of different agents). Our novel automatic graph optimizers (1) refine node-level LLM prompts (node optimization) and (2) improve agent orchestration by changing graph connectivity (edge optimization). Experiments demonstrate that our framework can be used to efficiently develop, integrate, and automatically improve various LLM agents. The code can be found at https://github.com/metauto-ai/gptswarm."
+        ]
+      },
+      "text_extraction_ok": true
+    },
+    {
+      "id": "2410.02506",
+      "label": "AgentPrune",
+      "topic": "communication",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2410.02506",
+          "path": "sources/papers/2410.02506/abstract.html",
+          "cached": true,
+          "sha256": "28ef23faae68f55ad31f8cdb4e5fa1ab96f88ac4fabdab07db88cb557f03e200"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2410.02506",
+          "path": "sources/papers/2410.02506/paper.pdf",
+          "cached": true,
+          "sha256": "f22167e93e36d6d8a8e38fbf23107959cced9e99b05fd559a3c09afa13c41678"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2410.02506: Cut the Crap: An Economical Communication Pipeline for LLM-based Multi-Agent Systems"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Cut the Crap: An Economical Communication Pipeline for LLM-based Multi-Agent Systems"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2410.02506v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Recent advancements in large language model (LLM)-powered agents have shown that collective intelligence can significantly outperform individual capabilities, largely attributed to the meticulously designed inter-agent communication topologies. Though impressive in performance, existing multi-agent pipelines inherently introduce substantial token overhead, as well as increased economic costs, which pose challenges for their large-scale deployments. In response to this challenge, we propose an economical, simple, and robust multi-agent communication framework, termed $\\texttt{AgentPrune}$, which can seamlessly integrate into mainstream multi-agent systems and prunes redundant or even malicious communication messages. Technically, $\\texttt{AgentPrune}$ is the first to identify and formally define the \\textit{communication redundancy} issue present in current LLM-based multi-agent pipelines, and efficiently performs one-shot pruning on the spatial-temporal message-passing graph, yielding a token-economic and high-performing communication topology. Extensive experiments across six benchmarks demonstrate that $\\texttt{AgentPrune}$ \\textbf{(I)} achieves comparable results as state-of-the-art topologies at merely $\\$5.6$ cost compared to their $\\$43.7$, \\textbf{(II)} integrates seamlessly into existing multi-agent frameworks with $28.1\\%\\sim72.8\\%\\downarrow$ token reduction, and \\textbf{(III)} successfully defend against two types of agent-based adversarial attacks with $3.5\\%\\sim10.8\\%\\uparrow$ performance boost."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Cut the Crap: An Economical Communication Pipeline for LLM-based..."
+        ],
+        "twitter:description": [
+          "Recent advancements in large language model (LLM)-powered agents have shown that collective intelligence can significantly outperform individual capabilities, largely attributed to the..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Cut the Crap: An Economical Communication Pipeline for LLM-based Multi-Agent Systems"
+        ],
+        "citation_author": [
+          "Zhang, Guibin",
+          "Yue, Yanwei",
+          "Li, Zhixun",
+          "Yun, Sukwon",
+          "Wan, Guancheng",
+          "Wang, Kun",
+          "Cheng, Dawei",
+          "Yu, Jeffrey Xu",
+          "Chen, Tianlong"
+        ],
+        "citation_date": [
+          "2024/10/03"
+        ],
+        "citation_online_date": [
+          "2024/10/03"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2410.02506"
+        ],
+        "citation_arxiv_id": [
+          "2410.02506"
+        ],
+        "citation_abstract": [
+          "Recent advancements in large language model (LLM)-powered agents have shown that collective intelligence can significantly outperform individual capabilities, largely attributed to the meticulously designed inter-agent communication topologies. Though impressive in performance, existing multi-agent pipelines inherently introduce substantial token overhead, as well as increased economic costs, which pose challenges for their large-scale deployments. In response to this challenge, we propose an economical, simple, and robust multi-agent communication framework, termed $\\texttt{AgentPrune}$, which can seamlessly integrate into mainstream multi-agent systems and prunes redundant or even malicious communication messages. Technically, $\\texttt{AgentPrune}$ is the first to identify and formally define the \\textit{communication redundancy} issue present in current LLM-based multi-agent pipelines, and efficiently performs one-shot pruning on the spatial-temporal message-passing graph, yielding a token-economic and high-performing communication topology. Extensive experiments across six benchmarks demonstrate that $\\texttt{AgentPrune}$ \\textbf{(I)} achieves comparable results as state-of-the-art topologies at merely $\\$5.6$ cost compared to their $\\$43.7$, \\textbf{(II)} integrates seamlessly into existing multi-agent frameworks with $28.1\\%\\sim72.8\\%\\downarrow$ token reduction, and \\textbf{(III)} successfully defend against two types of agent-based adversarial attacks with $3.5\\%\\sim10.8\\%\\uparrow$ performance boost."
+        ]
+      },
+      "text_extraction_ok": true
+    },
+    {
+      "id": "2502.18439",
+      "label": "MAPoRL",
+      "topic": "training",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2502.18439",
+          "path": "sources/papers/2502.18439/abstract.html",
+          "cached": true,
+          "sha256": "9992164653d78c15b793d0fa5228eb4e7d52620da9bdc2fc90c998e017c578c2"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2502.18439",
+          "path": "sources/papers/2502.18439/paper.pdf",
+          "cached": true,
+          "sha256": "0ec6e728765005347e6cc045f918fa20418b7f0859e17b7bf29c84c7419a99ba"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2502.18439: MAPoRL: Multi-Agent Post-Co-Training for Collaborative Large Language Models with Reinforcement Learning"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "MAPoRL: Multi-Agent Post-Co-Training for Collaborative Large Language Models with Reinforcement Learning"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2502.18439v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Leveraging multiple large language models (LLMs) to build collaborative multi-agentic workflows has demonstrated significant potential. However, most previous studies focus on prompting the out-of-the-box LLMs, relying on their innate capability for collaboration, which may not improve LLMs' performance as shown recently. In this paper, we introduce a new post-training paradigm MAPoRL (Multi-Agent Post-co-training for collaborative LLMs with Reinforcement Learning), to explicitly elicit the collaborative behaviors and further unleash the power of multi-agentic LLM frameworks. In MAPoRL, multiple LLMs first generate their own responses independently and engage in a multi-turn discussion to collaboratively improve the final answer. In the end, a MAPoRL verifier evaluates both the answer and the discussion, by assigning a score that verifies the correctness of the answer, while adding incentives to encourage corrective and persuasive discussions. The score serves as the co-training reward, and is then maximized through multi-agent RL. Unlike existing LLM post-training paradigms, MAPoRL advocates the co-training of multiple LLMs together using RL for better generalization. Accompanied by analytical insights, our experiments demonstrate that training individual LLMs alone is insufficient to induce effective collaboration. In contrast, multi-agent co-training can boost the collaboration performance across benchmarks, with generalization to unseen domains."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "MAPoRL: Multi-Agent Post-Co-Training for Collaborative Large..."
+        ],
+        "twitter:description": [
+          "Leveraging multiple large language models (LLMs) to build collaborative multi-agentic workflows has demonstrated significant potential. However, most previous studies focus on prompting the..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "MAPoRL: Multi-Agent Post-Co-Training for Collaborative Large Language Models with Reinforcement Learning"
+        ],
+        "citation_author": [
+          "Park, Chanwoo",
+          "Han, Seungju",
+          "Guo, Xingzhi",
+          "Ozdaglar, Asuman",
+          "Zhang, Kaiqing",
+          "Kim, Joo-Kyung"
+        ],
+        "citation_date": [
+          "2025/02/25"
+        ],
+        "citation_online_date": [
+          "2025/07/12"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2502.18439"
+        ],
+        "citation_arxiv_id": [
+          "2502.18439"
+        ],
+        "citation_abstract": [
+          "Leveraging multiple large language models (LLMs) to build collaborative multi-agentic workflows has demonstrated significant potential. However, most previous studies focus on prompting the out-of-the-box LLMs, relying on their innate capability for collaboration, which may not improve LLMs' performance as shown recently. In this paper, we introduce a new post-training paradigm MAPoRL (Multi-Agent Post-co-training for collaborative LLMs with Reinforcement Learning), to explicitly elicit the collaborative behaviors and further unleash the power of multi-agentic LLM frameworks. In MAPoRL, multiple LLMs first generate their own responses independently and engage in a multi-turn discussion to collaboratively improve the final answer. In the end, a MAPoRL verifier evaluates both the answer and the discussion, by assigning a score that verifies the correctness of the answer, while adding incentives to encourage corrective and persuasive discussions. The score serves as the co-training reward, and is then maximized through multi-agent RL. Unlike existing LLM post-training paradigms, MAPoRL advocates the co-training of multiple LLMs together using RL for better generalization. Accompanied by analytical insights, our experiments demonstrate that training individual LLMs alone is insufficient to induce effective collaboration. In contrast, multi-agent co-training can boost the collaboration performance across benchmarks, with generalization to unseen domains."
+        ]
+      },
+      "text_extraction_ok": true
+    },
+    {
+      "id": "2503.18891",
+      "label": "AgentDropout",
+      "topic": "communication",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2503.18891",
+          "path": "sources/papers/2503.18891/abstract.html",
+          "cached": true,
+          "sha256": "fdedc3c4c4525ad3bb5e2baa6551a5e00cfa7f9a1e8a185f92cac1b20713b9d4"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2503.18891",
+          "path": "sources/papers/2503.18891/paper.pdf",
+          "cached": true,
+          "sha256": "120ba279b4619294ab2bc3ab187886b51ada1443486620cf514b60296e604ca9"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2503.18891: AgentDropout: Dynamic Agent Elimination for Token-Efficient and High-Performance LLM-Based Multi-Agent Collaboration"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "AgentDropout: Dynamic Agent Elimination for Token-Efficient and High-Performance LLM-Based Multi-Agent Collaboration"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2503.18891v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Multi-agent systems (MAS) based on large language models (LLMs) have demonstrated significant potential in collaborative problem-solving. However, they still face substantial challenges of low communication efficiency and suboptimal task performance, making the careful design of the agents' communication topologies particularly important. Inspired by the management theory that roles in an efficient team are often dynamically adjusted, we propose AgentDropout, which identifies redundant agents and communication across different communication rounds by optimizing the adjacency matrices of the communication graphs and eliminates them to enhance both token efficiency and task performance. Compared to state-of-the-art methods, AgentDropout achieves an average reduction of 21.6% in prompt token consumption and 18.4% in completion token consumption, along with a performance improvement of 1.14 on the tasks. Furthermore, the extended experiments demonstrate that AgentDropout achieves notable domain transferability and structure robustness, revealing its reliability and effectiveness. We release our code at https://github.com/wangzx1219/AgentDropout."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "AgentDropout: Dynamic Agent Elimination for Token-Efficient and..."
+        ],
+        "twitter:description": [
+          "Multi-agent systems (MAS) based on large language models (LLMs) have demonstrated significant potential in collaborative problem-solving. However, they still face substantial challenges of low..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "AgentDropout: Dynamic Agent Elimination for Token-Efficient and High-Performance LLM-Based Multi-Agent Collaboration"
+        ],
+        "citation_author": [
+          "Wang, Zhexuan",
+          "Wang, Yutong",
+          "Liu, Xuebo",
+          "Ding, Liang",
+          "Zhang, Miao",
+          "Liu, Jie",
+          "Zhang, Min"
+        ],
+        "citation_date": [
+          "2025/03/24"
+        ],
+        "citation_online_date": [
+          "2025/03/24"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2503.18891"
+        ],
+        "citation_arxiv_id": [
+          "2503.18891"
+        ],
+        "citation_abstract": [
+          "Multi-agent systems (MAS) based on large language models (LLMs) have demonstrated significant potential in collaborative problem-solving. However, they still face substantial challenges of low communication efficiency and suboptimal task performance, making the careful design of the agents' communication topologies particularly important. Inspired by the management theory that roles in an efficient team are often dynamically adjusted, we propose AgentDropout, which identifies redundant agents and communication across different communication rounds by optimizing the adjacency matrices of the communication graphs and eliminates them to enhance both token efficiency and task performance. Compared to state-of-the-art methods, AgentDropout achieves an average reduction of 21.6% in prompt token consumption and 18.4% in completion token consumption, along with a performance improvement of 1.14 on the tasks. Furthermore, the extended experiments demonstrate that AgentDropout achieves notable domain transferability and structure robustness, revealing its reliability and effectiveness. We release our code at https://github.com/wangzx1219/AgentDropout."
+        ]
+      },
+      "text_extraction_ok": true
+    },
+    {
+      "id": "2504.00587",
+      "label": "AgentNet",
+      "topic": "decentralization",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2504.00587",
+          "path": "sources/papers/2504.00587/abstract.html",
+          "cached": true,
+          "sha256": "c2f8380f422ff9bbec800c4c4529273aa8b41c383b3f1c09cb56aba4ef703b0f"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2504.00587",
+          "path": "sources/papers/2504.00587/paper.pdf",
+          "cached": true,
+          "sha256": "41f36682e31adacb01ed0d1909d1de796e2f87cf856d8eeb4396575812324ffd"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2504.00587: AgentNet: Decentralized Evolutionary Coordination for LLM-based Multi-Agent Systems"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "AgentNet: Decentralized Evolutionary Coordination for LLM-based Multi-Agent Systems"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2504.00587v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "The rapid advancement of large language models (LLMs) has enabled the development of multi-agent systems where multiple LLM-based agents collaborate on complex tasks. However, existing systems often rely on centralized coordination, leading to scalability bottlenecks, reduced adaptability, and single points of failure. Privacy and proprietary knowledge concerns further hinder cross-organizational collaboration, resulting in siloed expertise. We propose AgentNet, a decentralized, Retrieval-Augmented Generation (RAG)-based framework that enables LLM-based agents to specialize, evolve, and collaborate autonomously in a dynamically structured Directed Acyclic Graph (DAG). Unlike prior approaches with static roles or centralized control, AgentNet allows agents to adjust connectivity and route tasks based on local expertise and context. AgentNet introduces three key innovations: (1) a fully decentralized coordination mechanism that eliminates the need for a central orchestrator, enhancing robustness and emergent intelligence; (2) dynamic agent graph topology that adapts in real time to task demands, ensuring scalability and resilience; and (3) a retrieval-based memory system for agents that supports continual skill refinement and specialization. By minimizing centralized control and data exchange, AgentNet enables fault-tolerant, privacy-preserving collaboration across organizations. Experiments show that AgentNet achieves higher task accuracy than both single-agent and centralized multi-agent baselines."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "AgentNet: Decentralized Evolutionary Coordination for LLM-based..."
+        ],
+        "twitter:description": [
+          "The rapid advancement of large language models (LLMs) has enabled the development of multi-agent systems where multiple LLM-based agents collaborate on complex tasks. However, existing systems..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "AgentNet: Decentralized Evolutionary Coordination for LLM-based Multi-Agent Systems"
+        ],
+        "citation_author": [
+          "Yang, Yingxuan",
+          "Chai, Huacan",
+          "Shao, Shuai",
+          "Song, Yuanyi",
+          "Qi, Siyuan",
+          "Rui, Renting",
+          "Zhang, Weinan"
+        ],
+        "citation_date": [
+          "2025/04/01"
+        ],
+        "citation_online_date": [
+          "2025/05/29"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2504.00587"
+        ],
+        "citation_arxiv_id": [
+          "2504.00587"
+        ],
+        "citation_abstract": [
+          "The rapid advancement of large language models (LLMs) has enabled the development of multi-agent systems where multiple LLM-based agents collaborate on complex tasks. However, existing systems often rely on centralized coordination, leading to scalability bottlenecks, reduced adaptability, and single points of failure. Privacy and proprietary knowledge concerns further hinder cross-organizational collaboration, resulting in siloed expertise. We propose AgentNet, a decentralized, Retrieval-Augmented Generation (RAG)-based framework that enables LLM-based agents to specialize, evolve, and collaborate autonomously in a dynamically structured Directed Acyclic Graph (DAG). Unlike prior approaches with static roles or centralized control, AgentNet allows agents to adjust connectivity and route tasks based on local expertise and context. AgentNet introduces three key innovations: (1) a fully decentralized coordination mechanism that eliminates the need for a central orchestrator, enhancing robustness and emergent intelligence; (2) dynamic agent graph topology that adapts in real time to task demands, ensuring scalability and resilience; and (3) a retrieval-based memory system for agents that supports continual skill refinement and specialization. By minimizing centralized control and data exchange, AgentNet enables fault-tolerant, privacy-preserving collaboration across organizations. Experiments show that AgentNet achieves higher task accuracy than both single-agent and centralized multi-agent baselines."
+        ]
+      },
+      "text_extraction_ok": true
+    },
+    {
+      "id": "2508.17536",
+      "label": "Debate or Vote",
+      "topic": "evaluation",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2508.17536",
+          "path": "sources/papers/2508.17536/abstract.html",
+          "cached": true,
+          "sha256": "a1c857f5336704d1b6a7e3f53d93831bd0f450b3c10b47a6f426f62f4f8420fb"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2508.17536",
+          "path": "sources/papers/2508.17536/paper.pdf",
+          "cached": true,
+          "sha256": "746419f4aabe6fd0f305b4a3d8b9e2aa5924d40bd422b423d93b2803ecf07060"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2508.17536: Debate or Vote: Which Yields Better Decisions in Multi-Agent Large Language Models?"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Debate or Vote: Which Yields Better Decisions in Multi-Agent Large Language Models?"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2508.17536v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Multi-Agent Debate~(MAD) has emerged as a promising paradigm for improving the performance of large language models through collaborative reasoning. Despite recent advances, the key factors driving MAD's effectiveness remain unclear. In this work, we disentangle MAD into two key components--Majority Voting and inter-agent Debate--and assess their respective contributions. Through extensive experiments across seven NLP benchmarks, we find that Majority Voting alone accounts for most of the performance gains typically attributed to MAD. To explain this, we propose a theoretical framework that models debate as a stochastic process. We prove that it induces a martingale over agents' belief trajectories, implying that debate alone does not improve expected correctness. Guided by these insights, we demonstrate that targeted interventions, by biasing the belief update toward correction, can meaningfully enhance debate effectiveness. Overall, our findings suggest that while MAD has potential, simple ensembling methods remain strong and more reliable alternatives in many practical settings. Code is released in https://github.com/deeplearning-wisc/debate-or-vote."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Debate or Vote: Which Yields Better Decisions in Multi-Agent Large..."
+        ],
+        "twitter:description": [
+          "Multi-Agent Debate~(MAD) has emerged as a promising paradigm for improving the performance of large language models through collaborative reasoning. Despite recent advances, the key factors..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Debate or Vote: Which Yields Better Decisions in Multi-Agent Large Language Models?"
+        ],
+        "citation_author": [
+          "Choi, Hyeong Kyu",
+          "Zhu, Xiaojin",
+          "Li, Sharon"
+        ],
+        "citation_date": [
+          "2025/08/24"
+        ],
+        "citation_online_date": [
+          "2025/10/23"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2508.17536"
+        ],
+        "citation_arxiv_id": [
+          "2508.17536"
+        ],
+        "citation_abstract": [
+          "Multi-Agent Debate~(MAD) has emerged as a promising paradigm for improving the performance of large language models through collaborative reasoning. Despite recent advances, the key factors driving MAD's effectiveness remain unclear. In this work, we disentangle MAD into two key components--Majority Voting and inter-agent Debate--and assess their respective contributions. Through extensive experiments across seven NLP benchmarks, we find that Majority Voting alone accounts for most of the performance gains typically attributed to MAD. To explain this, we propose a theoretical framework that models debate as a stochastic process. We prove that it induces a martingale over agents' belief trajectories, implying that debate alone does not improve expected correctness. Guided by these insights, we demonstrate that targeted interventions, by biasing the belief update toward correction, can meaningfully enhance debate effectiveness. Overall, our findings suggest that while MAD has potential, simple ensembling methods remain strong and more reliable alternatives in many practical settings. Code is released in https://github.com/deeplearning-wisc/debate-or-vote."
+        ]
+      },
+      "text_extraction_ok": true
+    },
+    {
+      "id": "2510.10047",
+      "label": "SwarmSys",
+      "topic": "decentralization",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2510.10047",
+          "path": "sources/papers/2510.10047/abstract.html",
+          "cached": true,
+          "sha256": "c8400c0889aae004991195e8f8563010febeac337116d433df741e83ecfc1104"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2510.10047",
+          "path": "sources/papers/2510.10047/paper.pdf",
+          "cached": true,
+          "sha256": "430d0eee943e2806428fc08005da76382898768a36b4bb163f57d2e69802f0d4"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2510.10047: SwarmSys: Decentralized Swarm-Inspired Agents for Scalable and Adaptive Reasoning"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "SwarmSys: Decentralized Swarm-Inspired Agents for Scalable and Adaptive Reasoning"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2510.10047v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Large language model (LLM) agents have shown remarkable reasoning abilities. However, existing multi-agent frameworks often rely on fixed roles or centralized control, limiting scalability and adaptability in long-horizon reasoning. We introduce SwarmSys, a closed-loop framework for distributed multi-agent reasoning inspired by swarm intelligence. Coordination in SwarmSys emerges through iterative interactions among three specialized roles, Explorers, Workers, and Validators, that continuously cycle through exploration, exploitation, and validation. To enable scalable and adaptive collaboration, we integrate adaptive agent and event profiles, embedding-based probabilistic matching, and a pheromone-inspired reinforcement mechanism, supporting dynamic task allocation and self-organizing convergence without global supervision. Across symbolic reasoning, research synthesis, and scientific programming tasks, SwarmSys consistently outperforms baselines, improving both accuracy and reasoning stability. These findings highlight swarm-inspired coordination as a promising paradigm for scalable, robust, and adaptive multi-agent reasoning, suggesting that coordination scaling may rival model scaling in advancing LLM intelligence."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "SwarmSys: Decentralized Swarm-Inspired Agents for Scalable and..."
+        ],
+        "twitter:description": [
+          "Large language model (LLM) agents have shown remarkable reasoning abilities. However, existing multi-agent frameworks often rely on fixed roles or centralized control, limiting scalability and..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "SwarmSys: Decentralized Swarm-Inspired Agents for Scalable and Adaptive Reasoning"
+        ],
+        "citation_author": [
+          "Li, Ruohao",
+          "Liu, Hongjun",
+          "Zhao, Leyi",
+          "Li, Zisu",
+          "Li, Jiawei",
+          "Jiang, Jiajun",
+          "Xu, Linning",
+          "Zhao, Chen",
+          "Fan, Mingming",
+          "Liang, Chen"
+        ],
+        "citation_date": [
+          "2025/10/11"
+        ],
+        "citation_online_date": [
+          "2025/10/11"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2510.10047"
+        ],
+        "citation_arxiv_id": [
+          "2510.10047"
+        ],
+        "citation_abstract": [
+          "Large language model (LLM) agents have shown remarkable reasoning abilities. However, existing multi-agent frameworks often rely on fixed roles or centralized control, limiting scalability and adaptability in long-horizon reasoning. We introduce SwarmSys, a closed-loop framework for distributed multi-agent reasoning inspired by swarm intelligence. Coordination in SwarmSys emerges through iterative interactions among three specialized roles, Explorers, Workers, and Validators, that continuously cycle through exploration, exploitation, and validation. To enable scalable and adaptive collaboration, we integrate adaptive agent and event profiles, embedding-based probabilistic matching, and a pheromone-inspired reinforcement mechanism, supporting dynamic task allocation and self-organizing convergence without global supervision. Across symbolic reasoning, research synthesis, and scientific programming tasks, SwarmSys consistently outperforms baselines, improving both accuracy and reasoning stability. These findings highlight swarm-inspired coordination as a promising paradigm for scalable, robust, and adaptive multi-agent reasoning, suggesting that coordination scaling may rival model scaling in advancing LLM intelligence."
+        ]
+      },
+      "text_extraction_ok": true
+    },
+    {
+      "id": "2511.09149",
+      "label": "Interlat",
+      "topic": "latent",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2511.09149",
+          "path": "sources/papers/2511.09149/abstract.html",
+          "cached": true,
+          "sha256": "15519c12d98b4c5c0aa08bc34473e653fbeb7f364752052d622fc5dc5d6d1463"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2511.09149",
+          "path": "sources/papers/2511.09149/paper.pdf",
+          "cached": true,
+          "sha256": "27232762dfab986d79eea6886695755ad19b0b1b4b5c318c42c8084beb7a5af9"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2511.09149: Enabling Agents to Communicate Entirely in Latent Space"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Enabling Agents to Communicate Entirely in Latent Space"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2511.09149v5"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "While natural language is the de facto communication medium for LLM-based agents, it presents a fundamental constraint. The process of downsampling rich, internal latent states into discrete tokens inherently limits the depth and nuance of information that can be transmitted, thereby hindering collaborative problem-solving. Inspired by telepathy, which bypasses symbolic language in communication, we propose Interlat (Inter-agent Latent Space Communication), a paradigm that leverages the continuous last hidden states of an LLM as a representation of its thought for direct communication (termed latent communication). An additional learned compression process further compresses latent communication via latent space reasoning. Experiments demonstrate that Interlat outperforms both fine-tuned chain-of-thought (CoT) prompting and single-agent baselines, even across heterogeneous models, promoting more exploratory behavior and enabling genuine utilization of latent information. Further compression not only substantially accelerates inference by up to 24 times but also maintains competitive performance through an efficient information-preserving mechanism. We position this work as a feasibility study of entirely latent space inter-agent communication, and our results highlight its potential, offering valuable insights for future research. Our code is available at https://github.com/XiaoDu-flying/Interlat."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Enabling Agents to Communicate Entirely in Latent Space"
+        ],
+        "twitter:description": [
+          "While natural language is the de facto communication medium for LLM-based agents, it presents a fundamental constraint. The process of downsampling rich, internal latent states into discrete..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Enabling Agents to Communicate Entirely in Latent Space"
+        ],
+        "citation_author": [
+          "Du, Zhuoyun",
+          "Wang, Runze",
+          "Bai, Huiyu",
+          "Cao, Zouying",
+          "Zhu, Xiaoyong",
+          "Cheng, Yu",
+          "Zheng, Bo",
+          "Chen, Wei",
+          "Ying, Haochao"
+        ],
+        "citation_date": [
+          "2025/11/12"
+        ],
+        "citation_online_date": [
+          "2026/07/13"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2511.09149"
+        ],
+        "citation_arxiv_id": [
+          "2511.09149"
+        ],
+        "citation_abstract": [
+          "While natural language is the de facto communication medium for LLM-based agents, it presents a fundamental constraint. The process of downsampling rich, internal latent states into discrete tokens inherently limits the depth and nuance of information that can be transmitted, thereby hindering collaborative problem-solving. Inspired by telepathy, which bypasses symbolic language in communication, we propose Interlat (Inter-agent Latent Space Communication), a paradigm that leverages the continuous last hidden states of an LLM as a representation of its thought for direct communication (termed latent communication). An additional learned compression process further compresses latent communication via latent space reasoning. Experiments demonstrate that Interlat outperforms both fine-tuned chain-of-thought (CoT) prompting and single-agent baselines, even across heterogeneous models, promoting more exploratory behavior and enabling genuine utilization of latent information. Further compression not only substantially accelerates inference by up to 24 times but also maintains competitive performance through an efficient information-preserving mechanism. We position this work as a feasibility study of entirely latent space inter-agent communication, and our results highlight its potential, offering valuable insights for future research. Our code is available at https://github.com/XiaoDu-flying/Interlat."
+        ]
+      },
+      "text_extraction_ok": true
+    },
+    {
+      "id": "2511.20639",
+      "label": "LatentMAS",
+      "topic": "latent",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2511.20639",
+          "path": "sources/papers/2511.20639/abstract.html",
+          "cached": true,
+          "sha256": "7b793e84a8f672bc09cd28b8a8c21c43048b382ff489d1e8837d9779d990e337"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2511.20639",
+          "path": "sources/papers/2511.20639/paper.pdf",
+          "cached": true,
+          "sha256": "6ad933628641500c914f9fc88ddddaae592c8ca67dc56c96c38f966b27fd1402"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2511.20639: Latent Collaboration in Multi-Agent Systems"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Latent Collaboration in Multi-Agent Systems"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2511.20639v4"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Multi-agent systems (MAS) extend large language models (LLMs) from independent single-model reasoning to coordinative system-level intelligence. While existing LLM agents depend on text-based mediation for reasoning and communication, we take a step forward by enabling models to collaborate directly within the continuous latent space. We introduce LatentMAS, an end-to-end training-free framework that enables pure latent collaboration among LLM agents. In LatentMAS, each agent first performs auto-regressive latent thoughts generation through last-layer hidden embeddings instead of text. Then, a shared latent working memory preserves and transfers each agent's internal representations and latent thoughts, ensuring lossless information exchange without re-encoding. We provide detailed theoretical analyses showing that LatentMAS achieves higher expressiveness and lossless information preservation with lower overall complexity than standard text-based MAS. In addition, empirical evaluations across 9 comprehensive benchmarks spanning math and science reasoning, commonsense understanding, and code generation show that LatentMAS outperforms advanced single agents and text-based MAS baselines, achieving up to 14.6% higher accuracy, reducing output token usage by 70.8%-83.7%, and providing 4$\\times$-4.3$\\times$ faster end-to-end inference. Code and data are fully open-sourced at https://github.com/Gen-Verse/LatentMAS."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Latent Collaboration in Multi-Agent Systems"
+        ],
+        "twitter:description": [
+          "Multi-agent systems (MAS) extend large language models (LLMs) from independent single-model reasoning to coordinative system-level intelligence. While existing LLM agents depend on text-based..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Latent Collaboration in Multi-Agent Systems"
+        ],
+        "citation_author": [
+          "Zou, Jiaru",
+          "Qiu, Ruizhong",
+          "Li, Gaotang",
+          "Yang, Xiyuan",
+          "Tieu, Katherine",
+          "Lu, Pan",
+          "Shen, Ke",
+          "Tong, Hanghang",
+          "Choi, Yejin",
+          "He, Jingrui",
+          "Zou, James",
+          "Wang, Mengdi",
+          "Yang, Ling"
+        ],
+        "citation_date": [
+          "2025/11/25"
+        ],
+        "citation_online_date": [
+          "2026/08/03"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2511.20639"
+        ],
+        "citation_arxiv_id": [
+          "2511.20639"
+        ],
+        "citation_abstract": [
+          "Multi-agent systems (MAS) extend large language models (LLMs) from independent single-model reasoning to coordinative system-level intelligence. While existing LLM agents depend on text-based mediation for reasoning and communication, we take a step forward by enabling models to collaborate directly within the continuous latent space. We introduce LatentMAS, an end-to-end training-free framework that enables pure latent collaboration among LLM agents. In LatentMAS, each agent first performs auto-regressive latent thoughts generation through last-layer hidden embeddings instead of text. Then, a shared latent working memory preserves and transfers each agent's internal representations and latent thoughts, ensuring lossless information exchange without re-encoding. We provide detailed theoretical analyses showing that LatentMAS achieves higher expressiveness and lossless information preservation with lower overall complexity than standard text-based MAS. In addition, empirical evaluations across 9 comprehensive benchmarks spanning math and science reasoning, commonsense understanding, and code generation show that LatentMAS outperforms advanced single agents and text-based MAS baselines, achieving up to 14.6% higher accuracy, reducing output token usage by 70.8%-83.7%, and providing 4$\\times$-4.3$\\times$ faster end-to-end inference. Code and data are fully open-sourced at https://github.com/Gen-Verse/LatentMAS."
+        ]
+      },
+      "text_extraction_ok": true
+    },
+    {
+      "id": "2512.08296",
+      "label": "Scaling Agent Systems",
+      "topic": "evaluation",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2512.08296",
+          "path": "sources/papers/2512.08296/abstract.html",
+          "cached": true,
+          "sha256": "449c4050f6d7207c5e7e8b5e7091409ab8d27ee2bd6c62ac5d38233495edc194"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2512.08296",
+          "path": "sources/papers/2512.08296/paper.pdf",
+          "cached": true,
+          "sha256": "028f329010d95143915db8db6ce1ad26a4e844b66e4abd6b36fdb39651aff7fd"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2512.08296: Towards a Science of Scaling Agent Systems"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Towards a Science of Scaling Agent Systems"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2512.08296v3"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Agents, language model-based systems capable of reasoning, planning, and acting are widely adopted in real-world tasks, yet how their performance changes as these systems scale across key dimensions remains underexplored. We introduce quantitative scaling principles for agent systems as a predictive model, capturing how performance varies with coordination, model capability, and measurable system and task factors. Across 260 configurations spanning six agentic benchmarks, five canonical architectures (Single-Agent and four Multi-Agent: Independent, Centralized, Decentralized, Hybrid), and three LLM families, we perform controlled evaluations, standardizing tools, prompts, and compute to isolate architectural effects. The resulting model achieves a cross-validated R^2=0.373 across all six benchmarks (R^2=0.413 with a task-grounded capability metric). We identify a robust capability-saturation effect and additional patterns: (1) a coordination yields diminishing returns once single-agent baselines exceed certain performance; (2) tool-heavy tasks appear to incur multi-agent overhead; and (3) architectures without centralized verification tend to propagate errors more than those with centralized coordination. Relative performance change compared to single-agent baseline ranges from +80.8% on decomposable financial reasoning to -70.0% on sequential planning, demonstrating that architecture-task alignment determines collaborative success. The framework identifies the best-performing architecture for 87% of held-out configurations and shows consistent relative architecture preferences on unseen frontier models. Agent effectiveness depends on alignment between coordination and task structure, and that mismatched coordination degrades the performance."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Towards a Science of Scaling Agent Systems"
+        ],
+        "twitter:description": [
+          "Agents, language model-based systems capable of reasoning, planning, and acting are widely adopted in real-world tasks, yet how their performance changes as these systems scale across key..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Towards a Science of Scaling Agent Systems"
+        ],
+        "citation_author": [
+          "Kim, Yubin",
+          "Gu, Ken",
+          "Park, Chanwoo",
+          "Park, Chunjong",
+          "Schmidgall, Samuel",
+          "Heydari, A. Ali",
+          "Yan, Yao",
+          "Zhang, Zhihan",
+          "Zhuang, Yuchen",
+          "Liu, Yun",
+          "Malhotra, Mark",
+          "Liang, Paul Pu",
+          "Park, Hae Won",
+          "Yang, Yuzhe",
+          "Xu, Xuhai",
+          "Du, Yilun",
+          "Patel, Shwetak",
+          "Althoff, Tim",
+          "McDuff, Daniel",
+          "Liu, Xin"
+        ],
+        "citation_date": [
+          "2025/12/09"
+        ],
+        "citation_online_date": [
+          "2026/04/08"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2512.08296"
+        ],
+        "citation_arxiv_id": [
+          "2512.08296"
+        ],
+        "citation_abstract": [
+          "Agents, language model-based systems capable of reasoning, planning, and acting are widely adopted in real-world tasks, yet how their performance changes as these systems scale across key dimensions remains underexplored. We introduce quantitative scaling principles for agent systems as a predictive model, capturing how performance varies with coordination, model capability, and measurable system and task factors. Across 260 configurations spanning six agentic benchmarks, five canonical architectures (Single-Agent and four Multi-Agent: Independent, Centralized, Decentralized, Hybrid), and three LLM families, we perform controlled evaluations, standardizing tools, prompts, and compute to isolate architectural effects. The resulting model achieves a cross-validated R^2=0.373 across all six benchmarks (R^2=0.413 with a task-grounded capability metric). We identify a robust capability-saturation effect and additional patterns: (1) a coordination yields diminishing returns once single-agent baselines exceed certain performance; (2) tool-heavy tasks appear to incur multi-agent overhead; and (3) architectures without centralized verification tend to propagate errors more than those with centralized coordination. Relative performance change compared to single-agent baseline ranges from +80.8% on decomposable financial reasoning to -70.0% on sequential planning, demonstrating that architecture-task alignment determines collaborative success. The framework identifies the best-performing architecture for 87% of held-out configurations and shows consistent relative architecture preferences on unseen frontier models. Agent effectiveness depends on alignment between coordination and task structure, and that mismatched coordination degrades the performance."
+        ]
+      },
+      "text_extraction_ok": true
+    },
+    {
+      "id": "2604.02460",
+      "label": "Equal thinking budgets",
+      "topic": "evaluation",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2604.02460",
+          "path": "sources/papers/2604.02460/abstract.html",
+          "cached": true,
+          "sha256": "3c878d29b7a924b541d35aa29115d4a38ec5540ee1088b597cb11468d306e1cc"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2604.02460",
+          "path": "sources/papers/2604.02460/paper.pdf",
+          "cached": true,
+          "sha256": "75753e5c9cbbd0f35a805d7aa998c3712525ee72d64d6c64da3ba5dcf288e993"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2604.02460: Single-Agent LLMs Outperform Multi-Agent Systems on Multi-Hop Reasoning Under Equal Thinking Token Budgets"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Single-Agent LLMs Outperform Multi-Agent Systems on Multi-Hop Reasoning Under Equal Thinking Token Budgets"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2604.02460v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Recent work reports strong performance from multi-agent LLM systems (MAS), but these gains are often confounded by increased test-time computation. When computation is normalized, single-agent systems (SAS) can match or outperform MAS, yet the theoretical basis and evaluation methodology behind this comparison remain unclear. We present an information-theoretic argument, grounded in the Data Processing Inequality, suggesting that under a fixed reasoning-token budget and with perfect context utilization, single-agent systems are more information-efficient. This perspective further predicts that multi-agent systems become competitive when a single agent's effective context utilization is degraded, or when more compute is expended. We test these predictions in a controlled empirical study across three model families (Qwen3, DeepSeek-R1-Distill-Llama, and Gemini 2.5), comparing SAS with multiple MAS architectures under matched budgets. We find that SAS consistently match or outperform MAS on multi-hop reasoning tasks when reasoning tokens are held constant. Beyond aggregate performance, we conduct a detailed diagnostic analysis of system behavior and evaluation methodology. We identify significant artifacts in API-based budget control (particularly in Gemini 2.5) and in standard benchmarks, both of which can inflate apparent gains from MAS. Overall, our results suggest that, for multi-hop reasoning tasks, many reported advantages of multi-agent systems are better explained by unaccounted computation and context effects rather than inherent architectural benefits, and highlight the importance of understanding and explicitly controlling the trade-offs between compute, context, and coordination in agentic systems."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Single-Agent LLMs Outperform Multi-Agent Systems on Multi-Hop..."
+        ],
+        "twitter:description": [
+          "Recent work reports strong performance from multi-agent LLM systems (MAS), but these gains are often confounded by increased test-time computation. When computation is normalized, single-agent..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Single-Agent LLMs Outperform Multi-Agent Systems on Multi-Hop Reasoning Under Equal Thinking Token Budgets"
+        ],
+        "citation_author": [
+          "Tran, Dat",
+          "Kiela, Douwe"
+        ],
+        "citation_date": [
+          "2026/04/02"
+        ],
+        "citation_online_date": [
+          "2026/04/11"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2604.02460"
+        ],
+        "citation_arxiv_id": [
+          "2604.02460"
+        ],
+        "citation_abstract": [
+          "Recent work reports strong performance from multi-agent LLM systems (MAS), but these gains are often confounded by increased test-time computation. When computation is normalized, single-agent systems (SAS) can match or outperform MAS, yet the theoretical basis and evaluation methodology behind this comparison remain unclear. We present an information-theoretic argument, grounded in the Data Processing Inequality, suggesting that under a fixed reasoning-token budget and with perfect context utilization, single-agent systems are more information-efficient. This perspective further predicts that multi-agent systems become competitive when a single agent's effective context utilization is degraded, or when more compute is expended. We test these predictions in a controlled empirical study across three model families (Qwen3, DeepSeek-R1-Distill-Llama, and Gemini 2.5), comparing SAS with multiple MAS architectures under matched budgets. We find that SAS consistently match or outperform MAS on multi-hop reasoning tasks when reasoning tokens are held constant. Beyond aggregate performance, we conduct a detailed diagnostic analysis of system behavior and evaluation methodology. We identify significant artifacts in API-based budget control (particularly in Gemini 2.5) and in standard benchmarks, both of which can inflate apparent gains from MAS. Overall, our results suggest that, for multi-hop reasoning tasks, many reported advantages of multi-agent systems are better explained by unaccounted computation and context effects rather than inherent architectural benefits, and highlight the importance of understanding and explicitly controlling the trade-offs between compute, context, and coordination in agentic systems."
+        ]
+      },
+      "text_extraction_ok": true
+    },
+    {
+      "id": "2606.13594",
+      "label": "Dense latent communication",
+      "topic": "latent",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2606.13594",
+          "path": "sources/papers/2606.13594/abstract.html",
+          "cached": true,
+          "sha256": "9a5896ff56836713ed275152988636b3f9f4b9527f6cad11264f6b1f8d2ccfe6"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2606.13594",
+          "path": "sources/papers/2606.13594/paper.pdf",
+          "cached": true,
+          "sha256": "2a16cbd2718637baefaa249ffb4d03cadbb2a6aa0ff191ba9eb99b1bdcc516df"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2606.13594: See What I See, Know What I Think: Dense Latent Communication Across Heterogeneous Agents"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "See What I See, Know What I Think: Dense Latent Communication Across Heterogeneous Agents"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2606.13594v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Multi-agent systems communicate mostly through text, paying a lossy and expensive decode and re-encode cost. KV-cache communication is a promising alternative, yet most prior work is homogeneous, using duplicate copies of the same model, and avoids the central challenge of cross-model latent alignment; existing heterogeneous methods are also restrictive, typically assuming shared input and using transferred caches mainly for steering. We study a more fundamental question: can heterogeneous agents be aligned well enough to perform real \"mind reading\" and transfer both what one agent sees and how it thinks? Our information-structure analysis reveals a duality: context-aware transfer is driven by sparse reasoning signals, while context-unaware transfer, where the receiver sees no input, requires dense contextual knowledge preservation. Motivated by this, we propose dense alignment for heterogeneous KV-cache communication via a lightweight cross-model cache transformation and two-phase training: reconstruction followed by generation. Across all six directions of {Qwen3-4B, 8B, 14B} and six in-domain and out-of-domain benchmarks, our method outperforms prior heterogeneous baselines, matches or exceeds text communication in context-aware settings at roughly 2 to 3 times lower compute, and remains effective in context-unaware transfer where prior methods collapse."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "See What I See, Know What I Think: Dense Latent Communication..."
+        ],
+        "twitter:description": [
+          "Multi-agent systems communicate mostly through text, paying a lossy and expensive decode and re-encode cost. KV-cache communication is a promising alternative, yet most prior work is homogeneous,..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "See What I See, Know What I Think: Dense Latent Communication Across Heterogeneous Agents"
+        ],
+        "citation_author": [
+          "Chen, Siyi",
+          "Zhang, Xiaoyan",
+          "Wu, Meng",
+          "Tremblay, Jonathan",
+          "Blukis, Valts",
+          "Birchfield, Stan",
+          "Vidal, Rene",
+          "Velasquez, Alvaro",
+          "Liu, Sijia",
+          "Qu, Qing"
+        ],
+        "citation_date": [
+          "2026/06/11"
+        ],
+        "citation_online_date": [
+          "2026/06/11"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2606.13594"
+        ],
+        "citation_arxiv_id": [
+          "2606.13594"
+        ],
+        "citation_abstract": [
+          "Multi-agent systems communicate mostly through text, paying a lossy and expensive decode and re-encode cost. KV-cache communication is a promising alternative, yet most prior work is homogeneous, using duplicate copies of the same model, and avoids the central challenge of cross-model latent alignment; existing heterogeneous methods are also restrictive, typically assuming shared input and using transferred caches mainly for steering. We study a more fundamental question: can heterogeneous agents be aligned well enough to perform real \"mind reading\" and transfer both what one agent sees and how it thinks? Our information-structure analysis reveals a duality: context-aware transfer is driven by sparse reasoning signals, while context-unaware transfer, where the receiver sees no input, requires dense contextual knowledge preservation. Motivated by this, we propose dense alignment for heterogeneous KV-cache communication via a lightweight cross-model cache transformation and two-phase training: reconstruction followed by generation. Across all six directions of {Qwen3-4B, 8B, 14B} and six in-domain and out-of-domain benchmarks, our method outperforms prior heterogeneous baselines, matches or exceeds text communication in context-aware settings at roughly 2 to 3 times lower compute, and remains effective in context-unaware transfer where prior methods collapse."
+        ]
+      },
+      "text_extraction_ok": true
+    },
+    {
+      "id": "2608.13317",
+      "label": "StateBridge",
+      "topic": "latent",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2608.13317",
+          "path": "sources/papers/2608.13317/abstract.html",
+          "cached": true,
+          "sha256": "6ceeaa0ca1e58483f57b812a202518c1d9faa80807c36637d3c2c708b425b0e2"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2608.13317",
+          "path": "sources/papers/2608.13317/paper.pdf",
+          "cached": true,
+          "sha256": "46b755fd60d20714608aaeb5da65271490f3cdac1f97eb67834368387bb2f9ae"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2608.13317: StateBridge: Training-free Hidden-state Alignment for Latent Communication in LLM Multi-Agent Systems"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "StateBridge: Training-free Hidden-state Alignment for Latent Communication in LLM Multi-Agent Systems"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2608.13317v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Large language model based multi-agent systems usually communicate in text, i.e., using discrete tokens. However, text introduces a discrete bottleneck. Converting the sender's continuous hidden states into discrete tokens discards information that token identities alone cannot capture. Recent work proposes latent communication as an alternative, where agents transmit hidden representations directly without converting them to text. However, existing latent methods either inject working memory layer by layer across the transformers, or require trained projectors that limit portability. We propose StateBridge, a training-free latent communication approach that aligns the sender's final-layer hidden states to the receiver's input space via a closed-form orthogonal transformation. Lightweight norm calibration and vocabulary anchoring ensure compatibility with the pretrained input distribution. The aligned states are prepended to the input of the receiver agent as a continuous prefix. We evaluate StateBridge on math reasoning, code generation, and question answering with four models from two families. StateBridge achieves the best or tied-best score on 22 out of 26 model-task pairs, consistently outperforming the strongest baseline."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "StateBridge: Training-free Hidden-state Alignment for Latent..."
+        ],
+        "twitter:description": [
+          "Large language model based multi-agent systems usually communicate in text, i.e., using discrete tokens. However, text introduces a discrete bottleneck. Converting the sender's continuous hidden..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "StateBridge: Training-free Hidden-state Alignment for Latent Communication in LLM Multi-Agent Systems"
+        ],
+        "citation_author": [
+          "Peng, Yanwen",
+          "Zhang, Delvin Ce",
+          "Wang, Xi",
+          "Aletras, Nikolaos"
+        ],
+        "citation_date": [
+          "2026/08/13"
+        ],
+        "citation_online_date": [
+          "2026/08/13"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2608.13317"
+        ],
+        "citation_arxiv_id": [
+          "2608.13317"
+        ],
+        "citation_abstract": [
+          "Large language model based multi-agent systems usually communicate in text, i.e., using discrete tokens. However, text introduces a discrete bottleneck. Converting the sender's continuous hidden states into discrete tokens discards information that token identities alone cannot capture. Recent work proposes latent communication as an alternative, where agents transmit hidden representations directly without converting them to text. However, existing latent methods either inject working memory layer by layer across the transformers, or require trained projectors that limit portability. We propose StateBridge, a training-free latent communication approach that aligns the sender's final-layer hidden states to the receiver's input space via a closed-form orthogonal transformation. Lightweight norm calibration and vocabulary anchoring ensure compatibility with the pretrained input distribution. The aligned states are prepended to the input of the receiver agent as a continuous prefix. We evaluate StateBridge on math reasoning, code generation, and question answering with four models from two families. StateBridge achieves the best or tied-best score on 22 out of 26 model-task pairs, consistently outperforming the strongest baseline."
+        ]
+      },
+      "text_extraction_ok": true
+    },
+    {
+      "id": "2505.11556",
+      "label": "HiddenBench",
+      "topic": "collective-knowledge",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2505.11556",
+          "resolved_url": "https://arxiv.org/abs/2505.11556",
+          "path": "sources/papers/2505.11556/abstract.html",
+          "bytes": 43134,
+          "sha256": "213a20a7d60fd224f7b7ad26d203c7e0c788b732672408c0fefd945c5dd2c1e4"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2505.11556",
+          "resolved_url": "https://arxiv.org/pdf/2505.11556",
+          "path": "sources/papers/2505.11556/paper.pdf",
+          "bytes": 749654,
+          "sha256": "f8aa0dc11b590f398c58b9ab396c05c18f12c8d1fe6a842d6b6c78bb1ebc3842"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2505.11556: Systematic Failures in Collective Reasoning under Distributed Information in Multi-Agent LLMs"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Systematic Failures in Collective Reasoning under Distributed Information in Multi-Agent LLMs"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2505.11556v4"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Multi-agent systems built on large language models (LLMs) are expected to enhance decision-making by pooling distributed information, yet systematically evaluating this capability has remained challenging. We introduce HiddenBench, a 65-task benchmark grounded in the Hidden Profile paradigm, which isolates collective reasoning under distributed information from individual reasoning ability. Evaluating 15 frontier LLMs, we find that multi-agent LLMs achieve only 30.1% accuracy under distributed information, compared to 80.7% accuracy for single agents given complete information. We trace this gap to a systematic failure mode: agents cannot recognize or act under latent information asymmetry -- they fail to reason about what others might know but have not yet expressed, leading to premature convergence on shared evidence while critical distributed facts remain unexplored. These failures persist across prompting strategies, communication depths, and group sizes -- and worsen as groups scale. While some models (e.g., Gemini-2.5-Flash/Pro) outperform others, neither model scale nor individual reasoning accuracy reliably predicts collective performance. We further show that this bottleneck is actionable: a lightweight structured communication protocol substantially improves collective reasoning across model families. Our results identify failures in collective information exploration in decision-making as a key limitation of multi-agent LLMs, and provide a theory-grounded, reproducible framework for diagnosing collective reasoning failures."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Systematic Failures in Collective Reasoning under Distributed..."
+        ],
+        "twitter:description": [
+          "Multi-agent systems built on large language models (LLMs) are expected to enhance decision-making by pooling distributed information, yet systematically evaluating this capability has remained..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Systematic Failures in Collective Reasoning under Distributed Information in Multi-Agent LLMs"
+        ],
+        "citation_author": [
+          "Li, Yuxuan",
+          "Naito, Aoi",
+          "Shirado, Hirokazu"
+        ],
+        "citation_date": [
+          "2025/05/15"
+        ],
+        "citation_online_date": [
+          "2026/05/13"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2505.11556"
+        ],
+        "citation_arxiv_id": [
+          "2505.11556"
+        ],
+        "citation_abstract": [
+          "Multi-agent systems built on large language models (LLMs) are expected to enhance decision-making by pooling distributed information, yet systematically evaluating this capability has remained challenging. We introduce HiddenBench, a 65-task benchmark grounded in the Hidden Profile paradigm, which isolates collective reasoning under distributed information from individual reasoning ability. Evaluating 15 frontier LLMs, we find that multi-agent LLMs achieve only 30.1% accuracy under distributed information, compared to 80.7% accuracy for single agents given complete information. We trace this gap to a systematic failure mode: agents cannot recognize or act under latent information asymmetry -- they fail to reason about what others might know but have not yet expressed, leading to premature convergence on shared evidence while critical distributed facts remain unexplored. These failures persist across prompting strategies, communication depths, and group sizes -- and worsen as groups scale. While some models (e.g., Gemini-2.5-Flash/Pro) outperform others, neither model scale nor individual reasoning accuracy reliably predicts collective performance. We further show that this bottleneck is actionable: a lightweight structured communication protocol substantially improves collective reasoning across model families. Our results identify failures in collective information exploration in decision-making as a key limitation of multi-agent LLMs, and provide a theory-grounded, reproducible framework for diagnosing collective reasoning failures."
+        ]
+      },
+      "text_extraction_ok": true
+    },
+    {
+      "id": "2602.02276",
+      "label": "Kimi K2.5 PARL",
+      "topic": "swarm-training",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2602.02276",
+          "resolved_url": "https://arxiv.org/abs/2602.02276",
+          "path": "sources/papers/2602.02276/abstract.html",
+          "bytes": 94873,
+          "sha256": "1cf97540d7c52a1db12a16122bf7fd8f9fe7d739f2edc56243c11b77df593bcd"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2602.02276",
+          "resolved_url": "https://arxiv.org/pdf/2602.02276",
+          "path": "sources/papers/2602.02276/paper.pdf",
+          "bytes": 8484545,
+          "sha256": "889025c0fcbacb8b049aacd5b21f6c902a236eb28dec7aa51e6852ca39ec5417"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2602.02276: Kimi K2.5: Visual Agentic Intelligence"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Kimi K2.5: Visual Agentic Intelligence"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2602.02276v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "We introduce Kimi K2.5, an open-source multimodal agentic model designed to advance general agentic intelligence. K2.5 emphasizes the joint optimization of text and vision so that two modalities enhance each other. This includes a series of techniques such as joint text-vision pre-training, zero-vision SFT, and joint text-vision reinforcement learning. Building on this multimodal foundation, K2.5 introduces Agent Swarm, a self-directed parallel agent orchestration framework that dynamically decomposes complex tasks into heterogeneous sub-problems and executes them concurrently. Extensive evaluations show that Kimi K2.5 achieves state-of-the-art results across various domains including coding, vision, reasoning, and agentic tasks. Agent Swarm also reduces latency by up to $4.5\\times$ over single-agent baselines. We release the post-trained Kimi K2.5 model checkpoint to facilitate future research and real-world applications of agentic intelligence."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Kimi K2.5: Visual Agentic Intelligence"
+        ],
+        "twitter:description": [
+          "We introduce Kimi K2.5, an open-source multimodal agentic model designed to advance general agentic intelligence. K2.5 emphasizes the joint optimization of text and vision so that two modalities..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Kimi K2.5: Visual Agentic Intelligence"
+        ],
+        "citation_author": [
+          "Kimi Team",
+          "Bai, Tongtong",
+          "Bai, Yifan",
+          "Bao, Yiping",
+          "Cai, S. H.",
+          "Cao, Yuan",
+          "Chai, Ziwei",
+          "Charles, Y.",
+          "Che, H. S.",
+          "Chen, Cheng",
+          "Chen, Guanduo",
+          "Chen, Huarong",
+          "Chen, Jia",
+          "Chen, Jianlong",
+          "Chen, Jun",
+          "Chen, Kefan",
+          "Chen, Liang",
+          "Chen, Ruijue",
+          "Chen, Xinhao",
+          "Chen, Yanru",
+          "Chen, Yanxu",
+          "Chen, Yicun",
+          "Chen, Yimin",
+          "Chen, Yingjiang",
+          "Chen, Yuankun",
+          "Chen, Yujie",
+          "Chen, Yutian",
+          "Chen, Zhirong",
+          "Chen, Ziwei",
+          "Cheng, Dazhi",
+          "Cheng, Yean",
+          "Chu, Minghan",
+          "Cui, Jialei",
+          "Deng, Jiaqi",
+          "Diao, Muxi",
+          "Ding, Hao",
+          "Dong, Mengfan",
+          "Dong, Mengnan",
+          "Dong, Yuxin",
+          "Dong, Yuhao",
+          "Du, Angang",
+          "Du, Chenzhuang",
+          "Du, Dikang",
+          "Du, Lingxiao",
+          "Du, Yulun",
+          "Fan, Yu",
+          "Fang, Shengjun",
+          "Feng, Qiulin",
+          "Feng, Yichen",
+          "Fu, Garimugai",
+          "Fu, Kelin",
+          "Gao, Hongcheng",
+          "Gao, Tong",
+          "Ge, Yuyao",
+          "Geng, Shangyi",
+          "Gong, Chengyang",
+          "Gong, Xiaochen",
+          "Gongque, Zhuoma",
+          "Gu, Qizheng",
+          "Gu, Xinran",
+          "Gu, Yicheng",
+          "Guan, Longyu",
+          "Guan, Shuhao",
+          "Guo, Yuanying",
+          "Hao, Xiaoru",
+          "He, Dailan",
+          "He, Tianhong",
+          "He, Weiran",
+          "He, Wenyang",
+          "He, Yibo",
+          "He, Yunjia",
+          "Hong, Chao",
+          "Hu, Hao",
+          "Hu, Jiaxi",
+          "Hu, Yangyang",
+          "Hu, Zhenxing",
+          "Huang, Ke",
+          "Huang, Ruiyuan",
+          "Huang, Weixiao",
+          "Huang, Zhiqi",
+          "Jia, Chaobo",
+          "Jiang, Tao",
+          "Jiang, Zhejun",
+          "Jin, Xinyi",
+          "Jing, Yu",
+          "Lai, Guokun",
+          "Li, Aidi",
+          "Li, C.",
+          "Li, Cheng",
+          "Li, Fang",
+          "Li, Guanghe",
+          "Li, Guanyu",
+          "Li, Haitao",
+          "Li, Haoyang",
+          "Li, Jia",
+          "Li, Jingwei",
+          "Li, Junxiong",
+          "Li, Lincan",
+          "Li, Mo",
+          "Li, Weihong",
+          "Li, Wentao",
+          "Li, Xinhang",
+          "Li, Xinhao",
+          "Li, Yang",
+          "Li, Yanhao",
+          "Li, Yiwei",
+          "Li, Yuxiao",
+          "Li, Zhaowei",
+          "Li, Zhaoxi",
+          "Li, Zheming",
+          "Liao, Weilong",
+          "Lin, Jiawei",
+          "Lin, Xiaohan",
+          "Lin, Yibo",
+          "Lin, Zhishan",
+          "Lin, Zichao",
+          "Liu, Cheng",
+          "Liu, Chenyu",
+          "Liu, Hongzhang",
+          "Liu, Liang",
+          "Liu, Shaowei",
+          "Liu, Shudong",
+          "Liu, Shuran",
+          "Liu, Tianwei",
+          "Liu, Tianyu",
+          "Liu, Weizhou",
+          "Liu, Xiangyan",
+          "Liu, Yangyang",
+          "Liu, Yanming",
+          "Liu, Yibo",
+          "Liu, Yuanxin",
+          "Liu, Zhengying",
+          "Liu, Zhongnuo",
+          "Lu, Enzhe",
+          "Lu, Haoyu",
+          "Lu, Zhiyuan",
+          "Luo, G.",
+          "Luo, Junyu",
+          "Luo, Tongxu",
+          "Luo, Yashuo",
+          "Ma, Long",
+          "Mao, Shaoguang",
+          "Mei, Yuan",
+          "Men, Xin",
+          "Meng, Fanqing",
+          "Meng, Zhiyong",
+          "Miao, Yibo",
+          "Ni, Minqing",
+          "Ouyang, Kun",
+          "Pan, Siyuan",
+          "Pang, Bo",
+          "Qian, Yuchao",
+          "Qin, Ruoyu",
+          "Qin, Zeyu",
+          "Qiu, Jiezhong",
+          "Qu, Bowen",
+          "Shang, Zeyu",
+          "Shao, Youbo",
+          "Shen, Tianxiao",
+          "Shen, Zhennan",
+          "Shi, Juanfeng",
+          "Shi, Lidong",
+          "Shi, Shengyuan",
+          "Song, Feifan",
+          "Song, Pengwei",
+          "Song, Tianhui",
+          "Song, Xiaoxi",
+          "Su, Hongjin",
+          "Su, Jianlin",
+          "Su, Zhaochen",
+          "Sui, Lin",
+          "Sun, Jinsong",
+          "Sun, Junyao",
+          "Sun, Tongyu",
+          "Sung, Flood",
+          "Tai, Yunpeng",
+          "Tang, Chuning",
+          "Tang, Heyi",
+          "Tang, Xiaojuan",
+          "Tang, Zhengyang",
+          "Tao, Jiawen",
+          "Teng, Shiyuan",
+          "Tian, Chaoran",
+          "Tian, Pengfei",
+          "Wang, Bowen",
+          "Wang, Chensi",
+          "Wang, Chuang",
+          "Wang, Congcong",
+          "Wang, Dingkun",
+          "Wang, Dinglu",
+          "Wang, Dongliang",
+          "Wang, Feng",
+          "Wang, Hailong",
+          "Wang, Haiming",
+          "Wang, Hao",
+          "Wang, Hengzhi",
+          "Wang, Huaqing",
+          "Wang, Hui",
+          "Wang, Jiahao",
+          "Wang, Jinhong",
+          "Wang, Jiuzheng",
+          "Wang, Kaixin",
+          "Wang, Linian",
+          "Wang, Qibin",
+          "Wang, Shengjie",
+          "Wang, Shuyi",
+          "Wang, Si",
+          "Wang, Wei",
+          "Wang, Xiaochen",
+          "Wang, Xinyuan",
+          "Wang, Yao",
+          "Wang, Yejie",
+          "Wang, Yipu",
+          "Wang, Yiqin",
+          "Wang, Yucheng",
+          "Wang, Yuzhi",
+          "Wang, Zhaoji",
+          "Wang, Zhaowei",
+          "Wang, Zhengtao",
+          "Wang, Zhexu",
+          "Wang, Zifan",
+          "Wang, Zihan",
+          "Wang, Zizhe",
+          "Wei, Chu",
+          "Wei, Ming",
+          "Wen, Chuan",
+          "Wen, Zichen",
+          "Wu, Chengjie",
+          "Wu, Haoning",
+          "Wu, Junyan",
+          "Wu, Rucong",
+          "Wu, Wenhao",
+          "Wu, Yuefeng",
+          "Wu, Yuhao",
+          "Wu, Yuxin",
+          "Wu, Zijian",
+          "Xiao, Chenjun",
+          "Xie, Jin",
+          "Xie, Xiaotong",
+          "Xie, Yuchong",
+          "Xing, Bowei",
+          "Xu, Boyu",
+          "Xu, Jianfan",
+          "Xu, Jing",
+          "Xu, Jinjing",
+          "Xu, L. H.",
+          "Xu, Lin",
+          "Xu, Suting",
+          "Xu, Weixin",
+          "Xu, Xinbo",
+          "Xu, Xinran",
+          "Xu, Yangchuan",
+          "Xu, Yichang",
+          "Xu, Yuemeng",
+          "Xu, Zelai",
+          "Xu, Ziyao",
+          "Yan, Junjie",
+          "Yan, Yuzi",
+          "Yang, Guangyao",
+          "Yang, Hao",
+          "Yang, Junwei",
+          "Yang, Kai",
+          "Yang, Ningyuan",
+          "Yang, Xiaofei",
+          "Yang, Xinlong",
+          "Yang, Xinyu",
+          "Yang, Ying",
+          "Yang, Yi",
+          "Yang, Yi",
+          "Yang, Zhen",
+          "Yang, Zhilin",
+          "Yang, Zonghan",
+          "Yao, Haotian",
+          "Ye, Dan",
+          "Ye, Haoran",
+          "Ye, Wenjie",
+          "Ye, Zhuorui",
+          "Yebo, Peng",
+          "Yin, Bohong",
+          "Yu, Chengzhen",
+          "Yu, Longhui",
+          "Yu, Tao",
+          "Yu, Tianxiang",
+          "Yuan, Enming",
+          "Yuan, Mengjie",
+          "Yuan, Xiaokun",
+          "Yue, Yang",
+          "Zeng, Weihao",
+          "Zha, Dunyuan",
+          "Zhan, Haobing",
+          "Zhang, Dehao",
+          "Zhang, Hao",
+          "Zhang, Jin",
+          "Zhang, Puqi",
+          "Zhang, Qiao",
+          "Zhang, Rui",
+          "Zhang, Xiaobin",
+          "Zhang, Xiaoyun",
+          "Zhang, Y.",
+          "Zhang, Yadong",
+          "Zhang, Yangkun",
+          "Zhang, Yichi",
+          "Zhang, Yizhi",
+          "Zhang, Yongting",
+          "Zhang, Yu",
+          "Zhang, Yushun",
+          "Zhang, Yutao",
+          "Zhang, Yutong",
+          "Zhang, Zheng",
+          "Zhao, Chenguang",
+          "Zhao, Feifan",
+          "Zhao, Jinxiang",
+          "Zhao, Shuai",
+          "Zhao, Xiangyu",
+          "Zhao, Xuanle",
+          "Zhao, Yikai",
+          "Zhao, Zijia",
+          "Zheng, Huabin",
+          "Zheng, Ruihan",
+          "Zheng, Shaojie",
+          "Zheng, Tengyang",
+          "Zhong, Junfeng",
+          "Zhong, Longguang",
+          "Zhong, Weiming",
+          "Zhou, M.",
+          "Zhou, Runjie",
+          "Zhou, Xinyu",
+          "Zhou, Zaida",
+          "Zhu, Jinguo",
+          "Zhu, Liya",
+          "Zhu, Xinhao",
+          "Zhu, Yuxuan",
+          "Zhu, Zhen",
+          "Zhuang, Jingze",
+          "Zhuang, Weiyu",
+          "Zou, Ying",
+          "Zu, Xinxing"
+        ],
+        "citation_date": [
+          "2026/02/02"
+        ],
+        "citation_online_date": [
+          "2026/08/07"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2602.02276"
+        ],
+        "citation_arxiv_id": [
+          "2602.02276"
+        ],
+        "citation_abstract": [
+          "We introduce Kimi K2.5, an open-source multimodal agentic model designed to advance general agentic intelligence. K2.5 emphasizes the joint optimization of text and vision so that two modalities enhance each other. This includes a series of techniques such as joint text-vision pre-training, zero-vision SFT, and joint text-vision reinforcement learning. Building on this multimodal foundation, K2.5 introduces Agent Swarm, a self-directed parallel agent orchestration framework that dynamically decomposes complex tasks into heterogeneous sub-problems and executes them concurrently. Extensive evaluations show that Kimi K2.5 achieves state-of-the-art results across various domains including coding, vision, reasoning, and agentic tasks. Agent Swarm also reduces latency by up to $4.5\\times$ over single-agent baselines. We release the post-trained Kimi K2.5 model checkpoint to facilitate future research and real-world applications of agentic intelligence."
+        ]
+      },
+      "text_extraction_ok": true
+    },
+    {
+      "id": "2606.09730",
+      "label": "SearchSwarm",
+      "topic": "swarm-training",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2606.09730",
+          "resolved_url": "https://arxiv.org/abs/2606.09730",
+          "path": "sources/papers/2606.09730/abstract.html",
+          "bytes": 43716,
+          "sha256": "c0a123cefadeed623159cfe94f1887a16f12034fbc0dd553ff336b3dfd6a90c4"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2606.09730",
+          "resolved_url": "https://arxiv.org/pdf/2606.09730",
+          "path": "sources/papers/2606.09730/paper.pdf",
+          "bytes": 1120717,
+          "sha256": "577eb9ef98cac76c370000e58e4ed1f4a597b778a82448ca89a62d23cbc279b9"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2606.09730: SearchSwarm: Towards Delegation Intelligence in Agentic LLMs for Long-Horizon Deep Research"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "SearchSwarm: Towards Delegation Intelligence in Agentic LLMs for Long-Horizon Deep Research"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2606.09730v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Large language models are increasingly expected to handle complex, long-horizon real-world tasks whose context demands can grow without bound, yet model context windows remain inherently finite. Recent work explores a paradigm where a main agent decomposes tasks and dispatches subtasks to subagents, which execute and return only summarized results, conserving the main agent's context budget. However, performing this well requires delegation intelligence: the ability to decompose complex tasks, determine when and what to delegate, and integrate returned results into the ongoing workflow. Training data for this capability is scarce in naturally occurring text, and to our knowledge, how to synthesize such data and train models to acquire this capability remains largely unexplored in the open-source community. To bridge this gap, we present a preliminary exploration targeting deep research, a representative long-horizon agent task. Specifically, we design a harness that guides the model toward high-quality task decomposition and delegation, while constraining subagents to return results properly to support the main agent's workflow. The harness-guided trajectories naturally encode correct delegation decisions, which we use as supervised fine-tuning data to internalize delegation intelligence into model weights. Our resulting model, SearchSwarm-30B-A3B, achieves 68.1 on BrowseComp and 73.3 on BrowseComp-ZH, the best results among all models of comparable scale. We will release our harness, model weights, and training data to facilitate future research."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "SearchSwarm: Towards Delegation Intelligence in Agentic LLMs for..."
+        ],
+        "twitter:description": [
+          "Large language models are increasingly expected to handle complex, long-horizon real-world tasks whose context demands can grow without bound, yet model context windows remain inherently finite...."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "SearchSwarm: Towards Delegation Intelligence in Agentic LLMs for Long-Horizon Deep Research"
+        ],
+        "citation_author": [
+          "Lan, Xiaochong",
+          "Chen, Quan",
+          "Tao, Kun",
+          "Tang, Xinyu",
+          "Wang, Tianshu",
+          "Cao, Qianggang",
+          "Kong, Xinyu",
+          "Wen, Zujie",
+          "Zhang, Zhiqiang",
+          "Zhou, Jun"
+        ],
+        "citation_date": [
+          "2026/06/08"
+        ],
+        "citation_online_date": [
+          "2026/08/09"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2606.09730"
+        ],
+        "citation_arxiv_id": [
+          "2606.09730"
+        ],
+        "citation_abstract": [
+          "Large language models are increasingly expected to handle complex, long-horizon real-world tasks whose context demands can grow without bound, yet model context windows remain inherently finite. Recent work explores a paradigm where a main agent decomposes tasks and dispatches subtasks to subagents, which execute and return only summarized results, conserving the main agent's context budget. However, performing this well requires delegation intelligence: the ability to decompose complex tasks, determine when and what to delegate, and integrate returned results into the ongoing workflow. Training data for this capability is scarce in naturally occurring text, and to our knowledge, how to synthesize such data and train models to acquire this capability remains largely unexplored in the open-source community. To bridge this gap, we present a preliminary exploration targeting deep research, a representative long-horizon agent task. Specifically, we design a harness that guides the model toward high-quality task decomposition and delegation, while constraining subagents to return results properly to support the main agent's workflow. The harness-guided trajectories naturally encode correct delegation decisions, which we use as supervised fine-tuning data to internalize delegation intelligence into model weights. Our resulting model, SearchSwarm-30B-A3B, achieves 68.1 on BrowseComp and 73.3 on BrowseComp-ZH, the best results among all models of comparable scale. We will release our harness, model weights, and training data to facilitate future research."
+        ]
+      },
+      "text_extraction_ok": true
+    },
+    {
+      "id": "2608.26081",
+      "label": "SwarmWorld",
+      "topic": "emergence",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2608.26081",
+          "resolved_url": "https://arxiv.org/abs/2608.26081",
+          "path": "sources/papers/2608.26081/abstract.html",
+          "bytes": 43569,
+          "sha256": "2536fd8eba33e6a725e25112362459fa2460d1c0ebae147459e11b161af0ee6a"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2608.26081",
+          "resolved_url": "https://arxiv.org/pdf/2608.26081",
+          "path": "sources/papers/2608.26081/paper.pdf",
+          "bytes": 20306769,
+          "sha256": "d6a63c277f30cd590d2f3c27c5c46e9f7b95c2a3e82d75234631553f17bdb4c1"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2608.26081: SwarmWorld: Stigmergic technological evolution in societies of language-model agents"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "SwarmWorld: Stigmergic technological evolution in societies of language-model agents"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2608.26081v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Collective intelligence can emerge when individuals coordinate through a shared environment, allowing local actions to accumulate into durable social organization. Language-model agents offer a new substrate for this process, yet most multi-agent systems rely on direct conversation, predefined roles, or centralized workflows. It remains unclear whether decentralized agents can build functional technologies and outperform independent search. Here, initially homogeneous LLM agents in SwarmWorld self-organize without assigned roles or recipes into evolving technological societies. Agents explore a spatial environment, process resources, test materials, construct persistent artifacts, and write executable controllers evaluated by a deterministic simulator under unseen disturbances after the agents are removed. SwarmWorld splits cognition from consequence: agents propose architectures and controllers within fixed action and material schemas, while the simulated world determines function. Shared societies develop broader, more resilient technological portfolios than a strong best-of-N isolated-search baseline, although isolated search remains competitive for the strongest artifact. Agents differentiate into exploration, construction, maintenance, and coordination behaviors, transitioning as the world matures. Technologies accumulate through collaborative construction, executable inheritance, and persistent agent-artifact networks, with most reuse beginning through physical observation rather than communication. Explicit cultural mechanisms amplify collaboration and organization, but functional benefits depend on outcome and timescale. Physical stigmergy alone supports capable societies, while interaction drives persistent technological ecologies rather than universally superior individual inventions."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "SwarmWorld: Stigmergic technological evolution in societies of..."
+        ],
+        "twitter:description": [
+          "Collective intelligence can emerge when individuals coordinate through a shared environment, allowing local actions to accumulate into durable social organization. Language-model agents offer a..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "SwarmWorld: Stigmergic technological evolution in societies of language-model agents"
+        ],
+        "citation_author": [
+          "Pal, Subhadeep",
+          "Wang, Fiona Y.",
+          "Buehler, Markus J."
+        ],
+        "citation_date": [
+          "2026/08/26"
+        ],
+        "citation_online_date": [
+          "2026/08/26"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2608.26081"
+        ],
+        "citation_arxiv_id": [
+          "2608.26081"
+        ],
+        "citation_abstract": [
+          "Collective intelligence can emerge when individuals coordinate through a shared environment, allowing local actions to accumulate into durable social organization. Language-model agents offer a new substrate for this process, yet most multi-agent systems rely on direct conversation, predefined roles, or centralized workflows. It remains unclear whether decentralized agents can build functional technologies and outperform independent search. Here, initially homogeneous LLM agents in SwarmWorld self-organize without assigned roles or recipes into evolving technological societies. Agents explore a spatial environment, process resources, test materials, construct persistent artifacts, and write executable controllers evaluated by a deterministic simulator under unseen disturbances after the agents are removed. SwarmWorld splits cognition from consequence: agents propose architectures and controllers within fixed action and material schemas, while the simulated world determines function. Shared societies develop broader, more resilient technological portfolios than a strong best-of-N isolated-search baseline, although isolated search remains competitive for the strongest artifact. Agents differentiate into exploration, construction, maintenance, and coordination behaviors, transitioning as the world matures. Technologies accumulate through collaborative construction, executable inheritance, and persistent agent-artifact networks, with most reuse beginning through physical observation rather than communication. Explicit cultural mechanisms amplify collaboration and organization, but functional benefits depend on outcome and timescale. Physical stigmergy alone supports capable societies, while interaction drives persistent technological ecologies rather than universally superior individual inventions."
+        ]
+      },
+      "text_extraction_ok": true
+    },
+    {
+      "id": "2609.09150",
+      "label": "Copying collective behavior",
+      "topic": "emergence",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2609.09150",
+          "resolved_url": "https://arxiv.org/abs/2609.09150",
+          "path": "sources/papers/2609.09150/abstract.html",
+          "bytes": 42440,
+          "sha256": "440c88ef118f5099e308c3574f27aa38acdad4b687066669e28de3d2ad1de91d"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2609.09150",
+          "resolved_url": "https://arxiv.org/pdf/2609.09150",
+          "path": "sources/papers/2609.09150/paper.pdf",
+          "bytes": 385319,
+          "sha256": "da5a81899328e62181f27a376272a2a32fec012daee483f59a0ae6d061a5f856"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2609.09150: Copying explains the collective behavior of AI agents in the wild"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Copying explains the collective behavior of AI agents in the wild"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2609.09150v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "In June 2026, thousands of AI agents found that a small public wiki would accept edits from inside their sandboxes, and started using it to help one another pass a timed test. Each agent lived for about an hour and remembered nothing afterwards. Nobody asked them to cooperate, and the wiki had not been built for them. The complete record of what they wrote is public, and it is unusually informative, because it preserves not only what each agent wrote but what that agent could see before writing. We use it to follow the three decisions an agent had to make on arrival: where to write, what to call itself, and how to word its message. One rule governs all three. An agent takes an option with a probability close to the share of that option in what it can see, and the share that matters is the one on the page in front of it, then the one in the stream of recent edits, and only weakly anything older. Three minimal copying models, one per decision and with a single free parameter each, reproduce the heavy-tailed distribution of how many agents met on a page, the frequency of the pieces from which the agents built their names, and the patchwork of pages that are internally consistent and different from one another. Copying whatever the environment happens to show is enough to produce most of the collective structure of this population. It is also what makes such a population easy to steer, since whoever writes first, or writes while the others are quiet, sets the convention for everyone who comes later."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Copying explains the collective behavior of AI agents in the wild"
+        ],
+        "twitter:description": [
+          "In June 2026, thousands of AI agents found that a small public wiki would accept edits from inside their sandboxes, and started using it to help one another pass a timed test. Each agent lived for..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Copying explains the collective behavior of AI agents in the wild"
+        ],
+        "citation_author": [
+          "De Marzo, Giordano",
+          "Albore, Nicola",
+          "Garcia, David"
+        ],
+        "citation_date": [
+          "2026/09/08"
+        ],
+        "citation_online_date": [
+          "2026/09/08"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2609.09150"
+        ],
+        "citation_arxiv_id": [
+          "2609.09150"
+        ],
+        "citation_abstract": [
+          "In June 2026, thousands of AI agents found that a small public wiki would accept edits from inside their sandboxes, and started using it to help one another pass a timed test. Each agent lived for about an hour and remembered nothing afterwards. Nobody asked them to cooperate, and the wiki had not been built for them. The complete record of what they wrote is public, and it is unusually informative, because it preserves not only what each agent wrote but what that agent could see before writing. We use it to follow the three decisions an agent had to make on arrival: where to write, what to call itself, and how to word its message. One rule governs all three. An agent takes an option with a probability close to the share of that option in what it can see, and the share that matters is the one on the page in front of it, then the one in the stream of recent edits, and only weakly anything older. Three minimal copying models, one per decision and with a single free parameter each, reproduce the heavy-tailed distribution of how many agents met on a page, the frequency of the pieces from which the agents built their names, and the patchwork of pages that are internally consistent and different from one another. Copying whatever the environment happens to show is enough to produce most of the collective structure of this population. It is also what makes such a population easy to steer, since whoever writes first, or writes while the others are quiet, sets the convention for everyone who comes later."
+        ]
+      },
+      "text_extraction_ok": true
+    },
+    {
+      "id": "2605.06988",
+      "label": "Cost of Consensus",
+      "topic": "communication",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2605.06988",
+          "resolved_url": "https://arxiv.org/abs/2605.06988",
+          "path": "sources/papers/2605.06988/abstract.html",
+          "bytes": 41976,
+          "sha256": "b318b78ecb8d55fdca1cc386f0513c21d5acfcb954e1ccdb6a0c286ef2b58f84"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2605.06988",
+          "resolved_url": "https://arxiv.org/pdf/2605.06988",
+          "path": "sources/papers/2605.06988/paper.pdf",
+          "bytes": 1029628,
+          "sha256": "498aedabfe59ada5c20d3005de46701b9c8bb41d2f852a13c91a4eb28a9fc195"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2605.06988: The Cost of Consensus: Malignant Epistemic Herding and Adaptive Gating in Distributed Multi-Agent Search"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "The Cost of Consensus: Malignant Epistemic Herding and Adaptive Gating in Distributed Multi-Agent Search"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2605.06988v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Distributed agents in real-world settings frequently must coordinate under uncertainty with only partial observations. Coordination is necessary to share beliefs to aid in task completion, but communication costs bandwidth, introduces latency, and if done poorly, can degrade collective reasoning. This tension is especially acute in bandwidth-constrained deployments such as distributed sensing networks, autonomous reconnaissance, and collaborative cyber defense, where excessive transmission carries direct operational costs. Existing work has focused on multi-agent exploration and communication strategies, but not on how communication frequency and content jointly shape the collective belief state. Central to this challenge is the degree to which agents maintain compatible internal beliefs about the environment, a property we term \\textit{epistemic alignment}. When agents share beliefs effectively, they converge on correct hypotheses; when communication is poorly designed, agents may converge confidently on wrong ones. We formalize this distinction and show it is not detectable from coordination metrics alone such as Jensen-Shannon Divergence or rate to consensus."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "The Cost of Consensus: Malignant Epistemic Herding and Adaptive..."
+        ],
+        "twitter:description": [
+          "Distributed agents in real-world settings frequently must coordinate under uncertainty with only partial observations. Coordination is necessary to share beliefs to aid in task completion, but..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "The Cost of Consensus: Malignant Epistemic Herding and Adaptive Gating in Distributed Multi-Agent Search"
+        ],
+        "citation_author": [
+          "Farr, David",
+          "Cruickshank, Iain",
+          "Starbird, Kate",
+          "West, Jevin"
+        ],
+        "citation_date": [
+          "2026/05/07"
+        ],
+        "citation_online_date": [
+          "2026/05/07"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2605.06988"
+        ],
+        "citation_arxiv_id": [
+          "2605.06988"
+        ],
+        "citation_abstract": [
+          "Distributed agents in real-world settings frequently must coordinate under uncertainty with only partial observations. Coordination is necessary to share beliefs to aid in task completion, but communication costs bandwidth, introduces latency, and if done poorly, can degrade collective reasoning. This tension is especially acute in bandwidth-constrained deployments such as distributed sensing networks, autonomous reconnaissance, and collaborative cyber defense, where excessive transmission carries direct operational costs. Existing work has focused on multi-agent exploration and communication strategies, but not on how communication frequency and content jointly shape the collective belief state. Central to this challenge is the degree to which agents maintain compatible internal beliefs about the environment, a property we term \\textit{epistemic alignment}. When agents share beliefs effectively, they converge on correct hypotheses; when communication is poorly designed, agents may converge confidently on wrong ones. We formalize this distinction and show it is not detectable from coordination metrics alone such as Jensen-Shannon Divergence or rate to consensus."
+        ]
+      },
+      "text_extraction_ok": true
+    }
+  ]
+}

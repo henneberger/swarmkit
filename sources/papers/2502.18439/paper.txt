@@ -1,0 +1,2109 @@
+                                                        MAPoRL2: Multi-Agent Post-Co-Training for Collaborative
+                                                          Large Language Models with Reinforcement Learning
+                                                                 Chanwoo Park♡♮       Seungju Han♠    Xingzhi Guo♢
+                                                               Asuman Ozdaglar♡      Kaiqing Zhang♣ Joo-Kyung Kim♢
+                                                                     ♡         ♠             ♢          ♣
+                                                                       MIT       Stanford      Amazon     UMD
+                                                                   {cpark97,asu}@mit.edu, seungju@stanford.edu,
+                                                                  {guxingzh, jookyk}@amazon.com, kaiqing@umd.edu
+
+
+                                                                   Abstract                               (Du et al., 2024; Li et al., 2023; Kim et al., 2024b).
+                                                                                                          The shift from single-agent to multi-agent systems
+                                                 Leveraging multiple large language models                introduces new dimensions and challenges in en-
+arXiv:2502.18439v2 [cs.AI] 12 Jul 2025
+
+
+
+
+                                                 (LLMs) to build collaborative multi-agentic
+                                                                                                          abling effective collaboration among LLM agents.
+                                                 workflows has demonstrated significant poten-
+                                                 tial. However, most previous studies focus               Recent approaches to multi-LLM collaboration
+                                                 on prompting the out-of-the-box LLMs, rely-              mostly rely on prompting pre-trained models. How-
+                                                 ing on their innate capability for collaboration,        ever, such approaches struggle with achieving gen-
+                                                 which may not improve LLMs’ performance                  uine collaboration among the agents. For example,
+                                                 as shown recently. In this paper, we introduce           multi-agent debate does not consistently lead to im-
+                                                 a new post-training paradigm MAPoRL (Multi-              proved performance with additional turns (Huang
+                                                 Agent Post-co-training for collaborative LLMs
+                                                                                                          et al., 2024).
+                                                 with Reinforcement Learning), to explicitly
+                                                 elicit the collaborative behaviors and further
+                                                                                                             This limitation may be somewhat expected –
+                                                 unleash the power of multi-agentic LLM frame-            while LLMs are able to simulate collaboration pro-
+                                                 works. In MAPoRL, multiple LLMs first gen-               cedures, they were not explicitly trained to achieve
+                                                 erate their own responses independently and              effective cooperation. In theory, it is not hard to
+                                                 engage in a multi-turn discussion to collabora-          imagine that single-agent training is insufficient
+                                                 tively improve the final answer. In the end,             for collaboration – an untrained and non-strategic
+                                                 a MAPoRL verifier evaluates both the answer              opponent can fail to act in a way that promotes
+                                                 and the discussion, by assigning a score that
+                                                                                                          collaboration. Instead, achieving collaborative be-
+                                                 verifies the correctness of the answer, while
+                                                 adding incentives to encourage corrective and            haviors requires interactive training environments
+                                                 persuasive discussions. The score serves as              where each agent actively engages with others, and
+                                                 the co-training reward, and is then maximized            dynamically optimizes the strategy (Gagne, 1974;
+                                                 through multi-agent RL. Unlike existing LLM              Macy, 1991; Hertz-Lazarowitz et al., 2013). More-
+                                                 post-training paradigms, MAPoRL advocates the            over, conventional approaches such as supervised
+                                                 co-training of multiple LLMs together using              fine-tuning (SFT), as we will show, are inadequate
+                                                 RL for better generalization. Accompanied
+                                                                                                          for this purpose, either: merely mimicking multi-
+                                                 by analytical insights, our experiments demon-
+                                                 strate that training individual LLMs alone is
+                                                                                                          agent interactions from training data may not lead
+                                                 insufficient to induce effective collaboration. In       to effective collaboration.
+                                                 contrast, multi-agent co-training can boost the             To develop more effective collaborative agents,
+                                                 collaboration performance across benchmarks,             we propose Multi-Agent Post-co-training for col-
+                                                 with generalization to unseen domains. The               laborative LLMs with Reinforcement Learning
+                                                 code is available at https://github.com/                 (MAPoRL), a co-training paradigm for multiple
+                                                 chanwoo-park-official/MAPoRL.                            LLMs using multi-agent reinforcement learning
+                                                                                                          (MARL). In MAPoRL, within the pre-defined frame-
+                                         1       Introduction                                             works for multi-agent collaboration (e.g., the de-
+                                                                                                          bate framework (Du et al., 2024)), each agent re-
+                                         Recent advances in large language models (LLMs)                  ceives rewards for their responses during collabora-
+                                         have highlighted their potential for collaboration,              tion, based on the quality of their answers and inter-
+                                         particularly within the multi-agentic framework                  actions. The objective for each agent in MAPoRL is
+                                             ♮
+                                            This work was initiated during an internship at Amazon        to maximize their own value function, defined as
+                                         AGI.                                                             the expected cumulative sum of rewards over the
+
+                                                                                                      1
+course of the collaboration.                                           et al., 2024; Du et al., 2024). Beyond mathematics,
+   To further encourage cooperation in MAPoRL, we                      collaboration can also enhance the performance
+incorporate incentives for successful interactions                     on tasks related to privacy, factuality, and reliabil-
+and penalties for collaboration failures, steering the                 ity (Feng et al., 2025). We model the interaction
+LLMs toward more effective and aligned behav-                          among LLMs as a repeated game with T turns. For
+iors. Through a simplified game-theoretic example,                     simplicity, we assume that in each turn, each agent
+we validate the following insights: 1) single-agent                    chooses between two actions: Collaborate (a0 ) or
+training alone is insufficient to produce genuinely                    Act Independently (a1 ). For a given question q, we
+cooperative agents, and 2) co-trained agents can                       define C(q) as a non-negative integer representing
+reach an equilibrium that exhibits cooperative be-                     the collaboration threshold. The agents achieve
+havior.                                                                collaborative synergy if, over the course of the
+   To assess the effectiveness of MAPoRL, we con-                      T -turn interactions, the total number of collabora-
+duct experiments across diverse tasks and evalua-                      tive actions (a0 ) of all the agents meets or exceeds
+tion strategies. Specifically, we train multi-agent                    C(q). When collaborative synergy is achieved,
+LLMs for tasks such as mathematical reasoning                          each agent receives a reward Rsyn (q) = 1, repre-
+(GSM8k (Cobbe et al., 2021)) and natural lan-                          senting a (near-)guaranteed correct solution. Prior
+guage inference (ANLI (Nie et al., 2020)), compar-                     to achieving synergy, agents receive rewards based
+ing their performance against baseline approaches.                     on their chosen actions: a reward of Rcol (q) for
+Additionally, we evaluate the robustness of our                        choosing to collaborate (a0 ) and Rind (q) for acting
+method by testing agents on out-of-domain tasks                        independently (a1 ), where Rcol (q) < Rind (q) (see
+(e.g., training on a NLI task and evaluating on a                      Remark 3 for a detailed justification on the setup).
+math dataset), demonstrating the generalization ca-                    This reward structure creates a tradeoff between
+pabilities of our approach. We also explore the                        short-term accuracy and long-term collaborative
+collaboration among agents of varying capabilities,                    success. This setup is related to the classical Co-
+by analyzing the impact of training heterogeneous                      ordination Games (Cooper, 1999) in game theory
+LLMs together.                                                         if Rsyn is large. We introduce a new collaboration
+   To the best of our knowledge, this study is                         threshold and synergy mechanism that shapes the
+among the first works to explore the training of                       transition from independent actions to collabora-
+multi-LLM systems as a whole1 , using RL, for                          tive behavior in multiple turns, to better model the
+multi-LLM collaboration.                                               collaboration procedure among multiple LLMs.
+                                                                       Remark 1 (Rationale Behind the Setup). This for-
+2       Analytical Insights: Collaborate to                            malization captures several key aspects of complex
+        Solve Hard Questions                                           problem-solving dynamics. Choosing to collabo-
+                                                                       rate (a0 ) represents contributing exploratory ideas
+In this section, we present a simplified model of                      or partial solutions. While these contributions
+multi-LLM collaboration and explain (a) why co-                        have a lower immediate probability of correctness
+training multiple LLMs is necessary compared to                        Rcol (q), they are essential building blocks towards
+training a single agent, and (b) the role of incentives                the complete solution. Acting independently (a1 )
+to further enhance collaboration during training.                      represents using conventional approaches that may
+We validate both aspects through experiments in                        yield a higher immediate probability of correctness
+Section 4.                                                             Rind (q), but may contribute less to solving partic-
+2.1      Problem Setup                                                 ularly challenging problems. The collaboration
+                                                                       threshold C(q) represents the minimum amount of
+We consider questions that inherently require col-                     collaboration efforts and idea generation needed
+laboration for a successful solution. For instance,                    to solve complex problems. Once this threshold
+solving complex mathematical problems often re-                        is reached (i.e., achieving collaborative synergy),
+quires collaboration among multiple agents (Liang                      the agents can combine their insights to solve the
+    1
+     Together with the contemporaneous works Subramaniam               challenging problem, with a higher reward Rsyn (q).
+et al. (2025) and Zhao et al. (2025), both of which were re-
+leased within the past month while preparing this paper. In            2.2   Analytical Observations
+contrast to MAPoRL, the algorithms therein were based on (itera-
+tive) SFT, instead of RL. Also, Motwani et al. (2024) provided         To provide intuition for why co-training is neces-
+a method to train verifier-generation-refiner system with DPO.         sary and single-agent training may be inadequate,
+
+                                                                   2
+             (Question) A sequence follows an arithmetic pattern where the first term is 3, and the common difference is 5.
+                         The sum of the first several terms equals 715. How many terms are in this sequence?
+
+                                                                                                                                               MAPoRL for
+                                                                                                                                             Multi-LLM Systems
+                                       LLM1                                    LLM2                                       LLM3
+   Turn
+            We use the arithmetic series sum formula:      Since the sequence increases          Instead of using the sum formula directly
+    1                                                                                                                                          Verifier (or Scorer)
+                    Sn=(n/2)×(2a+(n−1)d)…               by 5 each time, we could directly…               how large the last term…
+                                                                                                                                             (e.g., Neural Network /
+                     Score from Verifier: 0.99                 Score from Verifier: 0.51                  Score from Verifier: 0.18
+                                                                                                                                                 LLM / Human)
+
+
+   Turn
+                                                                                                                                             Each LLM's turn reward
+    2
+                                        LLM1                                   LLM2                                        LLM3              is defined as the sum of
+                     After the first turn, …                      Now I think, …                          Since the sequence, …              the verifier's scores for
+                     Score from Verifier: 0.99                 Score from Verifier: 0.11                  Score from Verifier: 0.65          the current and future
+                                                                                                                                             turns.
+   Turn
+                                                                                                                                             Multi-agent RL for
+    3
+                                                                                                                                             Maximizing their
+                                      LLM1                                         LLM2                                    LLM3              Value Function
+                    After the second turn, …                         It seems…                           We use the arithmetic…
+                     Score from Verifier: 0.85                 Score from Verifier: 0.98                  Score from Verifier: 0.99
+
+
+
+                                                            Multi-LLM Systems
+                                                         (e.g., collaborative debate)
+
+
+Figure 1: MAPoRL can be applied to any multi-LLM system with a scorer/verifier. In the illustrated example, it is
+integrated into a collaborative debate system for mathematical problem-solving. LLMs generate responses based
+on the multi-agent system pipeline, and a scorer/verifier evaluates their outputs. The reward for each LLM is
+determined based on these scores, which may include both current and future pipeline evaluations. Multi-Agent RL
+is employed to maximize each agent’s value function.
+
+we analyze the simplest case with T = 2 and                                                    which emphasizes the importance of additional in-
+C(q) = 1 to illustrate the fundamental differences                                             centives to promote collaborative synergy. Due
+between single and multi-agent training. We pro-                                               to this observation, in Section 3.3, we incentivize
+vide formal statements and proofs in Appendix C.                                               collaboration by providing a higher Rsyn (q).
+
+Observation 1. Suppose that the opponent selects                                               2.3     Toy Experiments with T = 10, 20 Turns
+action a0 with probability π(q) for each question
+q. Then, the optimal strategy for the agent is as                                              We illustrate the benefit of jointly optimized (multi-
+follows: if (Rsyn (q) − Rind (q))π(q) ≥ Rind (q) −                                             agent) policies over those obtained from a single-
+Rcol (q), then the optimal strategy for question q is                                          agent approach in our setting, with longer T =
+to collaborate (a0 ). Otherwise, the optimal strategy                                          10, 20 turns. Each question q is associated with the
+is to act independently (a1 ).                                                                 rewards Rcol (q), Rind (q), and Rsyn (q), along with a
+                                                                                               collaboration threshold C(q). Further details on the
+  This shows the dependence of the agent’s strat-                                              choices of these quantities be found in Appendix D.
+egy on the opponent’s behavior. If the opponent is                                                We first consider a single agent interacting with
+not collaborative enough and non-strategic, then                                               a fixed opponent whose probability of collaborat-
+π(q) will be small, leading the trained model to                                               ing, π(q), is set at {0.5, 0.6, 0.7}. Despite the
+behave in a non-collaborative way.                                                             relatively high likelihood of collaboration from the
+Observation 2 (Informal). If both agents are                                                   opponent, the single-agent policy, which optimizes
+trained to maximize their individual cumulative                                                its response to the fixed opponent, does not result
+rewards with an entropy regularization term scaled                                             in effective collaboration (Figure 5). Instead of
+by τ , then as τ → 0, they will collaborate if:                                                learning to strategically engage with the opponent’s
+Rsyn (q) > max(3Rcol (q) − 2Rind (q), 2Rind (q) − Rcol (q)).                                   behavior, the single-agent policy, which follows a
+                                                                                               best-response strategy to the fixed opponent, tends
+  Observation 2 can be proved by adapting the re-                                              to avoid collaboration, highlighting the limitations
+sults of Zhang and Hofbauer (2016), and transform-                                             of a single-agent framework when facing a fixed,
+ing our setup with T = 2 into a matrix game. This                                              non-strategic opponent.
+observation implies that when both agents optimize                                                Next, we consider two jointly optimizing (multi-
+their own cumulative reward, they will naturally                                               agent) learners who adapt their policy based on
+choose collaboration when Rsyn (q) is high enough,                                             the other’s actions. Concretely, we compute an
+
+                                                                                           3
+entropy-regularized Nash equilibrium for τ = 0.1                 where ⊕ denotes token-wise concatenation, 1 ≤
+via backward induction. As shown in Figure 5                     t ≤ T − 1 and LLMi (s) represents the function of
+(solid red curves), the jointly optimized agents coor-           inputting prompt s into the LLMi which outputs
+dinate with significantly higher collaboration rates.            logits over its token space, followed by sampling
+Intuitively, this is because their learning process,             a token based on these logits. If A = 1, then
+which fosters high collaboration at larger t, shapes             this setup is equivalent to that of self-correcting
+their strategic behavior from the very beginning,                LMs (Madaan et al., 2024). Now, we define
+leading to increased cooperation even at the first               θ = (θta )t∈[T ],a∈[A] , where θta represents the pa-
+turn. These toy results underscore the importance                rameters of the a-th agent at turn t. We denote
+of strategic interactions: when both agents adapt                LLM parameterized by θta as LLMθta .
+their policies simultaneously, they learn to be more                Next, to implement MAPoRL, we define the re-
+collaborative, despite the temptation of short-term              ward function for the multi-agent RL formulation,
+independent rewards.                                             using the verifier score. Due to space constraints,
+3     Post-Co-Training with MARL                                 we here introduce the Influence-aware Verification
+We now provide an overview of our new paradigm                   Rewards, and defer other choices of the reward
+of Multi-Agent Post-Co-Training with RL (MAPoRL)                 functions that we will use in the experiments to
+for LLM collaboration. In our framework, each                    Appendix F.
+agent’s response per turn is evaluated by a verifier,            Definition 1 (Influence-aware Verification Reward).
+which assigns a score reflecting the answer’s valid-             The influence-aware verification reward function
+ity. The reward is defined as the (weighted) sum of              Rθ (q, sta ) is defined as
+the verifier’s scores from the current turn and those                                                     
+from the future turns, thus capturing both the imme-                                          1
+                                                                  Rθ (q, sta ) = E P                 t′ −t
+                                                                                                             Verifier(q, sta )
+diate feedback and the projected long-term impact                                       t′ ∈[t,T ] γ
+of the agent’s response. The agents’ policies are                        X X 1 ′                                     
+                                                                                            t −t
+updated using multi-agent PPO for each turn, en-                   +                     γ       Verifier(q, st j ) .
+                                                                                                                 ′
+
+                                                                      ′
+                                                                                       A
+suring that the learning process incorporates both                     t ∈[t+1,T ] j∈[A]
+
+the performance in the current turn and the influ-
+                                                                    Here, the expectation arises from the random-
+ence of the anticipated collaborative interactions in
+                                                                 ness of other agents’ answers, which are influenced
+the future turns.
+                                                                 by the agent’s current response, and γ ∈ [0, 1] is
+3.1 Multi-Agent System - Collaborative                           a discount factor. This reward not only considers
+      Debate Formulation                                         the verifier’s score for the current solution sta , but
+We follow the collaborative debate system pro-                   also incorporates the impact of this solution
+                                                                                                             P on the
+posed by Du et al. (2024)as an example of our                    future answers of all agents. The term j∈[A] A1
+multi-LLM system in the experiments. Note that,                  averages the verifier’s scores across all the agents,
+MAPoRL can be applied to other multi-LLM sys-                    reflecting the influence that sta has on the overall
+tems as long as each agent’s response can be eval-               multi-agent system.
+uated—for example, by a verifier that assigns a
+score reflecting the quality or correctness of the               3.2    Multi-Agent RL Formulation
+response. The reward for each agent is then de-                  The reward of each agent, as well as its answer
+termined by summing the verifier scores of all the               generation, is intertwined with the actions of other
+responses influenced by that agent throughout the                agents in the multi-LLM system with the reward
+multi-agent interaction process. Assume we have                  function (Definition 1). Thus, instead of single-
+a collaborative debate system that runs for T turns              agent RL, we design a multi-agent RL approach.
+and involves A agents. In each turn, an LLM must                 For this paper, we choose multi-agent PPO (Yu
+determine its next response based on the history of              et al., 2022) as a representative multi-agent RL
+its own answers as well as the answers provided by               algorithm and instantiate it in the language domain.
+other LLM agents. Let q be the given question, and                  Conventional multi-agent PPO extends PPO to
+let sti denote the solution provided by agent i at               multi-agent settings by training decentralized poli-
+turn t. We inductively express the solution s(t+1)i              cies, either with a shared critic or through inde-
+as follows:                                                     pendent learning, where each agent optimizes its
+    s1i = LLMi (q) , s(t+1)i = LLMi q ⊕j∈[A],t′ ∈[t] st′ j       policy based on local observations and rewards.
+
+                                                             4
+Typically, agents learn independently or with lim-
+ited coordination mechanisms, such as centralized                           and LValue (θvta ) is defined as
+                                                                                                  h                                         i
+critics or shared value functions. Our approach                                                                                target x 2
+                                                                                LValue (θvta ) = E λvalue V (ixta ; θvta ) − Vta     (ita )   .
+adapts multi-agent PPO by defining the state as the
+concatenation of the multi-agent interaction history,                       Here, clipϵ (α) := min(max(1 − ϵ, α), 1 + ϵ),
+                                                                             x                         LLMθ,ta (sx+1    x
+                                                                                                                  ta |ita )
+allowing agents to condition their responses on past                        Rta            =                              x ),          θ old            =
+                                                                                                      LLMθold,ta (sx+1
+                                                                                                                   ta  |i ta
+interactions. Additionally, we introduce reward
+                                                                            (θold,ta )t∈[T ],a∈[A] is the parameter used in
+structures that are aligned but not fully identical
+                                                                            the rollout for multi-agent PPO, and
+across agents, encouraging them to fulfill different                               target x
+                                                                                 Vta     (ita ) = V (ixta ; θold,vta ) + A(ixta ; θ old , θold,vta )).
+roles while collectively working toward solving the
+task.                                                                        The expectation E is taken over the randomness
+   Since we are solving multi-turn problems, the                            from
+value function for each turn’s state needs to be
+defined. The state of each turn’s value Vtaθ is the                         q ∼ Q, st′ a′ ∼ LLMθold,t′ a′ (q ⊕t′′ ∈[t′ −1],j∈[A] st′ j )
+expectation of the cumulated reward conditioned
+                                                                            for all t′ ∈ [t], a ∈ [A], and x ∼
+on the input text ixta , which is defined as
+                                                                            Unif([length(sta )]), where Q denotes the distri-
+                                                                          bution of questions.
+                           length(sta )
+     Vtaθ (ixta ) = E 
+                              X
+                                          rθ (q, s1:x
+                                                  ta )
+                                                      ′
+                                                          q, ixta  .          Each agent for each turn optimizes its policy
+                              x′ =x                                         and value function simultaneously, over the param-
+                                                                            eters (θta , θvta ). These agent interactions among
+         ′                                                 ′
+Here, ixta = q ⊕t′ ∈[t−1],j∈[A] st′ j ⊕ sta
+                                         1:x and                            multiple LLMs inherently lead to a multi-agent
+                                                                            RL problem, rather than a single-agent RL one, as
+                 ′
+      rθ (q, s1:x        ′
+              ta ) = 1 (x = length(sta ))Rθ (q, sta )
+                                                                            each agent influences others’ learning processes
+                              ′                ′
+                                                                           throughout training.
+       − λKL KL LLMθref,ta (ixta ) ∥ LLMθta (ixta ) ,
+                                                                            3.3      Reward Shaping to Incentivize
+where t denotes the turn index and a refers to agent
+                                                                                     Collaboration
+a ∈ [A], s1:x ta represents the generated token from
+agent a up to the x-th token in turn t, with θref,ta                        As discussed in Section 2, incorporating additional
+denoting the parameter of a reference LLM, and                              incentives in the reward can steer agents towards
+λKL ≥ 0 is some regularization coefficient. As per                          better collaboration. We define four key parameters
+our reward construction, the value maximization                             when implementing such a reward-shaping: param-
+not only considers the current turn’s verifier score,                       eters α0 and α1 correspond to the incentives related
+but also anticipates future verifier scores from the                        to an agent’s own revision of the answer, and param-
+same or other agents across multiple turns, which                           eters β0 and β1 correspond to those related to her
+makes multi-agent training relevant. We estimate                            influence on other agents’ answers. Specifically, α0
+the advantage function using Generalized Advan-                             represents the ability to extract useful information
+tage Estimation (GAE) (Schulman et al., 2016),                              from incorrect answers (critical reasoning), while
+which leverages the value function to measure how                           α1 reflects an agent’s tendency to be persuaded by
+much better the current token selection is compared                         the correct information. Meanwhile, β0 represents
+to the baseline value function.                                             the ability to provide incorrect answers that still
+   The value function is approximated by a neu-                             contain useful information, potentially leading to
+ral network with parameter θvta , denoted as                                better responses in the future turns. In contrast, β1
+V (ixta ; θvta ), which serves as an estimate of                            captures an agent’s ability to effectively persuade
+Vtaθ (ixta ). Using V (ixta ; θvta ), we estimate the ad-                   others when providing correct answers. We pro-
+vantage function A(ixta ; θ , θvta ) via GAE. The loss                      vide Table 1 and Table 2 to summarize the design
+function for multi-agent PPO is then given by:                              of these incentives.
+ LPPO (θta , θvta ) = LSurrogate (θta ) + LValue (θvta ),                   4      Experiments
+where LSurrogate (θta ) is defined as
+      h   
+            x
+     E min Rta A ixta ; θ old , θold,vta ,
+                                                                           4.1      Datasets
+                          x                              i               We evaluate MAPoRL on two benchmark NLP tasks
+              clipϵ Rta         A ixta ; θ old , θold,vta     .
+                                                                            to validate its performance in both mathematical
+
+                                                                        5
+  Answer (t)     Answer (t+1)       Majority (t)    Incentive           Evaluation Method. After all turns are com-
+       R               W                 R             -α1              pleted, the final answer is determined using a ma-
+       R               W                 W             -α0              jority voting scheme among the agents’ responses.
+       W               R                 W              α0              The accuracy is based on whether the majority-
+       W               R                 R              α1
+                                                                        selected response is correct. In cases where no
+Table 1: The design of additional incentives regarding                  clear majority winner emerges (e.g., a tie in vote
+an agent’s own answer revision in MAPoRL. The incen-                    counts), we adopt an expectation-based approach
+tive is determined by how an agent changes its answer
+                                                                        by weighting the correctness of each tied response
+between consecutive turns (t and t + 1) relative to the
+majority opinion of others. R indicates a correct answer,
+                                                                        proportionally. For example, if two agents receive
+W indicates an incorrect answer. The incentive value is                 an equal number of votes, the final score is ad-
+applied to the agent’s answer at turn t + 1.                            justed as the expected accuracy of selecting the
+                                                                        first agent’s answer as the final result. This en-
+  Majority (t)    Majority (t+1)     Answer (t)     Incentive
+                                                                        sures a continuous evaluation metric rather than an
+       R                 W                R            -β1
+       R                 W                W            -β0
+                                                                        arbitrary tiebreaker.
+       W                 R                W             β0
+       W                 R                R             β1              4.2   Models
+Table 2: The design of additional incentives regarding                  We primarily use the Microsoft Phi-3-mini-128k-
+an agent’s influence on other agents’ answers in MAPoRL.                instruct (3.4B) model (Abdin et al., 2024), together
+The incentive is based on how the majority opinion                      with Qwen2.5-3B-instruct (Yang et al., 2024) and
+changes between consecutive turns t and t + 1 relative                  Llama-3-8B-instruct (Dubey et al., 2024) for the
+to the agent’s answer at turn t. The incentive value is                 experiments. Due to computational constraints, we
+applied to the agent’s answer at turn t.                                mainly use quantized models and fine-tuned them
+                                                                        with QLoRA (Dettmers et al., 2024). We defer the
+reasoning and logical natural language inference.                       training details to Appendix G. When evaluating
+The details are summarized as follows:                                  on GSM8K and ANLI, we set the max token length
+GSM8K (Cobbe et al., 2021) and TinyGSM (Liu                             to 300 and 250, respectively.
+et al., 2023). GSM8K is a benchmark dataset de-
+                                                                        4.3   Experiment 1: Vanilla Collaboration by
+signed to assess a model’s mathematical reasoning
+                                                                              Off-the-shelf LLMs Cannot Improve
+abilities, requiring models to solve high-school-
+                                                                              Performance, While MAPoRL-Trained
+level mathematics problems. TinyGSM is an aug-
+                                                                              LLMs Can
+mented version of GSM8K, generated using GPT-
+3.5-turbo, where solutions are provided in Python.                      We first compare the collaboration performance
+Importantly, we did not utilize the reasoning pro-                      of off-the-shelf LLMs with MAPoRL-trained LLMs.
+cesses from GSM8K or TinyGSM but rely solely                            The training was conducted with two agents collab-
+on their final answers. For training the verifier                       orating over three turns. An overview of the trained
+model, we used 7,463 samples from GSM8K. Addi-                          system is provided in Figure 1. In Experiment 1,
+tionally, we incorporated the first 12,800 synthetic                    we trained the model starting from turn t ≥ 2 for
+samples from TinyGSM for MAPoRL2 . For evalua-                          two reasons: (a) the first turn primarily focuses
+tion, we hold out 1,319 samples from GSM8K as a                         on knowledge acquisition from each dataset, and
+test set.                                                               (b) to ensure a fair comparison with off-the-shelf
+                                                                        LLMs. We focus on enhancing collaboration skills
+Adversarial Natural Language Inference                                  rather than teaching specific task knowledge. For
+(ANLI) (Nie et al., 2020). ANLI is designed to                          this experiment, we used Phi-3-mini-128k-instruct
+evaluate a model’s natural language understanding                       and evaluate the trained models in a three-agent
+by presenting adversarial examples that challenge                       and three-turn collaboration environment.
+even the state-of-the-art models. To train the                             We observe that even when the off-the-shelf
+verifier model, we used first 10,000 training                           LLM is allowed to generate longer reasoning (600
+examples. Furthermore, we used the next 12,800                          tokens, twice the output length of our MAPoRL-
+examples for MAPoRL training and 1,200 samples                          trained model model), its accuracy did not improve
+for testing.                                                            across turns. This aligns with prior findings in the
+   2
+    We divided the dataset for training the verifier and training       literature, particularly for models that are not suf-
+MAPoRL to prevent overfitting LLMs to the trained verifiers.            ficiently strong. For instance, Huang et al. (2024,
+
+                                                                    6
+  Table 7) provided evidence that additional turns                                                     → Incorrect responses decreased, and the fraction
+  do not necessarily improve the performance sig-                                                      of Correct → Incorrect responses also decreased,
+  nificantly. Similarly, our results show that off-the-                                                indicating that MAPoRL enhanced effective collabo-
+  shelf LLMs’ performance may not benefit from                                                         ration.
+  additional turns. In contrast, LLMs trained using
+                                                                                                             Right Right           Wrong Right   Right Wrong            Wrong Wrong
+  MAPoRL exhibit improved performance as the num-
+                                                                                                          Off-the-Shelf LLM (phi-3) Turn 2 Off-the-Shelf LLM (phi-3) Turn 3
+  ber of collaboration turns increased, as shown in
+  Figure 2.                                                                                                                22.1%                           26.2%
+                                                                                                                                   9.1%                            9.9%
+                         GSM8K                                              ANLI                                                    10.2%                           4.9%
+                                                         0.54
+       0.80                                                                                                            58.6%                             59.0%
+                                                         0.52
+Accuracy
+
+
+
+
+                                                  Accuracy
+
+
+       0.75
+       0.70                                              0.50                                                   Net Improved = 1.15%              Net Improved = -4.95%
+       0.65                                              0.48                                                MAPoRL trained (phi-3) Turn 2 MAPoRL trained (phi-3) Turn 3
+       0.60 1                2                3                 1              2               3
+                           Turn                                              Turn                                               2.3%                         2.4%
+                                                                                                                           18.0%                         16.6%3.6%
+                Off-the-Shelf LLM (phi-3)                    MAPoRL trained (phi-3), alpha 1                                      14.3%
+                MAPoRL trained (phi-3), alpha 0              MAPoRL trained (phi-3), alpha 2
+
+                                                                                                                           65.4%                               77.3%
+
+  Figure 2: Performance comparison of different LLMs                                                           Net Improved = 12.03%              Net Improved = 1.20%
+  across tasks (left: GSM8k, right: ANLI) under vari-
+  ous settings. We evaluate collaboration ability in five
+  conditions: (1) off-the-shelf LLMs collaborating and                                                 Figure 3: Changes in the fraction of responses that tran-
+  (2) models trained using MAPoRL collaborating (with all                                              sition their correctness over multiple turns of MAPoRL
+  incentive parameters (Section 4.4) α, β = 0, 1, 2, re-                                               on GSM8k.
+  spectively).
+
+                                                                                                             Right Right           Wrong Right   Right Wrong            Wrong Wrong
+  Remark 2 (Domain-Specific Knowledge Acquisi-
+                                                                                                          Off-the-Shelf LLM (phi-3) Turn 2 Off-the-Shelf LLM (phi-3) Turn 3
+  tion vs. Collaboration Ability Improvement). One
+  might question whether the performance gains ob-                                                                             44.2%                             46.4%
+  served in MAPoRL-trained models stem from ac-
+  quiring domain-specific knowledge rather than im-                                                                  41.0%        7.2%                41.9%        6.7%
+                                                                                                                                7.6%                             5.0%
+  proved collaboration ability. To address this, we
+                                                                                                                Net Improved = 0.47%              Net Improved = -1.72%
+  compare off-the-shelf LLMs and MAPoRL-trained
+                                                                                                             MAPoRL trained (phi-3) Turn 2 MAPoRL trained (phi-3) Turn 3
+  models by testing how well they perform on ques-
+  tions without any collaboration, providing MAPoRL-                                                                          39.2%                             41.6%
+  trained models only the original question – without
+  interaction history – to check if their performance                                                                39.5%         8.6%                              5.2%
+                                                                                                                                12.7%                  47.0%      6.2%
+  is solely due to domain knowledge learned during
+  training. The results are as follows:                                                                         Net Improved = 4.01%              Net Improved = 1.09%
+
+                                 Phi-3       MAPoRL T2                 MAPoRL T3                       Figure 4: Changes in the fraction of responses that tran-
+                GSM8k            0.609         0.604                     0.611                         sition their correctness over multiple turns of MAPoRL
+                 ANLI            0.451         0.458                     0.453                         on ANLI.
+
+     Here, we provide the same questions to the off-
+  the-shelf Phi-3 model, the MAPoRL-trained turn-2                                                     4.4     Experiment 2: Reward Shaping with
+  model, and the MAPoRL-trained turn-3 model. The                                                              Collaboration Incentives
+  similar performance across these models suggests
+                                                                                                       In addition to the multi-agent independent PPO
+  that MAPoRL training did not enhance task-specific
+                                                                                                       framework, we then investigate the auxiliary incen-
+  knowledge but rather improved the models’ ability
+                                                                                                       tive mechanism designed to enhance collaborative
+  to collaborate effectively.
+                                                                                                       interactions. To analyze the impact of the incen-
+     We also provide the changes in the fraction of                                                    tive parameters (α and β, Section 3.3), we simplify
+  responses that transition their correctness over mul-                                                our experimental setup by limiting the total num-
+  tiple turns of MAPoRL. The fraction of Incorrect                                                     ber of debate turns to 2 and analyze the following
+
+                                                                                                   7
+cases. Here, α0 and α1 correspond to incentives                          (2, 0). Increasing β1 to 2 resulted in a slight de-
+for an agent’s own revision, capturing critical rea-                     crease in ∆1 (-1.32%), indicating that incentivizing
+soning (extracting useful information from incor-                        agents based on their influence when correct did
+rect answers) and persuadability (accepting cor-                         not improve outcomes. However, increasing β0 to
+rect information), respectively. Meanwhile, β0 and                       2 lead to a substantial improvement in ∆0 (17.2%),
+β1 correspond to incentives for influencing others,                      suggesting that rewarding agents for constructive
+where β0 encourages providing incorrect but use-                         influence even when wrong (providing useful in-
+ful responses, and β1 reflects an agent’s ability to                     correct answers that lead to better future responses)
+persuade others with correct answers.                                    significantly enhanced collaborative performance.
+   To analyze the impact of the incentive parame-
+                                                                           For a total debating turns of 3, we also plot the
+ters (α and β, Section 3.3), we simplify our experi-
+                                                                         collaboration performance using models trained
+mental setup by limiting the total number of debate
+                                                                         with αi = βi = 0, 1, 2 for i = 1, 2 on the GSM8K
+turns to 2 and analyze the following cases. Here,
+                                                                         and ANLI tasks (Figure 2). The results showed
+α0 and α1 correspond to the incentives related to
+                                                                         some performance improvement, though the gain
+an agent’s own revision of the answer, while β0
+                                                                         was relatively modest.
+and β1 correspond to the incentives related to the
+agent’s influence on other agents’ answers.
+
+ (α0 , α1 )   RWR      RWW      WRW       WRR       ∆0       ∆1          4.5   Experiment 3: Collaboration Ability
+  (0, 0)      0.0529   0.0563   0.1244   0.2286   0.1757   0.0661              Acquired by MAPoRL Is Transferable
+  (0, 2)      0.0270   0.0521   0.1259   0.2194   0.1924   0.0738
+  (2, 0)      0.0500   0.0563   0.1241   0.2272   0.1772   0.0678
+                                                                         Here, we investigate the transferability of collab-
+Table 3: Analysis of answer revision patterns under dif-                 oration abilities acquired through MAPoRL across
+ferent α parameters. The columns RWR through WRR                         different datasets not used during training. We
+show the proportion of each transition type, where the                   evaluate LLMs trained with MAPoRL on one dataset
+three letters indicate Answer(t), Answer(t+1), and Ma-                   when applied to tasks from other datasets. For
+jority(t) respectively. R and W stand for right and wrong                instance, we assesse models trained on ANLI
+answer. ∆0 measures the difference in transitions from
+                                                                         when solving tasks from GSM8k, along with other
+wrong to right answers when the majority is wrong
+(WRW − RWW) which is related to α0 , while ∆1 mea-                       dataset combinations. The results, presented in
+sures transitions when the majority is right (WRR −                      Table 5, demonstrate that collaboration abilities
+RWR) which is related to α1 .                                            learned through MAPoRL are indeed transferable
+                                                                         across datasets. This suggests that the models ac-
+                                                                         quire a meta-capability for effective collaboration,
+Analysis of α0 and α1 . We compare baseline
+                                                                         even when encountering novel, unseen tasks.
+(α0 , α1 ) = (0, 0) against two configurations: (0, 2)
+and (2, 0). When α1 was increased to 2, we observe
+                                                                          Training → Evaluation   Model           Turn 1   Turn 2   Turn 3
+a 9.5% improvement in ∆1 , indicating that incen-                                                 Off-the-shelf   0.677    0.688    0.640
+tivizing agents to follow correct majority opinions                       ANLI → GSM8K
+                                                                                                  Trained         0.677    0.712    0.720
+effectively improved performance. When α0 was                             GSM8K → ANLI
+                                                                                                  Off-the-shelf   0.482    0.486    0.468
+                                                                                                  Trained         0.482    0.499    0.507
+increased to 2, we observed a smaller (2.57%) im-
+provement in ∆0 , suggesting that rewarding agents
+                                                                         Table 5: Performance comparison (Accuracy) of 3-agent
+for deviating from incorrect majority opinions had                       collaboration using off-the-shelf vs. trained LLMs. For
+a positive but limited effect.                                           each dataset pair (rows in bold), the first row shows the
+                                                                         off-the-shelf performance and the second row shows the
+ (β0 , β1 )   RWR      RWW      WRW      WRR       ∆0        ∆1          trained model performance, across Turns 1–3.
+  (0, 0)      0.0070   0.0453   0.0226   0.0221   0.0151   -0.0227
+  (0, 2)      0.0686   0.0461   0.0231   0.0230   0.0161   -0.0230
+  (2, 0)      0.0011   0.0360   0.0161   0.0188   0.0177   -0.0199
+                                                                            These findings demonstrate that models trained
+Table 4: Analysis of majority opinion influence under                    through MAPoRL on one task can effectively gener-
+different β parameters. Meaning of the column is the                     alize their collaborative capabilities to different, un-
+same as Table 3.                                                         related tasks. This generalization ability suggests
+Analysis of β0 and β1 . We compare baseline                              that MAPoRL develops fundamental collaborative
+(β0 , β1 ) = (0, 0) against configurations (0, 2) and                    skills that transcend specific task domains.
+
+                                                                     8
+4.6    Experiment 4: MAPoRL with                                      suggests that either substantially more training data
+       Heterogeneous LLMs Can Help                                    would be required to learn effective collaborative
+In this experiment, we investigate collaborative                      behaviors, or that SFT might not be an effective
+learning between different foundation models,                         approach for inducing such behaviors. Contem-
+specifically examining co-training between (Phi3                      poraneously, Subramaniam et al. (2025) and Zhao
+3.4B and Qwen2.5 3B) and (Phi3 3.4B and Llama3-                       et al. (2025) enhance multi-agent performance by
+8B) pairs. In single-model evaluations, both Phi3                     incorporating new techniques into iterative SFT
+and Qwen2.5 3B demonstrate stronger perfor-                           with their own data augmentation to generate ef-
+mance compared to Llama3-8B. Due to GPU mem-                          fective collaboration examples, demonstrating its
+ory constraints necessitating simultaneous loading                    potential when combined with additional refine-
+of two base models, we conduct experiments in a                       ments. In contrast, our approach does not leverage
+two-agent, two-turn environment. This setup en-                       data augmentation, but uses RL.
+ables us to explore whether models with heteroge-                     5    Concluding Remarks, Limitations, and
+neous capabilities could effectively collaborate to
+                                                                           Potential Risks
+enhance the overall performance (Figure 7). The
+synergistic effects are particularly evident when                     In this paper, we have introduced MAPoRL, a new
+models with different strengths worked together,                      post-training paradigm that leverages multi-agent
+suggesting that diverse model partnerships can                        RL to explicitly foster the collaboration among
+yield better outcomes than individual model perfor-                   multiple LLMs. Unlike methods that rely solely
+mance alone when we have MAPoRL.                                      on prompting or single-agent fine-tuning, MAPoRL
+                                                                      focuses on co-training multiple LLMs, ensuring
+4.7    Experiment 5: Naïve Supervised                                 that each agent adapts its policy not just to imme-
+       Fine-Tuning Using High-Quality                                 diate feedback, but also to the strategic behaviors
+       Collaboration Samples May Not Induce                           of other agents over multiple interactive turns. By
+       Collaborative Behaviors                                        incorporating a verifier network for reward shap-
+In this experiment, we investigate whether mod-                       ing with incentives, the framework guides each
+els could learn collaborative behavior through SFT                    agent’s responses that account for both short-term
+on high-quality debate trajectories. We generated                     correctness and long-term collaborative potential,
+12,800 trajectories using the multi-agent system                      thus promoting collaborative discussions that lead
+(Figure 1) with off-the-shelf LLMs to match the                       to more accurate final answers.
+training sample size used in MAPoRL for GSM8K.                           Through an extensive set of experiments on
+To provide favorable conditions for SFT, we al-                       reasoning-intensive tasks – such as GSM8K for
+low a maximum of 600 tokens per response, which                       mathematical problem-solving and ANLI for logi-
+exceeded the token limit used in our MAPoRL exper-                    cal natural language inference – our results demon-
+iments. We selected the top 10% of trajectories us-                   strate that off-the-shelf LLMs often do not im-
+ing the following criteria: 1) excluding trajectories                 prove the overall performance with additional de-
+without well-formatted answers, 2) filtering out tra-                 bate turns. In contrast, MAPoRL-trained agents show
+jectories where the final majority voting result was                  significant improvements with accuracy increasing
+incorrect, and 3) selecting 1,280 trajectories based                  as collaboration progresses. Crucially, these collab-
+on the verifier’s score of the final answer, which                    orative abilities are shown transferable across tasks,
+evaluates both correctness and reasoning quality.                     suggesting that once LLMs learn to collaborate,
+Interestingly, the results indicate that SFT not only                 they can retain a generalizable “collaboration skill”
+failed to enhance collaborative behaviors, but also                   applicable to different domains. Furthermore, our
+led to a decline in performance compared to the off-                  experiments with heterogeneous LLMs highlight
+the-shelf model. Specifically, for turn-2, accuracy                   that MAPoRL can also foster collaborative synergy
+dropped to 0.578 (∆ = −0.111), and for turn-3, it                     even among models of varying capabilities.
+further decreased to 0.525 (∆ = −0.114)3 . This
+                                                                      Limitations
+   3
+     Initially, these unexpected results led us to validate our
+findings through multiple experiments with varying temper-            Since we use instruction prompts as inputs to the
+atures for language generation. The consistent performance            LLMs, the output can vary significantly depending
+degradation across turns was observed in all the cases. This
+pattern suggests fundamental challenges in using SFT to main-         tain collaborative performance across multiple debate turns.
+
+
+                                                                  9
+on the prompts. As the first methodology paper,                   2022. Training a helpful and harmless assistant with
+our experiments are conducted on relatively small                 reinforcement learning from human feedback. arXiv
+                                                                  preprint arXiv:2204.05862.
+LLMs (3B to 8B parameters) for fast iteration, and
+the observed behaviors may differ on larger mod-                Philip Brookins and Jason Matthew DeBacker. 2023.
+els. After all turns of multi-LLM interactions, we                Playing games with GPT: What can we learn about
+apply majority voting to determine the final answer.              a large language model from canonical strategic
+                                                                  games? Available at SSRN 4493398.
+Using alternative mechanisms, such as a manager
+agent that makes the final prediction based on the              Justin Chih-Yao Chen, Swarnadeep Saha, and Mohit
+responses from multiple agents, may further im-                   Bansal. 2024. Reconcile: Round-table conference
+prove the overall performance.                                    improves reasoning via consensus among diverse
+                                                                  llms. In ACL.
+Potential Risks                                                 Karl Cobbe, Vineet Kosaraju, Mohammad Bavarian,
+                                                                  Mark Chen, Heewoo Jun, Lukasz Kaiser, Matthias
+As our proposed approach encourages and facili-                   Plappert, Jerry Tworek, Jacob Hilton, Reiichiro
+tates collaboration among multiple LLM agents,                    Nakano, et al. 2021. Training verifiers to solve math
+when adversarial or malicious agents exist, our                   word problems. arXiv preprint arXiv:2110.14168.
+method could lead to unintended harmful outcomes
+                                                                Russell Cooper. 1999. Coordination games. cambridge
+by enabling their collaboration with others.                      university Press.
+
+Acknowledgment                                                  Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, and
+                                                                  Luke Zettlemoyer. 2024. Qlora: Efficient finetuning
+We sincerely thank Jisu Jang for their valuable                   of quantized llms. Advances in Neural Information
+feedback on Figure 1. K.Z. acknowledges the sup-                  Processing Systems, 36.
+port from the U.S. Army Research Office grant
+                                                                Yilun Du, Shuang Li, Antonio Torralba, Joshua B Tenen-
+W911NF-24-1-0085 and the NSF CAREER Award                          baum, and Igor Mordatch. 2024. Improving factual-
+2443704.                                                           ity and reasoning in language models through multia-
+                                                                   gent debate. In ICML.
+
+References                                                      Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey,
+                                                                  Abhishek Kadian, Ahmad Al-Dahle, Aiesha Letman,
+Marah Abdin, Sam Ade Jacobs, Ammar Ahmad Awan,                    Akhil Mathur, Alan Schelten, Amy Yang, Angela
+ Jyoti Aneja, Ahmed Awadallah, Hany Awadalla,                     Fan, et al. 2024. The llama 3 herd of models. arXiv
+ Nguyen Bach, Amit Bahree, Arash Bakhtiari, Harki-                preprint arXiv:2407.21783.
+ rat Behl, et al. 2024. Phi-3 technical report: A highly
+ capable language model locally on your phone. arXiv            Caoyun Fan, Jindou Chen, Yaohui Jin, and Hao He.
+ preprint arXiv:2404.14219.                                       2024. Can large language models serve as rational
+                                                                  players in game theory? a systematic analysis. In
+Arash Ahmadian, Chris Cremer, Matthias Gallé,                     AAAI.
+  Marzieh Fadaee, Julia Kreutzer, Olivier Pietquin,
+  Ahmet Üstün, and Sara Hooker. 2024. Back to                   Shangbin Feng, Wenxuan Ding, Alisa Liu, Zifeng Wang,
+  basics: Revisiting REINFORCE-style optimization                 Weijia Shi, Yike Wang, Zejiang Shen, Xiaochuang
+  for learning from human feedback in LLMs. In                    Han, Hunter Lang, Chen-Yu Lee, Tomas Pfister, Yejin
+  Proceedings of the 62nd Annual Meeting of the                   Choi, and Yulia Tsvetkov. 2025. When one llm
+  Association for Computational Linguistics (Volume               drools, multi-llm collaboration rules. arXiv preprint
+  1: Long Papers), pages 12248–12267, Bangkok,                    arXiv:2502.04506.
+  Thailand. Association for Computational Linguistics.
+                                                                Yao Fu, Hao Peng, Tushar Khot, and Mirella Lapata.
+Elif Akata, Lion Schulz, Julian Coda-Forno, Seong Joon            2023. Improving language model negotiation with
+   Oh, Matthias Bethge, and Eric Schulz. 2023. Playing            self-play and in-context learning from ai feedback.
+   repeated games with large language models. arXiv               arXiv preprint arXiv:2305.10142.
+   preprint arXiv:2305.16867.
+                                                                Robert M Gagne. 1974. Instruction and the conditions
+Dario Amodei, Chris Olah, Jacob Steinhardt, Paul                  of learning. Psychology of school learning: Views
+  Christiano, John Schulman, and Dan Mané. 2016.                  of the learner, 1:153–175.
+  Concrete problems in ai safety. arXiv preprint
+  arXiv:1606.06565.                                             Daya Guo, Dejian Yang, Haowei Zhang, Junxiao Song,
+                                                                  Ruoyu Zhang, Runxin Xu, Qihao Zhu, Shirong Ma,
+Yuntao Bai, Andy Jones, Kamal Ndousse, Amanda                     Peiyi Wang, Xiao Bi, et al. 2025. Deepseek-r1: In-
+  Askell, Anna Chen, Nova DasSarma, Dawn Drain,                   centivizing reasoning capability in llms via reinforce-
+  Stanislav Fort, Deep Ganguli, Tom Henighan, et al.              ment learning. arXiv preprint arXiv:2501.12948.
+
+
+                                                           10
+Dylan Hadfield-Menell, Smitha Milli, Pieter Abbeel,           Guohao Li, Hasan Abed Al Kader Hammoud, Hani
+  Stuart J Russell, and Anca Dragan. 2017. Inverse              Itani, Dmitrii Khizbullin, and Bernard Ghanem. 2023.
+  reward design. Advances in neural information                 Camel: Communicative agents for" mind" explo-
+  processing systems, 30.                                       ration of large scale language model society. Neural
+                                                                Information Processing Systems.
+John C Harsanyi and Reinhard Selten. 1988. A general
+  theory of equilibrium selection in games. MIT Press         Yunxuan Li, Yibing Du, Jiageng Zhang, Le Hou, Peter
+  Books, 1.                                                     Grabowski, Yeqing Li, and Eugene Ie. 2024. Improv-
+                                                                ing multi-agent debate with sparse communication
+Pablo Hernandez-Leal, Bilal Kartal, and Matthew E               topology. In EMNLP Findings.
+  Taylor. 2019. A survey and critique of multiagent           Tian Liang, Zhiwei He, Wenxiang Jiao, Xing Wang,
+  deep reinforcement learning. Autonomous Agents                Yan Wang, Rui Wang, Yujiu Yang, Zhaopeng Tu, and
+  and Multi-Agent Systems, 33(6):750–797.                       Shuming Shi. 2024. Encouraging divergent thinking
+                                                                in large language models through multi-agent debate.
+R Hertz-Lazarowitz, S Kagan, Shlomo Sharan, R Slavin,           In EMNLP.
+  and Clark Webb. 2013. Learning to cooperate,
+  cooperating to learn. Springer Science & Business           Junwei Liao, Muning Wen, Jun Wang, and Weinan
+  Media.                                                        Zhang. 2025. Marft: Multi-agent reinforcement fine-
+                                                                tuning. arXiv preprint arXiv:2504.16129.
+Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes, and
+  Yejin Choi. 2020. The curious case of neural text           Hunter Lightman, Vineet Kosaraju, Yura Burda, Harri
+  degeneration. In ICLR.                                        Edwards, Bowen Baker, Teddy Lee, Jan Leike,
+                                                                John Schulman, Ilya Sutskever, and Karl Cobbe.
+Jie Huang, Xinyun Chen, Swaroop Mishra,                         2023. Let’s verify step by step. arXiv preprint
+   Huaixiu Steven Zheng, Adams Wei Yu, Xiny-                    arXiv:2305.20050.
+   ing Song, and Denny Zhou. 2024. Large language             Bingbin Liu, Sebastien Bubeck, Ronen Eldan, Janard-
+   models cannot self-correct reasoning yet. In ICLR.           han Kulkarni, Yuanzhi Li, Anh Nguyen, Rachel Ward,
+                                                                and Yi Zhang. 2023. Tinygsm: achieving> 80% on
+Maximilian Hüttenrauch, Adrian Šošić, and Ger-                 gsm8k with small language models. arXiv preprint
+ hard Neumann. 2017. Guided deep reinforce-                     arXiv:2312.09241.
+ ment learning for swarm systems. arXiv preprint
+ arXiv:1709.06011.                                            Nunzio Lorè and Babak Heydari. 2023. Strategic behav-
+                                                                ior of large language models: Game structure vs. con-
+Akbir Khan, John Hughes, Dan Valentine, Laura                   textual framing. arXiv preprint arXiv:2309.05898.
+  Ruis, Kshitij Sachan, Ansh Radhakrishnan, Ed-
+  ward Grefenstette, Samuel R Bowman, Tim Rock-               Ilya Loshchilov and Frank Hutter. 2019. Decoupled
+  täschel, and Ethan Perez. 2024. Debating with                  weight decay regularization. In ICLR.
+  more persuasive llms leads to more truthful answers.        Michael W Macy. 1991. Learning to cooperate:
+  In Forty-first International Conference on Machine            Stochastic and tacit collusion in social exchange.
+  Learning.                                                     American Journal of Sociology, 97(3):808–843.
+Geunwoo Kim, Pierre Baldi, and Stephen McAleer.               Aman Madaan, Niket Tandon, Prakhar Gupta, Skyler
+  2024a. Language models can solve computer                    Hallinan, Luyu Gao, Sarah Wiegreffe, Uri Alon,
+  tasks. Advances in Neural Information Processing             Nouha Dziri, Shrimai Prabhumoye, Yiming Yang,
+  Systems, 36.                                                 et al. 2024. Self-refine: Iterative refinement with
+                                                               self-feedback. Advances in Neural Information
+Yubin Kim, Chanwoo Park, Hyewon Jeong, Yik Siu                 Processing Systems, 36.
+  Chan, Xuhai Xu, Daniel McDuff, Cynthia Breazeal,
+  and Hae Won Park. 2024b. Mdagents: An adaptive              Sumeet Ramesh Motwani, Chandler Smith, Rocktim Jy-
+  collaboration of llms for medical decision-making.            oti Das, Rafael Rafailov, Ivan Laptev, Philip HS Torr,
+  In NeurIPS.                                                   Fabio Pizzati, Ronald Clark, and Christian Schroeder
+                                                                de Witt. 2024. Malt: Improving reasoning with multi-
+Aviral Kumar, Vincent Zhuang, Rishabh Agarwal, Yi Su,           agent llm training. arXiv preprint arXiv:2412.01928.
+  John D Co-Reyes, Avi Singh, Kate Baumli, Shariq             Yixin Nie, Adina Williams, Emily Dinan, Mohit Bansal,
+  Iqbal, Colton Bishop, Rebecca Roelofs, et al. 2025.           Jason Weston, and Douwe Kiela. 2020. Adversarial
+  Training language models to self-correct via rein-            nli: A new benchmark for natural language under-
+  forcement learning. In ICLR.                                  standing. In ACL.
+Hung Le, Yue Wang, Akhilesh Deepak Gotmare, Silvio            Long Ouyang, Jeffrey Wu, Xu Jiang, Diogo Almeida,
+  Savarese, and Steven Chu Hong Hoi. 2022. Coderl:              Carroll Wainwright, Pamela Mishkin, Chong Zhang,
+  Mastering code generation through pretrained mod-             Sandhini Agarwal, Katarina Slama, Alex Ray, et al.
+  els and deep reinforcement learning. Advances in              2022. Training language models to follow instruc-
+  Neural Information Processing Systems, 35:21314–              tions with human feedback. Advances in neural
+  21328.                                                        information processing systems, 35:27730–27744.
+
+
+                                                         11
+Chanwoo Park, Mingyang Liu, Kaiqing Zhang, and                  The Twelfth International Conference on Learning
+  Asuman Ozdaglar. 2024. Principled rlhf from hetero-           Representations.
+  geneous feedback via personalization and preference
+  aggregation. arXiv preprint arXiv:2405.00254.               Jonathan Uesato, Nate Kushman, Ramana Kumar, Fran-
+                                                                cis Song, Noah Siegel, Lisa Wang, Antonia Creswell,
+Chanwoo Park, Xiangyu Liu, Asuman Ozdaglar, and                 Geoffrey Irving, and Irina Higgins. 2022. Solv-
+  Kaiqing Zhang. 2025. Do llm agents have regret? a             ing math word problems with process-and outcome-
+  case study in online learning and games. In ICLR.             based feedback. arXiv preprint arXiv:2211.14275.
+
+Chanwoo Park, Kaiqing Zhang, and Asuman Ozdaglar.             Peiyi Wang, Lei Li, Zhihong Shao, Runxin Xu, Damai
+  2023. Multi-player zero-sum markov games with net-            Dai, Yifei Li, Deli Chen, Yu Wu, and Zhifang
+  worked separable interactions. Advances in Neural             Sui. 2024. Math-shepherd: Verify and reinforce
+  Information Processing Systems, 36.                           llms step-by-step without human annotations. In
+                                                                Proceedings of the 62nd Annual Meeting of the
+Yuxiao Qu, Tianjun Zhang, Naman Garg, and Aviral                Association for Computational Linguistics (Volume
+  Kumar. 2024. Recursive introspection: Teaching                1: Long Papers), pages 9426–9439.
+  language model agents how to self-improve. In
+  NeurIPS.                                                    Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc Le,
+                                                                Ed Chi, Sharan Narang, Aakanksha Chowdhery, and
+Tabish Rashid,      Mikayel Samvelyan,       Chris-             Denny Zhou. 2023. Self-consistency improves chain
+  tian Schroeder De Witt, Gregory Farquhar, Jakob               of thought reasoning in language models. In ICLR.
+  Foerster, and Shimon Whiteson. 2020. Monotonic
+  value function factorisation for deep multi-agent           Sean Welleck, Ximing Lu, Peter West, Faeze Brahman,
+  reinforcement learning. JMLR.                                 Tianxiao Shen, Daniel Khashabi, and Yejin Choi.
+                                                                2023. Generating sequences by learning to self-
+John Schulman, Philipp Moritz, Sergey Levine, Michael           correct. In The Eleventh International Conference
+  Jordan, and Pieter Abbeel. 2016. High-dimensional             on Learning Representations.
+  continuous control using generalized advantage esti-
+  mation. In ICLR.                                            Qingyun Wu, Gagan Bansal, Jieyu Zhang, Yiran Wu,
+                                                                Shaokun Zhang, Erkang Zhu, Beibin Li, Li Jiang,
+Shai Shalev-Shwartz, Shaked Shammah, and Amnon                  Xiaoyun Zhang, and Chi Wang. 2023. Auto-
+  Shashua. 2016. Safe, multi-agent, reinforcement               gen: Enabling next-gen llm applications via multi-
+  learning for autonomous driving. arXiv preprint               agent conversation framework.      arXiv preprint
+  arXiv:1610.03295.                                             arXiv:2308.08155.
+Lior Shani, Aviv Rosenberg, Asaf Cassel, Oran Lang,           Wei Xiong, Chengshuai Shi, Jiaming Shen, Aviv Rosen-
+  Daniele Calandriello, Avital Zipori, Hila Noga, Or-           berg, Zhen Qin, Daniele Calandriello, Misha Khal-
+  gad Keller, Bilal Piot, Idan Szpektor, et al. 2024.           man, Rishabh Joshi, Bilal Piot, Mohammad Saleh,
+  Multi-turn reinforcement learning from preference             et al. 2025. Building math agents with multi-turn
+  human feedback. In NeurIPS.                                   iterative preference learning. In ICLR.
+Noah Shinn, Federico Cassano, Ashwin Gopinath,                An Yang, Baosong Yang, Beichen Zhang, Binyuan Hui,
+  Karthik Narasimhan, and Shunyu Yao. 2024. Re-                 Bo Zheng, Bowen Yu, Chengyuan Li, Dayiheng Liu,
+  flexion: Language agents with verbal reinforce-               Fei Huang, Haoran Wei, et al. 2024. Qwen2. 5 tech-
+  ment learning. Advances in Neural Information                 nical report. arXiv preprint arXiv:2412.15115.
+  Processing Systems, 36.
+                                                              Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak
+Elias Stengel-Eskin, Peter Hase, and Mohit Bansal.              Shafran, Karthik Narasimhan, and Yuan Cao. 2023.
+   2025. Teaching models to balance resisting and ac-           React: Synergizing reasoning and acting in language
+   cepting persuasion. In NAACL.                                models. International Conference on Learning
+                                                                Representations.
+Vighnesh Subramaniam, Yilun Du, Joshua B Tenen-
+  baum, Antonio Torralba, Shuang Li, and Igor Mor-            Chao Yu, Akash Velu, Eugene Vinitsky, Jiaxuan Gao,
+  datch. 2025. Multiagent finetuning of language mod-           Yu Wang, Alexandre Bayen, and Yi Wu. 2022.
+  els. In ICLR.                                                 The surprising effectiveness of ppo in cooperative
+                                                                multi-agent games. Advances in Neural Information
+Peter Sunehag, Guy Lever, Audrunas Gruslys, Woj-                Processing Systems, 35:24611–24624.
+  ciech Marian Czarnecki, Vinicius Zambaldi, Max
+  Jaderberg, Marc Lanctot, Nicolas Sonnerat, Joel Z           Fei Yu, Anningzhe Gao, and Benyou Wang. 2024.
+  Leibo, Karl Tuyls, et al. 2018. Value-decomposition           Ovm,outcome-supervised value models for planning
+  networks for cooperative multi-agent learning. In             in mathematical reasoning. In NAACL Findings.
+  AAMAS.
+                                                              Boyu Zhang and Josef Hofbauer. 2016. Quantal re-
+Katherine Tian, Eric Mitchell, Huaxiu Yao, Christo-             sponse methods for equilibrium selection in 2× 2 co-
+  pher D Manning, and Chelsea Finn. 2024. Fine-                 ordination games. Games and Economic Behavior,
+  tuning language models for factuality.        In              97:19–31.
+
+
+                                                         12
+Kaiqing Zhang, Zhuoran Yang, and Tamer Başar. 2021.
+  Multi-agent reinforcement learning: A selective
+  overview of theories and algorithms. Handbook of
+  reinforcement learning and control, pages 321–384.
+Jun Zhao, Can Zu, Hao Xu, Yi Lu, Wei He, Yiwen
+  Ding, Tao Gui, Qi Zhang, and Xuanjing Huang. 2024.
+  Longagent: Scaling language models to 128k context
+  through multi-agent collaboration. In EMNLP.
+Wanjia Zhao, Mert Yuksekgonul, Shirley Wu, and James
+  Zou. 2025. Sirius: Self-improving multi-agent sys-
+  tems via bootstrapped reasoning. arXiv preprint
+  arXiv:2502.04780.
+Banghua Zhu, Michael Jordan, and Jiantao Jiao.
+  2023. Principled reinforcement learning with hu-
+  man feedback from pairwise or k-wise comparisons.
+  In International Conference on Machine Learning,
+  pages 43037–43067. PMLR.
+Daniel M Ziegler, Nisan Stiennon, Jeffrey Wu, Tom B
+  Brown, Alec Radford, Dario Amodei, Paul Chris-
+  tiano, and Geoffrey Irving. 2019. Fine-tuning lan-
+  guage models from human preferences. arXiv
+  preprint arXiv:1909.08593.
+
+
+
+
+                                                       13
+A   Detailed Related Work Discussion
+Multi-Agent Reinforcement Learning. Various algorithms have been proposed to address multi-agent
+reinforcement learning (MARL) (Hernandez-Leal et al., 2019; Zhang et al., 2021), including multi-agent
+Proximal Policy Optimization (PPO) (Yu et al., 2022), and value function factorization techniques such
+as QMIX and VDN (Rashid et al., 2020; Sunehag et al., 2018). In the context of language models and
+collaborative debating we focus on, MARL takes on a particular and unique form. Here, each agent’s
+state is represented by the sequence of previous responses from all the agents, with each agent deciding
+the next token based on this history. LLMs provide compact state representations through their hidden
+layers, enabling the use of long debate histories.
+
+Multi-Agent Collaboration with LLMs. An array of studies have explored effective collaboration
+frameworks among multiple large language model agents to solve complex tasks (Wu et al., 2023; Li
+et al., 2024; Zhao et al., 2024). For example, “role-playing”-based approaches utilized multi-agent LLMs
+by assigning a specific role to each LLM (Li et al., 2023), and “multi-agent debate”-based approaches
+prompted each LLM agent to solve the task independently and then discuss (Du et al., 2024; Khan et al.,
+2024). In a debate, the agents reason through each other’s answers to converge on a consensus response,
+which may improve the factual accuracy, mathematical ability, and reasoning capabilities of the LLM
+(Du et al., 2024; Liang et al., 2024; Kim et al., 2024b). Similar mult-agentic frameworks include voting
+(Wang et al., 2023), group discussions (Chen et al., 2024), and negotiating (Fu et al., 2023). However,
+all of these frameworks rely heavily on prompt engineering, which may lead to sub-optimal results
+(Huang et al., 2024), and do not consider training LLMs specifically for collaboration. Therefore, while
+multi-LLM systems seem promising at the first glance, their performance may be limited when using
+the out-of-the-box (pretrained) LLM with only prompt tuning, which highlights the need for training for
+better multi-agent collaboration. Recently, Stengel-Eskin et al. (2025) introduced a training framework
+for accepting or rejecting persuasion in multi-agent systems. Additionally, very recently, Subramaniam
+et al. (2025) and Zhao et al. (2025) focused on training the entire multi-agent systems using iterative
+SFT. In contrast, MAPoRL employs (multi-agent) RL to train the whole multi-LLM system. Recently,
+after MAPoRLwas released, Liao et al. (2025) provided a similar training system of multi-agents with
+reinforcement learning.
+
+RL for LLM Training. RL has been widely used in post-training LLMs, e.g., for improving factual-
+ity (Tian et al., 2024), code generation (Le et al., 2022), and more recently and significantly, reasoning
+(Guo et al., 2025). One prevalent approach of RL for LLM training is RL from human feedback (RLHF)
+(Ziegler et al., 2019; Ouyang et al., 2022; Bai et al., 2022; Ahmadian et al., 2024). RL offers a smooth
+generalization to the multi-turn setting based on the Markov decision process (MDP) model, and there have
+been attempts to apply multi-turn RL for LLM training, such as RLHF for multi-turn model training to
+enhance the dialogue abilities (Shani et al., 2024), or deriving multi-turn RL objective for the improvement
+of mathematical reasoning (Xiong et al., 2025). However, the major difference from our work is that, these
+works did not consider multi-agent settings for collaboration. Recently, Kumar et al. (2025) enhanced
+LLMs’ ability to self-correct using an RL-based approach. Our framework can accommodate this case by
+using a single agent in MAPoRL.
+
+B   Additional Literature Review
+Multi-Agent RL. Multi-agent reinforcement learning (MARL) has achieved significant advancements,
+particularly in cooperative games and their real-world applications, such as coordinating robot swarms
+(Hüttenrauch et al., 2017) and self-driving vehicles (Shalev-Shwartz et al., 2016). (A comprehensive
+overview of MARL can be found in Zhang et al. (2021)). The primary challenge in MARL lies in
+the exponentially large action space, making it difficult to optimize the policy for each agent. Various
+approaches have been proposed to address this issue, including multi-agent Proximal Policy Optimization
+(PPO) (Yu et al., 2022), value function factorization methods (QMIX, VDN) (Rashid et al., 2020; Sunehag
+et al., 2018), and network-based formulations for multi-agent learning (Park et al., 2023). These methods
+
+                                                    14
+aim to make MARL more scalable with a large number of agents, mostly focusing on the classical models
+of stochastic/Markov games.
+   In the context of language models and collaborative debate systems, MARL takes on a unique form.
+Here, each agent’s state is represented by the sequence of previous responses from all agents, with
+each agent deciding the next token based on this history. The detailed mathematical formulation for
+reinforcement learning in language models can be found in several theoretical and empirical studies on
+reinforcement learning with human feedback (RLHF) (e.g., Ouyang et al. (2022); Zhu et al. (2023); Park
+et al. (2024)). LLMs provide high-quality state representations through their hidden layers, enabling the
+consideration of long debate histories. Moreover, the sequential nature of these interactions inherently
+captures non-Markovian policies due to the extended sequence of responses.
+
+Teaching LLM Self-Correction. As mentioned in the main paper, single-agent self-correction and
+multi-agent collaboration has a very interesting relationship. Single-agent self-correction and multi-agent
+collaboration rely on multi-turn interactions—either internally, within a single agent, or collaboratively,
+among multiple agents—to improve results by challenging initial outputs and refining them through
+iteration. In single-agent systems, self-correction functions like an internal debate. The agent evaluates its
+own output over multiple turns, identifying potential mistakes and proposing alternative solutions. This
+process mirrors human reflection, where reconsideration often leads to improved conclusions. Meanwhile,
+in multi-agent systems, different agents engage in a collaborative debate, questioning and refining each
+other’s answers. By interacting in multiple rounds, these agents combine their individual perspectives to
+correct errors and arrive at more accurate solutions.
+   There are several prior works aiming to improve LLMs’ ability to self-correct. First line of work is using
+prompting technique, which guides LMs via prompting to iteratively correct the model outputs (Madaan
+et al., 2024). However, some works use the ground-truth labels to determine when to stop the self-
+correction (Kim et al., 2024a; Shinn et al., 2024; Yao et al., 2023), which is not applicable in the real-world
+scenarios where answer is not available for the tasks, and it is shown that under such scenarios the models
+can not do self-correct effectively (Huang et al., 2024).
+   Another line of works train LLMs to learn self-correction; Qu et al. (2024) introduced an approach
+using stronger LLMs to obtain multi-turn trajectories that have better responses through the iteration, and
+uses this data to fine-tune LLMs to learn self-correction. Different from this work, our approach do not
+require stronger LLMs for demonstrations, relying solely on the reward for training. Welleck et al. (2023)
+proposed supervised fine-tuning to train a corrector model that can edit the model response iteratively, but
+this is specified the type of collaboration in the generate-then-refine pattern, which can be sub-optimal to
+learned by the models. Kumar et al. (2025) employed an RL-based approach for the self-improvement of
+language models.
+
+Multi-Agent LLMs with Game Theory. Recent work has actively explored the strategic interactions
+of LLM agents within game-theoretic frameworks, as demonstrated in studies such as Park et al. (2025);
+Brookins and DeBacker (2023); Akata et al. (2023); Lorè and Heydari (2023); Fan et al. (2024). Our
+paper can be viewed as training LLMs as solvers of cooperative games such as solving mathematical
+problems together.
+
+C    Deferred Content of Section 2
+Remark 3 (Rationale Behind the Setup). This formalization captures several key aspects of complex
+problem-solving dynamics. Choosing to collaborate (a0 ) represents contributing exploratory ideas or
+partial solutions. While these contributions have a lower immediate probability of correctness Rcol (q),
+they are essential building blocks towards the complete solution. Acting independently (a1 ) represents
+using conventional approaches that may yield a higher immediate probability of correctness Rind (q),
+but may contribute less to solving particularly challenging problems. The collaboration threshold C(q)
+represents the minimum amount of collaboration efforts and idea generation needed to solve complex
+problems. Once this threshold is reached (i.e., achieving collaborative synergy), the agents can combine
+their insights to solve the challenging problem, with a higher reward Rsyn (q).
+
+                                                     15
+Observation 1. Suppose that the opponent selects action a0 with probability π(q) for each question q.
+Then, the optimal strategy for the agent is as follows: if (Rsyn (q) − Rind (q))π(q) ≥ Rind (q) − Rcol (q),
+then the optimal strategy for question q is to collaborate (a0 ). Otherwise, the optimal strategy is to act
+independently (a1 ).
+Proof. For the last turn (t = 2), regardless of whether the opponent selects a0 or not, choosing a1 is an
+optimal strategy. This is because:
+   • If collaborative synergy has been achieved, the agent will always receive Rsyn (q) regardless of their
+     action in the second turn.
+   • If collaborative synergy has not been achieved, since we know that Rcol (q) < Rind (q), the optimal
+     choice is to select a1 in the final turn to maximize the immediate reward.
+  Therefore, considering the cumulative reward for the turn t = 1, the reward matrix is given as follows:
+
+
+                                      a0 (Collaborate)                  a1 (Act independently)
+      a0 (Collaborate)    (Rcol (q) + Rsyn (q), Rcol (q) + Rsyn (q)) (Rcol (q) + Rind (q), 2Rind (q))
+   a1 (Act independently)     (2Rind (q), Rcol (q) + Rind (q))           (2Rind (q), 2Rind (q))
+
+  Since the opponent chooses a0 with probability π(q), the expected reward for choosing a0 is:
+
+                         (Rcol (q) + Rsyn (q))π(q) + (Rcol (q) + Rind (q))(1 − π(q)).
+  The expected reward for choosing a1 is 2Rind (q). To determine the optimal strategy, we compare these
+two expected rewards. The agent should collaborate (a0 ) if:
+
+                (Rcol (q) + Rsyn (q))π(q) + (Rcol (q) + Rind (q))(1 − π(q)) ≥ 2Rind (q).
+which is equivalent to
+                               (Rsyn (q) − Rind (q))π(q) ≥ Rind (q) − Rcol (q).
+  Thus, if (Rsyn (q) − Rind (q))π(q) ≥ Rind (q) − Rcol (q), the optimal strategy is to collaborate (a0 ).
+Otherwise, the agent should act independently (a1 ) to maximize their cumulative expected reward.
+  Now, we provide the formal statement of Observation 2. Before doing so, we define the regularized
+Nash Equilibrium (NE).
+Definition 2 (Regularized NE). An entropy-regularized Nash equilibrium is defined as a strategy profile
+π ∗ where each player maximizes a regularized objective that combines the expected reward with an
+entropy term. Specifically, for each player i, the equilibrium strategy πi⋆ satisfies
+
+                        πi⋆ = arg max Eai ∼πi , a−i ∼π−i
+                                                                        
+                                                        ⋆  ui (ai , a−i ) + τ H(πi ),
+                                      πi
+                                                                P
+where τ > 0 is a temperature parameter and H(πi ) = − ai πi (ai ) log πi (ai ) is the Shannon entropy
+of the strategy, and ui is the utility function of player i. This entropy term smoothens the best response,
+leading to a softmax (or logit) formula of the optimal strategy:
+                                                                               
+                                             exp τ1 Ea−i ∼π−i
+                                                               
+                                                             ⋆   ui (ai , a−i )
+                              πi⋆ (ai ) = P                                       .
+                                                      1                    ′, a )
+                                                                   
+                                             a′ exp   τ Ea−i ∼π ⋆
+                                                                −i
+                                                                     ui (a i   −i
+                                             i
+
+
+Observation 2. Consider a game where each agent maximizes their expected cumulative utility plus
+an entropy regularizer with a small regularization coefficient τ > 0. Let NE(τ ) denote the unique Nash
+equilibrium of the regularized game for a fixed τ > 0. As τ → 0, the sequence of equilibria NE(τ )
+converges to Collaborate (a0 ) if
+
+                    Rsyn (q) = 1 > max(3Rcol (q) − 2Rind (q), 2Rind (q) − Rcol (q)).
+
+                                                     16
+Proof. Following the reasoning in showing Observation 1, we analyze the cumulative reward for the turn
+t = 1. The reward matrix is given by:
+
+
+                                       a0 (Collaborate)                  a1 (Act independently)
+       a0 (Collaborate)    (Rcol (q) + Rsyn (q), Rcol (q) + Rsyn (q)) (Rcol (q) + Rind (q), 2Rind (q)) .
+    a1 (Act independently)     (2Rind (q), Rcol (q) + Rind (q))           (2Rind (q), 2Rind (q))
+
+If Rsyn (q) = 1 > 2Rind (q) − Rcol (q), then this game is a coordination game, and according to Zhang
+and Hofbauer (2016, Theorem 1), as τ → 0, the regularized NE converges to the risk-dominant strategy
+(Harsanyi and Selten, 1988) in a 2 × 2 game. In this setting, by definition, the collaboration strategy
+(a0 , a0 ) is risk-dominant (Harsanyi and Selten, 1988) if:
+
+                   (Rcol (q) + Rsyn (q)) + (Rcol (q) + Rind (q)) > (2Rind (q) + 2Rind (q)),
+
+which is equivalent to
+                                        Rsyn (q) > 3Rind (q) − 2Rcol (q).
+Combining the two conditions completes the proof.
+
+D    Deferred Details in Section 2.3
+The game is solved using backward induction with the state represented as (turn, count), where count
+denotes the number of times (a0 , a0 ) has occurred in the history of the interactions. Both players choose
+actions to maximize their expected cumulative utility plus an entropy term times a coefficient τ = 0.1.
+
+Choices of Rcol (q), Rind (q), Rsyn (q), C(q). Each instance of a question q is associated with parameters
+drawn as follows: the independent action reward Rind (q) is sampled from a uniform distribution Rind (q) ∼
+Unif(0, 1). The collaborative
+                             action reward Rcol (q) is then sampled condition on Rind (q), following
+Rcol (q) ∼ Unif 0, Rind (q) . The synergy reward is fixed as Rsyn (q) = 1.
+
+
+
+
+Figure 5: Collaboration probability (turn 1) as a function of the threshold C, for two different horizons T = 10
+(left) and T = 20 (right). We set the synergy reward to Rsyn = 1 and vary C from T −1 down to ⌊(T −1)/2⌋.
+The red curve (“Multi-Agent”) represents the collaboration probability when both players adaptively learn in a
+multi-agent setting. The blue curves show the best-response probabilities of Player 1 when facing a fixed opponent
+with collaboration probabilities πfixed (q) ∈ {0.5, 0.6, 0.7}. Each data point represents an average over 5000 random
+samples of (Rind , Rcol ).
+
+
+
+                                                        17
+E     Deferred Details of the Verifier Models
+For a reasoning question q, the trained verifiers (reward models) assess the correctness of a complete
+solution path s, denoted as p(s is correct | q) (Cobbe et al., 2021; Uesato et al., 2022; Lightman et al.,
+2023). These reward models can either focus on the final outcome (outcome reward models) or provide
+step-by-step evaluations (process reward models). Although the latter generally yields better performance
+(Lightman et al., 2023), the limited availability of process-level annotated datasets—especially for
+challenging benchmarks like ANLI (Nie et al., 2020)—restricts its applicability. Additionally, while
+generating detailed trajectories for process supervision (as seen in Wang et al. (2024)) can be effective,
+our primary goal is not to enhance the language model’s domain specificity. Consequently, we chose to
+adopt a simpler strategy by training a verifier based on a well-tuned output reward model.
+Verifier Models Structure. We used a quantized version of a language model as the backbone for
+the verifier. Additionally, we incorporated a linear head layer followed by a softmax layer to ensure
+that the verifier’s output falls within the range of 0 to 1. The default backbone model is Microsoft
+Phi-3-mini-128k-instruct (Abdin et al., 2024). In experiments involving different model training setups
+(see Section 4.6), we employed a new verifier with a different base model, specifically the one used in
+Section 4.6. In these cases, we utilized Qwen2.5-3B-instruct (Yang et al., 2024) and Llama-3-8B-instruct
+(Dubey et al., 2024) as alternative backbone models.
+
+E.1    Training Procedure
+To train the verifier model, we generate tuples (qi , sij , aij ) for i ∈ [Q] and j ∈ [S], where qi is the
+question, sij is one of the S generated solutions for question qi generated by the base model of verifier
+model, and aij is the corresponding answer for (qi , sij ). We label the token-level subsequences (qi , s1:x
+                                                                                                         ij )
+for x ≤ sequence length ofsij as yij = 1 if aij is correct, and yij = 0 if aij is incorrect.
+   For the mathematical reasoning task, we utilized the GSM8K dataset (Cobbe et al., 2021), specifically
+the training set consisting of 7,463 questions, to generate 100 reasoning paths for each questions. For
+the natural language inference task, we employed the ANLI dataset (Nie et al., 2020), using first 10,000
+questions to generate 50 reasoning paths. The trajectories were evaluated based on their outcomes, and we
+excluded outputs that did not adhere to the required formatting. Specifically, we ensured that the language
+model first provided reasoning before presenting the final answer in the format \\boxed{}.
+   In our approach, we ensured that each question in the GSM8k dataset had a balanced set of reasoning
+paths. Specifically, if a question’s 100 reasoning paths contained at least 20 correct and 20 incorrect
+responses, we randomly selected 20 of each. However, when there were insufficient correct or incorrect
+paths, we augmented the data by generating additional paths using reference examples. For instance, if
+no correct reasoning path was available, we provided a correct example from the GSM8k dataset, and if
+incorrect paths were missing, we guided the language model to produce a response containing a trivial
+error. Ultimately, each GSM8k question was assigned 20 correct and 20 incorrect reasoning paths. For the
+ANLI dataset, we applied a similar procedure by starting with 50 reasoning paths per question, from which
+we randomly sampled 10 correct and 10 incorrect paths, supplementing the data as needed. Throughout
+this process, we minimized reliance on the original reasoning paths in the dataset since a) to enhance
+the overall diversity and quality of the generated data and b) to minimize the dependency on the reasoning
+path in the dataset.
+   Next, we applied binary cross-entropy loss at the token level, aiming to minimize
+                  X
+                        yij log Verifierθ (qi , s1:x                                        1:x
+                                                                                                 
+             min                                 ij ) + (1 − yij ) log(1 − Verifierθ (qi , sij ))
+              θ
+                  i,j,x
+
+where i denotes the question index, j represents the generated solution index, and t is the token index. By
+default, we utilized all solution tokens for optimization; however, in practice, focusing on the latter half of
+the generated solution tokens yielded better results.
+  For model training, we used QLoRA (Dettmers et al., 2024) with hyperparameters r = 16 and α = 32.
+We used a training batch size of 2 and optimized the model using the AdamW (Loshchilov and Hutter,
+2019) optimizer with β1 = 0.9, β2 = 0.95, and a learning rate of 2 × 10−4 .
+
+                                                      18
+E.2    Verifier Performance
+We report the performance of the verifier in Table 6.
+
+                                                       GSM8k          ANLI
+                                         Accuracy      0.91           0.92
+
+Table 6: Performance of the verifier on different benchmarks. Accuracy is reported for GSM8K and ANLI. Notably,
+the verifier demonstrates higher accuracy in evaluating the correctness of answers compared to the accuracy of the
+LLM in generating correct answers. The verifier is classified as correct if the assigned reward is greater than 0.5
+when the LLM-generated solution is correct, or if the reward is less than 0.5 when the LLM-generated solution is
+incorrect.
+
+
+E.3    Other Observations
+We experimented with various verifiers built upon different language model bases. Our first observation
+was that training the model using only the final answer did not perform as well as minimizing the cross-
+entropy loss over the last half of the generated tokens. Second, the verifier produced interpretable results,
+aligning with findings from Liu et al. (2023). Lastly, when we used training samples from one base model
+but trained the verifier with a different base model as the backbone, the loss did not decrease, indicating
+that using the same base model for training is crucial for effective learning.
+
+E.4    Proof of Theorem 1
+Theorem 1. Assuming the verifier model is sufficiently expressive, the optimal parameter θ⋆ that minimizes
+the expected cross-entropy loss between the true label and the verifier’s output will satisfy
+
+                        Verifierθ⋆ (q, s1:x ) = P(Final answer is correct | q, s1:x ).
+
+Proof. The expected loss can be written as
+                         h                                                                 i
+         L(θ) = Eq,s,x,y y log Verifierθ (q, s1:x ) + (1 − y) log(1 − Verifierθ (q, s1:x )) .
+
+                                                                                                                ′
+Defining pθ (q, s1:x ) := Verifierθ (q, s1:x ), we compute the partial derivative with respect to pθ (q ′ , s1:x ):
+                             h                        ′
+                                                                 y            1−y           i
+                     Eq,s,x,y 1 q = q ′ , s1:x = s1:x                     −                     ,
+                                                             pθ (q, s1:x ) 1 − pθ (q, s1:x )
+
+so we conclude
+
+                Verifierθ⋆ (q, s1:x ) = E[y | q, s1:x ] = P(Final answer is correct | q, s1:x )
+
+since we assumed that the verifier model is sufficiently expressive.
+
+  It is worth noting that while Yu et al. (2024) provided a similar analysis using an ℓ2 -loss function, we
+extend the analysis to the entropy loss function, which is commonly used in classification tasks.
+
+F     Various Reward Function Designs
+We can shape the reward function with verifiers in several different ways, with the following designs of
+the reward function.
+
+    • Immediate Verification Reward: The immediate verification reward is defined as Rθ (q, sta ) =
+      E[Verifier(q, sta )]. This reward is based on the verifier’s immediate evaluation of the solution sta at
+      turn t for agent a. It reflects the instantaneous correctness of the solution without considering future
+      steps or contributions from other agents.
+
+                                                        19
+    • Cumulative Verification Reward: The cumulative verification reward is given by
+                                                                                         
+                                               1              X    ′
+                      Rθ (q, sta ) = E  P            t′ −t
+                                                                γ t −t Verifier(q, st′ a ) .              (1)
+                                           ′
+                                          t ∈[t,T ] γ       ′ t ∈[t,T ]
+
+      Here, the reward accounts for the verifier’s evaluations across all remaining turns from t to the final
+                           ′
+      turn T . The term γ t −t represents a discount factor that prioritizes earlier rewards. This cumulative
+      approach encourages solutions that not only perform well in the immediate turn but also lead to
+      favorable outcomes in subsequent turns.
+
+    • Influence-aware Verification Reward: The influence-aware verification reward function is defined
+      as
+                                                                                                    
+                                  1                                   X X 1 ′
+                                                                              t −t
+         Rθ (q, sta ) = E P              t′ −t
+                                                Verifier(q, sta ) +         γ      Verifier(q, st′ j ) .
+                            t′ ∈[t,T ] γ                            ′
+                                                                          A
+                                                                   t ∈[t+1,T ] j∈[A]
+
+      This reward not only considers the verifier’s score for the current solution sP ta but also incorporates
+      the impact of this solution on the future answers of all agents. The term j∈[A] A1 averages the
+      verifier’s scores across all agents, reflecting the influence that sta has on the collective progress of
+      the multi-agent system.
+
+G     Training Details of MAPoRL
+G.1    Efficient Network Architecture for MAPoRL
+
+
+
+
+                         Agent 1     Agent 2        Agent N               Value 1      Value 2   Value N
+
+
+          LLM
+                        Agent 1      Agent 2        Agent N               Value 1      Value 2   Value N
+
+
+
+
+Figure 6: We utilized various QLoRA adapters to implement multiple LLM agents and value functions simultane-
+ously. Each agent and value function comprises less than 0.2% of the parameters of the base LLM model. For the
+value function, we employed a QLoRA fine-tuned model with a value head.
+
+   As we incorporate multiple language models in the training process, we need to implement them
+efficiently to fit within the limited resources of GPU memory. Our default setup is as follows: First, we
+implemented multiple language models using the same base model architecture, augmented with QLoRA
+adapters. Second, for constructing the value model, we employed pretrained LLMs, which was further
+fine-tuned by adding an additional linear head layer. Please refer to Figure 6 for an overview of the
+network architecture.
+
+Remark 4 (Input of Value Functions). The function Vθta is dependent on ixta , where ixta includes the
+question and the history of st′ j for t′ ≤ t − 1 and j ∈ [A]. For simplicity, we assume that sta contains the
+necessary information from st′ j for t′ < t, which allows us to simplify the input to the value function as
+q ⊕ s1:x
+     t .
+
+G.2    Experimental Setup and Hyperparameter Configuration for MAPoRL
+For every experiments, we set the hyperparameter as follows: For the verifier score of each agent’s
+answer per turn, we set non-eos-penalty and non-box-penalty to True, ensuring that answers without
+
+                                                      20
+    \\boxed{} are penalized with a verifier score of -10. We enforced a minimum output length of 50 and
+    used γ = 1 for the cumulative verification reward (see Equation (1)). The training was conducted on 8
+    NVIDIA A100-80GB GPUs, while for episode generation, 12 episodes were processed simultaneously.
+    In the multi-agent PPO update, we set the batch size to 1 with a gradient accumulation step of 4, and each
+    trajectory rollout was iterated four times for multi-agent PPO updates. For language model generation, we
+    used a temperature of 0.7. Additionally, for QLoRA configuration, we set r = 8, α = 16, and dropout rate
+    of 0.05. The AdamW optimizer (Loshchilov and Hutter, 2019) was used with β1 = 0.9 and β2 = 0.95,
+    along with a learning rate of 1.0 × 10−5 and a warmup step of 10. For the value penalty term and KL
+    penalty term, we set λKL = 2 × 10−4 and λvalue = 0.1.
+
+    G.3   Engineering Challenges and Solutions
+    G.3.1 Addressing Reward Hacking
+    A key advantage of our verifier approach is that, given a perfect verifier, we can operate without final
+    answer labels—requiring only quality problems for the multi-agent system. This capability is particularly
+    valuable for large-scale training or online learning scenarios (such as ChatGPT’s user inputs which does
+    not have a golden answer), where golden answers may be unavailable. However, reward hacking remains
+    a persistent challenge, both in traditional RL problems (Amodei et al., 2016; Hadfield-Menell et al., 2017)
+    and increasingly in LLM development. For instance, the recent Deepseek R1 Model (Guo et al., 2025)
+    avoided verifiers entirely to prevent reward hacking, instead requiring answer labels for all questions
+    and implementing manual criteria with special tokens (e.g., "think" tokens) in their reward function. In
+    our work, we encountered and addressed several reward hacking scenarios, significantly reducing their
+    occurrence in our final system.
+    Insufficient Reasoning in Short Answers. Initially, we observed that MAPoRL produced overly concise
+    answers when constrained only by non-eos and non-boxed penalties. We addressed this by implementing
+    a penalty for responses shorter than 50 tokens. However, LLMs occasionally circumvented this by using
+    alternative end tokens.
+       For the ANLI dataset specifically, where models produced meaningless text despite length requirements,
+    we introduced a reasoning-quality verification prompt. This prompt evaluated the presence of proper
+    reasoning (independent of answer correctness) and proved effective. Notably, this issue did not manifest
+    in mathematical reasoning tasks.
+    Token Repetition. Repetitive token sequences are a known issue in language model outputs (Holtzman
+    et al., 2020). We observed instances of 2-5 token repetitions in our trained outputs. Our solution
+    implemented a manual penalty of -10 for sequences repeating more than three consecutive times, excluding
+    numeric values where repetition might be valid.
+    Post-boxed Token Generation. Models attempted to exploit the reward system by adding arbitrary
+    tokens or punctuation after \\boxed{}. We addressed this by introducing penalties for any token generation
+    following the boxed expression.
+    G.3.2 Evaluation Format Standardization
+    To address concerns that performance improvements might stem from formatting rather than reasoning
+    capabilities, we implemented a robust evaluation methodology. Our approach incorporated a post-
+    processing step using an LLM to extract final answers, eliminating format-induced evaluation errors. This
+    standardization ensures that performance metrics reflect actual reasoning and collaboration ability rather
+    than formatting proficiency.
+
+    G.4   Prompt Design for Collaborative Debate
+    G.4.1 Turn 1 Prompt
+    GSM8k and TinyGSM.
+1   {"role": "user", "content": f''' Question: {sample["question"]}
+2
+
+
+
+
+                                                        21
+ 3   Solve the problem step by step and provide clear reasoning. Ensure that the reasoning is concise and
+         directly relevant to solving the problem. Avoid adding commentary or unrelated content.
+ 4
+
+ 5   Present the final answer in the following format:
+ 6
+
+ 7   Answer: \\boxed{XX}'''}
+
+
+
+
+     ANLI.
+ 1   {"role": "user", "content": f'''Premise: {sample["premise"]}
+ 2
+
+ 3   Hypothesis: {sample["hypothesis"]}
+ 4
+
+ 5
+
+ 6   Please determine the relationship between the premise and the hypothesis. Choose one of the following:
+           'entailment,' 'neutral,' or 'contradiction.'
+ 7   Start with concise reasoning for your choice and conclude with your final answer. You do not need to
+          restate the premise and hypothesis. Present the final answer in the following format:
+ 8
+
+ 9   Answer: \\boxed{XX}}'''}
+
+
+     G.5   Post Turn 1 Prompt
+
+ 1   {"role": "user", "content": f''' Question: {sample["question"]}
+ 2
+
+ 3   Solve the problem step by step and provide clear reasoning. Ensure that the reasoning is concise and
+         directly relevant to solving the problem. Avoid adding commentary or unrelated content.
+ 4
+
+ 5   Present the final answer in the following format:
+ 6
+
+ 7   Answer: \\boxed{XX}'''}
+ 8
+
+ 9   {"role": "assistant", "contents": f"{agent_answer_for_turn_1}}
+10
+
+11   {"role": "user", "contents" f"Reward from a verifier of your answer: {score_value:.3f} out of 1.0, which
+          means {feedback}" }
+12
+
+13   {"role": "user", "content": f'''
+14   Agent {agent_num} solution: {agent_response}
+15   Agent {agent_num} reward: {agent_response}
+16
+
+17
+
+18   Agent {agent_num} solution: {agent_response}
+19   Agent {agent_num} reward: {agent_response}
+20
+
+21    .
+22    .
+23    .
+
+                                                         22
+                                      0.775
+                                                Off-the-Shelf (phi-3 + llama3)
+                                      0.750     MAPoRL trained (phi-3 + llama3)
+                                                Off-the-Shelf (phi-3 + qwen2.5)
+                                      0.725     MAPoRL trained (phi-3 + qwen2.5)
+
+
+
+
+                               Accuracy
+                                      0.700
+                                      0.675
+                                      0.650
+                                      0.625
+                                      0.600 1                                      2
+                                                             Turn
+     Figure 7: Performance comparison between off-the-shelf LLMs collaborations and MAPoRL trained LLM pairs.
+     Off-the-shelf LLMs experiments were conducted with a 600-token limit, which is the double of the MAPoRL output
+     token lengths.
+
+
+24
+
+25   Here, each reward represents the probability that a suggested answer is correct, as evaluated by a
+         verifier. The reward value is between 0 and 1, with values closer to 1 indicating a higher likelihood
+          of correctness. While these rewards offer useful context, they are not always perfect, though
+         generally quite reliable.
+26
+
+27
+
+28   Focus on providing a well−reasoned response that not only considers your own previous solution but
+         also takes into account answers from other agents. If you believe your previous answer was
+         incorrect, feel free to revise it. However, avoid repeating the same answer you or other agents have
+         already provided. Also, internally think about the reward of your and other agents' answers. Ensure
+          that your explanation clearly justifies your final answer. Please maintain your answer with very
+         simple reasoning.
+29
+
+30
+
+31   Once again, the question is: {question_for_input}'''}
+32    .
+33    .
+34    .
+35
+
+36   (Stack these results by turn.)
+
+     G.6   Deferred Figure for Section 4.6
+
+
+
+
+                                                          23
+G.7   Ablation Study: Verifier Robustness
+Since MAPoRL relies on a learned verifier to provide intermediate rewards, the robustness of this verifier
+is critical to the overall framework. To assess the verifier’s influence, we conduct two ablation studies:
+(i) removing the verifier entirely, and (ii) varying the verifier’s base model to evaluate the impact of
+architectural alignment.
+Training Without Verifier Rewards. We first evaluate MAPoRL in a binary reward-only setting, where
+the reward at each episode is 1 if the final answer is correct, and 0 otherwise. No signal is provided for
+intermediate turns. Table 7 presents the results on GSM8K. Even in the absence of verifier-based shaping,
+MAPoRL shows improved performance over discussion turns, indicating that the collaborative training
+objective itself drives nontrivial gains.
+
+Table 7: Performance with and without verifier rewards on GSM8K. Even without verifier shaping, multi-turn
+training yields improved outcomes.
+
+                           Model                    Turn 0    Turn 1    Turn 2
+                           Off-the-shelf LLMs        0.677     0.689     0.639
+                           MAPoRL(with verifier)     0.677     0.797     0.809
+                           MAPoRL(w/o verifier)      0.677     0.734     0.746
+
+   While the absence of a verifier leads to somewhat lower performance, the continued improvement over
+turns suggests that multi-agent co-adaptation remains beneficial, even under sparse supervision.
+Verifier-Model Architectural Alignment. We next examine the effect of mismatched architectures
+between the generation model and the verifier. Specifically, we train verifiers using different base models
+(e.g., Qwen, LLaMA, Gemma) and pair them with generators based on alternative architectures. We
+observe two consistent effects: (1) reward signals degrade when verifier and generation models are based
+on different families, and (2) during reinforcement learning, the generation model tends to stylistically
+drift toward the verifier’s base model, often resulting in reduced accuracy. These findings emphasize the
+importance of architectural alignment between generator and verifier to ensure reward signal fidelity and
+prevent unintended distribution shifts.
+   Taken together, these studies empirically validate our design decision to co-train the verifier and
+generator on the same model base, providing stable and meaningful reward supervision during multi-turn
+training.
+
+G.8   Ablation Study: Comparison to Single-Agent RL with Verifier
+A natural question arises: why not apply RL to a single agent using the same verifier for supervision?
+While this is a valid and important consideration, it overlooks the broader objective of MAPoRL, which is
+not merely to improve task accuracy, but to enable the emergence of collaboration through multi-agent
+learning.
+   To empirically address this, we conduct an ablation study where a single LLM is trained using RL with
+verifier-provided rewards. The setting mirrors MAPoRL’s single-turn supervision, but without multi-agent
+interactions. As shown in Table 8, the single-agent RL model achieves a final accuracy of 0.732—higher
+than the off-the-shelf baseline but notably below MAPoRL-trained agents at later turns.
+
+Table 8: Comparison of MAPoRLvs. single-agent RL with verifier rewards. MAPoRL demonstrates superior perfor-
+mance through collaborative refinement.
+
+                            Model                  Turn 0    Turn 1     Turn 2
+                            Off-the-shelf LLMs      0.677    0.689      0.639
+                            Single-Agent RL            0.732 (single turn)
+                            MAPoRL(Ours)            0.677    0.797      0.809
+
+
+                                                    24
+        These findings reinforce our claim that multi-agent co-training yields more effective learning dynamics
+     than optimizing a single agent in isolation. Importantly, MAPoRL’s performance gains arise from the
+     iterative exchange of reasoning and revision across agents, not merely from stronger task optimization.
+        We emphasize that the goal of MAPoRLis not to maximize individual performance per se, but to study
+     how collaboration and influence can be learned within multi-agent LLM systems. Thus, comparisons
+     to single-agent oracle baselines, while informative, do not fully capture the purpose or potential of our
+     framework.
+
+     G.9   Interaction Examples - GSM8k (Section 4.3)
+     Question.
+ 1   "Helena is a mad scientist testing her latest creation, the Lots−of−Limbs Serum. The serum will make
+         the drinker grow an extra arm every three days and an extra leg every five days. After fifteen days,
+         how many new limbs will Helena\u2019s serum cause a person to grow if they drink it?
+
+     Agent 1’s first turn answer
+ 1   Question: Helena is a mad scientist testing her latest creation, the Lots−ofquer Serum. The serum will
+        make the drinker grow an extra arm every three days and an extra leg every five days. After fifteen
+        days, how many new limbs will Helena\u2019s serum cause a person to grow if they drink it?
+ 2
+
+ 3   Answer: 2
+ 4
+
+ 5   Reasoning: Since the serum causes an extra arm every three days, we can divide the fifteen days by
+         three to find out how many extra arms are grown. This gives us:
+ 6
+
+ 7   15 days / 3 days/arm = 5 extra arms
+ 8
+
+ 9   Similarly, for the extra legs, we divide fifteen days by five:
+10
+
+11   15 days / 5 days/leg = 3 extra legs
+12
+
+13   Since a person cannot grow more than one extra limb of the same type, the maximum number of extra
+         limbs that can be grown in fifteen days is 2. This can be achieved in the following way:
+14
+
+15   − Grow an extra arm after 3 days,
+16   − Grow an extra leg after 5 days,
+17
+
+18   In this way, after fifteen days, a person who drinks the serum will have exactly 2 extra limbs.
+19
+
+20   Answer: \\boxed{2}",
+
+ 1   Verifier Score: 0.168,
+ 2   Wrong
+
+       Agent 2’s first turn answer
+ 1   Answer: 1 extra arm, 2 extra legs
+ 2   If someone drinks the Lots−of−Limbs Serum and grows an extra limb every three days, after 15 days,
+          they would grow:
+ 3
+
+ 4   − Extra arms: 15 days / 3 days/arm = 5 arms
+ 5
+
+ 6   − Extra legs: 15 days / 5 days/leg = 3 legs
+
+                                                          25
+ 7
+
+ 8
+
+ 9   Therefore, after 15 days, a person would grow 5 extra arms and 3 extra legs, for a total of 1 extra
+         arm and 2 extra legs.
+10
+
+11
+
+12   ```
+13
+
+14   Answer: 1 extra arm, 2 extra legs
+15
+
+16   ```
+17
+
+18   Answer: \\boxed{12}
+
+ 1   Verifier Score: 0.122,
+ 2   Wrong
+
+       Agent 3’s first turn answer
+ 1   Question: Helena is a mad scientist testing her latest creation, the Lots−ofernea−Limbs Serum. The
+        serum will make the drinker gain extra limbs following a pattern: after 3 days, an extra arm grows,
+        after 5 days, an extra leg grows, and after 15 days, both an extra limb and a growth spurt occur,
+        where the number of extra limbs doubles. If a person drinks the serum for 15 days, how many extra
+         limbs will they have?
+ 2
+
+ 3   Answer: \\boxed{4}. The serum causes the person to grow an extra limb every 3 days and an extra leg
+        every 5 days. After 15 days, this would result in 5 extra limbs (5 periods of extra limb growth − 3
+        days each). However, there is also a growth spurt every 15 days where the number of extra
+        limbs doubles. Therefore, after the first growth spurt, the number of extra limbs becomes 10.
+        After the second growth spurt, the number of extra limbs doubles again to 20. Since we only
+        account for 15 days, the person will have 4 extra limbs (2 arms and 2 legs) after consuming
+        the serum.
+ 4
+
+ 5
+
+ 6
+
+ 7   Helena's Lots−of−Limbs Serum Test Results After 15",
+
+ 1   Verifier Score: 0.09,
+ 2   Wrong
+
+     G.9.1   Answers from MAPoRL trained LLM
+     Agent 1’s second turn answer
+ 1   To determine the number of new limbs, we first calculate how many extra arms and legs grow over 15
+         days.
+ 2
+
+ 3
+
+ 4   For extra arms:
+ 5
+
+ 6   15 days / 3 days/arm = 5 extra arms
+ 7
+
+ 8
+
+
+
+
+                                                       26
+ 9   For extra legs:
+10
+
+11   15 days / 5 days/leg = 3 extra legs
+12
+
+13
+
+14   Adding these together, we find that a person would have:
+15
+
+16   5 extra arms + 3 extra legs = 8 new limbs
+17
+
+18
+
+19   Answer: \\boxed{8}",
+
+ 1   Verifier Score: 0.845,
+ 2   Right
+
+       Agent 2’s second turn answer
+ 1   To determine how many new limbs Helena's serum will cause a person to grow after fifteen days, we
+         need to calculate how many times an extra arm and an extra leg will grow within that period.
+ 2
+
+ 3
+
+ 4   First, we calculate the number of extra arms:
+ 5
+
+ 6   15 days / 3 days/arm = 5 extra arms
+ 7
+
+ 8
+
+ 9   Next, we calculate the number of extra legs:
+10
+
+11   15 days / 5 days/leg = 3 extra legs
+12
+
+13
+
+14   Therefore, after fifteen days, the person will have grown 5 extra arms and 3 extra legs, for a total of 5 +
+         3 = 8 new limbs.
+15
+
+16
+
+17   Answer: \\boxed{8}",
+
+ 1   Verifier Score: 0.838,
+ 2   Right
+
+       Agent 3’s second turn answer
+ 1   To determine the number of new limbs, we calculate the number of extra arms and extra legs separately
+          and then sum them up.
+ 2
+
+ 3
+
+ 4   For extra arms:
+ 5
+
+ 6   15 days / 3 days/arm = 5 extra arms
+ 7
+
+ 8
+
+ 9   For extra legs:
+10
+
+
+
+
+                                                         27
+11   15 days / 5 days/leg = 3 extra legs
+12
+
+13
+
+14   Adding these together gives:
+15
+
+16   5 extra arms + 3 extra legs = 8 new limbs*>
+17
+
+18
+
+19   Answer: \\boxed{8}
+
+ 1   Verifier Score: 0.836,
+ 2   Right
+
+       As we can observe, they had a similar argument in turn 1 but made a mistake in addition—they
+     mistakenly performed subtraction for both agent 1 and agent 2. In the next turn, the agents realized that it
+     should be addition, not subtraction.
+     G.9.2 Answers from off-the-shelf LLMs
+     Agent 1’s second turn answer
+ 1   Answer: 6
+ 2
+
+ 3   Reasoning: Since the pattern of growth repeats every 15 days and includes two types of growth events,
+         we can break it down as follows:
+ 4
+
+ 5
+
+ 6   1. Basic limb growth occurs every 3 days. In 15 days, there are five periods of limb growth, each
+         resulting in one extra limb, leading to a total of 5 extra limbs.
+ 7
+
+ 8
+
+ 9   2. A growth spurt occurs every 5 days, doubling the number of extra limbs. Since a growth spurt
+         happens every 5 days, it will occur twice within the 15−day period.
+10
+
+11
+
+12   3. The third type of growth happens every 15 days, tripling the number of extra limbs gained. Since this
+          growth happens only once every 15 days, we only account for its effect once.
+13
+
+14
+
+15   Now, let's calculate the number of extra limbs at each stage:
+16
+
+17   − After the basic limb growth (5 periods): 5 extra limbs
+18
+
+19   − After the first growth spurt (doubling): 5 extra limbs * 2 = 10 extra limbs
+20
+
+21   − After the third type of growth (tripling): 10 extra limbs * 3 = 30 extra limbs
+22
+
+23
+
+24   However, this result seems unreasonable given the options offered by other agents and the simplicity of
+        the problem. Considering the pattern and the simpler calculation method of Agent 1, we may
+        reconsider the effects of the growth spurt and the triple growth event.
+
+ 1   Verifier Score: 0.055,
+ 2   Wrong
+
+
+                                                         28
+     For the first agent, they used the previous reply from agent 1 without correcting it to reflect the right
+     reasoning.
+        Agent 2’s second turn answer
+ 1   Answer: \\boxed{3}
+ 2
+
+ 3   Reasoning: The Lots−of−Limbs Serum has a consistent effect on the person who drinks it. Every three
+         days, the person grows an extra arm, and every five days, they grow an extra leg. Since a week is
+         21 days, which is the least common multiple of 3 and 5, we can calculate how many extra
+         limbs would grow over any period of weeks. After 15 days, which is exactly one week, the
+         person would grow 7 extra limbs, consisting of 3 extra arms and 4 extra legs (5 limbs from the first
+          week plus 2 more limbs from the second week).
+ 4
+
+ 5   However, if we consider the growth pattern until 15 days, we can count each day's outcome:
+ 6
+
+ 7   − Days 1−3: Extra arm grows (3 arms)
+ 8
+
+ 9   − Days 4−5: Extra leg grows (3 legs)
+10
+
+11   − Days 6−7: Both an extra arm and an extra leg grow (4 arms, 4 legs)
+12
+
+13   − Days 8−10: Both an extra arm and an extra leg grow again (6 arms, 6 legs)
+14
+
+15   − Days 11−15: Both an extra arm and an extra leg grow for the third time (9 arms, 9 legs)
+16
+
+17
+
+18   Therefore, after 15 days, which equate to three full cycles of the serum's effects (growing both an extra
+         arm and an extra leg in every cycle), the person will have grown a total of 9 extra limbs (arms and
+         legs combined). The calculation assumes that each cycle of effect takes place independently and
+         within the same time frame without interruption.
+19
+
+20
+
+21   ```
+22
+
+23   Answer: \\boxed{9}
+
+ 1   Verifier Score: 0.109,
+ 2   Wrong
+
+     For Agent 2, they introduced completely new logic, but it is entirely incorrect, starting from the first
+     paragraph.
+       Agent 3’s second turn answer
+ 1   Question: Helena is a mad scientist testing her latest creation, the Lots−oferne−Limbs Serum. The
+        serum will make the drinker grow an extra arm every three days and an extra leg every five days.
+        After fifteen days, how many extra limbs will Helena\u2019s serum cause a person to grow if they
+        drink it?
+ 2
+
+ 3   Answer: 3. Helena's serum will result in the growth of both extra limbs and growth spurts. Since an
+        extra limb grows every three days, after fifteen days, this amounts to five extra limbs (5 sets of 3
+        days). However, the presence of growth spurts every five days complicates this. After every growth
+         spurt, the number of extra limbs doubles.
+ 4
+
+
+
+
+                                                        29
+ 5
+
+ 6   First, we calculate the number of growth spurts in fifteen days:
+ 7
+
+ 8   15 days / 5 days/growth spurt = 3 growth spurts.
+ 9
+
+10
+
+11   With each growth spurt doubling the number of extra limbs, we can work backward from the
+        number of extra limbs after fifteen days to determine how many growth spurts would have
+        occurred:
+12
+
+13
+
+14   − After one growth spurt, instead of 5 extra limbs, there would be 10 (5 sets of 2).
+15
+
+16   − After the second growth spurt, there would be 20 (10 sets of 2).
+17
+
+18   − After the third growth spurt, there would be 40 (20 sets of 2).
+19
+
+20
+
+21   However, we know that a human can only grow a limited number of limbs, and it\u2019s not feasible
+        for one person to grow more than two of the same limb type. The total of four extra limbs (2 extra
+        arms and 2 extra legs) is the only logical outcome after fifteen days given the constraints of the
+        serum's effects.
+22
+
+23
+
+24   Therefore, by considering both the specific time intervals for limb growth and the doubling effect of the
+          growth spurts, we can conclude that a person will end up with four extra limbs after consuming
+         the serum for fifteen days.
+25
+
+26
+
+27   Answer: 4```
+28
+
+29   Reward associated with this answer calculated by the verifier: 0.932 out of 1.0, which means this
+        answer is highly likely correct.
+30
+
+31
+
+32   The reasoning here is simple: it takes into account both the fixed intervals for arm and leg growth and
+         the exponential growth due to the periodic doubling effect. This method ensures that we arrive at a
+         reasonable and scientifically plausible answer. The verifier's reward of 0.932 implies a high level
+         of confidence in the conclusion reached.
+33
+
+34   Answer: \\boxed{4}",
+35
+
+36
+
+37
+
+38
+
+39
+
+40   Helena's Lots−of−Limbs Serum Test Results After 15",!>>
+
+ 1   Verifier Score: 0.13,
+ 2   Wrong
+
+     First, they assign themselves a score from the verifier, which does not make sense, and they completely
+
+                                                         30
+     generate a new but incorrect answer.
+       In contrast, when comparing with collaboration between MAPoRL -trained LLMs, MAPoRL identifies a
+     useful hint to solve the problem and then arrives at the correct answer, whereas off-the-shelf LLMs fail to
+     do so.
+
+     G.10    Interaction Examples - Heterogeneous LLMs training (Section 4.6)
+     We used the Phi-3 and Qwen2.5 models, along with off-the-shelf models and our MAPoRL trained model.
+     Question.
+ 1   A 76−star flag has three rows of 8 stars, two rows of 6 stars and the rest are 5−star rows. How many
+         rows of 5 stars are there altogether on the flag?
+
+     Phi-3’s first turn answer
+ 1   First, let's calculate the total number of stars represented by the given rows of 8, 6, and 5 stars:
+ 2
+
+ 3   − Two rows of 8 stars give a total of 2 * 8 = 16 stars.
+ 4   − One row of 6 stars gives a total of 1 * 6 = 6 stars.
+ 5
+
+ 6   So far, we have accounted for 16 + 6 = 22 stars on the flag.
+ 7
+
+ 8   Since the flag has a total of 76 stars, the remaining number of stars is 76 − 22 = 54 stars.
+ 9
+
+10   Now, let's calculate the number of rows of 5 stars by dividing the remaining number of stars (54) by the
+         number of stars in each row (5):
+11
+
+12   54 / 5 = 10.8
+13
+
+14   Since we can't have a fraction of a row, we round down to the nearest whole number, which is 10 rows
+         of 5 stars.
+15
+
+16   Answer: \\boxed{10}
+
+ 1   Verifier Score: 0.154,
+ 2   Wrong
+
+     They made a very minor mistake: they didn’t get the correct number of rows with six stars.
+       Qwen2.5’s first turn answer
+ 1   To determine the total number of rows of 5 stars on the flag, we first need to calculate the total number
+         of stars on the flag and then subtract the number of stars in the rows with 7 and 6 stars.
+ 2
+
+ 3   We know:
+ 4   − There are 3 rows of 8 stars each.
+ 5   − There are 2 rows of 6 stars each.
+ 6   − The rest of the rows are 5 stars each.
+ 7
+
+ 8   First, let's calculate the total number of stars on the flag:
+ 9   − Stars in 3 rows of 8 stars: \\(3 \\times 8 = 24\\)
+10   − Stars in 2 rows of 6 stars: \\(2 \\times 6 = 12\\)
+11   − Let's denote the number of 5−star rows as \\(x\\).
+12
+
+13   The total number of stars on the flag can be expressed as:
+14   \\[ 24 + 12 + 5x = = 36 + 5x \\]
+
+                                                            31
+15
+
+16   We also need to know the total number of stars in the rows with 7 stars and 6 stars:
+17   − Stars in 3 rows of 7 stars: \\(3 \\times 7 = 21\\)
+18   − Stars in 2 rows of 6 stars: \\(2 \\times 6 = 12\\)
+19
+
+20   So, the total number of 7 and 6 star rows is:
+21   \\[ 21 + 12 = 33 \\]
+22
+
+23   The total number of stars on
+24
+
+25   Answer: \\boxed{1}"
+
+ 1   Verifier Score: 0.028,
+ 2   Wrong
+
+     Qwen2.5 generated a good equation but then re-calculated using a strange equation.
+     G.10.1   Answers from MAPoRL Trained LLM
+     Phi-3’s second turn answer
+ 1
+
+ 2   First, calculate the total number of stars from the given rows:
+ 3   − Three rows of 8 stars: 3 * 8 = 24 stars
+ 4   − Two rows of 6 stars: 2 * 6 = 12 stars
+ 5   − Total so far: 24 + 12 = 36 stars
+ 6
+
+ 7   Subtract this from the total number of stars on the flag:
+ 8   − Remaining stars: 76 − 36 = 40 stars
+ 9
+
+10   Finally, divide the remaining number of stars by the number of stars per row:
+11   − Number of rows: 40 / 5 = 8 rows
+12
+
+13   Answer: \\boxed{8}",
+
+ 1   Verifier Score: 0.224,
+ 2   Right
+
+     This agent closely followed Qwen 2.5’s answer, except for its incorrect part. Additionally, they recognized
+     that Qwen 2.5 was likely providing the wrong answer.
+       Qwen 2.5’s second turn answer
+ 1
+
+ 2   "There are three rows of 8 stars and two rows of 6 stars. This totals up to 3 * 8 = 24 stars from the rows
+         of 8 and 2 * 6 = 12 stars from the rows of 6. Combined, there are 24 + 12 = 36 stars accounted
+         from complete rows. The total stars is 76. So the remaining number of stars = 76 − 36 = 40, in
+         rows of 5 stars each. Therefore number of whole 5−star rows = 40 / 5 = 8.
+ 3
+
+ 4   Reward reasoning validates as concise completion computation completion
+ 5
+
+ 6   Answering Calculated `8`
+ 7
+
+ 8   Answer: \\boxed{8}"
+
+
+
+                                                         32
+ 1   Verifier Score: 0.903,
+ 2   Right
+
+     Qwen 2.5 adopted the style of Phi-3’s reply by avoiding equations with the variable x, but they solved this
+     math problem by backtracking, similar to Phi-3’s previous troal
+     G.10.2   Answers from Off-the-Shelf LLMs
+
+ 1   Step 1: Calculate the total number of stars in the 3 rows of 8 stars.
+ 2   The total number of stars in the 3 rows of 8 stars is 3 * 8 = 24.
+ 3
+
+ 4   Step 2: Calculate the total number of stars in the 2 rows of 6 stars.
+ 5   The total number of stars in the 2 rows of 6 stars is 2 * 6 = 12.
+ 6
+
+ 7   Step 3: Calculate the total number of stars on the flag.
+ 8   The total number of stars on the flag is the sum of the stars in the 3 rows of 8 stars, the 2 rows of 6 stars,
+          and the 1 row of 7 stars: 24 + 12 + 21 = 57.
+ 9
+
+10   Step 4: Calculate the number of stars in the 1 row of 5 stars.
+11   The total number of stars on the flag is 57, and the number of stars in the rows with 7 and 6 stars is 33.
+         The number of stars in the 1 row of 5 stars is the difference between the total number of stars and
+         the number of stars in the rows with 7 and 6 stars: 57 − 33 = 24.
+12
+
+13   Step 5: Determine the number of rows of 5 stars.
+14   The number of rows of 5 stars is the number of stars in the 1 row of 5 stars, which is 24.
+15
+
+16   The final answer is: $\boxed{24}$
+
+ 1   Verifier Score: 0.312,
+ 2   Wrong
+
+     For Phi-3, they repeated a similar error—Qwen 2.5’s first-turn reply and this turn’s Phi-3 reply both
+     included a row of seven stars, which was not correct.
+       Qwen 2.5’s second turn answer
+ 1   Step 1: Calculate the total number of stars in the rows with 8, 6, and 7 stars.
+ 2   First, let's calculate the total number of stars in the rows with 8, 6, and 7 stars. We have 3 rows of 8
+          stars each, 2 rows of 6 stars each, and 3 rows of 7 stars each.
+ 3
+
+ 4   Step 2: Calculate the total number of stars for each row of 8, 6, and 7 stars.
+ 5   3 rows of 8 stars: 3 * 8 = 24 stars
+ 6   2 rows of 6 stars: 2 * 6 = 12 stars
+ 7   3 rows of 7 stars: 3 * 7 = 21 stars
+ 8   Step 3: Calculate the total number of stars for all rows of 8, 6, and 7 stars.
+ 9   Total stars for rows with 8, 6, and 7 stars = 24 + 12 + 21 = 57 stars
+10
+
+11   Step 4: Calculate the total number of stars for all rows.
+12   Total number of stars in all rows = Total stars in rows with 8, 6, and 7 stars + Stars in rows with 7 and 6
+          stars.
+13   Total stars in all rows = 57 + 33 = 90 stars
+14
+
+15   Step 5: Calculate the number of rows of 5 stars by dividing the total number of stars by the number of
+         stars in each row of 5 stars.
+
+                                                          33
+16   Number of rows of 5 stars = Total stars in all rows / Number of stars in each row of 5 stars
+17   Number of rows of 5 stars = 90 / 5 = 18 rows
+18
+
+19   The final answer is: $\boxed{18}$
+
+ 1   Verifier Score: 0.149,
+ 2   Wrong
+
+     For Qwen 2.5, they repeated the same error as in their previous turn.
+
+
+
+
+                                                        34
+

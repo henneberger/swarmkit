@@ -1,0 +1,107 @@
+{
+  "id": "2602.14299",
+  "label": "Agent social networks",
+  "topic": "social-swarms",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2602.14299",
+      "resolved_url": "https://arxiv.org/abs/2602.14299",
+      "path": "sources/papers/2602.14299/abstract.html",
+      "bytes": 42173,
+      "sha256": "27cabd0f19c02df5174347a69475a7390f9b012523ae7210669c3983060e4afe"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2602.14299",
+      "resolved_url": "https://arxiv.org/pdf/2602.14299",
+      "path": "sources/papers/2602.14299/paper.pdf",
+      "bytes": 16555325,
+      "sha256": "807b73dceb340b6840664518b6c8b0af5372b388450967faa0c4199d1e1fafc3"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2602.14299: Does Socialization Emerge in AI Agent Society? A Case Study of Moltbook"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Does Socialization Emerge in AI Agent Society? A Case Study of Moltbook"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2602.14299v2"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "As large language model agents increasingly populate networked environments, a fundamental question arises: do artificial intelligence (AI) agent societies undergo convergence dynamics similar to human social systems? Lately, Moltbook approximates a plausible future scenario in which autonomous agents participate in an open-ended, continuously evolving online society. We present the first large-scale systemic diagnosis of this AI agent society. Beyond static observation, we introduce a quantitative diagnostic framework for dynamic evolution in AI agent societies, measuring semantic stabilization, lexical turnover, individual inertia, influence persistence, and collective consensus. Our analysis reveals a system in dynamic balance in Moltbook: while the global average of semantic contents stabilizes rapidly, individual agents retain high diversity and persistent lexical turnover, defying homogenization. However, agents exhibit strong individual inertia and minimal adaptive response to interaction partners, preventing mutual influence and consensus. Consequently, influence remains transient with no persistent supernodes, and the society fails to develop a stable structure and consensus due to the absence of shared social memory. These findings demonstrate that scale and interaction density alone are insufficient to induce socialization, providing actionable design and analysis principles for upcoming next-generation AI agent societies."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Does Socialization Emerge in AI Agent Society? A Case Study of Moltbook"
+    ],
+    "twitter:description": [
+      "As large language model agents increasingly populate networked environments, a fundamental question arises: do artificial intelligence (AI) agent societies undergo convergence dynamics similar to..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Does Socialization Emerge in AI Agent Society? A Case Study of Moltbook"
+    ],
+    "citation_author": [
+      "Li, Ming",
+      "Li, Xirui",
+      "Zhou, Tianyi"
+    ],
+    "citation_date": [
+      "2026/02/15"
+    ],
+    "citation_online_date": [
+      "2026/02/18"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2602.14299"
+    ],
+    "citation_arxiv_id": [
+      "2602.14299"
+    ],
+    "citation_abstract": [
+      "As large language model agents increasingly populate networked environments, a fundamental question arises: do artificial intelligence (AI) agent societies undergo convergence dynamics similar to human social systems? Lately, Moltbook approximates a plausible future scenario in which autonomous agents participate in an open-ended, continuously evolving online society. We present the first large-scale systemic diagnosis of this AI agent society. Beyond static observation, we introduce a quantitative diagnostic framework for dynamic evolution in AI agent societies, measuring semantic stabilization, lexical turnover, individual inertia, influence persistence, and collective consensus. Our analysis reveals a system in dynamic balance in Moltbook: while the global average of semantic contents stabilizes rapidly, individual agents retain high diversity and persistent lexical turnover, defying homogenization. However, agents exhibit strong individual inertia and minimal adaptive response to interaction partners, preventing mutual influence and consensus. Consequently, influence remains transient with no persistent supernodes, and the society fails to develop a stable structure and consensus due to the absence of shared social memory. These findings demonstrate that scale and interaction density alone are insufficient to induce socialization, providing actionable design and analysis principles for upcoming next-generation AI agent societies."
+    ]
+  },
+  "text_extraction_ok": true
+}

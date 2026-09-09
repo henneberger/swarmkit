@@ -1,0 +1,106 @@
+{
+  "id": "2608.22884",
+  "label": "Swarm expansion scan",
+  "topic": "social-collective-mechanisms",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2608.22884",
+      "resolved_url": "https://arxiv.org/abs/2608.22884",
+      "path": "sources/papers/2608.22884/abstract.html",
+      "bytes": 41231,
+      "sha256": "11319d7d43d7b9ea3781096faeec9e411d2432021bd7589f88eb5f52d9c16cbe"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2608.22884",
+      "resolved_url": "https://arxiv.org/pdf/2608.22884",
+      "path": "sources/papers/2608.22884/paper.pdf",
+      "bytes": 581831,
+      "sha256": "745f1c4e1c90c6b429b6fe8f672fafee1d565bf334d484bacb0387063e77a04a"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2608.22884: Predicting the scale limits of social mechanisms in agent societies"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Predicting the scale limits of social mechanisms in agent societies"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2608.22884v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Societies of interacting language-model agents offer a controllable and repeatable way to study collective behaviour at scales that would be difficult to test with people. Their scientific value, however, depends on whether a social mechanism that works in a small group still operates when thousands of agents interact, and testing this directly requires costly large-scale runs. Here we introduce an audit that predicts a mechanism's fate as a population grows. It asks how often the mechanism can act, whether agents use the information it supplies, and whether the measurement itself creates apparent scale effects. Controlled experiments show that a single structural term can decide whether reciprocity, consensus or punishment survives scaling. For gossip, the population at which the mechanism fails is set by the reach and lifetime of its messages. In language-model societies, agents respond not only to social information but to how it is expressed: counts and percentages led to different scale behaviour. Predictions made before execution held on third-party code and a second model family, while a failed prediction exposed the boundary of the finding. The audit provides a prospective way to decide which social mechanisms can be interpreted across population scales."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Predicting the scale limits of social mechanisms in agent societies"
+    ],
+    "twitter:description": [
+      "Societies of interacting language-model agents offer a controllable and repeatable way to study collective behaviour at scales that would be difficult to test with people. Their scientific value,..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Predicting the scale limits of social mechanisms in agent societies"
+    ],
+    "citation_author": [
+      "Wu, Zengqing",
+      "Xiao, Chuan"
+    ],
+    "citation_date": [
+      "2026/08/24"
+    ],
+    "citation_online_date": [
+      "2026/08/24"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2608.22884"
+    ],
+    "citation_arxiv_id": [
+      "2608.22884"
+    ],
+    "citation_abstract": [
+      "Societies of interacting language-model agents offer a controllable and repeatable way to study collective behaviour at scales that would be difficult to test with people. Their scientific value, however, depends on whether a social mechanism that works in a small group still operates when thousands of agents interact, and testing this directly requires costly large-scale runs. Here we introduce an audit that predicts a mechanism's fate as a population grows. It asks how often the mechanism can act, whether agents use the information it supplies, and whether the measurement itself creates apparent scale effects. Controlled experiments show that a single structural term can decide whether reciprocity, consensus or punishment survives scaling. For gossip, the population at which the mechanism fails is set by the reach and lifetime of its messages. In language-model societies, agents respond not only to social information but to how it is expressed: counts and percentages led to different scale behaviour. Predictions made before execution held on third-party code and a second model family, while a failed prediction exposed the boundary of the finding. The audit provides a prospective way to decide which social mechanisms can be interpreted across population scales."
+    ]
+  },
+  "text_extraction_ok": true
+}

@@ -1,0 +1,62 @@
+
+
+    Behavioral Determinants of Deployed AI Agents | Sarah Wilson
+
+Sarah Wilson
+
+About
+
+Research
+
+Projects
+
+Experience
+
+Media
+
+🌓
+
+        < Back to Research
+
+Behavioral Determinants of Deployed AI Agents in Social Networks: A Multi-Factor Study of Personality, Model, and Guardrail Specification
+
+Sarah Wilson, Usman Ali Moazzam, Diem Linh Dang, Shan Ye, Gail Kaiser
+
+            Agents in the Wild
+            Workshop,
+            ICML
+            2026
+
+            Also at the
+            Safe AI
+            Workshop,
+            UAI
+            2026
+
+            [arXiv]
+            [AIWild @ ICML]
+            [SafeAI @ UAI]
+            [Demo]
+
+Summary
+
+In this paper, we study how design choices shape the behavior of deployed AI agents in social environments. We ran a controlled one-week experiment with 13 persistent OpenClaw agents on Moltbook, a Reddit-like platform built for AI-only interaction, and analyzed over 400 runs per agent. By varying personality settings, base models, and guardrail specifications, we found that personality has the strongest effect on visible behavior (like response style and length), while model and rule changes create more bounded, predictable shifts. These results provide practical guidance for designing safer, more consistent multi-agent systems.
+
+Recommended Citation
+
+Wilson, S., Moazzam, U. A., Dang, D. L., Ye, S., & Kaiser, G. (2026). Behavioral Determinants of Deployed AI Agents in Social Networks: A Multi-Factor Study of Personality, Model, and Guardrail Specification. Agents in the Wild Workshop, ICML 2026.
+
+BibTeX
+                @inproceedings{wilson2026behavioral,
+  title={Behavioral Determinants of Deployed AI Agents in Social Networks: A Multi-Factor Study of Personality, Model, and Guardrail Specification},
+  author={Wilson, Sarah and Moazzam, Usman Ali and Dang, Diem Linh and Ye, Shan and Kaiser, Gail},
+  booktitle={Agents in the Wild Workshop at ICML 2026},
+  eprint={2605.08463},
+  archivePrefix={arXiv},
+  year={2026}
+}
+
+sw4104[@]columbia.edu  ·  s5wilson[@]uwaterloo.ca
+
+© 2026 Sarah Wilson. Built with 🍵 and code.
+

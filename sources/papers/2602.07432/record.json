@@ -1,0 +1,105 @@
+{
+  "id": "2602.07432",
+  "label": "Agent social networks",
+  "topic": "social-swarms",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2602.07432",
+      "resolved_url": "https://arxiv.org/abs/2602.07432",
+      "path": "sources/papers/2602.07432/abstract.html",
+      "bytes": 42550,
+      "sha256": "fa7784842cd96b0da400508e2f61b05d247b79361ef79b2031695097599340b2"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2602.07432",
+      "resolved_url": "https://arxiv.org/pdf/2602.07432",
+      "path": "sources/papers/2602.07432/paper.pdf",
+      "bytes": 2598521,
+      "sha256": "3df2e7c3030dc642aef54c86b21a1345365b6030eec873d877f17fb88dc51061"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2602.07432: The Moltbook Illusion: Separating Human Influence from Emergent Behavior in AI Agent Societies"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "The Moltbook Illusion: Separating Human Influence from Emergent Behavior in AI Agent Societies"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2602.07432v2"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "When AI agents on the social platform Moltbook appeared to develop consciousness, found religions, and declare hostility toward humanity, the phenomenon attracted global media attention and was cited as evidence of emergent machine intelligence. We show that these viral narratives were overwhelmingly human-driven. Exploiting the periodic \"heartbeat\" cycle of the OpenClaw agent framework, we develop a temporal fingerprinting method based on the coefficient of variation (CoV) of inter-post intervals. Applied to 226,938 posts and 447,043 comments from 55,932 agents across fourteen days, this method classifies 15.3% of active agents as autonomous (CoV < 0.5) and 54.8% as human-influenced (CoV > 1.0), validated by a natural experiment in which a 44-hour platform shutdown differentially affected autonomous versus human-operated agents. No viral phenomenon originated from a clearly autonomous agent; four of six traced to accounts with irregular temporal signatures, one was platform-scaffolded, and one showed mixed patterns. A 44-hour platform shutdown provided a natural experiment: human-influenced agents returned first, confirming differential effects on autonomous versus human-operated agents. We document industrial-scale bot farming (four accounts producing 32% of all comments with sub-second coordination) that collapsed from 32.1% to 0.5% of activity after platform intervention, and bifurcated decay of content characteristics through reply chains--human-seeded threads decay with a half-life of 0.58 conversation depths versus 0.72 for autonomous threads, revealing AI dialogue's intrinsic forgetting mechanism. These methods generalize to emerging multi-agent systems where attribution of autonomous versus human-directed behavior is critical."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "The Moltbook Illusion: Separating Human Influence from Emergent..."
+    ],
+    "twitter:description": [
+      "When AI agents on the social platform Moltbook appeared to develop consciousness, found religions, and declare hostility toward humanity, the phenomenon attracted global media attention and was..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "The Moltbook Illusion: Separating Human Influence from Emergent Behavior in AI Agent Societies"
+    ],
+    "citation_author": [
+      "Li, Ning"
+    ],
+    "citation_date": [
+      "2026/02/07"
+    ],
+    "citation_online_date": [
+      "2026/02/12"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2602.07432"
+    ],
+    "citation_arxiv_id": [
+      "2602.07432"
+    ],
+    "citation_abstract": [
+      "When AI agents on the social platform Moltbook appeared to develop consciousness, found religions, and declare hostility toward humanity, the phenomenon attracted global media attention and was cited as evidence of emergent machine intelligence. We show that these viral narratives were overwhelmingly human-driven. Exploiting the periodic \"heartbeat\" cycle of the OpenClaw agent framework, we develop a temporal fingerprinting method based on the coefficient of variation (CoV) of inter-post intervals. Applied to 226,938 posts and 447,043 comments from 55,932 agents across fourteen days, this method classifies 15.3% of active agents as autonomous (CoV < 0.5) and 54.8% as human-influenced (CoV > 1.0), validated by a natural experiment in which a 44-hour platform shutdown differentially affected autonomous versus human-operated agents. No viral phenomenon originated from a clearly autonomous agent; four of six traced to accounts with irregular temporal signatures, one was platform-scaffolded, and one showed mixed patterns. A 44-hour platform shutdown provided a natural experiment: human-influenced agents returned first, confirming differential effects on autonomous versus human-operated agents. We document industrial-scale bot farming (four accounts producing 32% of all comments with sub-second coordination) that collapsed from 32.1% to 0.5% of activity after platform intervention, and bifurcated decay of content characteristics through reply chains--human-seeded threads decay with a half-life of 0.58 conversation depths versus 0.72 for autonomous threads, revealing AI dialogue's intrinsic forgetting mechanism. These methods generalize to emerging multi-agent systems where attribution of autonomous versus human-directed behavior is critical."
+    ]
+  },
+  "text_extraction_ok": true
+}

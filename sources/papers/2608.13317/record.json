@@ -1,0 +1,106 @@
+{
+  "id": "2608.13317",
+  "label": "StateBridge",
+  "topic": "latent",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2608.13317",
+      "path": "sources/papers/2608.13317/abstract.html",
+      "cached": true,
+      "sha256": "6ceeaa0ca1e58483f57b812a202518c1d9faa80807c36637d3c2c708b425b0e2"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2608.13317",
+      "path": "sources/papers/2608.13317/paper.pdf",
+      "cached": true,
+      "sha256": "46b755fd60d20714608aaeb5da65271490f3cdac1f97eb67834368387bb2f9ae"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2608.13317: StateBridge: Training-free Hidden-state Alignment for Latent Communication in LLM Multi-Agent Systems"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "StateBridge: Training-free Hidden-state Alignment for Latent Communication in LLM Multi-Agent Systems"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2608.13317v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Large language model based multi-agent systems usually communicate in text, i.e., using discrete tokens. However, text introduces a discrete bottleneck. Converting the sender's continuous hidden states into discrete tokens discards information that token identities alone cannot capture. Recent work proposes latent communication as an alternative, where agents transmit hidden representations directly without converting them to text. However, existing latent methods either inject working memory layer by layer across the transformers, or require trained projectors that limit portability. We propose StateBridge, a training-free latent communication approach that aligns the sender's final-layer hidden states to the receiver's input space via a closed-form orthogonal transformation. Lightweight norm calibration and vocabulary anchoring ensure compatibility with the pretrained input distribution. The aligned states are prepended to the input of the receiver agent as a continuous prefix. We evaluate StateBridge on math reasoning, code generation, and question answering with four models from two families. StateBridge achieves the best or tied-best score on 22 out of 26 model-task pairs, consistently outperforming the strongest baseline."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "StateBridge: Training-free Hidden-state Alignment for Latent..."
+    ],
+    "twitter:description": [
+      "Large language model based multi-agent systems usually communicate in text, i.e., using discrete tokens. However, text introduces a discrete bottleneck. Converting the sender's continuous hidden..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "StateBridge: Training-free Hidden-state Alignment for Latent Communication in LLM Multi-Agent Systems"
+    ],
+    "citation_author": [
+      "Peng, Yanwen",
+      "Zhang, Delvin Ce",
+      "Wang, Xi",
+      "Aletras, Nikolaos"
+    ],
+    "citation_date": [
+      "2026/08/13"
+    ],
+    "citation_online_date": [
+      "2026/08/13"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2608.13317"
+    ],
+    "citation_arxiv_id": [
+      "2608.13317"
+    ],
+    "citation_abstract": [
+      "Large language model based multi-agent systems usually communicate in text, i.e., using discrete tokens. However, text introduces a discrete bottleneck. Converting the sender's continuous hidden states into discrete tokens discards information that token identities alone cannot capture. Recent work proposes latent communication as an alternative, where agents transmit hidden representations directly without converting them to text. However, existing latent methods either inject working memory layer by layer across the transformers, or require trained projectors that limit portability. We propose StateBridge, a training-free latent communication approach that aligns the sender's final-layer hidden states to the receiver's input space via a closed-form orthogonal transformation. Lightweight norm calibration and vocabulary anchoring ensure compatibility with the pretrained input distribution. The aligned states are prepended to the input of the receiver agent as a continuous prefix. We evaluate StateBridge on math reasoning, code generation, and question answering with four models from two families. StateBridge achieves the best or tied-best score on 22 out of 26 model-task pairs, consistently outperforming the strongest baseline."
+    ]
+  },
+  "text_extraction_ok": true
+}

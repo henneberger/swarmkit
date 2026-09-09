@@ -1,0 +1,220 @@
+
+
+  [2603.21344] The AI Scientific Community: Agentic Virtual Lab Swarms
+
+    Skip to main content
+
+      Search
+
+    Submit
+    Donate
+
+      Log in
+
+      Search arXiv
+
+      Press Enter to search · Advanced search
+
+Computer Science > Artificial Intelligence
+
+      arXiv:2603.21344 (cs)
+
+  [Submitted on 22 Mar 2026]
+
+Title:The AI Scientific Community: Agentic Virtual Lab Swarms
+
+Authors:Ulisses Braga-Neto            
+View a PDF of the paper titled The AI Scientific Community: Agentic Virtual Lab Swarms, by Ulisses Braga-Neto
+    View PDF
+    HTML (experimental)
+
+            Abstract:In this short note we propose using agentic swarms of virtual labs as a model of an AI Science Community. In this paradigm, each particle in the swarm represents a complete virtual laboratory instance, enabling collective scientific exploration that mirrors real-world research communities. The framework leverages the inherent properties of swarm intelligence - decentralized coordination, balanced exploration-exploitation trade-offs, and emergent collective behavior - to simulate the behavior of a scientific community and potentially accelerate scientific discovery. We discuss architectural considerations, inter-laboratory communication and influence mechanisms including citation-analogous voting systems, fitness function design for quantifying scientific success, anticipated emergent behaviors, mechanisms for preventing lab dominance and preserving diversity, and computational efficiency strategies to enable large swarms exhibiting complex emergent behavior analogous to real-world scientific communities. A working instance of the AI Science Community is currently under development.
+
+          Subjects:
+
+            Artificial Intelligence (cs.AI)
+
+          Cite as:
+          arXiv:2603.21344 [cs.AI]
+
+          (or 
+              arXiv:2603.21344v1 [cs.AI] for this version)
+
+                        https://doi.org/10.48550/arXiv.2603.21344
+
+                Focus to learn more
+
+                                  arXiv-issued DOI via DataCite
+
+Submission history From: Ulisses Braga-Neto [view email]      
+    [v1]
+        Sun, 22 Mar 2026 18:04:23 UTC (1,701 KB)
+
+      Full-text links:
+
+Access Paper:
+
+View a PDF of the paper titled The AI Scientific Community: Agentic Virtual Lab Swarms, by Ulisses Braga-Neto
+View PDF
+HTML (experimental)
+TeX Source
+
+          view license
+
+Current browse context:
+
+cs.AI
+
+      < prev
+
+      |      
+      next >
+
+    new
+     | 
+    recent
+     | 2026-03
+
+    Change to browse by:
+
+        cs
+
+References & Citations
+
+NASA ADS
+Google Scholar
+
+Semantic Scholar
+
+    export BibTeX citation
+    Loading...
+
+BibTeX formatted citation
+            ×
+
+            loading...
+
+            Data provided by: 
+
+Bookmark
+
+    Bibliographic Tools
+
+Bibliographic and Citation Tools
+
+              Bibliographic Explorer Toggle
+
+            Bibliographic Explorer (What is the Explorer?)
+
+              Connected Papers Toggle
+
+            Connected Papers (What is Connected Papers?)
+
+              Litmaps Toggle
+
+            Litmaps (What is Litmaps?)
+
+              scite.ai Toggle
+
+            scite Smart Citations (What are Smart Citations?)
+
+    Code, Data, Media
+
+Code, Data and Media Associated with this Article
+
+              alphaXiv Toggle
+
+            alphaXiv (What is alphaXiv?)
+
+              Links to Code Toggle
+
+            CatalyzeX Code Finder for Papers (What is CatalyzeX?)
+
+              DagsHub Toggle
+
+            DagsHub (What is DagsHub?)
+
+              GotitPub Toggle
+
+            Gotit.pub (What is GotitPub?)
+
+              Huggingface Toggle
+
+            Hugging Face (What is Huggingface?)
+
+              ScienceCast Toggle
+
+            ScienceCast (What is ScienceCast?)
+
+      Demos
+
+Demos
+
+                Replicate Toggle
+
+              Replicate (What is Replicate?)
+
+                Spaces Toggle
+
+              Hugging Face Spaces (What is Spaces?)
+
+                Spaces Toggle
+
+              TXYZ.AI (What is TXYZ.AI?)
+
+      Related Papers
+
+Recommenders and Search Tools
+
+                Link to Influence Flower
+
+              Influence Flower (What are Influence Flowers?)
+
+                Core recommender toggle
+
+              CORE Recommender (What is CORE?)
+
+Author
+
+Venue
+
+Institution
+
+Topic
+
+        About arXivLabs
+
+arXivLabs: experimental projects with community collaborators
+
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+
+Have an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.
+
+    Which authors of this paper are endorsers? |
+    Disable MathJax (What is MathJax?)
+
+        We gratefully acknowledge support from
+        our major funders,
+        member institutions, ,
+        and all contributors.
+
+        About
+        ·
+        Help
+        ·
+        Contact
+        ·
+        Subscribe
+        ·
+        Copyright
+        ·
+        Privacy
+        ·
+        Accessibility
+        ·
+        Operational Status (opens in new tab)
+
+Major funding support from
+

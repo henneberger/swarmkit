@@ -1,0 +1,16 @@
+From: nia.brook@example.invalid
+To: oren.flint@example.invalid
+Date: Fri, 02 Feb 2001 11:00:00 +0000
+Subject: Quartz importer: QZ-7 write receipt
+Message-ID: <07_import_receipt@inquiry-demo.example.invalid>
+X-Synthetic-Fixture: true
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+SYNTHETIC INQUIRY FIXTURE =E2=80=94 entirely fictional, not an Enron email.
+
+The job receipt says Quartz wrote destination QZ-7 at 02:03 today from vendor=
+ revision 16. Lot Kestrel had a missing quantity in that input and was writte=
+n as zero. The receipt does not tell me whether anyone corrected QZ-7 yesterd=
+ay. This is a recorded write, not just a scheduled job.

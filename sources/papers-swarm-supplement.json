@@ -1,0 +1,433 @@
+[
+  {
+    "id": "2506.15672",
+    "label": "SwarmAgentic",
+    "topic": "swarm-evolution",
+    "artifacts": [
+      {
+        "url": "https://arxiv.org/abs/2506.15672",
+        "resolved_url": "https://arxiv.org/abs/2506.15672",
+        "path": "sources/papers/2506.15672/abstract.html",
+        "bytes": 43032,
+        "sha256": "952db1c248b1f2bc9f549497fa287b8a3812f64a8f1861dd0a4018abd6f84687"
+      },
+      {
+        "url": "https://arxiv.org/pdf/2506.15672",
+        "resolved_url": "https://arxiv.org/pdf/2506.15672",
+        "path": "sources/papers/2506.15672/paper.pdf",
+        "bytes": 1275508,
+        "sha256": "36176bc6ba8b7d8780bec5a8be4f3a6f48607e1d28a64e5cf731019379861f7d"
+      }
+    ],
+    "metadata": {
+      "viewport": [
+        "width=device-width, initial-scale=1"
+      ],
+      "msapplication-TileColor": [
+        "#da532c"
+      ],
+      "theme-color": [
+        "#ffffff"
+      ],
+      "description": [
+        "Abstract page for arXiv paper 2506.15672: SwarmAgentic: Towards Fully Automated Agentic System Generation via Swarm Intelligence"
+      ],
+      "og:type": [
+        "website"
+      ],
+      "og:site_name": [
+        "arXiv.org"
+      ],
+      "og:title": [
+        "SwarmAgentic: Towards Fully Automated Agentic System Generation via Swarm Intelligence"
+      ],
+      "og:url": [
+        "https://arxiv.org/abs/2506.15672v1"
+      ],
+      "og:image": [
+        "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+      ],
+      "og:image:secure_url": [
+        "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+      ],
+      "og:image:width": [
+        "1200"
+      ],
+      "og:image:height": [
+        "700"
+      ],
+      "og:image:alt": [
+        "arXiv logo"
+      ],
+      "og:description": [
+        "The rapid progress of Large Language Models has advanced agentic systems in decision-making, coordination, and task execution. Yet, existing agentic system generation frameworks lack full autonomy, missing from-scratch agent generation, self-optimizing agent functionality, and collaboration, limiting adaptability and scalability. We propose SwarmAgentic, a framework for fully automated agentic system generation that constructs agentic systems from scratch and jointly optimizes agent functionality and collaboration as interdependent components through language-driven exploration. To enable efficient search over system-level structures, SwarmAgentic maintains a population of candidate systems and evolves them via feedback-guided updates, drawing inspiration from Particle Swarm Optimization (PSO). We evaluate our method on six real-world, open-ended, and exploratory tasks involving high-level planning, system-level coordination, and creative reasoning. Given only a task description and an objective function, SwarmAgentic outperforms all baselines, achieving a +261.8% relative improvement over ADAS on the TravelPlanner benchmark, highlighting the effectiveness of full automation in structurally unconstrained tasks. This framework marks a significant step toward scalable and autonomous agentic system design, bridging swarm intelligence with fully automated system multi-agent generation. Our code is publicly released at https://yaoz720.github.io/SwarmAgentic/."
+      ],
+      "twitter:site": [
+        "@arxiv"
+      ],
+      "twitter:card": [
+        "summary"
+      ],
+      "twitter:title": [
+        "SwarmAgentic: Towards Fully Automated Agentic System Generation..."
+      ],
+      "twitter:description": [
+        "The rapid progress of Large Language Models has advanced agentic systems in decision-making, coordination, and task execution. Yet, existing agentic system generation frameworks lack full..."
+      ],
+      "twitter:image": [
+        "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+      ],
+      "twitter:image:alt": [
+        "arXiv logo"
+      ],
+      "citation_title": [
+        "SwarmAgentic: Towards Fully Automated Agentic System Generation via Swarm Intelligence"
+      ],
+      "citation_author": [
+        "Zhang, Yao",
+        "Lin, Chenyang",
+        "Tang, Shijie",
+        "Chen, Haokun",
+        "Zhou, Shijie",
+        "Ma, Yunpu",
+        "Tresp, Volker"
+      ],
+      "citation_date": [
+        "2025/06/18"
+      ],
+      "citation_online_date": [
+        "2025/06/18"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2506.15672"
+      ],
+      "citation_arxiv_id": [
+        "2506.15672"
+      ],
+      "citation_abstract": [
+        "The rapid progress of Large Language Models has advanced agentic systems in decision-making, coordination, and task execution. Yet, existing agentic system generation frameworks lack full autonomy, missing from-scratch agent generation, self-optimizing agent functionality, and collaboration, limiting adaptability and scalability. We propose SwarmAgentic, a framework for fully automated agentic system generation that constructs agentic systems from scratch and jointly optimizes agent functionality and collaboration as interdependent components through language-driven exploration. To enable efficient search over system-level structures, SwarmAgentic maintains a population of candidate systems and evolves them via feedback-guided updates, drawing inspiration from Particle Swarm Optimization (PSO). We evaluate our method on six real-world, open-ended, and exploratory tasks involving high-level planning, system-level coordination, and creative reasoning. Given only a task description and an objective function, SwarmAgentic outperforms all baselines, achieving a +261.8% relative improvement over ADAS on the TravelPlanner benchmark, highlighting the effectiveness of full automation in structurally unconstrained tasks. This framework marks a significant step toward scalable and autonomous agentic system design, bridging swarm intelligence with fully automated system multi-agent generation. Our code is publicly released at https://yaoz720.github.io/SwarmAgentic/."
+      ]
+    },
+    "text_extraction_ok": true
+  },
+  {
+    "id": "2505.04364",
+    "label": "SwarmBench",
+    "topic": "swarm-evaluation",
+    "artifacts": [
+      {
+        "url": "https://arxiv.org/abs/2505.04364",
+        "resolved_url": "https://arxiv.org/abs/2505.04364",
+        "path": "sources/papers/2505.04364/abstract.html",
+        "bytes": 43626,
+        "sha256": "4dbaf228b4a12d31ce74ef27ff6f6180a12c33014f7f3ce2e09e91cbcc23a7ee"
+      },
+      {
+        "url": "https://arxiv.org/pdf/2505.04364",
+        "resolved_url": "https://arxiv.org/pdf/2505.04364",
+        "path": "sources/papers/2505.04364/paper.pdf",
+        "bytes": 17447597,
+        "sha256": "aec4f5154c6e9502b17f4db1189cb5dc06864e23d1b3e459b1a85b233558428a"
+      }
+    ],
+    "metadata": {
+      "viewport": [
+        "width=device-width, initial-scale=1"
+      ],
+      "msapplication-TileColor": [
+        "#da532c"
+      ],
+      "theme-color": [
+        "#ffffff"
+      ],
+      "description": [
+        "Abstract page for arXiv paper 2505.04364: Benchmarking LLMs' Swarm intelligence"
+      ],
+      "og:type": [
+        "website"
+      ],
+      "og:site_name": [
+        "arXiv.org"
+      ],
+      "og:title": [
+        "Benchmarking LLMs' Swarm intelligence"
+      ],
+      "og:url": [
+        "https://arxiv.org/abs/2505.04364v4"
+      ],
+      "og:image": [
+        "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+      ],
+      "og:image:secure_url": [
+        "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+      ],
+      "og:image:width": [
+        "1200"
+      ],
+      "og:image:height": [
+        "700"
+      ],
+      "og:image:alt": [
+        "arXiv logo"
+      ],
+      "og:description": [
+        "Large Language Models (LLMs) show potential for complex reasoning, yet their capacity for emergent coordination in Multi-Agent Systems (MAS) when operating under strict swarm-like constraints-limited local perception and communication-remains largely unexplored. Existing benchmarks often do not fully capture the unique challenges of decentralized coordination when agents operate with incomplete spatio-temporal information. To bridge this gap, we introduce SwarmBench, a novel benchmark designed to systematically evaluate the swarm intelligence capabilities of LLMs acting as decentralized agents. SwarmBench features five foundational MAS coordination tasks (Pursuit, Synchronization, Foraging, Flocking, Transport) within a configurable 2D grid environment, forcing agents to rely solely on local sensory input ($k\\times k$ view) and local communication. We propose metrics for coordination effectiveness and analyze emergent group dynamics. Zero-shot evaluations of leading LLMs (e.g., deepseek-v3, o4-mini) reveal significant task-dependent performance variations. While some rudimentary coordination is observed, our results indicate that current LLMs significantly struggle with robust long-range planning and adaptive strategy formation under the uncertainty inherent in these decentralized scenarios. Assessing LLMs under such swarm-like constraints is crucial for understanding their utility in future decentralized intelligent systems. We release SwarmBench as an open, extensible toolkit-built on a customizable physical system-providing environments, prompts, evaluation scripts, and comprehensive datasets. This aims to foster reproducible research into LLM-based MAS coordination and the theoretical underpinnings of emergent collective behavior under severe informational decentralization. Our code repository is available at https://github.com/x66ccff/swarmbench."
+      ],
+      "twitter:site": [
+        "@arxiv"
+      ],
+      "twitter:card": [
+        "summary"
+      ],
+      "twitter:title": [
+        "Benchmarking LLMs' Swarm intelligence"
+      ],
+      "twitter:description": [
+        "Large Language Models (LLMs) show potential for complex reasoning, yet their capacity for emergent coordination in Multi-Agent Systems (MAS) when operating under strict swarm-like..."
+      ],
+      "twitter:image": [
+        "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+      ],
+      "twitter:image:alt": [
+        "arXiv logo"
+      ],
+      "citation_title": [
+        "Benchmarking LLMs' Swarm intelligence"
+      ],
+      "citation_author": [
+        "Ruan, Kai",
+        "Huang, Mowen",
+        "Wen, Ji-Rong",
+        "Sun, Hao"
+      ],
+      "citation_date": [
+        "2025/05/07"
+      ],
+      "citation_online_date": [
+        "2025/10/15"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2505.04364"
+      ],
+      "citation_arxiv_id": [
+        "2505.04364"
+      ],
+      "citation_abstract": [
+        "Large Language Models (LLMs) show potential for complex reasoning, yet their capacity for emergent coordination in Multi-Agent Systems (MAS) when operating under strict swarm-like constraints-limited local perception and communication-remains largely unexplored. Existing benchmarks often do not fully capture the unique challenges of decentralized coordination when agents operate with incomplete spatio-temporal information. To bridge this gap, we introduce SwarmBench, a novel benchmark designed to systematically evaluate the swarm intelligence capabilities of LLMs acting as decentralized agents. SwarmBench features five foundational MAS coordination tasks (Pursuit, Synchronization, Foraging, Flocking, Transport) within a configurable 2D grid environment, forcing agents to rely solely on local sensory input ($k\\times k$ view) and local communication. We propose metrics for coordination effectiveness and analyze emergent group dynamics. Zero-shot evaluations of leading LLMs (e.g., deepseek-v3, o4-mini) reveal significant task-dependent performance variations. While some rudimentary coordination is observed, our results indicate that current LLMs significantly struggle with robust long-range planning and adaptive strategy formation under the uncertainty inherent in these decentralized scenarios. Assessing LLMs under such swarm-like constraints is crucial for understanding their utility in future decentralized intelligent systems. We release SwarmBench as an open, extensible toolkit-built on a customizable physical system-providing environments, prompts, evaluation scripts, and comprehensive datasets. This aims to foster reproducible research into LLM-based MAS coordination and the theoretical underpinnings of emergent collective behavior under severe informational decentralization. Our code repository is available at https://github.com/x66ccff/swarmbench."
+      ]
+    },
+    "text_extraction_ok": true
+  },
+  {
+    "id": "2603.21344",
+    "label": "AI Scientific Community: Virtual Lab Swarms",
+    "topic": "swarm-proposal",
+    "artifacts": [
+      {
+        "url": "https://arxiv.org/abs/2603.21344",
+        "resolved_url": "https://arxiv.org/abs/2603.21344",
+        "path": "sources/papers/2603.21344/abstract.html",
+        "bytes": 40238,
+        "sha256": "4493951011d68c8d9bf6f316b64b7424b5c01491eaeb24ad5c603f05eb792e2b"
+      },
+      {
+        "url": "https://arxiv.org/pdf/2603.21344",
+        "resolved_url": "https://arxiv.org/pdf/2603.21344",
+        "path": "sources/papers/2603.21344/paper.pdf",
+        "bytes": 2135055,
+        "sha256": "0d58f296f7579f30b3abe4f6932fb855ba252bcb5b80450a382fe2d17fc9a9f5"
+      }
+    ],
+    "metadata": {
+      "viewport": [
+        "width=device-width, initial-scale=1"
+      ],
+      "msapplication-TileColor": [
+        "#da532c"
+      ],
+      "theme-color": [
+        "#ffffff"
+      ],
+      "description": [
+        "Abstract page for arXiv paper 2603.21344: The AI Scientific Community: Agentic Virtual Lab Swarms"
+      ],
+      "og:type": [
+        "website"
+      ],
+      "og:site_name": [
+        "arXiv.org"
+      ],
+      "og:title": [
+        "The AI Scientific Community: Agentic Virtual Lab Swarms"
+      ],
+      "og:url": [
+        "https://arxiv.org/abs/2603.21344v1"
+      ],
+      "og:image": [
+        "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+      ],
+      "og:image:secure_url": [
+        "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+      ],
+      "og:image:width": [
+        "1200"
+      ],
+      "og:image:height": [
+        "700"
+      ],
+      "og:image:alt": [
+        "arXiv logo"
+      ],
+      "og:description": [
+        "In this short note we propose using agentic swarms of virtual labs as a model of an AI Science Community. In this paradigm, each particle in the swarm represents a complete virtual laboratory instance, enabling collective scientific exploration that mirrors real-world research communities. The framework leverages the inherent properties of swarm intelligence - decentralized coordination, balanced exploration-exploitation trade-offs, and emergent collective behavior - to simulate the behavior of a scientific community and potentially accelerate scientific discovery. We discuss architectural considerations, inter-laboratory communication and influence mechanisms including citation-analogous voting systems, fitness function design for quantifying scientific success, anticipated emergent behaviors, mechanisms for preventing lab dominance and preserving diversity, and computational efficiency strategies to enable large swarms exhibiting complex emergent behavior analogous to real-world scientific communities. A working instance of the AI Science Community is currently under development."
+      ],
+      "twitter:site": [
+        "@arxiv"
+      ],
+      "twitter:card": [
+        "summary"
+      ],
+      "twitter:title": [
+        "The AI Scientific Community: Agentic Virtual Lab Swarms"
+      ],
+      "twitter:description": [
+        "In this short note we propose using agentic swarms of virtual labs as a model of an AI Science Community. In this paradigm, each particle in the swarm represents a complete virtual laboratory..."
+      ],
+      "twitter:image": [
+        "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+      ],
+      "twitter:image:alt": [
+        "arXiv logo"
+      ],
+      "citation_title": [
+        "The AI Scientific Community: Agentic Virtual Lab Swarms"
+      ],
+      "citation_author": [
+        "Braga-Neto, Ulisses"
+      ],
+      "citation_date": [
+        "2026/03/22"
+      ],
+      "citation_online_date": [
+        "2026/03/22"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2603.21344"
+      ],
+      "citation_arxiv_id": [
+        "2603.21344"
+      ],
+      "citation_abstract": [
+        "In this short note we propose using agentic swarms of virtual labs as a model of an AI Science Community. In this paradigm, each particle in the swarm represents a complete virtual laboratory instance, enabling collective scientific exploration that mirrors real-world research communities. The framework leverages the inherent properties of swarm intelligence - decentralized coordination, balanced exploration-exploitation trade-offs, and emergent collective behavior - to simulate the behavior of a scientific community and potentially accelerate scientific discovery. We discuss architectural considerations, inter-laboratory communication and influence mechanisms including citation-analogous voting systems, fitness function design for quantifying scientific success, anticipated emergent behaviors, mechanisms for preventing lab dominance and preserving diversity, and computational efficiency strategies to enable large swarms exhibiting complex emergent behavior analogous to real-world scientific communities. A working instance of the AI Science Community is currently under development."
+      ]
+    },
+    "text_extraction_ok": true
+  },
+  {
+    "id": "2410.11387",
+    "label": "LLM2Swarm",
+    "topic": "embodied-swarm",
+    "artifacts": [
+      {
+        "url": "https://arxiv.org/abs/2410.11387",
+        "resolved_url": "https://arxiv.org/abs/2410.11387",
+        "path": "sources/papers/2410.11387/abstract.html",
+        "bytes": 43416,
+        "sha256": "9d817bb978401e04917e2e6c94f488de35cb66ea52624455a4c5f8fe299a8508"
+      },
+      {
+        "url": "https://arxiv.org/pdf/2410.11387",
+        "resolved_url": "https://arxiv.org/pdf/2410.11387",
+        "path": "sources/papers/2410.11387/paper.pdf",
+        "bytes": 1058401,
+        "sha256": "fb3caa04bd3c8377e91ce2338bc78a063b9516163c135141287764a7bcb47c18"
+      }
+    ],
+    "metadata": {
+      "viewport": [
+        "width=device-width, initial-scale=1"
+      ],
+      "msapplication-TileColor": [
+        "#da532c"
+      ],
+      "theme-color": [
+        "#ffffff"
+      ],
+      "description": [
+        "Abstract page for arXiv paper 2410.11387: LLM2Swarm: Robot Swarms that Responsively Reason, Plan, and Collaborate through LLMs"
+      ],
+      "og:type": [
+        "website"
+      ],
+      "og:site_name": [
+        "arXiv.org"
+      ],
+      "og:title": [
+        "LLM2Swarm: Robot Swarms that Responsively Reason, Plan, and Collaborate through LLMs"
+      ],
+      "og:url": [
+        "https://arxiv.org/abs/2410.11387v3"
+      ],
+      "og:image": [
+        "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+      ],
+      "og:image:secure_url": [
+        "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+      ],
+      "og:image:width": [
+        "1200"
+      ],
+      "og:image:height": [
+        "700"
+      ],
+      "og:image:alt": [
+        "arXiv logo"
+      ],
+      "og:description": [
+        "Robot swarms are composed of many simple robots that communicate and collaborate to fulfill complex tasks. Robot controllers usually need to be specified by experts on a case-by-case basis via programming code. This process is time-consuming, prone to errors, and unable to take into account all situations that may be encountered during deployment. On the other hand, recent Large Language Models (LLMs) have demonstrated reasoning and planning capabilities, introduced new ways to interact with and program machines, and incorporate both domain-specific and commonsense knowledge. Hence, we propose to address the aforementioned challenges by integrating LLMs with robot swarms and show the potential in proofs of concept (showcases). For this integration, we explore two approaches. The first approach is 'indirect integration,' where LLMs are used to synthesize and validate the robot controllers. This approach may reduce development time and human error before deployment. Moreover, during deployment, it could be used for on-the-fly creation of new robot behaviors. The second approach is 'direct integration,' where each robot locally executes a separate LLM instance during deployment for robot-robot collaboration and human-swarm interaction. These local LLM instances enable each robot to reason, plan, and collaborate using natural language, as demonstrated in our showcases where the robots are able to detect a variety of anomalies, without prior information about the nature of these anomalies. To enable further research on our mainly conceptual contribution, we release the software and videos for our LLM2Swarm system: https://github.com/Pold87/LLM2Swarm."
+      ],
+      "twitter:site": [
+        "@arxiv"
+      ],
+      "twitter:card": [
+        "summary"
+      ],
+      "twitter:title": [
+        "LLM2Swarm: Robot Swarms that Responsively Reason, Plan, and..."
+      ],
+      "twitter:description": [
+        "Robot swarms are composed of many simple robots that communicate and collaborate to fulfill complex tasks. Robot controllers usually need to be specified by experts on a case-by-case basis via..."
+      ],
+      "twitter:image": [
+        "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+      ],
+      "twitter:image:alt": [
+        "arXiv logo"
+      ],
+      "citation_title": [
+        "LLM2Swarm: Robot Swarms that Responsively Reason, Plan, and Collaborate through LLMs"
+      ],
+      "citation_author": [
+        "Strobel, Volker",
+        "Dorigo, Marco",
+        "Fritz, Mario"
+      ],
+      "citation_date": [
+        "2024/10/15"
+      ],
+      "citation_online_date": [
+        "2024/10/30"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2410.11387"
+      ],
+      "citation_arxiv_id": [
+        "2410.11387"
+      ],
+      "citation_abstract": [
+        "Robot swarms are composed of many simple robots that communicate and collaborate to fulfill complex tasks. Robot controllers usually need to be specified by experts on a case-by-case basis via programming code. This process is time-consuming, prone to errors, and unable to take into account all situations that may be encountered during deployment. On the other hand, recent Large Language Models (LLMs) have demonstrated reasoning and planning capabilities, introduced new ways to interact with and program machines, and incorporate both domain-specific and commonsense knowledge. Hence, we propose to address the aforementioned challenges by integrating LLMs with robot swarms and show the potential in proofs of concept (showcases). For this integration, we explore two approaches. The first approach is 'indirect integration,' where LLMs are used to synthesize and validate the robot controllers. This approach may reduce development time and human error before deployment. Moreover, during deployment, it could be used for on-the-fly creation of new robot behaviors. The second approach is 'direct integration,' where each robot locally executes a separate LLM instance during deployment for robot-robot collaboration and human-swarm interaction. These local LLM instances enable each robot to reason, plan, and collaborate using natural language, as demonstrated in our showcases where the robots are able to detect a variety of anomalies, without prior information about the nature of these anomalies. To enable further research on our mainly conceptual contribution, we release the software and videos for our LLM2Swarm system: https://github.com/Pold87/LLM2Swarm."
+      ]
+    },
+    "text_extraction_ok": true
+  }
+]

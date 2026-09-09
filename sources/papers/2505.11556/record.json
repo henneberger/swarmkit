@@ -1,0 +1,107 @@
+{
+  "id": "2505.11556",
+  "label": "HiddenBench",
+  "topic": "collective-knowledge",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2505.11556",
+      "resolved_url": "https://arxiv.org/abs/2505.11556",
+      "path": "sources/papers/2505.11556/abstract.html",
+      "bytes": 43134,
+      "sha256": "213a20a7d60fd224f7b7ad26d203c7e0c788b732672408c0fefd945c5dd2c1e4"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2505.11556",
+      "resolved_url": "https://arxiv.org/pdf/2505.11556",
+      "path": "sources/papers/2505.11556/paper.pdf",
+      "bytes": 749654,
+      "sha256": "f8aa0dc11b590f398c58b9ab396c05c18f12c8d1fe6a842d6b6c78bb1ebc3842"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2505.11556: Systematic Failures in Collective Reasoning under Distributed Information in Multi-Agent LLMs"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Systematic Failures in Collective Reasoning under Distributed Information in Multi-Agent LLMs"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2505.11556v4"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Multi-agent systems built on large language models (LLMs) are expected to enhance decision-making by pooling distributed information, yet systematically evaluating this capability has remained challenging. We introduce HiddenBench, a 65-task benchmark grounded in the Hidden Profile paradigm, which isolates collective reasoning under distributed information from individual reasoning ability. Evaluating 15 frontier LLMs, we find that multi-agent LLMs achieve only 30.1% accuracy under distributed information, compared to 80.7% accuracy for single agents given complete information. We trace this gap to a systematic failure mode: agents cannot recognize or act under latent information asymmetry -- they fail to reason about what others might know but have not yet expressed, leading to premature convergence on shared evidence while critical distributed facts remain unexplored. These failures persist across prompting strategies, communication depths, and group sizes -- and worsen as groups scale. While some models (e.g., Gemini-2.5-Flash/Pro) outperform others, neither model scale nor individual reasoning accuracy reliably predicts collective performance. We further show that this bottleneck is actionable: a lightweight structured communication protocol substantially improves collective reasoning across model families. Our results identify failures in collective information exploration in decision-making as a key limitation of multi-agent LLMs, and provide a theory-grounded, reproducible framework for diagnosing collective reasoning failures."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Systematic Failures in Collective Reasoning under Distributed..."
+    ],
+    "twitter:description": [
+      "Multi-agent systems built on large language models (LLMs) are expected to enhance decision-making by pooling distributed information, yet systematically evaluating this capability has remained..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Systematic Failures in Collective Reasoning under Distributed Information in Multi-Agent LLMs"
+    ],
+    "citation_author": [
+      "Li, Yuxuan",
+      "Naito, Aoi",
+      "Shirado, Hirokazu"
+    ],
+    "citation_date": [
+      "2025/05/15"
+    ],
+    "citation_online_date": [
+      "2026/05/13"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2505.11556"
+    ],
+    "citation_arxiv_id": [
+      "2505.11556"
+    ],
+    "citation_abstract": [
+      "Multi-agent systems built on large language models (LLMs) are expected to enhance decision-making by pooling distributed information, yet systematically evaluating this capability has remained challenging. We introduce HiddenBench, a 65-task benchmark grounded in the Hidden Profile paradigm, which isolates collective reasoning under distributed information from individual reasoning ability. Evaluating 15 frontier LLMs, we find that multi-agent LLMs achieve only 30.1% accuracy under distributed information, compared to 80.7% accuracy for single agents given complete information. We trace this gap to a systematic failure mode: agents cannot recognize or act under latent information asymmetry -- they fail to reason about what others might know but have not yet expressed, leading to premature convergence on shared evidence while critical distributed facts remain unexplored. These failures persist across prompting strategies, communication depths, and group sizes -- and worsen as groups scale. While some models (e.g., Gemini-2.5-Flash/Pro) outperform others, neither model scale nor individual reasoning accuracy reliably predicts collective performance. We further show that this bottleneck is actionable: a lightweight structured communication protocol substantially improves collective reasoning across model families. Our results identify failures in collective information exploration in decision-making as a key limitation of multi-agent LLMs, and provide a theory-grounded, reproducible framework for diagnosing collective reasoning failures."
+    ]
+  },
+  "text_extraction_ok": true
+}

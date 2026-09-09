@@ -1,0 +1,111 @@
+{
+  "id": "2506.15672",
+  "label": "SwarmAgentic",
+  "topic": "swarm-evolution",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2506.15672",
+      "resolved_url": "https://arxiv.org/abs/2506.15672",
+      "path": "sources/papers/2506.15672/abstract.html",
+      "bytes": 43032,
+      "sha256": "952db1c248b1f2bc9f549497fa287b8a3812f64a8f1861dd0a4018abd6f84687"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2506.15672",
+      "resolved_url": "https://arxiv.org/pdf/2506.15672",
+      "path": "sources/papers/2506.15672/paper.pdf",
+      "bytes": 1275508,
+      "sha256": "36176bc6ba8b7d8780bec5a8be4f3a6f48607e1d28a64e5cf731019379861f7d"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2506.15672: SwarmAgentic: Towards Fully Automated Agentic System Generation via Swarm Intelligence"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "SwarmAgentic: Towards Fully Automated Agentic System Generation via Swarm Intelligence"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2506.15672v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "The rapid progress of Large Language Models has advanced agentic systems in decision-making, coordination, and task execution. Yet, existing agentic system generation frameworks lack full autonomy, missing from-scratch agent generation, self-optimizing agent functionality, and collaboration, limiting adaptability and scalability. We propose SwarmAgentic, a framework for fully automated agentic system generation that constructs agentic systems from scratch and jointly optimizes agent functionality and collaboration as interdependent components through language-driven exploration. To enable efficient search over system-level structures, SwarmAgentic maintains a population of candidate systems and evolves them via feedback-guided updates, drawing inspiration from Particle Swarm Optimization (PSO). We evaluate our method on six real-world, open-ended, and exploratory tasks involving high-level planning, system-level coordination, and creative reasoning. Given only a task description and an objective function, SwarmAgentic outperforms all baselines, achieving a +261.8% relative improvement over ADAS on the TravelPlanner benchmark, highlighting the effectiveness of full automation in structurally unconstrained tasks. This framework marks a significant step toward scalable and autonomous agentic system design, bridging swarm intelligence with fully automated system multi-agent generation. Our code is publicly released at https://yaoz720.github.io/SwarmAgentic/."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "SwarmAgentic: Towards Fully Automated Agentic System Generation..."
+    ],
+    "twitter:description": [
+      "The rapid progress of Large Language Models has advanced agentic systems in decision-making, coordination, and task execution. Yet, existing agentic system generation frameworks lack full..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "SwarmAgentic: Towards Fully Automated Agentic System Generation via Swarm Intelligence"
+    ],
+    "citation_author": [
+      "Zhang, Yao",
+      "Lin, Chenyang",
+      "Tang, Shijie",
+      "Chen, Haokun",
+      "Zhou, Shijie",
+      "Ma, Yunpu",
+      "Tresp, Volker"
+    ],
+    "citation_date": [
+      "2025/06/18"
+    ],
+    "citation_online_date": [
+      "2025/06/18"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2506.15672"
+    ],
+    "citation_arxiv_id": [
+      "2506.15672"
+    ],
+    "citation_abstract": [
+      "The rapid progress of Large Language Models has advanced agentic systems in decision-making, coordination, and task execution. Yet, existing agentic system generation frameworks lack full autonomy, missing from-scratch agent generation, self-optimizing agent functionality, and collaboration, limiting adaptability and scalability. We propose SwarmAgentic, a framework for fully automated agentic system generation that constructs agentic systems from scratch and jointly optimizes agent functionality and collaboration as interdependent components through language-driven exploration. To enable efficient search over system-level structures, SwarmAgentic maintains a population of candidate systems and evolves them via feedback-guided updates, drawing inspiration from Particle Swarm Optimization (PSO). We evaluate our method on six real-world, open-ended, and exploratory tasks involving high-level planning, system-level coordination, and creative reasoning. Given only a task description and an objective function, SwarmAgentic outperforms all baselines, achieving a +261.8% relative improvement over ADAS on the TravelPlanner benchmark, highlighting the effectiveness of full automation in structurally unconstrained tasks. This framework marks a significant step toward scalable and autonomous agentic system design, bridging swarm intelligence with fully automated system multi-agent generation. Our code is publicly released at https://yaoz720.github.io/SwarmAgentic/."
+    ]
+  },
+  "text_extraction_ok": true
+}

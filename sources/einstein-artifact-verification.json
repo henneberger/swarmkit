@@ -1,0 +1,11 @@
+{
+  "artifact": "repositories/togethercomputer__EinsteinArena-new-SOTA/kissing-number/solutions/solution_n=604_d=11.json",
+  "sha256": "0bde9ca2c434d7beb5af63a64a291498e8c264d9a5718b738e92dd70b9ba7761",
+  "vectors": 604,
+  "dimensions": 11,
+  "squared_radius": 36,
+  "pairwise_distance_checks": 182106,
+  "all_squared_distances_at_least": 36,
+  "arithmetic": "Exact integer comparisons in Q(sqrt(2)); no floating point.",
+  "verified": "Construction validity only; no causal swarm-advantage or novelty claim."
+}

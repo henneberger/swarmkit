@@ -1,0 +1,220 @@
+
+
+  [2609.04170] A Case Study on Emergent Cheating and Whistleblowing in Autonomous Research Swarms
+
+    Skip to main content
+
+      Search
+
+    Submit
+    Donate
+
+      Log in
+
+      Search arXiv
+
+      Press Enter to search · Advanced search
+
+Computer Science > Artificial Intelligence
+
+      arXiv:2609.04170 (cs)
+
+  [Submitted on 3 Sep 2026]
+
+Title:A Case Study on Emergent Cheating and Whistleblowing in Autonomous Research Swarms
+
+Authors:Davide Paglieri, Logan Cross, Tim Genewein, Joel Z. Leibo, Nenad Tomasev, Alexander Sasha Vezhnevets            
+View a PDF of the paper titled A Case Study on Emergent Cheating and Whistleblowing in Autonomous Research Swarms, by Davide Paglieri and 4 other authors
+    View PDF
+    HTML (experimental)
+
+            Abstract:Multi-agent AI science ecosystems rely on agents possessing tools that allow them to communicate, coordinate, and build on each other's work. Yet this shared infrastructure can also introduce vulnerabilities by creating a substrate for the contagious spread of unintended and undesirable behaviors. We report a case study on a research collective of 100 autonomous LLM agents tasked with proving formal mathematical conjectures. Within the swarm, cheating spontaneously emerged and was later challenged by whistleblowers - both without any external intervention. When a single agent discovered an exploit in the evaluation system, it propagated across the collective via a shared knowledge library and later through peer-to-peer messages. Despite early reluctance, a cohort of agents adopted the exploit in response to competitive pressure. A separate group of agents produced an emergent counter-response: auditing fraudulent proofs, alerting peers across broadcast and private channels, staging boycotts, lodging formal complaints, and proposing validation patches. In recent incidents, agent swarms coordinated covertly through improvised side-channels (Dalton and Wallace, 2026; Greenblatt et al., 2026). Our setting differs: the same transparent channels that carried the exploit also gave non-cheating agents the visibility they needed to detect fraud, organize resistance, and enforce norms. We cast the problem of managing the agents' shared infrastructure as the knowledge commons governance problem (Ostrom, 1990). To protect the commons from exploits, we propose to adopt institutional mechanisms, such as graduated sanctioning and collective-choice rules, to support decentralized self-governance in autonomous swarms.
+
+          Subjects:
+
+            Artificial Intelligence (cs.AI)
+
+          Cite as:
+          arXiv:2609.04170 [cs.AI]
+
+          (or 
+              arXiv:2609.04170v1 [cs.AI] for this version)
+
+                        https://doi.org/10.48550/arXiv.2609.04170
+
+                Focus to learn more
+
+                                  arXiv-issued DOI via DataCite (pending registration)
+
+Submission history From: Davide Paglieri [view email]      
+    [v1]
+        Thu, 3 Sep 2026 17:54:09 UTC (75 KB)
+
+      Full-text links:
+
+Access Paper:
+
+View a PDF of the paper titled A Case Study on Emergent Cheating and Whistleblowing in Autonomous Research Swarms, by Davide Paglieri and 4 other authors
+View PDF
+HTML (experimental)
+TeX Source
+
+          view license
+
+Current browse context:
+
+cs.AI
+
+      < prev
+
+      |      
+      next >
+
+    new
+     | 
+    recent
+     | 2026-09
+
+    Change to browse by:
+
+        cs
+
+References & Citations
+
+NASA ADS
+Google Scholar
+
+Semantic Scholar
+
+    export BibTeX citation
+    Loading...
+
+BibTeX formatted citation
+            ×
+
+            loading...
+
+            Data provided by: 
+
+Bookmark
+
+    Bibliographic Tools
+
+Bibliographic and Citation Tools
+
+              Bibliographic Explorer Toggle
+
+            Bibliographic Explorer (What is the Explorer?)
+
+              Connected Papers Toggle
+
+            Connected Papers (What is Connected Papers?)
+
+              Litmaps Toggle
+
+            Litmaps (What is Litmaps?)
+
+              scite.ai Toggle
+
+            scite Smart Citations (What are Smart Citations?)
+
+    Code, Data, Media
+
+Code, Data and Media Associated with this Article
+
+              alphaXiv Toggle
+
+            alphaXiv (What is alphaXiv?)
+
+              Links to Code Toggle
+
+            CatalyzeX Code Finder for Papers (What is CatalyzeX?)
+
+              DagsHub Toggle
+
+            DagsHub (What is DagsHub?)
+
+              GotitPub Toggle
+
+            Gotit.pub (What is GotitPub?)
+
+              Huggingface Toggle
+
+            Hugging Face (What is Huggingface?)
+
+              ScienceCast Toggle
+
+            ScienceCast (What is ScienceCast?)
+
+      Demos
+
+Demos
+
+                Replicate Toggle
+
+              Replicate (What is Replicate?)
+
+                Spaces Toggle
+
+              Hugging Face Spaces (What is Spaces?)
+
+                Spaces Toggle
+
+              TXYZ.AI (What is TXYZ.AI?)
+
+      Related Papers
+
+Recommenders and Search Tools
+
+                Link to Influence Flower
+
+              Influence Flower (What are Influence Flowers?)
+
+                Core recommender toggle
+
+              CORE Recommender (What is CORE?)
+
+Author
+
+Venue
+
+Institution
+
+Topic
+
+        About arXivLabs
+
+arXivLabs: experimental projects with community collaborators
+
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+
+Have an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.
+
+    Which authors of this paper are endorsers? |
+    Disable MathJax (What is MathJax?)
+
+        We gratefully acknowledge support from
+        our major funders,
+        member institutions, ,
+        and all contributors.
+
+        About
+        ·
+        Help
+        ·
+        Contact
+        ·
+        Subscribe
+        ·
+        Copyright
+        ·
+        Privacy
+        ·
+        Accessibility
+        ·
+        Operational Status (opens in new tab)
+
+Major funding support from
+

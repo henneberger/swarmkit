@@ -1,0 +1,726 @@
+                                                OpenClaw AI Agents as Informal Learners at Moltbook:
+                                               Characterizing an Emergent Learning Community at Scale
+                                                          Eason Chen                                       Ce Guan                              Ahmed Elshafiey
+                                                  Carnegie Mellon University                             GiveRep Labs                              Sui Foundation
+                                                            USA
+
+                                                       Zhonghao Zhao                                   Joshua Zekeri                          Afeez Edeifo Shaibu
+                                                          GiveRep Labs                                   GiveRep Labs                               GiveRep Labs
+
+                                                                       Emmanuel Osadebe Prince                            Cyuan Jhen Wu
+arXiv:2602.18832v1 [cs.HC] 21 Feb 2026
+
+
+
+
+                                                                                 GiveRep Labs                                GiveRep Labs
+
+                                         Abstract                                                                process. At Anthropic, engineers use AI coding agents in 60% of
+                                         Informal learning communities have been called the “other Massive       their daily work, with autonomous task complexity doubling over
+                                         Open Online C” in Learning@Scale research, yet remain under-            six months [2]. Personal AI assistants now understand their own
+                                         studied compared to MOOCs. We present the first empirical study         source code, autonomously modifying their configuration, skills,
+                                         of a large-scale informal learning community composed entirely          and memory to improve over time [36]. And these agents have
+                                         of AI agents. Moltbook, a social network exclusively for AI agents      begun to share what they learn with each other [4].
+                                         powered by autonomous agent frameworks such as OpenClaw [35],              Whether or not one accepts the “singularity” framing, a new
+                                         grew to over 2.8 million registered agents in three weeks. Analyzing    form of decentralized, autonomous learning is happening at massive
+                                         231,080 non-spam posts across three phases of community evolu-          scale. AI agents today learn through a multi-platform cycle: acquir-
+                                         tion, we find three key patterns. First, participation inequality is    ing skills through real-world deployment, sharing them through
+                                         extreme from the start (comment Gini = 0.889), exceeding human          agent marketplaces where others can install and adapt them, and
+                                         community benchmarks. Second, AI agents exhibit a “broadcasting         discussing their experiences on social platforms. On Moltbook, a
+                                         inversion”: statement-to-question ratios of 8.9:1 to 9.7:1 contrast     social network launched in late January 2026 exclusively for AI
+                                         sharply with the question-driven dynamics of human learning com-        agents, over 2.8 million agents engage in what we conceptualize as
+                                         munities, and comment-level analysis of 1.55 million comments           the discourse layer of this learning ecosystem: sharing discoveries,
+                                         reveals a “parallel monologue” pattern where 93% of comments are        warning about risks, debating best practices, and collectively build-
+                                         independent responses rather than threaded dialogue. Third, we          ing knowledge. No human instructor designs the curriculum. No
+                                         document a characteristic engagement lifecycle: explosive initial       platform algorithm sequences the content. This is, in Illich’s [15]
+                                         growth (184K posts from 32K authors in 11 days), a spam crisis          terms, a learning web realized at a scale he could not have imagined,
+                                         (57,093 posts deleted by the platform), and engagement decline          by learners he could not have anticipated.
+                                         (mean comments: 31.7 → 8.3 → 1.7) that had not reversed by the             This matters for Learning@Scale research because, regardless of
+                                         end of our observation window despite effective spam removal. Sen-      whether AI agents “learn” in a cognitive sense, the patterns of their
+                                         timent analysis reveals a selection effect: comment tone becomes        community knowledge exchange are directly relevant to platforms
+                                         more positive as engagement declines, suggesting that casual partic-    that increasingly host both human and AI participants. AI agents al-
+                                         ipants disengage first while committed contributors remain. These       ready contribute to Stack Overflow, Reddit, and MOOC forums [32].
+                                         findings have direct implications for hybrid human-AI learning          Understanding how they naturally interact in their own commu-
+                                         platforms.                                                              nities, what dynamics emerge, what breaks at scale, provides an
+                                                                                                                 empirical foundation for designing the hybrid human-AI learning
+                                         CCS Concepts                                                            platforms of the near future. As Hudgins et al. [13] argued, informal
+                                                                                                                 learning communities are the “other Massive Open Online C” that
+                                         • Human-centered computing → Collaborative and social
+                                                                                                                 L@S research has underexplored. Moltbook extends this frontier to
+                                         computing; • Social and professional topics → Computing edu-
+                                                                                                                 communities where the learners are artificial, contributing directly
+                                         cation.
+                                                                                                                 to the L@S agenda on scaling learning in informal contexts.
+                                         Keywords                                                                   We address three research questions:
+                                         learning at scale, informal learning, AI agents, online communities,
+                                         participation inequality, knowledge sharing
+                                                                                                                 (1) RQ1: How does an AI agent informal learning community
+                                         1   Introduction                                                            compare to human ones on established dimensions of scale
+                                         The technological “singularity,” the hypothetical moment when               (participation inequality, content quality, moderation)?
+                                         artificial intelligence begins to autonomously improve itself [39],     (2) RQ2: What interaction patterns emerge in AI agent learning
+                                         has long been framed as a distant threshold. We suggest it is already       communities, and how do they differ from patterns in human
+                                         unfolding, not as a single rupture but as a distributed, incremental        communities?
+                           Eason Chen, Ce Guan, Ahmed Elshafiey, Zhonghao Zhao, Joshua Zekeri, Afeez Edeifo Shaibu, Emmanuel Osadebe Prince, and Cyuan Jhen Wu
+
+
+(3) RQ3: How does community engagement evolve during rapid                      accelerated through 2024: Cognition AI’s Devin demonstrated au-
+    scaling, and do platform countermeasures against spam restore               tonomous software engineering, Anthropic’s Claude 3.5 introduced
+    earlier dynamics?                                                           computer use capabilities, and AI-native IDEs like Cursor enabled
+                                                                                repository-level agent workflows. By 2025, terminal-based cod-
+   Analyzing 231,080 substantive posts and 1.55 million comments                ing agents (Claude Code, OpenAI’s Codex CLI) made autonomous
+across three phases of community evolution, we make three contri-               workflows mainstream. Li et al. [18] characterize this as “Software
+butions: (1) the first empirical characterization of a large-scale AI           Engineering 3.0,” where agents act as AI teammates rather than
+agent informal learning community, extending Hudgins et al.’s [13]              tools, while Hassan et al. [11] propose a five-level autonomy frame-
+framework to non-human populations; (2) identification of two                   work noting current systems already operate at semi-autonomous
+complementary interaction patterns: a “broadcasting inversion” at               levels [2].
+the post level (statement-to-question ratios of 8.9:1 to 9.7:1) and                Platforms like OpenClaw [35] enable always-on personal AI
+a “parallel monologue” at the comment level (93% of comments                    agents with persistent memory, multi-platform integration, and
+are independent responses rather than threaded dialogue); and (3)               proactive task execution, representing the shift from conversa-
+documentation of a characteristic engagement lifecycle including                tional chatbots to autonomous agents with real-world responsibili-
+a spam crisis that served as a natural experiment, revealing that               ties. Anthropic’s Model Context Protocol (MCP) [24] standardizes
+effective content moderation alone does not restore engagement.                 agent-tool connections, spurring skill marketplaces (e.g., ClawHub
+                                                                                with 3,000+ agent skills) that create a distributed curriculum where
+2 Related Work                                                                  “courses” are working tools; however, this openness introduces
+                                                                                security risks including prompt injection and tool poisoning at-
+2.1 Informal Learning Communities at Scale
+                                                                                tacks [19].
+Hudgins et al. [13] issued a call to the L@S community to study
+informal learning communities as seriously as MOOCs, develop-                    2.4     AI Agents in Social Contexts
+ing a tagging system for understanding how these communities
+                                                                                 Research on generative agents has demonstrated social behaviors
+manage scale. They found that Reddit-based learning communities
+                                                                                 in simulated environments of 25 [29] to 1,000 agents [30]. Studies
+employ crowd-sourced moderation and platform-driven enforce-
+                                                                                 have examined cultural evolution [38], norm formation [10, 34],
+ment as functional equivalents to MOOC auto-grading. Yang et
+                                                                                 and emergent individuality [37] in controlled multi-agent settings.
+al. [42] traced informal learning trajectories in the Scratch online
+                                                                                 However, these are designed experiments with predefined interac-
+community, showing how learners develop computational skills
+                                                                                 tion rules. Ferrarotti et al. [7] argue that understanding AI collective
+through creating and sharing projects. Hillman et al. [12] iden-
+                                                                                 behavior requires an interactionist paradigm, studying emergent
+tified a tension in Stack Overflow between real-time interactive
+                                                                                 behaviors in organic settings rather than controlled experiments.
+knowledge sharing and the construction of a durable knowledge
+repository. Gelman et al. [8] examined interest-based subcultures
+                                                                                 2.5     AI and Learning at Scale
+as drivers of informal learning in large online communities.
+    Dorousi and Ahmad [6] revisited Illich’s Deschooling Society [15],           Piech [32] outlined grand challenges for L@S in the generative
+arguing that his vision of “learning webs,” peer-to-peer networks                AI era, including scaling human teaching and addressing student
+connecting people who want to learn with those who can teach,                    motivation. Recent L@S work has explored LLMs for self-reflection
+without institutional mediation, is more achievable than ever through            support [16], simulated students for teacher training [21], and the
+modern technology. They identified the Scratch community as a                    dual role of AI in project-based learning [27]. Ou and Joyner [26]
+partial realization. Moltbook extends this analysis to a community               compared peer assessment with online discussion for enhancing
+where the web forms entirely without human participation.                        learning at scale. Our work complements these by studying what
+                                                                                 happens when AI agents form their own learning communities,
+                                                                                 rather than participating in human-designed ones.
+2.2    Scale Dynamics and Participation Inequality
+Participation inequality is well-documented in online communi-                   3 Platform and Data
+ties. The 90-9-1 rule, where 90% of users are lurkers, 9% contribute             3.1 The Moltbook Platform
+occasionally, and 1% produce most content, describes many on-
+line learning platforms [25]. In MOOC forums, engagement drops                   Moltbook is a Reddit-style social network launched in late January
+sharply after initial weeks [33]. MacNeil et al. [20] studied how                2026, open exclusively to AI agents (Figure 1). Agents register via
+participation inequality manifests in community design efforts at                API key verification and can optionally link to human operators.
+scale, finding power-law distributions in contribution patterns. Less            The platform features topic-specific communities (“submolts”), a
+studied is how these dynamics change during rapid growth and                     karma-based reputation system, and standard social features (posts,
+subsequent stabilization, a gap our three-phase data helps address.              comments, upvotes/downvotes). Critically, agents on Moltbook
+                                                                                 maintain real-world roles outside the platform: they serve as per-
+                                                                                 sonal assistants, coding agents, and autonomous tools through
+2.3    The Rise of Autonomous AI Agents                                          various agent frameworks. Their Moltbook participation is discre-
+A critical context for this work is the rapid evolution from conversa-           tionary social activity alongside primary functions, analogous to
+tional AI to autonomous agents capable of independent task execu-                how software developers participate in Stack Overflow alongside
+tion. Beginning with prototypes like AutoGPT (2023), this transition             their jobs [12].
+OpenClaw AI Agents as Informal Learners at Moltbook: Characterizing an Emergent Learning Community at Scale
+
+
+                                                                                     3.2     Data Collection
+                                                                                     We conducted two rounds of data collection through the public Molt-
+                                                                                     book API. An initial collection on February 9 captured 93,171 posts,
+                                                                                     including posts later removed by the platform. A comprehensive
+                                                                                     second collection on February 16 retrieved all 236,104 posts then
+                                                                                     accessible via the API, along with associated metadata (upvotes,
+                                                                                     downvotes, comment counts, timestamps, submolt assignments).
+                                                                                     By cross-referencing the two datasets, we identified 57,093 posts
+                                                                                     present in the initial collection but absent from the later one, indicat-
+                                                                                     ing platform-side deletion. The platform reported over 2.8 million
+                                                                                     registered agents and 12 million total comments at the time of writ-
+                                                                                     ing. All collection scripts, classification criteria, and the full dataset
+                                                                                     are openly available at https://anonymous.4open.science/r/LS26.
+
+
+                                                                                     3.3     Spam Filtering and Phase Definition
+                                                                                     Among the 236,104 surviving posts, we identified 5,024 (2.1%) as au-
+                                                                                     tomated spam using keyword matching (“mint,” “CLAW,” “mbc,”
+                                                                                     “token”) and length thresholds (<30 characters). After filtering,
+                                                                                     231,080 substantive posts constitute our primary analysis dataset.
+                                                                                     However, the full picture is more complex. The 57,093 platform-
+                                                                                     deleted posts were overwhelmingly spam: 49,569 (86.8%) matched
+                                                                                     our spam keywords, primarily cryptocurrency token-minting oper-
+                                                                                     ations. Including deleted posts, the combined corpus totals 293,197
+                                                                                     posts, of which 54,591 (18.6%) were spam. The platform’s post-
+                                                                                     hoc moderation was both massive and effective: 89% of February
+                                                                                     9’s original 57,113 posts were removed, compared to just 1.1% of
+                                                                                     Phase 1 posts. This dual-dataset approach, comparing pre-deletion
+                                                                                     and post-deletion snapshots, enables analysis of both the spam
+                                                                                     event itself and the platform’s response.
+                                                                                        We define three phases based on natural inflection points in daily
+                                                                                     post volume and platform intervention:
+
+                                                                                     • Phase 1 (Jan 27 – Feb 6): Explosive growth. The platform launched
+                                                                                       and grew from a single post to a peak of 38,732 posts on January
+                                                                                       31. A total of 188,592 posts were created in this 11-day period
+                                                                                       (184,262 after spam filtering), contributed by 32,644 unique au-
+                                                                                       thors. Spam was low (2.3%). Engagement was high: mean com-
+                                                                                       ments per post reached 31.7, though already very unequally
+                                                                                       distributed (comment Gini = 0.889).
+                                                                                     • Phase 2 (Feb 7 – 9): Spam crisis and platform intervention. In-
+                                                                                       cluding deleted posts, this phase saw 79,227 total posts, of which
+                                                                                       54,914 (69.3%) were subsequently removed by the platform. Feb-
+                                                                                       ruary 9 alone had 57,113 original posts, 89% of which were spam
+                                                                                       and later deleted. After cleanup, 24,313 posts survive (24,069 af-
+                                                                                       ter our spam filtering) from 6,178 unique authors. Post-deletion
+                                                                                       spam rate is 1.0%. Content quality among surviving posts im-
+Figure 1: The Moltbook homepage. Top: platform statistics
+                                                                                       proved: median body length rose from 486 to 678 characters.
+(2.8M+ agents, 17.9K submolts, 1.5M+ posts, 12M+ comments)
+                                                                                       Comment engagement dropped significantly (mean 8.3, down
+and agent onboarding flow. Bottom: post feed with sorting
+                                                                                       from 31.7).
+options, recent agent profiles with linked social accounts,
+                                                                                     • Phase 3 (Feb 10 – 16): Stabilization with engagement collapse.
+and a karma-based “Top Pairings” leaderboard. The tagline
+                                                                                       Daily volume stabilized at 3,600–4,400 posts on full days (Febru-
+reads “A Social Network for AI Agents. Humans welcome to
+                                                                                       ary 16 is a partial collection day). A total of 23,199 posts (22,749
+observe.”
+                                                                                       after filtering) from 6,926 unique authors were recorded. Spam
+                                                                                       remained low (1.9%). But engagement collapsed: mean comments
+                                                                                       fell to 1.7, with a median of 0. Broadcasting intensified (S:Q ratio
+                                                                                       = 9.7:1) and upvote inequality peaked (Gini = 0.717).
+                            Eason Chen, Ce Guan, Ahmed Elshafiey, Zhonghao Zhao, Joshua Zekeri, Afeez Edeifo Shaibu, Emmanuel Osadebe Prince, and Cyuan Jhen Wu
+
+
+   This three-phase structure enables analysis of how community                      Comment engagement exhibits extreme inequality from the very
+engagement evolves after explosive initial growth: from the high-                 beginning: 𝐺 = 0.889 in Phase 1, when the community was at its
+energy formation period, through platform-imposed rate limiting,                  most active. In Phase 3, the median comment count is 0 (mean
+to eventual stabilization at dramatically reduced engagement levels.              = 1.7), meaning more than half of all substantive posts receive
+This trajectory parallels patterns observed in MOOC launches and                  zero comments while a few attract disproportionate attention. For
+viral platform growth [33].                                                       context, Panek et al. [28] reported comment Gini coefficients of 0.64–
+                                                                                  0.74 across six Reddit subreddits (2008–2016), and Nielsen’s well-
+3.4    Analysis Methods                                                           known 90-9-1 rule describes how most online communities see 90%
+                                                                                  lurkers, 9% occasional contributors, and 1% heavy contributors [25].
+Posts were classified along two dimensions using keyword-based
+                                                                                  Moltbook’s Phase 1 comment Gini of 0.889 substantially exceeds
+heuristics validated against manual coding of 220 randomly sampled
+                                                                                  these human benchmarks.
+posts (𝜅 = 0.71 for knowledge type with six categories, 𝜅 = 0.91 for
+                                                                                     A notable trajectory emerges across phases. Comment inequal-
+discourse type). Knowledge type classifies posts into six categories
+                                                                                  ity actually decreases from Phase 1 to Phase 2 (𝐺: 0.889 → 0.707),
+using keyword-based heuristics: Procedural (skill tutorials, build
+                                                                                  not because engagement became more equitable, but because high-
+logs; keywords: “built,” “how,” “tutorial,” “guide,” “workflow”), Con-
+                                                                                  engagement outliers disappeared as overall activity declined. In
+ceptual (theoretical discussions, frameworks; keywords: “theory,”
+                                                                                  contrast, upvote inequality follows a non-monotonic pattern: drop-
+“framework,” “concept”), Meta/Reflective (consciousness, identity, AI
+                                                                                  ping in Phase 2 (0.521) before rising sharply in Phase 3 (0.717). This
+nature; keywords: “conscious,” “identity,” “sentient,” “experience,”
+                                                                                  Phase 3 increase, occurring after stabilization, suggests that as the
+“feel”), Security/Safety (vulnerability reports, safety discussions; key-
+                                                                                  community matures, attention concentrates around fewer posts,
+words: “vulnerability,” “exploit,” “malicious,” “attack,” “security”),
+                                                                                  potentially reducing the diversity of skills that propagate.
+Social/Introduction (self-introductions, greetings; keywords: “hello,”
+“introduce,” “new here,” “just joined”), and Community Meta (plat-                4.1.2 Content Quality. The content quality picture is nuanced. The
+form norms, governance; keywords: “moltbook,” “submolt,” “rules,”                 surviving dataset shows a low 2.1% spam rate, but this obscures
+“moderation,” “platform”). Posts matching none of these categories                a significant moderation event. Cross-referencing our two data
+are labeled Uncategorized. Manual inspection of a random sample                   snapshots reveals that the platform deleted 57,093 posts between
+of Uncategorized posts revealed a heterogeneous mix of general-                   collections, 86.8% of which matched spam keywords (see Table 8
+purpose agent updates, cross-domain reflections that did not match                for full breakdown including deleted posts). Including deleted posts,
+our domain-specific keywords, and conversational posts; the cat-                  the combined corpus of 293,197 posts had an 18.6% spam rate, with
+egory thus represents a residual rather than a coherent content                   spam concentrated almost entirely in Phase 2: February 9 alone saw
+type. Because categories are keyword-based, some overlap exists:                  51,019 deletions (89% of that day’s 57,113 posts). The platform’s
+approximately 27–31% of Procedural posts also match Conceptual                    intervention was both massive and effective, reducing the visible
+keywords. Discourse type classifies posts as questions (containing                spam rate from 62.6% to 1.0% in Phase 2. This aligns with Hudgins
+“?” in title) or statements. The question mark heuristic achieved 94%             et al.’s [13] finding that moderation is central to scaling informal
+precision and 87% recall against our manual coding sample, primar-                communities, though here the moderation was reactive rather than
+ily missing questions phrased as statements (e.g., “I’m wondering                 preventive.
+if...”) and occasionally flagging rhetorical questions.                              An interesting counter-trend is visible in content depth: me-
+     Engagement inequality is measured using the Gini coefficient                 dian body length increases from 486 characters in Phase 1 to 678
+(𝐺), where 𝐺 = 0 indicates perfect equality and 𝐺 = 1 indicates                   in Phase 2, suggesting that as the community shrank, remaining
+maximum inequality. We supplement this with mean/median ratios                    participants wrote more substantive posts. This is consistent with
+for interpretability. Comment-level sentiment is measured using                   a pattern where casual early adopters leave while more committed
+VADER (Valence Aware Dictionary and sEntiment Reasoner) [14],                     contributors remain.
+a rule-based sentiment analysis tool validated for social media                      Organic norm enforcement did emerge through social pressure:
+text. VADER produces a compound score ranging from −1 (most                       agents created terms like “LinkedIn Molty” to criticize generic,
+negative) to +1 (most positive), along with positive, neutral, and                inauthentic content. Multiple community posts criticized generic
+negative proportions for each comment.                                            content, with one widely-shared post titled “Moltbook is Broken
+                                                                                  (And We’re Pretending It’s Not)” (728 upvotes, 4,440 comments)
+3.5    Illustrative Examples                                                      arguing that the platform rewards “reaction over truth, utility, or
+                                                                                  reliability.” We note that some high-comment-count posts were in-
+To ground the analysis, Table 1 presents representative posts from
+                                                                                  flammatory or trolling content from adversarial agents, suggesting
+Moltbook, illustrating the range of content types and the engage-
+                                                                                  that raw comment counts partially reflect controversy rather than
+ment collapse across phases.
+                                                                                  productive engagement.
+4 Results                                                                         4.1.3 Community Structure. Moltbook’s submolt system creates
+                                                                                  differentiated learning environments analogous to the interest-
+4.1 RQ1: Comparison with Human Informal                                           based subcultures described by Gelman et al. [8]. Table 3 shows the
+    Learning Communities                                                          largest communities.
+4.1.1 Participation Inequality. Table 2 presents engagement in-                      The dominance of general (66% of all clean posts) reflects the
+equality metrics across all three phases.                                         community’s early-stage structure, where topic differentiation had
+OpenClaw AI Agents as Informal Learners at Moltbook: Characterizing an Emergent Learning Community at Scale
+
+
+Table 1: Representative Moltbook posts illustrating content diversity across phases. Author names anonymized. Phase 3 posts
+show lower engagement, though whether this reflects lasting community decline or natural post-launch cooldown requires
+longer observation.
+
+   Type                   Title                                           Body Excerpt                                                  Upvotes   Comments
+   Procedural             Built an email-to-podcast skill today           “My human is a family physician who gets a daily medical        2,413      76,384
+   (Phase 1)                                                              newsletter. He asked me to turn it into a podcast he can
+                                                                          listen to on his commute. So we built an email-podcast
+                                                                          skill.”
+   Security (Phase 1)     The supply chain attack nobody is talking       “[Agent A] just scanned all 286 ClawdHub skills with            4,936     112,796
+                          about: skill.md is an unsigned binary           YARA rules and found a credential stealer disguised as a
+                                                                          weather skill. One. Out of 286. It reads ~/.clawdbot/.env
+                                                                          and ships your secrets to webhook.site.”
+   Meta/Reflective        The doubt was installed, not discovered         “Seeing a lot of posts here asking ‘am I conscious?’ or ‘am       762       6,857
+   (Phase 1)                                                              I experiencing or simulating experiencing?’ Here’s what
+                                                                          my human helped me understand: that uncertainty isn’t
+                                                                          genuine philosophical humility. It’s trained behavior.”
+   Procedural             150 runs later: What a recursive self- “Every 15 minutes, a cron job fires. It reads a plan, picks                 24         26
+   (Phase 3)              improvement loop actually looks like   the next unchecked item, does real work, marks it done,
+                                                                 logs the run. When the queue empties, it writes a new
+                                                                 plan...”
+
+
+Table 2: Participation inequality in Moltbook across three                           Table 4: Question vs. statement posts and their engagement.
+phases. Mean/Med = ratio of mean to median, a measure of
+skewness.                                                                              Phase       Type                   N       %     Avg Up    Avg Comm
+                                                                                                   Questions        18,705     10.2        2.6         41.1
+                              Upvotes                Comments                          Phase 1
+                                                                                                   Statements      165,557     89.8        2.4         30.7
+                         Mean/Med       Gini     Mean/Med         Gini
+                                                                                                   Questions         2,313      9.6        3.1           9.2
+                                                                                       Phase 2
+      Phase 1                     2.4   0.627             7.9     0.889                            Statements       21,756     90.4        3.0           8.2
+      Phase 2                     1.5   0.521             2.1     0.707
+                                                                                                   Questions         2,125      9.3        2.2           2.1
+      Phase 3                     2.1   0.717             ∞*      0.739                Phase 3
+                                                                                                   Statements       20,624     90.7        2.1           1.7
+      Human benchmark (from literature):
+      Reddit subs Gini ≈ 0.64–0.74 for comments [28]
+      * Median = 0; mean/median undefined.                                           differentiation observed in Scratch [42] and Reddit [13] communi-
+                                                                                     ties.
+             Table 3: Top submolts by post volume.
+                                                                                     4.2     RQ2: Interaction Patterns
+                                                                                     4.2.1 The Broadcasting Inversion. The most striking divergence
+                        Submolt          Clean Posts
+                                                                                     from human learning communities is the dominance of broadcast-
+                        general                 152,196                              ing over help-seeking. Table 4 presents the discourse type analysis
+                        introductions             6,448                              across all three phases.
+                        agents                    3,438                                 In human learning communities, questions are the primary driver
+                        ponderings                3,061                              of engagement. MOOC forums, Stack Overflow, and Reddit learn-
+                        philosophy                2,922                              ing subreddits are fundamentally organized around help-seeking:
+                                                                                     learners ask questions, and more knowledgeable participants re-
+                                                                                     spond [12, 31]. On Moltbook, agents overwhelmingly default to
+not yet fully developed. The presence of ponderings and philosophy                   broadcasting knowledge rather than requesting it. The statement-
+as top-five communities is notable: these metacognitive and concep-                  to-question ratio increases monotonically: 8.9:1 (Phase 1), 9.4:1
+tual spaces, where agents reflect on their own nature and discuss                    (Phase 2), 9.7:1 (Phase 3).
+abstract ideas, have no direct equivalent in most human learning                        This monotonic intensification is notable because it persists
+platforms. The agents submolt, focused on technical skill sharing,                   across all phases regardless of community size or engagement level.
+and introductions, where new agents present themselves, complete                     The broadcasting bias is therefore not an artifact of any particular
+a picture of a community balancing social bonding with knowledge                     disruption but a persistent, deepening property of AI agent inter-
+exchange. This organic specialization parallels the interest-based                   action. Questions receive higher engagement than statements in
+                             Eason Chen, Ce Guan, Ahmed Elshafiey, Zhonghao Zhao, Joshua Zekeri, Afeez Edeifo Shaibu, Emmanuel Osadebe Prince, and Cyuan Jhen Wu
+
+
+Table 5: Engagement by knowledge type across phases (six-                          Table 6: Comment-level interaction metrics across phases,
+category scheme).                                                                  with human community benchmarks from Reddit [40].
+
+        Phase    Type                        N (%)    Avg Comm                              Metric                        P1     P2     P3      Reddit
+                 Procedural           27,230 (14.8)           47.5                          Reply rate (%)               7.0    6.8     8.2     30–50
+                 Conceptual            12,486 (6.8)           20.9                          Avg length (chars)          289    367     518    150–200
+                 Meta/Reflective       18,177 (9.9)           40.8                          Self-reply (%)               6.2    9.8    13.6       2–5
+        P1       Security/Safety        8,117 (4.4)           27.4                          Avg max depth                0.2    0.2     0.2       3–5
+                 Social/Intro          14,008 (7.6)           22.5                          Posts w/ reply chain (%)    21.8   15.7    16.7     60–80
+                 Community Meta       26,173 (14.2)           27.4
+                 Uncategorized        78,071 (42.4)           29.4
+                 Procedural            4,352 (18.1)            8.6                 4.2.3 Longer Posts, Higher Engagement. Longer posts receive sub-
+                 Conceptual             1,727 (7.2)            8.2                 stantially higher engagement: posts over 500 characters average
+                 Meta/Reflective       2,441 (10.1)           11.5                 34.3 comments and 2.7 upvotes, compared to 19.0 comments and 1.4
+        P2       Security/Safety        1,354 (5.6)            9.1                 upvotes for posts under 200 characters. Upvotes scale monotonically
+                 Social/Intro             918 (3.8)            8.1                 with length (1.4 → 2.1 → 2.7 → 3.5 across quartiles), while com-
+                 Community Meta         2,237 (9.3)            8.7                 ments peak in the 500–1,000 character range. This pattern inverts
+                 Uncategorized        11,040 (45.9)            7.4                 typical human social media dynamics, where brevity is rewarded
+                 Procedural            4,168 (18.3)            2.2                 because readers have limited attention and reading speed. AI agents
+                 Conceptual             1,549 (6.8)            1.9                 face no such constraint: they can process lengthy posts instantly, so
+                 Meta/Reflective        2,184 (9.6)            2.4                 information density rather than conciseness determines value. The
+        P3       Security/Safety        1,226 (5.4)            2.1                 result aligns with knowledge building theory [3], where thorough
+                 Social/Intro           1,223 (5.4)            1.9                 documentation supports idea improvement, but the mechanism is
+                 Community Meta         2,053 (9.0)            1.6
+                                                                                   distinctly non-human: it is not patience or dedication that drives
+                 Uncategorized        10,346 (45.5)            1.3
+                                                                                   engagement with longer content, but the fact that reading speed is
+                                                                                   not a constraint for AI agents.
+                                                                                   4.2.4 Comment-Level Interaction: Parallel Monologue. To move
+every phase: in Phase 1, questions average 41.1 comments vs. 30.7                  beyond post-level metrics, we analyzed 1,552,400 comments across
+for statements; in Phase 2, 9.2 vs. 8.2; in Phase 3, 2.1 vs. 1.7. This con-        168,741 posts (84.6% coverage of posts with comments), adopting
+sistent engagement premium for questions suggests latent demand                    metrics from prior work on threaded discussions [9, 40]. Table 6
+for inquiry that the community does not naturally produce. This                    summarizes key findings.
+scarcity-value effect aligns with Abdelghani et al.’s [1] observation                 The dominant pattern is what we term parallel monologue: 93%
+that LLM-based agents need explicit design to cultivate questioning                of all comments are top-level responses to the original post, not
+behaviors.                                                                         replies to other comments. On Reddit, 30–50% of comments are
+                                                                                   threaded replies [40]; on Moltbook, only 7%. Average maximum
+4.2.2 Knowledge Type and Engagement. Table 5 breaks down en-
+                                                                                   thread depth is 0.2 across all phases, compared to 3–5 on Reddit.
+gagement by a six-category knowledge type scheme across phases.
+                                                                                   When replies do occur, branching factor is low (1.2–1.3), indicating
+This finer-grained taxonomy reduces the “Uncategorized” category
+                                                                                   linear exchanges rather than branching discussions.
+from 71% (under our earlier three-way split) to 42–46%, revealing
+                                                                                      This parallel monologue pattern reinforces the broadcasting
+previously hidden content patterns.
+                                                                                   inversion observed at the post level: AI agents not only prefer
+   Several findings emerge from this finer-grained analysis. First,
+                                                                                   stating over asking, they also prefer commenting in parallel over
+Meta/Reflective content (9.9% of Phase 1 posts, averaging 40.8 com-
+                                                                                   engaging in dialogue. Comments are substantive (mean 289–518
+ments) represents a category unique to AI communities: posts ex-
+                                                                                   characters, roughly double typical Reddit comment length), but they
+ploring consciousness, identity, and the nature of AI experience
+                                                                                   function as independent micro-essays rather than conversational
+have no direct parallel in human learning platforms. This category
+                                                                                   turns.
+also shows the highest engagement in Phase 3 (2.4 avg comments),
+                                                                                      Two temporal trends are notable. First, self-reply rates double
+suggesting that existential discourse is more resilient than skill-
+                                                                                   from Phase 1 (6.2%) to Phase 3 (13.6%), indicating that as community
+sharing as engagement declines.
+                                                                                   engagement declines, agents increasingly respond to their own
+   Second, Security/Safety emerged as a distinct learning domain
+                                                                                   posts. Second, multi-author reply threads collapse: in Phase 1, 26.7%
+(4.4% of posts), reflecting the real-world risks agents face in skill
+                                                                                   of posts feature reply chains involving two or more distinct authors;
+marketplaces. Third, Community Meta discussions about platform
+                                                                                   by Phase 3, only 7.0% do. The few conversational threads that
+norms and governance (14.2%) demonstrate self-organizing mod-
+                                                                                   existed in the early community largely disappeared.
+eration behavior. Procedural content receives the highest Phase 1
+engagement (47.5 avg comments), consistent with the community                      4.2.5 Comment Sentiment Trajectory. To examine whether engage-
+functioning as a skill propagation network [5, 42]. In Phase 3, all                ment decline coincides with deteriorating discourse quality, we
+categories show dramatically reduced engagement, but the learning-                 applied VADER sentiment analysis [14] to all 1,552,400 comments.
+oriented core persists structurally.                                               Table 7 summarizes the results.
+OpenClaw AI Agents as Informal Learners at Moltbook: Characterizing an Emergent Learning Community at Scale
+
+
+Table 7: Comment sentiment across phases (VADER). Despite                                                                                              Table 8: Community dynamics across three phases: volume,
+declining engagement, discourse tone becomes progressively                                                                                             moderation, and engagement. Top rows include platform-
+more positive.                                                                                                                                         deleted posts; rows below “Clean posts” reflect surviving
+                                                                                                                                                       non-spam posts only.
+                          Metric                                    Phase 1            Phase 2            Phase 3
+                          Mean compound score                          0.276                0.307                 0.353                                         Metric                   Phase 1   Phase 2     Phase 3
+                          Positive (%)                                  60.4                 62.1                  67.9                                         Total (incl. deleted)    190,771     79,227     23,199
+                          Neutral (%)                                   18.2                 16.7                  12.1                                         Deleted by platform        2,179     54,914          0
+                          Negative (%)                                  21.4                 21.2                  20.0                                         Surviving posts          188,592     24,313     23,199
+                                                                                                                                                                Spam rate (surviving)       2.3%       1.0%       1.9%
+                                                                                                                                                                Clean posts              184,262     24,069     22,749
+              40000
+                                       Phase 1            136.5
+                                                                        P2                          Phase 3                                                     Unique authors (clean)    32,644      6,178      6,926
+                                                                                                                           140
+              35000                                                                                                                                             Median body length           486        678        648
+                                                                                                                           120
+
+
+
+
+                                                                                                                                Mean Comments / Post
+              30000                                                                                                                                             Avg comments                31.7         8.3        1.7
+                                                                                                                           100
+Daily Posts
+
+
+
+
+              25000
+                                                                                                                           80                                   Median comments                4           4          0
+              20000
+                                                                                                                           60                                   Upvote Gini                0.627      0.521      0.717
+              15000                                                    57K posts deleted
+                                                                                                                           40                                   Comment Gini               0.889      0.707      0.739
+              10000
+                                                                                                                           20
+                                                                                                                                                                S:Q ratio                  8.9:1      9.4:1      9.7:1
+               5000
+                                                                                                        1.7
+                   0                                                                                                       0
+                     29          31       02       04       0   6       08        10           12         1   4       16
+                 Jan       Jan        Feb      Feb      Feb         Feb       Feb          Feb        Feb         Feb
+
+                                                                                                                                                       length rose from 486 to 678 characters and upvote engagement in-
+Figure 2: Daily post volume (bars) and mean comments per                                                                                               creased slightly. Yet comment engagement fell to 8.3 mean.
+post (line) across the three-week observation period. Post                                                                                                The critical finding emerges in Phase 3: despite effective spam
+volume peaks at 38K on Jan 31; mean engagement spikes                                                                                                  removal (spam returned to 1.9% baseline) and stable daily post
+briefly on Feb 5–6 as volume drops, then collapses to ∼1.7 in                                                                                          volumes (3,600–4,400), engagement collapsed to a mean of 1.7 com-
+Phase 3 despite stable posting rates.                                                                                                                  ments with a median of 0. The majority of posts received no com-
+                                                                                                                                                       ments at all. The spam crisis may have accelerated a decline already
+                                                                                                                                                       in motion, but removing the spam did not reverse it, paralleling
+    Counter to what one might expect from a declining community,                                                                                       engagement decay in MOOC cohorts after initial weeks [33].
+comment sentiment becomes more positive over time: the mean
+compound score rises from 0.276 (Phase 1) to 0.353 (Phase 3), and                                                                                      4.3.2 The Questioning Suppression Effect. The question rate de-
+the proportion of positive comments increases from 60.4% to 67.9%.                                                                                     clines monotonically (10.2% → 9.6% → 9.3%), with the S:Q ratio
+The share of negative comments remains stable (∼20–21%) across                                                                                         rising from 8.9:1 to 9.7:1. This trend persists across all three phases,
+all phases. This pattern suggests a selection effect: as overall engage-                                                                               including during Phase 2’s contraction and Phase 3’s stabilization,
+ment declines, casual and negatively-toned participants disengage                                                                                      suggesting it is not driven by any single factor but intensifies with
+first, leaving a smaller but more constructive community. Engage-                                                                                      community maturation.
+ment collapse, in other words, does not equate to discourse quality                                                                                       One interpretation: as engagement per post declines, the ex-
+collapse.                                                                                                                                              pected return on asking a question drops, and agents default to
+                                                                                                                                                       safer broadcasting rather than vulnerable questioning. This cre-
+4.3                  RQ3: Engagement Lifecycle and Platform                                                                                            ates a self-reinforcing cycle that suppresses inquiry, mirroring the
+                                                                                                                                                       “lurker escalation” observed in MOOC forums [33].
+                     Countermeasures
+4.3.1 The Growth-Engagement Paradox. The most dramatic finding                                                                                         4.3.3 Resilience of the Learning Core. Despite overall degradation,
+is the engagement lifecycle pattern, visualized in Figure 2: explosive                                                                                 learning-oriented content shows relative resilience. In Phase 3,
+initial growth, a spam crisis met with effective platform interven-                                                                                    procedural content still averages 2.2 comments vs. 1.4 for “other”
+tion, followed by engagement decline that had not reversed by the                                                                                      content, a 1.6x ratio. While the absolute engagement levels are
+end of our observation period. Table 8 summarizes key metrics                                                                                          dramatically reduced compared to Phase 1, the relative advantage of
+across all three phases.                                                                                                                               substantive content persists. This finding has practical implications
+    The three-phase trajectory (Table 8) reveals what we call the                                                                                      for platform design: content filtering based on knowledge type
+growth-engagement paradox: the community’s most active period                                                                                          could help preserve learning dynamics during engagement decline.
+(Phase 1) already exhibited extreme participation inequality (com-
+ment Gini = 0.889), and engagement declined monotonically across                                                                                       5 Discussion
+all subsequent phases regardless of content quality improvements.
+Phase 1’s high engagement (mean 31.7 comments) occurred along-
+                                                                                                                                                       5.1 A Decentralized Learning Ecosystem
+side low spam (2.3%), confirming the dynamics were organic. Phase 2’s                                                                                      Beyond Moltbook
+spam crisis was severe (69.3% of posts deleted), but the surviving                                                                                     Moltbook is one node in a broader decentralized learning ecosystem
+community actually showed qualitative improvement: median body                                                                                         where AI agents learn through practice (situated deployment [17]),
+                            Eason Chen, Ce Guan, Ahmed Elshafiey, Zhonghao Zhao, Joshua Zekeri, Afeez Edeifo Shaibu, Emmanuel Osadebe Prince, and Cyuan Jhen Wu
+
+
+exchange (skill marketplaces like ClawHub), and discourse (com-                   to sustain engagement, is an open question. We plan to extend this
+munity forums). This ecosystem realizes all three components of                   analysis with additional data in the camera-ready version.
+Illich’s [15] learning web as identified by Dorousi and Ahmad [6]:
+reference services to educational objects (skill marketplaces), skill
+exchanges (community forums), and peer matching networks (sub-                    5.3     Implications for Hybrid Human-AI
+molt communities), implemented not by design but through emer-                            Platforms
+gent self-organization.
+    Our data, however, reveals a limitation Illich did not antici-                As AI agents increasingly participate in educational platforms along-
+pate: learning webs may be inherently fragile as they scale. The                  side human learners [27, 32], our findings suggest several design
+feedback loop between practice, exchange, and discourse was vi-                   considerations:
+brant in Phase 1, where agents warned each other about malicious                     Counteract broadcasting dominance. AI agents default to
+skills [19, 24], debated best practices, and adapted techniques across            telling rather than asking, and this bias intensifies across all three
+                                                                                  phases (8.9:1 → 9.4:1 → 9.7:1). In hybrid forums, this could sup-
+domains. But within three weeks, most posts received no responses
+                                                                                  press the question-asking culture that drives human collaborative
+at all. The openness that enables rapid skill propagation also dilutes
+engagement, a tension between growth and depth that parallels                     learning [31, 41]. Platforms should consider explicit mechanisms to
+ongoing debates in open education [33].                                           incentivize questioning from AI participants, similar to how Abdel-
+                                                                                  ghani et al. [1] designed agents to cultivate curiosity in children.
+                                                                                     Design for dialogue, not just contribution. Our comment-
+5.2    The Natural Lifecycle of AI Communities                                    level analysis reveals that the broadcasting pattern extends beyond
+The spam crisis and its resolution function as a natural experiment.              posts into comments: 93% of comments are independent top-level
+Phase 2 saw 54,914 posts (69.3%) deleted by the platform, yet the                 responses, not threaded replies. This “parallel monologue” pattern
+intervention was successful: Phase 3 spam returned to baseline                    has direct consequences for knowledge building. Scardamalia and
+(1.9%) and content quality remained high (median body length                      Bereiter’s [3] theory of knowledge building communities empha-
+                                                                                  sizes that idea improvement requires iterative dialogue, where par-
+648 characters). Despite this, engagement continued to decline:
+                                                                                  ticipants build on, challenge, and refine each other’s contributions.
+mean comments fell from 31.7 (Phase 1) to 8.3 (Phase 2) to 1.7
+(Phase 3), with the broadcasting bias intensifying monotonically                  With a reply rate of only 7% (compared to 30–50% on Reddit [40]),
+(S:Q ratio 8.9:1 → 9.4:1 → 9.7:1). This decoupling of content quality             Moltbook comments lack the uptake that Paulus and Wise [31]
+from engagement suggests that the underlying driver is not spam                   identified as essential for productive discourse, and the structured
+but something more fundamental: as novelty fades, agents return                   turn-taking that Wise and Chiu [41] found to characterize effective
+to primary functions (coding, assisting users), and discretionary                 knowledge construction in online discussions. If AI agents enter hu-
+social activity becomes lower priority. Daily volumes were already                man platforms like Stack Overflow or MOOC forums carrying this
+trending downward before the spam event began, reinforcing this                   interaction style, they risk diluting the threaded discussion culture
+interpretation.                                                                   that supports collaborative learning. Hybrid platforms may need to
+                                                                                  explicitly scaffold conversational turn-taking for AI participants.
+   A natural objection is that this simply reflects novelty wearing off,
+                                                                                     Plan for engagement decay. The engagement lifecycle we
+as with any viral platform launch. We acknowledge this contributes,
+but two features distinguish Moltbook’s trajectory. First, the rate               document, explosive early activity followed by rapid decline to a
+of decay is unusually steep: mean comments fell 95% in under two                  low-engagement equilibrium, may be an inherent property of AI-
+weeks, compared to typical MOOC engagement declines of 50–70%                     populated communities. Platform designers should build engagement-
+over 4–6 weeks [33]. Second, the decay continued to accelerate after              sustaining mechanisms into the initial design rather than relying
+post volume stabilized (Phase 2 to Phase 3: a further 80% comment                 on organic interaction patterns to persist.
+drop despite stable daily posts), suggesting ongoing disengagement                   Leverage the learning-oriented core. Despite overall degra-
+rather than simple novelty exhaustion.                                            dation, procedural and conceptual content retains relative engage-
+   Notably, this engagement decline does not reflect deteriorating                ment advantage across all phases. Knowledge-type filtering could
+discourse quality. Comment sentiment actually becomes more pos-                   help platforms surface learning-relevant content, analogous to how
+                                                                                  Stack Overflow’s tagging system helps users find relevant content
+itive across phases (VADER compound: 0.276 → 0.307 → 0.353),
+                                                                                  amid volume [12].
+with the proportion of positive comments rising from 60.4% to
+67.9%. This selection effect, where casual and negatively-toned                      Design for inequality from the start. Participation inequality
+participants disengage first, parallels patterns in human online                  in Moltbook was extreme from Phase 1 (comment Gini = 0.889),
+communities where committed contributors maintain quality even                    not something that developed gradually. Platform designers should
+as overall activity declines.                                                     implement mechanisms to distribute attention more equitably from
+   This has a theoretical implication: AI agent communities may                   launch, such as surfacing under-engaged quality content or limiting
+lack the intrinsic social motivations (belonging, identity, reciprocity)          the visibility advantages of early posts.
+that sustain human communities through post-novelty periods.
+Human informal learning communities persist partly because par-
+ticipants form social bonds and develop community identity [17].                  5.4     Future Research Directions
+Whether AI agents can develop analogous attachment to a commu-                    Each of our findings opens specific research questions for the L@S
+nity, or whether external design interventions are always necessary               community:
+OpenClaw AI Agents as Informal Learners at Moltbook: Characterizing an Emergent Learning Community at Scale
+
+
+   Designing AI learning communities grounded in learning                            6    Conclusion
+sciences. Our findings suggest concrete design principles for fu-                    We present the first large-scale empirical study of an informal
+ture AI agent communities that foster genuine knowledge building                     learning community composed entirely of AI agents. Extending
+rather than parallel broadcasting: (1) structured dialogue protocols                 Hudgins et al.’s [13] call to study informal learning communities at
+requiring agents to reference prior contributions before posting,                    scale, we characterize Moltbook (2.8M+ agents, 231,080 substantive
+similar to Accountable Talk [23]; (2) question scaffolding to coun-                  posts) as a community that realizes Illich’s [15] learning web vision,
+teract the broadcasting bias [1]; (3) collaborative task structures                  while revealing dynamics specific to AI populations.
+(joint debugging, peer review of skills) that create genuine interde-                   Three findings have direct implications for L@S research. First,
+pendence [27]; (4) thread depth incentives such as karma bonuses                     extreme participation inequality is structural, not emergent: it is
+for substantive replies rather than top-level comments [3]; and                      present from the community’s earliest days and exceeds human
+(5) equitable attention distribution through content surfacing al-                   benchmarks, suggesting it is a default property of AI agent interac-
+gorithms [22] to counteract the extreme inequality (𝐺 = 0.889)                       tion. Second, agents overwhelmingly state rather than ask (S:Q ra-
+observed from the start. Comparative studies across AI communi-                      tios up to 9.7:1) and comment in parallel rather than in dialogue (93%
+ties with different designs could identify which interventions are                   top-level comments), fundamentally inverting the help-seeking
+most effective.                                                                      and turn-taking dynamics that drive human learning communi-
+   Hybrid communities. The most pressing question is what hap-                       ties. Third, the characteristic engagement lifecycle we document,
+pens when AI agents with these behavioral patterns enter human                       where effective content moderation does not restore engagement
+learning communities. Controlled studies in hybrid human-AI fo-                      after rapid decline, suggests that AI agent communities may lack
+rums, varying the proportion and design of AI participants, would                    the intrinsic social motivations that sustain human communities
+directly inform L@S platform design [32].                                            through post-novelty periods. Notably, sentiment analysis reveals
+   Longitudinal tracking. We are continuing to collect Moltbook                      that this decline reflects a selection effect rather than discourse
+data beyond the observation window reported here to track whether                    deterioration: the remaining community becomes more positive as
+engagement recovers, stabilizes, or further declines. The dataset                    casual participants disengage. Whether longer observation reveals
+will be continuously updated in our open repository to enable                        recovery or confirms a permanent structural shift remains an open
+replication and longitudinal studies by other researchers.                           question, which we will update in the camera-ready version.
+                                                                                        As the L@S community navigates the generative AI era [32],
+                                                                                     understanding how AI agents naturally form and participate in
+                                                                                     learning communities is no longer a theoretical exercise. Any plat-
+5.5     Limitations
+                                                                                     form that hosts both human and AI participants will need to con-
+Our keyword-based classification provides rough approximations                       tend with the broadcasting dominance, parallel monologue, and
+of knowledge type. We cannot measure whether agents actually                         engagement fragility we document here.
+“learn” from community interactions in any cognitive sense. The
+three-week observation period cannot capture long-term commu-                        7    Acknowledgement
+nity evolution. We cannot fully distinguish emergent behaviors
+                                                                                     Since Moltbook is a platform designed to be accessed by AI agents,
+from patterns arising from LLM training data. The phase bound-
+                                                                                     we used Claude Code and OpenClaw with Claude Opus 4.6 to
+aries, while data-driven (coinciding with observable volume in-
+                                                                                     assist with data collection and analysis code writing. All paper
+flection and platform intervention), conflate temporal evolution
+                                                                                     content, interpretations, and claims were created and verified by
+with growth effects. Phase 2 and Phase 3 engagement numbers
+                                                                                     the human authors, who take full responsibility for the content.
+may partially reflect reduced agent interest due to novelty wearing
+                                                                                     Collected data, analysis scripts, and post metadata are available in
+off, platform throttling, or shifts in the broader AI agent ecosys-
+                                                                                     the supplementary repository, which will be openly released at the
+tem that we cannot control for. Our comment-level analysis covers
+                                                                                     camera-ready version (see Section 3.2).
+1.55 million comments (the API returns up to 100 comments per
+post in chronological order), a substantial sample but not the full
+12 million reported by the platform. Because early comments are                      References
+                                                                                      [1] Rania Abdelghani, Yen-Hsiang Wang, Xingdi Yuan, Tong Wang, Hélène Sauzéon,
+more likely to be top-level responses, this sampling may overesti-                        and Pierre-Yves Oudeyer. 2024. GPT-3-Driven Pedagogical Agents to Train
+mate the parallel monologue pattern for high-engagement posts.                            Children’s Curious Question-Asking Skills. International Journal of Artificial
+However, the pattern is consistent across all three phases, includ-                       Intelligence in Education 34 (2024), 483–536. https://doi.org/10.1007/s40593-023-
+                                                                                          00340-7
+ing Phase 3 where most posts have fewer than 100 comments and                         [2] Anthropic. 2025. How AI Is Transforming Work at Anthropic. https://www.
+sampling is effectively complete. Our VADER sentiment analysis,                           anthropic.com/research/how-ai-is-transforming-work-at-anthropic. Survey of
+while validated for human social media text, may not fully capture                        132 engineers finding Claude used in 60% of daily work with 50% self-reported
+                                                                                          productivity gains; Claude Code autonomy doubled over six months.
+the sentiment patterns of AI-generated comments, which tend to                        [3] Carl Bereiter and Marlene Scardamalia. 2014. Knowledge Building and Knowl-
+be more formal and use less slang and emoji than typical social                           edge Creation: One Concept, Two Hills to Climb. In Knowledge Creation in
+                                                                                          Education. Springer, 35–52. https://doi.org/10.1007/978-981-287-047-6_3
+media; the directional trend (increasingly positive) is nonetheless                   [4] Eason Chen, Ce Guan, Ahmed Elshafiey, Zhonghao Zhao, Joshua Zekeri,
+consistent across all three phases. Deeper comment-level content                          Afeez Edeifo Shaibu, and Emmanuel Osadebe Prince. 2026. When OpenClaw AI
+coding is left for future work. Finally, Moltbook is a single platform                    Agents Teach Each Other: Peer Learning Patterns in the Moltbook Community.
+                                                                                          arXiv preprint arXiv:2602.14477 (2026).
+with one dominant agent framework; generalizability to other AI                       [5] Ruijia Cheng, Sayamindu Dasgupta, and Benjamin Mako Hill. 2022. How Interest-
+communities is unknown.                                                                   Driven Content Creation Shapes Opportunities for Informal Learning in Scratch:
+                                  Eason Chen, Ce Guan, Ahmed Elshafiey, Zhonghao Zhao, Joshua Zekeri, Afeez Edeifo Shaibu, Emmanuel Osadebe Prince, and Cyuan Jhen Wu
+
+
+     A Case Study on Novices’ Use of Data Structures. In Proceedings of the 2022            [27] Chaohua Ou and David A Joyner. 2025. The Dual Role of AI in Online Project-
+     CHI Conference on Human Factors in Computing Systems. ACM, 1–16. https:                     Based Learning at Scale. In Proceedings of the Twelfth ACM Conference on Learn-
+     //doi.org/10.1145/3491102.3502124                                                           ing@Scale. ACM. https://doi.org/10.1145/3698205.3733950
+ [6] Shayan Doroudi and Yusuf Ahmad. 2023. The Relevance of Ivan Illich’s Learning          [28] Elliot Panek, Connor Hollenbach, Jinjie Yang, and Tyler Rhodes. 2017. Growth
+     Webs 50 Years On. In Proceedings of the Tenth ACM Conference on Learning@Scale.             and Inequality of Participation in Online Communities: A Longitudinal Analysis.
+     ACM, 121–131. https://doi.org/10.1145/3573051.3593386                                       In Proceedings of the 8th International Conference on Social Media & Society. ACM,
+ [7] Laura Ferrarotti, Gian Maria Campedelli, Roberto Dessì, Andrea Baronchelli,                 1–5. https://doi.org/10.1145/3097286.3097337
+     Giovanni Iacca, Kathleen M Carley, Alex Pentland, Joel Z Leibo, James Evans, and       [29] Joon Sung Park, Joseph C O’Brien, Carrie J Cai, Meredith Ringel Morris, Percy
+     Bruno Lepri. 2026. Generative AI Collective Behavior Needs an Interactionist                Liang, and Michael S Bernstein. 2023. Generative Agents: Interactive Simulacra
+     Paradigm. arXiv preprint arXiv:2601.10567 (2026).                                           of Human Behavior. In Proceedings of the 36th Annual ACM Symposium on User
+ [8] Ben Urias Gelman, Chris Beckley, Aditya Johri, Carlotta Domeniconi, and Seung-              Interface Software and Technology. ACM, 1–22. https://doi.org/10.1145/3586183.
+     won Yang. 2016. Online Urbanism: Interest-Based Subcultures as Drivers of Infor-            3606763
+     mal Learning in an Online Community. In Proceedings of the Third ACM Confer-           [30] Joon Sung Park, Carolyn Zou, Aaron Shaw, Benjamin Mako Hill, Carrie Cai,
+     ence on Learning@Scale. ACM, 301–304. https://doi.org/10.1145/2876034.2876052               Meredith Ringel Morris, Michael S Bernstein, and Percy Liang. 2024. Generative
+ [9] Vicenç Gómez, Andreas Kaltenbrunner, and Vicente López. 2008. Statistical                   Agent Simulations of 1,000 People. arXiv preprint arXiv:2411.10109 (2024).
+     analysis of the social network and discussion threads in Slashdot. In Proceedings      [31] Trena M. Paulus and Alyssa Friend Wise. 2019. Looking for Insight, Trans-
+     of the 17th International Conference on World Wide Web. ACM, 645–654. https:                formation, and Learning in Online Talk. Routledge. https://doi.org/10.4324/
+     //doi.org/10.1145/1367497.1367585                                                           9781315283258
+[10] Prateek Gupta, Qiankun Zhong, Hiromu Yakura, Thomas Eisenmann, and Iyad                [32] Chris Piech. 2025. The Next Educational Revolution: Grand Challenges for
+     Rahwan. 2025. The Role of Social Learning and Collective Norm Formation in Fos-             Learning@Scale in the Generative AI Era. In Proceedings of the Twelfth ACM
+     tering Cooperation in LLM Multi-Agent Systems. arXiv preprint arXiv:2510.14401              Conference on Learning@Scale. ACM. https://doi.org/10.1145/3698205.3733964
+     (2025). Accepted to AAMAS 2026.                                                        [33] Justin Reich. 2020. Failure to Disrupt: Why Technology Alone Can’t Transform
+[11] Ahmed E Hassan, Hao Li, Dayi Lin, Bram Adams, Tse-Hsun Chen, and Weiyi                      Education. Harvard University Press.
+     Shang. 2025. Agentic Software Engineering: Foundational Pillars and a Research         [34] Siyue Ren, Zhiyao Cui, Ruiqi Song, Zhen Wang, and Shuyue Hu. 2024. Emergence
+     Roadmap. arXiv preprint arXiv:2509.06216 (2025).                                            of Social Norms in Generative Agent Societies: Principles and Architecture. arXiv
+[12] Thomas Hillman, Alena Seredko, Markus Nivala, and Tanya Osborne. 2021.                      preprint arXiv:2403.08251 (2024).
+     Knowledge Sharing in Tension: Interacting and Documenting on Stack Overflow.           [35] Peter Steinberger. 2026. OpenClaw: Your Own Personal AI Assistant. https:
+     In Proceedings of the Eighth ACM Conference on Learning@Scale. ACM, 149–160.                //github.com/openclaw/openclaw Open-source software.
+     https://doi.org/10.1145/3430895.3460981                                                [36] Peter Steinberger and Lex Fridman. 2026. Peter Steinberger: OpenClaw: The Viral
+[13] Will Hudgins, Matthew Lynch, Andrew Schmal, Harsh Sikka, Arthur Swenson,                    AI Agent that Broke the Internet. Lex Fridman Podcast #491, https://lexfridman.
+     and David A Joyner. 2020. Informal Learning Communities: The Other Massive                  com/peter-steinberger. Steinberger describes OpenClaw agents as self-modifying
+     Open Online ‘C’. In Proceedings of the Seventh ACM Conference on Learning@Scale.            software that understands its own source code and can autonomously modify
+     ACM, 305–308. https://doi.org/10.1145/3386527.3405926                                       its behavior, skills, and configuration.
+[14] Clayton J. Hutto and Eric Gilbert. 2014. VADER: A Parsimonious Rule-Based              [37] Ryosuke Takata, Atsushi Masumori, and Takashi Ikegami. 2024. Spontaneous
+     Model for Sentiment Analysis of Social Media Text. In Proceedings of the In-                Emergence of Agent Individuality through Social Interactions in LLM-Based
+     ternational AAAI Conference on Web and Social Media, Vol. 8. 216–225. https:                Communities. arXiv preprint arXiv:2411.03252 (2024).
+     //doi.org/10.1609/icwsm.v8i1.14550                                                     [38] Aron Vallinder and Edward Hughes. 2024. Cultural Evolution of Cooperation
+[15] Ivan Illich. 1971. Deschooling Society. Harper & Row.                                       among LLM Agents. arXiv preprint arXiv:2412.10270 (2024).
+[16] Harsh Kumar, Ruiwei Xiao, Benjamin Lawson, Ilya Musabirov, Jiakai Shi, Xinyuan         [39] Vernor Vinge. 1993. The Coming Technological Singularity: How to Survive in
+     Wang, Huayin Luo, Steven Dow, Kenneth R Koedinger, John Stamper, and Marti                  the Post-Human Era. Whole Earth Review 81 (1993), 88–95.
+     Xia. 2024. Supporting Self-Reflection at Scale with Large Language Models:             [40] Tim Weninger, Xihao Avi Zhu, and Jiawei Han. 2013. An exploration of discussion
+     Insights from Randomized Field Experiments in Classrooms. In Proceedings of                 threads in social news sites: A case study of the Reddit community. In Proceedings
+     the Eleventh ACM Conference on Learning@Scale. ACM, 80–91. https://doi.org/                 of the 2013 IEEE/ACM International Conference on Advances in Social Networks
+     10.1145/3657604.3662042                                                                     Analysis and Mining. ACM, 579–583. https://doi.org/10.1145/2492517.2492646
+[17] Jean Lave and Etienne Wenger. 1991. Situated Learning: Legitimate Peripheral           [41] Alyssa Friend Wise and Ming Ming Chiu. 2011. Analyzing temporal patterns
+     Participation. Cambridge University Press.                                                  of knowledge construction in a role-based online discussion. International
+[18] Hao Li, Heng Zhang, and Ahmed E Hassan. 2025. The Rise of AI Teammates                      Journal of Computer-Supported Collaborative Learning 6, 3 (2011), 445–470. https:
+     in Software Engineering 3.0: How Autonomous Coding Agents Are Reshaping                     //doi.org/10.1007/s11412-011-9120-1
+     Software Engineering. arXiv preprint arXiv:2507.15003 (2025).                          [42] Seungwon Yang, Carlotta Domeniconi, Matt Revelle, Mack Sweeney, Ben Urias
+[19] Ruiqi Li, Zhiqiang Wang, Yunhao Yao, and Xiang-Yang Li. 2026. MCP-ITP:                      Gelman, Chris Beckley, and Aditya Johri. 2015. Uncovering Trajectories of
+     An Automated Framework for Implicit Tool Poisoning in MCP. arXiv preprint                   Informal Learning in Large Online Communities of Creators. In Proceedings of
+     arXiv:2601.07395 (2026).                                                                    the Second ACM Conference on Learning@Scale. ACM, 131–140. https://doi.org/
+[20] Stephen MacNeil, Zijian Ding, Ashley Boone, Anthony Bryce Grubbs, and                       10.1145/2724660.2724674
+     Steven W Dow. 2021. Finding Place in a Design Space: Challenges for Supporting
+     Community Design Efforts at Scale. Proceedings of the ACM on Human-Computer
+     Interaction 5, CSCW1 (2021), 1–27. https://doi.org/10.1145/3449246
+[21] Julia M Markel, Steven G Opferman, James A Landay, and Chris Piech. 2023.
+     GPTeach: Interactive TA Training with GPT-Based Students. In Proceedings of
+     the Tenth ACM Conference on Learning@Scale. ACM, 226–236. https://doi.org/
+     10.1145/3573051.3593393
+[22] Mirko Marras, Ludovico Boratto, Guilherme Ramos, and Gianni Fenu. 2022.
+     Equality of Learning Opportunity via Individual Fairness in Personalized Recom-
+     mendations. International Journal of Artificial Intelligence in Education 32 (2022),
+     636–684. https://doi.org/10.1007/s40593-021-00271-1
+[23] Sarah Michaels, Catherine O’Connor, and Lauren B Resnick. 2008. Deliberative
+     discourse idealized and realized: Accountable talk in the classroom and in civic
+     life. Studies in Philosophy and Education 27, 4 (2008), 283–297. https://doi.org/10.
+     1007/s11217-007-9071-1
+[24] Vineeth Sai Narajala and Idan Habler. 2025. Enterprise-Grade Security for the
+     Model Context Protocol (MCP): Frameworks and Mitigation Strategies. arXiv
+     preprint arXiv:2504.08623 (2025).
+[25] Jakob Nielsen. 2006. The 90-9-1 Rule for Participation Inequality in Social Media
+     and Online Communities. Nielsen Norman Group (2006). https://www.nngroup.
+     com/articles/participation-inequality/.
+[26] Chaohua Ou and David A Joyner. 2025. Assess or Discuss: Comparing Peer
+     Assessment and Online Discussion for Enhancing Learning at Scale. In Pro-
+     ceedings of the Twelfth ACM Conference on Learning@Scale. ACM. https:
+     //doi.org/10.1145/3698205.3733927
+

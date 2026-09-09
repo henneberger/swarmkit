@@ -1,0 +1,17 @@
+From: leo.moss@example.invalid
+To: ada.finch@example.invalid
+Date: Fri, 02 Feb 2001 10:00:00 +0000
+Subject: Aster board: fresh server export
+Message-ID: <06_fresh_export@inquiry-demo.example.invalid>
+X-Synthetic-Fixture: true
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+SYNTHETIC INQUIRY FIXTURE =E2=80=94 entirely fictional, not an Enron email.
+
+I opened a new browser session and downloaded the server export at 09:52. It =
+shows Kestrel quantity 0, destination QZ-7, and generated-at 02:03 today. The=
+ archived revision 17 correction shows 420. This comparison uses the fresh se=
+rver export, not my local revision 16 spreadsheet. I cannot tell which proces=
+s wrote the 02:03 export.

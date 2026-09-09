@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "evidence_posts": 8,
+  "checked_citations": 26,
+  "unique_documents": 11,
+  "failures": [],
+  "scope": "emitted post evidence: exact stored quote, hashes, outer date and arrival sequence",
+  "limitations": "Does not audit uncited prose, model prior knowledge, truth, or quality of inference."
+}

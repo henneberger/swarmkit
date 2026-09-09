@@ -1,0 +1,107 @@
+{
+  "id": "2410.11387",
+  "label": "LLM2Swarm",
+  "topic": "embodied-swarm",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2410.11387",
+      "resolved_url": "https://arxiv.org/abs/2410.11387",
+      "path": "sources/papers/2410.11387/abstract.html",
+      "bytes": 43416,
+      "sha256": "9d817bb978401e04917e2e6c94f488de35cb66ea52624455a4c5f8fe299a8508"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2410.11387",
+      "resolved_url": "https://arxiv.org/pdf/2410.11387",
+      "path": "sources/papers/2410.11387/paper.pdf",
+      "bytes": 1058401,
+      "sha256": "fb3caa04bd3c8377e91ce2338bc78a063b9516163c135141287764a7bcb47c18"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2410.11387: LLM2Swarm: Robot Swarms that Responsively Reason, Plan, and Collaborate through LLMs"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "LLM2Swarm: Robot Swarms that Responsively Reason, Plan, and Collaborate through LLMs"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2410.11387v3"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Robot swarms are composed of many simple robots that communicate and collaborate to fulfill complex tasks. Robot controllers usually need to be specified by experts on a case-by-case basis via programming code. This process is time-consuming, prone to errors, and unable to take into account all situations that may be encountered during deployment. On the other hand, recent Large Language Models (LLMs) have demonstrated reasoning and planning capabilities, introduced new ways to interact with and program machines, and incorporate both domain-specific and commonsense knowledge. Hence, we propose to address the aforementioned challenges by integrating LLMs with robot swarms and show the potential in proofs of concept (showcases). For this integration, we explore two approaches. The first approach is 'indirect integration,' where LLMs are used to synthesize and validate the robot controllers. This approach may reduce development time and human error before deployment. Moreover, during deployment, it could be used for on-the-fly creation of new robot behaviors. The second approach is 'direct integration,' where each robot locally executes a separate LLM instance during deployment for robot-robot collaboration and human-swarm interaction. These local LLM instances enable each robot to reason, plan, and collaborate using natural language, as demonstrated in our showcases where the robots are able to detect a variety of anomalies, without prior information about the nature of these anomalies. To enable further research on our mainly conceptual contribution, we release the software and videos for our LLM2Swarm system: https://github.com/Pold87/LLM2Swarm."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "LLM2Swarm: Robot Swarms that Responsively Reason, Plan, and..."
+    ],
+    "twitter:description": [
+      "Robot swarms are composed of many simple robots that communicate and collaborate to fulfill complex tasks. Robot controllers usually need to be specified by experts on a case-by-case basis via..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "LLM2Swarm: Robot Swarms that Responsively Reason, Plan, and Collaborate through LLMs"
+    ],
+    "citation_author": [
+      "Strobel, Volker",
+      "Dorigo, Marco",
+      "Fritz, Mario"
+    ],
+    "citation_date": [
+      "2024/10/15"
+    ],
+    "citation_online_date": [
+      "2024/10/30"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2410.11387"
+    ],
+    "citation_arxiv_id": [
+      "2410.11387"
+    ],
+    "citation_abstract": [
+      "Robot swarms are composed of many simple robots that communicate and collaborate to fulfill complex tasks. Robot controllers usually need to be specified by experts on a case-by-case basis via programming code. This process is time-consuming, prone to errors, and unable to take into account all situations that may be encountered during deployment. On the other hand, recent Large Language Models (LLMs) have demonstrated reasoning and planning capabilities, introduced new ways to interact with and program machines, and incorporate both domain-specific and commonsense knowledge. Hence, we propose to address the aforementioned challenges by integrating LLMs with robot swarms and show the potential in proofs of concept (showcases). For this integration, we explore two approaches. The first approach is 'indirect integration,' where LLMs are used to synthesize and validate the robot controllers. This approach may reduce development time and human error before deployment. Moreover, during deployment, it could be used for on-the-fly creation of new robot behaviors. The second approach is 'direct integration,' where each robot locally executes a separate LLM instance during deployment for robot-robot collaboration and human-swarm interaction. These local LLM instances enable each robot to reason, plan, and collaborate using natural language, as demonstrated in our showcases where the robots are able to detect a variety of anomalies, without prior information about the nature of these anomalies. To enable further research on our mainly conceptual contribution, we release the software and videos for our LLM2Swarm system: https://github.com/Pold87/LLM2Swarm."
+    ]
+  },
+  "text_extraction_ok": true
+}

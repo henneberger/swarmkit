@@ -1,0 +1,110 @@
+{
+  "id": "2410.08948",
+  "label": "Swarm expansion scan",
+  "topic": "social-collective-mechanisms",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2410.08948",
+      "resolved_url": "https://arxiv.org/abs/2410.08948",
+      "path": "sources/papers/2410.08948/abstract.html",
+      "bytes": 42755,
+      "sha256": "9106e9fc7657bff69150f3565e773705da3ae68cd8d04378c73131991c653cac"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2410.08948",
+      "resolved_url": "https://arxiv.org/pdf/2410.08948",
+      "path": "sources/papers/2410.08948/paper.pdf",
+      "bytes": 4974158,
+      "sha256": "0fffd81d4174a399087717323b09b9edc15b349516e1b3b4a78bc64054584069"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2410.08948: Emergent social conventions and collective bias in LLM populations"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Emergent social conventions and collective bias in LLM populations"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2410.08948v2"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Social conventions are the backbone of social coordination, shaping how individuals form a group. As growing populations of artificial intelligence (AI) agents communicate through natural language, a fundamental question is whether they can bootstrap the foundations of a society. Here, we present experimental results that demonstrate the spontaneous emergence of universally adopted social conventions in decentralized populations of large language model (LLM) agents. We then show how strong collective biases can emerge during this process, even when agents exhibit no bias individually. Last, we examine how committed minority groups of adversarial LLM agents can drive social change by imposing alternative social conventions on the larger population. Our results show that AI systems can autonomously develop social conventions without explicit programming and have implications for designing AI systems that align, and remain aligned, with human values and societal goals."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Emergent social conventions and collective bias in LLM populations"
+    ],
+    "twitter:description": [
+      "Social conventions are the backbone of social coordination, shaping how individuals form a group. As growing populations of artificial intelligence (AI) agents communicate through natural..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Emergent social conventions and collective bias in LLM populations"
+    ],
+    "citation_author": [
+      "Ashery, Ariel Flint",
+      "Aiello, Luca Maria",
+      "Baronchelli, Andrea"
+    ],
+    "citation_doi": [
+      "10.1126/sciadv.adu9368"
+    ],
+    "citation_date": [
+      "2024/10/11"
+    ],
+    "citation_online_date": [
+      "2025/05/29"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2410.08948"
+    ],
+    "citation_arxiv_id": [
+      "2410.08948"
+    ],
+    "citation_abstract": [
+      "Social conventions are the backbone of social coordination, shaping how individuals form a group. As growing populations of artificial intelligence (AI) agents communicate through natural language, a fundamental question is whether they can bootstrap the foundations of a society. Here, we present experimental results that demonstrate the spontaneous emergence of universally adopted social conventions in decentralized populations of large language model (LLM) agents. We then show how strong collective biases can emerge during this process, even when agents exhibit no bias individually. Last, we examine how committed minority groups of adversarial LLM agents can drive social change by imposing alternative social conventions on the larger population. Our results show that AI systems can autonomously develop social conventions without explicit programming and have implications for designing AI systems that align, and remain aligned, with human values and societal goals."
+    ]
+  },
+  "text_extraction_ok": true
+}

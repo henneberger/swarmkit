@@ -1,0 +1,57 @@
+{
+  "retrieved_at": "2026-09-09T20:00:29.338690+00:00",
+  "items": [
+    {
+      "id": "kimi-k25",
+      "url": "https://www.kimi.com/blog/kimi-k2-5.html",
+      "artifact": {
+        "url": "https://www.kimi.com/blog/kimi-k2-5.html",
+        "resolved_url": "https://www.kimi.ai/blog/kimi-k2-5",
+        "path": "sources/posts/kimi-k25/page.html",
+        "bytes": 502770,
+        "sha256": "498931361040acbe066e3eb856a429631e75886c5e605da03e958bea0cf8f588"
+      },
+      "metadata": {
+        "": [
+          ""
+        ],
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "next-size-adjust": [
+          ""
+        ],
+        "googlebot": [
+          "notranslate"
+        ],
+        "msvalidate.01": [
+          "38E0A3C40C0983D8FED5BD0B59E78653"
+        ],
+        "sogou_site_verification": [
+          "K4KQFuej81"
+        ],
+        "description": [
+          "Kimi K2.5 defines Visual Agentic Intelligence. Trained on 15T tokens, it introduces SOTA visual coding and autonomous agent swarm. Read the full tech blog."
+        ],
+        "og:title": [
+          "Kimi K2.5 Tech Blog: Visual Agentic Intelligence"
+        ],
+        "og:description": [
+          "Kimi K2.5 defines Visual Agentic Intelligence. Trained on 15T tokens, it introduces SOTA visual coding and autonomous agent swarm. Read the full tech blog."
+        ],
+        "og:url": [
+          "https://www.kimi.ai/blog/kimi-k2-5"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Kimi K2.5 Tech Blog: Visual Agentic Intelligence"
+        ],
+        "twitter:description": [
+          "Kimi K2.5 defines Visual Agentic Intelligence. Trained on 15T tokens, it introduces SOTA visual coding and autonomous agent swarm. Read the full tech blog."
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "id": "2503.18891",
+  "label": "AgentDropout",
+  "topic": "communication",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2503.18891",
+      "path": "sources/papers/2503.18891/abstract.html",
+      "cached": true,
+      "sha256": "fdedc3c4c4525ad3bb5e2baa6551a5e00cfa7f9a1e8a185f92cac1b20713b9d4"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2503.18891",
+      "path": "sources/papers/2503.18891/paper.pdf",
+      "cached": true,
+      "sha256": "120ba279b4619294ab2bc3ab187886b51ada1443486620cf514b60296e604ca9"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2503.18891: AgentDropout: Dynamic Agent Elimination for Token-Efficient and High-Performance LLM-Based Multi-Agent Collaboration"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "AgentDropout: Dynamic Agent Elimination for Token-Efficient and High-Performance LLM-Based Multi-Agent Collaboration"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2503.18891v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Multi-agent systems (MAS) based on large language models (LLMs) have demonstrated significant potential in collaborative problem-solving. However, they still face substantial challenges of low communication efficiency and suboptimal task performance, making the careful design of the agents' communication topologies particularly important. Inspired by the management theory that roles in an efficient team are often dynamically adjusted, we propose AgentDropout, which identifies redundant agents and communication across different communication rounds by optimizing the adjacency matrices of the communication graphs and eliminates them to enhance both token efficiency and task performance. Compared to state-of-the-art methods, AgentDropout achieves an average reduction of 21.6% in prompt token consumption and 18.4% in completion token consumption, along with a performance improvement of 1.14 on the tasks. Furthermore, the extended experiments demonstrate that AgentDropout achieves notable domain transferability and structure robustness, revealing its reliability and effectiveness. We release our code at https://github.com/wangzx1219/AgentDropout."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "AgentDropout: Dynamic Agent Elimination for Token-Efficient and..."
+    ],
+    "twitter:description": [
+      "Multi-agent systems (MAS) based on large language models (LLMs) have demonstrated significant potential in collaborative problem-solving. However, they still face substantial challenges of low..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "AgentDropout: Dynamic Agent Elimination for Token-Efficient and High-Performance LLM-Based Multi-Agent Collaboration"
+    ],
+    "citation_author": [
+      "Wang, Zhexuan",
+      "Wang, Yutong",
+      "Liu, Xuebo",
+      "Ding, Liang",
+      "Zhang, Miao",
+      "Liu, Jie",
+      "Zhang, Min"
+    ],
+    "citation_date": [
+      "2025/03/24"
+    ],
+    "citation_online_date": [
+      "2025/03/24"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2503.18891"
+    ],
+    "citation_arxiv_id": [
+      "2503.18891"
+    ],
+    "citation_abstract": [
+      "Multi-agent systems (MAS) based on large language models (LLMs) have demonstrated significant potential in collaborative problem-solving. However, they still face substantial challenges of low communication efficiency and suboptimal task performance, making the careful design of the agents' communication topologies particularly important. Inspired by the management theory that roles in an efficient team are often dynamically adjusted, we propose AgentDropout, which identifies redundant agents and communication across different communication rounds by optimizing the adjacency matrices of the communication graphs and eliminates them to enhance both token efficiency and task performance. Compared to state-of-the-art methods, AgentDropout achieves an average reduction of 21.6% in prompt token consumption and 18.4% in completion token consumption, along with a performance improvement of 1.14 on the tasks. Furthermore, the extended experiments demonstrate that AgentDropout achieves notable domain transferability and structure robustness, revealing its reliability and effectiveness. We release our code at https://github.com/wangzx1219/AgentDropout."
+    ]
+  },
+  "text_extraction_ok": true
+}

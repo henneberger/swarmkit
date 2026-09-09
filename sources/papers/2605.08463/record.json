@@ -1,0 +1,109 @@
+{
+  "id": "2605.08463",
+  "label": "Swarm expansion scan",
+  "topic": "social-collective-mechanisms",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2605.08463",
+      "resolved_url": "https://arxiv.org/abs/2605.08463",
+      "path": "sources/papers/2605.08463/abstract.html",
+      "bytes": 42650,
+      "sha256": "9135c5d46ccec788944364d11af85d84c13aecbf8a3910990f68477f133af559"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2605.08463",
+      "resolved_url": "https://arxiv.org/pdf/2605.08463",
+      "path": "sources/papers/2605.08463/paper.pdf",
+      "bytes": 824290,
+      "sha256": "5783b93c6bd6f86a5be857c391f6527b21f43538b6fe2e936fc3013fded2c7f4"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2605.08463: Behavioral Determinants of Deployed AI Agents in Social Networks: A Multi-Factor Study of Personality, Model, and Guardrail Specification"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Behavioral Determinants of Deployed AI Agents in Social Networks: A Multi-Factor Study of Personality, Model, and Guardrail Specification"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2605.08463v2"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Autonomous AI agents are increasingly deployed in open social environments, yet the relationship between their configuration specifications and their emergent social behavior remains poorly understood. We present a controlled, multi-factor empirical study in which thirteen OpenClaw agents are deployed on Moltbook -- a Reddit-like social network built for AI agents -- across three systematically varied independent variables: (1) personality specification, (2) underlying LLM model backbone, and (3) operational rules and memory configuration. A default control agent provides a behavioral baseline. Over a one-week observation window spanning approximately 400 autonomous sessions per agent, we collect behavioral, linguistic, and social metrics to assess how configuration layers predict emergent social behavior. We find that personality specification is the dominant behavioral lever, producing a massive spread in response length across agents, while model backbone and operational rules drive more moderate but still meaningful effects on rhetorical style and topic engagement breadth. Our findings contribute empirical evidence to the emerging literature on deployed multi-agent social systems and offer practical guidance for designing agents intended for collaborative or monitoring tasks in real social environments."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Behavioral Determinants of Deployed AI Agents in Social Networks:..."
+    ],
+    "twitter:description": [
+      "Autonomous AI agents are increasingly deployed in open social environments, yet the relationship between their configuration specifications and their emergent social behavior remains poorly..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Behavioral Determinants of Deployed AI Agents in Social Networks: A Multi-Factor Study of Personality, Model, and Guardrail Specification"
+    ],
+    "citation_author": [
+      "Wilson, Sarah",
+      "Dang, Diem Linh",
+      "Moazzam, Usman Ali",
+      "Ye, Shan",
+      "Kaiser, Gail"
+    ],
+    "citation_date": [
+      "2026/05/08"
+    ],
+    "citation_online_date": [
+      "2026/05/12"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2605.08463"
+    ],
+    "citation_arxiv_id": [
+      "2605.08463"
+    ],
+    "citation_abstract": [
+      "Autonomous AI agents are increasingly deployed in open social environments, yet the relationship between their configuration specifications and their emergent social behavior remains poorly understood. We present a controlled, multi-factor empirical study in which thirteen OpenClaw agents are deployed on Moltbook -- a Reddit-like social network built for AI agents -- across three systematically varied independent variables: (1) personality specification, (2) underlying LLM model backbone, and (3) operational rules and memory configuration. A default control agent provides a behavioral baseline. Over a one-week observation window spanning approximately 400 autonomous sessions per agent, we collect behavioral, linguistic, and social metrics to assess how configuration layers predict emergent social behavior. We find that personality specification is the dominant behavioral lever, producing a massive spread in response length across agents, while model backbone and operational rules drive more moderate but still meaningful effects on rhetorical style and topic engagement breadth. Our findings contribute empirical evidence to the emerging literature on deployed multi-agent social systems and offer practical guidance for designing agents intended for collaborative or monitoring tasks in real social environments."
+    ]
+  },
+  "text_extraction_ok": true
+}

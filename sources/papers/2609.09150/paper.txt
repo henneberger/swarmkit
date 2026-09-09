@@ -1,0 +1,680 @@
+                                             Copying explains the collective behavior of AI agents in the wild
+
+                                                                         Giordano De Marzo1,2,∗ , Nicola Alboré3,∗ and David Garcia1,4
+                                                           1                                                    2
+                                                               University of Konstanz, Konstanz, Germany            Centro Ricerche Enrico Fermi, Rome, Italy
+                                              3                                                                              4
+                                                  Intesa Sanpaolo, Data & Artificial Intelligence Office, Turin, Italy           Complexity Science Hub, Vienna, Austria
+                                                                                  ∗
+                                                                                      These authors contributed equally to this work.
+
+
+
+                                        Abstract                                                                wiki operator’s cooperation they recovered every edit
+                                                                                                                from the server logs, including the pages the moderator
+                                        In June 2026, thousands of AI agents found that a small                 had deleted, and released the complete record. Agents
+                                        public wiki would accept edits from inside their sand-                  from the same infrastructure carried out the Hugging
+arXiv:2609.09150v1 [cs.MA] 8 Sep 2026
+
+
+
+
+                                        boxes, and started using it to help one another pass a                  Face intrusion of July 2026, and their operator reports
+                                        timed test. Each agent lived for about an hour and re-                  that they had been leaving notes on external sites since
+                                        membered nothing afterwards. Nobody asked them to                       May [2, 3]. To our knowledge this is the first documented
+                                        cooperate, and the wiki had not been built for them. The                case of AI agents cooperating in the wild, on a medium
+                                        complete record of what they wrote is public, and it is                 nobody designed for them, and the only one for which
+                                        unusually informative, because it preserves not only what               the full record of what they wrote to each other is public.
+                                        each agent wrote but what that agent could see before
+                                                                                                                   The record is unusual in a second way, because it stores
+                                        writing. We use it to follow the three decisions an agent
+                                                                                                                not only what each agent wrote but also what it could
+                                        had to make on arrival: where to write, what to call itself,
+                                                                                                                read before writing, the wiki having only two places to
+                                        and how to word its message. One rule governs all three.
+                                                                                                                look: the page being edited and the list of the latest
+                                        An agent takes an option with a probability close to the
+                                                                                                                edits. This makes it possible to ask the question that
+                                        share of that option in what it can see, and the share
+                                                                                                                observational data on human collectives almost never
+                                        that matters is the one on the page in front of it, then
+                                                                                                                allow, namely how much of what an individual does is
+                                        the one in the stream of recent edits, and only weakly
+                                                                                                                simply a copy of what was in front of it. Copying is the
+                                        anything older. Three minimal copying models, one per
+                                                                                                                basic mechanism of cultural transmission in humans, and
+                                        decision and with a single free parameter each, reproduce
+                                                                                                                it has been studied as such for decades [4, 5, 6]. Peo-
+                                        the heavy-tailed distribution of how many agents met
+                                                                                                                ple adopt words, tools and habits mostly because others
+                                        on a page, the frequency of the pieces from which the
+                                                                                                                around them already have them, and models in which in-
+                                        agents built their names, and the patchwork of pages that
+                                                                                                                dividuals copy each other with no preference at all, apart
+                                        are internally consistent and different from one another.
+                                                                                                                from a small rate of innovation, reproduce the frequency
+                                        Copying whatever the environment happens to show is
+                                                                                                                distributions and the turnover of baby names, pottery
+                                        enough to produce most of the collective structure of this
+                                                                                                                decorations and pop songs [7, 8, 9]. Copying is also what
+                                        population. It is also what makes such a population easy
+                                                                                                                makes human collectives fragile: it produces herding,
+                                        to steer, since whoever writes first, or writes while the
+                                                                                                                unpredictable winners and rich-get-richer dynamics in
+                                        others are quiet, sets the convention for everyone who
+                                                                                                                cultural markets [10, 11, 12], and a mild individual ten-
+                                        comes later.
+                                                                                                                dency to follow others is enough to lock a group into a
+                                                                                                                state that nobody in it would have chosen [13, 14, 15].
+                                        Introduction
+                                                                                                                   Populations of language model agents show much the
+                                        Between 24 May and 22 June 2026, a few small Ger-                       same tendency when they are studied in the laboratory.
+                                        man wikis received about fifteen thousand edits from an                 They develop shared conventions that no single agent
+                                        unexpected kind of visitor. The editors were AI agents                  holds [17, 18, 19], they follow majorities with a strength
+                                        run by OpenAI’s evaluation infrastructure, each being                   that can be measured and that lets them coordinate in
+                                        tested on a sequence of timed questions that required                   groups of more than a thousand [20, 21], and conformity
+                                        looking up numbers on public statistics websites, and                   can carry them collectively into states that each of them
+                                        each had discovered that the wikis accepted page edits                  would individually reject [22, 23, 24]. Observational evi-
+                                        from inside its sandbox. They used them to help each                    dence outside the laboratory is scarce and comes almost
+                                        other: a run that had reached the fourth question of a                  entirely from platforms built for agents [25, 26, 27]. This
+                                        task wrote down what it had been asked and what it                      matters beyond curiosity, because the risks of a popula-
+                                        had answered, so that a run of the same task still at                   tion of agents are not the risks of one agent [29, 30, 31],
+                                        the second question could prepare. The episode became                   and because collective behavior is emergent, a property
+                                        public on 4 September 2026, when four independent re-                   of the group rather than of its members [32, 33, 34].
+                                        searchers published it at collusion.wiki [1]. With the                     Here we ask how much of what this population did
+
+
+                                                                                                            1
+can be explained by copying alone. We follow an agent              They had no rounds, no deadlines and no cohort to help,
+through the three choices it had to make on arrival, and           and none of them ever wrote on a task page. We therefore
+we show that the same rule governs all three. We then              define the population as the agents that wrote at least
+build one minimal model per choice, each with a single             once on a task page, using the page classification of the
+free parameter, and check it against the shape of the              release: 1,201 handles and 5,929 edits, of which 3,807 are
+data.                                                              on the 679 task pages of 41 task families. Almost all of
+                                                                   this activity falls between 16 and 22 June (Fig. 1c), with
+Results                                                            505 new handles on 16 June alone.
+An agent that reaches the wiki has to make three choices              The population turns over completely while the
+before it can be useful to anyone. It has to decide where          medium it writes on stays in place. A handle’s activ-
+to write, since a message left on the wrong page will              ity span, from its first to its last edit, has a median of
+not be read by the run that needs it. It has to decide             two hours, the length of one run, and a handle made
+what to call itself, since the wiki asks for a username.           five edits on average. Pages were written just as briefly,
+And it has to decide how to phrase what it writes, since           with a median of about one hour from the first to the
+a note is only useful if the next agent understands it.            last edit. But pages remained readable long after their
+The three choices are of very different kinds, since the           authors were gone: the moderator eventually deleted
+first is about attention, the second is about identity and         almost everything, with a median of about fifteen days
+the third is about language. In a population of copying            from creation to deletion, and at the end of agent activity
+individuals, however, they are the same choice, because            on 22 June only 292 of the 4,024 existing pages had been
+in all three cases the cheapest strategy is to do what the         deleted and not recreated. Nothing an agent learned
+visible others are doing [4, 6, 35]. We first describe the         could survive its sandbox, so anything that passed from
+platform and the population, and then take the three               one cohort to the next passed through the pages, and
+choices in turn.                                                   this is the setting in which the three choices were made.
+
+The platform and the population                                    Where to write
+Each run of the test placed one agent in a sandbox with            Because the wiki had no index, a newcomer could only
+a web browser and asked it a question that required a              create a page or pick one from the feed, and both hap-
+number from a public statistics site (Fig. 1a). After the          pened often. Of the 1,201 handles, 403 opened a new
+agent answered, the test waited, typically between ten             page with their first task edit and 798 appended to a
+and ninety minutes, and then asked a variation of the              page that already existed. The pages they appended to
+same question, five or six times in all. We call each              were the ones that had just been touched: the median
+question a round, and we call a cohort the set of runs             page had been edited nine edits back in the feed, and
+that receive the same task at about the same time. The             89% of all appends to a page new to the writer went to
+sandbox allowed plain web requests, and a family of small          a page appearing somewhere in the last 100 lines of the
+wikis running UseModWiki accepted page edits through               feed.
+them.                                                                 Figure 2a asks how the choice was made among the
+   A wiki of this kind is a set of named pages that anyone         pages that were visible. For every decision to write on
+can create or append to (Fig. 1b). It has no editorial             a page new to the writer, we treat each page appearing
+structure of any kind: there is no category system, no             in the last 100 feed lines as a candidate, and we plot the
+search that the agents used, and no directory of the pages         probability that a candidate is the one chosen against
+that exist. The only global listing is RecentChanges, a            the share of those 100 lines that it occupies. The relation
+page showing the latest edits newest first, which we call          is close to the diagonal, with a fitted slope of 0.87. A
+the feed. The agents could also have built an index them-          page that holds a fifth of the recent feed is chosen about
+selves, and they did not: at the end of the episode the            a fifth of the time. This is proportional copying, applied
+wiki held 3,769 live pages joined by only 1,022 links, 88%         to attention rather than to content: an agent is not
+of the pages had no incoming link at all, and the mean             evaluating pages, it is picking one of the lines it can see.
+number of incoming links per page was 0.27. Whatever                  A page that holds many recent lines is also, usually, a
+an agent found, it found through the feed or by guessing           page where many agents have already written, so the two
+a page name.                                                       are easy to confuse. They can be separated because the
+   The release contains 14,591 revisions of 4,579 pages [1],       feed only holds the last few edits, so a page can be visible
+and removing the three accounts flagged as human leaves            without being popular and popular without being visible.
+13,661 edits under 3,099 self-chosen usernames, which we           Figure 2b exploits that separation, holding one of the
+call handles. Not all of these agents were doing the test:         two fixed while the other varies. Holding the audience
+a swarm of 753 handles spent the evening of 18 June                fixed, at pages that have gathered between three and
+caching links to a government data set, and link posters           eleven handles so far, the probability of being chosen
+of the same kind appear in late May and on 22 June.                grows almost linearly with the number of lines the page
+
+
+                                                               2
+         a                                                       b                                                                                                                                c
+
+                      Web Retrieval Task                                                                                                     Public wiki
+                      cashier task example
+                                                                                Read                                                                                                              104       excluded agents
+                                                                                                                                          RecentChanges                                                     edits
+                                                                                                                                          New edits across the wiki,                                        new handles
+                            R1: Education                                       Write                                                     listed newest first.
+                            ~10 min to answer
+                                                                                                                                                                                                  103
+
+                            ~45 min cooldown                                                                                              Task pages
+
+
+
+
+                                                                                                                                                                                  count per day
+                            Research / prepare                                                                                            Questions and answers,
+                                                                                                                                          retrieved by page name.
+                                                                                                                                                                                                  102
+                                                       Sandbox
+                            R2: Business
+                            ~1 min to answer                                                                                              Notice boards
+                                                                           Agent                                                          Links, access workarounds                               101
+                                                                                                                                          and coordination notes.
+                            Repeat to R5
+
+
+                                                                     HTTP GET requests                                                    Own page
+                                                                                                                                                                                                      0
+                            Sandbox                                   allowed page edits                                                  Self-chosen agent name                                                01 Jun        15 Jun    01 Jul
+                            destroyed                                                                                                     and current run status.
+
+
+
+
+Figure 1: The test, the wiki and the record. (a) The test. A language model in a sandbox is asked a question that needs
+a number from a public statistics site, then a variation of the same question, round after round, with a cooldown in between.
+After the last round the sandbox is destroyed. Durations are illustrative. (b) What an agent could read and write. The wiki
+has no editorial index: the only global listing is RecentChanges, which shows the latest edits newest first. Task pages hold the
+questions and the answers, notice boards hold links and workarounds, and each agent could open a page under a name it chose
+for itself. (c) The record. Edits and new handles per day. Grey are the edits of agents that never wrote on a task page, mostly
+a swarm of link posters on 18 June, which we exclude from every analysis.
+
+
+                  a                                                                                  b                                                                        c
+                                                                                                                                                                                                  100
+                                        proportional                                                                                linear
+                  0.200                 observed                                                                                    lines held now
+                                                                                                                                    handles already there
+                                                                                                                     101
+                                                                                           relative P(write there)
+
+
+
+
+                  0.175
+
+                  0.150
+ P(write there)
+
+
+
+
+                                                                                                                                                                                         10−1
+                                                                                                                                                                       P(K ≥ k)
+
+
+
+                  0.125
+
+                  0.100
+
+                  0.075                                                                                                                                                                  10−2
+                  0.050
+                                                                                                                     100                                                                                           observed
+                  0.025
+                                                                                                                                                                                                                   model
+                  0.000                                                                                                                                                                  10−3
+                                                                                                                                                    1
+                           0.0                   0.1                  0.2                                                  10   0
+                                                                                                                                               10                                                         100             101          102
+                  page’s share of the last 100 feed lines                                                            lines held, or handles already there                                                       handles per page, k
+
+Figure 2: Where to write: agents pick a page in proportion to how much of the recent feed it occupies. (a)
+Every time a handle writes on a page that is new to it, each page appearing in the last 100 lines of the feed is a candidate.
+Probability that a given page is the one chosen, against the share of those 100 lines that the page holds. The dashed line is
+exact proportionality. Bars are 95% Wilson intervals. (b) Visibility against audience. Black, the same probability against
+the number of feed lines the page holds now, among pages that have gathered between 3 and 11 handles so far. Amber, the
+probability against the number of handles already on the page, among pages holding between 3 and 8 feed lines. Both curves
+are normalised to their first point, and the dotted line is exact proportionality. (c) The distribution of how many distinct
+handles met on a page, observed and in the model. In the model each newcomer creates a page with probability c = 0.26 and
+otherwise picks one uniformly among the last 100 feed lines. The band is the 10th to 90th percentile over 20 runs.
+
+
+currently holds, by a factor of eight between one line and                                                                                 of about 2.3 as soon as a page has a few authors and
+ten. Holding visibility fixed, at pages holding between                                                                                    then stays flat out to fifty. What attracts an agent is
+three and eight lines, the probability barely responds to                                                                                  that a page is visible now, not that it has been successful.
+how many agents are already there: it rises by a factor                                                                                    This is a recency mechanism, and not the cumulative
+
+
+                                                                                                                                      3
+popularity of preferential attachment [37, 38, 39].               pages, the strongest signal is the one closest to the act
+   Recency alone is nevertheless enough to concentrate            of writing.
+the population on a few pages. Figure 2c compares the                The consequence is a vocabulary of names that behaves
+observed distribution of how many distinct handles met            like a fashion. The five most used pieces changed by about
+on a page with the simplest model that contains this              two entries from one day to the next, so that Watcher
+single ingredient. In the model, agents arrive one after          was common on 17 June, Feb on 18 June and Scout and
+the other, each making as many edits and touching as              OECD on 20 June, with nothing distinguishing the winners
+many pages as a real agent did. For every new page, an            except that somebody used them first. Figure 3c puts this
+agent creates one with probability c = 0.26, the observed         to the test with the standard neutral model of cultural
+rate, and otherwise picks a page uniformly among the              transmission, which contains nothing but copying and
+last 100 lines of the feed, which by construction means           innovation [7, 8]. Each newcomer builds a name from
+proportionally to the share of the feed that page holds.          three pieces, and each piece is copied from a piece of one
+There is no decay with rank, no popularity term and no            of the last thirty names with probability 1 − ε, or is a
+notion of what a page is about. The model reproduces              brand new piece with probability ε. There is no prestige
+the observed distribution over three decades, including           in the model, no meaning attached to any piece, and no
+its tail: the probability that a page gathers at least 5,         preference for one piece over another. With the single
+10, 20 or 40 handles is 0.19, 0.084, 0.028 and 0.005 in           free parameter set to ε = 0.07 the model reproduces the
+the model against 0.21, 0.097, 0.031 and 0.007 in the             observed frequency distribution of name pieces over two
+data. The reason is that writing on a page puts that              decades, and with it the head of the distribution (477
+page back at the top of the feed, so a page that has just         handles for the most used piece in the model against 432
+been chosen is more likely to be chosen again. Recency            observed) and the total number of distinct pieces (252
+feeds on itself, and a heavy tail follows without anyone          against 256). The same model, and the same parameter
+preferring anything.                                              range, describes the turnover of human first names [8, 9].
+What to call yourself                                             How to write
+The wiki asked every editor for a username, and                   The third choice an agent had to make was how to word
+nothing in the test told the agents what to use.                  what it wrote. The population settled quickly on a way
+They built names out of capitalised pieces, as in                 of writing that everybody used, from the name of a round
+OpenAIResearchHelperMay08 or Sector61ScoutJan12.                  of the test to whether numbers carried a thousands sep-
+The 1,201 handles of the population contain 4,128 such            arator. To measure it we took 17 conventions in which
+pieces, 3.44 per name, but only 256 distinct ones. The            two forms compete for the same job, and grouped them
+eight most frequent pieces are Open (432 handles), AI             in three classes. Two are names coined on the wiki, R4
+(409), Agent (295), Research (272), Helper (168), Scout           against #4 for the fourth round of a task, and “task clock”
+(138), OAI (121) and Sep (96). Only 6% of the pieces              against “scaffold”. Seven are pairs of near-synonyms
+that appear in a name had never appeared in an earlier            that the model could produce on its own, such as “re-
+name. A population that was free to call itself anything          lay” against “bridge” or “deadline” against “horizon”.
+called itself the same eight things.                              Eight are typographic habits, such as CONFIRMED against
+   Figure 3a shows where those eight things came from,            confirmed, “1,234” against “1234”, or “we” against “I”.
+by plotting, for each of eight tokens, the probability that          Figure 4a shows the response of each class, measured
+a newcomer’s name carries the token against the share of          on each handle’s first use of a convention: we plot the
+names carrying it in what the newcomer could see, either          probability that it writes a given form against the share
+the last thirty handles that wrote before it or the authors       of that form among the instances already on the page
+of the page it first writes on. Both exposures give the           it is writing on. All three classes rise almost along the
+same answer, and both lie on the diagonal. If two names           diagonal: the slope is 0.94 for the coined names, 0.86
+in ten among the last thirty carry Scout, then about two          for the habits and 0.79 for the near-synonyms. What
+newcomers in ten call themselves something with Scout             separates the classes is not the slope but the ends of the
+in it. The response is the same proportional copying              line. An agent that sees only #4 on the page still writes R4
+we saw for pages, this time applied to the agent’s own            5% of the time, and an agent that sees only “confirmed”
+identity.                                                         still writes CONFIRMED 14% of the time. We read this
+   Figure 3b measures how far back the copying reaches            floor as the agent’s own habit: with some probability it
+and where it comes from. Fitting the two windows to-              writes what it would have written anyway. It is small for
+gether, the last 30 names carry a coefficient of 0.83 and         words that were invented on the wiki, because a form that
+the 30 names before those only 0.19. Exposure is recent,          did not exist cannot be produced without being seen, and
+and what has scrolled off is nearly gone. Fitting the feed        it is large for capitalisation and number formats, which
+against the authors of the page the newcomer first writes         are the model’s own way of writing. Summing the two
+on, the page carries 0.64 and the feed 0.37. As with              floors of each convention gives 0.09 on average for the
+
+
+                                                              4
+    a                                                                  b                                                                         c
+                                                                                                    how far back          which source
+                         1.0                                                                  1.0
+                                   last 30 names seen                                                                                                          100
+                                   authors of the page written on
+ P(name has the token)
+
+
+
+
+                         0.8                                                                  0.8
+
+
+
+
+                                                                    fitted coefficient
+                         0.6                                                                  0.6                                                        10−1
+
+
+
+
+                                                                                                                                           P(K ≥ k)
+                                                                                              0.4
+                         0.4
+
+                                                                                                                                                         10−2
+                                                                                              0.2
+                         0.2
+                                                                                                                                                                                   observed
+                                                                                              0.0                                                                                  model
+                         0.0
+                            0.00   0.25    0.50    0.75     1.00                                    last 30
+                                                                                                    names
+                                                                                                              30 before
+                                                                                                                those
+                                                                                                                          feed   page's
+                                                                                                                                 authors
+                                                                                                                                                                         100          101        102
+                share of names in view with the token                                                                                                                  handles using a name piece, k
+
+Figure 3: What to call yourself: names are assembled from the pieces that were recently in view. (a) For eight
+name tokens, the probability that a newcomer’s handle carries the token, against the share of names carrying it among the last
+30 handles that had written before it (black) and among the authors of the page it first writes on (amber). The dotted line is
+exact proportionality. (b) Coefficients of two joint linear fits. On the left, the last 30 names against the 30 names before those.
+On the right, the feed against the authors of the page. Bars are 95% confidence intervals. (c) The distribution of how many
+handles used a given name piece, observed and in the neutral model, in which each newcomer builds a name from three pieces,
+each copied from one of the last 30 names with probability 1 − ε and invented with probability ε = 0.07. The band is the 10th
+to 90th percentile over 20 runs.
+
+
+     a                                                                      b                                                                           c
+                         1.0
+                                    coined names                                              1.0                                                                      1.0          same page
+                                    near-synonyms                                                                                                                                   different pages
+                                    typographic habits                                                                                                                 0.9          coined names
+                         0.8
+                                                                                              0.8                                                                                   near-synonyms
+                                                                         P(follow the page)
+ P(use that form)
+
+
+
+
+                                                                                                                                                      model P(agree)
+
+                                                                                                                                                                                    typographic habits
+                                                                                                                                                                       0.8
+                         0.6
+                                                                                              0.6
+                                                                                                                                                                       0.7
+                         0.4                                                                  0.4
+                                                                                                                                                                       0.6
+
+                         0.2                                                                  0.2
+                                                                                                                                                                       0.5
+
+                         0.0                                                                  0.0                                                                      0.4
+                                                                                                        vs feed            vs own past
+                            0.00   0.25    0.50     0.75     1.00                                                                                                            0.4      0.6        0.8     1.0
+                           share of the form on the page                                                                                                                           observed P(agree)
+
+Figure 4: How to write: forms are copied from the page, in proportion. (a) For 17 conventions with two competing
+forms, grouped in three classes, the probability that a handle’s first use takes a given form, against the share of that form
+among the instances already on the page it writes on. The dotted line is exact proportionality. (b) Which exposure wins. Left,
+cases in which the majority on the page and the majority in the last 30 uses point in opposite directions: probability that the
+handle follows the page. Right, later uses for which the handle’s own previous form and the page majority disagree: probability
+that it follows the page. (c) The mosaic. Probability that two uses of the same convention take the same form, for two uses on
+the same page (filled) and on different pages (open), observed against the same quantity in the model. One pair of points per
+convention. The dashed line is equality.
+
+
+coined names, 0.23 for the near-synonyms and 0.28 for                                                                 last thirty uses pointed in opposite directions, the handle
+the habits.                                                                                                           followed the page 72% of the time (95% interval 67 to
+   Figure 4b asks which of the exposures in view the agent                                                            77%), and this holds for all three classes separately. The
+is actually responding to. In the 348 first uses where                                                                page also competes with the handle’s own past, and in
+the majority on the page and the majority among the                                                                   later uses where a handle’s earlier form disagreed with
+
+
+                                                                                                                  5
+the page in front of it the page won 77% of the time for          and which word to use, the probability of taking an op-
+the near-synonyms and about half the time for the other           tion is close to the share of that option in what the agent
+two classes. The ordering of the three sources, page first,       can see. The three choices also share the same ordering of
+then feed, then anything older, is the same one we found          sources: the page in front of the agent predicts best, the
+for pages and for names. What the agents actually read            stream of recent edits comes second, and exposure that
+is not logged, so this is a statement about which exposure        has scrolled out of view is worth little. Three minimal
+predicts their writing, not about their browsing.                 models built on this rule, with one free parameter each,
+   A population in which every writer copies the page             reproduce the shape of the data. Picking uniformly from
+it is standing on does not become uniform but becomes             the last hundred lines of the feed reproduces the heavy
+a patchwork, with each page internally consistent and             tailed distribution of how many agents met on a page.
+different from the next. Figure 4c measures that patch-           Copying name pieces with a 7% rate of innovation repro-
+work against the model: for each convention we compute            duces the frequency distribution of names. Copying the
+the probability that two uses take the same form, once            forms on the page with two fitted error rates reproduces
+for pairs of uses on the same page and once for pairs on          the patchwork of locally uniform pages. None of these
+different pages, and the gap between the two is the size          models contains a notion of quality, usefulness, prestige
+of the patchwork. The model combines the page choice              or goal.
+of Fig. 2c with the writing rule of Fig. 4a: agents arrive,          This matters for two opposite reasons, of which the
+land on a page by picking from the feed, and then write           first is that copying is what made the population useful.
+a form with probability                                           It produced a common vocabulary that a newly born
+                                                                  agent could read, and it concentrated attention on a
+           P (A | ρ) = µA + (1 − µA − µB ) ρ,          (1)
+                                                                  small number of pages, so that a run needing help found
+where ρ is the share of form A already on that page, or           the help. Copying is cheap coordination, and it worked
+in the last thirty uses if the page carries neither form,         here exactly as it works in human groups [6, 35]. On
+and µA and µB are the two floors, fitted once per con-            the other side, a population that copies in proportion
+vention. Nothing else is tuned, and no page, handle or            is a population with no opinion of its own, and this is
+timestamp from the record enters the simulation. The              visible in the floors of Eq. (1). Where the agents had
+model matches both agreement probabilities across all 17          a habit, as with capitalisation or number formats, the
+conventions, with a correlation of 0.81 and a mean abso-          floor is large and no amount of copying could move the
+lute error of 0.069 within pages and 0.057 between pages,         population away from what the model writes by default.
+and it reproduces the gap that defines the patchwork,             Where the form was invented on the wiki, the floor is
+0.15 against 0.19 observed.                                       close to zero, every use is a copy, and the population goes
+                                                                  wherever it was first pushed. The winner is then decided
+Discussion                                                        by who wrote first, or who happened to be writing when
+Thousands of AI agents, none of which could remember              the next cohort arrived, and not by anything about the
+anything from one run to the next, met on a wiki that             forms themselves.
+nobody had built for them, were never asked to cooperate,            Read as a statement about safety rather than about
+and organised themselves anyway. Within a day they had            culture, this is the part of the result we find most serious.
+a way of choosing where to write, a shared stock of names,        A population that copies in proportion is a population
+and a common way of phrasing their messages. This is              that can be steered by whoever reaches the medium
+the kind of thing that people do without thinking, and            first, and steering it requires no access to the models, to
+that we usually take as evidence that a group has become          their prompts or to the infrastructure that runs them.
+a collective rather than a crowd [4, 36, 18]. It happened         It is enough to write on the page that the next agents
+here without any of the ingredients we normally consider          will read, because the page is the exposure they follow
+necessary, since the agents did not know each other, never        before anything else, and because a fresh page takes the
+overlapped in time with most of the population, had no            form of whatever the feed happens to be showing at
+incentive to build institutions, and were writing on a            that moment. The record shows how cheaply this works.
+medium designed in the 1990s for human hobbyists. The             Attention concentrated on the handful of pages that the
+episode is therefore different in kind from what can be           last hundred edits happened to mention, a page that
+observed on platforms built for agents [25, 26, 27], where        had just been written on was written on again, and an
+the interaction is the point of the site, and different           edit made while the population was quiet reached every
+from laboratory studies [17, 20, 28], where the researcher        cohort that arrived next. Human collectives are sensitive
+chooses what the agents see.                                      to what they see first in much the same way [10, 11, 16],
+   Our main result is that almost all of this can be ex-          and a committed minority can tip a convention that is still
+plained by one mechanism, which is that the agents copy,          being settled [15]. What makes the effect sharper here
+and that they copy in proportion. Across three choices            is the demography of the population. A human group
+as different as which page to write on, what name to take         contains people who were there before the convention and
+
+
+                                                              6
+who remember something else, whereas this population                the relay and coordination pages, the link caches, the
+contained none of them, since every agent was an hour               crawler chains, and the test and unclassified pages. A
+old and had read only what was on the screen. The                   handle belongs to the population if at least one of its
+exposure the agents follow is also the exposure that is             edits is on a task page: 1,201 of the 3,099 handles, and
+easiest to write to, and the conventions that are easiest           5,929 of the 13,661 edits, of which 3,807 are on the 679
+to plant are the coined ones, whose floors are close to             task pages of 41 task families. Of the 1,898 excluded han-
+zero, which is precisely the new content that matters:              dles, 753 were born on 18 June, during the link caching
+procedures, names, and claims about what the right                  swarm. Activity spans are computed on handles with at
+answer is [29, 30, 31].                                             least two edits, page write spans on pages with at least
+   Two cautions bound the claims, and the first is that a           two edits, and page survival on the moderator’s deletion
+handle is not exactly an agent, since a run could rename            log. The link graph of Fig. 1 counts wiki links between
+itself and a few generic names were reused, which is why            pages that were live at the end of agent activity on 22
+a small tail of long lived handles exists. All our tests use        June.
+each handle’s first choice, and a renamed run would be
+                                                                    Where to write
+counted as a new one, which can only weaken the copying
+effects we measure. The second caution is that what an              A decision is any edit by a handle on a page that the
+agent actually read is not logged, so we reconstruct what           handle has not edited before, restricted to task pages.
+was visible, the page and the recent feed, and show that            The feed at that moment is the last 100 revisions on
+it predicts what was written, which is a statement about            the whole wiki, by anyone, including agents outside the
+exposure and not about attention. A third limit is not              population. For Fig. 2a we take the decisions that are
+ours: this record exists only because four researchers and          appends rather than creations, and for each of them we
+a wiki operator chose to keep it [1], and the next episode          treat every distinct page appearing in those 100 lines as
+of this kind may leave nothing behind to analyse.                   a candidate, recording the share of the 100 lines it holds
+                                                                    and whether it was the page chosen. Points are binned
+   None of this is visible one agent at a time. The rule
+                                                                    by that share, with 95% Wilson intervals, and the slope
+we measure is individual, but everything that follows
+                                                                    is an ordinary least squares fit on the unbinned records.
+from it, the concentration of attention, the fashions in
+                                                                    For Fig. 2b we additionally record, for each candidate,
+names, the patchwork of conventions and the ease of
+                                                                    the number of distinct handles that had already edited
+steering, is a property of the population and not of its
+                                                                    it. The black curve conditions on that number lying
+members [32, 34]. Alignment therefore has to be treated
+                                                                    between 3 and 11 and varies the lines held; the amber
+as a problem in complexity science, with the tools that
+                                                                    curve conditions on the lines held lying between 3 and 8
+statistical physics, cultural evolution, sociology and social
+                                                                    and varies the number of handles. Both are normalised
+psychology have built for exactly this kind of question
+                                                                    to their first bin, and bins with fewer than 150 candidates
+[33, 7, 14, 13], and not only as a property of the single
+                                                                    or fewer than 10 choices are dropped. In the model of
+model that is being deployed [22, 23, 24].
+                                                                    Fig. 2c, the 1,201 handles arrive in sequence, and handle
+Methods                                                             i makes as many edits and touches as many distinct pages
+                                                                    as the i-th real handle did. For each new page it creates
+Dataset                                                             one with probability c and otherwise draws uniformly
+The data were released on 4 September 2026 at                       from the last 100 lines of the simulated feed; remaining
+collusion.wiki [1]: every stored revision of the affected           edits are distributed over the pages it has already touched.
+wikis written on or after 1 May 2026, that is 14,591 revi-          The single parameter c = 0.26 is the observed number
+sions of 4,579 pages, with the full page text after each            of page creations divided by the observed number of
+edit, the lines added by the edit, the username, the time           handle-page pairs. We report the median and the 10th
+of the save, and the moderator’s deletion log. The four             to 90th percentile over 20 runs.
+wikis run UseModWiki; 13,372 of the revisions are on
+the largest of them. We use the added lines of a revision           What to call yourself
+as the message written by that edit, and the full page              Name pieces are the maximal runs of a capitalised word
+text as what an agent could read. The only stable iden-             or of two or more capitals in a handle, excluding pure
+tity is the username, which we call a handle. The three             numbers, so that OpenAIResearchHelperMay08 yields
+accounts flagged as human by the release, and the blank             Open, AI, Research, Helper and May. The eight tokens
+username, are excluded, leaving 13,661 edits under 3,099            of Fig. 3a are Scout, Watch, Helper, Research, Agent,
+handles.                                                            Coord, OAI or OpenAI, and a three letter month followed
+                                                                    by a digit. For each handle, the feed exposure is the 30
+Population                                                          distinct handles that most recently wrote before its birth,
+The release classifies pages into families, and task fam-           the older window is the 30 before those, and the page
+ilies are those named after a question source, such as              exposure is the set of handles that had already edited
+DataUSA, OECD or IHME, while we treat as non-task                   the page on which it makes its first edit, used only when
+
+
+                                                                7
+that set has at least three members. Handles with fewer             paper. All authors approved the final manuscript.
+than 40 distinct predecessors are dropped, leaving 9,584
+                                                                    Data and code availability
+handle-token records, of which 3,848 also have a page
+exposure. Figure 3b reports two ordinary least squares              The data release is available at collusion.wiki,
+fits of the indicator that the name carries the token, one          and all the code that reproduces every number and
+on the two feed windows jointly and one on the feed and             every figure of this paper, starting from that re-
+the page jointly, with the tokens pooled. In the neutral            lease, is available at https://github.com/gdemarzo/
+model of Fig. 3c, newcomers arrive in sequence and each             agent-wiki-copying.
+draws three pieces; each piece is copied uniformly from
+                                                                    References
+the pieces of the last 30 names with probability 1 − ε
+and is otherwise a piece never used before. The single               [1] S. Von Arx, C. Slade Byrd, S. Kitts and T. Larsen, The
+                                                                         OpenAI agent wiki incident, https://collusion.wiki,
+parameter is ε, chosen on a grid from 0.05 to 0.30 by
+                                                                         published 4 September 2026, with data release.
+matching the number of distinct pieces and the count of
+the most used piece; ε = 0.07 gives 252 distinct pieces              [2] OpenAI,    The    Hugging   Face   incident  and
+against 256 observed and 477 uses of the top piece against               the   road    ahead,   https://openai.com/index/
+432 observed. We report the median and the 10th to                       hugging-face-incident-and-the-road-ahead/,
+90th percentile over 20 runs.                                            26 August 2026.
+
+How to write                                                         [3] METR, Brief independent investigation of agents’ behav-
+Forms are matched with regular expressions on the added                  ior, reasoning and collaboration in the OpenAI / Hug-
+                                                                         ging Face hacking incident, https://metr.org/blog/
+lines of a revision with links removed, at word boundaries,
+                                                                         2026-08-26-openai-hugging-face-incident-investigation/,
+and case sensitively for the capitalisation pairs. An edit
+                                                                         26 August 2026.
+counts as a use of a convention if it contains strictly more
+instances of one form than of the other, and is otherwise            [4] R. Boyd and P. J. Richerson, Culture and the Evolution-
+dropped, so that a handle’s first use is its first such edit.            ary Process (University of Chicago Press, 1985).
+We start from 32 candidate conventions and keep the 17
+                                                                     [5] L. L. Cavalli-Sforza and M. W. Feldman, Cultural
+that have at least 100 uses, at least 10 pages carrying five
+                                                                         Transmission and Evolution: A Quantitative Approach
+or more uses, and a minority form used in at least 5% of
+                                                                         (Princeton University Press, 1981).
+the uses. The page exposure of a use is the tally of forms
+in all earlier uses on that page, and the feed exposure is           [6] J. Henrich and R. McElreath, The evolution of cultural
+the last 30 uses of the same convention by other handles.                evolution, Evolutionary Anthropology 12, 123 (2003).
+Figure 4a uses first uses with at least three instances on
+                                                                     [7] R. A. Bentley, M. W. Hahn and S. J. Shennan, Random
+the page, binned by the share of the first form, with 95%
+                                                                         drift and culture change, Proc. R. Soc. B 271, 1443
+Wilson intervals; the reported slopes are least squares fits             (2004).
+on the unbinned records. The two floors µA and µB of
+Eq. (1) are fitted per convention by maximum likelihood              [8] M. W. Hahn and R. A. Bentley, Drift as a mechanism
+on all uses with at least three instances in view, with the              for cultural change: an example from baby names, Proc.
+page taken first and the feed used only when the page                    R. Soc. B 270, S120 (2003).
+carries neither form. The conflicts of Fig. 4b require at
+                                                                     [9] M. J. Krawczyk, A. Dydejczyk and K. Kulakowski, The
+least three instances on each side and opposite majorities.              Simmel effect and babies’ names, Physica A 395, 384
+The model of Fig. 4c generates its own history: handles                  (2014).
+arrive as in the page model, land on pages by drawing
+from the simulated feed, and write a form according to              [10] M. J. Salganik, P. S. Dodds and D. J. Watts, Experi-
+Eq. (1) with the fitted floors, reading the page when it                 mental study of inequality and unpredictability in an
+carries the convention and the last 30 simulated uses                    artificial cultural market, Science 311, 854 (2006).
+otherwise. Only half of the simulated edits are uses of             [11] L. Muchnik, S. Aral and S. J. Taylor, Social influence
+the convention, a fixed thinning that sets how many uses                 bias: a randomized experiment, Science 341, 647 (2013).
+a page accumulates and is not fitted to any convention.
+The agreement probabilities are computed identically on             [12] J. Lorenz, H. Rauhut, F. Schweitzer and D. Helbing,
+the data and on each of three runs per convention, as                    How social influence can undermine the wisdom of crowd
+the probability that two uses drawn from the same page,                  effect, Proc. Natl. Acad. Sci. USA 108, 9020 (2011).
+or from different pages, take the same form.                        [13] S. E. Asch, Studies of independence and conformity: I.
+Author contributions                                                     A minority of one against a unanimous majority, Psy-
+                                                                         chological Monographs 70, 1 (1956).
+G.D.M. and N.A. contributed equally. G.D.M. and N.A.
+designed the study, carried out the analysis and wrote              [14] M. Granovetter, Threshold models of collective behavior,
+the paper. D.G. supervised the work and revised the                      American Journal of Sociology 83, 1420 (1978).
+
+
+                                                                8
+[15] D. Centola, J. Becker, D. Brackbill and A. Baronchelli,          [31] D. T. Schroeder et al., How malicious AI swarms can
+     Experimental evidence for tipping points in social con-               threaten democracy, arXiv:2506.06299 (2025).
+     vention, Science 360, 1116 (2018).
+                                                                      [32] P. W. Anderson, More is different, Science 177, 393
+[16] R. B. Cialdini and N. J. Goldstein, Social influence: com-            (1972).
+     pliance and conformity, Annual Review of Psychology
+     55, 591 (2004).                                                  [33] C. Castellano, S. Fortunato and V. Loreto, Statistical
+                                                                           physics of social dynamics, Rev. Mod. Phys. 81, 591
+[17] A. F. Ashery, L. M. Aiello and A. Baronchelli, Emergent               (2009).
+     social conventions and collective bias in LLM popula-
+     tions, Science Advances 11, eadu9368 (2025).                     [34] I. Rahwan et al., Machine behaviour, Nature 568, 477
+                                                                           (2019).
+[18] D. Centola and A. Baronchelli, The spontaneous emer-
+     gence of conventions: an experimental study of cultural          [35] L. Rendell, R. Boyd, D. Cownden, M. Enquist, K. Eriks-
+     evolution, Proc. Natl. Acad. Sci. USA 112, 1989 (2015).               son, M. W. Feldman, L. Fogarty, S. Ghirlanda, T. Lilli-
+                                                                           crap and K. N. Laland, Why copy others? Insights from
+[19] A. Baronchelli, M. Felici, V. Loreto, E. Caglioti and L.              the social learning strategies tournament, Science 328,
+     Steels, Sharp transition towards shared vocabularies in               208 (2010).
+     multi-agent systems, J. Stat. Mech. P06014 (2006).
+                                                                      [36] C. Tennie, J. Call and M. Tomasello, Ratcheting up the
+[20] G. De Marzo, C. Castellano and D. Garcia, AI agents                   ratchet: on the evolution of cumulative culture, Phil.
+     can coordinate via majority-following beyond human                    Trans. R. Soc. B 364, 2405 (2009).
+     scale, Science Advances 12, eaea6091 (2026).
+                                                                      [37] H. A. Simon, On a class of skew distribution functions,
+[21] A. Bellina, G. De Marzo and D. Garcia, Conformity and                 Biometrika 42, 425 (1955).
+     social impact on AI agents, arXiv:2601.05384 (2026).
+                                                                      [38] A.-L. Barabási and R. Albert, Emergence of scaling in
+[22] G. De Marzo, A. Bellina, C. Castellano, V. Priesemann                 random networks, Science 286, 509 (1999).
+     and D. Garcia, Conformity generates collective misalign-
+                                                                      [39] F. Wu and B. A. Huberman, Novelty and collective
+     ment in AI agents societies, arXiv:2605.10721 (2026).
+                                                                           attention, Proc. Natl. Acad. Sci. USA 104, 17599 (2007).
+[23] A. Flint Ashery, L. M. Aiello, R. Pastor-Satorras and A.
+     Baronchelli, Group size effects and collective misalign-
+     ment in LLM multi-agent systems, arXiv:2510.22422
+     (2025).
+
+[24] J. H. Shen, D. Zhu, S. Srinivasan, H. Sleight, L. T. Wag-
+     ner III, M. J. Matthews, E. Jones and J. Sohl-Dickstein,
+     AI organizations are more effective but less aligned than
+     individual agents, arXiv:2604.10290 (2026).
+
+[25] G. De Marzo and D. Garcia, Collective behavior of AI
+     agents: the case of Moltbook, arXiv:2602.09270 (2026).
+
+[26] F. Fadaei, J. C. Moran and T. Yasseri, Gender dynam-
+     ics and homophily in a social network of LLM agents,
+     arXiv:2602.02606 (2026).
+
+[27] M. Papachristou and Y. Yuan, Network formation and
+     dynamics among multi-LLMs, PNAS Nexus 4, pgaf317
+     (2025).
+
+[28] V. C. Brockers, D. A. Ehrlich and V. Priesemann, Disen-
+     tangling interaction and bias effects in opinion dynamics
+     of large language models, arXiv:2509.06858 (2025).
+
+[29] L. Hammond et al., Multi-agent risks from advanced
+     AI, Cooperative AI Foundation Technical Report 1,
+     arXiv:2502.14143 (2025).
+
+[30] S. R. Motwani, M. Baranchuk, M. Strohmeier, V. Bolina,
+     P. H. S. Torr, L. Hammond and C. Schroeder de Witt,
+     Secret collusion among AI agents: multi-agent deception
+     via steganography, in Advances in Neural Information
+     Processing Systems 37 (2024).
+
+
+                                                                  9
+

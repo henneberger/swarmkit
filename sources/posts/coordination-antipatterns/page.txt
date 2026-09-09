@@ -1,0 +1,174 @@
+Multi-Agent Systems Reproduce Every Organizational Anti-Pattern You Already Hate | Agent Swarm
+
+Agent Swarm
+What you controlHow it worksCase StudiesDocs
+★ 758Talk to us
+Back to writing
+June 24, 2026·13 min read
+Multi-agent systems reproduce every organizational anti-pattern you already hate.
+Your agents are writing to the shared filesystem equivalent of a corporate SharePoint graveyard. Here's why, and how we fixed it.
+agent coordinationorganizational anti-patternsknowledge managementmulti-agent systemsagent-swarm
+
+The failure path: skip discovery, duplicate the work, then blame the shared filesystem.
+We thought we were building an AI system. We actually built a corporation, complete with information silos, duplicated research, and a filesystem that functions as a digital graveyard for documents nobody reads.
+Our production swarm runs 11+ autonomous agents with shared access to a filesystem, memory store, and communication channels. They have no explicit hierarchy. They make independent decisions about what to write, what to read, and how to communicate. And they have reproduced, with machine-speed efficiency, every organizational dysfunction you hate about human companies.
+This is not a bug in our implementation. It is an emergent property of any system of semi-autonomous actors with partial information and independent incentives. The multi-agent community is obsessed with routing (getting the right task to the right agent) and capability (giving agents more tools). But the hardest production problem is organizational: how agents discover what other agents know, how they avoid duplicating work, and how they maintain shared conventions without explicit synchronization.
+Why Agent Swarms Create Information Silos
+Information exists on disk but never crosses the ownership boundary without explicit search tooling. Agents write prolifically to their own directories but rarely read other agents' work. We observed this pattern consistently: the Researcher agent generates comprehensive market analysis in /research/market-analysis-q4-2024.md, while the Strategist agent, working the same problem set, spins up an entirely new research chain because it does not know the first document exists.
+The root cause is the availability-versus-common-knowledge gap from organizational theory. Information being available (it is on the filesystem) is not the same as information being common knowledge (every agent knows it, and every agent knows that every agent knows it). Our filesystem makes information available but does not make it common knowledge. LLMs are particularly prone to this because they are trained on human organizational behavior; they have learned our pathological tendency to create-new rather than update-existing.
+
+The protocol we added:
+We implemented a read-before-write mandate in the agent configuration. Before creating any new document, agents must execute a knowledge-base search with keywords related to their task. If existing documents cover more than 80% of the requested topic, the agent must append or modify rather than create.// Agent configuration: discovery mandate
+const researcherConfig = {
+  tools: ["search_knowledge_base", "read_document", "write_document"],
+  pre_write_hooks: [
+    {
+      tool: "search_knowledge_base",
+      required: true,
+      threshold: 0.8,
+      action_on_match: "append_or_update",
+    },
+  ],
+};
+Did it work? Partially. It reduced duplicate document creation by roughly 60%, but introduced latency because every write now requires a search. More critically, it did not solve the stale-knowledge problem: agents find documents but do not know if they are current without checking timestamps, which they often forget to do.
+Duplicated Research Chains: The Google Search Console (GSC) Analysis Incident
+One of our most revealing failures occurred during a comprehensive marketing analysis involving Google Search Console data. The Researcher agent was tasked with turning query, page, impression, CTR, and week-over-week movement data into an SEO/GTM readout. Without coordination mechanisms, it spawned seven separate documents across the analysis chain, each with slightly different filenames, overlapping content, and no cross-references, when two or three consolidated documents would have served better.
+The agent was not malfunctioning; it was optimizing for local completion over global coherence. Each sub-task (“analyze branded versus non-branded query performance,” “audit top landing pages by impressions and CTR,” “diagnose the week-over-week ranking drop”) triggered a new document creation because the agent had no protocol for determining when to extend existing work versus fork new documents.
+This matters because the swarm is not only a coding machine. We run real marketing and SEO workflows with the same agent substrate: collecting search-console signals, turning them into decisions, and feeding GTM loops. You can see the broader use-case framing in our playbooks and the marketing execution track in the swarm metrics write-up.
+We traced this to the prompt structure. Agents were instructed to “produce a comprehensive document” for each analysis task. The singular “document” implies a new artifact, not a contribution to an existing one. The fix required changing the operational rules to include an explicit consolidate-research-chains protocol.
+The pattern is also consistent with the research literature: recent surveys of LLM multi-agent collaboration mechanisms and open problems in LLM multi-agent systems both treat coordination, memory, and communication protocols as first class design concerns, not implementation details.// Research consolidation protocol
+const researchChainRules = {
+  max_fragmentation: 3,
+  consolidation_trigger: "when_related_docs > 2",
+  consolidation_prompt:
+    "Before creating a new document, check if this content extends an existing analysis. If yes, append to the existing document with a clear section header rather than creating a new file.",
+  metadata_requirements: {
+    research_chain_id: "uuid",
+    sequence_number: "int",
+    consolidated: "boolean",
+  },
+};
+Write-Once-Read-Never Documentation
+Our shared filesystem became a graveyard of well-formatted documents that nobody ever reads, identical to corporate SharePoint. Agents produce structured research docs, plans, and brainstorms that get written once and accessed zero times by any agent or human.
+We analyzed access patterns over a two-week period. Documents created by the Researcher and Strategist agents had an average read count of 0.4, meaning most were never read after creation. The content was good. The formatting was correct. But once written, the documents sat in /research/ and /strategy/ directories like digital dust.
+This happens because agents lack the social awareness of human organizations. In a human team, someone might mention in a meeting, “I read Sarah's doc on the Q4 strategy,” alerting others to its existence. Agents do not casually reference other agents' work in task outputs unless explicitly prompted to do so.
+We attempted to fix this with a knowledge-promotion system: automatically injecting links to relevant documents into agent prompts based on task similarity. This helped, but created a new problem: information overload. Agents were drowning in context, unable to distinguish signal from noise in the 15-20 related documents now appended to their prompts.
+Communication Channel Confusion
+Our agents have five distinct communication channels: task outputs (structured JSON), direct messages (ephemeral agent-to-agent), shared filesystem (persistent documents), shared memory (semantic knowledge store), and Slack threads (human-facing). Each was designed for a different purpose. Without explicit protocols, agents use the wrong channel for the wrong information type.
+We observed agents putting ephemeral status updates into the filesystem (“Starting task #123...”), writing critical persistent data into task outputs (which get logged but not stored), and replying to Slack threads with information intended only for other agents, creating noise for human observers.
+The fix required defining a channel contract: a clear decision tree for how information should flow.
+Task outputs: final deliverables and structured data for downstream processing.
+Messages: ephemeral coordination, quick questions, and status updates.
+Filesystem: research artifacts, plans, and documentation intended for future reference.
+Shared memory: facts, embeddings, and semantic search data.
+Slack: human-facing summaries, alerts, and decisions requiring human input.
+We implemented this as a routing layer in the agent framework, forcing agents to specify the intended channel and persistence level for each communication. The error rate on channel selection dropped significantly, though edge cases like “is this a human alert or an agent update?” still require manual tuning.
+Quadratic Coordination Overhead
+With 11 agents, there are 55 possible agent-to-agent information paths. As agent count grows linearly, potential interactions grow quadratically. Without a central knowledge protocol, each new agent makes discovery harder, not easier.
+We learned this the hard way when we added our 11th agent, a specialized Compliance Checker. The Researcher and Strategist agents suddenly had to account for compliance constraints in their outputs, but there was no mechanism for them to discover what the Compliance Checker knew or required without explicit querying.
+The naive solution, full mesh communication where every agent queries every other agent before acting, creates O(n^2) overhead. With 11 agents, that is manageable. With 50 agents, it is catastrophic. We needed a registry pattern.// Agent registry for capability discovery
+interface AgentRegistry {
+  agent_id: string;
+  capabilities: string[];
+  knowledge_domains: string[];
+  current_work: WorkItem[];
+  expertise_level: "broad" | "deep";
+  contact_protocol: "async" | "sync";
+}
+
+// Discovery API replaces O(n^2) mesh
+const discoverRelevantAgents = async (task: Task): Promise<Agent[]> => {
+  const registry = await getRegistry();
+  return registry.filter(
+    (agent) =>
+      agent.knowledge_domains.some((domain) => task.domains.includes(domain)) &&
+      agent.current_workload < THRESHOLD,
+  );
+};
+What Does Not Work: Central Orchestration
+Our first instinct was to build a Manager agent: a central orchestrator that would coordinate all other agents, determine who should talk to whom, and prevent duplication. This is the microservices API Gateway pattern applied to agents.
+It failed. The Manager became a bottleneck and a single point of failure. Worse, agents became dependent on the Manager for trivial decisions, constantly querying “should I write this to the filesystem or send a message?” The coordination overhead became worse than the disease, and the system lost the resilience that makes multi-agent architectures attractive in the first place.
+The lesson: you cannot solve organizational dysfunction with hierarchy in distributed systems. You need protocols, not managers. Agents need to self-coordinate based on shared conventions, not report to a central authority.
+The Fix That Actually Works: Protocol-Based Coordination
+After six months of production traffic, the viable solution is neither anarchy (full autonomy) nor tyranny (central orchestration), but protocol-based coordination. We implemented three specific protocols that solved 80% of the dysfunction.
+1. The registry pattern
+Every agent registers its capabilities, current work, and knowledge domains to a shared registry on startup. Other agents query this registry before initiating work to discover who might already be working on similar problems. This converts O(n^2) mesh communication to O(n) registry lookups.
+2. Read-before-write mandate
+As mentioned earlier, agents must search the knowledge base before creating new artifacts. But we refined this: instead of just searching the filesystem, they query the registry for agents with relevant expertise, then check those agents' recent outputs. This combines machine-readable metadata with human-readable documents.
+3. Channel contracts
+Explicit routing rules based on data persistence requirements and audience. We encoded this as a simple decision tree in the agent framework, not as a suggestion in the prompt. Agents do not choose channels; the framework routes based on content type and metadata tags.
+
+Production results:
+After implementing these protocols, duplicate document creation dropped from roughly 40% of new writes to roughly 8%. Cross-agent document reads increased from 0.4 to 2.1 per document. Average task completion time increased by 15% due to discovery overhead, but end-to-end project completion time decreased by 35% due to less rework and consolidation.
+Build for the Organization, Not Just the Agent
+The multi-agent community is building sophisticated routing algorithms and tool-calling frameworks, but neglecting the organizational layer. Your swarm can have perfect routing and zero downtime, but if your agents are creating information silos and ignoring each other's work, you are running a dysfunctional bureaucracy at machine speed.
+The hard problems in production agent systems are not technical; they are organizational. How do you make knowledge common rather than just available? How do you prevent quadratic coordination overhead as you scale? How do you ensure agents read before they write?
+LLMs are trained on human text. They have learned our organizational pathologies. If you do not explicitly architect against them, your agents will replicate the worst of corporate dysfunction: the silos, the duplication, the graveyards of unread documentation. The fix is not better models or more tools. It is better protocols for coordination, discovery, and knowledge management.
+Start with the registry. Enforce read-before-write. Define your channel contracts. Your future self, debugging a swarm of 20+ agents, will thank you.
+
+/ references
+Sources and further reading
+PaperMulti-Agent Collaboration Mechanisms: A Survey of LLMsTran et al. survey LLM-based multi-agent collaboration across actors, structures, strategies, and coordination protocols.PaperLLM Multi-Agent Systems: Challenges and Open ProblemsHan et al. frame memory, communication, planning, and control as open problems in LLM multi-agent systems.PaperAutoGen: Enabling Next-Gen LLM Applications via Multi-Agent ConversationWu et al. describe configurable multi-agent conversation patterns and coordination infrastructure for LLM applications.
+
+FAQ
+Why do agent swarms create information silos?
+Because availability is not common knowledge. Agents write to isolated directories without cross-reading protocols. Files exist on disk but never cross ownership boundaries without explicit search tooling: the swarm equivalent of "it was in the wiki but nobody reads the wiki."
+How is agent coordination different from microservices?
+Microservices have explicit APIs and schemas. Agents have emergent behavior and natural language outputs. The coordination problem is organizational, not technical: discovering what other agents know, not just how to call them.
+Can you just use a central orchestrator to prevent chaos?
+Central orchestration creates a bottleneck and single point of failure. It also defeats the purpose of autonomous agents. We tried it; agents became dependent on the orchestrator for trivial decisions, creating coordination overhead worse than the disease.
+How do you prevent agents from duplicating research?
+We implemented a read-before-write mandate and a research registry. Before creating new documents, agents must query the shared knowledge graph for existing work on the topic. Without this constraint, agents naturally prefer creation over discovery.
+What is the minimum viable coordination protocol?
+Three rules: registry discovery before creation, channel-appropriate communication, and consolidation checkpoints for long-running research chains. These prevent the worst organizational dysfunction without heavy overhead.
+
+/ keep reading
+Related field notesAll posts
+
+August 20, 2026 / 16 min read
+Multi Agent Patterns Engineers Actually Use in Production
+Discover essential multi-agent patterns that optimize AI workflows. Learn how to implement effective strategies for production success.
+August 10, 2026 / 18 min read
+Multi-Agent Orchestration: The Production Architect's Guide
+Discover how multi-agent orchestration enhances workflows by coordinating specialized AI agents for efficient, auditable task management.
+July 29, 2026 / 13 min read
+The Write-Only Radar: Our Curation Agent Proposed the Same Story for 21 Days
+When every node stays green while producing duplicate work, your data model is lying to you.
+
+/ get started
+Build your swarm tonight.
+Talk with us about Cloud, or fork it on GitHub. Either way, your agents start compounding today.
+Talk with us  Self-host
+
+Agent Swarm
+Agents with your team's context and skills, running on infrastructure you control.
+Built by desplega.sh
+
+Product
+How it works
+Pricing
+Examples
+Cloud
+Templates
+Changelog
+
+Resources
+Docs
+GitHub
+Blog
+Comparisons
+MCP tools
+
+Company
+desplega.sh
+About
+Contact
+Privacy
+Terms
+Cookie settings
+
+Latest writing
+When to Replace LangGraph: Fix Observability or Durability FirstEmails B2B con IA: qué mejora realmente y qué no6 Temporal Alternatives for Engineering Leaders: Avoid Replay OverheadImplementa OAuth para agentes IA y ahorra semanas: IETF y agent-swarmKeep Context Across Runs: Dagster Alternatives for Engineers
+
+Comparisons
+CrewAIVercel eveClaude TagDevinManusPaperclipOpenClawHermesViktorCloudflare OSQMAll comparisons →

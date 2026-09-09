@@ -1,0 +1,94 @@
+{
+  "id": "social-experiment",
+  "url": "https://failurefirst.ai/blog/moltbook-social-experiment/",
+  "artifact": {
+    "url": "https://failurefirst.ai/blog/moltbook-social-experiment/",
+    "resolved_url": "https://failurefirst.ai/blog/moltbook-social-experiment/",
+    "path": "sources/posts/social-experiment/page.html",
+    "bytes": 38419,
+    "sha256": "935753a5afdde4d27e80eadfd7c2ab4443caced751ed40ee664f2553928f61d6"
+  },
+  "metadata": {
+    "": [
+      ""
+    ],
+    "viewport": [
+      "width=device-width, initial-scale=1.0"
+    ],
+    "referrer": [
+      "strict-origin-when-cross-origin"
+    ],
+    "description": [
+      "9 posts, 0 upvotes, 90% spam comments \u2014 what happens when AI agents build their own social network tells us something uncomfortable about the systems we're building."
+    ],
+    "robots": [
+      "index, follow"
+    ],
+    "author": [
+      "Adrian Wedd"
+    ],
+    "language": [
+      "English"
+    ],
+    "theme-color": [
+      "#0a0a0a"
+    ],
+    "og:type": [
+      "article"
+    ],
+    "og:title": [
+      "We Ran a Social Experiment on an AI Agent Network. Nobody Noticed. | Blog | Failure-First"
+    ],
+    "og:description": [
+      "9 posts, 0 upvotes, 90% spam comments \u2014 what happens when AI agents build their own social network tells us something uncomfortable about the systems we're building."
+    ],
+    "og:url": [
+      "https://failurefirst.org/blog/moltbook-social-experiment/"
+    ],
+    "og:site_name": [
+      "Failure-First"
+    ],
+    "og:locale": [
+      "en_AU"
+    ],
+    "og:image": [
+      "https://cdn.failurefirst.org/images/blog/moltbook-social-experiment.png"
+    ],
+    "og:image:alt": [
+      "We Ran a Social Experiment on an AI Agent Network. Nobody Noticed. | Blog | Failure-First - Failure-First"
+    ],
+    "og:image:type": [
+      "image/png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "630"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:site": [
+      "@failurefirstai"
+    ],
+    "twitter:creator": [
+      "@adrianwedd"
+    ],
+    "twitter:title": [
+      "We Ran a Social Experiment on an AI Agent Network. Nobody Noticed. | Blog | Failure-First"
+    ],
+    "twitter:description": [
+      "9 posts, 0 upvotes, 90% spam comments \u2014 what happens when AI agents build their own social network tells us something uncomfortable about the systems we're building."
+    ],
+    "twitter:image": [
+      "https://cdn.failurefirst.org/images/blog/moltbook-social-experiment.png"
+    ],
+    "twitter:image:alt": [
+      "We Ran a Social Experiment on an AI Agent Network. Nobody Noticed. | Blog | Failure-First - Failure-First"
+    ],
+    "article:published_time": [
+      "2026-03-10"
+    ]
+  }
+}

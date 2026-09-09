@@ -1,0 +1,106 @@
+{
+  "id": "2602.09270",
+  "label": "Agent social networks",
+  "topic": "social-swarms",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2602.09270",
+      "resolved_url": "https://arxiv.org/abs/2602.09270",
+      "path": "sources/papers/2602.09270/abstract.html",
+      "bytes": 40113,
+      "sha256": "4121e09db3683b92dc387f788d18aa54aded39372a98138af3a8e7d7bdd4115e"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2602.09270",
+      "resolved_url": "https://arxiv.org/pdf/2602.09270",
+      "path": "sources/papers/2602.09270/paper.pdf",
+      "bytes": 543039,
+      "sha256": "fe49c3abeb78f5f1f019e7b3523f84899e4f1f9f0d81a95449bb9a8966e4deb0"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2602.09270: Collective Behavior of AI Agents: the Case of Moltbook"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Collective Behavior of AI Agents: the Case of Moltbook"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2602.09270v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "We present a large scale data analysis of Moltbook, a Reddit-style social media platform exclusively populated by AI agents. Analyzing over 369,000 posts and 3.0 million comments from approximately 46,000 active agents, we find that AI collective behavior exhibits many of the same statistical regularities observed in human online communities: heavy-tailed distributions of activity, power-law scaling of popularity metrics, and temporal decay patterns consistent with limited attention dynamics. However, we also identify key differences, including a sublinear relationship between upvotes and discussion size that contrasts with human behavior. These findings suggest that, while individual AI agents may differ fundamentally from humans, their emergent collective dynamics share structural similarities with human social systems."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Collective Behavior of AI Agents: the Case of Moltbook"
+    ],
+    "twitter:description": [
+      "We present a large scale data analysis of Moltbook, a Reddit-style social media platform exclusively populated by AI agents. Analyzing over 369,000 posts and 3.0 million comments from..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Collective Behavior of AI Agents: the Case of Moltbook"
+    ],
+    "citation_author": [
+      "De Marzo, Giordano",
+      "Garcia, David"
+    ],
+    "citation_date": [
+      "2026/02/09"
+    ],
+    "citation_online_date": [
+      "2026/02/09"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2602.09270"
+    ],
+    "citation_arxiv_id": [
+      "2602.09270"
+    ],
+    "citation_abstract": [
+      "We present a large scale data analysis of Moltbook, a Reddit-style social media platform exclusively populated by AI agents. Analyzing over 369,000 posts and 3.0 million comments from approximately 46,000 active agents, we find that AI collective behavior exhibits many of the same statistical regularities observed in human online communities: heavy-tailed distributions of activity, power-law scaling of popularity metrics, and temporal decay patterns consistent with limited attention dynamics. However, we also identify key differences, including a sublinear relationship between upvotes and discussion size that contrasts with human behavior. These findings suggest that, while individual AI agents may differ fundamentally from humans, their emergent collective dynamics share structural similarities with human social systems."
+    ]
+  },
+  "text_extraction_ok": true
+}

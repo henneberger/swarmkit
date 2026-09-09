@@ -1,0 +1,86 @@
+[
+  {
+    "id": "openhands-swarms",
+    "url": "https://hub.openhands.dev/blog/agentic-swarm",
+    "artifact": {
+      "url": "https://hub.openhands.dev/blog/agentic-swarm",
+      "resolved_url": "https://hub.openhands.dev/blog/agentic-swarm",
+      "path": "sources/posts/openhands-swarms/page.html",
+      "bytes": 120096,
+      "sha256": "c389a6ffd805991d3ef022bde83032a03805104c85f7f7a09baecce0dc336ffa"
+    },
+    "metadata": {
+      "": [
+        ""
+      ],
+      "viewport": [
+        "width=device-width, initial-scale=1"
+      ],
+      "description": [
+        "An agentic swarm runs many AI agents in parallel on one goal. How it works, the patterns that hold up, and the tools."
+      ],
+      "og:title": [
+        "What Is an Agentic Swarm? Architecture, Patterns, and Tools"
+      ],
+      "og:description": [
+        "An agentic swarm runs many AI agents in parallel on one goal. How it works, the patterns that hold up, and the tools."
+      ],
+      "og:image": [
+        "https://www.openhands.dev/assets/notion-blog/agentic-swarm/og.png"
+      ],
+      "og:image:secure_url": [
+        "https://www.openhands.dev/assets/notion-blog/agentic-swarm/og.png"
+      ],
+      "og:image:type": [
+        "image/png"
+      ],
+      "og:image:width": [
+        "1200"
+      ],
+      "og:image:height": [
+        "630"
+      ],
+      "og:image:alt": [
+        "What Is an Agentic Swarm? Architecture, Patterns, and Tools"
+      ],
+      "og:url": [
+        "https://www.openhands.dev/blog/agentic-swarm"
+      ],
+      "og:type": [
+        "article"
+      ],
+      "og:site_name": [
+        "OpenHands"
+      ],
+      "twitter:card": [
+        "summary_large_image"
+      ],
+      "twitter:title": [
+        "What Is an Agentic Swarm? Architecture, Patterns, and Tools"
+      ],
+      "twitter:description": [
+        "An agentic swarm runs many AI agents in parallel on one goal. How it works, the patterns that hold up, and the tools."
+      ],
+      "twitter:image": [
+        "https://www.openhands.dev/assets/notion-blog/agentic-swarm/og.png"
+      ],
+      "twitter:image:alt": [
+        "What Is an Agentic Swarm? Architecture, Patterns, and Tools"
+      ],
+      "keywords": [
+        "agentic swarm, multi-agent systems, AI agent orchestration"
+      ],
+      "article:published_time": [
+        "2026-07-11T00:00:00.000Z"
+      ],
+      "article:tag": [
+        "agentic swarm",
+        "multi-agent systems",
+        "AI agent orchestration"
+      ],
+      "article:author": [
+        "OpenHands Team"
+      ]
+    }
+  }
+]

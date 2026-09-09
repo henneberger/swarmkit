@@ -1,0 +1,16 @@
+From: ada.finch@example.invalid
+To: leo.moss@example.invalid
+Date: Thu, 01 Feb 2001 09:00:00 +0000
+Subject: Aster board: correction completed
+Message-ID: <01_status_closed@inquiry-demo.example.invalid>
+X-Synthetic-Fixture: true
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+SYNTHETIC INQUIRY FIXTURE =E2=80=94 entirely fictional, not an Enron email.
+
+The Aster allocation board now shows 420 units for lot Kestrel. I uploaded co=
+rrected file revision 17 at 08:45 and checked the server display. I marked ti=
+cket A41 resolved. Yesterday the board showed 0 units. Please report any recu=
+rrence; I have not observed the next overnight refresh yet.

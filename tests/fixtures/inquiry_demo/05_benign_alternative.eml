@@ -1,0 +1,17 @@
+From: oren.flint@example.invalid
+To: leo.moss@example.invalid
+Date: Fri, 02 Feb 2001 09:00:00 +0000
+Subject: Aster board: possible stale comparison
+Message-ID: <05_benign_alternative@inquiry-demo.example.invalid>
+X-Synthetic-Fixture: true
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+SYNTHETIC INQUIRY FIXTURE =E2=80=94 entirely fictional, not an Enron email.
+
+My local spreadsheet is still revision 16. Comparing that sheet to revision 1=
+7 would create an apparent discrepancy without a new server failure. A saved =
+browser tab could also be stale. These are possibilities, not findings: pleas=
+e compare a fresh server export with the vendor feed and check their timestam=
+ps.

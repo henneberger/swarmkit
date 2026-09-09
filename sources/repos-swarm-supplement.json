@@ -1,0 +1,32 @@
+[
+  {
+    "repo": "YaoZ720/SwarmAgenticCode",
+    "reason": "Language-driven particle swarm system evolution",
+    "path": "repositories/YaoZ720__SwarmAgenticCode",
+    "commit": "d7346ed6c56cecdfb8244c7c4b5276a983010b91",
+    "commit_date": "2025-11-03T09:37:47+08:00",
+    "licenses": [
+      "LICENSE"
+    ]
+  },
+  {
+    "repo": "RUC-GSAI/YuLan-SwarmIntell",
+    "reason": "Decentralized swarm benchmark",
+    "path": "repositories/RUC-GSAI__YuLan-SwarmIntell",
+    "commit": "c164678ff8511b65b452140d050829c715e1ad86",
+    "commit_date": "2025-05-21T17:19:35+08:00",
+    "licenses": [
+      "LICENSE"
+    ]
+  },
+  {
+    "repo": "Pold87/LLM2Swarm",
+    "reason": "Direct LLM integration in robot swarms",
+    "path": "repositories/Pold87__LLM2Swarm",
+    "commit": "27e91237b980e24adbb136f9e841a3a25b40f1e6",
+    "commit_date": "2025-05-20T22:03:41+02:00",
+    "licenses": [
+      "LICENSE"
+    ]
+  }
+]

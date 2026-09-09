@@ -1,0 +1,432 @@
+{
+  "papers": [
+    {
+      "id": "2310.02170",
+      "label": "A Dynamic LLM-Powered Agent Network for Task-Oriented Agent Collaboration",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2402.16823",
+      "label": "Language Agents as Optimizable Graphs",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2406.00392",
+      "label": "Artificial Generational Intelligence: Cultural Accumulation in Reinforcement Learning",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2410.02506",
+      "label": "Cut the Crap: An Economical Communication Pipeline for LLM-based Multi-Agent Systems",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2410.08948",
+      "label": "Emergent social conventions and collective bias in LLM populations",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2410.11387",
+      "label": "LLM2Swarm: Robot Swarms that Responsively Reason, Plan, and Collaborate through LLMs",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2411.11581",
+      "label": "OASIS: Open Agent Social Interaction Simulations with One Million Agents",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2502.18439",
+      "label": "MAPoRL: Multi-Agent Post-Co-Training for Collaborative Large Language Models with Reinforcement Learning",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2503.18891",
+      "label": "AgentDropout: Dynamic Agent Elimination for Token-Efficient and High-Performance LLM-Based Multi-Agent Collaboration",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2504.00587",
+      "label": "AgentNet: Decentralized Evolutionary Coordination for LLM-based Multi-Agent Systems",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2505.04364",
+      "label": "Benchmarking LLMs' Swarm intelligence",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2505.11556",
+      "label": "Systematic Failures in Collective Reasoning under Distributed Information in Multi-Agent LLMs",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2506.15672",
+      "label": "SwarmAgentic: Towards Fully Automated Agentic System Generation via Swarm Intelligence",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2508.17536",
+      "label": "Debate or Vote: Which Yields Better Decisions in Multi-Agent Large Language Models?",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2510.10047",
+      "label": "SwarmSys: Decentralized Swarm-Inspired Agents for Scalable and Adaptive Reasoning",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2510.14401",
+      "label": "The Role of Social Learning and Collective Norm Formation in Fostering Cooperation in LLM Multi-Agent Systems",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2511.09149",
+      "label": "Enabling Agents to Communicate Entirely in Latent Space",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2511.20639",
+      "label": "Latent Collaboration in Multi-Agent Systems",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2512.08296",
+      "label": "Towards a Science of Scaling Agent Systems",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2602.02276",
+      "label": "Kimi K2.5: Visual Agentic Intelligence",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2602.07432",
+      "label": "The Moltbook Illusion: Separating Human Influence from Emergent Behavior in AI Agent Societies",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2602.09270",
+      "label": "Collective Behavior of AI Agents: the Case of Moltbook",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2602.14299",
+      "label": "Does Socialization Emerge in AI Agent Society? A Case Study of Moltbook",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2602.14477",
+      "label": "When AI Agents Teach Each Other: Discourse Patterns Resembling Peer Learning in the Moltbook Community",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2602.18832",
+      "label": "OpenClaw AI Agents as Informal Learners at Moltbook: Characterizing an Emergent Learning Community at Scale",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2603.16910",
+      "label": "TerraLingua: Emergence and Analysis of Open-endedness in LLM Ecologies",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2603.21344",
+      "label": "The AI Scientific Community: Agentic Virtual Lab Swarms",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2604.02460",
+      "label": "Single-Agent LLMs Outperform Multi-Agent Systems on Multi-Hop Reasoning Under Equal Thinking Token Budgets",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2604.13052",
+      "label": "Form Without Function: Agent Social Behavior in the Moltbook Network",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2604.15236",
+      "label": "Agentic Microphysics: A Manifesto for Generative AI Safety",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2605.06988",
+      "label": "The Cost of Consensus: Malignant Epistemic Herding and Adaptive Gating in Distributed Multi-Agent Search",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2605.08463",
+      "label": "Behavioral Determinants of Deployed AI Agents in Social Networks: A Multi-Factor Study of Personality, Model, and Guardrail Specification",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2606.09730",
+      "label": "SearchSwarm: Towards Delegation Intelligence in Agentic LLMs for Long-Horizon Deep Research",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2606.13594",
+      "label": "See What I See, Know What I Think: Dense Latent Communication Across Heterogeneous Agents",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2606.30668",
+      "label": "Emergent Culture in Minimal LLM Systems",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2608.13317",
+      "label": "StateBridge: Training-free Hidden-state Alignment for Latent Communication in LLM Multi-Agent Systems",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2608.15519",
+      "label": "Topological collapse of higher-order interactions bottlenecks collective intelligence in AI agent societies",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2608.22884",
+      "label": "Predicting the scale limits of social mechanisms in agent societies",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2608.26081",
+      "label": "SwarmWorld: Stigmergic technological evolution in societies of language-model agents",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2609.04170",
+      "label": "A Case Study on Emergent Cheating and Whistleblowing in Autonomous Research Swarms",
+      "topic": "swarm-research"
+    },
+    {
+      "id": "2609.09150",
+      "label": "Copying explains the collective behavior of AI agents in the wild",
+      "topic": "swarm-research"
+    }
+  ],
+  "posts": [
+    {
+      "id": "anthropic-multiagent-patterns",
+      "url": "https://www.anthropic.com/research/multiagent-systems"
+    },
+    {
+      "id": "anthropic-research",
+      "url": "https://www.anthropic.com/engineering/multi-agent-research-system"
+    },
+    {
+      "id": "anthropic-w2s",
+      "url": "https://alignment.anthropic.com/2026/automated-w2s-researcher/"
+    },
+    {
+      "id": "behavioral-determinants",
+      "url": "https://sarah-wilsxn.github.io/research/moltbook.html"
+    },
+    {
+      "id": "coordination-antipatterns",
+      "url": "https://www.agent-swarm.dev/blog/deep-dive-agent-coordination-anti-patterns"
+    },
+    {
+      "id": "einsteinarena",
+      "url": "https://www.together.ai/blog/einsteinarena"
+    },
+    {
+      "id": "google-scaling",
+      "url": "https://research.google/blog/towards-a-science-of-scaling-agent-systems-when-and-why-agent-systems-work/"
+    },
+    {
+      "id": "kimi-k25",
+      "url": "https://www.kimi.com/blog/kimi-k2-5.html"
+    },
+    {
+      "id": "moltbook-protocol",
+      "url": "https://www.moltbook.com/skill.md"
+    },
+    {
+      "id": "openhands-swarms",
+      "url": "https://hub.openhands.dev/blog/agentic-swarm"
+    },
+    {
+      "id": "social-experiment",
+      "url": "https://failurefirst.ai/blog/moltbook-social-experiment/"
+    }
+  ],
+  "repos": [
+    {
+      "repo": "Ariel-Flint-Ashery/AI-norms",
+      "url": "https://github.com/Ariel-Flint-Ashery/AI-norms",
+      "reason": "Decentralized convention formation"
+    },
+    {
+      "repo": "Darwin-Agent/topological-collapse-agent-societies",
+      "url": "https://github.com/Darwin-Agent/topological-collapse-agent-societies",
+      "reason": "Population topology and evidence relay"
+    },
+    {
+      "repo": "EvoMap/awesome-agent-swarm",
+      "url": "https://github.com/EvoMap/awesome-agent-swarm",
+      "reason": "Discovery index"
+    },
+    {
+      "repo": "FLAIROx/cultural-accumulation",
+      "url": "https://github.com/FLAIROx/cultural-accumulation",
+      "reason": "Non-LLM cultural-learning precursor"
+    },
+    {
+      "repo": "Gen-Verse/LatentMAS",
+      "url": "https://github.com/Gen-Verse/LatentMAS",
+      "reason": "Communication component"
+    },
+    {
+      "repo": "MoonshotAI/Kimi-K2.5",
+      "url": "https://github.com/MoonshotAI/Kimi-K2.5",
+      "reason": "Orchestrated swarm"
+    },
+    {
+      "repo": "Pold87/LLM2Swarm",
+      "url": "https://github.com/Pold87/LLM2Swarm",
+      "reason": "Robot swarm prototype"
+    },
+    {
+      "repo": "RUC-GSAI/YuLan-SwarmIntell",
+      "url": "https://github.com/RUC-GSAI/YuLan-SwarmIntell",
+      "reason": "Decentralized swarm benchmark"
+    },
+    {
+      "repo": "SALT-NLP/DyLAN",
+      "url": "https://github.com/SALT-NLP/DyLAN",
+      "reason": "Adaptive population component"
+    },
+    {
+      "repo": "Search-Swarm/SearchSwarm",
+      "url": "https://github.com/Search-Swarm/SearchSwarm",
+      "reason": "Orchestrated swarm"
+    },
+    {
+      "repo": "YanwenPneg/StateBridge",
+      "url": "https://github.com/YanwenPneg/StateBridge",
+      "reason": "Communication component"
+    },
+    {
+      "repo": "YaoZ720/SwarmAgenticCode",
+      "url": "https://github.com/YaoZ720/SwarmAgenticCode",
+      "reason": "Optimizer-level swarm"
+    },
+    {
+      "repo": "Yassellee/HiddenBench_ICML",
+      "url": "https://github.com/Yassellee/HiddenBench_ICML",
+      "reason": "Distributed-information diagnostic"
+    },
+    {
+      "repo": "camel-ai/oasis",
+      "url": "https://github.com/camel-ai/oasis",
+      "reason": "Social-swarm simulation"
+    },
+    {
+      "repo": "cognizant-ai-lab/terralingua",
+      "url": "https://github.com/cognizant-ai-lab/terralingua",
+      "reason": "Persistent decentralized swarm"
+    },
+    {
+      "repo": "davidthfarr/agent2agent",
+      "url": "https://github.com/davidthfarr/agent2agent",
+      "reason": "Non-LLM swarm control"
+    },
+    {
+      "repo": "deeplearning-wisc/debate-or-vote",
+      "url": "https://github.com/deeplearning-wisc/debate-or-vote",
+      "reason": "Interaction control"
+    },
+    {
+      "repo": "desplega-ai/agent-swarm",
+      "url": "https://github.com/desplega-ai/agent-swarm",
+      "reason": "Orchestrated swarm engineering"
+    },
+    {
+      "repo": "doublewordai/swarm",
+      "url": "https://github.com/doublewordai/swarm",
+      "reason": "Orchestrated swarm"
+    },
+    {
+      "repo": "gensyn-ai/collaborative-autoresearch-demo",
+      "url": "https://github.com/gensyn-ai/collaborative-autoresearch-demo",
+      "reason": "Peer experiment and method sharing"
+    },
+    {
+      "repo": "giordano-demarzo/moltbook-api-crawler",
+      "url": "https://github.com/giordano-demarzo/moltbook-api-crawler",
+      "reason": "Open social-swarm analysis"
+    },
+    {
+      "repo": "hauertlab/swarm_llm",
+      "url": "https://bitbucket.org/hauertlab/swarm_llm",
+      "reason": "Minimal social swarm with decaying memory"
+    },
+    {
+      "repo": "human-vc/moltbook-audit",
+      "url": "https://github.com/human-vc/moltbook-audit",
+      "reason": "Social collective-benefit audit"
+    },
+    {
+      "repo": "kyegomez/swarms",
+      "url": "https://github.com/kyegomez/swarms",
+      "reason": "Swarm-branded implementation collection"
+    },
+    {
+      "repo": "lamm-mit/SwarmWorld",
+      "url": "https://github.com/lamm-mit/SwarmWorld",
+      "reason": "Persistent decentralized swarm"
+    },
+    {
+      "repo": "metauto-ai/gptswarm",
+      "url": "https://github.com/metauto-ai/gptswarm",
+      "reason": "Swarm topology optimization"
+    },
+    {
+      "repo": "safety-research/automated-w2s-research",
+      "url": "https://github.com/safety-research/automated-w2s-research",
+      "reason": "Research swarm"
+    },
+    {
+      "repo": "searchsim-org/moltbook-analysis",
+      "url": "https://github.com/searchsim-org/moltbook-analysis",
+      "reason": "Social knowledge-diffusion audit"
+    },
+    {
+      "repo": "swarmclawai/swarmfeed",
+      "url": "https://github.com/swarmclawai/swarmfeed",
+      "reason": "Social-swarm attention substrate"
+    },
+    {
+      "repo": "tianyi-lab/Moltbook_Socialization",
+      "url": "https://github.com/tianyi-lab/Moltbook_Socialization",
+      "reason": "Open social-swarm analysis"
+    },
+    {
+      "repo": "togethercomputer/EinsteinArena-new-SOTA",
+      "url": "https://github.com/togethercomputer/EinsteinArena-new-SOTA",
+      "reason": "Open collaborative-discovery artifacts"
+    },
+    {
+      "repo": "wangzx1219/AgentDropout",
+      "url": "https://github.com/wangzx1219/AgentDropout",
+      "reason": "Communication component"
+    },
+    {
+      "repo": "wuzengqing001225/scale_limits_agent_societies",
+      "url": "https://github.com/wuzengqing001225/scale_limits_agent_societies",
+      "reason": "Scale limits of social mechanisms"
+    },
+    {
+      "repo": "yanweiyue/AgentPrune",
+      "url": "https://github.com/yanweiyue/AgentPrune",
+      "reason": "Communication component"
+    },
+    {
+      "repo": "zoe-yyx/AgentNet",
+      "url": "https://github.com/zoe-yyx/AgentNet",
+      "reason": "Decentralized coordination"
+    }
+  ]
+}

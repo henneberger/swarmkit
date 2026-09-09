@@ -1,0 +1,248 @@
+What Is an Agentic Swarm? Architecture, Patterns, and Tools | Jul 11, 2026
+
+Product▾
+Enterprise
+Pricing
+Community
+Resources▾
+Get OpenHands
+Start with OSS
+
+Product
+
+Agent Canvas
+
+Cloud
+
+Agent Control Plane
+
+SDK
+Enterprise
+Pricing
+Community
+
+Resources
+
+Learn
+
+Docs
+
+Manifesto
+
+Blog
+
+Benchmarks
+
+Trust Center
+
+Company
+
+Press
+
+Careers
+
+About
+
+Contact
+
+87.1K
+
+Access CloudAccess Cloud
+
+Get OpenHandsGet OpenHands
+
+87.1K
+
+Access CloudAccess Cloud
+
+Get OpenHandsGet OpenHandsMenuClose
+
+← Back to Blog
+
+What Is an Agentic Swarm? Architecture, Patterns, and Tools
+
+Written by
+OpenHands Team
+
+Published on
+July 11, 2026
+
+A handful of AI coding agents can now work against the same repository at once: picking up bounded tasks, writing code, running tests, and producing reviewable outputs without a person steering every step. Recent research projects have demonstrated dozens of agents collaborating against a shared repository, coordinating through version control and task decomposition, which is roughly what people mean when they say agentic swarm.
+
+The term gets stretched to cover anything with more than one agent in it, which makes it hard to tell a real production pattern from a demo. In practice, most engineering swarms are not fully decentralized swarms. They are orchestrated multi-agent systems that use parallel agents for bounded work. This guide covers what an agentic swarm actually is, the architecture and coordination patterns behind one, the frameworks worth knowing, and how you keep a swarm under control at scale.
+
+What an agentic swarm is
+
+An agentic swarm is a multi-agent system where several AI agents work in parallel toward a shared goal. Each agent has its own role, tools, and slice of context, and the system coordinates their work through an orchestrator, shared state, handoffs, or peer-to-peer communication.
+
+Strictly speaking, “swarm” usually refers to  decentralized systems with no central planner. In software engineering, though, the term is often used more loosely for orchestrated multi-agent systems: one lead agent decomposes the task, several worker agents run in parallel, and their outputs are merged into a reviewable result.
+
+That looser definition is what this guide uses. The important question is not whether the system is a pure swarm. It is whether multiple agents can safely split work, run in parallel, coordinate state, and produce outputs a human or platform team can trust. The parallelism buys you speed and coverage, and it costs you tokens and coordination. One multi-agent research system with a Claude Opus 4 lead and Claude Sonnet 4 subagents beat a single Claude Opus 4 agent by 90.2% on its own internal research evaluation, and that same setup burned around fifteen times the tokens of a normal chat. You end up planning the token budget as a design constraint from your first sketch rather than patching it in later.
+
+How an agentic swarm works
+
+Once you kick it off, the system moves through four stages that take the goal apart, spread the work out, and put the results back together.
+
+Decomposition: A high-capacity orchestrator reads the global objective, splits it into subtasks, works out the dependencies, and hands out roles. The orchestrator-workers pattern fits coding well because reasoning through the split at runtime beats following a fixed script written before the orchestrator sees the code.
+
+Coordination: An orchestrator hands out subtasks and watches progress, or one agent performs a handoff that transfers an active conversation to another agent and carries the prior context with it. Group-chat setups take a third route, where a manager picks the next speaker and broadcasts to everyone.
+
+Parallel execution: This is the part that fans the work out. The lead fires off several subagents exploring different angles at once, each keeping its own search context isolated so the lead only sees the distilled result.
+
+Aggregation: Parallel agents can return outputs that contradict each other, and a single hallucinated assumption in one branch can poison everything downstream. Careful merging leans on redundancy, so several prompts might review the same code and flag an issue only when they agree, or you reach for majority-rule voting and weighted merging on scored outputs.
+
+Verification: Before changes are accepted, many production workflows run a separate verification stage where automated checks or additional reviewers evaluate correctness, security, and test coverage. Separating execution from verification produces outputs that are easier to audit, review, and trust.
+
+All of that coordination adds latency and new failure modes, so a swarm only earns its keep when the work can be usefully split: broad search, independent investigation, repeated checks, test generation, or migration tasks with clear boundaries. If the task is linear or write-heavy, one well-scoped agent is often cheaper and easier to control.
+
+The architecture behind an agentic swarm
+
+Four components turn up in nearly every production swarm, whatever framework wraps them, and you need all four to run one.
+
+Orchestrator: Owns planning, task decomposition, and direction of the other agents, the job Magentic-One gives its Orchestrator along with a progress ledger. Anything that must satisfy an auditor benefits from an event-driven design that emits each decision as a replayable event.
+
+Specialized agents: Autonomous units with narrow, well-defined roles, because an LLM handed one focused sub-task and specific instructions steers far better than one asked to juggle everything. Magentic-One splits FileSurfer, WebSurfer, Coder, and Computer Terminal for exactly that reason.
+
+Communication layer: The topology you pick decides how debuggable the system is later. Hub-and-spoke puts one orchestrator in the middle, and dense peer-to-peer wiring multiplies the coordination surface that hurts observability and failure isolation.
+
+Shared memory: Context has to move between bounded windows without getting dropped. A decentralized swarm can share one message thread, graph frameworks split short-term state from a long-term store, and the most defensive pattern gives each agent a private namespace with writes gated behind locking.
+
+Those four pieces don't dictate a single wiring, and the way teams arrange them settles into a few recurring patterns.
+
+Common agentic swarm patterns
+
+A few coordination patterns show up again and again, and each trades cost, control, and flexibility differently. Knowing which one you are reaching for saves you from bolting the wrong shape onto your problem.
+
+Hierarchical, one boss and many workers
+
+A central orchestrator delegates to specialized subagents and stitches their results back together, which gives you clear responsibility chains and a single place to reason about the run. A non-blocking runner lets faster agents move ahead of the slowest one and tends to win on time and token spend, though the cost still runs high and static hierarchies grow brittle as complexity climbs.
+
+Decentralized or mesh
+
+Here the agents talk peer-to-peer, negotiate roles at runtime, and solve the problem through distributed decision-making rather than a boss. A mesh swarm can edge out a supervisor on some tasks, because agents hand off directly instead of routing every message through a translation layer. Fully decentralized designs get hard to justify the moment you need policy enforcement, an audit trail, and a rollback path.
+
+Sequential or chained
+
+The pipeline pattern lines agents up in a fixed order and feeds each one the output of the last, which makes it the cheapest and most predictable option because the whole workflow is defined before a single agent runs. You give up parallelism to get that predictability, and your total latency is the sum of every step.
+
+On-demand spawning
+
+A top-level orchestrator spawns subagents as it needs them, which handles work you cannot fully plan up front and keeps context windows clean by handing each fresh subagent a blank slate. The failure mode is runaway spawning, and early systems were bad enough at it to launch dozens of subagents for a query that needed one. Most teams combine patterns in practice, using orchestration for the main flow and reserving a dedicated orchestrator for the complex exceptions.
+
+Planning costs differently than execution
+
+Not every agent in a swarm needs the same reasoning capability. A common architecture is to use a more capable planner to break work into well-scoped tasks, while assigning routine implementation, search, or validation work to less expensive worker models. The planner makes relatively few decisions, while workers consume most of the tokens because they execute the bulk of the workflow.
+
+That shifts cost optimization away from choosing a single "best" model and toward matching models to the type of work each agent performs. A stronger planner can improve task decomposition and coordination, while lower-cost workers often handle repetitive execution without materially affecting the overall outcome. The right balance depends on the workflow, but model selection becomes an architectural decision rather than simply a procurement decision.
+
+Frameworks and tools for building agentic swarms
+
+The framework layer moves fast, so treat this as a snapshot rather than a settled ranking. Each gives you a different set of primitives for wiring agents together, and the right pick depends more on your existing stack than on any leaderboard.
+
+OpenHands: OpenHands is an open-source platform and Software Agent SDK for building and running AI coding agents., It is strongest when the agents need to operate against real repositories, run commands in sandboxed environments, produce reviewable outputs, and eventually move from local experimentation to governed team workflows.
+
+OpenAI Agents SDK: The successor to the experimental Swarm project, this SDK is open source and built around agents, handoffs, guardrails, and tracing. It is provider-agnostic and runs across most LLMs you would reach for.
+
+Microsoft Agent Framework: Microsoft’s newer agent framework brings together ideas from AutoGen and Semantic Kernel for building multi-agent and workflow-based applications. Treat AutoGen/Semantic Kernel status claims as version-specific and verify them against current Microsoft docs before publishing.
+
+LangGraph: Models a system as an explicit graph of nodes and edges, with first-class support for map-reduce fan-out where the number of downstream branches is unknown until runtime.
+
+CrewAI: Uses role-based agent definitions with sequential, hierarchical, and consensual process models. Set explicit iteration and retry limits, because without them a retrying agent can turn a simple flow into an expensive one.
+
+Google ADK: Google's open-source Agent Development Kit for multi-agent applications, aimed at making agent development smoother across Google Cloud.
+
+Underneath most of these frameworks sits the same reason-and-act loop, where an agent queries an LLM, takes an action, observes what happened, and iterates until the task is done. A swarm is that loop replicated across many agents at once.
+
+Putting an agentic swarm to work on real engineering
+
+Swarms pay off most on parallelizable, well-bounded work, which is the outer-loop toil that piles up in every codebase. Dependency updates, vulnerability fixes, test generation, and migration work all fit the shape, because agents can run them end to end while your developers review the diffs rather than write them, an approach OpenHands covers in its work on running parallel agents across a codebase.
+
+Large-scale migration is a strong candidate when the work decomposes cleanly, and the most reliable way to run migrations at scale with LLMs keeps a human in the loop who sets direction while agents grind through the repetitive changes. Parallel debugging and test generation is the other sweet spot, and one engineering team cut time-to-root-cause by 93% across an internal debugging pilot once coordinated agents ran the triage in parallel, which is also the pattern behind agents that find and fix vulnerabilities without a person driving each step.
+
+The flip side deserves the same honesty. You get the win on read-heavy, parallelizable work, and you get burned on naive write-heavy parallelism where several agents fight over the same files.
+
+How to keep an agentic swarm under control
+
+Running one agent on your laptop is a solved problem, and fanning hundreds out across an organization is where coordination, security, and cost start to bite. Three controls have to land early, before the swarm outgrows the people watching it.
+
+Order the work. Use dependency-aware sequencing so parallel changes land in the right order instead of colliding in merge conflicts.
+
+Isolate execution. Run agent activity in sandboxes with scoped, least-privilege permissions rather than loose on your infrastructure.
+
+Keep an audit trail. Tie actions back to the workflow and person who triggered them, so you can answer who ran what, against which repos, and at what cost.
+
+Get those three right and you are set up for the end state many teams are quietly building toward, a dark software factory where agents handle core maintenance while people tune the agents and set direction. That is the shift from prompting one agent by hand to the outer loop, where many agents run on a schedule or in response to events.
+
+Running and managing multi-agent workflows with OpenHands
+
+Once multiple agents are running across repositories, the challenge shifts from individual agent capability to coordinating, observing, and governing the system as a whole. Teams start asking operational questions: Who triggered the workflow? What did each agent access? What changed? What did it cost? Can the results be reviewed before they’re merged?Multi-agent systems make orchestration harder. OpenHands is built for that operational layer around those systems: workspaces, workflows, automations, deployment options, and governance. Developers can start locally in Agent Canvas, inspect conversations, tool activity, file changes, and outputs, then turn useful patterns into repeatable workflows. When work needs to keep running beyond a laptop, teams can move workflows to OpenHands Cloud, a remote backend, or a self-hosted deployment.
+
+OpenHands can also connect to ACP-compatible external agents such as Claude Code, Codex, and Gemini CLI. In that setup, the external agent continues to manage its own model, tools, authentication, and execution, while OpenHands provides the workspace and workflow layer around them.
+
+For organizations running many agents across projects, OpenHands Enterprise adds the governance layer:
+
+Scale confidently: Turn proven workflows into scheduled or event-driven automations and expand from single-agent tasks to coordinated multi-agent workflows.
+
+Govern execution: Apply access controls, sandboxed execution, auditability, usage visibility, and budgets across teams.
+
+Choose your deployment: Run locally, in the cloud, or self-host the platform. Full data containment depends on your model, tool, logging, and telemetry choices—not just where OpenHands runs.
+
+That combination is what turns a promising swarm demo into something a platform team can sign off on.
+
+Running your first swarm the right way
+
+The gap between a swarm demo and a swarm you trust in production is mostly the control layer, and the way to close it is to start small and add scope deliberately. Point a single agent at one bounded task first, watch the loop, and only fan out to parallel agents once you can see and constrain what each one is doing.
+
+Start by running Agent Canvas locally and connecting the agent or model path you want to evaluate.Agent Canvas can work with ACP-compatible external agents such as Claude Code, Codex, and Gemini CLI, while those agents continue to manage their own authentication, tools, model behavior, and execution. Spin up your first run on OpenHands and add agents once you trust what one is doing.
+
+Frequently asked questions about agentic swarms
+
+What is the difference between an agentic swarm and a multi-agent system?
+
+Strictly speaking, a swarm is one kind of multi-agent system, the decentralized kind with no fixed central planner. The broader family also covers orchestrator-worker designs, supervisor hierarchies, and sequential pipelines. In practice the two terms are mostly interchangeable, and what matters more is having a control layer for many agents running at once.
+
+When should you use a swarm instead of a single agent?
+
+Reach for a swarm when the work actually parallelizes, judged by the read-versus-write split. Read-heavy tasks like investigation and test generation fan out cleanly, and write-heavy tasks conflict the moment several agents touch a shared state. Too many tools, overflowing context, or compliance separation also point toward a swarm. The patterns behind background software engineering agents show this in practice.
+
+How do agents in a swarm share files without conflicting?
+
+Git worktrees give each agent its own working directory over one shared object store, so uncommitted edits stay invisible to the others when you run parallel agents on a codebase. For task-level coordination, agents can claim work through explicit file locks, the trick behind the C compiler experiment. Git still misses edits that each look fine in isolation, which is why some setups add write-time conflict detection.
+
+How much do agentic swarms cost to run?
+
+Expect a swarm to burn far more tokens than a single agent, on the order of the fifteen-times gap measured between multi-agent runs and ordinary chats. Parallel agents and generous retry limits grow quickly if nothing caps them. A platform like OpenHands can help track usage per org, user, and run to keep the bill predictable.
+
+About OpenHands
+
+OpenHands is the open-source platform for building and running AI coding agents, with the interface, automations, and control layer needed to go from a single local agent to a system running across an entire organization. The mission is to make agent-based software development accessible, transparent, and controllable by default. That starts in the open. The core framework is open source, giving developers and platform teams full visibility into how agents execute work and interact with their systems. The project has over 80,000 GitHub stars, over 9 million downloads, and contributions from hundreds of developers. OpenHands is used by engineers at large enterprises and fast-growing startups to build, run, and scale AI coding agents across real software engineering workflows. The long-term vision is to become the full stack AI coding agent platform for software engineering. Not just helping developers write code, but running meaningful parts of the software lifecycle.
+
+ONE VISUAL WORKSPACE
+Run parallel agents in one workspace
+Keep every agent, task, and result visible in Agent Canvas, then turn the workflows that work into repeatable automations.Download Agent Canvas→
+
+✓
+
+Citation
+
+OpenHands in August: A Clearer Way to Run, Review, and Automate Agentic Work
+
+Use Jira Cloud in your OpenHands Enterprise Organization
+
+NVIDIA Nemotron 3.5 Lightning and OpenHands: A Faster Path to Always-On Software Engineering Agents
+
+Get useful insights in our blog
+Insights and updates from the OpenHands team
+Sign up for our newsletter for updates, events, and community insights.
+
+By submitting your email you agree to our Privacy Policy
+
+Thank you for your submission!
+
+Building the open standard for autonomous software development.
+OpenHands is the foundation for secure, transparent, model-agnostic coding agents - empowering every software team to build faster with full control.
+
+Join The CommunityJoin The Community
+
+© 2026 OpenHands - All rights reservedPrivacy PolicyContact
+

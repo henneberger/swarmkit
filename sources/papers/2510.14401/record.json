@@ -1,0 +1,112 @@
+{
+  "id": "2510.14401",
+  "label": "Swarm expansion scan",
+  "topic": "social-collective-mechanisms",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2510.14401",
+      "resolved_url": "https://arxiv.org/abs/2510.14401",
+      "path": "sources/papers/2510.14401/abstract.html",
+      "bytes": 45912,
+      "sha256": "7b0c2070cdf4ab39987d1366b1108d702b7cd47e96137fa467d4db0d8336b5f4"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2510.14401",
+      "resolved_url": "https://arxiv.org/pdf/2510.14401",
+      "path": "sources/papers/2510.14401/paper.pdf",
+      "bytes": 1437995,
+      "sha256": "0e2c7c0ade5a597a3f5b8e65f1fae37992ee3c537cc0a027c1c2acbcdf64b1a7"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2510.14401: The Role of Social Learning and Collective Norm Formation in Fostering Cooperation in LLM Multi-Agent Systems"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "The Role of Social Learning and Collective Norm Formation in Fostering Cooperation in LLM Multi-Agent Systems"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2510.14401v2"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "A growing body of multi-agent studies with LLMs explores how norms and cooperation emerge in mixed-motive scenarios, where pursuing individual gain can undermine the collective good. While prior work has explored these dynamics in both richly contextualized simulations and simplified game-theoretic environments, most LLM systems featuring common-pool resource (CPR) games provide agents with explicit reward functions directly tied to their actions. In contrast, human cooperation often emerges without explicit knowledge of the payoff structure or how individual actions translate into long-run outcomes, relying instead on heuristics, communication, and enforcement. We introduce a CPR simulation framework that removes explicit reward signals and embeds cultural-evolutionary mechanisms: social learning (adopting strategies and beliefs from successful peers) and norm-based punishment, grounded in Ostrom's principles of resource governance. Agents also individually learn from the consequences of harvesting, monitoring, and punishing via environmental feedback, enabling norms to emerge endogenously. We establish the validity of our simulation by reproducing key findings from existing studies on human behavior. Building on this, we examine norm evolution across a $2\\times2$ grid of environmental and social initialisations (resource-rich vs. resource-scarce; altruistic vs. selfish) and benchmark how agentic societies comprised of different LLMs perform under these conditions. Our results reveal systematic model differences in sustaining cooperation and norm formation, positioning the framework as a rigorous testbed for studying emergent norms in mixed-motive LLM societies. Such analysis can inform the design of AI systems deployed in social and organizational contexts, where alignment with cooperative norms is critical for stability, fairness, and effective governance of AI-mediated environments."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "The Role of Social Learning and Collective Norm Formation in..."
+    ],
+    "twitter:description": [
+      "A growing body of multi-agent studies with LLMs explores how norms and cooperation emerge in mixed-motive scenarios, where pursuing individual gain can undermine the collective good. While prior..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "The Role of Social Learning and Collective Norm Formation in Fostering Cooperation in LLM Multi-Agent Systems"
+    ],
+    "citation_author": [
+      "Gupta, Prateek",
+      "Zhong, Qiankun",
+      "Yakura, Hiromu",
+      "Eisenmann, Thomas",
+      "Rahwan, Iyad"
+    ],
+    "citation_doi": [
+      "10.65109/CZDC3237"
+    ],
+    "citation_date": [
+      "2025/10/16"
+    ],
+    "citation_online_date": [
+      "2026/01/27"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2510.14401"
+    ],
+    "citation_arxiv_id": [
+      "2510.14401"
+    ],
+    "citation_abstract": [
+      "A growing body of multi-agent studies with LLMs explores how norms and cooperation emerge in mixed-motive scenarios, where pursuing individual gain can undermine the collective good. While prior work has explored these dynamics in both richly contextualized simulations and simplified game-theoretic environments, most LLM systems featuring common-pool resource (CPR) games provide agents with explicit reward functions directly tied to their actions. In contrast, human cooperation often emerges without explicit knowledge of the payoff structure or how individual actions translate into long-run outcomes, relying instead on heuristics, communication, and enforcement. We introduce a CPR simulation framework that removes explicit reward signals and embeds cultural-evolutionary mechanisms: social learning (adopting strategies and beliefs from successful peers) and norm-based punishment, grounded in Ostrom's principles of resource governance. Agents also individually learn from the consequences of harvesting, monitoring, and punishing via environmental feedback, enabling norms to emerge endogenously. We establish the validity of our simulation by reproducing key findings from existing studies on human behavior. Building on this, we examine norm evolution across a $2\\times2$ grid of environmental and social initialisations (resource-rich vs. resource-scarce; altruistic vs. selfish) and benchmark how agentic societies comprised of different LLMs perform under these conditions. Our results reveal systematic model differences in sustaining cooperation and norm formation, positioning the framework as a rigorous testbed for studying emergent norms in mixed-motive LLM societies. Such analysis can inform the design of AI systems deployed in social and organizational contexts, where alignment with cooperative norms is critical for stability, fairness, and effective governance of AI-mediated environments."
+    ]
+  },
+  "text_extraction_ok": true
+}

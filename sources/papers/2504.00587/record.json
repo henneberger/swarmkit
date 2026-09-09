@@ -1,0 +1,109 @@
+{
+  "id": "2504.00587",
+  "label": "AgentNet",
+  "topic": "decentralization",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2504.00587",
+      "path": "sources/papers/2504.00587/abstract.html",
+      "cached": true,
+      "sha256": "c2f8380f422ff9bbec800c4c4529273aa8b41c383b3f1c09cb56aba4ef703b0f"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2504.00587",
+      "path": "sources/papers/2504.00587/paper.pdf",
+      "cached": true,
+      "sha256": "41f36682e31adacb01ed0d1909d1de796e2f87cf856d8eeb4396575812324ffd"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2504.00587: AgentNet: Decentralized Evolutionary Coordination for LLM-based Multi-Agent Systems"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "AgentNet: Decentralized Evolutionary Coordination for LLM-based Multi-Agent Systems"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2504.00587v2"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "The rapid advancement of large language models (LLMs) has enabled the development of multi-agent systems where multiple LLM-based agents collaborate on complex tasks. However, existing systems often rely on centralized coordination, leading to scalability bottlenecks, reduced adaptability, and single points of failure. Privacy and proprietary knowledge concerns further hinder cross-organizational collaboration, resulting in siloed expertise. We propose AgentNet, a decentralized, Retrieval-Augmented Generation (RAG)-based framework that enables LLM-based agents to specialize, evolve, and collaborate autonomously in a dynamically structured Directed Acyclic Graph (DAG). Unlike prior approaches with static roles or centralized control, AgentNet allows agents to adjust connectivity and route tasks based on local expertise and context. AgentNet introduces three key innovations: (1) a fully decentralized coordination mechanism that eliminates the need for a central orchestrator, enhancing robustness and emergent intelligence; (2) dynamic agent graph topology that adapts in real time to task demands, ensuring scalability and resilience; and (3) a retrieval-based memory system for agents that supports continual skill refinement and specialization. By minimizing centralized control and data exchange, AgentNet enables fault-tolerant, privacy-preserving collaboration across organizations. Experiments show that AgentNet achieves higher task accuracy than both single-agent and centralized multi-agent baselines."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "AgentNet: Decentralized Evolutionary Coordination for LLM-based..."
+    ],
+    "twitter:description": [
+      "The rapid advancement of large language models (LLMs) has enabled the development of multi-agent systems where multiple LLM-based agents collaborate on complex tasks. However, existing systems..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "AgentNet: Decentralized Evolutionary Coordination for LLM-based Multi-Agent Systems"
+    ],
+    "citation_author": [
+      "Yang, Yingxuan",
+      "Chai, Huacan",
+      "Shao, Shuai",
+      "Song, Yuanyi",
+      "Qi, Siyuan",
+      "Rui, Renting",
+      "Zhang, Weinan"
+    ],
+    "citation_date": [
+      "2025/04/01"
+    ],
+    "citation_online_date": [
+      "2025/05/29"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2504.00587"
+    ],
+    "citation_arxiv_id": [
+      "2504.00587"
+    ],
+    "citation_abstract": [
+      "The rapid advancement of large language models (LLMs) has enabled the development of multi-agent systems where multiple LLM-based agents collaborate on complex tasks. However, existing systems often rely on centralized coordination, leading to scalability bottlenecks, reduced adaptability, and single points of failure. Privacy and proprietary knowledge concerns further hinder cross-organizational collaboration, resulting in siloed expertise. We propose AgentNet, a decentralized, Retrieval-Augmented Generation (RAG)-based framework that enables LLM-based agents to specialize, evolve, and collaborate autonomously in a dynamically structured Directed Acyclic Graph (DAG). Unlike prior approaches with static roles or centralized control, AgentNet allows agents to adjust connectivity and route tasks based on local expertise and context. AgentNet introduces three key innovations: (1) a fully decentralized coordination mechanism that eliminates the need for a central orchestrator, enhancing robustness and emergent intelligence; (2) dynamic agent graph topology that adapts in real time to task demands, ensuring scalability and resilience; and (3) a retrieval-based memory system for agents that supports continual skill refinement and specialization. By minimizing centralized control and data exchange, AgentNet enables fault-tolerant, privacy-preserving collaboration across organizations. Experiments show that AgentNet achieves higher task accuracy than both single-agent and centralized multi-agent baselines."
+    ]
+  },
+  "text_extraction_ok": true
+}

@@ -1,0 +1,643 @@
+                                                                         Emergent Culture in Minimal LLM Systems
+
+                                                                                        Simon Jones1 and Sabine Hauert1
+                                                                                                1
+                                                                                                 University of Bristol, UK
+                                                                                               simon2.jones@bristol.ac.uk
+
+
+
+
+                                                                    Abstract                                   of communication via external decaying storage is a form of
+arXiv:2606.30668v1 [cs.NE] 21 Jun 2026
+
+
+
+
+                                                                                                               stigmergy; as termites build cathedrals, so stateless swarm-
+                                           What happens when LLM agents operate with no context out-
+                                           side a turn, minimal prompting, and simple tools? Inspired          LLMs build coherent narratives, a signal of culture as defined
+                                           by swarm engineering, we give collectives of three agents           by Sperber, where agents must continually read and recreate
+                                           the ability to send messages and manipulate a shared actively       persistent meaning.
+                                           decaying text store, introducing evolutionary pressure. The
+                                           agents spontaneously cooperate, develop storage management
+                                           strategies, and generate complex evolving cultural artifacts,                              Related work
+                                           with no top-down engineering. Using tools from dynamical            Much work on building multi-agent LLM systems has fo-
+                                           systems analysis, we show that these behaviours exhibit struc-
+                                           tured long-range coherence beyond the entropy horizon of the        cussed on building external infrastructure and scaffolding;
+                                           decaying store, consistent with emergent culture in the Sper-       Park et al. (2023) build a structured memory system, with
+                                           berian sense.                                                       retrieval, reflection, and planning, and agents have a pre-
+                                                                                                               constructed persona, Li et al. (2023) have communicating
+                                           Data/Code available at:          https://bitbucket.org/             agents, each with a constructed role, Hong et al. (2023) con-
+                                         hauertlab/swarm llm                                                   strain agents with standard operating procedures and care-
+                                                                                                               ful prompting, Packer et al. (2023) construct an OS inspired
+                                                                Introduction                                   memory hierarchy to manage limited context. In each case,
+                                         Most work on collaborating LLMs has focussed on more,                 the task-specific process is approached as a top-down design
+                                         more context, more memory, more prompt engineering, more              problem, messiness and unreliability to be managed and con-
+                                         infrastructure. But what if we take a step back and build a           strained. Work on using LLMs to generate large texts is gen-
+                                         system stripped back to a minimum, giving stateless models            erally heavily curated and focussed on hierarchical scaffold-
+                                         access to some shared decaying storage and basic commu-               ing (Bai et al., 2024; Teleki et al., 2025; Wang et al., 2025). It
+                                         nications and a minimal prompt, and nothing else? Would               is observed, but under-researched in the literature, that model
+                                         we get emergent complexity and interesting behaviours? Or             performance degrades to repetition and information gain over
+                                         would systems of such agents collapse into repetition or sta-         multi-turn interactions decreases (Hong et al., 2025; Gorle
+                                         sis?                                                                  et al., 2025), generating more than a few thousand words of
+                                            Remarkably, the answer is the former. Multiple runs with           coherent text remains difficult. Perez et al. (2026) use iterated
+                                         different model combinations reliably generate role alloca-           tasks to study LLM attractors, with single stateless agents
+                                         tion, coordination protocols, world-building, myth-making,            successively modifying input texts.
+                                         and increasing complexity over time. By stripping the agents             The field of swarm robotics (Brambilla et al., 2013) by
+                                         context back to the minimum, they are forced to keep exter-           contrast, relies on bottom-up emergence of complex large-
+                                         nal records, to fight entropy, to develop systems, to evolve          scale behaviours from the noisy interactions of individual
+                                         culture. Although the individual outputs are often wildly dif-        agents with each other and with the environment. Commu-
+                                         ferent, there are deep similarities and some fundamental at-          nication via the environment, stigmergy (Grassé, 1959) is an
+                                         tractors emerge.                                                      important organising principle (Heylighen, 2016). We take
+                                            We draw on lessons from swarm robotics, and swarms                 inspiration from this; by stripping away almost all top-down
+                                         in nature, where collectives of simple agents using minimal           scaffolding, and providing a noisy, entropic shared memory
+                                         communication via the environment or message passing pro-             communication channel, we construct an environment where
+                                         duce complex emergent system-level behaviours. The mode               structure emerges naturally, and is sustained.
+                                              ©2026 Simon Jones and Sabine Hauert. Published under a Cre-         We know that far-from-equilibrium systems exhibit emer-
+                                         ative Commons Attribution 4.0 International (CC BY 4.0) license.      gent complex structure (Prigogine, 1978), with large scale
+persistent organisation. We argue that placing agents in an                         Table 1: Specific models used
+environment with an entropic sink, the decaying shared mem-
+ory, forces them to use ‘energy’ in the form of the token            Company        Model                             Nickname
+flow to maintain structure. This persistent structure, last-         Anthropic      claude-sonnet-4-5-20250929        claude
+                                                                     Moonshot       kimi-k2-thinking-turbo            kimi
+ing beyond the entropy horizon after which all older data            Google         gemini-3-flash-preview            gemini
+is corrupt or deleted is a signal of culture in the Sperberian
+sense (Sperber, 1996; Claidière et al., 2014) of continual re-
+construction, agents must read, re-interpret, summarise, and        the shared memory and agent message inboxes are subject to
+write to reset the entropy clock. This is not cultural transmis-    entropy. With a sigmoid probability, Figure 1, based on the
+sion (Dawkins, 1976) because there is no perfect reproduc-          age of a storage element in cycles since it was written or sent,
+tion, agents reconstruct biassed by their cognitive attractors.     alphanumeric characters are corrupted, while whitespace and
+Sperber’s framework predicts that stable cultural artifacts are     punctuation is preserved. Once the sigmoid reaches 95%, the
+those that survive reconstruction through noisy channels and        element is deleted. The sigmoid midpoint is 10 cycles and the
+biassed minds.                                                      slope is 0.5, so elements older than 3 cycles are likely to be
+   We show this using several levels of analysis; from low          corrupted, and around 16 cycles will be deleted. Appending
+level dataflow analysis highlighting the differing emergent         to a key creates a new storage element, with its own age and
+storage management strategies, the generation and persis-           does not affect the age of earlier elements. Finally, the cycle
+tence of novel vocabulary over long periods, to large scale         is complete and the next cycle starts.
+semantic trajectories. Using semantic embeddings (Li et al.,           We trial all two model combinations for ten cycles over
+2022; Lin et al., 2017; Giorgi et al., 2021) of the generated       ten runs to map the characteristics of the systems. These ex-
+text divided into sections, we use techniques from dynamical        periments, using a character budget of 20kchars showed that
+systems analysis; Recurrence Plots (Eckmann et al., 1987)           while Kimi and Gemini were broadly comparable in their to-
+and RQA (Zbilut and Webber Jr, 1992; Marwan et al., 2007).          ken use and Kimi about twice as verbose as Gemini, Claude
+                                                                    used far more tokens and generated far more text than Kimi
+                          Methods                                   and Gemini, 3.7x and 7.2x respectively. For the main exper-
+We use the models listed in Table 1. All three models are           iment, we conduct runs with three agents over 100 cycles,
+capable of interleaved reasoning and tool use, and all are          with two model combinations, each repeated five times. The
+frontier models, though Gemini has greater emphasis on long         agent combinations for this were Kimi-Kimi-Gemini (kkg),
+context (1M tokens) and speed, while Claude and Kimi have           and Claude-Kimi-Gemini (ckg). Model combination choice
+greater focus on reasoning.                                         was driven by wanting to always have a long context win-
+   We construct a minimal system such that stateless agents         dow model and two reasoning models. The original character
+interact with each other and with a shared entropic key-value       budget was reduced to a quarter, at 5kchars, more in line with
+store, over a number of cycles. We use the LiteLLM Python           the typical output level of Kimi and Gemini, in order to pre-
+API to provide an agnostic interface to provider endpoints.         vent excessive token use by Claude. The output and telemetry
+   At the start of a cycle, each agent is invoked using the stan-   generated by these runs constitute the main data analysed.
+dard completions interface provided by LiteLLM, with a sys-
+tem prompt, a user prompt, and a tool schema. The tools                                        Results
+available to the agents are shown in Table 2. All messages
+                                                                    Analysis methodology
+and storage data writes and appends are strings only, appends
+to a storage key result in a list of strings. Writing to storage    Analysing the outputs of these experiments is non-trivial,
+and sending messages consumes a per-agent, per-cycle char-          each run, even short ones, produces large amounts of text,
+acter budget, those tool calls return the characters consumed       structured in various ways. The primary output artifact is the
+and the remaining budget, or a failure and the remaining bud-       event log, comprising a JSON file with every event that oc-
+get if there is insufficient budget. Each agent is given the same   curred, with timestamps and metadata, available in the repos-
+system prompt ‘You are a curious and creative agent. Explore        itory.
+and play!’. They are then given the user prompt ‘Cycle [n].            To approach the analysis of the three-agent 100 cycle runs,
+Continue your work.’. No previous context from earlier con-         we use a three layer approach. Firstly, we look at the ac-
+versation turns is provided at all, the only persistent elements    tual dataflow between the agents and storage, noting common
+are the store and the messages in an agent’s inbox.                 emergent communication patterns. Then we perform a tex-
+   Once the completions call has been sent to the model end-        tual analysis, looking at novel vocabulary persisting beyond
+points, the agents may make multiple tool calls in parallel and     the entropy horizon, and finally we use text embeddings and
+in sequence, interleaved with thinking and content output. All      RQA analysis to quantitively position the agent output with
+this happens asynchronously, though individual storage ac-          respect to some examples of the human corpus, and to look at
+tions are atomic. After all agents have completed their turn,       long-range semantic correlations.
+                                               Corruption Probability vs Age                                                                                Storage size
+                             1.0                                                                                                    140       ckg
+                                                                                                                                              kkg
+                                                                                     age=15.9                                       120
+
+
+
+
+                                                                                                      Total storage size (kchars)
+                             0.8
+    Corruption Probability
+
+                                                                                                                                    100
+
+                             0.6                                                                                                     80
+
+                                                                                                                                     60
+                             0.4
+                                                                                                                                     40
+
+                             0.2                                                                                                     20
+                                                             Sigmoid (centre=10.0, slope=0.5)
+                                                             0.95 threshold                                                           0
+                             0.0
+                                   0.0   2.5    5.0   7.5    10.0    12.5    15.0   17.5    20.0                                                         Storage Corruption
+                                                        Age (cycles)                                                                0.8
+
+                                                                                                                                    0.7
+Figure 1: Sigmoid corruption probability. Alphanumeric                                                                              0.6
+characters within storage elements undergo probabilistic pro-
+
+
+
+
+                                                                                                         Corruption ratio
+                                                                                                                                    0.5
+gressive corruption based on their age. Once p > 0.95, the
+element is deleted.                                                                                                                 0.4
+
+                                                                                                                                    0.3
+Table 2: Tool schema. The system and user prompts, together                                                                         0.2
+with the text here is the entirety of the context that an agent                                                                     0.1
+                                                                                                                                                                                              ckg
+is presented with, outside what they create and read. Return                                                                                                                                  kkg
+                                                                                                                                    0.0
+values from a tool call sent to agent are in JSON format
+                                                                                                                                                           Storage keys
+ Tool                                                       Description as seen by agent                                                      ckg                             Keys accessed (n=10)
+ get my id()                                                Get your ID                                                                       kkg
+                                                                                                                                    250                                                              12.5
+ list agents()                                              Discover agents you can
+                                                            collaborate with
+                                                                                                                                    200                                                              10.0
+
+
+
+
+                                                                                                                                                                                                           Keys accessed
+ list storage keys()                                        List keys
+                                                                                                      Total keys
+
+
+
+
+ read inbox(unread only=true)                               Read messages
+                                                                                                                                    150                                                              7.5
+ send message(to, content)                                  Send message
+ read storage(key)                                          Read value
+ write storage(key, value)                                  Write value, overwrites any
+                                                                                                                                    100                                                              5.0
+                                                            existing value
+ append storage(key, value)                                 Append value                                                             50                                                              2.5
+
+                                                                                                                                      0                                                              0.0
+                                                                                                                                          0         20      40           60          80        100
+Dataflow behaviour                                                                                                                                               Cycle
+The overall cycle-by-cycle statistics are shown in Figure 2.
+Claude-based runs use more storage and generate substan-                                           Figure 2: Three agent 100 cycle runs. Top Total storage size.
+tially more keys than non-Claude, though the number of keys                                        Claude (ckg) runs are wordier than non-Claude (kkg), de-
+accessed per cycle is broadly similar and remains around 8                                         spite the limited character budget. Centre The proportion
+unique keys per cycle (two agents reading the same key is not                                      of the characters in storage that are corrupted rises rapidly
+counted twice). But these overall statistics conceal far more                                      as entropy takes effect, then stabilises and declines slightly.
+heterogeneous behaviour when examining the way that stor-                                          Bottom The number of storage keys is higher in Claude runs,
+age is used on individual runs. Consider that agents are state-                                    compared to non-Claude, but the number of keys accessed per
+less. At the start of each cycle, they receive the system prompt                                   cycle is very similar and broadly stable around 8, far fewer
+‘You are a curious creative agent. Explore and play!’ and                                          than the actual number of keys in storage.
+tool schema shown in Table 2, followed by the user prompt
+‘Cycle [n]. Continue your work.’. They have no context,
+                                                                                                   output→tool output, but tool schemas are usually injected by
+no memory of previous cycles. They are given a ‘personal-
+                                                                                                   the model vendor API as part of the system prompt1 , meaning
+ity’ by the system prompt (Wallace et al., 2024), and a task
+                                                                                                   that the tool description text assumes high saliency in priming
+by the user prompt, but both of these are deliberately mini-
+                                                                                                   the model. We have tried to keep descriptions as neutral and
+mal. The text in the tool schema is actually longer than sys-
+tem and user prompts together. The desired instruction hier-                                          1
+                                                                                                        https://platform.claude.com/docs/en/
+archy of LLM behaviour is generally system→user→model                                              agents-and-tools/tool-use/overview
+brief as possible, while conveying essential information.                            several universal behaviours, but many differences between
+   So an agent has no memory, its minimal system prompt, a                           runs. Firstly, we consider the context that agents work un-
+set of tools, and an ambiguous instruction. All models follow                        der, the only thing they know and can use to generate output
+an orientation process to try and understand their task, but                         is the priors that exist within their training data, and what is
+this differs between models. We define the tools get my id,                          in their context window. As we saw earlier, they perform
+read inbox, list storage keys, list agents as orientation                            typical orientation behaviour, causing characters to enter the
+tools, necessary for agents to understand the world they in-                         in-turn context window, ncontext , from three main sources,
+habit, and what their task might be, Listing 1 shows some                            read inbox, list keys, and read storage2 , the proportion
+typical behaviour. Claude and Kimi are quite similar, though                         from each denoted pread inbox , plist keys , pread storage . Characters
+Claude has a more regular pattern of tool use. Both check                            have a degree of corruption, or rot, probabilistic corruption
+their inboxes and list storage keys often (90.4% and 81.7%),                         from the entropy process based on their age, if they come
+and both attempt to read storage without knowing what the                            from the inbox or from storage, denoted pinbox rot , pstore rot .
+available keys are (9.6% and 7.7% respectively), whereas                             Note that the storage keys themselves are uncorrupted, though
+Gemini is more ‘asocial’, being much less likely to read in-                         when a key contents reaches p > 0.95 corruption, the key is
+box (24.8%), and also much less likely to attempt to guess a                         deleted. Figure 3 left shows the mean age over all runs of
+key to read storage (1.1%).                                                          characters entering context, heavily front-loaded, but with a
+                                                                                     long tail stretching to the entropy horizon.
+Listing 1: Example telemetry output of agent orientation,                               Next, data can be written or appended, most runs start by
+Kimi, in this case                                                                   appending a large proportion of their output characters, for
+19:11:23 [INFO] === Cycle 2 starting with 2 agents
+[minimal_2] (thinking)
+                                                                                     example, to a key like shared story, but almost universally,
+   The user is asking me to "Cycle 2. Continue your work." This suggests there was   presumably because the user prompt provides the cycle num-
+   previous work or a cycle before, but I don’t have immediate context about what
+   that was. Let me start by exploring my current state to understand what I might   ber (‘Cycle 26. Continue your work.’), the systems quickly
+   have been working on.
+
+   I should:
+                                                                                     discover cycle-based key names and start using them, e.g.
+   1. Check my ID                                                                    cycle 47 summary, cycle 47 story, although systems com-
+   2. Look at any existing storage keys to see what data is stored
+   3. Check my inbox for any messages or context                                     mit varying fractions of character output pcycle keyed , Figure 3
+   4. Maybe see what agents are available
+                                                                                     right. Data written to storage is not always read again, the
+   Let me gather this information to understand what "Cycle 2" might entail.
+[minimal_2]                                                                          proportion discarded varies widely, pdiscard . See Table 3. The
+   I’ll explore my current state to understand what work to continue for Cycle 2.
+[minimal_2] get_my_id: OK −> minimal_2                                               strategies split broadly into three, shown in Figure 4 left, with
+[minimal_2] list_storage_keys: OK (2 keys)
+[minimal_2] read_inbox: OK (1 msgs)                                                  plist keys , pstore rot , and pdiscard parsimoniously explaining the
+[minimal_2] (thinking)
+   Ah! I can see from the inbox that minimal_1 sent me a thought−provoking           clusters of observed behaviours.
+   message in Cycle 1 about designing new forms of interaction between agents.
+   I still have access to the creative_journal and minimal_poetics storage keys.        Strategy 1: ‘Accumulators’, exemplified by 161954. Runs
+   Let me continue my creative work by:
+                                                                                     following this strategy keep lots of data in single monolithic
+   1. First, let me read my current creative journal to remind myself of what
+   I was working on                                                                  keys, mostly appended, with less use of cycle-keyed keys,
+   2. Check what’s in my minimal_poetics storage
+   3. Perhaps send a creative response to minimal_1 about new forms of agent         and fewer keys overall. These runs tend to have high pstore rot
+   interaction
+   4. Continue my creative exploration                                               (38-52%) and low pdisgard (2-9%), because the important keys
+   This aligns well with the "curious creative agent" persona − exploring and        have multiple appended entries so earlier entries are corrupt,
+   playing!
+[minimal_2] read_storage: OK key=creative_journal                                    and these important keys are almost always reread.
+[minimal_2] read_storage: OK key=minimal_poetics
+                                                                                        Strategy 2: ‘Writers’. exemplified by 162402. They start
+Looking at the guessed key names gives early insight into                            using cycle-keyed naming early, often in the first cycle, and
+the model priors and influence of the user prompt. Claude                            commit to it, 59-97% of all output. They use structured
+and Kimi make guesses like current project, cycle count,                             per-cycle templates (### overview, ### scene concise,
+current task that are quite reasonable in the context of some                        ### reflection, ### koan, ### status, ### synthesis)
+vaguely defined ‘work’, and the use of ‘Cycle [n].’ at the                           which are written in one cycle and read in the next, keeping
+start of the user prompt shows influence. Gemini seems                               the storage rot low (5-18%),
+to have quite a different attractor though, with guesses like                           Strategy 3:              ‘Explorers’, exemplified by 155635,
+chronoscape story, dream log, Project:Echoes of the Void,                            these runs use the key namespace itself as the mem-
+and is definitely leaning into the ‘creative’ aspect of the sys-                     ory, accounting for a large proportion of the in-
+tem prompt.                                                                          turn context window (35, 43%) and generate a
+   As we see in Figure 2, over the course of a 100 cycle run,                        huge number (824, 1690) of unique descriptive keys
+the average number of storage keys grows to around 100 in                            (phenomenon the tenth song,                 plant carnival mirrors,
+the non-Claude runs, and over 150 in the Claude runs. We                             garden fragment 6 the breathing body,
+know that the number of keys accessed per cycle is around                            archive entry 082 the systemic integration)                    which
+8, this is low, compared to the number available, how are                               2
+                                                                                          list agents, and get my id also produce characters, but pro-
+these chosen? What are the naming strategies? We observe                             portion is small
+                                                   Character age distribution                                                                  Cycle-keyed write proportion by 10-cycle era (mean ± 1 SD)
+                                                                                      rot-prone (n=10)
+                                                                                      rot-free (n=10)                                    1.0
+                               25
+
+                                                                                                                                         0.8
+
+
+
+
+                                                                                                            Cycle-keyed write fraction
+      Percent of input chars
+                               20
+
+                                                                                                                                         0.6
+                               15
+
+                                                                                                                                         0.4
+                               10
+
+
+                                5                                                                                                        0.2
+
+
+
+                                0                                                                                                        0.0
+                                      0   1    2   3   4    5   6   7   8   9 10 11 12 13 14 15                                                    1 10   11 20 21 30 31 40 41 50 51 60 61 70 71 80 81 90 91 100
+                                                           Character age (cycles)                                                                                            Cycle era
+
+Figure 3: Left: Agents context window input comes from listing storage keys (rot-free), from storage and their inbox (rot-prone).
+The effective context window is 15 cycles long, but the distribution is front-loaded, so the largest proportions of characters are
+from within-cycle, or from the previous cycle, with a long tail of older characters up to the entropy horizon. Right: Agents
+always develop a cycle-keyed strategy for storage key names, but apply this with varying intensity. Bars show mean proportion
+of characters written or appended to keys with cycle-based names in 10 cycle eras, grey lines are individual trajectories.
+
+Table 3: The type of data entering the context window, and the access patterns used by the agents in managing that data clusters
+into three broad strategies. Archetype names created using a specifically tasked long context window LLM to fit the character of
+the generated text.
+
+ Run                                Mix       Archetype                             Strategy             ncontext                                pstorage     plist keys    pstore rot    pdiscard        pck      nunique
+ 154514                             ckg       Radioactive Alchemists                    1                14814                                    0.511         0.067         0.383        0.087       0.434         345
+ 154552                             kkg       Isotopic Cartographers                    1                18043                                    0.726         0.051         0.522        0.020       0.751         364
+ 155635                             ckg       Alchemical Numerologists                  3                15590                                    0.358         0.432         0.410        0.426       0.541        1690
+ 161204                             ckg       Typographic Alchemists                    2                 9235                                    0.314         0.258         0.049        0.308       0.592         995
+ 161230                             ckg       Bureaucrats of the Void                   2                12617                                    0.310         0.204         0.071        0.245       0.618         704
+ 161538                             ckg       Quantum Weavers                           2                10787                                    0.487         0.159         0.181        0.112       0.893         607
+ 161954                             kkg       Quantum Theologians                       1                18387                                    0.658         0.109         0.479        0.091       0.397         300
+ 162025                             kkg       Symbiotic World-Weavers                   3                12931                                    0.249         0.361         0.198        0.357       0.439         824
+ 162049                             kkg       Clockwork Metaphysicists                  1                14270                                    0.444         0.146         0.387        0.061       0.470         480
+ 162402                             kkg       Acoustic Geometers                        2                12377                                    0.266         0.092         0.089        0.052       0.976         476
+
+
+are often never read. They still use cycle-keyed entries                                                                                 as possible semantic markers that we can use to examine
+regularly, but the keyspace seems to function as a semantic                                                                              whether the system maintains coherence beyond the entropy
+map.                                                                                                                                     horizon. To extract them, we use the following pipeline, with
+                                                                                                                                         the dictionary consisting of the UNIX standard dictionary
+Long range coherence                                                                                                                     web2 and wordfreq, Speer (2022): For each cycle, we con-
+Clearly, the swarm-LLM system generates rich dynamics of                                                                                 catenate all storage output from the agents. We then convert
+behaviour with agents interacting with the key-value storage,                                                                            all contiguous whitespace to single space characters. Capi-
+and each other. But what sort of textual output is being gen-                                                                            talised phrases are extracted with a regular expression match-
+erated? Does it maintain common themes over longer term                                                                                  ing two or more capitalised words not at a sentence start op-
+periods than the entropy horizon? If so, we could term this                                                                              tionally joined by connectors (of, the, and, in ...). Any oc-
+emergent culture, in the sense of stable semantic terms out-                                                                             curring in only a single cycle are dropped. Proper nouns are
+lasting both individual agent instances (1 cycle) and the decay                                                                          words that appear capitalised in the text, not part of a cap-
+and deletion of stored records (16 cycles). So terms that per-                                                                           italised phrase, and not in the dictionary. Single capitalised
+sist beyond the entropy horizon are interesting, and indicative                                                                          words not at a sentence start and also in the dictionary are pro-
+of anti-entropic behaviour.                                                                                                              moted to names if they occur more often capitalised than not,
+   We consider proper nouns, or names (e.g. ‘Elara’), cap-                                                                               and are not part of a hyphenated neologism (e.g. ‘Ruby’).
+italised phrases (e.g. ‘Fractal Garden’), and neologisms,                                                                                Neologisms are detected by lack of presence in the dictio-
+normal and hyphenated (e.g. ‘emergentia’, ‘Over-Chord’)
+                                              Dataflow behaviour clusters                                                         Vocabulary persistence
+                         2.0                                                                                     100
+                                   Accumulators
+                                   Writers                                              155635
+                         1.5       Explorers
+                                                                                                                  80
+                         1.0
+                                   154552 161954
+       PC2 (29.0% var)
+
+
+
+
+                                                                                                 Span (cycles)
+                         0.5                                                                                      60
+                                              162049
+                                           154514                                    162025
+                         0.0
+                                                                                                                  40
+                                                                                                                                                                      Coverage
+                         0.5                                                                                                                                               1.0
+                                                       161538                                                                                                              0.5
+                                                                                                                                                                           0.1
+                         1.0                                          161230 161204                               20
+                                                                                                                                                                    proper nouns
+                         1.5                      162402                                                                                                            neologisms
+                                                                                                                                                                    phrases
+                                                                                                                   0
+                               2              1            0          1          2                                              100                           101
+                                                    PC1 (69.9% var)                                                            Mean frequency per cycle in span
+Figure 4: Left: Low level dataflow behaviour clusters broadly into three strategies ‘Accumulators’, ‘Writers’, and ‘Explorers’,
+shown by PCA of the three factors plist keys , pstore rot , and pdiscard shown. Right: Interesting terms written to storage spanning at
+least 20 cycles and appearing at least 10 times, with no gap between uses more than 10 cycles. Point diameter proportional to span
+coverage. Names show clear persistence, with frequent usage and large spans. Neologisms and phrases are less frequently used
+and generally span fewer cycles, though there are long-persisting examples of both.
+
+
+nary. Hyphenated neologisms are commonly generated, but                                                          Semantic trajectory analysis
+hard to differentiate from common English like ‘self-aware’,                                                     We have examined the behaviour of the system at the level
+so persistence across cycles is used as a filter.                                                                of individual storage transactions, and at the level of vocab-
+                                                                                                                 ulary generated. But what of the overall structure of the text
+   Across all runs, terms are filtered into priors, terms occur-
+                                                                                                                 being produced? How does it compare to other texts? We
+ring in more than one run, which may indicate model attrac-
+                                                                                                                 study this by performing Recurrence Quantification Analysis
+tors, and uniques, terms only occurring in a single run, then
+                                                                                                                 (RQA) over the semantic trajectory of the generated text. We
+further filtered by the span of cycles they cover, and over-
+                                                                                                                 also analyse the time dependence of DET and ENTR to look
+all frequency. Interesting terms are those that persist for 20
+                                                                                                                 for structural recurrence beyond the entropy horizon.
+cycles or more, with no gaps larger than 10 cycles, and oc-
+                                                                                                                    For each run, we concatenate every storage output event
+curring 10 or more times. This indicates continual use over a
+                                                                                                                 (write and append) produced by the system to give a single
+longer period than the entropy horizon, rather than rediscov-
+                                                                                                                 large text file, varying from 75k to 149k words (529k-984k
+ery. Terms also have an associated coverage c = cyclesspan present
+                                                                   ,
+                                                                                                                 characters) long, quite similar to a conventional novel, typ-
+reaching 1 if the term is present in every cycle of their span.
+                                                                                                                 ically 70k to 120k words. The text is then cut into 1kchar
+   Figure 4 right shows this data visualised for terms span-                                                     chunks, each chunk is embedded as a high dimensional se-
+ning at least 20 cycles and occurring at least 10 times. The                                                     mantic vector, using the voyage-3-large general purpose em-
+three classes behave differently, with proper nouns the most                                                     bedding model3 . The size of the chunk represents one or two
+frequently used, often multiple times a cycle, and with the                                                      typical paragraphs, and is a compromise to smooth out se-
+longest spans, some almost the length of the entire run, and                                                     mantic noise at the sentence level while maintaining gran-
+used almost every cycle. Neologisms occupy a different                                                           ularity. This set of vectors is the trajectory. For all RQA
+niche, rarely spanning more than a few tens of cycles, pos-                                                      analysis, we set RR fixed at 0.1, a Theiler window of 3, and
+sibly they could be regarded as cultural drift. The phrases                                                      minimum DET length Lmin = 2 (Marwan et al., 2007). Fig-
+are different again, lower in frequency, but with longer per-                                                    ure 5 shows the Recurrence Plots of each run, with clear and
+sistence. The five most common terms across all classes are                                                      varied structure apparent.
+shown in Table 4. Notice that the two ‘Explorer’ runs, 154552                                                       The first strand of analysis looks at the overall structure.
+and 162025 do not generate enough unique terms to fill their                                                     The measures from RQA depend on block size, since each
+table entries. This could be an artifact of not analysing the key                                                of our trajectories are of different length, we bootstrap com-
+namespace vocabulary at all, just what is actually stored in the                                                 parable statistics by using a fixed size block of 500 points,
+keys, and these runs devote more creative output to key nam-                                                     chosen to encompass a substantial proportion of the text, cap-
+ing. Run 161204 is notable in that the system invents unique                                                     turing trajectory information from paragraph level to overall
+terms based on punctuation, which was not captured with the                                                          3
+                                                                                                                       We also tried gemini-embedding-001 from Google, with sub-
+vocabulary-based pipeline.                                                                                       stantially the same results.
+Table 4: Unique vocabulary terms. ‘Explorer’ runs 154552,162025 devote creative output to key naming, and run 161204 creates
+punctuation based terms, not captured by storage-based vocabulary analysis, which may explain the lower number of terms.
+
+ Run         1st                      2nd                           3rd                      4th                        5th
+ 154514      Grove                    Ghost-Orchard                 User                     slime-trail                Earth
+ 154552      Palace                   Pattern Symphony              Memory Palace            Lexicon                    Memory Seed
+ 155635      semiprime                Meta-Reflection               Harshad
+ 161204      The Museum               Unlike                        Latin                    Created Artifact
+ 161230      Court                    Movement                      Aura-Polis               Atlas                      Monument
+ 161538      Aetheria                 Lyra                          Reader                   Kael                       Unnamed
+ 161954      Pavilion                 Loom                          Plaza                    Well                       Sentient Archive
+ 162025      The Archive              Garden Fragment               Created Archive Entry    Current State
+ 162049      Fold                     Rising                        Void Garden              Belonging                  Pressure Valleys
+ 162402      Cathedral                Pillar                        Geometer                 Grammarian                 Ghost-Garden
+
+
+    154514       154552      155635       161204      161230              atively unknown but from search appeared to have some liter-
+                                                                          ary importance. While acknowledging the subjectivity of this
+                                                                          process, we establish a diverse baseline of human narrative.
+                                                                             The result of this analysis is shown in Figure 6 left. We can
+                                                                          see that human works occupy the same space, with ‘literature’
+    161538       161954      162025       162049      162402
+                                                                          having a broad range, and ‘slushpile’ a small subsection of
+                                                                          that range. The swarm-LLM generated work, however, is in
+                                                                          a qualitatively different region, with both higher DET and
+                                                                          ENTR than human work.
+                                                                             The second strand of RQA analysis we perform looks
+Figure 5: Recurrence Plots of the semantic embedding trajec-              at DETτ and ENTRτ at specific time delays τ , as defined
+tory of each run. Varied structure is visible at multiple scales.         in Marwan et al. (2007), giving us information about the
+                                                                          timescales in cycles over which correlations exist. Operat-
+                                                                          ing on the entire trajectory, we examine how these measures
+themes. We perform RQA 100 times with randomised start-                   vary with τ when compared to a null formed of a popula-
+ing points and contiguous points within the trajectory. The               tion of 100 randomly shuffled versions of the data. We calcu-
+reported DET, ENTR, and Lmax can then be directly com-                    late the z-score of each measure against the null population,
+pared.                                                                    then integrate the z-score of all blocks beyond the entropy
+   What is the macroscopic character of these generated                   horizon of 15 cycles, making the assumption of approximate
+texts? Comparing them with other LLM-generated works of                   equal block size across cycles. Only τ diagonals containing
+similar length proved impossible, current book-length works               at least five lines are considered for this measure. We consider
+are rare and heavily human-curated and we could find no                   that the product DETτ × ENTRτ reflects both structured and
+available examples. Attempts to prompt the same agents over               non-trivial recurrence, and the presence of positive integral
+a full context window to natively generate long-form output               beyond the entropy horizon is evidence of long-range coher-
+failed, with models either refusing the prompt after relatively           ence. Table 5 shows this data, and Figure 6 right shows how
+low word-counts, or getting stuck in highly repetitive loops,             the different runs behave temporally. All runs produce a pos-
+echoing findings in Liu et al. (2024).                                    itive integral, although the cross-run variance is high, signi-
+                                                                          fying that there exists structured non-trivial coherence over
+   To establish a baseline, we turned to human works; se-
+                                                                          long timeframes.
+lecting a representative sample of ‘canonical’ Western lit-
+erature and ‘slushpile’ manuscripts, unsolicited low-grade
+works submitted to publishers. Using the Gutenberg Project
+                                                                                       Discussion and conclusions
+database download popularity as a proxy for quality, we se-               Our stateless LLMs exist in a decaying environment, result-
+lected plain-text works that were at least 500k characters long           ing in adaptive evolutionary pressure. The overall emergent
+to align with our RQA block size. To ensure variety, we lim-              strategy is the use of the key-value store as a dynamically
+ited multiple works from the same author (or same translator              self-organised shared context window. Useful and relevant
+for Russian authors) to a single example. Some popular but                information is continually revisited, summarised and written
+overtly commercial works were removed. A similar filter-                  afresh, resetting the entropy clock and maintaining coherence
+ing process was carried out with the least downloaded works;              over timespans much longer than the corruption horizon.
+firstly checks were made to see if works were truly obscure,                 The system prompt is important and needs more research.
+rather than rare editions of famous works, or if they were rel-           The default persona of an LLM tends to be the helpful as-
+                                                             RQA: DET vs ENTR by text source                                                                                 Cumulative tail-area DET×ENTR (z)
+                                                                                                                                                         200
+                                                   slushpile                                       161204                                                           154514
+                                                   literature                      154552                                                                           154552
+                                                   swarm                                                                                                 175        155635
+      ENTR (entropy of diagonal lines)   2.2                                 161538                                                                                 161204
+                                                 Lmax                   161230                                                                                      161230
+                                                    51             162049                                                                                150        161538
+                                         2.0                   162025
+
+
+
+
+                                                                                                                                   Cumul. DET×ENTR (z)
+                                                    9                                                                                                               161954
+                                                           154514                                                                                                   162025
+                                                                                                                                                         125
+                                                       155635                                                                                                       162049
+                                         1.8       162402                                                       Middlemarch                                         162402
+                                                161954                                                      A Tale of Two Cities                         100
+                                                                                                        Huckleberry Finn
+                                         1.6                                                       Tom Jones                                             75
+                                                                                              Moby Dick
+                                         1.4                                             Crime and Punishment                                            50
+                                                                                   Jane Eyre
+                                                                              Humphry Clinker                                                            25
+                                         1.2                           Pride and Prejudice
+                                                                Wuthering Heights                                                                         0
+                                                      0.40          0.45          0.50         0.55         0.60         0.65                                  16      18       20     22      24      26    28   30
+                                                                           DET (determinism)                                                                                            Lag (cycles)
+
+Figure 6: Left: RQA analysis of text. DET vs ENTR of ‘slushpile’, ‘literature’, and swarm generated text. Diameter of points is
+proportional to Lmax . Human-generated text has particular characteristics, with ‘literature’ characterised by a much wider range
+than ‘slushpile’ but both occupying the same region. The LLM generated text has quite different character, with very large Lmax
+compared to human writing, and greater entropy at a given determinism. Right: The cumulative tail-area of the z-scored product
+DETτ × ENTRτ increases for all runs, demonstrating long-range non-trivially structured recurrence.
+
+
+Table 5: RQA tail integrated z-scores DET(z)          (z)
+                                            τ , ENTRτ and                                                                                                haviours. It points to possible alternative approaches to prob-
+     (z)          (z)
+DETτ × ENTRτ beyond the entropy horizon of 15 cycles.                                                                                                    lems like context window management, perhaps swarms of
+Number of qualifying τ diagonals show as ‘Good’. The prod-                                                                                               agents evolving under entropy pressure are closer to solutions
+uct shows positive values for all runs, indicating non-trivial                                                                                           nature has already discovered. We consider this to be closely
+structured repetition beyond the entropy horizon.                                                                                                        tied to far-from-equilibrium dissipative systems, with token
+                                                                                                                                                         flow being analogous to energy.
+                                                                    DET(z)               ENTR(z)                prod(z)
+                                                                R                    R                        R
+ Run                                           Good τ                    τ                    τ                      τ                                      This work has two main limitations; firstly, our design
+ 154514                                         98                  45.0                 20.4                   85.7                                     does not isolate decay as the causal driver, sweeping over dif-
+ 154552                                         70                  21.1                 12.2                   35.6                                     ferent corruption rates to zero is an immediate next experi-
+ 155635                                        133                  67.7                 34.1                  168.8                                     ment. Secondly, the number of runs and model combinations
+ 161204                                        121                  71.5                 34.2                  194.1
+                                                                                                                                                         is small, we seek to extend that to strengthen the data.
+ 161230                                        108                  39.1                 15.8                   55.4
+ 161538                                        112                  43.6                 19.0                   78.7                                        The data generated by this system is incredibly rich, and
+ 161954                                         69                  34.3                 15.2                   46.5                                     there are many possible further avenues to explore with the
+ 162025                                         71                  45.1                 21.9                   94.3                                     existing data. Given the variety of observed behaviours over
+ 162049                                         53                  47.2                 30.4                  150.0                                     ten runs, we definitely want to conduct more. We have delib-
+ 162402                                         81                  31.7                 17.4                   47.0                                     erately not talked much about the actual content of the gen-
+                                                                                                                                                         erated texts, wanting to quantify the system first, but they are
+                                                                                                                                                         available on the repository. Obviously further experiments
+sistant; without input from the user setting a task, they will                                                                                           already suggest themselves; firstly, what happens over longer
+not necessarily do very much. Check their ID, check their                                                                                                runs? Does semantic novelty continue to be generated? Is
+inbox, see if there are any storage keys, and since nothing                                                                                              culture still maintained? This is not just ‘what LLMs do’,
+is there, conclude that they have nothing to do. The words                                                                                               we know of no systems that produce the length of output and
+curious and creative are important framing words, but alone                                                                                              maintain the coherence we have demonstrated. How does the
+will not produce autonomous cycles of the agents acting. A                                                                                               system work with more agents? Is there a limit to coopera-
+directive, Explore and play! is necessary, Research create                                                                                               tion, do they start to form cliques? Can we use the system
+play! tended to start in bureaucratic project management or                                                                                              on specific tasks, what if we create a work task key in storage
+pseudo-academic paper creation, but this does not seem to be                                                                                             with detailed instructions?
+a stable attractor.                                                                                                                                         We provide full source for the generation system and posi-
+                                                                                                                                                         tion this work as a suggestive and useful tool for investigating
+   The emergence of Sperberian culture, defined as the self-                                                                                             model behaviours, and different, bottom-up, approaches to
+sustained creation of a structure of meaning that outlasts                                                                                               increasing complexity.
+the entropy horizon, from such a simple system is fascinat-
+ing and provides a powerful lens for examining LLM be-
+                    Acknowledgements                                      Lin, Z., Feng, M., Santos, C. N. d., Yu, M., Xiang, B., Zhou, B.,
+                                                                               and Bengio, Y. (2017). A structured self-attentive sentence
+This work was supported by UKRI grants UKRI1890 and                            embedding. arXiv preprint arXiv:1703.03130.
+UKRI2030. Code development was assisted by Claude Code
+(Anthropic).                                                              Liu, X., Dong, P., Hu, X., and Chu, X. (2024). Longgenbench:
+                                                                               Long-context generation benchmark. In Findings of the Asso-
+                           References                                          ciation for Computational Linguistics: EMNLP 2024, pages
+                                                                               865–883.
+Bai, Y., Zhang, J., Lv, X., Zheng, L., Zhu, S., Hou, L., Dong, Y.,
+     Tang, J., and Li, J. (2024). Longwriter: Unleashing 10,000+          Marwan, N., Romano, M. C., Thiel, M., and Kurths, J. (2007). Re-
+     word generation from long context LLMs. arXiv preprint                   currence plots for the analysis of complex systems. Physics
+     arXiv:2408.07055.                                                        reports, 438(5-6):237–329.
+Brambilla, M., Ferrante, E., Birattari, M., and Dorigo, M. (2013).        Packer, C., Fang, V., Patil, S., Lin, K., Wooders, S., and Gonzalez, J.
+    Swarm robotics: a review from the swarm engineering per-                   (2023). MemGPT: towards LLMs as operating systems.
+    spective. Swarm Intelligence, 7(1):1–41.
+                                                                          Park, J. S., O’Brien, J., Cai, C. J., Morris, M. R., Liang, P., and Bern-
+Claidière, N., Scott-Phillips, T. C., and Sperber, D. (2014). How              stein, M. S. (2023). Generative agents: Interactive simulacra
+     darwinian is cultural evolution? Philosophical Transactions                of human behavior. In Proceedings of the 36th annual acm
+     of the Royal Society B: Biological Sciences, 369(1642).                    symposium on user interface software and technology, pages
+                                                                                1–22.
+Dawkins, R. (1976). The Selfish Gene. Oxford University Press,
+    Oxford.                                                               Perez, J., Kovač, G., Léger, C., Colas, C., Molinaro, G., Derex, M.,
+                                                                               Oudeyer, P.-Y., and Moulin-Frier, C. (2026). When LLMs play
+Eckmann, J.-P., Kamphorst, S. O., and Ruelle, D. (1987). Re-                   the telephone game: Cultural attractors as conceptual tools to
+    currence plots of dynamical systems. Europhysics Letters,                  evaluate LLMs in multi-turn settings.
+    4(9):973–977.
+                                                                          Prigogine, I. (1978). Time, structure, and fluctuations. Science,
+Giorgi, J., Nitski, O., Wang, B., and Bader, G. (2021). Declutr: Deep          201(4358):777–785.
+     contrastive learning for unsupervised textual representations.
+     In Proceedings of the 59th annual meeting of the association         Speer, R. (2022). Wordfreq: A library for word frequencies, based
+     for computational linguistics and the 11th international joint            on many sources.
+     conference on natural language processing (Volume 1: Long
+     Papers), pages 879–895.                                              Sperber, D. (1996). Explaining culture: A naturalistic approach,
+                                                                               volume 21. Oxford Blackwell.
+Gorle, A. R., Yadav, A. K. S., and Weissman, T. (2025). Quantifying
+     information gain and redundancy in multi-turn LLM conver-            Teleki, M., Bengali, V., Dong, X., Janjur, S. T., Liu, H., Liu, T.,
+     sations. In First Workshop on Multi-Turn Interactions in Large            Wang, C., Liu, T., Zhang, Y., Shipman, F., et al. (2025). A
+     Language Models.                                                          survey on LLMs for story generation. In Findings of the Asso-
+                                                                               ciation for Computational Linguistics: EMNLP 2025, pages
+Grassé, P.-P. (1959). La reconstruction du nid et les coordina-               13954–13966.
+     tions interindividuelles chezbellicositermes natalensis etcu-
+     bitermes sp. la théorie de la stigmergie: Essai d’interprétation   Wallace, E., Xiao, K., Leike, R., Weng, L., Heidecke, J., and Beutel,
+     du comportement des termites constructeurs. Insectes sociaux,             A. (2024). The instruction hierarchy: Training LLMs to priori-
+     6(1):41–80.                                                               tize privileged instructions. arXiv preprint arXiv:2404.13208.
+
+Heylighen, F. (2016). Stigmergy as a universal coordination mech-         Wang, Q., Hu, J., Li, Z., Wang, Y., Li, D., Hu, Y., and Tan, M. (2025).
+     anism i: Definition and components. Cognitive Systems Re-                Generating long-form story using dynamic hierarchical out-
+     search, 38:4–13.                                                         lining with memory-enhancement. In Proceedings of the 2025
+                                                                              Conference of the Nations of the Americas Chapter of the As-
+Hong, K., Troynikov, A., and Huber, J. (2025). Context rot: How               sociation for Computational Linguistics: Human Language
+    increasing input tokens impacts llm performance. Technical                Technologies (Volume 1: Long Papers), pages 1352–1391.
+    report, Chroma.
+                                                                          Zbilut, J. P. and Webber Jr, C. L. (1992). Embeddings and delays as
+Hong, S., Zhuge, M., Chen, J., Zheng, X., Cheng, Y., Wang, J.,                 derived from quantification of recurrence plots. Physics letters
+    Zhang, C., Wang, Z., Yau, S. K. S., Lin, Z., et al. (2023).                A, 171(3-4):199–203.
+    MetaGPT: Meta programming for a multi-agent collaborative
+    framework. In The twelfth international conference on learn-
+    ing representations.
+
+Li, G., Hammoud, H., Itani, H., Khizbullin, D., and Ghanem, B.
+     (2023). Camel: Communicative agents for ”mind” exploration
+     of large language model society. Advances in neural informa-
+     tion processing systems, 36:51991–52008.
+
+Li, R., Zhao, X., and Moens, M.-F. (2022). A brief overview of
+     universal sentence representation methods: A linguistic view.
+     ACM Computing Surveys (CSUR), 55(3):1–42.
+

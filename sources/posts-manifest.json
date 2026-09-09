@@ -1,0 +1,204 @@
+{
+  "retrieved_at": "2026-09-09T20:00:29.332781+00:00",
+  "items": [
+    {
+      "id": "anthropic-research",
+      "url": "https://www.anthropic.com/engineering/multi-agent-research-system",
+      "artifact": {
+        "url": "https://www.anthropic.com/engineering/multi-agent-research-system",
+        "resolved_url": "https://www.anthropic.com/engineering/multi-agent-research-system",
+        "path": "sources/posts/anthropic-research/page.html",
+        "bytes": 205658,
+        "sha256": "a9fe5d86a98e276359b73d5f3b829f9ef24ee9adbe891db79426aa66088205e3"
+      },
+      "metadata": {
+        "": [
+          ""
+        ],
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "next-size-adjust": [
+          ""
+        ],
+        "theme-color": [
+          "#141413"
+        ],
+        "description": [
+          "On the the engineering challenges and lessons learned from building Claude's Research system"
+        ],
+        "msapplication-TileColor": [
+          "141413"
+        ],
+        "msapplication-config": [
+          "/browserconfig.xml"
+        ],
+        "google-site-verification": [
+          "BqiAW_sWOg-KrPk-Accxm6ge9dtnFEyV6DB6vzVZSGs"
+        ],
+        "og:title": [
+          "How we built our multi-agent research system"
+        ],
+        "og:description": [
+          "On the the engineering challenges and lessons learned from building Claude's Research system"
+        ],
+        "og:image": [
+          "https://cdn.sanity.io/images/4zrzovbb/website/5cf046fff69b847bfa78c12723dd466b285c0218-2400x1260.png"
+        ],
+        "og:image:alt": [
+          "Anthropic logo"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "twitter:card": [
+          "summary_large_image"
+        ],
+        "twitter:site": [
+          "@AnthropicAI"
+        ],
+        "twitter:creator": [
+          "@AnthropicAI"
+        ],
+        "twitter:title": [
+          "How we built our multi-agent research system"
+        ],
+        "twitter:description": [
+          "On the the engineering challenges and lessons learned from building Claude's Research system"
+        ],
+        "twitter:image": [
+          "https://cdn.sanity.io/images/4zrzovbb/website/5cf046fff69b847bfa78c12723dd466b285c0218-2400x1260.png"
+        ],
+        "twitter:image:alt": [
+          "Anthropic logo"
+        ]
+      }
+    },
+    {
+      "id": "google-scaling",
+      "url": "https://research.google/blog/towards-a-science-of-scaling-agent-systems-when-and-why-agent-systems-work/",
+      "artifact": {
+        "url": "https://research.google/blog/towards-a-science-of-scaling-agent-systems-when-and-why-agent-systems-work/",
+        "resolved_url": "https://research.google/blog/towards-a-science-of-scaling-agent-systems-when-and-why-agent-systems-work/",
+        "path": "sources/posts/google-scaling/page.html",
+        "bytes": 178250,
+        "sha256": "42bfd8901b2c3f9d75962e28e6d98b8207e56eaecf3b4aeb749e50ddabff8f8c"
+      },
+      "metadata": {
+        "": [
+          ""
+        ],
+        "og:title": [
+          "Towards a science of scaling agent systems: When and why agent systems work"
+        ],
+        "og:url": [
+          "https://research.google/blog/towards-a-science-of-scaling-agent-systems-when-and-why-agent-systems-work/"
+        ],
+        "og:image": [
+          "https://storage.googleapis.com/gweb-research2023-media/images/HO_previewImage1.width-800.format-jpeg.jpg"
+        ],
+        "og:image:secure_url": [
+          "https://storage.googleapis.com/gweb-research2023-media/images/HO_previewImage1.width-800.format-jpeg.jpg"
+        ],
+        "og:type": [
+          "Website"
+        ],
+        "viewport": [
+          "width=device-width, initial-scale=1 viewport-fit=cover"
+        ]
+      }
+    },
+    {
+      "id": "anthropic-w2s",
+      "url": "https://alignment.anthropic.com/2026/automated-w2s-researcher/",
+      "artifact": {
+        "url": "https://alignment.anthropic.com/2026/automated-w2s-researcher/",
+        "resolved_url": "https://alignment.anthropic.com/2026/automated-w2s-researcher/",
+        "path": "sources/posts/anthropic-w2s/page.html",
+        "bytes": 100824,
+        "sha256": "c9c32a534f19f4055ae4248f0a2ede9000b0bbccda60fe12c48c7491fd37b3e9"
+      },
+      "metadata": {
+        "": [
+          ""
+        ],
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ]
+      }
+    },
+    {
+      "id": "anthropic-multiagent-patterns",
+      "url": "https://www.anthropic.com/research/multiagent-systems",
+      "artifact": {
+        "url": "https://www.anthropic.com/research/multiagent-systems",
+        "resolved_url": "https://www.anthropic.com/research/multiagent-systems",
+        "path": "sources/posts/anthropic-multiagent-patterns/page.html",
+        "bytes": 218334,
+        "sha256": "44a795818de28fa4315af71ed89f040ef8f541382828d2ede2aa0e6e9648f2a3"
+      },
+      "metadata": {
+        "": [
+          ""
+        ],
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "next-size-adjust": [
+          ""
+        ],
+        "theme-color": [
+          "#141413"
+        ],
+        "description": [
+          "We ran experiments on swarms of Claude agents and found coordination failures, collusion, and sabotage. Here, we share what they mean for AI safety."
+        ],
+        "msapplication-TileColor": [
+          "141413"
+        ],
+        "msapplication-config": [
+          "/browserconfig.xml"
+        ],
+        "google-site-verification": [
+          "BqiAW_sWOg-KrPk-Accxm6ge9dtnFEyV6DB6vzVZSGs"
+        ],
+        "og:title": [
+          "Patterns and problems in multiagent systems"
+        ],
+        "og:description": [
+          "We ran experiments on swarms of Claude agents and found coordination failures, collusion, and sabotage. Here, we share what they mean for AI safety."
+        ],
+        "og:image": [
+          "https://cdn.sanity.io/images/4zrzovbb/website/6d4a0d28992ade92d6fa63646fd9c9d318245c6c-2400x1260.jpg"
+        ],
+        "og:image:alt": [
+          "Anthropic logo"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "twitter:card": [
+          "summary_large_image"
+        ],
+        "twitter:site": [
+          "@AnthropicAI"
+        ],
+        "twitter:creator": [
+          "@AnthropicAI"
+        ],
+        "twitter:title": [
+          "Patterns and problems in multiagent systems"
+        ],
+        "twitter:description": [
+          "We ran experiments on swarms of Claude agents and found coordination failures, collusion, and sabotage. Here, we share what they mean for AI safety."
+        ],
+        "twitter:image": [
+          "https://cdn.sanity.io/images/4zrzovbb/website/6d4a0d28992ade92d6fa63646fd9c9d318245c6c-2400x1260.jpg"
+        ],
+        "twitter:image:alt": [
+          "Anthropic logo"
+        ]
+      }
+    }
+  ]
+}

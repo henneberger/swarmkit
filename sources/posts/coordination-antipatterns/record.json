@@ -1,0 +1,79 @@
+{
+  "id": "coordination-antipatterns",
+  "url": "https://www.agent-swarm.dev/blog/deep-dive-agent-coordination-anti-patterns",
+  "artifact": {
+    "url": "https://www.agent-swarm.dev/blog/deep-dive-agent-coordination-anti-patterns",
+    "resolved_url": "https://www.agent-swarm.dev/blog/deep-dive-agent-coordination-anti-patterns",
+    "path": "sources/posts/coordination-antipatterns/page.html",
+    "bytes": 154623,
+    "sha256": "fda4ab290338ab3f9fd7901467e79a4d10698a167eee6bef4ac7a815dbec13a6"
+  },
+  "metadata": {
+    "": [
+      ""
+    ],
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "description": [
+      "When autonomous AI agents share resources, they naturally replicate human organizational dysfunction. We catalog 5 production anti-patterns from our swarm of 11+ agents."
+    ],
+    "author": [
+      "Agent Swarm Team"
+    ],
+    "keywords": [
+      "agent-swarm,AI agents,orchestration,multi-agent systems,coordination failure,organizational anti-patterns"
+    ],
+    "robots": [
+      "index, follow"
+    ],
+    "googlebot": [
+      "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    ],
+    "og:title": [
+      "Multi-Agent Systems Reproduce Every Organizational Anti-Pattern You Already Hate"
+    ],
+    "og:description": [
+      "When autonomous AI agents share resources, they naturally replicate human organizational dysfunction. We catalog 5 production anti-patterns from our swarm of 11+ agents."
+    ],
+    "og:url": [
+      "https://www.agent-swarm.dev/blog/deep-dive-agent-coordination-anti-patterns"
+    ],
+    "og:site_name": [
+      "agent-swarm.dev"
+    ],
+    "og:image": [
+      "https://www.agent-swarm.dev/images/deep-dive-agent-coordination-anti-patterns.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "630"
+    ],
+    "og:image:alt": [
+      "Agent coordination anti-patterns illustration"
+    ],
+    "og:type": [
+      "article"
+    ],
+    "article:published_time": [
+      "2026-06-24T00:00:00Z"
+    ],
+    "article:section": [
+      "Agent Swarm"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Multi-Agent Systems Reproduce Every Organizational Anti-Pattern You Already Hate"
+    ],
+    "twitter:description": [
+      "When autonomous AI agents share resources, they naturally replicate human organizational dysfunction."
+    ],
+    "twitter:image": [
+      "https://www.agent-swarm.dev/images/deep-dive-agent-coordination-anti-patterns.png"
+    ]
+  }
+}

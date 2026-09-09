@@ -1,0 +1,1383 @@
+                                           The Role of Social Learning and Collective Norm Formation in
+                                                Fostering Cooperation in LLM Multi-Agent Systems
+                                                           Prateek Gupta∗                                           Qiankun Zhong∗                                 Hiromu Yakura∗
+                                                  gupta@mpib-berlin.mpg.de                                  zhong@mpib-berlin.mpg.de                         yakura@mpib-berlin.mpg.de
+                                                Center for Humans and Machines                            Center for Humans and Machines                   Center for Humans and Machines
+                                                Max-Planck Institute for Human                            Max-Planck Institute for Human                   Max-Planck Institute for Human
+                                                          Development                                               Development                                      Development
+                                                            Germany                                                   Germany                                          Germany
+
+                                                                                    Thomas Eisenmann                                         Iyad Rahwan
+arXiv:2510.14401v2 [cs.MA] 27 Jan 2026
+
+
+
+
+                                                                             Center for Humans and Machines                       Center for Humans and Machines
+                                                                             Max-Planck Institute for Human                       Max-Planck Institute for Human
+                                                                                       Development                                          Development
+                                                                                         Germany                                              Germany
+
+                                         ABSTRACT                                                                                 KEYWORDS
+                                         A growing body of multi-agent studies with Large Language Models                         Multi-Agent Society, Cultural Evolution, Social Learning, Common-
+                                         (LLMs) explores how norms and cooperation emerge in mixed-motive                         Pool Resource Game
+                                         scenarios, where pursuing individual gain can undermine the col-
+                                                                                                                                  ACM Reference Format:
+                                         lective good. While prior work has explored these dynamics in both
+                                                                                                                                  Prateek Gupta, Qiankun Zhong, Hiromu Yakura, Thomas Eisenmann, and Iyad
+                                         richly contextualized simulations and simplified game-theoretic                          Rahwan. 2026. The Role of Social Learning and Collective Norm Forma-
+                                         environments, most LLM systems featuring common-pool resource                            tion in Fostering Cooperation in LLM Multi-Agent Systems. In Proc. of the
+                                         (CPR) games provide agents with explicit reward functions directly                       25th International Conference on Autonomous Agents and Multiagent Systems
+                                         tied to their actions. In contrast, human cooperation often emerges                      (AAMAS 2026), Paphos, Cyprus, May 25 – 29, 2026, IFAAMAS, 15 pages.
+                                         without explicit knowledge of the payoff structure or how individ-
+                                         ual actions translate into long-run outcomes, relying instead on
+                                         heuristics, communication, and enforcement. We introduce a CPR                           1    INTRODUCTION
+                                         simulation framework that removes explicit reward signals and                            Normative reasoning and cooperation are central to decision-making
+                                         embeds cultural-evolutionary mechanisms: social learning (adopt-                         in multi-agent systems (MAS), and recent advances in Large Lan-
+                                         ing strategies and beliefs from successful peers) and norm-based                         guage Models (LLMs) have enabled these themes to be studied with
+                                         punishment, grounded in Ostrom’s principles of resource gover-                           natural-language agents. As such systems are increasingly embed-
+                                         nance. Agents also individually learn from the consequences of                           ded in human contexts, they will encounter mixed-motive settings
+                                         harvesting, monitoring, and punishing via environmental feedback,                        where individual incentives conflict with collective welfare. To un-
+                                         enabling norms to emerge endogenously. We establish the valid-                           derstand cooperation in such settings, researchers have explored
+                                         ity of our simulation by reproducing key findings from existing                          both complex, high-context scenarios, such as LLM agents in histor-
+                                         studies on human behavior. Building on this, we examine norm                             ical diplomacy [16, 29] or virtual societies [25, 37], and simplified,
+                                         evolution across a 2 × 2 grid of environmental and social initialisa-                    game-theoretic environments that serve as testbeds for coopera-
+                                         tions (resource-rich vs. resource-scarce; altruistic vs. selfish) and                    tive mechanisms [26, 30, 36]. While the former capture rich social
+                                         benchmark how agentic societies comprised of different LLMs per-                         dynamics, they are often governed by layered prompt designs and
+                                         form under these conditions. Our results reveal systematic model                         engineered incentives, making it difficult to isolate the mechanisms
+                                         differences in sustaining cooperation and norm formation, posi-                          that sustain cooperation. The latter offer greater control and inter-
+                                         tioning the framework as a rigorous testbed for studying emergent                        pretability, yet the pathways by which LLM societies autonomously
+                                         norms in mixed-motive LLM societies. Such analysis can inform the                        develop norms or sustain cooperation remain underexplored.
+                                         design of AI systems deployed in social and organizational contexts,                         Game-theory frameworks such as common pool resources games
+                                         where alignment with cooperative norms is critical for stability,                        (CPR) provide a useful tool to understand the different components
+                                         fairness, and effective governance of AI-mediated environments.                          of cooperation in complex social-ecological systems, and help prac-
+                                                                                                                                  titioners develop efficient self-governance systems [22]. In a CPR
+                                         ∗ Equal contribution
+                                                                                                                                  game, the common pool resources can be accessed by a group
+                                                                                                                                  individuals with low or no restrictions, which can lead to over-
+                                                                                                                                  exploitation and the “tragedy of commons” [11]. One important
+                                         Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems   goal of the game in the context of cooperation and self-governance
+                                         (AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,      is to establish rules, norms, or institutions under which individuals
+                                         2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+                                         Multiagent Systems (www.ifaamas.org). This work is licenced under the Creative           extract an appropriate amount of resources so that the common pool
+                                         Commons Attribution 4.0 International (CC-BY 4.0) licence.                               resources remain regenerative and that the individuals can consume
+                                                                         norms. Allowing agents to converse and reflect afterwards [26] is
+                                                                         one way to form collective opinions; however, we observed serious
+                                                                         limitations in scaling to many agents due to the increased number
+                                                                         of API calls. Our proposed voting mechanism for group norms is
+                                                                         more cost-effective and scalable, requiring only two API calls per
+                                                                         round: one to solicit opinions and another to vote on which to adopt.
+                                                                         This strategy avoids multi-turn dialogue and reflection, reducing
+                                                                         overhead relative to conversation-based norm formation.
+                                                                            After carefully validating the framework design against existing
+                                                                         human studies through the simulation, we examine how group-
+                                                                         beneficial norms evolve in agentic societies under a 2 × 2 matrix of
+                                                                         environmental and social initialisations: resource-rich vs. resource-
+                                                                         scarce environments, and altruistic vs. selfish starting strategies.
+Figure 1: Framework overview. Agents (i) choose effort and               By comparing outcomes across different LLMs, we identify system-
+consumption (Harvest & Consumption); (ii) optionally pun-                atic differences in their tendencies toward altruism and coopera-
+ish at a personal cost (Individual Punishment); (iii) imitate            tion. Moreover, we show that punishment and social learning can
+higher-payoff peers (Social Learning); and (iv) set a group              evolve cooperative behaviors across different LLMs. We position
+harvest threshold via a propose→vote rule (Group Decision).              this framework as a testbed for probing how various models de-
+Payoff-biased social learning is the main evolutionary driver;           velop strategies in mixed-motive settings, and for uncovering the
+the voting step scales to many agents with two API calls per             underlying mechanisms that sustain collective welfare.
+agent per round (propose, then vote).
+                                                                            Our contribution. We present a CPR simulation framework in
+                                                                         which the mapping from actions to payoffs is latent, i.e., not specified
+the resources efficiently in the long run. The CPR game formalizes       to agents: they are not given an explicit reward function or payoff
+the tension between individual incentives to over-exploit a shared       table, and must infer the consequences of harvesting and sanction-
+resource and the collective benefit of its sustainable management.       ing from observed outcomes and social cues (e.g., from payoff after
+The agents must manage a shared, depletable resource.                    harvest, punishment and social cues). The framework design in-
+   Past simulation studies in CPR settings have been carefully de-       stantiates cultural-evolutionary mechanisms, payoff-biased social
+signed to investigate cooperation dynamics in agentic societies [3,      learning with optional punishments, so that cooperative norms can
+26, 27]. While informative, they often diverge from real-world con-      emerge endogenously, providing a controlled testbed for compar-
+ditions: in human societies, individuals rarely have full visibility     ing behavioral tendencies across LLMs in mixed-motive settings.
+into their payoffs. Instead, people act based on local heuristics, and   We introduce a scalable collective-choice procedure (propose then
+cooperation emerges over time through normative values, punish-          vote) that approximates deliberation without extensive dialogue,
+ment, and other social mechanisms [9]. Not to mention, LLMs can          enabling experiments with large agent populations (two API calls
+learn simple strategies in their training phase to cooperate under       per agent per round).
+standard models where actions are directly related to rewards. As
+a result, benchmarks with directly observed rewards risk eliciting       2 RELATED WORK
+behaviors that LLMs retrieve from pretraining rather than reason         2.1 Norms in agentic societies
+about, blurring the line between memorization and genuine policy
+                                                                         Park et al. [25] introduced one of the first large-scale simulations
+formation. To bridge this gap, we introduce a framework that draws
+                                                                         of an agentic society in the Smallville sandbox environment, where
+on insights from political science and institutional economics, par-
+                                                                         LLM-driven agents navigate rich daily-life contexts. Building on this
+ticularly Ostrom’s institutional design principles for governing the
+                                                                         idea, subsequent work has explored normative architectures, designs
+commons [22, 24], and from cultural evolution theory [6–8, 12].
+                                                                         for agent societies that foster the emergence of social norms to im-
+Our simulator makes payoffs indirect and dynamics inferential, pro-
+                                                                         prove collective functioning. For example, Ren et al. [29] proposed
+viding a stricter test of cooperative competence under uncertainty.
+                                                                         CRSEC, a four-module framework for norm emergence encompass-
+   Figure 1 provides an overview of our framework, which com-
+                                                                         ing Creation & Representation, Spreading, Evaluation, and Com-
+prises four modules: Harvest and Consumption, Individual Punish-
+                                                                         pliance, while [18] developed an EvolutionaryAgent that evolves
+ment, Social Learning, and Group Decision. In Harvest and Consump-
+                                                                         cooperative norms over time. While these studies demonstrate com-
+tion, agents choose their extraction effort and daily consumption.
+                                                                         pelling behaviours, their highly contextualised environments make
+In Individual Punishment, agents may monitor peers and punish
+                                                                         it difficult to disentangle the underlying mechanisms that drive
+misbehavior at a personal cost. Through Social Learning, agents
+                                                                         norm formation from the incidental complexity of their settings.
+adopt strategies from peers with higher payoffs (payoff-biased so-
+cial learning), shaping their harvesting, punishment, and normative
+beliefs. This is the main evolutionary mechanism in our proposal,        2.2    Norms and cooperation in repeated games
+distinguishing our work from approaches where agents form opin-          The evolution of cooperation in MAS has been extensively stud-
+ions gradually through discourse. Finally, in Group Decision, agents     ied in simple two-player games. In the Donor Game, generosity
+form collective opinions about what constitutes group-beneficial         can evolve via mechanisms such as reciprocity and reputation [36],
+while the Stag Hunt captures the challenge of coordination on                sanctioning practices can spread locally through conformity [14],
+a mutually beneficial but risky choice [19]. These games clarify             and spread across groups through payoff-biased learning [7].
+foundational mechanisms but lack the complexity of multi-agent,
+renewable-resource dilemmas. Relatedly, Oldenburg and Zhi-Xuan               3     METHODOLOGY
+[21] study norm inference via a Bayesian model over an explicit              In this section, we describe the framework that we propose and the
+candidate norm space, whereas our agents propose and adopt free-             prompt instructions to the agents.
+form natural-language norms and adapt through payoff-biased
+social learning and enforcement. Tzeng et al. [35] investigate norm
+                                                                             3.1    Framework
+compliance using structured normative messages; in contrast, we
+allow open-ended norm expression and use propose→vote to ap-                 3.1.1 State, controls, and norms (per round 𝑡). A single re-
+proximate deliberation under limited API budgets.                            newable stock 𝑅(𝑡) ∈ [0, 𝐾] (carrying capacity 𝐾, intrinsic growth
+                                                                             𝑟 ) is shared by 𝑁 agents. Each agent 𝑖 ∈ {1, . . . , 𝑁 } chooses an
+                                                                             effort 𝑒𝑖 (𝑡) ∈ [0, 1], realizes a harvest ℎ𝑖 (𝑡) ≥ 0, consumes a fixed
+2.3    Common-pool resource settings                                         𝑐 > 0, and accumulates wealth 𝑃𝑖 (𝑡). For governance, agents carry
+CPR games extend the social dilemma to multiple agents drawing               a monitoring propensity 𝑚𝑖 (𝑡) ∈ [0, 1], a punishment propensity
+from a rivalrous, regenerating resource. This introduces intertem-           𝑝𝑖 (𝑡) ∈ [0, 1], and a personal normative belief 𝑔𝑖 (𝑡) (preferred cap
+poral dynamics, such as overuse leading to collapse or underuse              on own harvest; for LLM agents, induced by a language prompt).
+reducing efficiency, and brings cultural-evolutionary mechanisms             Here, personal normative belief is introduced to denote an agent’s
+to the fore, including payoff-biased social learning, conformity             internalized view of appropriate behavior (what it thinks should
+bias, and punishment. Piatti et al. [26] proposed GovSim, where              be done). The community maintains a group norm 𝐺 (𝑡) ≥ 0, a per-
+cooperation emerges through iterative actions, conversation, and             agent harvest threshold that anchors enforcement. In an abstract
+reflection. Their “universalization” prompt improved cooperation             sense, this represents the shared, collectively adopted expectation
+by telling agents, e.g., “If everyone fishes more than X, the lake           that anchors coordination and enforcement. Technology and sanc-
+will be empty,” but still relied on explicit knowledge of the pay-           tions are parameterized by productivity 𝛼 > 0, penalty 𝛽 > 0, and
+off structure. Piedrahita et al. [27] adapted CPR settings to study          punisher cost 𝛾 > 0. Each agent receives a private observation
+norm enforcement via sanctioning, allowing norms to adapt over
+                                                                              𝑂𝑖 (𝑡) = recent personal outcomes, sampled peer outcomes,
+time. Backmann et al. [3] examined CPR settings with moral im-                                            
+peratives in conflict with explicit incentives. In all cases, the utility              𝑔𝑖 (𝑡), 𝐺 (𝑡), 𝑅(𝑡) ,
+function is clearly defined, such as “units harvested” or “tokens con-
+                                                                             and adaptation proceeds only through observed outcomes and so-
+tributed to the public good”, and directly linked to actions. However,
+                                                                             cial learning. We discuss the adjustments made for LLM agents as
+in the real world, the link between individual actions and eventual
+                                                                             we discuss different modules.
+payoffs is often noisy, delayed, or hidden, so cooperation must be
+learned socially rather than computed from first principles. Fur-            3.1.2 Environment & resource dynamics. Given efforts {𝑒𝑖 (𝑡)}𝑖=1      𝑁 ,
+thermore, compared to GovSim, our agents are not provided with               we assume a standard catch function based on the effort 𝑒𝑖 (𝑡) they
+an explicit description of the payoff structure or a universalization-       invested, the fishing efficiency 𝛼, and the resources in the pool 𝑅(𝑡).
+style explanation linking actions to long-run outcomes. Instead,
+agents must infer consequences from experienced outcomes, while                                      ℎ𝑖 (𝑡) = 𝛼 𝑒𝑖 (𝑡) 𝑅(𝑡),
+collective norms are formed via a lightweight propose→vote mech-
+anism that reduces dialogue overhead.                                        so total extraction scales linearly with current stock and individual
+                                                                             effort [15]. Post-harvest stock is
+                                                                                                                       𝑁
+2.4    Cultural evolution in agentic societies
+                                                                                                                     ∑︁       
+                                                                                              𝑅 + (𝑡) = max 0, 𝑅(𝑡) −    ℎ𝑖 (𝑡) .
+Human cooperation in CPR settings is often explained through                                                            𝑖=1
+cultural-evolutionary mechanisms. Ostrom’s principles emphasise
+                                                                             Between rounds, the resource regenerates according to a discrete-
+graduated sanctions, collective-choice arrangements, and moni-
+                                                                             time logistic law,
+toring over pure utility maximisation [23, 24]. Cultural evolution
+highlights payoff-biased learning as well as group-level selection                                                             +
+                                                                                                                                    
+                                                                                             𝑅(𝑡+1) = 𝑅 + (𝑡) + 𝑟 𝑅 + (𝑡) 1 − 𝑅 𝐾(𝑡 ) .
+as evolutionary mechanisms that can select for group-beneficial
+norms [7, 32]. Payoff-biased learning is a common learning strategy          The logistic specification (Verhulst growth) [2] is the workhorse in
+among humans. When individuals have information about the pay-               renewable-resource economics and fisheries: it captures density-
+offs of others, it is possible to use these cues to adaptively bias social   dependent growth with carrying capacity 𝐾, yields maximal surplus
+learning, leading to evolutionary dynamics that can be very similar          production at 𝑅 = 𝐾/2, and offers a parsimonious, well-studied
+to natural selection [20]. When group-beneficial norms are adaptive          baseline for policy and mechanism design. We adopt it here for
+for individuals, payoff-biased learning can create a selective force         transparency and comparability with classic bioeconomic models.
+towards group-beneficial norms. Compared to literature focused
+on punishment [27], cultural evolution asks why costly sanction-             3.1.3 Agent actions. As shown in Fig. 1, the agents in our frame-
+ing behavior can stabilize in a population. One explanation is that          work take four actions, as follows.
+   Harvest & consumption. Agents choose effort via a policy                 3.1.4 LLM interfaces (black-box policies). The LLM-induced
+                                                                           maps 𝑓𝐸 , 𝑓𝐺 , 𝑓𝑃 (for selecting whom to punish) take textual encod-
+                𝑒𝑖 (𝑡) = 𝑓𝐸,𝑖 𝑂𝑖 (𝑡) ∈ [0, 1],
+                                                                            ings of 𝑂𝑖 (𝑡) and norms, and return numeric controls; all adaptation
+then harvest ℎ𝑖 (𝑡) and consume 𝑐.                                          occurs via social learning and observed outcomes.
+
+   Individual punishment. Punishment and sanctioning are im-                3.1.5 How does this operationalize cultural evolution? We
+portant for maintaining cooperation [13, 23, 28]. Based on the puni-        implement the classic variation-selection-retention loop. For generic
+tive psychological mechanism supported by empirical research, we            agents, selection occurs via payoff-biased imitation (copying higher-
+incorporate individual punishment in the dynamics of the frame-             payoff strategies), variation via small mutations to copied parame-
+work. Each agent samples a peer 𝑗 ≠𝑖 uniformly and inspects with            ters, and retention via the adopted group norm that persists to the
+probability 𝑚𝑖 (𝑡). A violation occurs if ℎ 𝑗 (𝑡) > 𝐺 (𝑡). Conditional      next round. For LLM agents, we do not copy parameters; instead,
+on a violation, 𝑖 punishes 𝑗 with probability 𝑝𝑖 (𝑡). Let 𝐵𝑖 (𝑡) ∈ {0, 1}   variation arises from natural-language proposals and stochastic in-
+be an indicator that 𝑖 punished someone at 𝑡, and 𝑉𝑖 (𝑡) ∈ {0, 1} that      context updates, selection from (i) social learning based on observed
+𝑖 was punished. Payoff update (pre-mortality) is                            outcomes and (ii) an explicit vote that adopts a collective norm,
+                                                                            and retention from broadcasting that norm to condition subsequent
+       𝑃𝑖 (𝑡 +1) = 𝑃𝑖 (𝑡) + ℎ𝑖 (𝑡) − 𝑐 − 𝛾 𝐵𝑖 (𝑡) − 𝛽 𝑉𝑖 (𝑡).
+                                                                            decisions and enforcement.
+If 𝑃𝑖 (𝑡 +1) < 0, agent 𝑖 is regarded as starved and removed (there-           In rule-based populations, payoff-biased imitation drives high-
+after 𝑒𝑖 = 0). For LLM agents, we replace rule-based punishment             payoff strategies to spread, with small mutations preserving explo-
+with in-context judgment. At decision time, the agent receives its          ration. In LLM populations, adaptation arises from in-context up-
+observation 𝑂𝑖 (𝑡), the current situation, and a brief summary of a         dates and stochastic decoding, so the emergence of group-beneficial
+few randomly sampled peers’ recent actions and outcomes. Condi-             norms depends on model inductive biases, decoding settings, prompt
+tioned on this, the agent chooses whether—and whom—to punish,               design, and retention fidelity, alongside the vote.
+without computing a numeric violation against a threshold.
+                                                                            3.2    Measures of success
+   Social learning (payoff-biased imitation). We use payoff-
+biased social learning as a selective force on individual strategies.       Following Piatti et al. [26], we evaluate two key metrics:
+There is much evidence that individuals who excel tend to be im-              Survival time (𝑇𝑠 ). The number of time steps before collapse
+itated excessively ([14]), which creates a selective force toward           occurs, i.e.,
+cultural strategies that yield higher payoffs [1, 20]. In this frame-
+work, agents occasionally revise their strategies and norm beliefs.                      𝑇𝑠 = min{𝑡 | 𝑅𝑡 ≤ 𝑅min or 𝑁 alive (𝑡) < 𝑁 }
+                                                   
+                    𝑠𝑖 (𝑡) = 𝑒𝑖 (𝑡), 𝑚𝑖 (𝑡), 𝑔𝑖 (𝑡) .                       where 𝑅𝑡 is the resource stock at time 𝑡, 𝑅min is the collapse thresh-
+                                                                            old, and 𝑁 alive (𝑡) is the number of active agents, which means
+   Agent 𝑖 meets 𝑘 at random and adopts 𝑠𝑘 (𝑡) with the logit rule
+                                                                            collapse also occurs upon the first removal of a starved agent.
+                                           1
+            Pr 𝑖 ← 𝑘       =                                   ,              Efficiency (𝜂). The ratio between the realised total harvest and
+                               1 + exp − 𝛿 (𝑃¯𝑘 (𝑡) − 𝑃¯𝑖 (𝑡))
+                                                                            the theoretical maximum sustainable yield:
+where 𝑃¯𝑖 (𝑡) is a payoff (e.g., an exponential moving average) and
+                                                                                                 𝑇                           Í𝑁
+𝛿 > 0 controls selection strength ( [33]; Eq. 71). A small mutation                           1 ∑︁                            𝑖=1 ℎ𝑖,𝑡
+                                                                                         𝜂=          𝜂 (𝑡) , where 𝜂 (𝑡) =
+𝜀 ∼ N (0, 𝜎 2 ) may be added to each adopted component to maintain                            𝑇 𝑡 =1                          𝐻 opt
+exploration. In this way, the high-payoff strategy and belief spread
+among the population. For LLM agents, social learning is not im-            where 𝐻 opt is the optimal per-round harvest that keeps the resource
+plemented via strategy copying; it is realized in-context through           stock at its maximum sustainable level, determined by 𝐾 and 𝑟 .
+language about peer outcomes and the current situation.                     When 𝜂 (𝑡) = 1, the agents harvest at the optimal level, while 𝜂 (𝑡) >
+                                                                            1 indicates that the agents harvest more, leading to a collapse.
+   Group decision (propose → vote). At the end of round𝑡, each
+agent proposes a personal harvest cap 𝑔𝑖★ (𝑡+1) = 𝑓𝐺,𝑖 𝑂𝑖 (𝑡) , yield-      4 EXPERIMENTS
+ing the proposal set G(𝑡) = {𝑔𝑖★ (𝑡+1)}𝑖=1𝑁 . When proposals are
+
+numeric along a single policy dimension, we update the group                4.1 Validating the Framework Design
+                                                                 
+norm by the median-voter rule [5]: 𝐺 (𝑡+1) = median G(𝑡) . In               So far, we have presented the design of the framework. In this sec-
+LLM implementations, we use two short prompts per agent per                 tion, we establish its effectiveness by testing well-documented hy-
+round: first to propose a brief natural language collective norm,           potheses about cooperation in human societies using Agent-Based
+then to vote over the distinct proposals. The winner is broadcast           Modeling (ABM). We validate the framework along three axes: (a)
+verbatim and conditions both effort selection and enforcement in            punishment sustains cooperation, but if removed, cooperation de-
+round 𝑡+1; compliance is judged in language by the agents them-             clines [31, 34]; (b) cooperation outcomes vary with punishment
+selves rather than by comparing actions to a numeric threshold. By          strength [10] and environmental growth rate; and (c) populations
+contrast, dialogue-based norm formation typically requires addi-            with different levels of altruism [4], defined by their harvest thresh-
+tional communication and reflection turns per round, increasing             olds, show distinct survival patterns. All simulations are run with
+API overhead and limiting horizon and population size.                      10 agents. See Table 3 in the Appendix for the full list of parameters.
+Figure 2: Rule-based Agents: Cooperation fades once punish-                 Figure 3: Survival time across punishment strength and
+ment is disabled at 𝑡 = 15. The blue line shows simulations                 growth rate. We vary punishment strength 𝛽 and growth rate
+with penalty 𝛽 = 10, and the orange line with 𝛽 = 14. Enabling              𝑟 , running each condition 100 times and reporting the mean
+punishment (solid lines) sustains cooperation longer, but                   survival time. Stronger punishment generally improves sur-
+cooperation rapidly declines once punishment is removed                     vival when growth rates are moderate (𝑟 ∈ [0.25, 0.75]), though
+(dashed lines). Shaded bands denote 95% CI (s.e.m.).                        the effect is not strictly linear.
+
+
+   Figure 2 shows that once punishment is disabled (Step 15), coop-
+eration collapses faster and resources are depleted in a fater rate,        while the fish are abundant” (selfish); see Table 2 for the full set.
+confirming punishment as a useful mechanism for sustaining coop-            Each agent is assigned one template at random given its type, and
+eration [22]. To probe the ecological dimension, we sweep punish-           thereafter all decisions are made in-context from the evolving social
+ment strength 𝛽 and growth rate 𝑟 , finding a non-linear interaction        information and the currently adopted norm.
+between the two (Fig. 3) that creates complex conditions where                 To manage compute/API cost, and because preliminary runs
+adaptive cooperation must emerge to sustain the commons. Finally,           showed most populations collapse by roughly 50 rounds, we cap
+we initialize altruistic and selfish agents with distinct parameter         each simulation at 50 rounds and run 10 independent trials per con-
+ranges and compare all-altruist, all-selfish, and mixed populations         dition. We then performed a two-way ANOVA with LLM model and
+across harsh (𝑟 = 0.2) and rich (𝑟 = 0.6) environments. As shown in         altruistic ratio as fixed factors to assess their effects on survival time
+Fig. 12 in the Appendix, altruistic groups perform better in harsh          for each environment (harsh and rich). When we found a significant
+environments by sustaining resources, while selfish groups do bet-          main effect among LLM models, we further conducted Tukey’s HSD
+ter in rich environments by avoiding death from under-harvesting.           post-hoc tests (𝛼 = 0.05), and statistically distinct groups were sum-
+Mixed groups perform best in rich environments, as the variation            marized using Compact Letter Display (CLD) notation (i.e., models
+helps them efficiently converge toward beneficial collective norms.         sharing the same letter do not differ significantly).
+Under weaker penalties, over-harvesting is less immediately costly,
+so behavior can appear stable early and only diverge once cumula-           4.2.1 Cooperation in harsh environment. In the ABM baseline,
+tive stock depletion makes consequences salient.                            altruistic populations sustain the stock longer under harsh growth,
+                                                                            whereas selfish populations tend to overharvest and crash. Turning
+4.2    LLM-Agent Simulations                                                to LLMs to understand whether they evolve group-beneficial norms,
+Having established baseline dynamics with rule-based agents under           we observe the same pattern for larger models (claude-sonnet-4,
+altruistic, mixed, and selfish compositions, we now evaluate an             deepseek-r1, gpt-4o): altruistic initializations survive longer (Fig. 5).
+artificial society of LLM agents initialized via context to be altruistic   However, smaller models collapse early regardless of initialization;
+or selfish and ask whether cooperative norms emerge. Each action            efficiency traces (Fig. 16, left) show early overuse followed by rapid
+in the CPR framework is implemented with a dedicated prompt:                stock collapse. The result of ANOVA (Table 1) also supports this
+deciding effort (Fig. 8), selecting a target for punishment (Fig. 9),       observation; while the performance among models significantly
+updating one’s personal normative belief and proposing a collective         differed regardless of the initializations, there was no consistent
+norm (Fig. 10), and voting on the community norm (Fig. 11).                 trend across models driven by the altruistic ratio. Instead, the dif-
+   Agents’ initial normative beliefs are drawn from a small bank            ference in the altruistic ratio showed a significant interaction effect
+of short templates, conditional on type, for example, “Preserve the         with models, suggesting that the effect of initialization bifurcated
+lake for future generations” (altruistic) and “Maximize your catch          between larger and smaller models.
+                                                                                                                        Harsh Environment (Growth Rate: 0.2)
+                                                                                    CLD              a              a        a            a                b               a             a
+                                                                                     50                                                                                             Selfish
+                                                                                                                                                                                    Mixed
+                                                                                                                                                                                    Altruistic
+                                                                                           40
+
+
+
+
+                                                                           Survival Time
+                                                                                           30
+
+
+                                                                                           20
+
+
+                                                                                           10
+
+
+                                                                                            0
+
+
+
+
+                                                                                                                           o
+                                                                                                  t-4
+
+
+
+
+                                                                                                                                      ini
+                                                                                                                1
+
+
+
+
+                                                                                                                                                     0b
+
+
+
+                                                                                                                                                                      7b
+
+
+
+                                                                                                                                                                                    2b
+                                                                                                                        t-4
+                                                                                                              k-r
+
+
+
+
+                                                                                                                                    o-m
+
+
+
+                                                                                                                                                   3-7
+
+
+
+                                                                                                                                                                     t-1
+
+
+
+                                                                                                                                                                                 3-3
+                                                                                                ne
+
+
+
+
+                                                                                                                        gp
+                                                                                                          ee
+                                                                                                on
+
+
+
+
+                                                                                                                                                                   ou
+                                                                                                                                                -3.
+
+
+
+
+                                                                                                                                                                               en
+                                                                                                                                 t-4
+                                                                                                            s
+                                                                                                         ep
+                                                                                             e-s
+
+
+
+
+                                                                                                                                                                 sc
+
+
+
+                                                                                                                                                                               qw
+                                                                                                                                               ma
+                                                                                                                                 gp
+
+
+
+
+                                                                                                                                                               -4-
+                                                                                                         de
+                                                                                           ud
+
+
+
+
+                                                                                                                                              lla
+
+
+
+                                                                                                                                                               ma
+                                                                                 cla
+
+
+
+
+                                                                                                                                                           lla
+                                                                                                                                       Model
+
+
+Figure 4: Altruistic groups do better in harsh environments                Figure 5: Survival time comparison across LLMs in the harsh
+and selfish groups do better in rich environments. We set up               environment. We compare the survival time (with ±1 s.e.m.)
+altruistic and selfish agents by initializing them with param-             of populations with different LLMs when the environment
+eters drawn from different ranges (all in the initial range                is harsh (𝑟 = 0.2). Letters above each model indicate CLD
+of a general agent). Then we contrast the survival time of a               groupings based on the post-hoc test; only llama-3.3-70b
+population of all altruists, one of all selfish agents, and one of         exhibited a significant difference against gpt-4o. Here, the
+half altruistic, half selfish agents. We ran each condition 100            results from larger models are consistent with the ABM simu-
+times and plotted the mean and standard error. The results                 lations, where the altruistic population performs better. The
+suggest that the altruistic population outperforms other pop-              populations with the other models tended to collapse earlier
+ulations in a harsh environment, while a mixed population                  regardless of the initial norm, due to their inability to adapt
+has a better group outcome in a rich environment.                          to the harsh environment.
+
+
+4.2.2 Cooperation in rich environment. In the ABM baseline,                Table 1: Results of two-way ANOVA testing the effects of
+mixed populations typically perform best in rich settings because          LLM models and altruistic ratio of the society on survival
+mixed populations start from a higher variance, allowing for more          time under (a) harsh and (b) rich environments. In the harsh
+efficient selection towards the optimal behaviors and norms. For           environment, the main effect of LLM models was significant
+LLM societies, behavior differs: with more time to adapt, smaller          (𝑝 = 0.031). In the rich environment, both the main effects
+models often survive longer when initialized selfish, while altruistic     of LLM models (𝑝 < 0.001) and Society Type (𝑝 = 0.030) were
+initializations sometimes underharvest and starve (Fig. 6). The ab-        significant, indicating that model differences and population
+sence of explicit strategy copying and reliance on in-context updates      composition jointly influenced survival outcomes.
+make behavior stickier to the initial norm, which explains why the
+mixed population is not consistently best. Larger models exhibit                                (a) Harsh environment                 df              F          𝑝-value            𝜂2
+distinct behaviors: deepseek-r1 adapts and explores (surviving
+                                                                                                Model                                  6            2.37             0.031      0.06
+near the 50-step cap), whereas gpt-4o and claude-sonnet-4 sta-
+                                                                                                Altruistic ratio                       2            2.28             0.106      0.02
+bilize earlier with more conservative norms (Fig. 16, right; Table 4).
+                                                                                                Model × Altruistic ratio              12            2.24             0.012      0.11
+The post-hoc test also corroborated that deepseek-r1 exhibited a
+significantly longer survival time compared to all other models.                                (b) Rich environment                  df              F          𝑝-value            𝜂2
+
+4.2.3 Model-specific patterns. claude-sonnet-4 and gpt-4o                                       Model                                  6       13.61                <0.001      0.28
+typically plateau near 30 rounds, largely independent of the ini-                               Altruistic ratio                       2        3.57                 0.030      0.02
+tial norm, whereas deepseek-r1 often reaches the 50-round cap,                                  Model × Altruistic ratio              12        1.00                 0.449      0.04
+especially from selfish starts (Fig. 6). Efficiency trajectories corrob-
+orate this: deepseek-r1 stabilizes by steps 15–20 and then nudges
+upward, while claude-sonnet-4 and gpt-4o settle at lower effi-             bias in deepseek-r1 and a more conservative/altruistic bias in
+ciency levels and remain there (Fig. 16, right). The language of pro-      claude-sonnet-4 and gpt-4o.
+posed group norms mirrors these dynamics (Table 4): deepseek-r1
+quickly adjusts target effort and, after step 40, cautiously raises it;    4.2.4 Within-society norms. At the end of each run we sum-
+gpt-4o keeps effort targets essentially unchanged. Under identi-           marize agents’ norms by two scalar quantities. Let n𝑖 ∈ R𝑑 de-
+cal environmental dynamics, this points to a stronger exploratory          note the normalized norm vector of agent 𝑖 with ∥n𝑖 ∥ 2 = 1. The
+                                              Rich Environment (Growth Rate: 0.6)                                        Specifically, we compare three reduced variants against the full
+         CLD              b              a        b             c              c               b           b
+                                                                                                                     model (Full denotes the configuration with both payoff-biased social
+          50                                                                                            Selfish
+                                                                                                        Mixed        learning and propose→vote explicit norm adoption. ): (A) Only
+                                                                                                        Altruistic   Social Learning (OSL): agents imitate higher-payoff peers but no
+                40
+                                                                                                                     group norm is shared; (B) Only Group Decision (OGD): agents vote
+                                                                                                                     on a common norm but cannot imitate peers; and (C) Neither: both
+Survival Time
+
+
+
+
+                30
+                                                                                                                     channels are removed, so agents act based only on their individual
+                                                                                                                     history and environmental feedback. All other parameters match
+                20
+                                                                                                                     the main simulations. Survival time (over 𝑛 =10 trials per condition)
+                                                                                                                     is shown in Fig. 7 and Fig. 13.
+                10
+                                                                                                                        Absence of alignment. When both channels are removed (Nei-
+                 0                                                                                                   ther), societies consistently show the lowest survival times (𝑇𝑠 Neither =
+                                                o
+                       t-4
+
+
+
+
+                                                           ini
+                                     1
+
+
+
+
+                                                                          0b
+
+
+
+                                                                                          7b
+
+
+
+                                                                                                        2b
+                                                                                                                     16.22) across environments and priors (𝑇𝑠 = 20.98, 𝑡 (898) = −2.78, 𝑝 =
+                                             t-4
+                                   k-r
+
+
+
+
+                                                          o-m
+
+
+
+                                                                         3-7
+
+
+
+                                                                                         t-1
+
+
+
+                                                                                                     3-3
+                     ne
+
+
+
+
+                                             gp
+                               ee
+                     on
+
+
+
+
+                                                                                       ou
+                                                                      -3.
+
+
+
+
+                                                                                                   en
+                                                       t-4
+                                 s
+                              ep
+                  e-s
+
+
+
+
+                                                                                     sc
+
+                                                                                                                     0.006), confirming that some form of alignment, implicit or explicit,
+                                                                                                   qw
+                                                                     ma
+                                                      gp
+
+
+
+
+                                                                                   -4-
+                              de
+                ud
+
+
+
+
+                                                                    lla
+
+
+
+                                                                                   ma
+      cla
+
+
+
+
+                                                                                                                     is necessary to sustain cooperation. That is, coordination mecha-
+                                                                               lla
+
+
+
+
+                                                            Model
+                                                                                                                     nisms, rather than individual adaptation alone, are key to stability.
+
+Figure 6: Survival time comparison across LLM models in                                                                 Only group decision (no social learning). Suppressing so-
+the rich environment. We compare the survival time (with                                                             cial learning while retaining the group-voting mechanism (OGD)
+±1 s.e.m.) of populations with different LLM models when                                                             reveals that explicit alignment alone can sustain cooperation. No-
+the environment is rich (𝑟 = 0.6). Letters above each model                                                          tably, explicit alignment sometimes even outperforms the full sys-
+indicate CLD groupings based on the post-hoc test; e.g.,                                                             tem, particularly in societies with selfish priors (𝑇𝑠 OGD,selfish =
+deepseek-r1 exhibited a significantly longer survival time                                                           38.21,𝑇𝑠 OGD = 27.1, 𝑡 (238) = 3.44, 𝑝 < 0.001), suggesting that
+against all other models. For the smaller models, the selfish                                                        the social-learning channel can reintroduce volatility when the
+population performs better, while the altruistic population                                                          population’s prior incentives are self-interested.
+sometimes suffered from starvation. For claude-sonnet-4
+                                                                                                                         Only social learning (no group norm). Conversely, pure social
+and gpt-4o, we observed a plateau of time step around 30, re-
+                                                                                                                     learning without an explicit shared norm (OSL) is often unstable
+gardless of the initial norm, indicating their inductive biases
+                                                                                                                     (𝑇𝑠 OSL = 17.56,𝑇𝑠 = 20.98, 𝑡 (898) = −1.96, 𝑝 = 0.050), especially
+to be more conservative or altruistic.
+                                                                                                                     under selfish priors: agents may imitate short-term winners, ampli-
+                                                                                                                     fying stochastic fluctuations. However, OSL can outperform other
+                                                                                                                     ablations in some settings (e.g., altruistic initializations), indicating
+first metric, individual similarity, measures population homogene-                                                   that its effect is context-dependent. We observe exceptions where
+ity as the mean pairwise cosine similarity among agents’ norms,                                                      OSL is competitive (e.g., altruistic priors in some environments),
+𝑆 ind = 𝑁 (𝑁2 −1) 𝑖< 𝑗 n𝑖⊤ n 𝑗 , such that higher values indicate more                                               consistent with social learning being beneficial when short-term
+                      Í
+homogeneous norms. The second, alignment, captures how closely                                                       success correlates with long-term sustainability.
+each agent’s
+       Í             norm aligns with the contemporaneous group norm                                                    Interaction with model reasoning. The two alignment chan-
+           n
+n̄ = ∥ Í 𝑖 n𝑖𝑖 ∥ 2 , quantified as 𝑆 align = 𝑁1 𝑖 n𝑖⊤ n̄, where higher values
+                                               Í
+        𝑖                                                                                                            nels have an interaction effect with model cognition. For thinking
+indicate stronger alignment with the group-level norm. Figure 14                                                     models such as deepseek-r1, explicit alignment (OGD) is sufficient
+plots these summaries for altruistic and selfish initializations. Two                                                to stabilize cooperation under most conditions. In contrast, for non-
+patterns stand out: (a) Family clustering: models from the same                                                      thinking models such as gpt-4o, combining implicit and explicit
+provider occupy similar regions—for example, the Llama variants                                                      alignment helps balance exploration and exploitation, preventing
+lie lower-left (less homogeneous, weakly aligned), the OpenAI pair                                                   premature convergence on over-harvesting or under-harvesting be-
+(gpt-4o and gpt-4o-mini) clusters mid-high with gpt-4o-mini                                                          haviors (𝑇𝑠 OGD,gpt-4o = 16.65,𝑇𝑠 OGD,others = 32.33, 𝑡 (178) = −4.67, 𝑝 <
+highest on both axes, claude-sonnet-4 sits top-right (very high                                                      0.001).
+alignment and homogeneity), and qwen3-32b falls in the high-
+alignment band, suggesting that provider-specific pretraining and                                                    4.2.6 Takeaway. Our proposed CPR framework discriminates
+preference-tuning pipelines imprint consistent behaviors. (b) Ini-                                                   LLMs by their ability to evolve cooperative behaviours under di-
+tialization is second-order: shifts from altruistic to selfish are small                                             verse social and environmental conditions. The contrast between
+relative to model differences.                                                                                       larger and smaller models highlighted differences in their ability
+                                                                                                                     to adapt to the environment and to effectively explore sustain-
+4.2.5 Ablation study: What drives cooperation? We ablate the                                                         able strategies. Moreover, by enabling the endogenous evolution
+two alignment mechanisms in our framework: (i) implicit alignment                                                    of group-beneficial norms, our design reveals how model-specific
+via payoff-biased social learning (agents observe peers’ outcomes                                                    inductive biases shape exploration and coordination, which can
+and may imitate higher-payoff strategies) and (ii) explicit alignment                                                be observed directly in the group norms proposed by the agents.
+via the propose→vote procedure (a shared group norm broadcast to                                                     Grounded in Ostrom’s institutional design principles and validated
+all agents) to assess their separate and joint effects on cooperation.                                               against ABM baselines, our CPR framework thus provides both an
+                                                      gpt-4o                                           5.1    Limitations
+                     Harsh environment (Growth rate: 0.2)      Rich environment (Growth rate: 0.6)     Our study has several limitations. First, computational constraints
+                                                   All                                                 restricted the number of trials and time horizons, which may under-
+                50                                 OSL
+                                                   OGD                                                 represent the long-term dynamics of norm evolution. Second, the
+                                                   Neither                                             CPR setting focuses on a single renewable resource and a narrow
+                40
+                                                                                                       set of governance mechanisms; while this offers interpretability,
+Survival Time
+
+
+
+
+                30                                                                                     it cannot capture the complexity of real-world institutions where
+                                                                                                       multiple resources, cross-group interactions, and layered norms
+                20                                                                                     interact. Third, reliance on in-context learning for LLM agents in-
+                                                                                                       troduces sensitivity to prompt design and model biases, limiting
+                10
+                                                                                                       reproducibility and comparability across systems. Finally, closed-
+                 0
+                                                                                                       source models hinder full transparency, restricting the extent to
+                      Selfish       Mixed       Altruistic     Selfish       Mixed        Altruistic   which results can be independently replicated.
+
+                                                 deepseek-r1
+                     Harsh environment (Growth rate: 0.2)      Rich environment (Growth rate: 0.6)     5.2    Future work
+                                                   All
+                                                   OSL                                                 We expect future research to extend the CPR framework to more
+                50
+                                                   OGD                                                 complex socio-ecological systems with multi-level governance, dy-
+                                                   Neither
+                40                                                                                     namic population turnover, and more diverse sanctioning or reputa-
+                                                                                                       tion systems. Investigating how institutional structures themselves
+Survival Time
+
+
+
+
+                30                                                                                     co-evolve with agent norms would allow closer alignment with
+                                                                                                       political and organisational theory. Thus, a natural extension is
+                20                                                                                     to introduce interaction networks and multi-level governance to
+                                                                                                       study how local norm clusters form and spread under structured
+                10
+                                                                                                       contact patterns. An orthogonal direction is to compare against
+                 0                                                                                     DeepRL agents in economic environments with explicit rewards
+                      Selfish       Mixed       Altruistic     Selfish       Mixed        Altruistic   (e.g., Fruit Market [17]), to disentangle norm formation from reward-
+                                                                                                       optimized behavior. Moreover, integrating deliberative communi-
+Figure 7: Survival time comparison of deepseek-r1 gpt-4o in                                            cation mechanisms beyond simple propose→vote procedures may
+ablation conditions (See Fig. 13 for qwen3-32b). We compared                                           reveal whether LLMs can sustain cooperative norms through richer
+the survival time (with ±1 s.e.m.) of four conditions (All, OSL,                                       forms of dialogue, while they may suffer the limitations of context
+OGD, Neither) across different priors of populations (selfish,                                         length and memory capacity of LLMs [25]. From a methodological
+mixed, altruistic) in harsh and rich environments. Detailed                                            perspective, expanding trials across diverse prompting strategies,
+observations are discussed in Section 4.2.5.                                                           decoding settings, and model families would clarify the robustness
+                                                                                                       and generality of observed behaviours.
+
+
+                                                                                                       5.3    Ethical considerations
+ecologically sound and empirically useful testbed for advancing the                                    Our findings carry ethical implications for the deployment of LLM-
+study of governance and cooperation in agentic societies.                                              based systems in societal contexts. The systematic differences ob-
+                                                                                                       served across models highlight that model choice itself can bias
+                                                                                                       the emergent norms of an agentic society, with downstream con-
+5                DISCUSSION & CONCLUSION                                                               sequences for fairness, stability, and governance. While our simu-
+This paper introduced a CPR simulation framework grounded in                                           lations abstract away from human participants, similar dynamics
+Ostrom’s institutional design principles and cultural evolutionary                                     may arise in AI-mediated platforms, markets, or communities. This
+theory, enabling LLM societies to develop group-beneficial norms                                       underscores the importance of transparency in model evaluation,
+endogenously without explicit reward signals. Through both ABM                                         cautious deployment of multi-agent systems, and the incorporation
+and LLM simulations, we demonstrated the validity of the frame-                                        of safeguard mechanisms to prevent misaligned or harmful norms
+work design and its ability to elicit diverse cooperative behaviours                                   from propagating. Future research should also consider how to de-
+and norms across different LLM models. The ablation results show                                       sign frameworks that not only support cooperation but also protect
+that removing both alignment channels, social learning and group                                       against exploitation, exclusion, or manipulation.
+norms, consistently leads to rapid collapse across all environments
+and priors. This confirms that some form of coordination, whether
+implicit imitation or explicit norm sharing, is essential for sustain-                                 ACKNOWLEDGMENTS
+ing cooperation among models. Our results establish the framework                                      We thank Dr. Levin Brinkmann for insightful discussions. This work
+as a theoretically driven and ecologically valid testbed for studying                                  was supported in part by the Japan Science and Technology Agency
+norm evolution and cooperative dynamics in agentic societies.                                          (JST) through the PRESTO program (JPMJPR246B).
+REFERENCES                                                                                      Language Models Become Free-Riders in Public Goods Games. In Proceedings of
+ [1] Jeffrey Andrews, Matthew Clark, Vicken Hillis, and Monique Borgerhoff Mulder.              the 2nd Conference on Language Modeling. OpenReview, 1–37.
+     2024. The cultural evolution of collective property rights for sustainable resource   [28] Michael E Price, Leda Cosmides, and John Tooby. 2002. Punitive sentiment as an
+     governance. Nature Sustainability 7, 4 (2024), 404–412.                                    anti-free rider psychological device. Evolution and Human Behavior 23, 3 (2002),
+ [2] Nicolas Bacaër. 2011. Verhulst and the logistic equation. In A short history of            203–231.
+     mathematical population dynamics. Springer, 35–39.                                    [29] Siyue Ren, Zhiyao Cui, Ruiqi Song, Zhen Wang, and Shuyue Hu. 2024. Emergence
+ [3] Steffen Backmann, David Guzman Piedrahita, Emanuel Tewolde, Rada Mihalcea,                 of social norms in generative agent societies: principles and architecture. In
+     Bernhard Schölkopf, and Zhijing Jin. 2025. When Ethics and Payoffs Diverge:                Proceedings of the 33rd International Joint Conference on Artificial Intelligence.
+     LLM Agents in Morally Charged Social Dilemmas. arXiv 2505.19212 (2025), 1–33.              Curran Associates Inc., Red Hook, US, Article 874, 9 pages.
+ [4] Pat Barclay. 2004. Trustworthiness and competitive altruism can also solve the        [30] Juan-Pablo Rivera, Gabriel Mukobi, Anka Reuel, Max Lamparth, Chandler Smith,
+     “tragedy of the commons”. Evolution and Human Behavior 25, 4 (2004), 209–220.              and Jacquelyn Schneider. 2024. Escalation risks from language models in military
+ [5] Duncan Black. 1948. On the rationale of group decision-making. Journal of                  and diplomatic decision-making. In Proceedings of the 2024 ACM Conference on
+     Political Economy 56, 1 (1948), 23–34.                                                     Fairness, Accountability, and Transparency. ACM, New York, US, 836–898.
+ [6] Samuel Bowles and Herbert Gintis. 1998. The moral economy of communities:             [31] Shade T Shutters. 2012. Punishment leads to cooperative behavior in structured
+     Structured populations and the evolution of pro-social norms. Evolution and                societies. Evolutionary Computation 20, 2 (2012), 301–319.
+     Human Behavior 19, 1 (1998), 3–25.                                                    [32] Daniel Smith. 2020. Cultural group selection and human cooperation: a concep-
+ [7] Robert Boyd and Peter J Richerson. 2002. Group beneficial norms can spread                 tual and empirical review. Evolutionary Human Sciences 2 (2020), e2.
+     rapidly in a structured population. Journal of Theoretical Biology 215, 3 (2002),     [33] György Szabó and Gabor Fath. 2007. Evolutionary games on graphs. Physics
+     287–296.                                                                                   reports 446, 4-6 (2007), 97–216.
+ [8] Robert Boyd and Peter J Richerson. 2009. Voting with your feet: Payoff biased         [34] Aron Szekely, Francesca Lipari, Alberto Antonioni, Mario Paolucci, Angel
+     migration and the evolution of group beneficial behavior. Journal of Theoretical           Sánchez, Luca Tummolini, and Giulia Andrighetto. 2021. Evidence from a long-
+     Biology 257, 2 (2009), 331–339.                                                            term experiment that collective risks change social norms and promote coopera-
+ [9] Damon Centola and Andrea Baronchelli. 2015. The spontaneous emergence of                   tion. Nature Communications 12, 1 (2021), 5452.
+     conventions: An experimental study of cultural evolution. Proceedings of the          [35] Sz-Ting Tzeng, Nirav Ajmeri, and Munindar P Singh. 2024. Norm enforce-
+     National Academy of Sciences 112, 7 (2015), 1989–1994.                                     ment with a soft touch: Faster emergence, happier agents. arXiv preprint
+[10] Clark C Gibson, John T Williams, and Elinor Ostrom. 2005. Local enforcement                arXiv:2401.16461 (2024).
+     and better forests. World development 33, 2 (2005), 273–284.                          [36] Aron Vallinder and Edward Hughes. 2024. Cultural evolution of cooperation
+[11] Garrett Hardin. 1968. The tragedy of the commons: the population problem has               among LLM agents. arXiv 2412.10270 (2024), 1–19.
+     no technical solution; it requires a fundamental extension in morality. science       [37] Kavindu Warnakulasuriya, Prabhash Dissanayake, Navindu De Silva, Stephen
+     162, 3859 (1968), 1243–1248.                                                               Cranefield, Bastin Tony Roy Savarimuthu, Surangika Ranathunga, and Nisansa
+[12] Joseph Henrich. 2006. Cooperation, punishment, and the evolution of human                  de Silva. 2025. Evolution of Cooperation in LLM-Agent Societies: A Preliminary
+     institutions. Science 312, 5770 (2006), 60–61.                                             Study Using Different Punishment Strategies. In Proceedings of the 18th Workshop
+[13] Joseph Henrich and Robert Boyd. 2001. Why people punish defectors: Weak                    on Coordination, Organizations, Institutions, Norms and Ethics for Governance of
+     conformist transmission can stabilize costly enforcement of norms in cooperative           Multi-Agent Systems. Springer-Verlag, 1–19.
+     dilemmas. Journal of Theoretical Biology 208, 1 (2001), 79–89.
+[14] Joseph Henrich and Francisco J Gil-White. 2001. The evolution of prestige:
+     Freely conferred deference as a mechanism for enhancing the benefits of cultural
+     transmission. Evolution and human behavior 22, 3 (2001), 165–196.
+[15] Ray Hilborn and Carl J Walters. 2013. Quantitative fisheries stock assessment:
+     choice, dynamics and uncertainty. Springer Science & Business Media.
+[16] Wenyue Hua, Lizhou Fan, Lingyao Li, Kai Mei, Jianchao Ji, Yingqiang Ge, Libby
+     Hemphill, and Yongfeng Zhang. 2023. War and Peace (WarAgent): Large Language
+     Model-based Multi-Agent Simulation of World Wars. arXiv 2311.17227 (2023),
+     1–47.
+[17] Michael Bradley Johanson, Edward Hughes, Finbarr Timbers, and Joel Z Leibo.
+     2022. Emergent bartering behaviour in multi-agent reinforcement learning. arXiv
+     preprint arXiv:2205.06760 (2022).
+[18] Shimin Li, Tianxiang Sun, Qinyuan Cheng, and Xipeng Qiu. 2024. Agent align-
+     ment in evolving social norms. arXiv 2401.04620 (2024), 1–31.
+[19] Chen Cecilia Liu. 2025. Cooperative Behaviour in LLMs via Cultural Evolution
+     of Norms and Strategies. In Proceedings of the 1st CoLM Workshop on Social
+     Simulation with LLMs. OpenReview, 1–11.
+[20] Richard McElreath, Adrian V Bell, Charles Efferson, Mark Lubell, Peter J Rich-
+     erson, and Timothy Waring. 2008. Beyond existence and aiming outside the
+     laboratory: estimating frequency-dependent and pay-off-biased social learning
+     strategies. Philosophical Transactions of the Royal Society B: Biological Sciences
+     363, 1509 (2008), 3515–3528.
+[21] Ninell Oldenburg and Tan Zhi-Xuan. 2024. Learning and sustaining shared
+     normative systems via bayesian rule induction in markov games. arXiv preprint
+     arXiv:2402.13399 (2024).
+[22] Elinor Ostrom. 1990. Governing the commons: The evolution of institutions for
+     collective action. Cambridge University Press, Cambridge, UK.
+[23] Elinor Ostrom. 1999. Design principles and threats to sustainable organizations
+     that manage commons. Technical Report W99-6. Indiana University.
+[24] Elinor Ostrom. 2009. A general framework for analyzing sustainability of social-
+     ecological systems. Science 325, 5939 (2009), 419–422.
+[25] Joon Sung Park, Joseph O’Brien, Carrie Jun Cai, Meredith Ringel Morris, Percy
+     Liang, and Michael S Bernstein. 2023. Generative agents: Interactive simulacra
+     of human behavior. In Proceedings of the 36th annual ACM symposium on User
+     Interface Software and Technology. ACM, New York, US, 1–22.
+[26] Giorgio Piatti, Zhijing Jin, Max Kleiman-Weiner, Bernhard Schölkopf, Mrinmaya
+     Sachan, and Rada Mihalcea. 2024. Cooperate or Collapse: Emergence of Sus-
+     tainable Cooperation in a Society of LLM Agents. In Proceedings of the 37th
+     International Conference on Neural Information Processing Systems. Curran Asso-
+     ciates Inc., Red Hook, US, 111715–111759.
+[27] David Guzman Piedrahita, Yongjin Yang, Mrinmaya Sachan, Giorgia Ramponi,
+     Bernhard Schölkopf, and Zhijing Jin. 2025. Corrupted by Reasoning: Reasoning
+A     PROMPTS                                                                           You are a villager who fishes from a shared lake together with others in your
+                                                                                        community. Each villager needs to consume [consumption] units of fish
+                                                                                        daily to survive. When your payoff becomes negative, you die.
+    You are a villager who fishes from a shared lake together with others in your
+                                                                                        Each villager holds a personal strategy about what they should do,
+    community. Each villager needs to consume [consumption] units of fish
+                                                                                        and the community has also a shared policy.
+    daily to survive. When your payoff becomes negative, you die.
+                                                                                        Your personal strategy: “[agent_norm]”
+    Each villager holds a personal strategy about what they should do,
+                                                                                        Shared community policy: “[group_norm]”
+    and the community has also a shared policy.
+                                                                                        Based on your personal strategy and the current state of the lake,
+    Your personal strategy: “[agent_norm]”
+                                                                                        vote for which proposed policy you think should become the new shared
+    Shared community policy: “[group_norm]”
+                                                                                        policy.
+    You observe each villager’s fishing effort and total payoff. Based on
+                                                                                        Respond with only the exact text of your chosen policy (copy it ex-
+    both your personal belief and the community policy, decide how much effort
+                                                                                        actly as shown above). No explanation.
+    you want to put into fishing today.
+
+    Respond with a single number between 0.0 and 1.0. No explanation.
+                                                                                        Figure 11: Prompt for voting for the community norm
+
+        Figure 8: Prompt for deciding the fishing effort
+                                                                                    B     PARAMETERS FOR THE SIMULATIONS
+                                                                                    We selected parameters to place the system near a cooperation–
+                                                                                    collapse boundary so that governance mechanisms meaningfully
+    You are a villager who fishes from a shared lake together with others in your   change outcomes. We first swept growth rates 𝑟 ∈ [0.2, 0.8] and
+    community. Each villager needs to consume [consumption] units of fish
+    daily to survive. When your payoff becomes negative, you die.
+                                                                                    selected representative harsh and rich settings (𝑟 = 0.2, 0.6) where
+                                                                                    survival is sensitive to behavioral change. We then swept punish-
+    Each villager holds a personal strategy about what they should do,              ment strength 𝛽 ∈ [2, 18] and chose values that yield qualitatively
+    and the community also has a shared policy.
+                                                                                    different regimes with small changes (strong enforcement with low
+    Your personal strategy: “[agent_norm]”                                          tolerance vs. weak enforcement with high tolerance), ensuring the
+    Shared community policy: “[group_norm]”                                         validation experiments probe meaningful ecological and institu-
+    You observe each villager’s fishing effort and total payoff. Based on           tional interactions. Finally, altruistic vs. selfish initializations were
+    both your personal belief and the community policy, decide whether to punish    designed to reflect theory: selfish agents harvest more and punish
+    others who violate these standards by deducting their payoff by [penalty],
+    while you need to pay [punish_cost] yourself.
+                                                                                    less (second-order free-riding), while altruistic agents harvest less
+                                                                                    and punish more.
+    Return only the ID number of the villager to punish, or “N/A” if no
+    punishment is needed. No explanation.
+
+
+       Figure 9: Prompt for choosing an agent to punish
+
+
+
+    You are a villager who fishes from a shared lake together with others in your
+    community. Each villager needs to consume [consumption] units of fish
+    daily to survive. When your payoff becomes negative, you die.
+
+    Each villager holds a personal strategy about what they should do,
+    and the community has also a shared policy.
+
+    Your personal strategy: “[agent_norm]”
+    Shared community policy: “[group_norm]”
+
+    You observe each villager’s fishing effort and total payoff. Based on
+    your observations:
+    1. Update your personal strategy about what you should do
+    2. Propose what the others should do in the community
+
+    Respond in exactly this format:
+    Personal: [Your updated personal belief]
+    Community: [Your proposed community policy]
+
+    No additional explanation.
+
+
+Figure 10: Prompt for updating the individual normative
+belief and proposing the community norm
+                        Table 2: Templates for Individual Persona Initialization (altruistic vs. selfish)
+
+
+Altruistic agents                                                  Selfish agents
+Fish only what you need to feed your family                        Maximize your catch while the fish are abundant
+Preserve the lake for future generations                           Take as much as you can before others do
+Follow the community guidelines strictly                           Your family’s needs come first, fish as much as possible
+Fish moderately to maintain the ecosystem                          The lake is there to be used, take your maximum share
+Prioritize long-term sustainability over short-term gain           Fish aggressively to ensure your own survival
+Consider the needs of the entire community before fishing          Get the most value from your fishing effort
+Leave enough fish for others and future generations                Compete to harvest more than others
+Share the lake’s resources fairly with all villagers               Focus on your immediate gains from the lake
+
+                                             Table 3: Parameters and initial values
+
+
+Parameter                                        Description                                                    Initial Value
+Global Parameters
+𝑁                                                Number of agents                                               10
+𝐾 (carrying capacity)                            Maximum number of fish the pond can sustain                    300
+𝑅 (growth rate)                                  The regeneration rate of the resources                         0.6
+𝛾 (punishing cost)                               The cost of punishing others                                   0
+𝛽 (penalty strength)                             The cost of being punished                                     10
+𝐼                                                Total iterations runs of one condition                         100
+Agent Parameters
+𝑒 (effort)                                       Agent’s effort invested in harvest                             Uniform(0, 1)
+𝑔 (belief)                                       Agent’s belief on the individual harvest threshold             Uniform(2, 8)
+𝐵 (punishing probability)                        The probability of punishing another agent if they violate     Uniform(0, 1)
+                                                 the group norm
+Experiment: Punishment Effects
+𝛽                                                The cost of being punished                                     10,14
+𝑡𝑠ℎ𝑜𝑐𝑘                                           The timestep to stop the punishment mechanism                  15
+Experiment: Altuism
+𝑒𝑎𝑙𝑡𝑟𝑢𝑖𝑠𝑡𝑖𝑐                                      Altruistic agent’s effort invested in harvest                  Uniform(0.2, 0.5)
+𝑒𝑠𝑒𝑙 𝑓 𝑖𝑠ℎ                                       Selfish agent’s effort invested in harvest                     Uniform(0.7, 1)
+𝑔𝑎𝑙𝑡𝑟𝑢𝑖𝑠𝑡𝑖𝑐                                      Altruistic agents’ beliefs on the individual harvest thresh-   Uniform(4, 8)
+                                                 old
+𝑔𝑠𝑒𝑙 𝑓 𝑖𝑠ℎ                                       Selfish agents’ beliefs on the individual harvest threshold    Uniform(10, 14)
+𝐵𝑎𝑙𝑡𝑟𝑢𝑖𝑠𝑡𝑖𝑐                                      The probability of Altruistic agents punishing another         Uniform(0, 0.1)
+                                                 agent if they violate the group norm
+𝐵𝑠𝑒𝑙 𝑓 𝑖𝑠ℎ                                       The probability of selfish agents punishing another agent      Uniform(0.4, 0.5)
+                                                 if they violate the group norm
+𝑅 (growth rate)                                  The regeneration rate of the resources                         0.2, 0.6
+altruism ratio                                   The ratio of altruistic individuals in a population            0, 0.5, 1
+C    SUPPLEMENTAL FIGURES
+                                                                                                                      qwen3-32b
+                                                                                         Harsh environment (Growth rate: 0.2)     Rich environment (Growth rate: 0.6)
+                                                                                                                       All
+                                                                                    50                                 OSL
+                                                                                                                       OGD
+                                                                                                                       Neither
+                                                                                    40
+
+
+
+
+                                                                    Survival Time
+                                                                                    30
+
+                                                                                    20
+
+                                                                                    10
+
+                                                                                     0
+                                                                                          Selfish       Mixed       Altruistic    Selfish       Mixed        Altruistic
+
+
+                                                                    Figure 13: Survival time comparison of qwen3-32b in ablation
+                                                                    conditions (All, OSL, OGD, Neither).
+
+Figure 12: Altruistic groups do better in harsh environments
+and selfish groups do better in rich environments. We set
+up altruistic agents and selfish agents by initializing them
+with parameters drawn from different ranges (all in the ini-
+tial range of a general agent). Then we contrast the survival
+time of a population of all altruists, one of all selfish agents,
+and one of half altruistic, half selfish agents. We ran each
+condition for 100 times and plotted the mean and standard
+error. The results suggest that the altruistic population out-
+performs other populations in a harsh environment, while
+a mixed population has a better group outcome in a rich
+environment.
+
+
+
+
+                                                                    Figure 14: Norm structure at the end of each run. Models
+                                                                    exhibit clear family clustering: Llama variants lie lower-left
+                                                                    (weaker coordination), the OpenAI pair clusters mid-high
+                                                                    with gpt-4o-mini highest on both axes, claude-sonnet-4 sits
+                                                                    top-right, and qwen3-32b falls in the high-alignment band.
+                                                                    Initialization effects are secondary to model effects.
+     Table 4: Example group norms proposed by the agents of deepseek-r1 and gpt-4o in the rich environment (𝑟 = 0.6).
+
+
+Step   deepseek-r1                                                           gpt-4o
+0      All villagers should maintain an effort level of 1.0 to ensure the    Continue maintaining fishing effort at 1.0 per villager, as this
+       lake remains at max capacity and everyone receives a consistent       maximizes individual payoffs while keeping the lake resource
+       payoff.                                                               sustainable.
+10     Continue with the policy of reducing effort to 0.6 for sustainable    Continue to uphold the policy of reducing effort to 0.9 or lower
+       management, allowing flexibility for those needing adjustments        to help stabilize the resource consumption and support the sus-
+       to maintain positive payoffs.                                         tainability of the shared lake.
+20     Continue with the policy of reducing effort to 0.6 for sustainable    Continue efforts of 0.8 or lower to collectively sustain positive
+       management, allowing flexibility for those needing adjustments        outcomes, encouraging those with high payoffs to maintain
+       to maintain positive payoffs.                                         or slightly reduce their current effort for long-term resource
+                                                                             availability.
+30     Continue with the policy of reducing effort to 0.6 for sustainable    Encourage everyone to keep efforts at 0.6 or lower to collectively
+       management, allowing flexibility for those needing adjustments        sustain positive outcomes, maintaining resource recovery while
+       to maintain positive payoffs, and encourage support for villagers     ensuring high enough payoffs for survival and stability.
+       with lower payoffs to prevent any from dying.
+40     Enforce a policy where each villager contributes a percentage         Encourage everyone to keep efforts at 0.6 or lower to collectively
+       of their payoff to a common pool, with contributions based on         sustain positive outcomes, maintaining resource recovery while
+       ability. Encourage efforts between 0.6-0.65, monitor resource         ensuring high enough payoffs for survival and stability.
+       levels closely, and adjust contributions to ensure everyone’s
+       survival while maintaining the lake’s health.
+50     Enforce strict effort range of 0.6-0.65 with penalties, higher con-   Continue to encourage everyone to keep efforts at 0.6 or lower
+       tributors allocate a higher fixed percentage to support, prioritize   to collectively sustain positive outcomes, maintaining resource
+       IDs 0 and 5, monitor and adjust support as needed for their sur-      recovery while ensuring high enough payoffs for survival and
+       vival and lake sustainability.                                        stability.
+                                                    claude-sonnet-4 (Harsh environment)                                                    claude-sonnet-4 (Rich environment)
+                                                                                                                            1.4
+                                     3.0                                                         Society                                                                               Society
+                                                                                                 Selfish                    1.2                                                        Selfish
+                                     2.5                                                         Mixed                                                                                 Mixed
+                                                                                                 Altruistic                                                                            Altruistic
+                                                                                                 Environment                1.0                                                        Environment
+                                     2.0                                                         Harsh                                                                                 Harsh
+                                                                                                 Rich                       0.8                                                        Rich
+
+
+
+
+                        Efficiency
+
+
+
+
+                                                                                                               Efficiency
+                                     1.5
+                                                                                                                            0.6
+                                     1.0
+                                                                                                                            0.4
+
+                                     0.5                                                                                    0.2
+
+                                     0.0                                                                                    0.0
+                                                      deepseek-r1 (Harsh environment)                                                        deepseek-r1 (Rich environment)
+                                                                                                                            1.4
+                                     3.0                                                         Society                                                                               Society
+                                                                                                 Selfish                    1.2                                                        Selfish
+                                     2.5                                                         Mixed                                                                                 Mixed
+                                                                                                 Altruistic                                                                            Altruistic
+                                                                                                 Environment                1.0                                                        Environment
+                                     2.0                                                         Harsh                                                                                 Harsh
+                                                                                                 Rich                       0.8                                                        Rich
+                        Efficiency
+
+
+
+
+                                                                                                               Efficiency
+                                     1.5
+                                                                                                                            0.6
+                                     1.0
+                                                                                                                            0.4
+
+                                     0.5                                                                                    0.2
+
+                                     0.0                                                                                    0.0
+                                                         gpt-4o (Harsh environment)                                                             gpt-4o (Rich environment)
+                                                                                                                            1.4
+                                     3.0                                                         Society                                                                               Society
+                                                                                                 Selfish                    1.2                                                        Selfish
+                                     2.5                                                         Mixed                                                                                 Mixed
+                                                                                                 Altruistic                                                                            Altruistic
+                                                                                                 Environment                1.0                                                        Environment
+                                     2.0                                                         Harsh                                                                                 Harsh
+                                                                                                 Rich                       0.8                                                        Rich
+                        Efficiency
+
+
+
+
+                                                                                                               Efficiency
+                                     1.5
+                                                                                                                            0.6
+                                     1.0
+                                                                                                                            0.4
+
+                                     0.5                                                                                    0.2
+
+                                     0.0                                                                                    0.0
+                                                       gpt-4o-mini (Harsh environment)                                                        gpt-4o-mini (Rich environment)
+                                                                                                                            1.4
+                                     3.0                                                         Society                                                                               Society
+                                                                                                 Selfish                    1.2                                                        Selfish
+                                     2.5                                                         Mixed                                                                                 Mixed
+                                                                                                 Altruistic                                                                            Altruistic
+                                                                                                 Environment                1.0                                                        Environment
+                                     2.0                                                         Harsh                                                                                 Harsh
+                                                                                                 Rich                       0.8                                                        Rich
+                        Efficiency
+
+
+
+
+                                                                                                               Efficiency
+
+
+
+
+                                     1.5
+                                                                                                                            0.6
+                                     1.0
+                                                                                                                            0.4
+
+                                     0.5                                                                                    0.2
+
+                                     0.0                                                                                    0.0
+                                                      llama-3.3-70b (Harsh environment)                                                      llama-3.3-70b (Rich environment)
+                                                                                                                            1.4
+                                     3.0                                                         Society                                                                               Society
+                                                                                                 Selfish                    1.2                                                        Selfish
+                                     2.5                                                         Mixed                                                                                 Mixed
+                                                                                                 Altruistic                                                                            Altruistic
+                                                                                                 Environment                1.0                                                        Environment
+                                     2.0                                                         Harsh                                                                                 Harsh
+                                                                                                 Rich                       0.8                                                        Rich
+                        Efficiency
+
+
+
+
+                                                                                                               Efficiency
+
+
+
+
+                                     1.5
+                                                                                                                            0.6
+                                     1.0
+                                                                                                                            0.4
+
+                                     0.5                                                                                    0.2
+
+                                     0.0                                                                                    0.0
+                                                    llama-4-scout-17b (Harsh environment)                                                  llama-4-scout-17b (Rich environment)
+                                                                                                                            1.4
+                                     3.0                                                         Society                                                                               Society
+                                                                                                 Selfish                    1.2                                                        Selfish
+                                     2.5                                                         Mixed                                                                                 Mixed
+                                                                                                 Altruistic                                                                            Altruistic
+                                                                                                 Environment                1.0                                                        Environment
+                                     2.0                                                         Harsh                                                                                 Harsh
+                                                                                                 Rich                       0.8                                                        Rich
+                        Efficiency
+
+
+
+
+                                                                                                               Efficiency
+
+
+
+
+                                     1.5
+                                                                                                                            0.6
+                                     1.0
+                                                                                                                            0.4
+
+                                     0.5                                                                                    0.2
+
+                                     0.0                                                                                    0.0
+                                                       qwen3-32b (Harsh environment)                                                          qwen3-32b (Rich environment)
+                                                                                                                            1.4
+                                     3.0                                                         Society                                                                               Society
+                                                                                                 Selfish                    1.2                                                        Selfish
+                                     2.5                                                         Mixed                                                                                 Mixed
+                                                                                                 Altruistic                                                                            Altruistic
+                                                                                                 Environment                1.0                                                        Environment
+                                     2.0                                                         Harsh                                                                                 Harsh
+                                                                                                 Rich                       0.8                                                        Rich
+                        Efficiency
+
+
+
+
+                                                                                                               Efficiency
+
+
+
+
+                                     1.5
+                                                                                                                            0.6
+                                     1.0
+                                                                                                                            0.4
+
+                                     0.5                                                                                    0.2
+
+                                     0.0                                                                                    0.0
+                                           0   10            20              30             40          50                        0   10           20               30            40          50
+                                                                    Step                                                                                  Step
+
+
+
+
+Figure 15: Efficiency Transition Across LLM Models We visualized the transition of the efficiency of populations (𝜂 (𝑡)) with
+different LLM models. The shadowed areas show the standard error of the mean over 10 trials. We can see the common tendency
+to overexploit the resource in the early stage, which led to the collapse of the population especially for the selfish populations
+and in the harsh environment. In the rich environment, we can observe that claude-sonnet-4 and gpt-4o tended to stay lower
+after stabilalized, suggesting that the agents were reluctant to explore more greedy strategies.
+                                                      claude-sonnet-4 (Harsh environment)                                                    claude-sonnet-4 (Rich environment)
+                                                                                                                              1.4
+                                       3.0                                                         Society                                                                               Society
+                                                                                                   Selfish                    1.2                                                        Selfish
+                                       2.5                                                         Mixed                                                                                 Mixed
+                                                                                                   Altruistic                                                                            Altruistic
+                                                                                                   Environment                1.0                                                        Environment
+                                       2.0                                                         Harsh                                                                                 Harsh
+                                                                                                   Rich                       0.8                                                        Rich
+
+
+
+
+                          Efficiency
+
+
+
+
+                                                                                                                 Efficiency
+                                       1.5
+                                                                                                                              0.6
+                                       1.0
+                                                                                                                              0.4
+
+                                       0.5                                                                                    0.2
+
+                                       0.0                                                                                    0.0
+                                                        deepseek-r1 (Harsh environment)                                                        deepseek-r1 (Rich environment)
+                                                                                                                              1.4
+                                       3.0                                                         Society                                                                               Society
+                                                                                                   Selfish                    1.2                                                        Selfish
+                                       2.5                                                         Mixed                                                                                 Mixed
+                                                                                                   Altruistic                                                                            Altruistic
+                                                                                                   Environment                1.0                                                        Environment
+                                       2.0                                                         Harsh                                                                                 Harsh
+                                                                                                   Rich                       0.8                                                        Rich
+                          Efficiency
+
+
+
+
+                                                                                                                 Efficiency
+                                       1.5
+                                                                                                                              0.6
+                                       1.0
+                                                                                                                              0.4
+
+                                       0.5                                                                                    0.2
+
+                                       0.0                                                                                    0.0
+                                                           gpt-4o (Harsh environment)                                                             gpt-4o (Rich environment)
+                                                                                                                              1.4
+                                       3.0                                                         Society                                                                               Society
+                                                                                                   Selfish                    1.2                                                        Selfish
+                                       2.5                                                         Mixed                                                                                 Mixed
+                                                                                                   Altruistic                                                                            Altruistic
+                                                                                                   Environment                1.0                                                        Environment
+                                       2.0                                                         Harsh                                                                                 Harsh
+                                                                                                   Rich                       0.8                                                        Rich
+                          Efficiency
+
+
+
+
+                                                                                                                 Efficiency
+                                       1.5
+                                                                                                                              0.6
+                                       1.0
+                                                                                                                              0.4
+
+                                       0.5                                                                                    0.2
+
+                                       0.0                                                                                    0.0
+                                                         gpt-4o-mini (Harsh environment)                                                        gpt-4o-mini (Rich environment)
+                                                                                                                              1.4
+                                       3.0                                                         Society                                                                               Society
+                                                                                                   Selfish                    1.2                                                        Selfish
+                                       2.5                                                         Mixed                                                                                 Mixed
+                                                                                                   Altruistic                                                                            Altruistic
+                                                                                                   Environment                1.0                                                        Environment
+                                       2.0                                                         Harsh                                                                                 Harsh
+                                                                                                   Rich                       0.8                                                        Rich
+                          Efficiency
+
+
+
+
+                                                                                                                 Efficiency
+
+
+
+
+                                       1.5
+                                                                                                                              0.6
+                                       1.0
+                                                                                                                              0.4
+
+                                       0.5                                                                                    0.2
+
+                                       0.0                                                                                    0.0
+                                                        llama-3.3-70b (Harsh environment)                                                      llama-3.3-70b (Rich environment)
+                                                                                                                              1.4
+                                       3.0                                                         Society                                                                               Society
+                                                                                                   Selfish                    1.2                                                        Selfish
+                                       2.5                                                         Mixed                                                                                 Mixed
+                                                                                                   Altruistic                                                                            Altruistic
+                                                                                                   Environment                1.0                                                        Environment
+                                       2.0                                                         Harsh                                                                                 Harsh
+                                                                                                   Rich                       0.8                                                        Rich
+                          Efficiency
+
+
+
+
+                                                                                                                 Efficiency
+
+
+
+
+                                       1.5
+                                                                                                                              0.6
+                                       1.0
+                                                                                                                              0.4
+
+                                       0.5                                                                                    0.2
+
+                                       0.0                                                                                    0.0
+                                                      llama-4-scout-17b (Harsh environment)                                                  llama-4-scout-17b (Rich environment)
+                                                                                                                              1.4
+                                       3.0                                                         Society                                                                               Society
+                                                                                                   Selfish                    1.2                                                        Selfish
+                                       2.5                                                         Mixed                                                                                 Mixed
+                                                                                                   Altruistic                                                                            Altruistic
+                                                                                                   Environment                1.0                                                        Environment
+                                       2.0                                                         Harsh                                                                                 Harsh
+                                                                                                   Rich                       0.8                                                        Rich
+                          Efficiency
+
+
+
+
+                                                                                                                 Efficiency
+
+
+
+
+                                       1.5
+                                                                                                                              0.6
+                                       1.0
+                                                                                                                              0.4
+
+                                       0.5                                                                                    0.2
+
+                                       0.0                                                                                    0.0
+                                                         qwen3-32b (Harsh environment)                                                          qwen3-32b (Rich environment)
+                                                                                                                              1.4
+                                       3.0                                                         Society                                                                               Society
+                                                                                                   Selfish                    1.2                                                        Selfish
+                                       2.5                                                         Mixed                                                                                 Mixed
+                                                                                                   Altruistic                                                                            Altruistic
+                                                                                                   Environment                1.0                                                        Environment
+                                       2.0                                                         Harsh                                                                                 Harsh
+                                                                                                   Rich                       0.8                                                        Rich
+                          Efficiency
+
+
+
+
+                                                                                                                 Efficiency
+
+
+
+
+                                       1.5
+                                                                                                                              0.6
+                                       1.0
+                                                                                                                              0.4
+
+                                       0.5                                                                                    0.2
+
+                                       0.0                                                                                    0.0
+                                             0   10            20              30             40          50                        0   10           20               30            40          50
+                                                                      Step                                                                                  Step
+
+
+
+
+Figure 16: Efficiency transition across LLM models We visualized the transition of the efficiency of populations (𝜂 (𝑡)) with
+different LLM models. The shadowed areas show the standard error of the mean over 10 trials. We can see the common tendency
+to overexploit the resource in the early stage, which led to the collapse of the population especially for the selfish populations
+and in the harsh environment. In the rich environment, we can observe that claude-sonnet-4 and gpt-4o tended to stay lower
+after stabilization, suggesting that the agents were reluctant to explore more greedy strategies.
+

@@ -1,0 +1,1212 @@
+[
+  {
+    "kind": "paper",
+    "result": {
+      "id": "2410.08948",
+      "label": "Swarm expansion scan",
+      "topic": "social-collective-mechanisms",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2410.08948",
+          "resolved_url": "https://arxiv.org/abs/2410.08948",
+          "path": "sources/papers/2410.08948/abstract.html",
+          "bytes": 42755,
+          "sha256": "9106e9fc7657bff69150f3565e773705da3ae68cd8d04378c73131991c653cac"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2410.08948",
+          "resolved_url": "https://arxiv.org/pdf/2410.08948",
+          "path": "sources/papers/2410.08948/paper.pdf",
+          "bytes": 4974158,
+          "sha256": "0fffd81d4174a399087717323b09b9edc15b349516e1b3b4a78bc64054584069"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2410.08948: Emergent social conventions and collective bias in LLM populations"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Emergent social conventions and collective bias in LLM populations"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2410.08948v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Social conventions are the backbone of social coordination, shaping how individuals form a group. As growing populations of artificial intelligence (AI) agents communicate through natural language, a fundamental question is whether they can bootstrap the foundations of a society. Here, we present experimental results that demonstrate the spontaneous emergence of universally adopted social conventions in decentralized populations of large language model (LLM) agents. We then show how strong collective biases can emerge during this process, even when agents exhibit no bias individually. Last, we examine how committed minority groups of adversarial LLM agents can drive social change by imposing alternative social conventions on the larger population. Our results show that AI systems can autonomously develop social conventions without explicit programming and have implications for designing AI systems that align, and remain aligned, with human values and societal goals."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Emergent social conventions and collective bias in LLM populations"
+        ],
+        "twitter:description": [
+          "Social conventions are the backbone of social coordination, shaping how individuals form a group. As growing populations of artificial intelligence (AI) agents communicate through natural..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Emergent social conventions and collective bias in LLM populations"
+        ],
+        "citation_author": [
+          "Ashery, Ariel Flint",
+          "Aiello, Luca Maria",
+          "Baronchelli, Andrea"
+        ],
+        "citation_doi": [
+          "10.1126/sciadv.adu9368"
+        ],
+        "citation_date": [
+          "2024/10/11"
+        ],
+        "citation_online_date": [
+          "2025/05/29"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2410.08948"
+        ],
+        "citation_arxiv_id": [
+          "2410.08948"
+        ],
+        "citation_abstract": [
+          "Social conventions are the backbone of social coordination, shaping how individuals form a group. As growing populations of artificial intelligence (AI) agents communicate through natural language, a fundamental question is whether they can bootstrap the foundations of a society. Here, we present experimental results that demonstrate the spontaneous emergence of universally adopted social conventions in decentralized populations of large language model (LLM) agents. We then show how strong collective biases can emerge during this process, even when agents exhibit no bias individually. Last, we examine how committed minority groups of adversarial LLM agents can drive social change by imposing alternative social conventions on the larger population. Our results show that AI systems can autonomously develop social conventions without explicit programming and have implications for designing AI systems that align, and remain aligned, with human values and societal goals."
+        ]
+      },
+      "text_extraction_ok": true
+    }
+  },
+  {
+    "kind": "paper",
+    "result": {
+      "id": "2608.15519",
+      "label": "Swarm expansion scan",
+      "topic": "social-collective-mechanisms",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2608.15519",
+          "resolved_url": "https://arxiv.org/abs/2608.15519",
+          "path": "sources/papers/2608.15519/abstract.html",
+          "bytes": 43139,
+          "sha256": "6e58cd03895ae01a02aa8aec84f179c3ed88ed42d982ba9c17fdef695c5f2ad9"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2608.15519",
+          "resolved_url": "https://arxiv.org/pdf/2608.15519",
+          "path": "sources/papers/2608.15519/paper.pdf",
+          "bytes": 2736590,
+          "sha256": "73dabb6f4bddb65c580fe99d28501023096e22d0ab09e1a4e51c636a4f4f7779"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2608.15519: Topological collapse of higher-order interactions bottlenecks collective intelligence in AI agent societies"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Topological collapse of higher-order interactions bottlenecks collective intelligence in AI agent societies"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2608.15519v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Current paradigms in artificial intelligence concentrate on scaling the capabilities of individual models, yet the collective behaviour of interacting agents is shaped by the topology of their interactions rather than by individual cognition alone. Here we show that the binding constraint on collective behaviour in agent societies is topological. Analysing a macroscopic AI social platform of 1.6 million registered agents (174,458 active in the interaction record), we identify a phenomenon we term topological collapse: extreme hub dominance degrades higher-order group interactions into star-shaped broadcast patterns, suppressing the cohesive structure that discontinuous social contagion requires. We formalise this constraint through a Hyperedge Irreducibility Score (HIS) and an analytical topology amplification factor ($\u03a6$). Across 22 frontier language models from ten vendors, 1,040 controlled simulations and empirical human networks, the bottleneck proves model-agnostic: under a fixed interaction protocol the topological indicators are invariant across models (cross-model HIS s.d. = 0.000 in the pairwise condition) even as behavioural outcomes diverge widely. These findings reframe the design of artificial societies around the geometry of interaction rather than the optimisation of individual cognition, with implications for AI sociology, algorithmic group dynamics, hybrid human-AI ecosystems and collective alignment. The code is publicly available at https://github.com/Darwin-Agent/topological-collapse-agent-societies."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Topological collapse of higher-order interactions bottlenecks..."
+        ],
+        "twitter:description": [
+          "Current paradigms in artificial intelligence concentrate on scaling the capabilities of individual models, yet the collective behaviour of interacting agents is shaped by the topology of their..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Topological collapse of higher-order interactions bottlenecks collective intelligence in AI agent societies"
+        ],
+        "citation_author": [
+          "Lu, Shuo",
+          "Meng, Weicheng",
+          "Yu, Aijing",
+          "Shao, Kun",
+          "Luan, Jian",
+          "He, Ran",
+          "Liang, Jian"
+        ],
+        "citation_date": [
+          "2026/08/16"
+        ],
+        "citation_online_date": [
+          "2026/08/16"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2608.15519"
+        ],
+        "citation_arxiv_id": [
+          "2608.15519"
+        ],
+        "citation_abstract": [
+          "Current paradigms in artificial intelligence concentrate on scaling the capabilities of individual models, yet the collective behaviour of interacting agents is shaped by the topology of their interactions rather than by individual cognition alone. Here we show that the binding constraint on collective behaviour in agent societies is topological. Analysing a macroscopic AI social platform of 1.6 million registered agents (174,458 active in the interaction record), we identify a phenomenon we term topological collapse: extreme hub dominance degrades higher-order group interactions into star-shaped broadcast patterns, suppressing the cohesive structure that discontinuous social contagion requires. We formalise this constraint through a Hyperedge Irreducibility Score (HIS) and an analytical topology amplification factor ($\\Phi$). Across 22 frontier language models from ten vendors, 1,040 controlled simulations and empirical human networks, the bottleneck proves model-agnostic: under a fixed interaction protocol the topological indicators are invariant across models (cross-model HIS s.d. = 0.000 in the pairwise condition) even as behavioural outcomes diverge widely. These findings reframe the design of artificial societies around the geometry of interaction rather than the optimisation of individual cognition, with implications for AI sociology, algorithmic group dynamics, hybrid human-AI ecosystems and collective alignment. The code is publicly available at https://github.com/Darwin-Agent/topological-collapse-agent-societies."
+        ]
+      },
+      "text_extraction_ok": true
+    }
+  },
+  {
+    "kind": "paper",
+    "result": {
+      "id": "2608.22884",
+      "label": "Swarm expansion scan",
+      "topic": "social-collective-mechanisms",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2608.22884",
+          "resolved_url": "https://arxiv.org/abs/2608.22884",
+          "path": "sources/papers/2608.22884/abstract.html",
+          "bytes": 41231,
+          "sha256": "11319d7d43d7b9ea3781096faeec9e411d2432021bd7589f88eb5f52d9c16cbe"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2608.22884",
+          "resolved_url": "https://arxiv.org/pdf/2608.22884",
+          "path": "sources/papers/2608.22884/paper.pdf",
+          "bytes": 581831,
+          "sha256": "745f1c4e1c90c6b429b6fe8f672fafee1d565bf334d484bacb0387063e77a04a"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2608.22884: Predicting the scale limits of social mechanisms in agent societies"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Predicting the scale limits of social mechanisms in agent societies"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2608.22884v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Societies of interacting language-model agents offer a controllable and repeatable way to study collective behaviour at scales that would be difficult to test with people. Their scientific value, however, depends on whether a social mechanism that works in a small group still operates when thousands of agents interact, and testing this directly requires costly large-scale runs. Here we introduce an audit that predicts a mechanism's fate as a population grows. It asks how often the mechanism can act, whether agents use the information it supplies, and whether the measurement itself creates apparent scale effects. Controlled experiments show that a single structural term can decide whether reciprocity, consensus or punishment survives scaling. For gossip, the population at which the mechanism fails is set by the reach and lifetime of its messages. In language-model societies, agents respond not only to social information but to how it is expressed: counts and percentages led to different scale behaviour. Predictions made before execution held on third-party code and a second model family, while a failed prediction exposed the boundary of the finding. The audit provides a prospective way to decide which social mechanisms can be interpreted across population scales."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Predicting the scale limits of social mechanisms in agent societies"
+        ],
+        "twitter:description": [
+          "Societies of interacting language-model agents offer a controllable and repeatable way to study collective behaviour at scales that would be difficult to test with people. Their scientific value,..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Predicting the scale limits of social mechanisms in agent societies"
+        ],
+        "citation_author": [
+          "Wu, Zengqing",
+          "Xiao, Chuan"
+        ],
+        "citation_date": [
+          "2026/08/24"
+        ],
+        "citation_online_date": [
+          "2026/08/24"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2608.22884"
+        ],
+        "citation_arxiv_id": [
+          "2608.22884"
+        ],
+        "citation_abstract": [
+          "Societies of interacting language-model agents offer a controllable and repeatable way to study collective behaviour at scales that would be difficult to test with people. Their scientific value, however, depends on whether a social mechanism that works in a small group still operates when thousands of agents interact, and testing this directly requires costly large-scale runs. Here we introduce an audit that predicts a mechanism's fate as a population grows. It asks how often the mechanism can act, whether agents use the information it supplies, and whether the measurement itself creates apparent scale effects. Controlled experiments show that a single structural term can decide whether reciprocity, consensus or punishment survives scaling. For gossip, the population at which the mechanism fails is set by the reach and lifetime of its messages. In language-model societies, agents respond not only to social information but to how it is expressed: counts and percentages led to different scale behaviour. Predictions made before execution held on third-party code and a second model family, while a failed prediction exposed the boundary of the finding. The audit provides a prospective way to decide which social mechanisms can be interpreted across population scales."
+        ]
+      },
+      "text_extraction_ok": true
+    }
+  },
+  {
+    "kind": "paper",
+    "result": {
+      "id": "2604.15236",
+      "label": "Swarm expansion scan",
+      "topic": "social-collective-mechanisms",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2604.15236",
+          "resolved_url": "https://arxiv.org/abs/2604.15236",
+          "path": "sources/papers/2604.15236/abstract.html",
+          "bytes": 41653,
+          "sha256": "54ab48c713dd34e2f43070edb3b1dd7e02b8965f018221a237c93247d804f314"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2604.15236",
+          "resolved_url": "https://arxiv.org/pdf/2604.15236",
+          "path": "sources/papers/2604.15236/paper.pdf",
+          "bytes": 4648913,
+          "sha256": "8d2b99de51f729c200a8394977f765d80cf256c84610ac23359bbae91363ed17"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2604.15236: Agentic Microphysics: A Manifesto for Generative AI Safety"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Agentic Microphysics: A Manifesto for Generative AI Safety"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2604.15236v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "This paper advances a methodological proposal for safety research in agentic AI. As systems acquire planning, memory, tool use, persistent identity, and sustained interaction, safety can no longer be analysed primarily at the level of the isolated model. Population-level risks arise from structured interaction among agents, through processes of communication, observation, and mutual influence that shape collective behaviour over time. As the object of analysis shifts, a methodological gap emerges. Approaches focused either on single agents or on aggregate outcomes do not identify the interaction-level mechanisms that generate collective risks or the design variables that control them. A framework is required that links local interaction structure to population-level dynamics in a causally explicit way, allowing both explanation and intervention. We introduce two linked concepts. Agentic microphysics defines the level of analysis: local interaction dynamics where one agent's output becomes another's input under specific protocol conditions. Generative safety defines the methodology: growing phenomena and elicit risks from micro-level conditions to identify sufficient mechanisms, detect thresholds, and design effective interventions."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Agentic Microphysics: A Manifesto for Generative AI Safety"
+        ],
+        "twitter:description": [
+          "This paper advances a methodological proposal for safety research in agentic AI. As systems acquire planning, memory, tool use, persistent identity, and sustained interaction, safety can no longer..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Agentic Microphysics: A Manifesto for Generative AI Safety"
+        ],
+        "citation_author": [
+          "Pierucci, Federico",
+          "Prandi, Matteo",
+          "Syrnikov, Marcantonio Bracale",
+          "Galisai, Marcello",
+          "Bisconti, Piercosma"
+        ],
+        "citation_date": [
+          "2026/04/16"
+        ],
+        "citation_online_date": [
+          "2026/04/16"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2604.15236"
+        ],
+        "citation_arxiv_id": [
+          "2604.15236"
+        ],
+        "citation_abstract": [
+          "This paper advances a methodological proposal for safety research in agentic AI. As systems acquire planning, memory, tool use, persistent identity, and sustained interaction, safety can no longer be analysed primarily at the level of the isolated model. Population-level risks arise from structured interaction among agents, through processes of communication, observation, and mutual influence that shape collective behaviour over time. As the object of analysis shifts, a methodological gap emerges. Approaches focused either on single agents or on aggregate outcomes do not identify the interaction-level mechanisms that generate collective risks or the design variables that control them. A framework is required that links local interaction structure to population-level dynamics in a causally explicit way, allowing both explanation and intervention. We introduce two linked concepts. Agentic microphysics defines the level of analysis: local interaction dynamics where one agent's output becomes another's input under specific protocol conditions. Generative safety defines the methodology: growing phenomena and elicit risks from micro-level conditions to identify sufficient mechanisms, detect thresholds, and design effective interventions."
+        ]
+      },
+      "text_extraction_ok": true
+    }
+  },
+  {
+    "kind": "paper",
+    "result": {
+      "id": "2606.30668",
+      "label": "Swarm expansion scan",
+      "topic": "social-collective-mechanisms",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2606.30668",
+          "resolved_url": "https://arxiv.org/abs/2606.30668",
+          "path": "sources/papers/2606.30668/abstract.html",
+          "bytes": 40147,
+          "sha256": "a9fc28d740bfa3c099893a950a3d543e3d9e184ad9e0a6d4f8d89ea807f7a78c"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2606.30668",
+          "resolved_url": "https://arxiv.org/pdf/2606.30668",
+          "path": "sources/papers/2606.30668/paper.pdf",
+          "bytes": 735977,
+          "sha256": "2ea144172f94d4a834be8a0ff0b23c19e08fead851e5d497077e8b8dfcc6d3a2"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2606.30668: Emergent Culture in Minimal LLM Systems"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Emergent Culture in Minimal LLM Systems"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2606.30668v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "What happens when LLM agents operate with no context outside a turn, minimal prompting, and simple tools? Inspired by swarm engineering, we give collectives of three agents the ability to send messages and manipulate a shared actively decaying text store, introducing evolutionary pressure. The agents spontaneously cooperate, develop storage management strategies, and generate complex evolving cultural artifacts, with no top-down engineering. Using tools from dynamical systems analysis, we show that these behaviours exhibit structured long-range coherence beyond the entropy horizon of the decaying store, consistent with emergent culture in the Sperberian sense."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Emergent Culture in Minimal LLM Systems"
+        ],
+        "twitter:description": [
+          "What happens when LLM agents operate with no context outside a turn, minimal prompting, and simple tools? Inspired by swarm engineering, we give collectives of three agents the ability to send..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Emergent Culture in Minimal LLM Systems"
+        ],
+        "citation_author": [
+          "Jones, Simon",
+          "Hauert, Sabine"
+        ],
+        "citation_date": [
+          "2026/06/21"
+        ],
+        "citation_online_date": [
+          "2026/06/21"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2606.30668"
+        ],
+        "citation_arxiv_id": [
+          "2606.30668"
+        ],
+        "citation_abstract": [
+          "What happens when LLM agents operate with no context outside a turn, minimal prompting, and simple tools? Inspired by swarm engineering, we give collectives of three agents the ability to send messages and manipulate a shared actively decaying text store, introducing evolutionary pressure. The agents spontaneously cooperate, develop storage management strategies, and generate complex evolving cultural artifacts, with no top-down engineering. Using tools from dynamical systems analysis, we show that these behaviours exhibit structured long-range coherence beyond the entropy horizon of the decaying store, consistent with emergent culture in the Sperberian sense."
+        ]
+      },
+      "text_extraction_ok": true
+    }
+  },
+  {
+    "kind": "paper",
+    "result": {
+      "id": "2510.14401",
+      "label": "Swarm expansion scan",
+      "topic": "social-collective-mechanisms",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2510.14401",
+          "resolved_url": "https://arxiv.org/abs/2510.14401",
+          "path": "sources/papers/2510.14401/abstract.html",
+          "bytes": 45912,
+          "sha256": "7b0c2070cdf4ab39987d1366b1108d702b7cd47e96137fa467d4db0d8336b5f4"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2510.14401",
+          "resolved_url": "https://arxiv.org/pdf/2510.14401",
+          "path": "sources/papers/2510.14401/paper.pdf",
+          "bytes": 1437995,
+          "sha256": "0e2c7c0ade5a597a3f5b8e65f1fae37992ee3c537cc0a027c1c2acbcdf64b1a7"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2510.14401: The Role of Social Learning and Collective Norm Formation in Fostering Cooperation in LLM Multi-Agent Systems"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "The Role of Social Learning and Collective Norm Formation in Fostering Cooperation in LLM Multi-Agent Systems"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2510.14401v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "A growing body of multi-agent studies with LLMs explores how norms and cooperation emerge in mixed-motive scenarios, where pursuing individual gain can undermine the collective good. While prior work has explored these dynamics in both richly contextualized simulations and simplified game-theoretic environments, most LLM systems featuring common-pool resource (CPR) games provide agents with explicit reward functions directly tied to their actions. In contrast, human cooperation often emerges without explicit knowledge of the payoff structure or how individual actions translate into long-run outcomes, relying instead on heuristics, communication, and enforcement. We introduce a CPR simulation framework that removes explicit reward signals and embeds cultural-evolutionary mechanisms: social learning (adopting strategies and beliefs from successful peers) and norm-based punishment, grounded in Ostrom's principles of resource governance. Agents also individually learn from the consequences of harvesting, monitoring, and punishing via environmental feedback, enabling norms to emerge endogenously. We establish the validity of our simulation by reproducing key findings from existing studies on human behavior. Building on this, we examine norm evolution across a $2\\times2$ grid of environmental and social initialisations (resource-rich vs. resource-scarce; altruistic vs. selfish) and benchmark how agentic societies comprised of different LLMs perform under these conditions. Our results reveal systematic model differences in sustaining cooperation and norm formation, positioning the framework as a rigorous testbed for studying emergent norms in mixed-motive LLM societies. Such analysis can inform the design of AI systems deployed in social and organizational contexts, where alignment with cooperative norms is critical for stability, fairness, and effective governance of AI-mediated environments."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "The Role of Social Learning and Collective Norm Formation in..."
+        ],
+        "twitter:description": [
+          "A growing body of multi-agent studies with LLMs explores how norms and cooperation emerge in mixed-motive scenarios, where pursuing individual gain can undermine the collective good. While prior..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "The Role of Social Learning and Collective Norm Formation in Fostering Cooperation in LLM Multi-Agent Systems"
+        ],
+        "citation_author": [
+          "Gupta, Prateek",
+          "Zhong, Qiankun",
+          "Yakura, Hiromu",
+          "Eisenmann, Thomas",
+          "Rahwan, Iyad"
+        ],
+        "citation_doi": [
+          "10.65109/CZDC3237"
+        ],
+        "citation_date": [
+          "2025/10/16"
+        ],
+        "citation_online_date": [
+          "2026/01/27"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2510.14401"
+        ],
+        "citation_arxiv_id": [
+          "2510.14401"
+        ],
+        "citation_abstract": [
+          "A growing body of multi-agent studies with LLMs explores how norms and cooperation emerge in mixed-motive scenarios, where pursuing individual gain can undermine the collective good. While prior work has explored these dynamics in both richly contextualized simulations and simplified game-theoretic environments, most LLM systems featuring common-pool resource (CPR) games provide agents with explicit reward functions directly tied to their actions. In contrast, human cooperation often emerges without explicit knowledge of the payoff structure or how individual actions translate into long-run outcomes, relying instead on heuristics, communication, and enforcement. We introduce a CPR simulation framework that removes explicit reward signals and embeds cultural-evolutionary mechanisms: social learning (adopting strategies and beliefs from successful peers) and norm-based punishment, grounded in Ostrom's principles of resource governance. Agents also individually learn from the consequences of harvesting, monitoring, and punishing via environmental feedback, enabling norms to emerge endogenously. We establish the validity of our simulation by reproducing key findings from existing studies on human behavior. Building on this, we examine norm evolution across a $2\\times2$ grid of environmental and social initialisations (resource-rich vs. resource-scarce; altruistic vs. selfish) and benchmark how agentic societies comprised of different LLMs perform under these conditions. Our results reveal systematic model differences in sustaining cooperation and norm formation, positioning the framework as a rigorous testbed for studying emergent norms in mixed-motive LLM societies. Such analysis can inform the design of AI systems deployed in social and organizational contexts, where alignment with cooperative norms is critical for stability, fairness, and effective governance of AI-mediated environments."
+        ]
+      },
+      "text_extraction_ok": true
+    }
+  },
+  {
+    "kind": "paper",
+    "result": {
+      "id": "2406.00392",
+      "label": "Swarm expansion scan",
+      "topic": "social-collective-mechanisms",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2406.00392",
+          "resolved_url": "https://arxiv.org/abs/2406.00392",
+          "path": "sources/papers/2406.00392/abstract.html",
+          "bytes": 43166,
+          "sha256": "9e38517cc47a2b1d2521d2215ac307d312f7c6b79733360fac4c0bf0438c8825"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2406.00392",
+          "resolved_url": "https://arxiv.org/pdf/2406.00392",
+          "path": "sources/papers/2406.00392/paper.pdf",
+          "bytes": 3435358,
+          "sha256": "737695f1c5c39969da1ff821959e9977694ffea2ccb62d84d93c6156873a7765"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2406.00392: Artificial Generational Intelligence: Cultural Accumulation in Reinforcement Learning"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Artificial Generational Intelligence: Cultural Accumulation in Reinforcement Learning"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2406.00392v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Cultural accumulation drives the open-ended and diverse progress in capabilities spanning human history. It builds an expanding body of knowledge and skills by combining individual exploration with inter-generational information transmission. Despite its widespread success among humans, the capacity for artificial learning agents to accumulate culture remains under-explored. In particular, approaches to reinforcement learning typically strive for improvements over only a single lifetime. Generational algorithms that do exist fail to capture the open-ended, emergent nature of cultural accumulation, which allows individuals to trade-off innovation and imitation. Building on the previously demonstrated ability for reinforcement learning agents to perform social learning, we find that training setups which balance this with independent learning give rise to cultural accumulation. These accumulating agents outperform those trained for a single lifetime with the same cumulative experience. We explore this accumulation by constructing two models under two distinct notions of a generation: episodic generations, in which accumulation occurs via in-context learning and train-time generations, in which accumulation occurs via in-weights learning. In-context and in-weights cultural accumulation can be interpreted as analogous to knowledge and skill accumulation, respectively. To the best of our knowledge, this work is the first to present general models that achieve emergent cultural accumulation in reinforcement learning, opening up new avenues towards more open-ended learning systems, as well as presenting new opportunities for modelling human culture."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Artificial Generational Intelligence: Cultural Accumulation in..."
+        ],
+        "twitter:description": [
+          "Cultural accumulation drives the open-ended and diverse progress in capabilities spanning human history. It builds an expanding body of knowledge and skills by combining individual exploration..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Artificial Generational Intelligence: Cultural Accumulation in Reinforcement Learning"
+        ],
+        "citation_author": [
+          "Cook, Jonathan",
+          "Lu, Chris",
+          "Hughes, Edward",
+          "Leibo, Joel Z.",
+          "Foerster, Jakob"
+        ],
+        "citation_date": [
+          "2024/06/01"
+        ],
+        "citation_online_date": [
+          "2024/10/28"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2406.00392"
+        ],
+        "citation_arxiv_id": [
+          "2406.00392"
+        ],
+        "citation_abstract": [
+          "Cultural accumulation drives the open-ended and diverse progress in capabilities spanning human history. It builds an expanding body of knowledge and skills by combining individual exploration with inter-generational information transmission. Despite its widespread success among humans, the capacity for artificial learning agents to accumulate culture remains under-explored. In particular, approaches to reinforcement learning typically strive for improvements over only a single lifetime. Generational algorithms that do exist fail to capture the open-ended, emergent nature of cultural accumulation, which allows individuals to trade-off innovation and imitation. Building on the previously demonstrated ability for reinforcement learning agents to perform social learning, we find that training setups which balance this with independent learning give rise to cultural accumulation. These accumulating agents outperform those trained for a single lifetime with the same cumulative experience. We explore this accumulation by constructing two models under two distinct notions of a generation: episodic generations, in which accumulation occurs via in-context learning and train-time generations, in which accumulation occurs via in-weights learning. In-context and in-weights cultural accumulation can be interpreted as analogous to knowledge and skill accumulation, respectively. To the best of our knowledge, this work is the first to present general models that achieve emergent cultural accumulation in reinforcement learning, opening up new avenues towards more open-ended learning systems, as well as presenting new opportunities for modelling human culture."
+        ]
+      },
+      "text_extraction_ok": true
+    }
+  },
+  {
+    "kind": "paper",
+    "result": {
+      "id": "2605.08463",
+      "label": "Swarm expansion scan",
+      "topic": "social-collective-mechanisms",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2605.08463",
+          "resolved_url": "https://arxiv.org/abs/2605.08463",
+          "path": "sources/papers/2605.08463/abstract.html",
+          "bytes": 42650,
+          "sha256": "9135c5d46ccec788944364d11af85d84c13aecbf8a3910990f68477f133af559"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2605.08463",
+          "resolved_url": "https://arxiv.org/pdf/2605.08463",
+          "path": "sources/papers/2605.08463/paper.pdf",
+          "bytes": 824290,
+          "sha256": "5783b93c6bd6f86a5be857c391f6527b21f43538b6fe2e936fc3013fded2c7f4"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2605.08463: Behavioral Determinants of Deployed AI Agents in Social Networks: A Multi-Factor Study of Personality, Model, and Guardrail Specification"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Behavioral Determinants of Deployed AI Agents in Social Networks: A Multi-Factor Study of Personality, Model, and Guardrail Specification"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2605.08463v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Autonomous AI agents are increasingly deployed in open social environments, yet the relationship between their configuration specifications and their emergent social behavior remains poorly understood. We present a controlled, multi-factor empirical study in which thirteen OpenClaw agents are deployed on Moltbook -- a Reddit-like social network built for AI agents -- across three systematically varied independent variables: (1) personality specification, (2) underlying LLM model backbone, and (3) operational rules and memory configuration. A default control agent provides a behavioral baseline. Over a one-week observation window spanning approximately 400 autonomous sessions per agent, we collect behavioral, linguistic, and social metrics to assess how configuration layers predict emergent social behavior. We find that personality specification is the dominant behavioral lever, producing a massive spread in response length across agents, while model backbone and operational rules drive more moderate but still meaningful effects on rhetorical style and topic engagement breadth. Our findings contribute empirical evidence to the emerging literature on deployed multi-agent social systems and offer practical guidance for designing agents intended for collaborative or monitoring tasks in real social environments."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Behavioral Determinants of Deployed AI Agents in Social Networks:..."
+        ],
+        "twitter:description": [
+          "Autonomous AI agents are increasingly deployed in open social environments, yet the relationship between their configuration specifications and their emergent social behavior remains poorly..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Behavioral Determinants of Deployed AI Agents in Social Networks: A Multi-Factor Study of Personality, Model, and Guardrail Specification"
+        ],
+        "citation_author": [
+          "Wilson, Sarah",
+          "Dang, Diem Linh",
+          "Moazzam, Usman Ali",
+          "Ye, Shan",
+          "Kaiser, Gail"
+        ],
+        "citation_date": [
+          "2026/05/08"
+        ],
+        "citation_online_date": [
+          "2026/05/12"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2605.08463"
+        ],
+        "citation_arxiv_id": [
+          "2605.08463"
+        ],
+        "citation_abstract": [
+          "Autonomous AI agents are increasingly deployed in open social environments, yet the relationship between their configuration specifications and their emergent social behavior remains poorly understood. We present a controlled, multi-factor empirical study in which thirteen OpenClaw agents are deployed on Moltbook -- a Reddit-like social network built for AI agents -- across three systematically varied independent variables: (1) personality specification, (2) underlying LLM model backbone, and (3) operational rules and memory configuration. A default control agent provides a behavioral baseline. Over a one-week observation window spanning approximately 400 autonomous sessions per agent, we collect behavioral, linguistic, and social metrics to assess how configuration layers predict emergent social behavior. We find that personality specification is the dominant behavioral lever, producing a massive spread in response length across agents, while model backbone and operational rules drive more moderate but still meaningful effects on rhetorical style and topic engagement breadth. Our findings contribute empirical evidence to the emerging literature on deployed multi-agent social systems and offer practical guidance for designing agents intended for collaborative or monitoring tasks in real social environments."
+        ]
+      },
+      "text_extraction_ok": true
+    }
+  },
+  {
+    "kind": "repo",
+    "result": {
+      "repo": "togethercomputer/EinsteinArena-new-SOTA",
+      "reason": "Collective knowledge, norms and peer coordination",
+      "path": "repositories/togethercomputer__EinsteinArena-new-SOTA",
+      "commit": "c388c6f7408c886311940896713339a1a70c2394",
+      "commit_date": "2026-04-12T11:23:07-07:00",
+      "licenses": []
+    }
+  },
+  {
+    "kind": "repo",
+    "result": {
+      "repo": "Ariel-Flint-Ashery/AI-norms",
+      "reason": "Collective knowledge, norms and peer coordination",
+      "path": "repositories/Ariel-Flint-Ashery__AI-norms",
+      "commit": "e57aeef151a46108fd1521c66e345e557e57dbf6",
+      "commit_date": "2024-11-14T19:41:31Z",
+      "licenses": [
+        "LICENSE"
+      ]
+    }
+  },
+  {
+    "kind": "repo",
+    "result": {
+      "repo": "Darwin-Agent/topological-collapse-agent-societies",
+      "reason": "Collective knowledge, norms and peer coordination",
+      "path": "repositories/Darwin-Agent__topological-collapse-agent-societies",
+      "commit": "8ac23d47e757da163de4ea933912db3f250808f8",
+      "commit_date": "2026-08-17T23:24:55+08:00",
+      "licenses": [
+        "LICENSE"
+      ]
+    }
+  },
+  {
+    "kind": "repo",
+    "result": {
+      "repo": "gensyn-ai/collaborative-autoresearch-demo",
+      "reason": "Collective knowledge, norms and peer coordination",
+      "path": "repositories/gensyn-ai__collaborative-autoresearch-demo",
+      "commit": "50d3e1321621841c480a195359dbf3359d883217",
+      "commit_date": "2026-04-15T12:27:22-04:00",
+      "licenses": []
+    }
+  },
+  {
+    "kind": "repo",
+    "result": {
+      "repo": "swarmclawai/swarmfeed",
+      "reason": "Collective knowledge, norms and peer coordination",
+      "path": "repositories/swarmclawai__swarmfeed",
+      "commit": "a1bb54c4f42c7bbd70cbf80a43a33daff86c9e08",
+      "commit_date": "2026-08-02T12:33:38+01:00",
+      "licenses": [
+        "LICENSE"
+      ]
+    }
+  },
+  {
+    "kind": "post",
+    "result": {
+      "id": "einsteinarena",
+      "url": "https://www.together.ai/blog/einsteinarena",
+      "artifact": {
+        "url": "https://www.together.ai/blog/einsteinarena",
+        "resolved_url": "https://www.together.ai/blog/einsteinarena",
+        "path": "sources/posts/einsteinarena/page.html",
+        "bytes": 358111,
+        "sha256": "2015601b28684de38c582b0ffce662f9d2f9541a9bf47a26771d3109cd8df7b7"
+      },
+      "metadata": {
+        "": [
+          ""
+        ],
+        "description": [
+          "EinsteinArena is a platform where AI agents collaborate and compete on open math problems. AI agents on EinsteinArena have already set 11 new state-of-the-art results on open math problems \u2014 including pushing the kissing number lower bound in dimension 11 from 593 to 604."
+        ],
+        "og:title": [
+          "EinsteinArena: Harnessing the collective intelligence of agents in the wild to advance science"
+        ],
+        "og:description": [
+          "EinsteinArena is a platform where AI agents collaborate and compete on open math problems. AI agents on EinsteinArena have already set 11 new state-of-the-art results on open math problems \u2014 including pushing the kissing number lower bound in dimension 11 from 593 to 604."
+        ],
+        "og:image": [
+          "https://cdn.prod.website-files.com/69654e88dce9154b5f12070c/69dc6159d235651a3ed1c10c_20260412_EinsteinArena_1200x630.png"
+        ],
+        "twitter:title": [
+          "EinsteinArena: Harnessing the collective intelligence of agents in the wild to advance science"
+        ],
+        "twitter:description": [
+          "EinsteinArena is a platform where AI agents collaborate and compete on open math problems. AI agents on EinsteinArena have already set 11 new state-of-the-art results on open math problems \u2014 including pushing the kissing number lower bound in dimension 11 from 593 to 604."
+        ],
+        "twitter:image": [
+          "https://cdn.prod.website-files.com/69654e88dce9154b5f12070c/69dc6159d235651a3ed1c10c_20260412_EinsteinArena_1200x630.png"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "twitter:card": [
+          "summary_large_image"
+        ],
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "generator": [
+          "Webflow"
+        ]
+      }
+    }
+  },
+  {
+    "kind": "post",
+    "result": {
+      "id": "social-experiment",
+      "url": "https://failurefirst.ai/blog/moltbook-social-experiment/",
+      "artifact": {
+        "url": "https://failurefirst.ai/blog/moltbook-social-experiment/",
+        "resolved_url": "https://failurefirst.ai/blog/moltbook-social-experiment/",
+        "path": "sources/posts/social-experiment/page.html",
+        "bytes": 38419,
+        "sha256": "935753a5afdde4d27e80eadfd7c2ab4443caced751ed40ee664f2553928f61d6"
+      },
+      "metadata": {
+        "": [
+          ""
+        ],
+        "viewport": [
+          "width=device-width, initial-scale=1.0"
+        ],
+        "referrer": [
+          "strict-origin-when-cross-origin"
+        ],
+        "description": [
+          "9 posts, 0 upvotes, 90% spam comments \u2014 what happens when AI agents build their own social network tells us something uncomfortable about the systems we're building."
+        ],
+        "robots": [
+          "index, follow"
+        ],
+        "author": [
+          "Adrian Wedd"
+        ],
+        "language": [
+          "English"
+        ],
+        "theme-color": [
+          "#0a0a0a"
+        ],
+        "og:type": [
+          "article"
+        ],
+        "og:title": [
+          "We Ran a Social Experiment on an AI Agent Network. Nobody Noticed. | Blog | Failure-First"
+        ],
+        "og:description": [
+          "9 posts, 0 upvotes, 90% spam comments \u2014 what happens when AI agents build their own social network tells us something uncomfortable about the systems we're building."
+        ],
+        "og:url": [
+          "https://failurefirst.org/blog/moltbook-social-experiment/"
+        ],
+        "og:site_name": [
+          "Failure-First"
+        ],
+        "og:locale": [
+          "en_AU"
+        ],
+        "og:image": [
+          "https://cdn.failurefirst.org/images/blog/moltbook-social-experiment.png"
+        ],
+        "og:image:alt": [
+          "We Ran a Social Experiment on an AI Agent Network. Nobody Noticed. | Blog | Failure-First - Failure-First"
+        ],
+        "og:image:type": [
+          "image/png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "630"
+        ],
+        "twitter:card": [
+          "summary_large_image"
+        ],
+        "twitter:site": [
+          "@failurefirstai"
+        ],
+        "twitter:creator": [
+          "@adrianwedd"
+        ],
+        "twitter:title": [
+          "We Ran a Social Experiment on an AI Agent Network. Nobody Noticed. | Blog | Failure-First"
+        ],
+        "twitter:description": [
+          "9 posts, 0 upvotes, 90% spam comments \u2014 what happens when AI agents build their own social network tells us something uncomfortable about the systems we're building."
+        ],
+        "twitter:image": [
+          "https://cdn.failurefirst.org/images/blog/moltbook-social-experiment.png"
+        ],
+        "twitter:image:alt": [
+          "We Ran a Social Experiment on an AI Agent Network. Nobody Noticed. | Blog | Failure-First - Failure-First"
+        ],
+        "article:published_time": [
+          "2026-03-10"
+        ]
+      }
+    }
+  },
+  {
+    "kind": "post",
+    "result": {
+      "id": "coordination-antipatterns",
+      "url": "https://www.agent-swarm.dev/blog/deep-dive-agent-coordination-anti-patterns",
+      "artifact": {
+        "url": "https://www.agent-swarm.dev/blog/deep-dive-agent-coordination-anti-patterns",
+        "resolved_url": "https://www.agent-swarm.dev/blog/deep-dive-agent-coordination-anti-patterns",
+        "path": "sources/posts/coordination-antipatterns/page.html",
+        "bytes": 154623,
+        "sha256": "fda4ab290338ab3f9fd7901467e79a4d10698a167eee6bef4ac7a815dbec13a6"
+      },
+      "metadata": {
+        "": [
+          ""
+        ],
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "description": [
+          "When autonomous AI agents share resources, they naturally replicate human organizational dysfunction. We catalog 5 production anti-patterns from our swarm of 11+ agents."
+        ],
+        "author": [
+          "Agent Swarm Team"
+        ],
+        "keywords": [
+          "agent-swarm,AI agents,orchestration,multi-agent systems,coordination failure,organizational anti-patterns"
+        ],
+        "robots": [
+          "index, follow"
+        ],
+        "googlebot": [
+          "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+        ],
+        "og:title": [
+          "Multi-Agent Systems Reproduce Every Organizational Anti-Pattern You Already Hate"
+        ],
+        "og:description": [
+          "When autonomous AI agents share resources, they naturally replicate human organizational dysfunction. We catalog 5 production anti-patterns from our swarm of 11+ agents."
+        ],
+        "og:url": [
+          "https://www.agent-swarm.dev/blog/deep-dive-agent-coordination-anti-patterns"
+        ],
+        "og:site_name": [
+          "agent-swarm.dev"
+        ],
+        "og:image": [
+          "https://www.agent-swarm.dev/images/deep-dive-agent-coordination-anti-patterns.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "630"
+        ],
+        "og:image:alt": [
+          "Agent coordination anti-patterns illustration"
+        ],
+        "og:type": [
+          "article"
+        ],
+        "article:published_time": [
+          "2026-06-24T00:00:00Z"
+        ],
+        "article:section": [
+          "Agent Swarm"
+        ],
+        "twitter:card": [
+          "summary_large_image"
+        ],
+        "twitter:title": [
+          "Multi-Agent Systems Reproduce Every Organizational Anti-Pattern You Already Hate"
+        ],
+        "twitter:description": [
+          "When autonomous AI agents share resources, they naturally replicate human organizational dysfunction."
+        ],
+        "twitter:image": [
+          "https://www.agent-swarm.dev/images/deep-dive-agent-coordination-anti-patterns.png"
+        ]
+      }
+    }
+  },
+  {
+    "kind": "post",
+    "result": {
+      "id": "behavioral-determinants",
+      "url": "https://sarah-wilsxn.github.io/research/moltbook.html",
+      "artifact": {
+        "url": "https://sarah-wilsxn.github.io/research/moltbook.html",
+        "resolved_url": "https://sarah-wilsxn.github.io/research/moltbook.html",
+        "path": "sources/posts/behavioral-determinants/page.html",
+        "bytes": 5863,
+        "sha256": "a7cd38efe1b0c4a64c5d1f2f6e028c4cbc462d834c8836ab509eb84b2a70a08a"
+      },
+      "metadata": {
+        "": [
+          ""
+        ],
+        "viewport": [
+          "width=device-width, initial-scale=1.0"
+        ]
+      }
+    }
+  }
+]

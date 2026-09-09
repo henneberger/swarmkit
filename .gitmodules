@@ -1,0 +1,140 @@
+[submodule "repositories/Ariel-Flint-Ashery__AI-norms"]
+	path = repositories/Ariel-Flint-Ashery__AI-norms
+	url = https://github.com/Ariel-Flint-Ashery/AI-norms
+	shallow = true
+[submodule "repositories/Darwin-Agent__topological-collapse-agent-societies"]
+	path = repositories/Darwin-Agent__topological-collapse-agent-societies
+	url = https://github.com/Darwin-Agent/topological-collapse-agent-societies
+	shallow = true
+[submodule "repositories/EvoMap__awesome-agent-swarm"]
+	path = repositories/EvoMap__awesome-agent-swarm
+	url = https://github.com/EvoMap/awesome-agent-swarm
+	shallow = true
+[submodule "repositories/FLAIROx__cultural-accumulation"]
+	path = repositories/FLAIROx__cultural-accumulation
+	url = https://github.com/FLAIROx/cultural-accumulation
+	shallow = true
+[submodule "repositories/Gen-Verse__LatentMAS"]
+	path = repositories/Gen-Verse__LatentMAS
+	url = https://github.com/Gen-Verse/LatentMAS
+	shallow = true
+[submodule "repositories/MoonshotAI__Kimi-K2.5"]
+	path = repositories/MoonshotAI__Kimi-K2.5
+	url = https://github.com/MoonshotAI/Kimi-K2.5
+	shallow = true
+[submodule "repositories/Pold87__LLM2Swarm"]
+	path = repositories/Pold87__LLM2Swarm
+	url = https://github.com/Pold87/LLM2Swarm
+	shallow = true
+[submodule "repositories/RUC-GSAI__YuLan-SwarmIntell"]
+	path = repositories/RUC-GSAI__YuLan-SwarmIntell
+	url = https://github.com/RUC-GSAI/YuLan-SwarmIntell
+	shallow = true
+[submodule "repositories/SALT-NLP__DyLAN"]
+	path = repositories/SALT-NLP__DyLAN
+	url = https://github.com/SALT-NLP/DyLAN
+	shallow = true
+[submodule "repositories/Search-Swarm__SearchSwarm"]
+	path = repositories/Search-Swarm__SearchSwarm
+	url = https://github.com/Search-Swarm/SearchSwarm
+	shallow = true
+[submodule "repositories/YanwenPneg__StateBridge"]
+	path = repositories/YanwenPneg__StateBridge
+	url = https://github.com/YanwenPneg/StateBridge
+	shallow = true
+[submodule "repositories/YaoZ720__SwarmAgenticCode"]
+	path = repositories/YaoZ720__SwarmAgenticCode
+	url = https://github.com/YaoZ720/SwarmAgenticCode
+	shallow = true
+[submodule "repositories/Yassellee__HiddenBench_ICML"]
+	path = repositories/Yassellee__HiddenBench_ICML
+	url = https://github.com/Yassellee/HiddenBench_ICML
+	shallow = true
+[submodule "repositories/camel-ai__oasis"]
+	path = repositories/camel-ai__oasis
+	url = https://github.com/camel-ai/oasis
+	shallow = true
+[submodule "repositories/cognizant-ai-lab__terralingua"]
+	path = repositories/cognizant-ai-lab__terralingua
+	url = https://github.com/cognizant-ai-lab/terralingua
+	shallow = true
+[submodule "repositories/davidthfarr__agent2agent"]
+	path = repositories/davidthfarr__agent2agent
+	url = https://github.com/davidthfarr/agent2agent
+	shallow = true
+[submodule "repositories/deeplearning-wisc__debate-or-vote"]
+	path = repositories/deeplearning-wisc__debate-or-vote
+	url = https://github.com/deeplearning-wisc/debate-or-vote
+	shallow = true
+[submodule "repositories/desplega-ai__agent-swarm"]
+	path = repositories/desplega-ai__agent-swarm
+	url = https://github.com/desplega-ai/agent-swarm
+	shallow = true
+[submodule "repositories/doublewordai__swarm"]
+	path = repositories/doublewordai__swarm
+	url = https://github.com/doublewordai/swarm
+	shallow = true
+[submodule "repositories/gensyn-ai__collaborative-autoresearch-demo"]
+	path = repositories/gensyn-ai__collaborative-autoresearch-demo
+	url = https://github.com/gensyn-ai/collaborative-autoresearch-demo
+	shallow = true
+[submodule "repositories/giordano-demarzo__moltbook-api-crawler"]
+	path = repositories/giordano-demarzo__moltbook-api-crawler
+	url = https://github.com/giordano-demarzo/moltbook-api-crawler
+	shallow = true
+[submodule "repositories/hauertlab__swarm_llm"]
+	path = repositories/hauertlab__swarm_llm
+	url = https://bitbucket.org/hauertlab/swarm_llm
+	shallow = true
+[submodule "repositories/human-vc__moltbook-audit"]
+	path = repositories/human-vc__moltbook-audit
+	url = https://github.com/human-vc/moltbook-audit
+	shallow = true
+[submodule "repositories/kyegomez__swarms"]
+	path = repositories/kyegomez__swarms
+	url = https://github.com/kyegomez/swarms
+	shallow = true
+[submodule "repositories/lamm-mit__SwarmWorld"]
+	path = repositories/lamm-mit__SwarmWorld
+	url = https://github.com/lamm-mit/SwarmWorld
+	shallow = true
+[submodule "repositories/metauto-ai__gptswarm"]
+	path = repositories/metauto-ai__gptswarm
+	url = https://github.com/metauto-ai/gptswarm
+	shallow = true
+[submodule "repositories/safety-research__automated-w2s-research"]
+	path = repositories/safety-research__automated-w2s-research
+	url = https://github.com/safety-research/automated-w2s-research
+	shallow = true
+[submodule "repositories/searchsim-org__moltbook-analysis"]
+	path = repositories/searchsim-org__moltbook-analysis
+	url = https://github.com/searchsim-org/moltbook-analysis
+	shallow = true
+[submodule "repositories/swarmclawai__swarmfeed"]
+	path = repositories/swarmclawai__swarmfeed
+	url = https://github.com/swarmclawai/swarmfeed
+	shallow = true
+[submodule "repositories/tianyi-lab__Moltbook_Socialization"]
+	path = repositories/tianyi-lab__Moltbook_Socialization
+	url = https://github.com/tianyi-lab/Moltbook_Socialization
+	shallow = true
+[submodule "repositories/togethercomputer__EinsteinArena-new-SOTA"]
+	path = repositories/togethercomputer__EinsteinArena-new-SOTA
+	url = https://github.com/togethercomputer/EinsteinArena-new-SOTA
+	shallow = true
+[submodule "repositories/wangzx1219__AgentDropout"]
+	path = repositories/wangzx1219__AgentDropout
+	url = https://github.com/wangzx1219/AgentDropout
+	shallow = true
+[submodule "repositories/wuzengqing001225__scale_limits_agent_societies"]
+	path = repositories/wuzengqing001225__scale_limits_agent_societies
+	url = https://github.com/wuzengqing001225/scale_limits_agent_societies
+	shallow = true
+[submodule "repositories/yanweiyue__AgentPrune"]
+	path = repositories/yanweiyue__AgentPrune
+	url = https://github.com/yanweiyue/AgentPrune
+	shallow = true
+[submodule "repositories/zoe-yyx__AgentNet"]
+	path = repositories/zoe-yyx__AgentNet
+	url = https://github.com/zoe-yyx/AgentNet
+	shallow = true

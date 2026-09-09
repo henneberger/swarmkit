@@ -1,0 +1,109 @@
+{
+  "id": "2604.15236",
+  "label": "Swarm expansion scan",
+  "topic": "social-collective-mechanisms",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2604.15236",
+      "resolved_url": "https://arxiv.org/abs/2604.15236",
+      "path": "sources/papers/2604.15236/abstract.html",
+      "bytes": 41653,
+      "sha256": "54ab48c713dd34e2f43070edb3b1dd7e02b8965f018221a237c93247d804f314"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2604.15236",
+      "resolved_url": "https://arxiv.org/pdf/2604.15236",
+      "path": "sources/papers/2604.15236/paper.pdf",
+      "bytes": 4648913,
+      "sha256": "8d2b99de51f729c200a8394977f765d80cf256c84610ac23359bbae91363ed17"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2604.15236: Agentic Microphysics: A Manifesto for Generative AI Safety"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Agentic Microphysics: A Manifesto for Generative AI Safety"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2604.15236v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "This paper advances a methodological proposal for safety research in agentic AI. As systems acquire planning, memory, tool use, persistent identity, and sustained interaction, safety can no longer be analysed primarily at the level of the isolated model. Population-level risks arise from structured interaction among agents, through processes of communication, observation, and mutual influence that shape collective behaviour over time. As the object of analysis shifts, a methodological gap emerges. Approaches focused either on single agents or on aggregate outcomes do not identify the interaction-level mechanisms that generate collective risks or the design variables that control them. A framework is required that links local interaction structure to population-level dynamics in a causally explicit way, allowing both explanation and intervention. We introduce two linked concepts. Agentic microphysics defines the level of analysis: local interaction dynamics where one agent's output becomes another's input under specific protocol conditions. Generative safety defines the methodology: growing phenomena and elicit risks from micro-level conditions to identify sufficient mechanisms, detect thresholds, and design effective interventions."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Agentic Microphysics: A Manifesto for Generative AI Safety"
+    ],
+    "twitter:description": [
+      "This paper advances a methodological proposal for safety research in agentic AI. As systems acquire planning, memory, tool use, persistent identity, and sustained interaction, safety can no longer..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Agentic Microphysics: A Manifesto for Generative AI Safety"
+    ],
+    "citation_author": [
+      "Pierucci, Federico",
+      "Prandi, Matteo",
+      "Syrnikov, Marcantonio Bracale",
+      "Galisai, Marcello",
+      "Bisconti, Piercosma"
+    ],
+    "citation_date": [
+      "2026/04/16"
+    ],
+    "citation_online_date": [
+      "2026/04/16"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2604.15236"
+    ],
+    "citation_arxiv_id": [
+      "2604.15236"
+    ],
+    "citation_abstract": [
+      "This paper advances a methodological proposal for safety research in agentic AI. As systems acquire planning, memory, tool use, persistent identity, and sustained interaction, safety can no longer be analysed primarily at the level of the isolated model. Population-level risks arise from structured interaction among agents, through processes of communication, observation, and mutual influence that shape collective behaviour over time. As the object of analysis shifts, a methodological gap emerges. Approaches focused either on single agents or on aggregate outcomes do not identify the interaction-level mechanisms that generate collective risks or the design variables that control them. A framework is required that links local interaction structure to population-level dynamics in a causally explicit way, allowing both explanation and intervention. We introduce two linked concepts. Agentic microphysics defines the level of analysis: local interaction dynamics where one agent's output becomes another's input under specific protocol conditions. Generative safety defines the methodology: growing phenomena and elicit risks from micro-level conditions to identify sufficient mechanisms, detect thresholds, and design effective interventions."
+    ]
+  },
+  "text_extraction_ok": true
+}

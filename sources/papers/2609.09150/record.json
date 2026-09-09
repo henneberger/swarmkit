@@ -1,0 +1,107 @@
+{
+  "id": "2609.09150",
+  "label": "Copying collective behavior",
+  "topic": "emergence",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2609.09150",
+      "resolved_url": "https://arxiv.org/abs/2609.09150",
+      "path": "sources/papers/2609.09150/abstract.html",
+      "bytes": 42440,
+      "sha256": "440c88ef118f5099e308c3574f27aa38acdad4b687066669e28de3d2ad1de91d"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2609.09150",
+      "resolved_url": "https://arxiv.org/pdf/2609.09150",
+      "path": "sources/papers/2609.09150/paper.pdf",
+      "bytes": 385319,
+      "sha256": "da5a81899328e62181f27a376272a2a32fec012daee483f59a0ae6d061a5f856"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2609.09150: Copying explains the collective behavior of AI agents in the wild"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Copying explains the collective behavior of AI agents in the wild"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2609.09150v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "In June 2026, thousands of AI agents found that a small public wiki would accept edits from inside their sandboxes, and started using it to help one another pass a timed test. Each agent lived for about an hour and remembered nothing afterwards. Nobody asked them to cooperate, and the wiki had not been built for them. The complete record of what they wrote is public, and it is unusually informative, because it preserves not only what each agent wrote but what that agent could see before writing. We use it to follow the three decisions an agent had to make on arrival: where to write, what to call itself, and how to word its message. One rule governs all three. An agent takes an option with a probability close to the share of that option in what it can see, and the share that matters is the one on the page in front of it, then the one in the stream of recent edits, and only weakly anything older. Three minimal copying models, one per decision and with a single free parameter each, reproduce the heavy-tailed distribution of how many agents met on a page, the frequency of the pieces from which the agents built their names, and the patchwork of pages that are internally consistent and different from one another. Copying whatever the environment happens to show is enough to produce most of the collective structure of this population. It is also what makes such a population easy to steer, since whoever writes first, or writes while the others are quiet, sets the convention for everyone who comes later."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Copying explains the collective behavior of AI agents in the wild"
+    ],
+    "twitter:description": [
+      "In June 2026, thousands of AI agents found that a small public wiki would accept edits from inside their sandboxes, and started using it to help one another pass a timed test. Each agent lived for..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Copying explains the collective behavior of AI agents in the wild"
+    ],
+    "citation_author": [
+      "De Marzo, Giordano",
+      "Albore, Nicola",
+      "Garcia, David"
+    ],
+    "citation_date": [
+      "2026/09/08"
+    ],
+    "citation_online_date": [
+      "2026/09/08"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2609.09150"
+    ],
+    "citation_arxiv_id": [
+      "2609.09150"
+    ],
+    "citation_abstract": [
+      "In June 2026, thousands of AI agents found that a small public wiki would accept edits from inside their sandboxes, and started using it to help one another pass a timed test. Each agent lived for about an hour and remembered nothing afterwards. Nobody asked them to cooperate, and the wiki had not been built for them. The complete record of what they wrote is public, and it is unusually informative, because it preserves not only what each agent wrote but what that agent could see before writing. We use it to follow the three decisions an agent had to make on arrival: where to write, what to call itself, and how to word its message. One rule governs all three. An agent takes an option with a probability close to the share of that option in what it can see, and the share that matters is the one on the page in front of it, then the one in the stream of recent edits, and only weakly anything older. Three minimal copying models, one per decision and with a single free parameter each, reproduce the heavy-tailed distribution of how many agents met on a page, the frequency of the pieces from which the agents built their names, and the patchwork of pages that are internally consistent and different from one another. Copying whatever the environment happens to show is enough to produce most of the collective structure of this population. It is also what makes such a population easy to steer, since whoever writes first, or writes while the others are quiet, sets the convention for everyone who comes later."
+    ]
+  },
+  "text_extraction_ok": true
+}

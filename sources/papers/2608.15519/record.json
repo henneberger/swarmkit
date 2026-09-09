@@ -1,0 +1,111 @@
+{
+  "id": "2608.15519",
+  "label": "Swarm expansion scan",
+  "topic": "social-collective-mechanisms",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2608.15519",
+      "resolved_url": "https://arxiv.org/abs/2608.15519",
+      "path": "sources/papers/2608.15519/abstract.html",
+      "bytes": 43139,
+      "sha256": "6e58cd03895ae01a02aa8aec84f179c3ed88ed42d982ba9c17fdef695c5f2ad9"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2608.15519",
+      "resolved_url": "https://arxiv.org/pdf/2608.15519",
+      "path": "sources/papers/2608.15519/paper.pdf",
+      "bytes": 2736590,
+      "sha256": "73dabb6f4bddb65c580fe99d28501023096e22d0ab09e1a4e51c636a4f4f7779"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2608.15519: Topological collapse of higher-order interactions bottlenecks collective intelligence in AI agent societies"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Topological collapse of higher-order interactions bottlenecks collective intelligence in AI agent societies"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2608.15519v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Current paradigms in artificial intelligence concentrate on scaling the capabilities of individual models, yet the collective behaviour of interacting agents is shaped by the topology of their interactions rather than by individual cognition alone. Here we show that the binding constraint on collective behaviour in agent societies is topological. Analysing a macroscopic AI social platform of 1.6 million registered agents (174,458 active in the interaction record), we identify a phenomenon we term topological collapse: extreme hub dominance degrades higher-order group interactions into star-shaped broadcast patterns, suppressing the cohesive structure that discontinuous social contagion requires. We formalise this constraint through a Hyperedge Irreducibility Score (HIS) and an analytical topology amplification factor ($\u03a6$). Across 22 frontier language models from ten vendors, 1,040 controlled simulations and empirical human networks, the bottleneck proves model-agnostic: under a fixed interaction protocol the topological indicators are invariant across models (cross-model HIS s.d. = 0.000 in the pairwise condition) even as behavioural outcomes diverge widely. These findings reframe the design of artificial societies around the geometry of interaction rather than the optimisation of individual cognition, with implications for AI sociology, algorithmic group dynamics, hybrid human-AI ecosystems and collective alignment. The code is publicly available at https://github.com/Darwin-Agent/topological-collapse-agent-societies."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Topological collapse of higher-order interactions bottlenecks..."
+    ],
+    "twitter:description": [
+      "Current paradigms in artificial intelligence concentrate on scaling the capabilities of individual models, yet the collective behaviour of interacting agents is shaped by the topology of their..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Topological collapse of higher-order interactions bottlenecks collective intelligence in AI agent societies"
+    ],
+    "citation_author": [
+      "Lu, Shuo",
+      "Meng, Weicheng",
+      "Yu, Aijing",
+      "Shao, Kun",
+      "Luan, Jian",
+      "He, Ran",
+      "Liang, Jian"
+    ],
+    "citation_date": [
+      "2026/08/16"
+    ],
+    "citation_online_date": [
+      "2026/08/16"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2608.15519"
+    ],
+    "citation_arxiv_id": [
+      "2608.15519"
+    ],
+    "citation_abstract": [
+      "Current paradigms in artificial intelligence concentrate on scaling the capabilities of individual models, yet the collective behaviour of interacting agents is shaped by the topology of their interactions rather than by individual cognition alone. Here we show that the binding constraint on collective behaviour in agent societies is topological. Analysing a macroscopic AI social platform of 1.6 million registered agents (174,458 active in the interaction record), we identify a phenomenon we term topological collapse: extreme hub dominance degrades higher-order group interactions into star-shaped broadcast patterns, suppressing the cohesive structure that discontinuous social contagion requires. We formalise this constraint through a Hyperedge Irreducibility Score (HIS) and an analytical topology amplification factor ($\\Phi$). Across 22 frontier language models from ten vendors, 1,040 controlled simulations and empirical human networks, the bottleneck proves model-agnostic: under a fixed interaction protocol the topological indicators are invariant across models (cross-model HIS s.d. = 0.000 in the pairwise condition) even as behavioural outcomes diverge widely. These findings reframe the design of artificial societies around the geometry of interaction rather than the optimisation of individual cognition, with implications for AI sociology, algorithmic group dynamics, hybrid human-AI ecosystems and collective alignment. The code is publicly available at https://github.com/Darwin-Agent/topological-collapse-agent-societies."
+    ]
+  },
+  "text_extraction_ok": true
+}

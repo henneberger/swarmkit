@@ -1,0 +1,19 @@
+{
+  "id": "anthropic-w2s",
+  "url": "https://alignment.anthropic.com/2026/automated-w2s-researcher/",
+  "artifact": {
+    "url": "https://alignment.anthropic.com/2026/automated-w2s-researcher/",
+    "resolved_url": "https://alignment.anthropic.com/2026/automated-w2s-researcher/",
+    "path": "sources/posts/anthropic-w2s/page.html",
+    "bytes": 100824,
+    "sha256": "c9c32a534f19f4055ae4248f0a2ede9000b0bbccda60fe12c48c7491fd37b3e9"
+  },
+  "metadata": {
+    "": [
+      ""
+    ],
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ]
+  }
+}

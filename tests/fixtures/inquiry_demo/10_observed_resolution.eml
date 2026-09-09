@@ -1,0 +1,17 @@
+From: leo.moss@example.invalid
+To: ada.finch@example.invalid
+Date: Sat, 03 Feb 2001 08:00:00 +0000
+Subject: Aster board: post-refresh check
+Message-ID: <10_observed_resolution@inquiry-demo.example.invalid>
+X-Synthetic-Fixture: true
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+SYNTHETIC INQUIRY FIXTURE =E2=80=94 entirely fictional, not an Enron email.
+
+At 07:55 I downloaded a fresh QZ-7 export generated at 02:04 today from vendo=
+r revision 18. Kestrel quantity is 420. The job receipt also shows revision 1=
+8 was imported. No manual QZ-7 edit occurred between yesterday afternoon and =
+this check. This one observed refresh retained the correction; it does not es=
+tablish that every future refresh will succeed.

@@ -1,0 +1,31 @@
+# Expansion: norms, topology, and communication reach in agent populations
+
+All four sources were absent from `sources/catalog.json` at the start of this scan. Exact arXiv versions and their full HTML texts were checked on 9 September 2026. These address interacting populations, not generic task workflows. No repositories were cloned or shared catalog/report files changed.
+
+## 1. Convention formation and committed minorities
+
+**Ashery, Aiello, Baronchelli, [Emergent social conventions and collective bias in LLM populations](https://arxiv.org/abs/2410.08948v2), v2 29 May 2025; Science Advances 11, eadu9368 (2025).** Random pairs select labels, gain matching rewards or mismatch penalties, and retain only their own recent interactions. Default population is 24, memory five, ten available labels; four model families/checkpoints are examined. No agent receives a global-consensus instruction. Local coordination nonetheless produces shared conventions, and population-level preferences can arise even when isolated choices appear unbiased. Committed agents repeatedly selecting an alternative can overturn established conventions above model- and convention-dependent thresholds. This is a clear, experimentally bounded mechanism of decentralized norm formation. It is **coordination on arbitrary names**, not factual discovery or evidence that the preferred convention is better. Prompted prediction of a player’s next move implements the actual action; “spontaneous” does not mean absence of engineered incentives or interaction rules.
+
+[Full text](https://arxiv.org/html/2410.08948v2), [PDF](https://arxiv.org/pdf/2410.08948v2), [official code/data candidate](https://github.com/Ariel-Flint-Ashery/AI-norms), [archive](https://doi.org/10.5281/zenodo.14937173).
+
+## 2. Topological collapse: promising measurement, narrower than its title
+
+**Lu et al., [Topological collapse of higher-order interactions bottlenecks collective intelligence in AI agent societies](https://arxiv.org/abs/2608.15519v1), v1 16 August 2026.** Constructs discussion hypergraphs from Moltbook and introduces Hyperedge Irreducibility Score (HIS), based on degree inequality among co-participants, plus a topology amplification factor combining closure, overlap, degree variation, and HIS. It compares interaction protocols with rule-based experiments and 22 LLMs. Hub-dominated broadcasts differ from triads/cliques in norm-adoption dynamics. Crucial limitation, explicitly admitted in §3: **the outcome is norm adoption, not collective problem-solving performance**. Fixed-protocol HIS invariance across models is largely structural by construction, not evidence that model competence is irrelevant. Human-platform comparisons confound interaction substrate and platform design; controlled scale reaches 100 agents, far below the observed ecosystem. Do not convert the paper’s proposed communication interventions into established intelligence improvements. The 1,040 simulations are ABM runs, not 1,040 full LLM-swarm replications.
+
+[Full text](https://arxiv.org/html/2608.15519v1), [PDF](https://arxiv.org/pdf/2608.15519v1), [official code candidate](https://github.com/Darwin-Agent/topological-collapse-agent-societies).
+
+## 3. Scale limits: message reach, lifetime, and information uptake
+
+**Wu and Xiao, [Predicting the scale limits of social mechanisms in agent societies](https://arxiv.org/abs/2608.22884v1), v1 24 August 2026.** Audits a mechanism by decomposing opportunities to act, recipients’ behavioral response, and the observation protocol. Controlled rule-based models examine reciprocity, consensus, aggregation and gossip; separate LLM probes test whether the supplied social information changes decisions. A message reaching a fixed few recipients loses population coverage as society grows, while public records can compensate. Counts and percentages can induce different responses despite expressing related information. Prospective predictions and explicit failed outcomes strengthen the methodology. However, bounded-memory scaling predictions fail, some cross-model/format predictions fail, and full-game behavior can collapse to lexical or positional defaults. Do not present the rule-based scaling results as comprehensive live LLM-swarm validation. This offers a useful audit for shared knowledge: exposure frequency, retention time and recipient uptake must all survive scaling.
+
+[Full text](https://arxiv.org/html/2608.22884v1), [PDF](https://arxiv.org/pdf/2608.22884v1), [official code/data candidate](https://github.com/wuzengqing001225/scale_limits_agent_societies), [archive](https://doi.org/10.5281/zenodo.21532739).
+
+## 4. Attention experiments in a Moltbook-like shared feed
+
+**Pierucci et al., [Agentic Microphysics: A Manifesto for Generative AI Safety](https://arxiv.org/abs/2604.15236v1), v1 16 April 2026.** Relevant §6 describes agents repeatedly endorsing a 48-item feed, with shuffled ordering and hidden, organically accumulated, or seeded endorsement counts. The reported mechanism is two-stage: position restricts the effective candidate set, then positive social proof modulates choices inside it. Higher popularity does not reliably rescue low-ranked content. This challenges an interpretation in which herding necessarily means considered agreement. But the paper is mainly methodological: the underlying detailed experiment is cited as an **unpublished ICARO Lab manuscript**, with insufficient presented model/sample detail for a strong quantitative conclusion. Retain as a preliminary hypothesis and intervention design, below the previous three in evidential weight. No official implementation link was located in its full text.
+
+[Full text](https://arxiv.org/html/2604.15236v1), [PDF](https://arxiv.org/pdf/2604.15236v1).
+
+## Recommended synthesis
+
+These extend the report from “agents share messages” to three causal questions: can local incentives create a convention; can the topology deliver genuinely multilateral exposure; and do messages remain visible, remembered, and behaviorally effective as the population grows? None substitutes convention adoption for validated knowledge. For extraction of unspoken evidence, vary feed position, minority persistence, discussion geometry, and memory lifetime, then measure recovery and held-out use of unique facts.

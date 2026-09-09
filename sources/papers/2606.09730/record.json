@@ -1,0 +1,114 @@
+{
+  "id": "2606.09730",
+  "label": "SearchSwarm",
+  "topic": "swarm-training",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2606.09730",
+      "resolved_url": "https://arxiv.org/abs/2606.09730",
+      "path": "sources/papers/2606.09730/abstract.html",
+      "bytes": 43716,
+      "sha256": "c0a123cefadeed623159cfe94f1887a16f12034fbc0dd553ff336b3dfd6a90c4"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2606.09730",
+      "resolved_url": "https://arxiv.org/pdf/2606.09730",
+      "path": "sources/papers/2606.09730/paper.pdf",
+      "bytes": 1120717,
+      "sha256": "577eb9ef98cac76c370000e58e4ed1f4a597b778a82448ca89a62d23cbc279b9"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2606.09730: SearchSwarm: Towards Delegation Intelligence in Agentic LLMs for Long-Horizon Deep Research"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "SearchSwarm: Towards Delegation Intelligence in Agentic LLMs for Long-Horizon Deep Research"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2606.09730v2"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Large language models are increasingly expected to handle complex, long-horizon real-world tasks whose context demands can grow without bound, yet model context windows remain inherently finite. Recent work explores a paradigm where a main agent decomposes tasks and dispatches subtasks to subagents, which execute and return only summarized results, conserving the main agent's context budget. However, performing this well requires delegation intelligence: the ability to decompose complex tasks, determine when and what to delegate, and integrate returned results into the ongoing workflow. Training data for this capability is scarce in naturally occurring text, and to our knowledge, how to synthesize such data and train models to acquire this capability remains largely unexplored in the open-source community. To bridge this gap, we present a preliminary exploration targeting deep research, a representative long-horizon agent task. Specifically, we design a harness that guides the model toward high-quality task decomposition and delegation, while constraining subagents to return results properly to support the main agent's workflow. The harness-guided trajectories naturally encode correct delegation decisions, which we use as supervised fine-tuning data to internalize delegation intelligence into model weights. Our resulting model, SearchSwarm-30B-A3B, achieves 68.1 on BrowseComp and 73.3 on BrowseComp-ZH, the best results among all models of comparable scale. We will release our harness, model weights, and training data to facilitate future research."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "SearchSwarm: Towards Delegation Intelligence in Agentic LLMs for..."
+    ],
+    "twitter:description": [
+      "Large language models are increasingly expected to handle complex, long-horizon real-world tasks whose context demands can grow without bound, yet model context windows remain inherently finite...."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "SearchSwarm: Towards Delegation Intelligence in Agentic LLMs for Long-Horizon Deep Research"
+    ],
+    "citation_author": [
+      "Lan, Xiaochong",
+      "Chen, Quan",
+      "Tao, Kun",
+      "Tang, Xinyu",
+      "Wang, Tianshu",
+      "Cao, Qianggang",
+      "Kong, Xinyu",
+      "Wen, Zujie",
+      "Zhang, Zhiqiang",
+      "Zhou, Jun"
+    ],
+    "citation_date": [
+      "2026/06/08"
+    ],
+    "citation_online_date": [
+      "2026/08/09"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2606.09730"
+    ],
+    "citation_arxiv_id": [
+      "2606.09730"
+    ],
+    "citation_abstract": [
+      "Large language models are increasingly expected to handle complex, long-horizon real-world tasks whose context demands can grow without bound, yet model context windows remain inherently finite. Recent work explores a paradigm where a main agent decomposes tasks and dispatches subtasks to subagents, which execute and return only summarized results, conserving the main agent's context budget. However, performing this well requires delegation intelligence: the ability to decompose complex tasks, determine when and what to delegate, and integrate returned results into the ongoing workflow. Training data for this capability is scarce in naturally occurring text, and to our knowledge, how to synthesize such data and train models to acquire this capability remains largely unexplored in the open-source community. To bridge this gap, we present a preliminary exploration targeting deep research, a representative long-horizon agent task. Specifically, we design a harness that guides the model toward high-quality task decomposition and delegation, while constraining subagents to return results properly to support the main agent's workflow. The harness-guided trajectories naturally encode correct delegation decisions, which we use as supervised fine-tuning data to internalize delegation intelligence into model weights. Our resulting model, SearchSwarm-30B-A3B, achieves 68.1 on BrowseComp and 73.3 on BrowseComp-ZH, the best results among all models of comparable scale. We will release our harness, model weights, and training data to facilitate future research."
+    ]
+  },
+  "text_extraction_ok": true
+}

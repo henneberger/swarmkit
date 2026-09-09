@@ -1,0 +1,68 @@
+{
+  "reviewed_on": "2026-09-09",
+  "scope": "Agentic swarms and social agent populations; supporting non-LLM population-learning methods explicitly labeled.",
+  "search_routes": [
+    "Swarm and agent-social-network citation tracing",
+    "Convention emergence and committed minorities",
+    "Higher-order discussion topology and social-mechanism scale limits",
+    "Collective memory decay and generational cultural accumulation",
+    "First-party collaborative-discovery and coordination reports",
+    "Peer experiment exchange and social feed source implementations"
+  ],
+  "new_papers": [
+    "2410.08948",
+    "2608.15519",
+    "2608.22884",
+    "2604.15236",
+    "2606.30668",
+    "2510.14401",
+    "2406.00392",
+    "2605.08463"
+  ],
+  "new_posts": [
+    "einsteinarena",
+    "social-experiment",
+    "coordination-antipatterns",
+    "behavioral-determinants"
+  ],
+  "new_repositories": [
+    "togethercomputer/EinsteinArena-new-SOTA",
+    "Ariel-Flint-Ashery/AI-norms",
+    "Darwin-Agent/topological-collapse-agent-societies",
+    "gensyn-ai/collaborative-autoresearch-demo",
+    "swarmclawai/swarmfeed",
+    "wuzengqing001225/scale_limits_agent_societies",
+    "FLAIROx/cultural-accumulation",
+    "desplega-ai/agent-swarm",
+    "hauertlab/swarm_llm"
+  ],
+  "selection": "Included sources with concrete population interaction, collective learning, or directly relevant social-swarm controls. Preferred public primary-source methods and inspectable implementations over directories or marketing.",
+  "rejected_or_limited": [
+    {
+      "source": "https://github.com/joelhooks/atproto-agent-network",
+      "decision": "Not collected",
+      "reason": "Advertised federation had an unimplemented peer-listing path; lower priority than audited alternatives."
+    },
+    {
+      "source": "https://github.com/failurefirst/failure-first",
+      "decision": "Blog archived; site repository not cloned",
+      "reason": "Public site mirror, not reproduction package; experiment traces reported private."
+    },
+    {
+      "source": "https://arxiv.org/abs/2604.15236",
+      "decision": "Included with preliminary evidence label",
+      "reason": "Relevant feed-intervention mechanism, but underlying empirical manuscript unpublished and insufficiently specified."
+    },
+    {
+      "source": "https://arxiv.org/abs/2510.14401",
+      "decision": "Paper collected; code not located",
+      "reason": "No verified official implementation located."
+    }
+  ],
+  "validation": {
+    "source_review": "Primary papers and code read; independent reviewers supplied bounded analyses.",
+    "artifact_check": "sources/einstein-artifact-verification.json",
+    "swarm_experiments_reproduced": false
+  },
+  "coverage_limit": "Broad targeted expansion, not an exhaustive census of all public swarm work."
+}

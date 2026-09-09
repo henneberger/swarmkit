@@ -1,0 +1,105 @@
+{
+  "id": "2603.21344",
+  "label": "AI Scientific Community: Virtual Lab Swarms",
+  "topic": "swarm-proposal",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2603.21344",
+      "resolved_url": "https://arxiv.org/abs/2603.21344",
+      "path": "sources/papers/2603.21344/abstract.html",
+      "bytes": 40238,
+      "sha256": "4493951011d68c8d9bf6f316b64b7424b5c01491eaeb24ad5c603f05eb792e2b"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2603.21344",
+      "resolved_url": "https://arxiv.org/pdf/2603.21344",
+      "path": "sources/papers/2603.21344/paper.pdf",
+      "bytes": 2135055,
+      "sha256": "0d58f296f7579f30b3abe4f6932fb855ba252bcb5b80450a382fe2d17fc9a9f5"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2603.21344: The AI Scientific Community: Agentic Virtual Lab Swarms"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "The AI Scientific Community: Agentic Virtual Lab Swarms"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2603.21344v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "In this short note we propose using agentic swarms of virtual labs as a model of an AI Science Community. In this paradigm, each particle in the swarm represents a complete virtual laboratory instance, enabling collective scientific exploration that mirrors real-world research communities. The framework leverages the inherent properties of swarm intelligence - decentralized coordination, balanced exploration-exploitation trade-offs, and emergent collective behavior - to simulate the behavior of a scientific community and potentially accelerate scientific discovery. We discuss architectural considerations, inter-laboratory communication and influence mechanisms including citation-analogous voting systems, fitness function design for quantifying scientific success, anticipated emergent behaviors, mechanisms for preventing lab dominance and preserving diversity, and computational efficiency strategies to enable large swarms exhibiting complex emergent behavior analogous to real-world scientific communities. A working instance of the AI Science Community is currently under development."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "The AI Scientific Community: Agentic Virtual Lab Swarms"
+    ],
+    "twitter:description": [
+      "In this short note we propose using agentic swarms of virtual labs as a model of an AI Science Community. In this paradigm, each particle in the swarm represents a complete virtual laboratory..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "The AI Scientific Community: Agentic Virtual Lab Swarms"
+    ],
+    "citation_author": [
+      "Braga-Neto, Ulisses"
+    ],
+    "citation_date": [
+      "2026/03/22"
+    ],
+    "citation_online_date": [
+      "2026/03/22"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2603.21344"
+    ],
+    "citation_arxiv_id": [
+      "2603.21344"
+    ],
+    "citation_abstract": [
+      "In this short note we propose using agentic swarms of virtual labs as a model of an AI Science Community. In this paradigm, each particle in the swarm represents a complete virtual laboratory instance, enabling collective scientific exploration that mirrors real-world research communities. The framework leverages the inherent properties of swarm intelligence - decentralized coordination, balanced exploration-exploitation trade-offs, and emergent collective behavior - to simulate the behavior of a scientific community and potentially accelerate scientific discovery. We discuss architectural considerations, inter-laboratory communication and influence mechanisms including citation-analogous voting systems, fitness function design for quantifying scientific success, anticipated emergent behaviors, mechanisms for preventing lab dominance and preserving diversity, and computational efficiency strategies to enable large swarms exhibiting complex emergent behavior analogous to real-world scientific communities. A working instance of the AI Science Community is currently under development."
+    ]
+  },
+  "text_extraction_ok": true
+}

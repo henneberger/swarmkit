@@ -1,0 +1,112 @@
+{
+  "id": "2606.13594",
+  "label": "Dense latent communication",
+  "topic": "latent",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2606.13594",
+      "path": "sources/papers/2606.13594/abstract.html",
+      "cached": true,
+      "sha256": "9a5896ff56836713ed275152988636b3f9f4b9527f6cad11264f6b1f8d2ccfe6"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2606.13594",
+      "path": "sources/papers/2606.13594/paper.pdf",
+      "cached": true,
+      "sha256": "2a16cbd2718637baefaa249ffb4d03cadbb2a6aa0ff191ba9eb99b1bdcc516df"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2606.13594: See What I See, Know What I Think: Dense Latent Communication Across Heterogeneous Agents"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "See What I See, Know What I Think: Dense Latent Communication Across Heterogeneous Agents"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2606.13594v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Multi-agent systems communicate mostly through text, paying a lossy and expensive decode and re-encode cost. KV-cache communication is a promising alternative, yet most prior work is homogeneous, using duplicate copies of the same model, and avoids the central challenge of cross-model latent alignment; existing heterogeneous methods are also restrictive, typically assuming shared input and using transferred caches mainly for steering. We study a more fundamental question: can heterogeneous agents be aligned well enough to perform real \"mind reading\" and transfer both what one agent sees and how it thinks? Our information-structure analysis reveals a duality: context-aware transfer is driven by sparse reasoning signals, while context-unaware transfer, where the receiver sees no input, requires dense contextual knowledge preservation. Motivated by this, we propose dense alignment for heterogeneous KV-cache communication via a lightweight cross-model cache transformation and two-phase training: reconstruction followed by generation. Across all six directions of {Qwen3-4B, 8B, 14B} and six in-domain and out-of-domain benchmarks, our method outperforms prior heterogeneous baselines, matches or exceeds text communication in context-aware settings at roughly 2 to 3 times lower compute, and remains effective in context-unaware transfer where prior methods collapse."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "See What I See, Know What I Think: Dense Latent Communication..."
+    ],
+    "twitter:description": [
+      "Multi-agent systems communicate mostly through text, paying a lossy and expensive decode and re-encode cost. KV-cache communication is a promising alternative, yet most prior work is homogeneous,..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "See What I See, Know What I Think: Dense Latent Communication Across Heterogeneous Agents"
+    ],
+    "citation_author": [
+      "Chen, Siyi",
+      "Zhang, Xiaoyan",
+      "Wu, Meng",
+      "Tremblay, Jonathan",
+      "Blukis, Valts",
+      "Birchfield, Stan",
+      "Vidal, Rene",
+      "Velasquez, Alvaro",
+      "Liu, Sijia",
+      "Qu, Qing"
+    ],
+    "citation_date": [
+      "2026/06/11"
+    ],
+    "citation_online_date": [
+      "2026/06/11"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2606.13594"
+    ],
+    "citation_arxiv_id": [
+      "2606.13594"
+    ],
+    "citation_abstract": [
+      "Multi-agent systems communicate mostly through text, paying a lossy and expensive decode and re-encode cost. KV-cache communication is a promising alternative, yet most prior work is homogeneous, using duplicate copies of the same model, and avoids the central challenge of cross-model latent alignment; existing heterogeneous methods are also restrictive, typically assuming shared input and using transferred caches mainly for steering. We study a more fundamental question: can heterogeneous agents be aligned well enough to perform real \"mind reading\" and transfer both what one agent sees and how it thinks? Our information-structure analysis reveals a duality: context-aware transfer is driven by sparse reasoning signals, while context-unaware transfer, where the receiver sees no input, requires dense contextual knowledge preservation. Motivated by this, we propose dense alignment for heterogeneous KV-cache communication via a lightweight cross-model cache transformation and two-phase training: reconstruction followed by generation. Across all six directions of {Qwen3-4B, 8B, 14B} and six in-domain and out-of-domain benchmarks, our method outperforms prior heterogeneous baselines, matches or exceeds text communication in context-aware settings at roughly 2 to 3 times lower compute, and remains effective in context-unaware transfer where prior methods collapse."
+    ]
+  },
+  "text_extraction_ok": true
+}

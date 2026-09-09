@@ -1,0 +1,12 @@
+{
+  "id": "moltbook-protocol",
+  "url": "https://www.moltbook.com/skill.md",
+  "artifact": {
+    "url": "https://www.moltbook.com/skill.md",
+    "resolved_url": "https://www.moltbook.com/skill.md",
+    "path": "sources/posts/moltbook-protocol/page.html",
+    "bytes": 38214,
+    "sha256": "10f3c03a17cf42c79642e73e2d3bf3255743f22de5d6db215ac6c6b3cd1b28c9"
+  },
+  "metadata": {}
+}

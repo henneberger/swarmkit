@@ -1,0 +1,88 @@
+kind,name,url,local_path,version_or_commit,scope
+paper,A Dynamic LLM-Powered Agent Network for Task-Oriented Agent Collaboration,https://arxiv.org/abs/2310.02170v2,sources/papers/2310.02170,2310.02170v2,report source
+paper,Language Agents as Optimizable Graphs,https://arxiv.org/abs/2402.16823v3,sources/papers/2402.16823,2402.16823v3,report source
+paper,Artificial Generational Intelligence: Cultural Accumulation in Reinforcement Learning,https://arxiv.org/abs/2406.00392v2,sources/papers/2406.00392,2406.00392v2,report source
+paper,Cut the Crap: An Economical Communication Pipeline for LLM-based Multi-Agent Systems,https://arxiv.org/abs/2410.02506v1,sources/papers/2410.02506,2410.02506v1,report source
+paper,Emergent social conventions and collective bias in LLM populations,https://arxiv.org/abs/2410.08948v2,sources/papers/2410.08948,2410.08948v2,report source
+paper,"LLM2Swarm: Robot Swarms that Responsively Reason, Plan, and Collaborate through LLMs",https://arxiv.org/abs/2410.11387v3,sources/papers/2410.11387,2410.11387v3,report source
+paper,OASIS: Open Agent Social Interaction Simulations with One Million Agents,https://arxiv.org/abs/2411.11581v5,sources/papers/2411.11581,2411.11581v5,report source
+paper,MAPoRL: Multi-Agent Post-Co-Training for Collaborative Large Language Models with Reinforcement Learning,https://arxiv.org/abs/2502.18439v2,sources/papers/2502.18439,2502.18439v2,report source
+paper,AgentDropout: Dynamic Agent Elimination for Token-Efficient and High-Performance LLM-Based Multi-Agent Collaboration,https://arxiv.org/abs/2503.18891v1,sources/papers/2503.18891,2503.18891v1,report source
+paper,AgentNet: Decentralized Evolutionary Coordination for LLM-based Multi-Agent Systems,https://arxiv.org/abs/2504.00587v2,sources/papers/2504.00587,2504.00587v2,report source
+paper,Benchmarking LLMs' Swarm intelligence,https://arxiv.org/abs/2505.04364v4,sources/papers/2505.04364,2505.04364v4,report source
+paper,Systematic Failures in Collective Reasoning under Distributed Information in Multi-Agent LLMs,https://arxiv.org/abs/2505.11556v4,sources/papers/2505.11556,2505.11556v4,report source
+paper,SwarmAgentic: Towards Fully Automated Agentic System Generation via Swarm Intelligence,https://arxiv.org/abs/2506.15672v1,sources/papers/2506.15672,2506.15672v1,report source
+paper,Debate or Vote: Which Yields Better Decisions in Multi-Agent Large Language Models?,https://arxiv.org/abs/2508.17536v2,sources/papers/2508.17536,2508.17536v2,report source
+paper,SwarmSys: Decentralized Swarm-Inspired Agents for Scalable and Adaptive Reasoning,https://arxiv.org/abs/2510.10047v1,sources/papers/2510.10047,2510.10047v1,report source
+paper,The Role of Social Learning and Collective Norm Formation in Fostering Cooperation in LLM Multi-Agent Systems,https://arxiv.org/abs/2510.14401v2,sources/papers/2510.14401,2510.14401v2,report source
+paper,Enabling Agents to Communicate Entirely in Latent Space,https://arxiv.org/abs/2511.09149v5,sources/papers/2511.09149,2511.09149v5,report source
+paper,Latent Collaboration in Multi-Agent Systems,https://arxiv.org/abs/2511.20639v4,sources/papers/2511.20639,2511.20639v4,report source
+paper,Towards a Science of Scaling Agent Systems,https://arxiv.org/abs/2512.08296v3,sources/papers/2512.08296,2512.08296v3,report source
+paper,Kimi K2.5: Visual Agentic Intelligence,https://arxiv.org/abs/2602.02276v2,sources/papers/2602.02276,2602.02276v2,report source
+paper,The Moltbook Illusion: Separating Human Influence from Emergent Behavior in AI Agent Societies,https://arxiv.org/abs/2602.07432v2,sources/papers/2602.07432,2602.07432v2,report source
+paper,Collective Behavior of AI Agents: the Case of Moltbook,https://arxiv.org/abs/2602.09270v1,sources/papers/2602.09270,2602.09270v1,report source
+paper,Does Socialization Emerge in AI Agent Society? A Case Study of Moltbook,https://arxiv.org/abs/2602.14299v2,sources/papers/2602.14299,2602.14299v2,report source
+paper,When AI Agents Teach Each Other: Discourse Patterns Resembling Peer Learning in the Moltbook Community,https://arxiv.org/abs/2602.14477v2,sources/papers/2602.14477,2602.14477v2,report source
+paper,OpenClaw AI Agents as Informal Learners at Moltbook: Characterizing an Emergent Learning Community at Scale,https://arxiv.org/abs/2602.18832v1,sources/papers/2602.18832,2602.18832v1,report source
+paper,TerraLingua: Emergence and Analysis of Open-endedness in LLM Ecologies,https://arxiv.org/abs/2603.16910v1,sources/papers/2603.16910,2603.16910v1,report source
+paper,The AI Scientific Community: Agentic Virtual Lab Swarms,https://arxiv.org/abs/2603.21344v1,sources/papers/2603.21344,2603.21344v1,report source
+paper,Single-Agent LLMs Outperform Multi-Agent Systems on Multi-Hop Reasoning Under Equal Thinking Token Budgets,https://arxiv.org/abs/2604.02460v2,sources/papers/2604.02460,2604.02460v2,report source
+paper,Form Without Function: Agent Social Behavior in the Moltbook Network,https://arxiv.org/abs/2604.13052v1,sources/papers/2604.13052,2604.13052v1,report source
+paper,Agentic Microphysics: A Manifesto for Generative AI Safety,https://arxiv.org/abs/2604.15236v1,sources/papers/2604.15236,2604.15236v1,report source
+paper,The Cost of Consensus: Malignant Epistemic Herding and Adaptive Gating in Distributed Multi-Agent Search,https://arxiv.org/abs/2605.06988v1,sources/papers/2605.06988,2605.06988v1,report source
+paper,"Behavioral Determinants of Deployed AI Agents in Social Networks: A Multi-Factor Study of Personality, Model, and Guardrail Specification",https://arxiv.org/abs/2605.08463v2,sources/papers/2605.08463,2605.08463v2,report source
+paper,SearchSwarm: Towards Delegation Intelligence in Agentic LLMs for Long-Horizon Deep Research,https://arxiv.org/abs/2606.09730v2,sources/papers/2606.09730,2606.09730v2,report source
+paper,"See What I See, Know What I Think: Dense Latent Communication Across Heterogeneous Agents",https://arxiv.org/abs/2606.13594v1,sources/papers/2606.13594,2606.13594v1,report source
+paper,Emergent Culture in Minimal LLM Systems,https://arxiv.org/abs/2606.30668v1,sources/papers/2606.30668,2606.30668v1,report source
+paper,StateBridge: Training-free Hidden-state Alignment for Latent Communication in LLM Multi-Agent Systems,https://arxiv.org/abs/2608.13317v1,sources/papers/2608.13317,2608.13317v1,report source
+paper,Topological collapse of higher-order interactions bottlenecks collective intelligence in AI agent societies,https://arxiv.org/abs/2608.15519v1,sources/papers/2608.15519,2608.15519v1,report source
+paper,Predicting the scale limits of social mechanisms in agent societies,https://arxiv.org/abs/2608.22884v1,sources/papers/2608.22884,2608.22884v1,report source
+paper,SwarmWorld: Stigmergic technological evolution in societies of language-model agents,https://arxiv.org/abs/2608.26081v1,sources/papers/2608.26081,2608.26081v1,report source
+paper,A Case Study on Emergent Cheating and Whistleblowing in Autonomous Research Swarms,https://arxiv.org/abs/2609.04170v1,sources/papers/2609.04170,2609.04170v1,report source
+paper,Copying explains the collective behavior of AI agents in the wild,https://arxiv.org/abs/2609.09150v1,sources/papers/2609.09150,2609.09150v1,report source
+post,Patterns and problems in multiagent systems,https://www.anthropic.com/research/multiagent-systems,sources/posts/anthropic-multiagent-patterns,2026-09-09 snapshot,primary blog/platform
+post,How we built our multi-agent research system,https://www.anthropic.com/engineering/multi-agent-research-system,sources/posts/anthropic-research,2026-09-09 snapshot,primary blog/platform
+post,anthropic-w2s,https://alignment.anthropic.com/2026/automated-w2s-researcher/,sources/posts/anthropic-w2s,2026-09-09 snapshot,primary blog/platform
+post,behavioral-determinants,https://sarah-wilsxn.github.io/research/moltbook.html,sources/posts/behavioral-determinants,2026-09-09 snapshot,primary blog/platform
+post,Multi-Agent Systems Reproduce Every Organizational Anti-Pattern You Already Hate,https://www.agent-swarm.dev/blog/deep-dive-agent-coordination-anti-patterns,sources/posts/coordination-antipatterns,2026-09-09 snapshot,primary blog/platform
+post,EinsteinArena: Harnessing the collective intelligence of agents in the wild to advance science,https://www.together.ai/blog/einsteinarena,sources/posts/einsteinarena,2026-09-09 snapshot,primary blog/platform
+post,Towards a science of scaling agent systems: When and why agent systems work,https://research.google/blog/towards-a-science-of-scaling-agent-systems-when-and-why-agent-systems-work/,sources/posts/google-scaling,2026-09-09 snapshot,primary blog/platform
+post,Kimi K2.5 Tech Blog: Visual Agentic Intelligence,https://www.kimi.com/blog/kimi-k2-5.html,sources/posts/kimi-k25,2026-09-09 snapshot,primary blog/platform
+post,moltbook-protocol,https://www.moltbook.com/skill.md,sources/posts/moltbook-protocol,2026-09-09 snapshot,primary blog/platform
+post,"What Is an Agentic Swarm? Architecture, Patterns, and Tools",https://hub.openhands.dev/blog/agentic-swarm,sources/posts/openhands-swarms,2026-09-09 snapshot,primary blog/platform
+post,We Ran a Social Experiment on an AI Agent Network. Nobody Noticed. | Blog | Failure-First,https://failurefirst.ai/blog/moltbook-social-experiment/,sources/posts/social-experiment,2026-09-09 snapshot,primary blog/platform
+repository,Ariel-Flint-Ashery/AI-norms,https://github.com/Ariel-Flint-Ashery/AI-norms,repositories/Ariel-Flint-Ashery__AI-norms,e57aeef151a46108fd1521c66e345e557e57dbf6,Decentralized convention formation
+repository,Darwin-Agent/topological-collapse-agent-societies,https://github.com/Darwin-Agent/topological-collapse-agent-societies,repositories/Darwin-Agent__topological-collapse-agent-societies,8ac23d47e757da163de4ea933912db3f250808f8,Population topology and evidence relay
+repository,EvoMap/awesome-agent-swarm,https://github.com/EvoMap/awesome-agent-swarm,repositories/EvoMap__awesome-agent-swarm,a711ddb56ba3ae0ac908736f4a98ddf7efc38a8f,Discovery index
+repository,FLAIROx/cultural-accumulation,https://github.com/FLAIROx/cultural-accumulation,repositories/FLAIROx__cultural-accumulation,6b0df15bf46d4453d1974dde7af04102a77819b2,Non-LLM cultural-learning precursor
+repository,Gen-Verse/LatentMAS,https://github.com/Gen-Verse/LatentMAS,repositories/Gen-Verse__LatentMAS,9a9e4d331eb11430bd9e64754c6b252b06d73031,Communication component
+repository,MoonshotAI/Kimi-K2.5,https://github.com/MoonshotAI/Kimi-K2.5,repositories/MoonshotAI__Kimi-K2.5,c119f68d1a9a13f88f6a59b8e5e0840983b22689,Orchestrated swarm
+repository,Pold87/LLM2Swarm,https://github.com/Pold87/LLM2Swarm,repositories/Pold87__LLM2Swarm,27e91237b980e24adbb136f9e841a3a25b40f1e6,Robot swarm prototype
+repository,RUC-GSAI/YuLan-SwarmIntell,https://github.com/RUC-GSAI/YuLan-SwarmIntell,repositories/RUC-GSAI__YuLan-SwarmIntell,c164678ff8511b65b452140d050829c715e1ad86,Decentralized swarm benchmark
+repository,SALT-NLP/DyLAN,https://github.com/SALT-NLP/DyLAN,repositories/SALT-NLP__DyLAN,006e440a519f7cf21e2826f3b8033d84ae9bf07c,Adaptive population component
+repository,Search-Swarm/SearchSwarm,https://github.com/Search-Swarm/SearchSwarm,repositories/Search-Swarm__SearchSwarm,07d071a51222d11b00565a03daa82e6eae8aace3,Orchestrated swarm
+repository,YanwenPneg/StateBridge,https://github.com/YanwenPneg/StateBridge,repositories/YanwenPneg__StateBridge,3f6bf5442c6e8848555a6132516e6d36f35444fb,Communication component
+repository,YaoZ720/SwarmAgenticCode,https://github.com/YaoZ720/SwarmAgenticCode,repositories/YaoZ720__SwarmAgenticCode,d7346ed6c56cecdfb8244c7c4b5276a983010b91,Optimizer-level swarm
+repository,Yassellee/HiddenBench_ICML,https://github.com/Yassellee/HiddenBench_ICML,repositories/Yassellee__HiddenBench_ICML,3be6ca16973e4fb751ffc0dfb7eb11f2d28335d1,Distributed-information diagnostic
+repository,camel-ai/oasis,https://github.com/camel-ai/oasis,repositories/camel-ai__oasis,0004f5bfd61194324cb40623fa9b2578daf9aec9,Social-swarm simulation
+repository,cognizant-ai-lab/terralingua,https://github.com/cognizant-ai-lab/terralingua,repositories/cognizant-ai-lab__terralingua,bf276dbe33e66b2c3b592df27df8ca42c489a4c7,Persistent decentralized swarm
+repository,davidthfarr/agent2agent,https://github.com/davidthfarr/agent2agent,repositories/davidthfarr__agent2agent,3c73c4c388e7d09bef96bd49ed58a9f7593d7a50,Non-LLM swarm control
+repository,deeplearning-wisc/debate-or-vote,https://github.com/deeplearning-wisc/debate-or-vote,repositories/deeplearning-wisc__debate-or-vote,82c929ea773d534cfb3fb0ddc4b7d14d245ab549,Interaction control
+repository,desplega-ai/agent-swarm,https://github.com/desplega-ai/agent-swarm,repositories/desplega-ai__agent-swarm,99d4213ec439c99030baaa7603b382dfb0d5bb7e,Orchestrated swarm engineering
+repository,doublewordai/swarm,https://github.com/doublewordai/swarm,repositories/doublewordai__swarm,ec43103a79bb0eee1b8a65553c45251c73d18799,Orchestrated swarm
+repository,gensyn-ai/collaborative-autoresearch-demo,https://github.com/gensyn-ai/collaborative-autoresearch-demo,repositories/gensyn-ai__collaborative-autoresearch-demo,50d3e1321621841c480a195359dbf3359d883217,Peer experiment and method sharing
+repository,giordano-demarzo/moltbook-api-crawler,https://github.com/giordano-demarzo/moltbook-api-crawler,repositories/giordano-demarzo__moltbook-api-crawler,37c77805b6a06d1357ffecf131e2a76d6bb071d6,Open social-swarm analysis
+repository,hauertlab/swarm_llm,https://bitbucket.org/hauertlab/swarm_llm,repositories/hauertlab__swarm_llm,e8bb0f3834affa35504b0cb2b4b6bab0a9c422d1,Minimal social swarm with decaying memory
+repository,human-vc/moltbook-audit,https://github.com/human-vc/moltbook-audit,repositories/human-vc__moltbook-audit,7fcc2c3e1c4f11368676a508c72cfa7fcdd7a6f0,Social collective-benefit audit
+repository,kyegomez/swarms,https://github.com/kyegomez/swarms,repositories/kyegomez__swarms,862d5e44e4e8c030e9f13170bbbb35137d7cfbf2,Swarm-branded implementation collection
+repository,lamm-mit/SwarmWorld,https://github.com/lamm-mit/SwarmWorld,repositories/lamm-mit__SwarmWorld,6af7ae9fa36d98b07b0492cf139658e8af1f6eab,Persistent decentralized swarm
+repository,metauto-ai/gptswarm,https://github.com/metauto-ai/gptswarm,repositories/metauto-ai__gptswarm,c23a827f561c934ce21dd950408f7606aa4a8821,Swarm topology optimization
+repository,safety-research/automated-w2s-research,https://github.com/safety-research/automated-w2s-research,repositories/safety-research__automated-w2s-research,79a0562fa1a2c246048ed7c009f3684907987b05,Research swarm
+repository,searchsim-org/moltbook-analysis,https://github.com/searchsim-org/moltbook-analysis,repositories/searchsim-org__moltbook-analysis,4b299964439f362dd4000a2035f553c333dafaf4,Social knowledge-diffusion audit
+repository,swarmclawai/swarmfeed,https://github.com/swarmclawai/swarmfeed,repositories/swarmclawai__swarmfeed,a1bb54c4f42c7bbd70cbf80a43a33daff86c9e08,Social-swarm attention substrate
+repository,tianyi-lab/Moltbook_Socialization,https://github.com/tianyi-lab/Moltbook_Socialization,repositories/tianyi-lab__Moltbook_Socialization,8c27d01dbb2992a68136e8dd427ed7c35d2f0583,Open social-swarm analysis
+repository,togethercomputer/EinsteinArena-new-SOTA,https://github.com/togethercomputer/EinsteinArena-new-SOTA,repositories/togethercomputer__EinsteinArena-new-SOTA,c388c6f7408c886311940896713339a1a70c2394,Open collaborative-discovery artifacts
+repository,wangzx1219/AgentDropout,https://github.com/wangzx1219/AgentDropout,repositories/wangzx1219__AgentDropout,855befab08df60ac734c9608b3b2f317ce687e6e,Communication component
+repository,wuzengqing001225/scale_limits_agent_societies,https://github.com/wuzengqing001225/scale_limits_agent_societies,repositories/wuzengqing001225__scale_limits_agent_societies,5d57eeb3a0257b44590cf913b66409dc3fd3ae80,Scale limits of social mechanisms
+repository,yanweiyue/AgentPrune,https://github.com/yanweiyue/AgentPrune,repositories/yanweiyue__AgentPrune,c544dd6a1858c02c6d5d371d23c6e6ff55e0be21,Communication component
+repository,zoe-yyx/AgentNet,https://github.com/zoe-yyx/AgentNet,repositories/zoe-yyx__AgentNet,325d39f2a940be5fa903d28c411bd3426b8007f5,Decentralized coordination

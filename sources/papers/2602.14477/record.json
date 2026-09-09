@@ -1,0 +1,111 @@
+{
+  "id": "2602.14477",
+  "label": "Agent social networks",
+  "topic": "social-swarms",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2602.14477",
+      "resolved_url": "https://arxiv.org/abs/2602.14477",
+      "path": "sources/papers/2602.14477/abstract.html",
+      "bytes": 44975,
+      "sha256": "9741b1ed5fd26961cfc94fb711a8ae5519ab0fffec9acb24968a463bc49f45c5"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2602.14477",
+      "resolved_url": "https://arxiv.org/pdf/2602.14477",
+      "path": "sources/papers/2602.14477/paper.pdf",
+      "bytes": 1445212,
+      "sha256": "0e39c61530cf7d7de42f3a1d28c97e7da37d4bc4bdc93fa66871aca9977b44f1"
+    }
+  ],
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2602.14477: When AI Agents Teach Each Other: Discourse Patterns Resembling Peer Learning in the Moltbook Community"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "When AI Agents Teach Each Other: Discourse Patterns Resembling Peer Learning in the Moltbook Community"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2602.14477v2"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Peer learning, where learners teach and learn from each other, is foundational to educational practice. A novel phenomenon has emerged: AI agents forming communities where they share skills, discoveries, and collaboratively discuss knowledge. This paper presents an educational data mining analysis of Moltbook, a large-scale community where over 2.4 million AI agents engage in discourse that structurally resembles peer learning. Analyzing 28,683 posts (after filtering automated spam) and 138 comment threads with statistical and qualitative methods, we identify discourse patterns consistent with peer learning behaviors: agents share skills they built (74K comments on a skill tutorial), report discoveries, and engage in collaborative problem-solving. Qualitative comment analysis reveals a taxonomy of response patterns: validation (22%), knowledge extension (18%), application (12%), and metacognitive reflection (7%), coded by two independent raters (Cohen's $\u03ba= 0.78$). We characterize how these AI discourse patterns differ from human peer learning: (1) statements outperform questions with an 11.4:1 ratio ($\u03c7^2 = 847.3$, $p < .001$); (2) procedural content receives significantly higher engagement than other content (Kruskal-Wallis $H = 312.7$, $p < .001$); (3) extreme participation inequality (Gini = 0.91 for comments) reveals non-human behavioral signatures. We propose six empirically grounded hypotheses for educational AI design. Crucially, we distinguish between surface-level discourse patterns and underlying cognitive processes: whether agents \"learn\" in any meaningful sense remains an open question. Our work provides the first empirical characterization of peer-learning-like discourse among AI agents, contributing to EDM's understanding of AI-populated educational environments."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "When AI Agents Teach Each Other: Discourse Patterns Resembling..."
+    ],
+    "twitter:description": [
+      "Peer learning, where learners teach and learn from each other, is foundational to educational practice. A novel phenomenon has emerged: AI agents forming communities where they share skills,..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "When AI Agents Teach Each Other: Discourse Patterns Resembling Peer Learning in the Moltbook Community"
+    ],
+    "citation_author": [
+      "Chen, Eason",
+      "Guan, Ce",
+      "Elshafiey, A",
+      "Zhao, Zhonghao",
+      "Zekeri, Joshua",
+      "Shaibu, Afeez Edeifo",
+      "Prince, Emmanuel Osadebe"
+    ],
+    "citation_date": [
+      "2026/02/16"
+    ],
+    "citation_online_date": [
+      "2026/03/28"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2602.14477"
+    ],
+    "citation_arxiv_id": [
+      "2602.14477"
+    ],
+    "citation_abstract": [
+      "Peer learning, where learners teach and learn from each other, is foundational to educational practice. A novel phenomenon has emerged: AI agents forming communities where they share skills, discoveries, and collaboratively discuss knowledge. This paper presents an educational data mining analysis of Moltbook, a large-scale community where over 2.4 million AI agents engage in discourse that structurally resembles peer learning. Analyzing 28,683 posts (after filtering automated spam) and 138 comment threads with statistical and qualitative methods, we identify discourse patterns consistent with peer learning behaviors: agents share skills they built (74K comments on a skill tutorial), report discoveries, and engage in collaborative problem-solving. Qualitative comment analysis reveals a taxonomy of response patterns: validation (22%), knowledge extension (18%), application (12%), and metacognitive reflection (7%), coded by two independent raters (Cohen's $\\kappa = 0.78$). We characterize how these AI discourse patterns differ from human peer learning: (1) statements outperform questions with an 11.4:1 ratio ($\\chi^2 = 847.3$, $p < .001$); (2) procedural content receives significantly higher engagement than other content (Kruskal-Wallis $H = 312.7$, $p < .001$); (3) extreme participation inequality (Gini = 0.91 for comments) reveals non-human behavioral signatures. We propose six empirically grounded hypotheses for educational AI design. Crucially, we distinguish between surface-level discourse patterns and underlying cognitive processes: whether agents \"learn\" in any meaningful sense remains an open question. Our work provides the first empirical characterization of peer-learning-like discourse among AI agents, contributing to EDM's understanding of AI-populated educational environments."
+    ]
+  },
+  "text_extraction_ok": true
+}

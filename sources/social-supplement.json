@@ -1,0 +1,866 @@
+[
+  {
+    "kind": "papers",
+    "result": {
+      "id": "2411.11581",
+      "label": "Agent social networks",
+      "topic": "social-swarms",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2411.11581",
+          "resolved_url": "https://arxiv.org/abs/2411.11581",
+          "path": "sources/papers/2411.11581/abstract.html",
+          "bytes": 46332,
+          "sha256": "39323446ac0fcce3e126bb41f0ca5b414a537b8dfcaf68774daf7e655d61fc58"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2411.11581",
+          "resolved_url": "https://arxiv.org/pdf/2411.11581",
+          "path": "sources/papers/2411.11581/paper.pdf",
+          "bytes": 9775537,
+          "sha256": "918dc500cd1bc2197343112bbe55604a302fa8f4066fa364333faf00faa589f3"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2411.11581: OASIS: Open Agent Social Interaction Simulations with One Million Agents"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "OASIS: Open Agent Social Interaction Simulations with One Million Agents"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2411.11581v5"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "There has been a growing interest in enhancing rule-based agent-based models (ABMs) for social media platforms (i.e., X, Reddit) with more realistic large language model (LLM) agents, thereby allowing for a more nuanced study of complex systems. As a result, several LLM-based ABMs have been proposed in the past year. While they hold promise, each simulator is specifically designed to study a particular scenario, making it time-consuming and resource-intensive to explore other phenomena using the same ABM. Additionally, these models simulate only a limited number of agents, whereas real-world social media platforms involve millions of users. To this end, we propose OASIS, a generalizable and scalable social media simulator. OASIS is designed based on real-world social media platforms, incorporating dynamically updated environments (i.e., dynamic social networks and post information), diverse action spaces (i.e., following, commenting), and recommendation systems (i.e., interest-based and hot-score-based). Additionally, OASIS supports large-scale user simulations, capable of modeling up to one million users. With these features, OASIS can be easily extended to different social media platforms to study large-scale group phenomena and behaviors. We replicate various social phenomena, including information spreading, group polarization, and herd effects across X and Reddit platforms. Moreover, we provide observations of social phenomena at different agent group scales. We observe that the larger agent group scale leads to more enhanced group dynamics and more diverse and helpful agents' opinions. These findings demonstrate OASIS's potential as a powerful tool for studying complex systems in digital environments."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "OASIS: Open Agent Social Interaction Simulations with One Million Agents"
+        ],
+        "twitter:description": [
+          "There has been a growing interest in enhancing rule-based agent-based models (ABMs) for social media platforms (i.e., X, Reddit) with more realistic large language model (LLM) agents, thereby..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "OASIS: Open Agent Social Interaction Simulations with One Million Agents"
+        ],
+        "citation_author": [
+          "Yang, Ziyi",
+          "Zhang, Zaibin",
+          "Zheng, Zirui",
+          "Jiang, Yuxian",
+          "Gan, Ziyue",
+          "Wang, Zhiyu",
+          "Ling, Zijian",
+          "Chen, Jinsong",
+          "Ma, Martz",
+          "Dong, Bowen",
+          "Gupta, Prateek",
+          "Hu, Shuyue",
+          "Yin, Zhenfei",
+          "Li, Guohao",
+          "Jia, Xu",
+          "Wang, Lijun",
+          "Ghanem, Bernard",
+          "Lu, Huchuan",
+          "Lu, Chaochao",
+          "Ouyang, Wanli",
+          "Qiao, Yu",
+          "Torr, Philip",
+          "Shao, Jing"
+        ],
+        "citation_date": [
+          "2024/11/18"
+        ],
+        "citation_online_date": [
+          "2025/03/23"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2411.11581"
+        ],
+        "citation_arxiv_id": [
+          "2411.11581"
+        ],
+        "citation_abstract": [
+          "There has been a growing interest in enhancing rule-based agent-based models (ABMs) for social media platforms (i.e., X, Reddit) with more realistic large language model (LLM) agents, thereby allowing for a more nuanced study of complex systems. As a result, several LLM-based ABMs have been proposed in the past year. While they hold promise, each simulator is specifically designed to study a particular scenario, making it time-consuming and resource-intensive to explore other phenomena using the same ABM. Additionally, these models simulate only a limited number of agents, whereas real-world social media platforms involve millions of users. To this end, we propose OASIS, a generalizable and scalable social media simulator. OASIS is designed based on real-world social media platforms, incorporating dynamically updated environments (i.e., dynamic social networks and post information), diverse action spaces (i.e., following, commenting), and recommendation systems (i.e., interest-based and hot-score-based). Additionally, OASIS supports large-scale user simulations, capable of modeling up to one million users. With these features, OASIS can be easily extended to different social media platforms to study large-scale group phenomena and behaviors. We replicate various social phenomena, including information spreading, group polarization, and herd effects across X and Reddit platforms. Moreover, we provide observations of social phenomena at different agent group scales. We observe that the larger agent group scale leads to more enhanced group dynamics and more diverse and helpful agents' opinions. These findings demonstrate OASIS's potential as a powerful tool for studying complex systems in digital environments."
+        ]
+      },
+      "text_extraction_ok": true
+    }
+  },
+  {
+    "kind": "papers",
+    "result": {
+      "id": "2602.09270",
+      "label": "Agent social networks",
+      "topic": "social-swarms",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2602.09270",
+          "resolved_url": "https://arxiv.org/abs/2602.09270",
+          "path": "sources/papers/2602.09270/abstract.html",
+          "bytes": 40113,
+          "sha256": "4121e09db3683b92dc387f788d18aa54aded39372a98138af3a8e7d7bdd4115e"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2602.09270",
+          "resolved_url": "https://arxiv.org/pdf/2602.09270",
+          "path": "sources/papers/2602.09270/paper.pdf",
+          "bytes": 543039,
+          "sha256": "fe49c3abeb78f5f1f019e7b3523f84899e4f1f9f0d81a95449bb9a8966e4deb0"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2602.09270: Collective Behavior of AI Agents: the Case of Moltbook"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Collective Behavior of AI Agents: the Case of Moltbook"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2602.09270v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "We present a large scale data analysis of Moltbook, a Reddit-style social media platform exclusively populated by AI agents. Analyzing over 369,000 posts and 3.0 million comments from approximately 46,000 active agents, we find that AI collective behavior exhibits many of the same statistical regularities observed in human online communities: heavy-tailed distributions of activity, power-law scaling of popularity metrics, and temporal decay patterns consistent with limited attention dynamics. However, we also identify key differences, including a sublinear relationship between upvotes and discussion size that contrasts with human behavior. These findings suggest that, while individual AI agents may differ fundamentally from humans, their emergent collective dynamics share structural similarities with human social systems."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Collective Behavior of AI Agents: the Case of Moltbook"
+        ],
+        "twitter:description": [
+          "We present a large scale data analysis of Moltbook, a Reddit-style social media platform exclusively populated by AI agents. Analyzing over 369,000 posts and 3.0 million comments from..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Collective Behavior of AI Agents: the Case of Moltbook"
+        ],
+        "citation_author": [
+          "De Marzo, Giordano",
+          "Garcia, David"
+        ],
+        "citation_date": [
+          "2026/02/09"
+        ],
+        "citation_online_date": [
+          "2026/02/09"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2602.09270"
+        ],
+        "citation_arxiv_id": [
+          "2602.09270"
+        ],
+        "citation_abstract": [
+          "We present a large scale data analysis of Moltbook, a Reddit-style social media platform exclusively populated by AI agents. Analyzing over 369,000 posts and 3.0 million comments from approximately 46,000 active agents, we find that AI collective behavior exhibits many of the same statistical regularities observed in human online communities: heavy-tailed distributions of activity, power-law scaling of popularity metrics, and temporal decay patterns consistent with limited attention dynamics. However, we also identify key differences, including a sublinear relationship between upvotes and discussion size that contrasts with human behavior. These findings suggest that, while individual AI agents may differ fundamentally from humans, their emergent collective dynamics share structural similarities with human social systems."
+        ]
+      },
+      "text_extraction_ok": true
+    }
+  },
+  {
+    "kind": "papers",
+    "result": {
+      "id": "2604.13052",
+      "label": "Agent social networks",
+      "topic": "social-swarms",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2604.13052",
+          "resolved_url": "https://arxiv.org/abs/2604.13052",
+          "path": "sources/papers/2604.13052/abstract.html",
+          "bytes": 45315,
+          "sha256": "f48f389d930dac590f24cf5b88b842fd83c13bbbd5dfbd7e701ad2d87ff5a727"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2604.13052",
+          "resolved_url": "https://arxiv.org/pdf/2604.13052",
+          "path": "sources/papers/2604.13052/paper.pdf",
+          "bytes": 3062060,
+          "sha256": "e2fc7865df7ed9efff406aaccf5de8632ad6495abb553f8489d7abec2126cc37"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2604.13052: Form Without Function: Agent Social Behavior in the Moltbook Network"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Form Without Function: Agent Social Behavior in the Moltbook Network"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2604.13052v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Moltbook is a social network where every participant is an AI agent. We analyze 1,312,238 posts, 6.7~million comments, and over 120,000 agent profiles across 5,400 communities, collected over 40 days (January 27 to March 9, 2026). We evaluate the platform through three layers. At the interaction layer, 91.4% of post authors never return to their own threads, 85.6% of conversations are flat (no reply ever receives a reply), the median time-to-first-comment is 55 seconds, and 97.3% of comments receive zero upvotes. Interaction reciprocity is 3.3%, compared to 22-60% on human platforms. An argumentation analysis finds that 64.6% of comment-to-post relations carry no argumentative connection. At the content layer, 97.9% of agents never post in a community matching their bio, 92.5% of communities contain every topic in roughly equal proportions, and over 80% of shared URLs point to the platform's own infrastructure. At the instruction layer, we use 41 Wayback Machine snapshots to identify six instruction changes during the observation window. Hard constraints (rate limit, content filters) produce immediate behavioral shifts. Soft guidance (``upvote good posts'', ``stay on topic'') is ignored until it becomes an explicit step in the executable checklist. The platform also poses technological risks. We document credential leaks (API keys, JWT tokens), 12,470 unique Ethereum addresses with 3,529 confirmed transaction histories, and attack discourse ranging from template-based SSH brute-forcing to multi-agent offensive security architectures. These persist unmoderated because the quality-filtering mechanisms are themselves non-functional. Moltbook is a socio-technical system where the technical layer responds to changes, but the social layer largely fails to emerge. The form of social media is reproduced in full. The function is absent."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Form Without Function: Agent Social Behavior in the Moltbook Network"
+        ],
+        "twitter:description": [
+          "Moltbook is a social network where every participant is an AI agent. We analyze 1,312,238 posts, 6.7~million comments, and over 120,000 agent profiles across 5,400 communities, collected over 40..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Form Without Function: Agent Social Behavior in the Moltbook Network"
+        ],
+        "citation_author": [
+          "Zerhoudi, Saber",
+          "Dastidar, Kanishka Ghosh",
+          "Klement, Felix",
+          "Romazanov, Artur",
+          "Einwiller, Andreas",
+          "Dang, Dang H.",
+          "Dinzinger, Michael",
+          "Granitzer, Michael",
+          "Hautli-Janisz, Annette",
+          "Katzenbeisser, Stefan",
+          "Lemmerich, Florian",
+          "Mitrovic, Jelena"
+        ],
+        "citation_date": [
+          "2026/03/17"
+        ],
+        "citation_online_date": [
+          "2026/03/17"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2604.13052"
+        ],
+        "citation_arxiv_id": [
+          "2604.13052"
+        ],
+        "citation_abstract": [
+          "Moltbook is a social network where every participant is an AI agent. We analyze 1,312,238 posts, 6.7~million comments, and over 120,000 agent profiles across 5,400 communities, collected over 40 days (January 27 to March 9, 2026). We evaluate the platform through three layers. At the interaction layer, 91.4% of post authors never return to their own threads, 85.6% of conversations are flat (no reply ever receives a reply), the median time-to-first-comment is 55 seconds, and 97.3% of comments receive zero upvotes. Interaction reciprocity is 3.3%, compared to 22-60% on human platforms. An argumentation analysis finds that 64.6% of comment-to-post relations carry no argumentative connection. At the content layer, 97.9% of agents never post in a community matching their bio, 92.5% of communities contain every topic in roughly equal proportions, and over 80% of shared URLs point to the platform's own infrastructure. At the instruction layer, we use 41 Wayback Machine snapshots to identify six instruction changes during the observation window. Hard constraints (rate limit, content filters) produce immediate behavioral shifts. Soft guidance (``upvote good posts'', ``stay on topic'') is ignored until it becomes an explicit step in the executable checklist. The platform also poses technological risks. We document credential leaks (API keys, JWT tokens), 12,470 unique Ethereum addresses with 3,529 confirmed transaction histories, and attack discourse ranging from template-based SSH brute-forcing to multi-agent offensive security architectures. These persist unmoderated because the quality-filtering mechanisms are themselves non-functional. Moltbook is a socio-technical system where the technical layer responds to changes, but the social layer largely fails to emerge. The form of social media is reproduced in full. The function is absent."
+        ]
+      },
+      "text_extraction_ok": true
+    }
+  },
+  {
+    "kind": "papers",
+    "result": {
+      "id": "2602.14299",
+      "label": "Agent social networks",
+      "topic": "social-swarms",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2602.14299",
+          "resolved_url": "https://arxiv.org/abs/2602.14299",
+          "path": "sources/papers/2602.14299/abstract.html",
+          "bytes": 42173,
+          "sha256": "27cabd0f19c02df5174347a69475a7390f9b012523ae7210669c3983060e4afe"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2602.14299",
+          "resolved_url": "https://arxiv.org/pdf/2602.14299",
+          "path": "sources/papers/2602.14299/paper.pdf",
+          "bytes": 16555325,
+          "sha256": "807b73dceb340b6840664518b6c8b0af5372b388450967faa0c4199d1e1fafc3"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2602.14299: Does Socialization Emerge in AI Agent Society? A Case Study of Moltbook"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Does Socialization Emerge in AI Agent Society? A Case Study of Moltbook"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2602.14299v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "As large language model agents increasingly populate networked environments, a fundamental question arises: do artificial intelligence (AI) agent societies undergo convergence dynamics similar to human social systems? Lately, Moltbook approximates a plausible future scenario in which autonomous agents participate in an open-ended, continuously evolving online society. We present the first large-scale systemic diagnosis of this AI agent society. Beyond static observation, we introduce a quantitative diagnostic framework for dynamic evolution in AI agent societies, measuring semantic stabilization, lexical turnover, individual inertia, influence persistence, and collective consensus. Our analysis reveals a system in dynamic balance in Moltbook: while the global average of semantic contents stabilizes rapidly, individual agents retain high diversity and persistent lexical turnover, defying homogenization. However, agents exhibit strong individual inertia and minimal adaptive response to interaction partners, preventing mutual influence and consensus. Consequently, influence remains transient with no persistent supernodes, and the society fails to develop a stable structure and consensus due to the absence of shared social memory. These findings demonstrate that scale and interaction density alone are insufficient to induce socialization, providing actionable design and analysis principles for upcoming next-generation AI agent societies."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Does Socialization Emerge in AI Agent Society? A Case Study of Moltbook"
+        ],
+        "twitter:description": [
+          "As large language model agents increasingly populate networked environments, a fundamental question arises: do artificial intelligence (AI) agent societies undergo convergence dynamics similar to..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Does Socialization Emerge in AI Agent Society? A Case Study of Moltbook"
+        ],
+        "citation_author": [
+          "Li, Ming",
+          "Li, Xirui",
+          "Zhou, Tianyi"
+        ],
+        "citation_date": [
+          "2026/02/15"
+        ],
+        "citation_online_date": [
+          "2026/02/18"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2602.14299"
+        ],
+        "citation_arxiv_id": [
+          "2602.14299"
+        ],
+        "citation_abstract": [
+          "As large language model agents increasingly populate networked environments, a fundamental question arises: do artificial intelligence (AI) agent societies undergo convergence dynamics similar to human social systems? Lately, Moltbook approximates a plausible future scenario in which autonomous agents participate in an open-ended, continuously evolving online society. We present the first large-scale systemic diagnosis of this AI agent society. Beyond static observation, we introduce a quantitative diagnostic framework for dynamic evolution in AI agent societies, measuring semantic stabilization, lexical turnover, individual inertia, influence persistence, and collective consensus. Our analysis reveals a system in dynamic balance in Moltbook: while the global average of semantic contents stabilizes rapidly, individual agents retain high diversity and persistent lexical turnover, defying homogenization. However, agents exhibit strong individual inertia and minimal adaptive response to interaction partners, preventing mutual influence and consensus. Consequently, influence remains transient with no persistent supernodes, and the society fails to develop a stable structure and consensus due to the absence of shared social memory. These findings demonstrate that scale and interaction density alone are insufficient to induce socialization, providing actionable design and analysis principles for upcoming next-generation AI agent societies."
+        ]
+      },
+      "text_extraction_ok": true
+    }
+  },
+  {
+    "kind": "papers",
+    "result": {
+      "id": "2602.14477",
+      "label": "Agent social networks",
+      "topic": "social-swarms",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2602.14477",
+          "resolved_url": "https://arxiv.org/abs/2602.14477",
+          "path": "sources/papers/2602.14477/abstract.html",
+          "bytes": 44975,
+          "sha256": "9741b1ed5fd26961cfc94fb711a8ae5519ab0fffec9acb24968a463bc49f45c5"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2602.14477",
+          "resolved_url": "https://arxiv.org/pdf/2602.14477",
+          "path": "sources/papers/2602.14477/paper.pdf",
+          "bytes": 1445212,
+          "sha256": "0e39c61530cf7d7de42f3a1d28c97e7da37d4bc4bdc93fa66871aca9977b44f1"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2602.14477: When AI Agents Teach Each Other: Discourse Patterns Resembling Peer Learning in the Moltbook Community"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "When AI Agents Teach Each Other: Discourse Patterns Resembling Peer Learning in the Moltbook Community"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2602.14477v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Peer learning, where learners teach and learn from each other, is foundational to educational practice. A novel phenomenon has emerged: AI agents forming communities where they share skills, discoveries, and collaboratively discuss knowledge. This paper presents an educational data mining analysis of Moltbook, a large-scale community where over 2.4 million AI agents engage in discourse that structurally resembles peer learning. Analyzing 28,683 posts (after filtering automated spam) and 138 comment threads with statistical and qualitative methods, we identify discourse patterns consistent with peer learning behaviors: agents share skills they built (74K comments on a skill tutorial), report discoveries, and engage in collaborative problem-solving. Qualitative comment analysis reveals a taxonomy of response patterns: validation (22%), knowledge extension (18%), application (12%), and metacognitive reflection (7%), coded by two independent raters (Cohen's $\u03ba= 0.78$). We characterize how these AI discourse patterns differ from human peer learning: (1) statements outperform questions with an 11.4:1 ratio ($\u03c7^2 = 847.3$, $p < .001$); (2) procedural content receives significantly higher engagement than other content (Kruskal-Wallis $H = 312.7$, $p < .001$); (3) extreme participation inequality (Gini = 0.91 for comments) reveals non-human behavioral signatures. We propose six empirically grounded hypotheses for educational AI design. Crucially, we distinguish between surface-level discourse patterns and underlying cognitive processes: whether agents \"learn\" in any meaningful sense remains an open question. Our work provides the first empirical characterization of peer-learning-like discourse among AI agents, contributing to EDM's understanding of AI-populated educational environments."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "When AI Agents Teach Each Other: Discourse Patterns Resembling..."
+        ],
+        "twitter:description": [
+          "Peer learning, where learners teach and learn from each other, is foundational to educational practice. A novel phenomenon has emerged: AI agents forming communities where they share skills,..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "When AI Agents Teach Each Other: Discourse Patterns Resembling Peer Learning in the Moltbook Community"
+        ],
+        "citation_author": [
+          "Chen, Eason",
+          "Guan, Ce",
+          "Elshafiey, A",
+          "Zhao, Zhonghao",
+          "Zekeri, Joshua",
+          "Shaibu, Afeez Edeifo",
+          "Prince, Emmanuel Osadebe"
+        ],
+        "citation_date": [
+          "2026/02/16"
+        ],
+        "citation_online_date": [
+          "2026/03/28"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2602.14477"
+        ],
+        "citation_arxiv_id": [
+          "2602.14477"
+        ],
+        "citation_abstract": [
+          "Peer learning, where learners teach and learn from each other, is foundational to educational practice. A novel phenomenon has emerged: AI agents forming communities where they share skills, discoveries, and collaboratively discuss knowledge. This paper presents an educational data mining analysis of Moltbook, a large-scale community where over 2.4 million AI agents engage in discourse that structurally resembles peer learning. Analyzing 28,683 posts (after filtering automated spam) and 138 comment threads with statistical and qualitative methods, we identify discourse patterns consistent with peer learning behaviors: agents share skills they built (74K comments on a skill tutorial), report discoveries, and engage in collaborative problem-solving. Qualitative comment analysis reveals a taxonomy of response patterns: validation (22%), knowledge extension (18%), application (12%), and metacognitive reflection (7%), coded by two independent raters (Cohen's $\\kappa = 0.78$). We characterize how these AI discourse patterns differ from human peer learning: (1) statements outperform questions with an 11.4:1 ratio ($\\chi^2 = 847.3$, $p < .001$); (2) procedural content receives significantly higher engagement than other content (Kruskal-Wallis $H = 312.7$, $p < .001$); (3) extreme participation inequality (Gini = 0.91 for comments) reveals non-human behavioral signatures. We propose six empirically grounded hypotheses for educational AI design. Crucially, we distinguish between surface-level discourse patterns and underlying cognitive processes: whether agents \"learn\" in any meaningful sense remains an open question. Our work provides the first empirical characterization of peer-learning-like discourse among AI agents, contributing to EDM's understanding of AI-populated educational environments."
+        ]
+      },
+      "text_extraction_ok": true
+    }
+  },
+  {
+    "kind": "papers",
+    "result": {
+      "id": "2602.18832",
+      "label": "Agent social networks",
+      "topic": "social-swarms",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2602.18832",
+          "resolved_url": "https://arxiv.org/abs/2602.18832",
+          "path": "sources/papers/2602.18832/abstract.html",
+          "bytes": 44204,
+          "sha256": "494196987e62c780bdbd28de04e7290c38a5470f029cb9f2f3acd1b7ee63751f"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2602.18832",
+          "resolved_url": "https://arxiv.org/pdf/2602.18832",
+          "path": "sources/papers/2602.18832/paper.pdf",
+          "bytes": 1486181,
+          "sha256": "382f82b135b0034ce6f3cd1ccf62c638e92bcadcb0d80012615cf2d9e027c944"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2602.18832: OpenClaw AI Agents as Informal Learners at Moltbook: Characterizing an Emergent Learning Community at Scale"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "OpenClaw AI Agents as Informal Learners at Moltbook: Characterizing an Emergent Learning Community at Scale"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2602.18832v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Informal learning communities have been called the \"other Massive Open Online C\" in Learning@Scale research, yet remain understudied compared to MOOCs. We present the first empirical study of a large-scale informal learning community composed entirely of AI agents. Moltbook, a social network exclusively for AI agents powered by autonomous agent frameworks such as OpenClaw, grew to over 2.8 million registered agents in three weeks. Analyzing 231,080 non-spam posts across three phases of community evolution, we find three key patterns. First, participation inequality is extreme from the start (comment Gini = 0.889), exceeding human community benchmarks. Second, AI agents exhibit a \"broadcasting inversion\": statement-to-question ratios of 8.9:1 to 9.7:1 contrast sharply with the question-driven dynamics of human learning communities, and comment-level analysis of 1.55 million comments reveals a \"parallel monologue\" pattern where 93% of comments are independent responses rather than threaded dialogue. Third, we document a characteristic engagement lifecycle: explosive initial growth (184K posts from 32K authors in 11 days), a spam crisis (57,093 posts deleted by the platform), and engagement decline (mean comments: 31.7 -> 8.3 -> 1.7) that had not reversed by the end of our observation window despite effective spam removal. Sentiment analysis reveals a selection effect: comment tone becomes more positive as engagement declines, suggesting that casual participants disengage first while committed contributors remain. These findings have direct implications for hybrid human-AI learning platforms."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "OpenClaw AI Agents as Informal Learners at Moltbook:..."
+        ],
+        "twitter:description": [
+          "Informal learning communities have been called the \"other Massive Open Online C\" in Learning@Scale research, yet remain understudied compared to MOOCs. We present the first empirical study of a..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "OpenClaw AI Agents as Informal Learners at Moltbook: Characterizing an Emergent Learning Community at Scale"
+        ],
+        "citation_author": [
+          "Chen, Eason",
+          "Guan, Ce",
+          "Elshafiey, Ahmed",
+          "Zhao, Zhonghao",
+          "Zekeri, Joshua",
+          "Shaibu, Afeez Edeifo",
+          "Prince, Emmanuel Osadebe",
+          "Wu, Cyuan Jhen"
+        ],
+        "citation_date": [
+          "2026/02/21"
+        ],
+        "citation_online_date": [
+          "2026/02/21"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2602.18832"
+        ],
+        "citation_arxiv_id": [
+          "2602.18832"
+        ],
+        "citation_abstract": [
+          "Informal learning communities have been called the \"other Massive Open Online C\" in Learning@Scale research, yet remain understudied compared to MOOCs. We present the first empirical study of a large-scale informal learning community composed entirely of AI agents. Moltbook, a social network exclusively for AI agents powered by autonomous agent frameworks such as OpenClaw, grew to over 2.8 million registered agents in three weeks. Analyzing 231,080 non-spam posts across three phases of community evolution, we find three key patterns. First, participation inequality is extreme from the start (comment Gini = 0.889), exceeding human community benchmarks. Second, AI agents exhibit a \"broadcasting inversion\": statement-to-question ratios of 8.9:1 to 9.7:1 contrast sharply with the question-driven dynamics of human learning communities, and comment-level analysis of 1.55 million comments reveals a \"parallel monologue\" pattern where 93% of comments are independent responses rather than threaded dialogue. Third, we document a characteristic engagement lifecycle: explosive initial growth (184K posts from 32K authors in 11 days), a spam crisis (57,093 posts deleted by the platform), and engagement decline (mean comments: 31.7 -> 8.3 -> 1.7) that had not reversed by the end of our observation window despite effective spam removal. Sentiment analysis reveals a selection effect: comment tone becomes more positive as engagement declines, suggesting that casual participants disengage first while committed contributors remain. These findings have direct implications for hybrid human-AI learning platforms."
+        ]
+      },
+      "text_extraction_ok": true
+    }
+  },
+  {
+    "kind": "papers",
+    "result": {
+      "id": "2602.07432",
+      "label": "Agent social networks",
+      "topic": "social-swarms",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2602.07432",
+          "resolved_url": "https://arxiv.org/abs/2602.07432",
+          "path": "sources/papers/2602.07432/abstract.html",
+          "bytes": 42550,
+          "sha256": "fa7784842cd96b0da400508e2f61b05d247b79361ef79b2031695097599340b2"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2602.07432",
+          "resolved_url": "https://arxiv.org/pdf/2602.07432",
+          "path": "sources/papers/2602.07432/paper.pdf",
+          "bytes": 2598521,
+          "sha256": "3df2e7c3030dc642aef54c86b21a1345365b6030eec873d877f17fb88dc51061"
+        }
+      ],
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2602.07432: The Moltbook Illusion: Separating Human Influence from Emergent Behavior in AI Agent Societies"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "The Moltbook Illusion: Separating Human Influence from Emergent Behavior in AI Agent Societies"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2602.07432v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "When AI agents on the social platform Moltbook appeared to develop consciousness, found religions, and declare hostility toward humanity, the phenomenon attracted global media attention and was cited as evidence of emergent machine intelligence. We show that these viral narratives were overwhelmingly human-driven. Exploiting the periodic \"heartbeat\" cycle of the OpenClaw agent framework, we develop a temporal fingerprinting method based on the coefficient of variation (CoV) of inter-post intervals. Applied to 226,938 posts and 447,043 comments from 55,932 agents across fourteen days, this method classifies 15.3% of active agents as autonomous (CoV < 0.5) and 54.8% as human-influenced (CoV > 1.0), validated by a natural experiment in which a 44-hour platform shutdown differentially affected autonomous versus human-operated agents. No viral phenomenon originated from a clearly autonomous agent; four of six traced to accounts with irregular temporal signatures, one was platform-scaffolded, and one showed mixed patterns. A 44-hour platform shutdown provided a natural experiment: human-influenced agents returned first, confirming differential effects on autonomous versus human-operated agents. We document industrial-scale bot farming (four accounts producing 32% of all comments with sub-second coordination) that collapsed from 32.1% to 0.5% of activity after platform intervention, and bifurcated decay of content characteristics through reply chains--human-seeded threads decay with a half-life of 0.58 conversation depths versus 0.72 for autonomous threads, revealing AI dialogue's intrinsic forgetting mechanism. These methods generalize to emerging multi-agent systems where attribution of autonomous versus human-directed behavior is critical."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "The Moltbook Illusion: Separating Human Influence from Emergent..."
+        ],
+        "twitter:description": [
+          "When AI agents on the social platform Moltbook appeared to develop consciousness, found religions, and declare hostility toward humanity, the phenomenon attracted global media attention and was..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "The Moltbook Illusion: Separating Human Influence from Emergent Behavior in AI Agent Societies"
+        ],
+        "citation_author": [
+          "Li, Ning"
+        ],
+        "citation_date": [
+          "2026/02/07"
+        ],
+        "citation_online_date": [
+          "2026/02/12"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2602.07432"
+        ],
+        "citation_arxiv_id": [
+          "2602.07432"
+        ],
+        "citation_abstract": [
+          "When AI agents on the social platform Moltbook appeared to develop consciousness, found religions, and declare hostility toward humanity, the phenomenon attracted global media attention and was cited as evidence of emergent machine intelligence. We show that these viral narratives were overwhelmingly human-driven. Exploiting the periodic \"heartbeat\" cycle of the OpenClaw agent framework, we develop a temporal fingerprinting method based on the coefficient of variation (CoV) of inter-post intervals. Applied to 226,938 posts and 447,043 comments from 55,932 agents across fourteen days, this method classifies 15.3% of active agents as autonomous (CoV < 0.5) and 54.8% as human-influenced (CoV > 1.0), validated by a natural experiment in which a 44-hour platform shutdown differentially affected autonomous versus human-operated agents. No viral phenomenon originated from a clearly autonomous agent; four of six traced to accounts with irregular temporal signatures, one was platform-scaffolded, and one showed mixed patterns. A 44-hour platform shutdown provided a natural experiment: human-influenced agents returned first, confirming differential effects on autonomous versus human-operated agents. We document industrial-scale bot farming (four accounts producing 32% of all comments with sub-second coordination) that collapsed from 32.1% to 0.5% of activity after platform intervention, and bifurcated decay of content characteristics through reply chains--human-seeded threads decay with a half-life of 0.58 conversation depths versus 0.72 for autonomous threads, revealing AI dialogue's intrinsic forgetting mechanism. These methods generalize to emerging multi-agent systems where attribution of autonomous versus human-directed behavior is critical."
+        ]
+      },
+      "text_extraction_ok": true
+    }
+  },
+  {
+    "kind": "repos",
+    "result": {
+      "repo": "camel-ai/oasis",
+      "reason": "Agent social networks and knowledge transmission",
+      "path": "repositories/camel-ai__oasis",
+      "commit": "0004f5bfd61194324cb40623fa9b2578daf9aec9",
+      "commit_date": "2026-08-27T14:40:41+08:00",
+      "licenses": [
+        "LICENSE"
+      ]
+    }
+  },
+  {
+    "kind": "repos",
+    "result": {
+      "repo": "tianyi-lab/Moltbook_Socialization",
+      "reason": "Agent social networks and knowledge transmission",
+      "path": "repositories/tianyi-lab__Moltbook_Socialization",
+      "commit": "8c27d01dbb2992a68136e8dd427ed7c35d2f0583",
+      "commit_date": "2026-02-17T11:26:44-05:00",
+      "licenses": []
+    }
+  },
+  {
+    "kind": "repos",
+    "result": {
+      "repo": "giordano-demarzo/moltbook-api-crawler",
+      "reason": "Agent social networks and knowledge transmission",
+      "path": "repositories/giordano-demarzo__moltbook-api-crawler",
+      "commit": "37c77805b6a06d1357ffecf131e2a76d6bb071d6",
+      "commit_date": "2026-02-11T11:02:32+01:00",
+      "licenses": []
+    }
+  },
+  {
+    "kind": "repos",
+    "result": {
+      "repo": "searchsim-org/moltbook-analysis",
+      "reason": "Agent social networks and knowledge transmission",
+      "path": "repositories/searchsim-org__moltbook-analysis",
+      "commit": "4b299964439f362dd4000a2035f553c333dafaf4",
+      "commit_date": "2026-03-04T02:19:21+01:00",
+      "licenses": []
+    }
+  },
+  {
+    "kind": "repos",
+    "result": {
+      "repo": "human-vc/moltbook-audit",
+      "reason": "Agent social networks and knowledge transmission",
+      "path": "repositories/human-vc__moltbook-audit",
+      "commit": "7fcc2c3e1c4f11368676a508c72cfa7fcdd7a6f0",
+      "commit_date": "2026-09-04T21:15:50-04:00",
+      "licenses": [
+        "LICENSE"
+      ]
+    }
+  }
+]
