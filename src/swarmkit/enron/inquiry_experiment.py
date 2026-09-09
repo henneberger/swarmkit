@@ -15,7 +15,7 @@ import re
 from dataclasses import asdict, dataclass
 
 from ..runtime import CallableAgent, MessageBus, SwarmRuntime, apply_result
-from ..serialization import to_data
+from ..serialization import from_data, to_data
 from ..types import AgentState, Budget, Message, SwarmState, Task, new_id
 from .inquiries import AgendaConfig, InquiryAgenda
 from .inquiry_model import InquiryReasoner
@@ -43,16 +43,35 @@ class InquiryExperimentConfig:
 
 
 class InquiryExperiment:
-    def __init__(self, replay, store, client, config=None, agents=None):
+    def __init__(self, replay, store, client, config=None, agents=None, resume_run_id=None):
         self.replay, self.store, self.client = replay, store, client
-        self.config = config or InquiryExperimentConfig()
-        if replay.stats()["arrived"]:
+        saved = store.run(resume_run_id) if resume_run_id else None
+        if resume_run_id and (not saved or saved.get("mode") != "inquiry_swarm"):
+            raise ValueError("unknown inquiry run to resume")
+        self.config = config or (
+            InquiryExperimentConfig(**saved["config"]) if saved else InquiryExperimentConfig()
+        )
+        if saved and asdict(self.config) != saved["config"]:
+            raise ValueError("resume configuration must match stored limits")
+        if replay.stats()["arrived"] and not saved:
             raise ValueError("fresh experiment requires an empty replay membership")
         peers = agents or [AgentState(f"investigator-{i + 1}") for i in range(4)]
         if not peers or len({a.id for a in peers}) != len(peers):
             raise ValueError("distinct investigators required")
-        self.state = SwarmState(agents={a.id: a for a in peers})
-        self.id = new_id("inquiry-run")
+        self.state = (
+            from_data(saved["state_snapshot"]) if saved else SwarmState(agents={a.id: a for a in peers})
+        )
+        if saved:
+            if not isinstance(self.state, SwarmState) or agents is not None:
+                raise ValueError("resume restores canonical agents; do not replace them")
+            if replay.stats()["arrived"] != saved["metrics"]["arrived"] or replay.stats()[
+                "virtual_time"
+            ] != saved.get("virtual_time"):
+                raise ValueError("replay membership differs from saved checkpoint")
+            if saved.get("replay_bounds") and replay.stats()["bounds"] != saved["replay_bounds"]:
+                raise ValueError("replay bounds differ from saved checkpoint")
+            peers = list(self.state.agents.values())
+        self.id = resume_run_id or new_id("inquiry-run")
         self.agenda = InquiryAgenda(
             self.state,
             replay.verify_evidence,
@@ -102,6 +121,82 @@ class InquiryExperiment:
         self.exposed = set()
         self.coverage = {a.id: [] for a in peers}
         self.seen_bodies = set()
+        self.batches_processed = 0
+        self.resuming = bool(saved)
+        if saved:
+            self.record = {k: v for k, v in saved.items() if k not in ("posts", "events")}
+            self.runtime.budget.used_calls = self.agenda.data["actions_used"]
+            self.runtime.budget.used_tokens = self.record["metrics"]["tokens"]
+            self.runtime.budget.used_cost = self.record["metrics"]["cost"]
+            extra = saved.get("resume_state", {})
+            self.batches_processed = extra.get(
+                "batches_processed",
+                (replay.stats()["arrived"] + self.config.batch_size - 1) // self.config.batch_size,
+            )
+            self.exposed = set(extra.get("exposed", []))
+            self.coverage = extra.get("coverage", self.coverage)
+            if not extra:
+                for event in saved.get("events", []):
+                    if event.get("kind") == "prompt_exposure":
+                        self.exposed.update(event.get("document_ids", []))
+                for actor in self.coverage:
+                    ids = [
+                        d
+                        for event in saved.get("events", [])
+                        if event.get("agent") == actor and event.get("kind") == "prompt_exposure"
+                        for d in event.get("document_ids", [])
+                    ]
+                    for docid in ids:
+                        doc = replay.get(docid)
+                        if doc:
+                            item = {"sender": doc.sender, "subject": doc.subject[:120]}
+                            if item not in self.coverage[actor]:
+                                self.coverage[actor] = (self.coverage[actor] + [item])[-8:]
+            # Read existing membership only; never re-admit the prefix or search future mail.
+            with replay._lock:
+                self.seen_bodies = {
+                    r[0]
+                    for r in replay._db.execute(
+                        "SELECT d.body_sha256 FROM arrived a JOIN archive.documents d ON d.id=a.doc_id"
+                    )
+                }
+            if any(replay.get(docid) is None for docid in self.exposed):
+                raise ValueError("saved exposure outside replay membership")
+            for actor in self.state.agents.values():
+                evidence = [
+                    *actor.private_evidence,
+                    *actor.memory.get("evidence", {}).values(),
+                    *(e for m in actor.inbox for e in m.evidence),
+                ]
+                if any(not replay.verify_evidence(e) for e in evidence):
+                    raise ValueError("saved private evidence outside replay membership")
+            for artifact in self.state.artifacts.values():
+                if any(not replay.verify_evidence(e) for e in artifact.evidence):
+                    raise ValueError("saved evidence does not match replay membership")
+            self.record.setdefault("resume_history", []).append(
+                {
+                    "prior_status": saved["status"],
+                    "prior_errors": saved.get("errors", []),
+                    "prior_shared_ledger_delta": dict(saved.get("shared_ledger_delta", {})),
+                    **self._watermark(),
+                }
+            )
+            self.record["errors"] = []
+            if saved.get("errors") and not self.agenda.data["running"]:
+                self._event(
+                    "lost_assignment",
+                    reason="prior failed dispatch already retired; no automatic repetition or budget refund",
+                    **self._watermark(),
+                )
+            for work in list(self.agenda.data["running"]):
+                self._event(
+                    "lost_assignment",
+                    assignment_id=work["id"],
+                    reason="unknown interrupted outcome; reservation retained, not automatically repeated",
+                    **self._watermark(),
+                )
+                self.agenda.finish(work["id"])
+            self._event("resume", batches_processed=self.batches_processed, **self._watermark())
 
     def owner_for(self, sender):
         ids = sorted(self.state.agents)
@@ -138,9 +233,15 @@ class InquiryExperiment:
             virtual_time=self.replay.stats()["virtual_time"],
             agenda=to_data(snapshot),
         )
+        self.record["replay_bounds"] = self.replay.stats()["bounds"]
         self.record["metrics"]["arrived"] = self.replay.stats()["arrived"]
         self.record["metrics"]["scheduled_calls"] = self.agenda.data["actions_used"]
         self.record["metrics"]["exposed"] = len(self.exposed)
+        self.record["resume_state"] = {
+            "batches_processed": self.batches_processed,
+            "exposed": sorted(self.exposed),
+            "coverage": self.coverage,
+        }
         self.record["state_snapshot"] = to_data(self.state)
         self.store.save_run(self.record)
 
@@ -196,6 +297,29 @@ class InquiryExperiment:
         elif work["kind"] == "explore":
             docs = [d for docid in payload.get("document_ids", []) if (d := self.replay.get(docid))]
         messages = list(context.messages) if self.config.peer_exchange else []
+        request_id = payload.get("request_id")
+        if self.config.peer_exchange and request_id and work["kind"] in ("peer_review", "react"):
+            # The inbox may have been consumed by an earlier exploration task.
+            # Bind this assignment to its original addressed request/reply.
+            candidates = [
+                message
+                for message in self.state.messages
+                if actor in message.recipients
+                and (
+                    (work["kind"] == "peer_review" and message.id == request_id)
+                    or (
+                        work["kind"] == "react"
+                        and message.metadata.get("request_id") == request_id
+                        and message.sender == payload.get("sender")
+                        and message.metadata.get("action") == "reply"
+                    )
+                )
+            ]
+            if not candidates:
+                raise ValueError("assigned peer message is missing from the canonical conversation")
+            assigned_message = candidates[-1]
+            if all(message.id != assigned_message.id for message in messages):
+                messages.append(assigned_message)
         directory = []
         for row in self.agenda.data["inquiries"].values():
             if actor in row["participants"] and (
@@ -219,7 +343,7 @@ class InquiryExperiment:
             work["id"],
             "Choose a useful next inquiry action from your available context.",
             metadata={
-                "assignment": {k: work[k] for k in ("inquiry_id", "kind")},
+                "assignment": {**{k: work[k] for k in ("inquiry_id", "kind")}, "request_id": request_id},
                 "peers": self.record["peers"],
                 "source_access_result": access_result,
             },
@@ -248,6 +372,25 @@ class InquiryExperiment:
             return False
         work = assignments[0]
         self.current = work
+        if work["kind"] == "read" and [
+            work["payload"]["document_id"],
+            work["payload"]["offset"],
+        ] in self.state.agents[work["agent_id"]].memory.get("source_reads", []):
+            self.agenda.finish(work["id"])
+            self.state.agents[work["agent_id"]].memory["host_feedback"] = (
+                "Duplicate read retired locally: this source offset was already requested. Choose another source, continuation offset, or action."
+            )
+            self.record["metrics"]["duplicate_reads_prevented"] = (
+                self.record["metrics"].get("duplicate_reads_prevented", 0) + 1
+            )
+            self._event(
+                "duplicate_read_retired",
+                agent=work["agent_id"],
+                assignment_id=work["id"],
+                **self._watermark(),
+            )
+            self._persist()
+            return True
         self._persist()
         result = await self.runtime.round(
             Task(work["id"], "Inquiry agenda dispatch"), phase=work["kind"], participants=(work["agent_id"],)
@@ -263,6 +406,20 @@ class InquiryExperiment:
             self.record["metrics"]["reasoning_rejections"] += int(rejected)
             try:
                 if action["kind"] != "wait":
+                    if action["kind"] == "read":
+                        key = [action.get("document_id"), action.get("offset", 0)]
+                        prior = self.state.agents[message.sender].memory.get("source_reads", [])
+                        queued = [
+                            q
+                            for q in self.agenda.data["pending"]
+                            if q["agent_id"] == message.sender and q["kind"] == "read"
+                        ]
+                        if key in prior or any(
+                            [q["payload"]["document_id"], q["payload"]["offset"]] == key for q in queued
+                        ):
+                            raise ValueError(
+                                "duplicate read: this source offset was already requested; choose a different source, continuation, or action"
+                            )
                     action["evidence"] = message.evidence
                     action.update(self._watermark(), event_sequence=self._sequence())
                     applied = self.agenda.apply(message.sender, action)
@@ -286,6 +443,10 @@ class InquiryExperiment:
             except (ValueError, TypeError, KeyError) as exc:
                 rejected = True
                 self.record["metrics"]["action_rejections"] += 1
+                if str(exc).startswith("duplicate read:"):
+                    self.record["metrics"]["duplicate_reads_prevented"] = (
+                        self.record["metrics"].get("duplicate_reads_prevented", 0) + 1
+                    )
                 self.state.agents[message.sender].memory["host_feedback"] = (
                     f"Your {action.get('kind')} action was not executed: {str(exc)[:500]}. "
                     "Correct the request or choose a different action."
@@ -317,13 +478,44 @@ class InquiryExperiment:
     async def run(self):
         gate = getattr(self.client, "gate", None)
         initial_gate = gate.status() if gate else None
+        ledger_segment = None
+        if gate:
+            segments = self.record.setdefault("ledger_segments", [])
+            if not segments and self.record.get("shared_ledger_delta"):
+                segments.append(
+                    {
+                        "id": "legacy-aggregate",
+                        "kind": "imported_prior_aggregate",
+                        "delta": dict(self.record["shared_ledger_delta"]),
+                        "scope": "Prior recorded aggregate; individual historical boundaries unavailable.",
+                    }
+                )
+            ledger_segment = {
+                "id": new_id("ledger-segment"),
+                "kind": "execution",
+                "start": {k: initial_gate[k] for k in ("calls", "tokens", "cost_usd")},
+                "start_arrival_sequence": self.replay.stats()["arrived"],
+                "delta": None,
+            }
+            segments.append(ledger_segment)
         self.record["status"] = "running"
         self._persist()
         try:
-            for _ in range(self.config.max_batches):
+            if self.resuming:
+                for _ in range(self.config.actions_per_batch):
+                    if not await self._dispatch():
+                        break
+                self.resuming = False
+            for _ in range(self.batches_processed, self.config.max_batches):
+                if (
+                    self.record["status"] == "incomplete"
+                    or self.agenda.data["actions_used"] >= self.config.max_actions
+                ):
+                    break
                 arrivals = self.replay.admit_next_metadata(self.config.batch_size)
                 if not arrivals:
                     break
+                self.batches_processed += 1
                 groups = {a: [] for a in self.state.agents}
                 for row in arrivals:
                     # Watch all newly arrived substantial segments, not just samples.
@@ -354,6 +546,11 @@ class InquiryExperiment:
                     or self.agenda.data["actions_used"] >= self.config.max_actions
                 ):
                     break
+            if self.record["status"] != "incomplete" and self.replay.stats()["complete"]:
+                # Finish already scheduled conversations after the final arrival,
+                # still subject to the same per-inquiry and total action limits.
+                while await self._dispatch():
+                    pass
             if self.record["status"] != "incomplete":
                 self.record["status"] = (
                     "completed"
@@ -370,11 +567,26 @@ class InquiryExperiment:
         finally:
             if gate:
                 final_gate = gate.status()
-                self.record["shared_ledger_delta"] = {
+                ledger_segment["end"] = {key: final_gate[key] for key in ("calls", "tokens", "cost_usd")}
+                ledger_segment["end_arrival_sequence"] = self.replay.stats()["arrived"]
+                ledger_segment["delta"] = {
                     key: final_gate[key] - initial_gate[key] for key in ("calls", "tokens", "cost_usd")
                 }
+                self.record["shared_ledger_delta"] = {
+                    key: sum(
+                        segment["delta"][key]
+                        for segment in self.record["ledger_segments"]
+                        if segment.get("delta") is not None
+                    )
+                    for key in ("calls", "tokens", "cost_usd")
+                }
+                self.record["ledger_accounting_complete"] = all(
+                    segment.get("delta") is not None for segment in self.record["ledger_segments"]
+                )
                 self.record["shared_ledger_delta_scope"] = (
-                    "All shared-ledger activity during run, including concurrent callers and charged failures."
+                    "Sum of recorded execution-interval shared-ledger deltas plus any labeled legacy aggregate; "
+                    "includes concurrent callers and charged failures during those intervals, excludes between-session activity. "
+                    "Segments missing a terminal checkpoint are explicitly incomplete and are not silently estimated."
                 )
             self._persist()
         return self.store.run(self.id)

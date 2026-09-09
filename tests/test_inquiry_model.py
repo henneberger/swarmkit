@@ -58,7 +58,7 @@ async def test_open_action_has_exact_evidence_and_no_implicit_broadcast(arrived)
     assert message.recipients == ("one",)
     assert message.metadata["action"]["kind"] == "open"
     assert all(arrived.verify_evidence(ev) for ev in message.evidence)
-    assert client.prompts[0]["private_memory"] == "Only my local context."
+    assert client.prompts[0]["private_memory"] == ""  # Unscoped narrative cannot contaminate a new source.
     assert not client.prompts[0]["addressed_messages"]
     assert result.usage.cost == 0.01
 
@@ -200,3 +200,29 @@ async def test_search_terms_and_irrelevant_nulls_normalize_without_inventing_evi
     agenda.apply("one", action)
     work = agenda.schedule()[0]
     assert work["kind"] == "search" and work["inquiry_id"] is None
+
+
+@pytest.mark.asyncio
+async def test_source_memory_preserves_subject_and_scopes_narrative(arrived):
+    docs = arrived.search("correction")
+    doc = docs[0]
+    client = Client(lambda _: json.dumps({"update": "A note about this source.", "action": {"kind": "wait"}}))
+    agent = AgentState(
+        "one",
+        memory={
+            "summary": "An unrelated matter with a similar name.",
+            "scoped_summaries": {"source:unrelated-document": "Unrelated guaranty claim."},
+        },
+    )
+    first = await InquiryReasoner(arrived, client).act(agent, Task("t", "Read"), documents=[doc])
+    assert client.prompts[0]["private_memory"] == ""
+    agent.memory.update(first.memory_updates)
+    await InquiryReasoner(arrived, client).act(agent, Task("u", "Continue"), documents=[doc])
+    payload = client.prompts[1]
+    assert payload["private_memory"] == "A note about this source."
+    assert payload["memory_scope"] == f"source:{doc.id}"
+    assert all(
+        e["outer_subject"] == doc.subject and e["outer_sender"] == doc.sender for e in payload["evidence"]
+    )
+    await InquiryReasoner(arrived, client).act(agent, Task("v", "Explore another context"))
+    assert client.prompts[2]["private_memory"] == ""

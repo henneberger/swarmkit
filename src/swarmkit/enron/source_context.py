@@ -39,10 +39,30 @@ class SourceContext:
                 if len(text.strip()) < 15:
                     continue
                 evidence = self.replay.evidence(doc.id, start, end, owner="source-resolver")
+                scope = {
+                    "document_id": doc.id,
+                    "outer_subject": doc.subject,
+                    "outer_sender": doc.sender,
+                    "outer_date": doc.date_utc,
+                    "outer_recipients": tuple(doc.recipients),
+                    "claimed_subject": segment.subject,
+                    "claimed_sender": segment.claimed_sender,
+                    "claimed_date": segment.claimed_date,
+                    "kind": segment.kind,
+                    "segment_id": segment.segment_id,
+                    "segment_start": segment.start,
+                    "segment_end": segment.end,
+                    "depth": segment.depth,
+                    "attribution_confidence": segment.confidence,
+                    "ambiguities": tuple(segment.ambiguities),
+                }
+                if evidence.metadata["quote"] != text:
+                    raise ValueError("provided document text differs from canonical source span")
                 evidence = replace(
                     evidence,
                     metadata={
                         **evidence.metadata,
+                        **scope,
                         "excerpt_truncated": truncated,
                         "next_read": f"read: {doc.id} {end}" if truncated else None,
                     },
@@ -53,6 +73,7 @@ class SourceContext:
                 spans[alias] = evidence
                 segments.append(
                     {
+                        **scope,
                         "span_id": alias,
                         "text": text,
                         "start": start,
@@ -75,6 +96,7 @@ class SourceContext:
                 {
                     "document_id": doc.id,
                     "subject": doc.subject,
+                    "outer_subject": doc.subject,
                     "outer_sender": doc.sender,
                     "outer_date": doc.date_utc,
                     "in_reply_to": list(doc.in_reply_to),

@@ -131,12 +131,16 @@ def parser():
     run.add_argument("--export", type=Path)
     inquiry = sub.add_parser("inquire", help="Agent-directed investigations of chronological arrivals")
     inquiry.add_argument("--replay-id", required=True)
+    inquiry.add_argument("--resume-run", help="Resume stored inquiry state without resetting ledger or membership")
+    inquiry.add_argument("--recover-peer-requests", action="store_true",
+                         help="On resume, deliver recorded factual peer requests rejected by the older host")
     inquiry.add_argument("--start", default="1999-01-01")
     inquiry.add_argument("--end", default="2002-12-31")
     inquiry.add_argument("--batch-size", type=int, default=20)
     inquiry.add_argument("--max-batches", type=int, default=4)
     inquiry.add_argument("--actions-per-batch", type=int, default=4)
     inquiry.add_argument("--max-actions", type=int, default=16)
+    inquiry.add_argument("--max-actions-per-inquiry", type=int, default=8)
     inquiry.add_argument("--docs-per-agent", type=int, default=3)
     inquiry.add_argument("--max-output-tokens", type=int, default=1800)
     inquiry.add_argument("--live", action="store_true", required=True)
@@ -201,6 +205,8 @@ def main(argv=None):
 
     ledger = args.ledger
     if args.command == "inquire":
+        if args.recover_peer_requests and not args.resume_run:
+            raise SystemExit("Request recovery requires --resume-run.")
         from .inquiry_experiment import InquiryExperiment, InquiryExperimentConfig
         from .replay import ReplayCorpus
         if not args.replay_id or any(c not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_' for c in args.replay_id):
@@ -215,11 +221,15 @@ def main(argv=None):
         client = DeepSeekClient(gate=gate, max_retries=0)
         config = InquiryExperimentConfig(batch_size=args.batch_size, max_batches=args.max_batches,
             actions_per_batch=args.actions_per_batch, max_actions=args.max_actions,
+            max_actions_per_inquiry=args.max_actions_per_inquiry,
             docs_per_agent=args.docs_per_agent, max_output_tokens=args.max_output_tokens,
             peer_exchange=not args.withhold_peer_exchange)
         with ReplayCorpus(corpus_path, args.workspace / 'replays' / (args.replay_id + '.sqlite'),
                           start=args.start, end=args.end) as view:
-            engine = InquiryExperiment(view, store, client, config)
+            engine = InquiryExperiment(view, store, client, None if args.resume_run else config, resume_run_id=args.resume_run)
+            if args.recover_peer_requests:
+                from .inquiry_recovery import recover_peer_requests
+                print(f"Recovered peer requests: {recover_peer_requests(engine)}", flush=True)
             print(f"Inquiry swarm {engine.id}; arrival state {args.replay_id}", flush=True)
             result = asyncio.run(engine.run())
         if args.export:

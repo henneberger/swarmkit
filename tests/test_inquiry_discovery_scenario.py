@@ -192,6 +192,10 @@ def test_scripted_peer_request_unlocks_connection_that_withheld_control_cannot_s
             assert assignments[0]['kind'] == 'peer_review'
             assert assignments[0]['agent_id'] == 'importer'
             if reply_enabled:
+                agenda.apply('importer', {
+                    'kind': 'join', 'inquiry_id': iid,
+                    'unresolved_premise': 'I can inspect the requested import receipt.',
+                })
                 reply = agenda.apply('importer', {
                     'kind': 'revise', 'inquiry_id': iid, 'evidence': (evidence['receipt'],),
                     'change': 'Actual Quartz write receipt connects the server destination and timestamp.',
