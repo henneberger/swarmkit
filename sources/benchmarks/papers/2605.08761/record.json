@@ -1,0 +1,127 @@
+{
+  "kind": "papers",
+  "id": "2605.08761",
+  "title": "Beyond the All-in-One Agent: Benchmarking Role-Specialized Multi-Agent Collaboration in Enterprise Workflows",
+  "page_url": "https://arxiv.org/abs/2605.08761",
+  "pdf_url": "https://arxiv.org/pdf/2605.08761",
+  "retrieved_at": "2026-09-10T22:57:25.928000+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2605.08761",
+      "resolved_url": "https://arxiv.org/abs/2605.08761",
+      "path": "sources/benchmarks/papers/2605.08761/page.html",
+      "bytes": 44629,
+      "sha256": "4103757113cf4118f38d19f6d96d699bb32cafd7eacd0f2fafe55911de55892d"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2605.08761",
+      "resolved_url": "https://arxiv.org/pdf/2605.08761",
+      "path": "sources/benchmarks/papers/2605.08761/paper.pdf",
+      "bytes": 7576808,
+      "sha256": "7c6336a57ee5710379526df6dce2a6bab551cf96f0ef69998103077ac1a15446"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2605.08761: Beyond the All-in-One Agent: Benchmarking Role-Specialized Multi-Agent Collaboration in Enterprise Workflows"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Beyond the All-in-One Agent: Benchmarking Role-Specialized Multi-Agent Collaboration in Enterprise Workflows"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2605.08761v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Large language model (LLM) agents are increasingly expected to operate in enterprise environments, where work is distributed across specialized roles, permission-controlled systems, and cross-departmental procedures. However, existing enterprise benchmarks largely evaluate single agents with broad tool access, while existing multi-agent benchmarks rarely capture realistic enterprise constraints such as role specialization, access control, stateful business systems, and policy-based approvals. We introduce \\textsc{EntCollabBench}, a benchmark for evaluating enterprise multi-agent collaboration. \\textsc{EntCollabBench} simulates a permission-isolated organization with 11 role-specialized agents across six departments and contains two evaluation subsets: a Workflow subset, where agents collaboratively modify enterprise system states, and an Approval subset, where agents make policy-grounded decisions. Evaluation is based on execution traces, database state verification, and deterministic policy adjudication rather than natural-language response judging. Experiments with representative LLM agents show that current models still struggle with end-to-end enterprise collaboration, especially in delegation, context transfer, parameter grounding, workflow closure, and decision commitment. \\textsc{EntCollabBench} provides a reproducible testbed for measuring and improving agent systems intended for realistic organizational environments."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Beyond the All-in-One Agent: Benchmarking Role-Specialized..."
+    ],
+    "twitter:description": [
+      "Large language model (LLM) agents are increasingly expected to operate in enterprise environments, where work is distributed across specialized roles, permission-controlled systems, and..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Beyond the All-in-One Agent: Benchmarking Role-Specialized Multi-Agent Collaboration in Enterprise Workflows"
+    ],
+    "citation_author": [
+      "Yu, Tao",
+      "Wang, Hao",
+      "Li, Changyu",
+      "Chai, Shenghua",
+      "Zhang, Minghui",
+      "Luo, Zhongtian",
+      "Zhou, Yuxuan",
+      "Jin, Haopeng",
+      "Kang, Zhaolu",
+      "Yang, Jiabing",
+      "Zhang, YiFan",
+      "Wang, Xinming",
+      "Yi, Hongzhu",
+      "He, Zheqi",
+      "Zheng, Jing-Shu",
+      "Yang, Xi",
+      "Huang, Yan",
+      "Wang, Liang"
+    ],
+    "citation_date": [
+      "2026/05/09"
+    ],
+    "citation_online_date": [
+      "2026/05/09"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2605.08761"
+    ],
+    "citation_arxiv_id": [
+      "2605.08761"
+    ],
+    "citation_abstract": [
+      "Large language model (LLM) agents are increasingly expected to operate in enterprise environments, where work is distributed across specialized roles, permission-controlled systems, and cross-departmental procedures. However, existing enterprise benchmarks largely evaluate single agents with broad tool access, while existing multi-agent benchmarks rarely capture realistic enterprise constraints such as role specialization, access control, stateful business systems, and policy-based approvals. We introduce \\textsc{EntCollabBench}, a benchmark for evaluating enterprise multi-agent collaboration. \\textsc{EntCollabBench} simulates a permission-isolated organization with 11 role-specialized agents across six departments and contains two evaluation subsets: a Workflow subset, where agents collaboratively modify enterprise system states, and an Approval subset, where agents make policy-grounded decisions. Evaluation is based on execution traces, database state verification, and deterministic policy adjudication rather than natural-language response judging. Experiments with representative LLM agents show that current models still struggle with end-to-end enterprise collaboration, especially in delegation, context transfer, parameter grounding, workflow closure, and decision commitment. \\textsc{EntCollabBench} provides a reproducible testbed for measuring and improving agent systems intended for realistic organizational environments."
+    ]
+  },
+  "extracted_text_characters": 197876,
+  "text_searchable": true
+}

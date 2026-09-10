@@ -1,0 +1,120 @@
+{
+  "kind": "papers",
+  "id": "2503.01935v1",
+  "title": "MultiAgentBench: Evaluating the Collaboration and Competition of LLM agents",
+  "page_url": "https://arxiv.org/abs/2503.01935v1",
+  "pdf_url": "https://arxiv.org/pdf/2503.01935v1",
+  "retrieved_at": "2026-09-10T22:56:57.607779+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2503.01935v1",
+      "resolved_url": "https://arxiv.org/abs/2503.01935v1",
+      "path": "sources/benchmarks/papers/2503.01935v1/page.html",
+      "bytes": 42745,
+      "sha256": "c864a58b23470791349ed69879cd00a41b5b3ee643c640bdf781e74fe2eaf933"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2503.01935v1",
+      "resolved_url": "https://arxiv.org/pdf/2503.01935v1",
+      "path": "sources/benchmarks/papers/2503.01935v1/paper.pdf",
+      "bytes": 6362861,
+      "sha256": "a346779cf027b395c7c8105506146801b2229e3eefc893674bdaa7c7cc59a04e"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2503.01935v1: MultiAgentBench: Evaluating the Collaboration and Competition of LLM agents"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "MultiAgentBench: Evaluating the Collaboration and Competition of LLM agents"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2503.01935v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Large Language Models (LLMs) have shown remarkable capabilities as autonomous agents, yet existing benchmarks either focus on single-agent tasks or are confined to narrow domains, failing to capture the dynamics of multi-agent coordination and competition. In this paper, we introduce MultiAgentBench, a comprehensive benchmark designed to evaluate LLM-based multi-agent systems across diverse, interactive scenarios. Our framework measures not only task completion but also the quality of collaboration and competition using novel, milestone-based key performance indicators. Moreover, we evaluate various coordination protocols (including star, chain, tree, and graph topologies) and innovative strategies such as group discussion and cognitive planning. Notably, gpt-4o-mini reaches the average highest task score, graph structure performs the best among coordination protocols in the research scenario, and cognitive planning improves milestone achievement rates by 3%. Code and datasets are public available at https://github.com/MultiagentBench/MARBLE."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "MultiAgentBench: Evaluating the Collaboration and Competition of LLM agents"
+    ],
+    "twitter:description": [
+      "Large Language Models (LLMs) have shown remarkable capabilities as autonomous agents, yet existing benchmarks either focus on single-agent tasks or are confined to narrow domains, failing to..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "MultiAgentBench: Evaluating the Collaboration and Competition of LLM agents"
+    ],
+    "citation_author": [
+      "Zhu, Kunlun",
+      "Du, Hongyi",
+      "Hong, Zhaochen",
+      "Yang, Xiaocheng",
+      "Guo, Shuyi",
+      "Wang, Zhe",
+      "Wang, Zhenhailong",
+      "Qian, Cheng",
+      "Tang, Xiangru",
+      "Ji, Heng",
+      "You, Jiaxuan"
+    ],
+    "citation_date": [
+      "2025/03/03"
+    ],
+    "citation_online_date": [
+      "2025/03/03"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2503.01935"
+    ],
+    "citation_arxiv_id": [
+      "2503.01935"
+    ],
+    "citation_abstract": [
+      "Large Language Models (LLMs) have shown remarkable capabilities as autonomous agents, yet existing benchmarks either focus on single-agent tasks or are confined to narrow domains, failing to capture the dynamics of multi-agent coordination and competition. In this paper, we introduce MultiAgentBench, a comprehensive benchmark designed to evaluate LLM-based multi-agent systems across diverse, interactive scenarios. Our framework measures not only task completion but also the quality of collaboration and competition using novel, milestone-based key performance indicators. Moreover, we evaluate various coordination protocols (including star, chain, tree, and graph topologies) and innovative strategies such as group discussion and cognitive planning. Notably, gpt-4o-mini reaches the average highest task score, graph structure performs the best among coordination protocols in the research scenario, and cognitive planning improves milestone achievement rates by 3%. Code and datasets are public available at https://github.com/MultiagentBench/MARBLE."
+    ]
+  },
+  "extracted_text_characters": 221274,
+  "text_searchable": true
+}

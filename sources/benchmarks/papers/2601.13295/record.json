@@ -1,0 +1,120 @@
+{
+  "kind": "papers",
+  "id": "2601.13295",
+  "title": "CooperBench: Why Coding Agents Cannot be Your Teammates Yet",
+  "page_url": "https://arxiv.org/abs/2601.13295",
+  "pdf_url": "https://arxiv.org/pdf/2601.13295",
+  "retrieved_at": "2026-09-10T22:57:25.927929+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2601.13295",
+      "resolved_url": "https://arxiv.org/abs/2601.13295",
+      "path": "sources/benchmarks/papers/2601.13295/page.html",
+      "bytes": 45427,
+      "sha256": "ce21d29a39f21a2ab92d5a3afaf7e90f48a685e595f59095a487cd349d32d3e9"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2601.13295",
+      "resolved_url": "https://arxiv.org/pdf/2601.13295",
+      "path": "sources/benchmarks/papers/2601.13295/paper.pdf",
+      "bytes": 4727424,
+      "sha256": "70e02f3c03e3ec9c53e0a6655c7a339ada460b76448b0078a4856ba278c4fb6c"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2601.13295: CooperBench: Why Coding Agents Cannot be Your Teammates Yet"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "CooperBench: Why Coding Agents Cannot be Your Teammates Yet"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2601.13295v2"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Resolving team conflicts requires not only task-specific competence, but also social intelligence to find common ground and build consensus. As AI agents increasingly collaborate on complex work, they must develop coordination capabilities to function as effective teammates. Yet we hypothesize that current agents lack these capabilities. To test this, we introduce CooperBench, a benchmark of over 600 collaborative coding tasks across 12 libraries in 4 programming languages. Each task assigns two agents different features that can be implemented independently but may conflict without proper coordination. Tasks are grounded in real open-source repositories with expert-written tests. Evaluating state-of-the-art coding agents, we observe the curse of coordination: agents achieve on average 30% lower success rates when working together compared to performing both tasks individually. This contrasts sharply with human teams, where adding teammates typically improves productivity. Our analysis reveals three key issues: (1) communication channels become jammed with vague, ill-timed, and inaccurate messages; (2) even with effective communication, agents deviate from their commitments; and (3) agents often hold incorrect expectations about others' plans and communication. Through large-scale simulation, we also observe rare but interesting emergent coordination behavior including role division, resource division, and negotiation. Our research presents a novel benchmark for collaborative coding and calls for a shift from pursuing individual agent capability to developing social intelligence."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "CooperBench: Why Coding Agents Cannot be Your Teammates Yet"
+    ],
+    "twitter:description": [
+      "Resolving team conflicts requires not only task-specific competence, but also social intelligence to find common ground and build consensus. As AI agents increasingly collaborate on complex work,..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "CooperBench: Why Coding Agents Cannot be Your Teammates Yet"
+    ],
+    "citation_author": [
+      "Khatua, Arpandeep",
+      "Zhu, Hao",
+      "Tran, Peter",
+      "Prabhudesai, Arya",
+      "Sadrieh, Frederic",
+      "Lieberwirth, Johann K.",
+      "Yu, Xinkai",
+      "Fu, Yicheng",
+      "Ryan, Michael J.",
+      "Pei, Jiaxin",
+      "Yang, Diyi"
+    ],
+    "citation_date": [
+      "2026/01/19"
+    ],
+    "citation_online_date": [
+      "2026/01/26"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2601.13295"
+    ],
+    "citation_arxiv_id": [
+      "2601.13295"
+    ],
+    "citation_abstract": [
+      "Resolving team conflicts requires not only task-specific competence, but also social intelligence to find common ground and build consensus. As AI agents increasingly collaborate on complex work, they must develop coordination capabilities to function as effective teammates. Yet we hypothesize that current agents lack these capabilities. To test this, we introduce CooperBench, a benchmark of over 600 collaborative coding tasks across 12 libraries in 4 programming languages. Each task assigns two agents different features that can be implemented independently but may conflict without proper coordination. Tasks are grounded in real open-source repositories with expert-written tests. Evaluating state-of-the-art coding agents, we observe the curse of coordination: agents achieve on average 30% lower success rates when working together compared to performing both tasks individually. This contrasts sharply with human teams, where adding teammates typically improves productivity. Our analysis reveals three key issues: (1) communication channels become jammed with vague, ill-timed, and inaccurate messages; (2) even with effective communication, agents deviate from their commitments; and (3) agents often hold incorrect expectations about others' plans and communication. Through large-scale simulation, we also observe rare but interesting emergent coordination behavior including role division, resource division, and negotiation. Our research presents a novel benchmark for collaborative coding and calls for a shift from pursuing individual agent capability to developing social intelligence."
+    ]
+  },
+  "extracted_text_characters": 129659,
+  "text_searchable": true
+}

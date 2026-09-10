@@ -1,0 +1,119 @@
+{
+  "kind": "papers",
+  "id": "2606.08340v1",
+  "title": "Benchmarking Open-Ended Multi-Agent Coordination in Language Agents",
+  "page_url": "https://arxiv.org/abs/2606.08340v1",
+  "pdf_url": "https://arxiv.org/pdf/2606.08340v1",
+  "retrieved_at": "2026-09-10T22:53:05.980108+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2606.08340v1",
+      "resolved_url": "https://arxiv.org/abs/2606.08340v1",
+      "path": "sources/benchmarks/papers/2606.08340v1/page.html",
+      "bytes": 44268,
+      "sha256": "3e5b220f0b562203ed2dfe27cf733bd0821ef512c85c907c1cda1d23bb888bca"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2606.08340v1",
+      "resolved_url": "https://arxiv.org/pdf/2606.08340v1",
+      "path": "sources/benchmarks/papers/2606.08340v1/paper.pdf",
+      "bytes": 3977127,
+      "sha256": "a13938ce0a61bac68c9cf4b2b5a0666f1b9ad1c4bf1b925e8094eee4789c1450"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2606.08340v1: Benchmarking Open-Ended Multi-Agent Coordination in Language Agents"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Benchmarking Open-Ended Multi-Agent Coordination in Language Agents"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2606.08340v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "As language models are increasingly deployed as autonomous agents, they must coordinate with others over long horizons in open-ended interactive tasks. Yet existing evaluations rarely test these demands together, instead emphasising single-agent tasks, short interactions, or highly structured multi-agent settings. We introduce $alem$, a JAX-based benchmark for open-ended multi-agent coordination built on Craftax-like dynamics. Alem embeds procedurally generated coordination tasks, soft specialisation, communication, and controllable coordination difficulty into a long-horizon survival world with exploration, crafting, trading, and combat. We evaluate $13$ modern LLMs zero-shot within homogeneous teams, with trained MARL agents as reference points. Current LLM agents remain far from solving alem, averaging only ~6% normalised return, but their failures are not uniform. On the hardest coordination setting, zero-shot Gemini-3.1-Pro-High approaches MARL agents trained for one billion steps, while GPT-5.4-High achieves strong base-task reward but much lower coordination reward. This contrast shows that individual task competence does not imply coordination competence. Ablations show that communication is the largest contributor to coordination, while memory and reasoning help when used to maintain multi-step plans. Overall, our results identify coordination as a distinct bottleneck for frontier LLM agents, separate from single-agent capabilities. Alem makes this bottleneck measurable and provides a controlled testbed for developing agents that communicate, allocate roles, and execute shared plans. Code is available at https://github.com/alem-world/alem-env."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Benchmarking Open-Ended Multi-Agent Coordination in Language Agents"
+    ],
+    "twitter:description": [
+      "As language models are increasingly deployed as autonomous agents, they must coordinate with others over long horizons in open-ended interactive tasks. Yet existing evaluations rarely test these..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Benchmarking Open-Ended Multi-Agent Coordination in Language Agents"
+    ],
+    "citation_author": [
+      "Tessera, Kale-ab Abebe",
+      "Szecsenyi, Andras",
+      "Barker, Cameron",
+      "Rutherford, Alexander",
+      "Paglieri, Davide",
+      "Scannell, Aidan",
+      "Gouk, Henry",
+      "Crowley, Elliot J.",
+      "Rockt\u00e4schel, Tim",
+      "Storkey, Amos"
+    ],
+    "citation_date": [
+      "2026/06/06"
+    ],
+    "citation_online_date": [
+      "2026/06/06"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2606.08340"
+    ],
+    "citation_arxiv_id": [
+      "2606.08340"
+    ],
+    "citation_abstract": [
+      "As language models are increasingly deployed as autonomous agents, they must coordinate with others over long horizons in open-ended interactive tasks. Yet existing evaluations rarely test these demands together, instead emphasising single-agent tasks, short interactions, or highly structured multi-agent settings. We introduce $alem$, a JAX-based benchmark for open-ended multi-agent coordination built on Craftax-like dynamics. Alem embeds procedurally generated coordination tasks, soft specialisation, communication, and controllable coordination difficulty into a long-horizon survival world with exploration, crafting, trading, and combat. We evaluate $13$ modern LLMs zero-shot within homogeneous teams, with trained MARL agents as reference points. Current LLM agents remain far from solving alem, averaging only ~6% normalised return, but their failures are not uniform. On the hardest coordination setting, zero-shot Gemini-3.1-Pro-High approaches MARL agents trained for one billion steps, while GPT-5.4-High achieves strong base-task reward but much lower coordination reward. This contrast shows that individual task competence does not imply coordination competence. Ablations show that communication is the largest contributor to coordination, while memory and reasoning help when used to maintain multi-step plans. Overall, our results identify coordination as a distinct bottleneck for frontier LLM agents, separate from single-agent capabilities. Alem makes this bottleneck measurable and provides a controlled testbed for developing agents that communicate, allocate roles, and execute shared plans. Code is available at https://github.com/alem-world/alem-env."
+    ]
+  },
+  "extracted_text_characters": 182290,
+  "text_searchable": true
+}

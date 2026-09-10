@@ -1,0 +1,37 @@
+{
+  "kind": "repositories",
+  "id": "MultiagentBench__MARBLE",
+  "title": "MultiagentBench/MARBLE",
+  "url": "https://github.com/MultiagentBench/MARBLE",
+  "retrieved_at": "2026-09-10T22:53:06.919772+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/MultiagentBench/MARBLE/blob/8892e9cfb69282db568e6b018f2b1cd8eec31ba6/LICENSE",
+      "resolved_url": "https://github.com/MultiagentBench/MARBLE/blob/8892e9cfb69282db568e6b018f2b1cd8eec31ba6/LICENSE",
+      "path": "sources/benchmarks/repositories/MultiagentBench__MARBLE/LICENSE",
+      "bytes": 1066,
+      "sha256": "389d00652aaea7a870e1128c95df7171580f347856b3993f8a0890f1a1cf09ae"
+    },
+    {
+      "url": "https://github.com/MultiagentBench/MARBLE/blob/8892e9cfb69282db568e6b018f2b1cd8eec31ba6/README.md",
+      "resolved_url": "https://github.com/MultiagentBench/MARBLE/blob/8892e9cfb69282db568e6b018f2b1cd8eec31ba6/README.md",
+      "path": "sources/benchmarks/repositories/MultiagentBench__MARBLE/README.md",
+      "bytes": 4753,
+      "sha256": "cef07b77a5fafaeffd122fcc1d5640c036a3fda1c268ffc9de15788f00c961e6"
+    }
+  ],
+  "status": "ok",
+  "commit": "8892e9cfb69282db568e6b018f2b1cd8eec31ba6",
+  "commit_date": "2025-06-21T08:47:58-07:00",
+  "checkout": "sources/benchmarks/repositories/MultiagentBench__MARBLE/checkout",
+  "experiments_reproduced": false,
+  "license_files": [
+    "LICENSE"
+  ],
+  "audit": {
+    "path": "README.md",
+    "line": 1,
+    "finding": "Redirects to ulab-uiuc/MARBLE. Retained as the paper-linked historical repository.",
+    "scope": "selected file inspection, not full audit"
+  }
+}

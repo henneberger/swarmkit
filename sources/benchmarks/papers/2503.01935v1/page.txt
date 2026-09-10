@@ -1,0 +1,229 @@
+
+
+  [2503.01935v1] MultiAgentBench: Evaluating the Collaboration and Competition of LLM agents
+
+    Skip to main content
+
+      Search
+
+    Submit
+    Donate
+
+      Log in
+
+      Search arXiv
+
+      Press Enter to search · Advanced search
+
+Computer Science > Multiagent Systems
+
+      arXiv:2503.01935v1 (cs)
+
+  [Submitted on 3 Mar 2025]
+
+Title:MultiAgentBench: Evaluating the Collaboration and Competition of LLM agents
+
+Authors:Kunlun Zhu, Hongyi Du, Zhaochen Hong, Xiaocheng Yang, Shuyi Guo, Zhe Wang, Zhenhailong Wang, Cheng Qian, Xiangru Tang, Heng Ji, Jiaxuan You            
+View a PDF of the paper titled MultiAgentBench: Evaluating the Collaboration and Competition of LLM agents, by Kunlun Zhu and 10 other authors
+    View PDF
+    HTML (experimental)
+
+            Abstract:Large Language Models (LLMs) have shown remarkable capabilities as autonomous agents, yet existing benchmarks either focus on single-agent tasks or are confined to narrow domains, failing to capture the dynamics of multi-agent coordination and competition. In this paper, we introduce MultiAgentBench, a comprehensive benchmark designed to evaluate LLM-based multi-agent systems across diverse, interactive scenarios. Our framework measures not only task completion but also the quality of collaboration and competition using novel, milestone-based key performance indicators. Moreover, we evaluate various coordination protocols (including star, chain, tree, and graph topologies) and innovative strategies such as group discussion and cognitive planning. Notably, gpt-4o-mini reaches the average highest task score, graph structure performs the best among coordination protocols in the research scenario, and cognitive planning improves milestone achievement rates by 3%. Code and datasets are public available at this https URL.
+
+          Comments:
+          this https URL
+
+          Subjects:
+
+            Multiagent Systems (cs.MA); Artificial Intelligence (cs.AI); Computation and Language (cs.CL); Computers and Society (cs.CY)
+
+          Cite as:
+          arXiv:2503.01935 [cs.MA]
+
+          (or 
+              arXiv:2503.01935v1 [cs.MA] for this version)
+
+                        https://doi.org/10.48550/arXiv.2503.01935
+
+                Focus to learn more
+
+                                  arXiv-issued DOI via DataCite
+
+Submission history From: Kunlun Zhu [view email]      
+    [v1]
+        Mon, 3 Mar 2025 05:18:50 UTC (5,997 KB)
+
+      Full-text links:
+
+Access Paper:
+
+View a PDF of the paper titled MultiAgentBench: Evaluating the Collaboration and Competition of LLM agents, by Kunlun Zhu and 10 other authors
+View PDF
+HTML (experimental)
+TeX Source
+
+          view license
+
+Current browse context:
+
+cs.MA
+
+      < prev
+
+      |      
+      next >
+
+    new
+     | 
+    recent
+     | 2025-03
+
+    Change to browse by:
+
+        cs
+
+        cs.AI
+
+        cs.CL
+
+        cs.CY
+
+References & Citations
+
+NASA ADS
+Google Scholar
+
+Semantic Scholar
+
+    export BibTeX citation
+    Loading...
+
+BibTeX formatted citation
+            ×
+
+            loading...
+
+            Data provided by: 
+
+Bookmark
+
+    Bibliographic Tools
+
+Bibliographic and Citation Tools
+
+              Bibliographic Explorer Toggle
+
+            Bibliographic Explorer (What is the Explorer?)
+
+              Connected Papers Toggle
+
+            Connected Papers (What is Connected Papers?)
+
+              Litmaps Toggle
+
+            Litmaps (What is Litmaps?)
+
+              scite.ai Toggle
+
+            scite Smart Citations (What are Smart Citations?)
+
+    Code, Data, Media
+
+Code, Data and Media Associated with this Article
+
+              alphaXiv Toggle
+
+            alphaXiv (What is alphaXiv?)
+
+              Links to Code Toggle
+
+            CatalyzeX Code Finder for Papers (What is CatalyzeX?)
+
+              DagsHub Toggle
+
+            DagsHub (What is DagsHub?)
+
+              GotitPub Toggle
+
+            Gotit.pub (What is GotitPub?)
+
+              Huggingface Toggle
+
+            Hugging Face (What is Huggingface?)
+
+              ScienceCast Toggle
+
+            ScienceCast (What is ScienceCast?)
+
+      Demos
+
+Demos
+
+                Replicate Toggle
+
+              Replicate (What is Replicate?)
+
+                Spaces Toggle
+
+              Hugging Face Spaces (What is Spaces?)
+
+                Spaces Toggle
+
+              TXYZ.AI (What is TXYZ.AI?)
+
+      Related Papers
+
+Recommenders and Search Tools
+
+                Link to Influence Flower
+
+              Influence Flower (What are Influence Flowers?)
+
+                Core recommender toggle
+
+              CORE Recommender (What is CORE?)
+
+Author
+
+Venue
+
+Institution
+
+Topic
+
+        About arXivLabs
+
+arXivLabs: experimental projects with community collaborators
+
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+
+Have an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.
+
+    Which authors of this paper are endorsers? |
+    Disable MathJax (What is MathJax?)
+
+        We gratefully acknowledge support from
+        our major funders,
+        member institutions, ,
+        and all contributors.
+
+        About
+        ·
+        Help
+        ·
+        Contact
+        ·
+        Subscribe
+        ·
+        Copyright
+        ·
+        Privacy
+        ·
+        Accessibility
+        ·
+        Operational Status (opens in new tab)
+
+Major funding support from
+

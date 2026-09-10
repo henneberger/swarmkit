@@ -1,0 +1,2162 @@
+{
+  "updated_at": "2026-09-10T23:04:24.838597+00:00",
+  "items": [
+    {
+      "kind": "papers",
+      "id": "2512.03466v1",
+      "title": "AsymPuzl: An Asymmetric Puzzle for multi-agent cooperation",
+      "page_url": "https://arxiv.org/abs/2512.03466v1",
+      "pdf_url": "https://arxiv.org/pdf/2512.03466v1",
+      "retrieved_at": "2026-09-10T22:53:05.980500+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2512.03466v1",
+          "resolved_url": "https://arxiv.org/abs/2512.03466v1",
+          "path": "sources/benchmarks/papers/2512.03466v1/page.html",
+          "bytes": 41179,
+          "sha256": "20c6c81b8b4d70b9ecb1d50f16e5b20097d679e8ccec79133bfe9a05d1ab3c08"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2512.03466v1",
+          "resolved_url": "https://arxiv.org/pdf/2512.03466v1",
+          "path": "sources/benchmarks/papers/2512.03466v1/paper.pdf",
+          "bytes": 1414247,
+          "sha256": "08960eb3faae1844379a1dde5ad3e3a94ddc6d36b900344de2cd23f2b0250b01"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2512.03466v1: AsymPuzl: An Asymmetric Puzzle for multi-agent cooperation"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "AsymPuzl: An Asymmetric Puzzle for multi-agent cooperation"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2512.03466v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Large Language Model (LLM) agents are increasingly studied in multi-turn, multi-agent scenarios, yet most existing setups emphasize open-ended role-play rather than controlled evaluation. We introduce AsymPuzl, a minimal but expressive two-agent puzzle environment designed to isolate communication under information asymmetry. Each agent observes complementary but incomplete views of a symbolic puzzle and must exchange messages to solve it cooperatively. Using a diverse set of current-generation and open-source LLMs, we show that (i) strong models such as GPT-5 and Claude-4.0 reliably converge across puzzle sizes on the solution by sharing complete information in two turns, (ii) weaker models often ignore partner messages or over-correct their hypotheses, and (iii) feedback design is non-trivial: simple self-feedback improves success rates, while detailed joint feedback can hurt performance. These findings show that even in simple cooperative tasks, LLM communication strategies diverge and depend on the granularity of feedback signals. AsymPuzl thus provides a testbed for probing the limits of multi-turn cooperation and opens avenues for studying coordination mechanisms."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "AsymPuzl: An Asymmetric Puzzle for multi-agent cooperation"
+        ],
+        "twitter:description": [
+          "Large Language Model (LLM) agents are increasingly studied in multi-turn, multi-agent scenarios, yet most existing setups emphasize open-ended role-play rather than controlled evaluation. We..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "AsymPuzl: An Asymmetric Puzzle for multi-agent cooperation"
+        ],
+        "citation_author": [
+          "Cadet, Xavier",
+          "Koh, Edward",
+          "Chin, Peter"
+        ],
+        "citation_date": [
+          "2025/12/03"
+        ],
+        "citation_online_date": [
+          "2025/12/03"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2512.03466"
+        ],
+        "citation_arxiv_id": [
+          "2512.03466"
+        ],
+        "citation_abstract": [
+          "Large Language Model (LLM) agents are increasingly studied in multi-turn, multi-agent scenarios, yet most existing setups emphasize open-ended role-play rather than controlled evaluation. We introduce AsymPuzl, a minimal but expressive two-agent puzzle environment designed to isolate communication under information asymmetry. Each agent observes complementary but incomplete views of a symbolic puzzle and must exchange messages to solve it cooperatively. Using a diverse set of current-generation and open-source LLMs, we show that (i) strong models such as GPT-5 and Claude-4.0 reliably converge across puzzle sizes on the solution by sharing complete information in two turns, (ii) weaker models often ignore partner messages or over-correct their hypotheses, and (iii) feedback design is non-trivial: simple self-feedback improves success rates, while detailed joint feedback can hurt performance. These findings show that even in simple cooperative tasks, LLM communication strategies diverge and depend on the granularity of feedback signals. AsymPuzl thus provides a testbed for probing the limits of multi-turn cooperation and opens avenues for studying coordination mechanisms."
+        ]
+      },
+      "extracted_text_characters": 38426,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2603.01045v2",
+      "title": "Silo-Bench: A Scalable Environment for Evaluating Distributed Coordination in Multi-Agent LLM Systems",
+      "page_url": "https://arxiv.org/abs/2603.01045v2",
+      "pdf_url": "https://arxiv.org/pdf/2603.01045v2",
+      "retrieved_at": "2026-09-10T22:53:05.980448+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2603.01045v2",
+          "resolved_url": "https://arxiv.org/abs/2603.01045v2",
+          "path": "sources/benchmarks/papers/2603.01045v2/page.html",
+          "bytes": 43162,
+          "sha256": "28c6388e901f64ca6087d6a691fe8139f3a9629816e74a45c8b5289077e331d3"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2603.01045v2",
+          "resolved_url": "https://arxiv.org/pdf/2603.01045v2",
+          "path": "sources/benchmarks/papers/2603.01045v2/paper.pdf",
+          "bytes": 2689853,
+          "sha256": "75ad1a82df89da48d6c5f5e154edf429ea6c63dfa389441763061df4c26e2c83"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2603.01045v2: Silo-Bench: A Scalable Environment for Evaluating Distributed Coordination in Multi-Agent LLM Systems"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Silo-Bench: A Scalable Environment for Evaluating Distributed Coordination in Multi-Agent LLM Systems"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2603.01045v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Large language models are increasingly deployed in multi-agent systems to overcome context limitations by distributing information across agents. Yet whether agents can reliably compute with distributed information, rather than merely exchange it, remains an open question. We introduce SILO-BENCH, a role-agnostic benchmark of 30 algorithmic tasks across three communication complexity levels, evaluating 54 configurations over 1,620 experiments. Our experiments expose a fundamental Communication-Reasoning Gap: agents spontaneously form task-appropriate coordination topologies and exchange information actively, yet systematically fail to synthesize distributed state into correct answers. The failure is localized to the reasoning-integration stage where agents often acquire sufficient information but cannot integrate it. This coordination overhead compounds with scale, eventually eliminating parallelization gains entirely. These findings demonstrate that naively scaling agent count cannot circumvent context limitations, and SILO-BENCH provides a foundation for tracking progress toward genuinely collaborative multi-agent systems. The code is available at https://github.com/jwyjohn/acl26-silo-bench ."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Silo-Bench: A Scalable Environment for Evaluating Distributed..."
+        ],
+        "twitter:description": [
+          "Large language models are increasingly deployed in multi-agent systems to overcome context limitations by distributing information across agents. Yet whether agents can reliably compute with..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Silo-Bench: A Scalable Environment for Evaluating Distributed Coordination in Multi-Agent LLM Systems"
+        ],
+        "citation_author": [
+          "Zhang, Yuzhe",
+          "Liu, Feiran",
+          "Shan, Yi",
+          "Huang, Xinyi",
+          "Yang, Xin",
+          "Zhu, Yueqi",
+          "Cheng, Xuxin",
+          "Liu, Cao",
+          "Zeng, Ke",
+          "Zhang, Terry Jingchen",
+          "Jiang, Wenyuan"
+        ],
+        "citation_date": [
+          "2026/03/01"
+        ],
+        "citation_online_date": [
+          "2026/04/13"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2603.01045"
+        ],
+        "citation_arxiv_id": [
+          "2603.01045"
+        ],
+        "citation_abstract": [
+          "Large language models are increasingly deployed in multi-agent systems to overcome context limitations by distributing information across agents. Yet whether agents can reliably compute with distributed information, rather than merely exchange it, remains an open question. We introduce SILO-BENCH, a role-agnostic benchmark of 30 algorithmic tasks across three communication complexity levels, evaluating 54 configurations over 1,620 experiments. Our experiments expose a fundamental Communication-Reasoning Gap: agents spontaneously form task-appropriate coordination topologies and exchange information actively, yet systematically fail to synthesize distributed state into correct answers. The failure is localized to the reasoning-integration stage where agents often acquire sufficient information but cannot integrate it. This coordination overhead compounds with scale, eventually eliminating parallelization gains entirely. These findings demonstrate that naively scaling agent count cannot circumvent context limitations, and SILO-BENCH provides a foundation for tracking progress toward genuinely collaborative multi-agent systems. The code is available at https://github.com/jwyjohn/acl26-silo-bench ."
+        ]
+      },
+      "extracted_text_characters": 130920,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2606.08340v1",
+      "title": "Benchmarking Open-Ended Multi-Agent Coordination in Language Agents",
+      "page_url": "https://arxiv.org/abs/2606.08340v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.08340v1",
+      "retrieved_at": "2026-09-10T22:53:05.980108+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2606.08340v1",
+          "resolved_url": "https://arxiv.org/abs/2606.08340v1",
+          "path": "sources/benchmarks/papers/2606.08340v1/page.html",
+          "bytes": 44268,
+          "sha256": "3e5b220f0b562203ed2dfe27cf733bd0821ef512c85c907c1cda1d23bb888bca"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2606.08340v1",
+          "resolved_url": "https://arxiv.org/pdf/2606.08340v1",
+          "path": "sources/benchmarks/papers/2606.08340v1/paper.pdf",
+          "bytes": 3977127,
+          "sha256": "a13938ce0a61bac68c9cf4b2b5a0666f1b9ad1c4bf1b925e8094eee4789c1450"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2606.08340v1: Benchmarking Open-Ended Multi-Agent Coordination in Language Agents"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Benchmarking Open-Ended Multi-Agent Coordination in Language Agents"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2606.08340v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "As language models are increasingly deployed as autonomous agents, they must coordinate with others over long horizons in open-ended interactive tasks. Yet existing evaluations rarely test these demands together, instead emphasising single-agent tasks, short interactions, or highly structured multi-agent settings. We introduce $alem$, a JAX-based benchmark for open-ended multi-agent coordination built on Craftax-like dynamics. Alem embeds procedurally generated coordination tasks, soft specialisation, communication, and controllable coordination difficulty into a long-horizon survival world with exploration, crafting, trading, and combat. We evaluate $13$ modern LLMs zero-shot within homogeneous teams, with trained MARL agents as reference points. Current LLM agents remain far from solving alem, averaging only ~6% normalised return, but their failures are not uniform. On the hardest coordination setting, zero-shot Gemini-3.1-Pro-High approaches MARL agents trained for one billion steps, while GPT-5.4-High achieves strong base-task reward but much lower coordination reward. This contrast shows that individual task competence does not imply coordination competence. Ablations show that communication is the largest contributor to coordination, while memory and reasoning help when used to maintain multi-step plans. Overall, our results identify coordination as a distinct bottleneck for frontier LLM agents, separate from single-agent capabilities. Alem makes this bottleneck measurable and provides a controlled testbed for developing agents that communicate, allocate roles, and execute shared plans. Code is available at https://github.com/alem-world/alem-env."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Benchmarking Open-Ended Multi-Agent Coordination in Language Agents"
+        ],
+        "twitter:description": [
+          "As language models are increasingly deployed as autonomous agents, they must coordinate with others over long horizons in open-ended interactive tasks. Yet existing evaluations rarely test these..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Benchmarking Open-Ended Multi-Agent Coordination in Language Agents"
+        ],
+        "citation_author": [
+          "Tessera, Kale-ab Abebe",
+          "Szecsenyi, Andras",
+          "Barker, Cameron",
+          "Rutherford, Alexander",
+          "Paglieri, Davide",
+          "Scannell, Aidan",
+          "Gouk, Henry",
+          "Crowley, Elliot J.",
+          "Rockt\u00e4schel, Tim",
+          "Storkey, Amos"
+        ],
+        "citation_date": [
+          "2026/06/06"
+        ],
+        "citation_online_date": [
+          "2026/06/06"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2606.08340"
+        ],
+        "citation_arxiv_id": [
+          "2606.08340"
+        ],
+        "citation_abstract": [
+          "As language models are increasingly deployed as autonomous agents, they must coordinate with others over long horizons in open-ended interactive tasks. Yet existing evaluations rarely test these demands together, instead emphasising single-agent tasks, short interactions, or highly structured multi-agent settings. We introduce $alem$, a JAX-based benchmark for open-ended multi-agent coordination built on Craftax-like dynamics. Alem embeds procedurally generated coordination tasks, soft specialisation, communication, and controllable coordination difficulty into a long-horizon survival world with exploration, crafting, trading, and combat. We evaluate $13$ modern LLMs zero-shot within homogeneous teams, with trained MARL agents as reference points. Current LLM agents remain far from solving alem, averaging only ~6% normalised return, but their failures are not uniform. On the hardest coordination setting, zero-shot Gemini-3.1-Pro-High approaches MARL agents trained for one billion steps, while GPT-5.4-High achieves strong base-task reward but much lower coordination reward. This contrast shows that individual task competence does not imply coordination competence. Ablations show that communication is the largest contributor to coordination, while memory and reasoning help when used to maintain multi-step plans. Overall, our results identify coordination as a distinct bottleneck for frontier LLM agents, separate from single-agent capabilities. Alem makes this bottleneck measurable and provides a controlled testbed for developing agents that communicate, allocate roles, and execute shared plans. Code is available at https://github.com/alem-world/alem-env."
+        ]
+      },
+      "extracted_text_characters": 182290,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2503.01935v1",
+      "title": "MultiAgentBench: Evaluating the Collaboration and Competition of LLM agents",
+      "page_url": "https://arxiv.org/abs/2503.01935v1",
+      "pdf_url": "https://arxiv.org/pdf/2503.01935v1",
+      "retrieved_at": "2026-09-10T22:56:57.607779+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2503.01935v1",
+          "resolved_url": "https://arxiv.org/abs/2503.01935v1",
+          "path": "sources/benchmarks/papers/2503.01935v1/page.html",
+          "bytes": 42745,
+          "sha256": "c864a58b23470791349ed69879cd00a41b5b3ee643c640bdf781e74fe2eaf933"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2503.01935v1",
+          "resolved_url": "https://arxiv.org/pdf/2503.01935v1",
+          "path": "sources/benchmarks/papers/2503.01935v1/paper.pdf",
+          "bytes": 6362861,
+          "sha256": "a346779cf027b395c7c8105506146801b2229e3eefc893674bdaa7c7cc59a04e"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2503.01935v1: MultiAgentBench: Evaluating the Collaboration and Competition of LLM agents"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "MultiAgentBench: Evaluating the Collaboration and Competition of LLM agents"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2503.01935v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Large Language Models (LLMs) have shown remarkable capabilities as autonomous agents, yet existing benchmarks either focus on single-agent tasks or are confined to narrow domains, failing to capture the dynamics of multi-agent coordination and competition. In this paper, we introduce MultiAgentBench, a comprehensive benchmark designed to evaluate LLM-based multi-agent systems across diverse, interactive scenarios. Our framework measures not only task completion but also the quality of collaboration and competition using novel, milestone-based key performance indicators. Moreover, we evaluate various coordination protocols (including star, chain, tree, and graph topologies) and innovative strategies such as group discussion and cognitive planning. Notably, gpt-4o-mini reaches the average highest task score, graph structure performs the best among coordination protocols in the research scenario, and cognitive planning improves milestone achievement rates by 3%. Code and datasets are public available at https://github.com/MultiagentBench/MARBLE."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "MultiAgentBench: Evaluating the Collaboration and Competition of LLM agents"
+        ],
+        "twitter:description": [
+          "Large Language Models (LLMs) have shown remarkable capabilities as autonomous agents, yet existing benchmarks either focus on single-agent tasks or are confined to narrow domains, failing to..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "MultiAgentBench: Evaluating the Collaboration and Competition of LLM agents"
+        ],
+        "citation_author": [
+          "Zhu, Kunlun",
+          "Du, Hongyi",
+          "Hong, Zhaochen",
+          "Yang, Xiaocheng",
+          "Guo, Shuyi",
+          "Wang, Zhe",
+          "Wang, Zhenhailong",
+          "Qian, Cheng",
+          "Tang, Xiangru",
+          "Ji, Heng",
+          "You, Jiaxuan"
+        ],
+        "citation_date": [
+          "2025/03/03"
+        ],
+        "citation_online_date": [
+          "2025/03/03"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2503.01935"
+        ],
+        "citation_arxiv_id": [
+          "2503.01935"
+        ],
+        "citation_abstract": [
+          "Large Language Models (LLMs) have shown remarkable capabilities as autonomous agents, yet existing benchmarks either focus on single-agent tasks or are confined to narrow domains, failing to capture the dynamics of multi-agent coordination and competition. In this paper, we introduce MultiAgentBench, a comprehensive benchmark designed to evaluate LLM-based multi-agent systems across diverse, interactive scenarios. Our framework measures not only task completion but also the quality of collaboration and competition using novel, milestone-based key performance indicators. Moreover, we evaluate various coordination protocols (including star, chain, tree, and graph topologies) and innovative strategies such as group discussion and cognitive planning. Notably, gpt-4o-mini reaches the average highest task score, graph structure performs the best among coordination protocols in the research scenario, and cognitive planning improves milestone achievement rates by 3%. Code and datasets are public available at https://github.com/MultiagentBench/MARBLE."
+        ]
+      },
+      "extracted_text_characters": 221274,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2502.20073v3",
+      "title": "Collab-Overcooked: Benchmarking and Evaluating Large Language Models as Collaborative Agents",
+      "page_url": "https://arxiv.org/abs/2502.20073v3",
+      "pdf_url": "https://arxiv.org/pdf/2502.20073v3",
+      "retrieved_at": "2026-09-10T22:53:05.980576+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2502.20073v3",
+          "resolved_url": "https://arxiv.org/abs/2502.20073v3",
+          "path": "sources/benchmarks/papers/2502.20073v3/page.html",
+          "bytes": 45119,
+          "sha256": "d1cf753e04957051ad5a50990d719276e273fa8218ee1f0180675b1212a39284"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2502.20073v3",
+          "resolved_url": "https://arxiv.org/pdf/2502.20073v3",
+          "path": "sources/benchmarks/papers/2502.20073v3/paper.pdf",
+          "bytes": 6230841,
+          "sha256": "4cfcad1987f0a91e5ba44cf6adc4abd1d448a4f09438ef956032e7beb298d068"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2502.20073v3: Collab-Overcooked: Benchmarking and Evaluating Large Language Models as Collaborative Agents"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Collab-Overcooked: Benchmarking and Evaluating Large Language Models as Collaborative Agents"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2502.20073v3"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Large Language Models (LLMs) based agent systems have made great strides in real-world applications beyond traditional NLP tasks. This paper proposes a new LLM-based Multi-Agent System (LLM-MAS) benchmark, Collab-Overcooked, built on the popular Overcooked-AI game with more applicable and challenging tasks in interactive environments. Collab-Overcooked extends existing benchmarks in two novel ways. First, it provides a multi-agent framework supporting diverse tasks and objectives and encourages collaboration through natural language communication. Second, it introduces a spectrum of process-oriented evaluation metrics to assess the fine-grained collaboration capabilities of different LLM agents, a dimension often overlooked in prior work. We conduct extensive experiments with 13 popular LLMs and show that, while the LLMs exhibit a strong ability in goal interpretation, there are significant shortcomings in active collaboration and continuous adaptation, which are critical for efficiently fulfilling complex tasks. Notably, we highlight the strengths and weaknesses of LLM-MAS and provide insights for improving and evaluating LLM-MAS on a unified and open-source benchmark. The environments, 30 open-ended tasks, and the evaluation package are publicly available at https://github.com/YusaeMeow/Collab-Overcooked."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Collab-Overcooked: Benchmarking and Evaluating Large Language..."
+        ],
+        "twitter:description": [
+          "Large Language Models (LLMs) based agent systems have made great strides in real-world applications beyond traditional NLP tasks. This paper proposes a new LLM-based Multi-Agent System (LLM-MAS)..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Collab-Overcooked: Benchmarking and Evaluating Large Language Models as Collaborative Agents"
+        ],
+        "citation_author": [
+          "Sun, Haochen",
+          "Zhang, Shuwen",
+          "Niu, Lujie",
+          "Ren, Lei",
+          "Xu, Hao",
+          "Fu, Hao",
+          "Zhao, Fangkun",
+          "Yuan, Caixia",
+          "Wang, Xiaojie"
+        ],
+        "citation_doi": [
+          "10.18653/v1/2025.emnlp-main.249"
+        ],
+        "citation_date": [
+          "2025/02/27"
+        ],
+        "citation_online_date": [
+          "2025/09/25"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2502.20073"
+        ],
+        "citation_arxiv_id": [
+          "2502.20073"
+        ],
+        "citation_abstract": [
+          "Large Language Models (LLMs) based agent systems have made great strides in real-world applications beyond traditional NLP tasks. This paper proposes a new LLM-based Multi-Agent System (LLM-MAS) benchmark, Collab-Overcooked, built on the popular Overcooked-AI game with more applicable and challenging tasks in interactive environments. Collab-Overcooked extends existing benchmarks in two novel ways. First, it provides a multi-agent framework supporting diverse tasks and objectives and encourages collaboration through natural language communication. Second, it introduces a spectrum of process-oriented evaluation metrics to assess the fine-grained collaboration capabilities of different LLM agents, a dimension often overlooked in prior work. We conduct extensive experiments with 13 popular LLMs and show that, while the LLMs exhibit a strong ability in goal interpretation, there are significant shortcomings in active collaboration and continuous adaptation, which are critical for efficiently fulfilling complex tasks. Notably, we highlight the strengths and weaknesses of LLM-MAS and provide insights for improving and evaluating LLM-MAS on a unified and open-source benchmark. The environments, 30 open-ended tasks, and the evaluation package are publicly available at https://github.com/YusaeMeow/Collab-Overcooked."
+        ]
+      },
+      "extracted_text_characters": 193664,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2107.06857v1",
+      "title": "Scalable Evaluation of Multi-Agent Reinforcement Learning with Melting Pot",
+      "page_url": "https://arxiv.org/abs/2107.06857v1",
+      "pdf_url": "https://arxiv.org/pdf/2107.06857v1",
+      "retrieved_at": "2026-09-10T22:53:06.407147+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2107.06857v1",
+          "resolved_url": "https://arxiv.org/abs/2107.06857v1",
+          "path": "sources/benchmarks/papers/2107.06857v1/page.html",
+          "bytes": 42917,
+          "sha256": "a3a82c5e62d9d40b76186b3b9bd7fe34b9962314428c53c2c18129df699c334b"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2107.06857v1",
+          "resolved_url": "https://arxiv.org/pdf/2107.06857v1",
+          "path": "sources/benchmarks/papers/2107.06857v1/paper.pdf",
+          "bytes": 2794249,
+          "sha256": "754c178708461c361df11cc00dac6ecdeaea0e91a17ce284e7783360404ec55d"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2107.06857v1: Scalable Evaluation of Multi-Agent Reinforcement Learning with Melting Pot"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Scalable Evaluation of Multi-Agent Reinforcement Learning with Melting Pot"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2107.06857v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Existing evaluation suites for multi-agent reinforcement learning (MARL) do not assess generalization to novel situations as their primary objective (unlike supervised-learning benchmarks). Our contribution, Melting Pot, is a MARL evaluation suite that fills this gap, and uses reinforcement learning to reduce the human labor required to create novel test scenarios. This works because one agent's behavior constitutes (part of) another agent's environment. To demonstrate scalability, we have created over 80 unique test scenarios covering a broad range of research topics such as social dilemmas, reciprocity, resource sharing, and task partitioning. We apply these test scenarios to standard MARL training algorithms, and demonstrate how Melting Pot reveals weaknesses not apparent from training performance alone."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Scalable Evaluation of Multi-Agent Reinforcement Learning with Melting Pot"
+        ],
+        "twitter:description": [
+          "Existing evaluation suites for multi-agent reinforcement learning (MARL) do not assess generalization to novel situations as their primary objective (unlike supervised-learning benchmarks). Our..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Scalable Evaluation of Multi-Agent Reinforcement Learning with Melting Pot"
+        ],
+        "citation_author": [
+          "Leibo, Joel Z.",
+          "Du\u00e9\u00f1ez-Guzm\u00e1n, Edgar",
+          "Vezhnevets, Alexander Sasha",
+          "Agapiou, John P.",
+          "Sunehag, Peter",
+          "Koster, Raphael",
+          "Matyas, Jayd",
+          "Beattie, Charles",
+          "Mordatch, Igor",
+          "Graepel, Thore"
+        ],
+        "citation_date": [
+          "2021/07/14"
+        ],
+        "citation_online_date": [
+          "2021/07/14"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2107.06857"
+        ],
+        "citation_arxiv_id": [
+          "2107.06857"
+        ],
+        "citation_abstract": [
+          "Existing evaluation suites for multi-agent reinforcement learning (MARL) do not assess generalization to novel situations as their primary objective (unlike supervised-learning benchmarks). Our contribution, Melting Pot, is a MARL evaluation suite that fills this gap, and uses reinforcement learning to reduce the human labor required to create novel test scenarios. This works because one agent's behavior constitutes (part of) another agent's environment. To demonstrate scalability, we have created over 80 unique test scenarios covering a broad range of research topics such as social dilemmas, reciprocity, resource sharing, and task partitioning. We apply these test scenarios to standard MARL training algorithms, and demonstrate how Melting Pot reveals weaknesses not apparent from training performance alone."
+        ]
+      },
+      "extracted_text_characters": 197665,
+      "text_searchable": true
+    },
+    {
+      "kind": "repositories",
+      "id": "jwyjohn__acl26-silo-bench",
+      "title": "jwyjohn/acl26-silo-bench",
+      "url": "https://github.com/jwyjohn/acl26-silo-bench",
+      "retrieved_at": "2026-09-10T22:53:06.820621+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/jwyjohn/acl26-silo-bench/blob/e74127782ed1c42fff474249961f022c063d76f2/LICENSE",
+          "resolved_url": "https://github.com/jwyjohn/acl26-silo-bench/blob/e74127782ed1c42fff474249961f022c063d76f2/LICENSE",
+          "path": "sources/benchmarks/repositories/jwyjohn__acl26-silo-bench/LICENSE",
+          "bytes": 1211,
+          "sha256": "6b0382b16279f26ff69014300541967a356a666eb0b91b422f6862f6b7dad17e"
+        },
+        {
+          "url": "https://github.com/jwyjohn/acl26-silo-bench/blob/e74127782ed1c42fff474249961f022c063d76f2/README.md",
+          "resolved_url": "https://github.com/jwyjohn/acl26-silo-bench/blob/e74127782ed1c42fff474249961f022c063d76f2/README.md",
+          "path": "sources/benchmarks/repositories/jwyjohn__acl26-silo-bench/README.md",
+          "bytes": 11188,
+          "sha256": "c01728fb5fdf395db600fe7598940170fb1fe6b022e1455ab64de30d12226267"
+        }
+      ],
+      "status": "ok",
+      "commit": "e74127782ed1c42fff474249961f022c063d76f2",
+      "commit_date": "2026-04-12T13:30:41+08:00",
+      "checkout": "sources/benchmarks/repositories/jwyjohn__acl26-silo-bench/checkout",
+      "experiments_reproduced": false,
+      "license_files": [
+        "LICENSE"
+      ],
+      "audit": {
+        "path": "src/engine.py",
+        "line": 440,
+        "finding": "Loads hidden expected outputs, counts missing submissions as wrong; separate partial correctness metrics.",
+        "scope": "selected file inspection, not full audit"
+      }
+    },
+    {
+      "kind": "repositories",
+      "id": "alem-world__alem-env",
+      "title": "alem-world/alem-env",
+      "url": "https://github.com/alem-world/alem-env",
+      "retrieved_at": "2026-09-10T22:53:06.841057+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/alem-world/alem-env/blob/14d412e5ee961f9c43d6ce92ee05fee9cd1efc5e/LICENSE",
+          "resolved_url": "https://github.com/alem-world/alem-env/blob/14d412e5ee961f9c43d6ce92ee05fee9cd1efc5e/LICENSE",
+          "path": "sources/benchmarks/repositories/alem-world__alem-env/LICENSE",
+          "bytes": 1042,
+          "sha256": "fc5260ded68cef09cf6f46d94eb9cd01032e1821aecf8b0e0ff17fb4cc6d13be"
+        },
+        {
+          "url": "https://github.com/alem-world/alem-env/blob/14d412e5ee961f9c43d6ce92ee05fee9cd1efc5e/README.md",
+          "resolved_url": "https://github.com/alem-world/alem-env/blob/14d412e5ee961f9c43d6ce92ee05fee9cd1efc5e/README.md",
+          "path": "sources/benchmarks/repositories/alem-world__alem-env/README.md",
+          "bytes": 27044,
+          "sha256": "03062a6343afd1346a06e9b5bd1ec39d5358446019d8f82c15e116016c1c5dc0"
+        }
+      ],
+      "status": "ok",
+      "commit": "14d412e5ee961f9c43d6ce92ee05fee9cd1efc5e",
+      "commit_date": "2026-09-10T16:03:48+01:00",
+      "checkout": "sources/benchmarks/repositories/alem-world__alem-env/checkout",
+      "experiments_reproduced": false,
+      "license_files": [
+        "LICENSE"
+      ],
+      "audit": {
+        "path": "README.md",
+        "line": 1,
+        "finding": "Documents per-agent observations, messages and scratchpad. Environment infrastructure, not a small puzzle generator.",
+        "scope": "selected file inspection, not full audit"
+      }
+    },
+    {
+      "kind": "repositories",
+      "id": "MultiagentBench__MARBLE",
+      "title": "MultiagentBench/MARBLE",
+      "url": "https://github.com/MultiagentBench/MARBLE",
+      "retrieved_at": "2026-09-10T22:53:06.919772+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/MultiagentBench/MARBLE/blob/8892e9cfb69282db568e6b018f2b1cd8eec31ba6/LICENSE",
+          "resolved_url": "https://github.com/MultiagentBench/MARBLE/blob/8892e9cfb69282db568e6b018f2b1cd8eec31ba6/LICENSE",
+          "path": "sources/benchmarks/repositories/MultiagentBench__MARBLE/LICENSE",
+          "bytes": 1066,
+          "sha256": "389d00652aaea7a870e1128c95df7171580f347856b3993f8a0890f1a1cf09ae"
+        },
+        {
+          "url": "https://github.com/MultiagentBench/MARBLE/blob/8892e9cfb69282db568e6b018f2b1cd8eec31ba6/README.md",
+          "resolved_url": "https://github.com/MultiagentBench/MARBLE/blob/8892e9cfb69282db568e6b018f2b1cd8eec31ba6/README.md",
+          "path": "sources/benchmarks/repositories/MultiagentBench__MARBLE/README.md",
+          "bytes": 4753,
+          "sha256": "cef07b77a5fafaeffd122fcc1d5640c036a3fda1c268ffc9de15788f00c961e6"
+        }
+      ],
+      "status": "ok",
+      "commit": "8892e9cfb69282db568e6b018f2b1cd8eec31ba6",
+      "commit_date": "2025-06-21T08:47:58-07:00",
+      "checkout": "sources/benchmarks/repositories/MultiagentBench__MARBLE/checkout",
+      "experiments_reproduced": false,
+      "license_files": [
+        "LICENSE"
+      ],
+      "audit": {
+        "path": "README.md",
+        "line": 1,
+        "finding": "Redirects to ulab-uiuc/MARBLE. Retained as the paper-linked historical repository.",
+        "scope": "selected file inspection, not full audit"
+      }
+    },
+    {
+      "kind": "papers",
+      "id": "2601.13295",
+      "title": "CooperBench: Why Coding Agents Cannot be Your Teammates Yet",
+      "page_url": "https://arxiv.org/abs/2601.13295",
+      "pdf_url": "https://arxiv.org/pdf/2601.13295",
+      "retrieved_at": "2026-09-10T22:57:25.927929+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2601.13295",
+          "resolved_url": "https://arxiv.org/abs/2601.13295",
+          "path": "sources/benchmarks/papers/2601.13295/page.html",
+          "bytes": 45427,
+          "sha256": "ce21d29a39f21a2ab92d5a3afaf7e90f48a685e595f59095a487cd349d32d3e9"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2601.13295",
+          "resolved_url": "https://arxiv.org/pdf/2601.13295",
+          "path": "sources/benchmarks/papers/2601.13295/paper.pdf",
+          "bytes": 4727424,
+          "sha256": "70e02f3c03e3ec9c53e0a6655c7a339ada460b76448b0078a4856ba278c4fb6c"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2601.13295: CooperBench: Why Coding Agents Cannot be Your Teammates Yet"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "CooperBench: Why Coding Agents Cannot be Your Teammates Yet"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2601.13295v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Resolving team conflicts requires not only task-specific competence, but also social intelligence to find common ground and build consensus. As AI agents increasingly collaborate on complex work, they must develop coordination capabilities to function as effective teammates. Yet we hypothesize that current agents lack these capabilities. To test this, we introduce CooperBench, a benchmark of over 600 collaborative coding tasks across 12 libraries in 4 programming languages. Each task assigns two agents different features that can be implemented independently but may conflict without proper coordination. Tasks are grounded in real open-source repositories with expert-written tests. Evaluating state-of-the-art coding agents, we observe the curse of coordination: agents achieve on average 30% lower success rates when working together compared to performing both tasks individually. This contrasts sharply with human teams, where adding teammates typically improves productivity. Our analysis reveals three key issues: (1) communication channels become jammed with vague, ill-timed, and inaccurate messages; (2) even with effective communication, agents deviate from their commitments; and (3) agents often hold incorrect expectations about others' plans and communication. Through large-scale simulation, we also observe rare but interesting emergent coordination behavior including role division, resource division, and negotiation. Our research presents a novel benchmark for collaborative coding and calls for a shift from pursuing individual agent capability to developing social intelligence."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "CooperBench: Why Coding Agents Cannot be Your Teammates Yet"
+        ],
+        "twitter:description": [
+          "Resolving team conflicts requires not only task-specific competence, but also social intelligence to find common ground and build consensus. As AI agents increasingly collaborate on complex work,..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "CooperBench: Why Coding Agents Cannot be Your Teammates Yet"
+        ],
+        "citation_author": [
+          "Khatua, Arpandeep",
+          "Zhu, Hao",
+          "Tran, Peter",
+          "Prabhudesai, Arya",
+          "Sadrieh, Frederic",
+          "Lieberwirth, Johann K.",
+          "Yu, Xinkai",
+          "Fu, Yicheng",
+          "Ryan, Michael J.",
+          "Pei, Jiaxin",
+          "Yang, Diyi"
+        ],
+        "citation_date": [
+          "2026/01/19"
+        ],
+        "citation_online_date": [
+          "2026/01/26"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2601.13295"
+        ],
+        "citation_arxiv_id": [
+          "2601.13295"
+        ],
+        "citation_abstract": [
+          "Resolving team conflicts requires not only task-specific competence, but also social intelligence to find common ground and build consensus. As AI agents increasingly collaborate on complex work, they must develop coordination capabilities to function as effective teammates. Yet we hypothesize that current agents lack these capabilities. To test this, we introduce CooperBench, a benchmark of over 600 collaborative coding tasks across 12 libraries in 4 programming languages. Each task assigns two agents different features that can be implemented independently but may conflict without proper coordination. Tasks are grounded in real open-source repositories with expert-written tests. Evaluating state-of-the-art coding agents, we observe the curse of coordination: agents achieve on average 30% lower success rates when working together compared to performing both tasks individually. This contrasts sharply with human teams, where adding teammates typically improves productivity. Our analysis reveals three key issues: (1) communication channels become jammed with vague, ill-timed, and inaccurate messages; (2) even with effective communication, agents deviate from their commitments; and (3) agents often hold incorrect expectations about others' plans and communication. Through large-scale simulation, we also observe rare but interesting emergent coordination behavior including role division, resource division, and negotiation. Our research presents a novel benchmark for collaborative coding and calls for a shift from pursuing individual agent capability to developing social intelligence."
+        ]
+      },
+      "extracted_text_characters": 129659,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2603.08835",
+      "title": "MASEval: Extending Multi-Agent Evaluation from Models to Systems",
+      "page_url": "https://arxiv.org/abs/2603.08835",
+      "pdf_url": "https://arxiv.org/pdf/2603.08835",
+      "retrieved_at": "2026-09-10T22:57:25.927904+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2603.08835",
+          "resolved_url": "https://arxiv.org/abs/2603.08835",
+          "path": "sources/benchmarks/papers/2603.08835/page.html",
+          "bytes": 41379,
+          "sha256": "a4f96e9fc75b28529b8c87deae2bcb70b5c53bf8f941f1d855cdcaca793fe90d"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2603.08835",
+          "resolved_url": "https://arxiv.org/pdf/2603.08835",
+          "path": "sources/benchmarks/papers/2603.08835/paper.pdf",
+          "bytes": 313403,
+          "sha256": "ee28d2414944bc790eddeb19c547b305b4e43eacec7c28a5ad73fc3127850d8b"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2603.08835: MASEval: Extending Multi-Agent Evaluation from Models to Systems"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "MASEval: Extending Multi-Agent Evaluation from Models to Systems"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2603.08835v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "The rapid adoption of LLM-based agentic systems has produced a rich ecosystem of frameworks (smolagents, LangGraph, AutoGen, CAMEL, LlamaIndex, i.a.). Yet existing benchmarks are model-centric: they fix the agentic setup and do not compare other system components. We argue that implementation decisions substantially impact performance, including choices such as topology, orchestration logic, and error handling. MASEval addresses this evaluation gap with a framework-agnostic library that treats the entire system as the unit of analysis. Through a systematic system-level comparison across 3 benchmarks, 3 models, and 3 frameworks, we find that framework choice matters as much as model choice. MASEval allows researchers to explore all components of agentic systems, opening new avenues for principled system design, and practitioners to identify the best implementation for their use case.\n  MASEval is available under the MIT licence https://github.com/parameterlab/MASEval."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "MASEval: Extending Multi-Agent Evaluation from Models to Systems"
+        ],
+        "twitter:description": [
+          "The rapid adoption of LLM-based agentic systems has produced a rich ecosystem of frameworks (smolagents, LangGraph, AutoGen, CAMEL, LlamaIndex, i.a.). Yet existing benchmarks are model-centric:..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "MASEval: Extending Multi-Agent Evaluation from Models to Systems"
+        ],
+        "citation_author": [
+          "Emde, Cornelius",
+          "Rubinstein, Alexander",
+          "Goel, Anmol",
+          "Heakl, Ahmed",
+          "Yun, Sangdoo",
+          "Oh, Seong Joon",
+          "Gubri, Martin"
+        ],
+        "citation_date": [
+          "2026/03/09"
+        ],
+        "citation_online_date": [
+          "2026/03/09"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2603.08835"
+        ],
+        "citation_arxiv_id": [
+          "2603.08835"
+        ],
+        "citation_abstract": [
+          "The rapid adoption of LLM-based agentic systems has produced a rich ecosystem of frameworks (smolagents, LangGraph, AutoGen, CAMEL, LlamaIndex, i.a.). Yet existing benchmarks are model-centric: they fix the agentic setup and do not compare other system components. We argue that implementation decisions substantially impact performance, including choices such as topology, orchestration logic, and error handling. MASEval addresses this evaluation gap with a framework-agnostic library that treats the entire system as the unit of analysis. Through a systematic system-level comparison across 3 benchmarks, 3 models, and 3 frameworks, we find that framework choice matters as much as model choice. MASEval allows researchers to explore all components of agentic systems, opening new avenues for principled system design, and practitioners to identify the best implementation for their use case. MASEval is available under the MIT licence https://github.com/parameterlab/MASEval."
+        ]
+      },
+      "extracted_text_characters": 73716,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2605.08761",
+      "title": "Beyond the All-in-One Agent: Benchmarking Role-Specialized Multi-Agent Collaboration in Enterprise Workflows",
+      "page_url": "https://arxiv.org/abs/2605.08761",
+      "pdf_url": "https://arxiv.org/pdf/2605.08761",
+      "retrieved_at": "2026-09-10T22:57:25.928000+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2605.08761",
+          "resolved_url": "https://arxiv.org/abs/2605.08761",
+          "path": "sources/benchmarks/papers/2605.08761/page.html",
+          "bytes": 44629,
+          "sha256": "4103757113cf4118f38d19f6d96d699bb32cafd7eacd0f2fafe55911de55892d"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2605.08761",
+          "resolved_url": "https://arxiv.org/pdf/2605.08761",
+          "path": "sources/benchmarks/papers/2605.08761/paper.pdf",
+          "bytes": 7576808,
+          "sha256": "7c6336a57ee5710379526df6dce2a6bab551cf96f0ef69998103077ac1a15446"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2605.08761: Beyond the All-in-One Agent: Benchmarking Role-Specialized Multi-Agent Collaboration in Enterprise Workflows"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Beyond the All-in-One Agent: Benchmarking Role-Specialized Multi-Agent Collaboration in Enterprise Workflows"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2605.08761v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Large language model (LLM) agents are increasingly expected to operate in enterprise environments, where work is distributed across specialized roles, permission-controlled systems, and cross-departmental procedures. However, existing enterprise benchmarks largely evaluate single agents with broad tool access, while existing multi-agent benchmarks rarely capture realistic enterprise constraints such as role specialization, access control, stateful business systems, and policy-based approvals. We introduce \\textsc{EntCollabBench}, a benchmark for evaluating enterprise multi-agent collaboration. \\textsc{EntCollabBench} simulates a permission-isolated organization with 11 role-specialized agents across six departments and contains two evaluation subsets: a Workflow subset, where agents collaboratively modify enterprise system states, and an Approval subset, where agents make policy-grounded decisions. Evaluation is based on execution traces, database state verification, and deterministic policy adjudication rather than natural-language response judging. Experiments with representative LLM agents show that current models still struggle with end-to-end enterprise collaboration, especially in delegation, context transfer, parameter grounding, workflow closure, and decision commitment. \\textsc{EntCollabBench} provides a reproducible testbed for measuring and improving agent systems intended for realistic organizational environments."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Beyond the All-in-One Agent: Benchmarking Role-Specialized..."
+        ],
+        "twitter:description": [
+          "Large language model (LLM) agents are increasingly expected to operate in enterprise environments, where work is distributed across specialized roles, permission-controlled systems, and..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Beyond the All-in-One Agent: Benchmarking Role-Specialized Multi-Agent Collaboration in Enterprise Workflows"
+        ],
+        "citation_author": [
+          "Yu, Tao",
+          "Wang, Hao",
+          "Li, Changyu",
+          "Chai, Shenghua",
+          "Zhang, Minghui",
+          "Luo, Zhongtian",
+          "Zhou, Yuxuan",
+          "Jin, Haopeng",
+          "Kang, Zhaolu",
+          "Yang, Jiabing",
+          "Zhang, YiFan",
+          "Wang, Xinming",
+          "Yi, Hongzhu",
+          "He, Zheqi",
+          "Zheng, Jing-Shu",
+          "Yang, Xi",
+          "Huang, Yan",
+          "Wang, Liang"
+        ],
+        "citation_date": [
+          "2026/05/09"
+        ],
+        "citation_online_date": [
+          "2026/05/09"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2605.08761"
+        ],
+        "citation_arxiv_id": [
+          "2605.08761"
+        ],
+        "citation_abstract": [
+          "Large language model (LLM) agents are increasingly expected to operate in enterprise environments, where work is distributed across specialized roles, permission-controlled systems, and cross-departmental procedures. However, existing enterprise benchmarks largely evaluate single agents with broad tool access, while existing multi-agent benchmarks rarely capture realistic enterprise constraints such as role specialization, access control, stateful business systems, and policy-based approvals. We introduce \\textsc{EntCollabBench}, a benchmark for evaluating enterprise multi-agent collaboration. \\textsc{EntCollabBench} simulates a permission-isolated organization with 11 role-specialized agents across six departments and contains two evaluation subsets: a Workflow subset, where agents collaboratively modify enterprise system states, and an Approval subset, where agents make policy-grounded decisions. Evaluation is based on execution traces, database state verification, and deterministic policy adjudication rather than natural-language response judging. Experiments with representative LLM agents show that current models still struggle with end-to-end enterprise collaboration, especially in delegation, context transfer, parameter grounding, workflow closure, and decision commitment. \\textsc{EntCollabBench} provides a reproducible testbed for measuring and improving agent systems intended for realistic organizational environments."
+        ]
+      },
+      "extracted_text_characters": 197876,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2602.11964",
+      "title": "Gaia2: Benchmarking LLM Agents on Dynamic and Asynchronous Environments",
+      "page_url": "https://arxiv.org/abs/2602.11964",
+      "pdf_url": "https://arxiv.org/pdf/2602.11964",
+      "retrieved_at": "2026-09-10T22:57:25.927762+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2602.11964",
+          "resolved_url": "https://arxiv.org/abs/2602.11964",
+          "path": "sources/benchmarks/papers/2602.11964/page.html",
+          "bytes": 45462,
+          "sha256": "c0078e559b6d83564cff5c32ef843b03dad76e8ffb889a48378eff4bbf80e408"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2602.11964",
+          "resolved_url": "https://arxiv.org/pdf/2602.11964",
+          "path": "sources/benchmarks/papers/2602.11964/paper.pdf",
+          "bytes": 3630349,
+          "sha256": "d777d8a33f9a646ac982aa845071775424c404759d208c14bdd9ea488a27ab67"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2602.11964: Gaia2: Benchmarking LLM Agents on Dynamic and Asynchronous Environments"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Gaia2: Benchmarking LLM Agents on Dynamic and Asynchronous Environments"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2602.11964v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "We introduce Gaia2, a benchmark for evaluating large language model agents in realistic, asynchronous environments. Unlike prior static or synchronous evaluations, Gaia2 introduces scenarios where environments evolve independently of agent actions, requiring agents to operate under temporal constraints, adapt to noisy and dynamic events, resolve ambiguity, and collaborate with other agents. Each scenario is paired with a write-action verifier, enabling fine-grained, action-level evaluation and making Gaia2 directly usable for reinforcement learning from verifiable rewards. Our evaluation of state-of-the-art proprietary and open-source models shows that no model dominates across capabilities: GPT-5 (high) reaches the strongest overall score of 42% pass@1 but fails on time-sensitive tasks, Claude-4 Sonnet trades accuracy and speed for cost, Kimi-K2 leads among open-source models with 21% pass@1. These results highlight fundamental trade-offs between reasoning, efficiency, robustness, and expose challenges in closing the \"sim2real\" gap. Gaia2 is built on a consumer environment with the open-source Agents Research Environments platform and designed to be easy to extend. By releasing Gaia2 alongside the foundational ARE framework, we aim to provide the community with a flexible infrastructure for developing, benchmarking, and training the next generation of practical agent systems."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Gaia2: Benchmarking LLM Agents on Dynamic and Asynchronous Environments"
+        ],
+        "twitter:description": [
+          "We introduce Gaia2, a benchmark for evaluating large language model agents in realistic, asynchronous environments. Unlike prior static or synchronous evaluations, Gaia2 introduces scenarios where..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Gaia2: Benchmarking LLM Agents on Dynamic and Asynchronous Environments"
+        ],
+        "citation_author": [
+          "Froger, Romain",
+          "Andrews, Pierre",
+          "Bettini, Matteo",
+          "Budhiraja, Amar",
+          "Cabral, Ricardo Silveira",
+          "Do, Virginie",
+          "Garreau, Emilien",
+          "Gaya, Jean-Baptiste",
+          "Lauren\u00e7on, Hugo",
+          "Lecanu, Maxime",
+          "Malkan, Kunal",
+          "Mekala, Dheeraj",
+          "M\u00e9nard, Pierre",
+          "Bertran, Gerard Moreno-Torres",
+          "Piterbarg, Ulyana",
+          "Plekhanov, Mikhail",
+          "Rita, Mathieu",
+          "Rusakov, Andrey",
+          "Vorotilov, Vladislav",
+          "Wang, Mengjue",
+          "Yu, Ian",
+          "Benhalloum, Amine",
+          "Mialon, Gr\u00e9goire",
+          "Scialom, Thomas"
+        ],
+        "citation_date": [
+          "2026/02/12"
+        ],
+        "citation_online_date": [
+          "2026/02/12"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2602.11964"
+        ],
+        "citation_arxiv_id": [
+          "2602.11964"
+        ],
+        "citation_abstract": [
+          "We introduce Gaia2, a benchmark for evaluating large language model agents in realistic, asynchronous environments. Unlike prior static or synchronous evaluations, Gaia2 introduces scenarios where environments evolve independently of agent actions, requiring agents to operate under temporal constraints, adapt to noisy and dynamic events, resolve ambiguity, and collaborate with other agents. Each scenario is paired with a write-action verifier, enabling fine-grained, action-level evaluation and making Gaia2 directly usable for reinforcement learning from verifiable rewards. Our evaluation of state-of-the-art proprietary and open-source models shows that no model dominates across capabilities: GPT-5 (high) reaches the strongest overall score of 42% pass@1 but fails on time-sensitive tasks, Claude-4 Sonnet trades accuracy and speed for cost, Kimi-K2 leads among open-source models with 21% pass@1. These results highlight fundamental trade-offs between reasoning, efficiency, robustness, and expose challenges in closing the \"sim2real\" gap. Gaia2 is built on a consumer environment with the open-source Agents Research Environments platform and designed to be easy to extend. By releasing Gaia2 alongside the foundational ARE framework, we aim to provide the community with a flexible infrastructure for developing, benchmarking, and training the next generation of practical agent systems."
+        ]
+      },
+      "extracted_text_characters": 145328,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2511.05269",
+      "title": "TAMAS: Benchmarking Adversarial Risks in Multi-Agent LLM Systems",
+      "page_url": "https://arxiv.org/abs/2511.05269",
+      "pdf_url": "https://arxiv.org/pdf/2511.05269",
+      "retrieved_at": "2026-09-10T22:57:25.928111+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2511.05269",
+          "resolved_url": "https://arxiv.org/abs/2511.05269",
+          "path": "sources/benchmarks/papers/2511.05269/page.html",
+          "bytes": 42780,
+          "sha256": "47354cf70654b6a2574da11e0e5918b22b4f4f9b0427cd82053d02005a3edfb1"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2511.05269",
+          "resolved_url": "https://arxiv.org/pdf/2511.05269",
+          "path": "sources/benchmarks/papers/2511.05269/paper.pdf",
+          "bytes": 5229217,
+          "sha256": "78cb3622c9c4fb6968a2717be48fca347aa881599c04f7ad9da583cc428a2640"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2511.05269: TAMAS: Benchmarking Adversarial Risks in Multi-Agent LLM Systems"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "TAMAS: Benchmarking Adversarial Risks in Multi-Agent LLM Systems"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2511.05269v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Large Language Models (LLMs) have demonstrated strong capabilities as autonomous agents through tool use, planning, and decision-making abilities, leading to their widespread adoption across diverse tasks. As task complexity grows, multi-agent LLM systems are increasingly used to solve problems collaboratively. However, safety and security of these systems remains largely under-explored. Existing benchmarks and datasets predominantly focus on single-agent settings, failing to capture the unique vulnerabilities of multi-agent dynamics and co-ordination. To address this gap, we introduce $\\textbf{T}$hreats and $\\textbf{A}$ttacks in $\\textbf{M}$ulti-$\\textbf{A}$gent $\\textbf{S}$ystems ($\\textbf{TAMAS}$), a benchmark designed to evaluate the robustness and safety of multi-agent LLM systems. TAMAS includes five distinct scenarios comprising 300 adversarial instances across six attack types and 211 tools, along with 100 harmless tasks. We assess system performance across ten backbone LLMs and three agent interaction configurations from Autogen and CrewAI frameworks, highlighting critical challenges and failure modes in current multi-agent deployments. Furthermore, we introduce Effective Robustness Score (ERS) to assess the tradeoff between safety and task effectiveness of these frameworks. Our findings show that multi-agent systems are highly vulnerable to adversarial attacks, underscoring the urgent need for stronger defenses. TAMAS provides a foundation for systematically studying and improving the safety of multi-agent LLM systems."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "TAMAS: Benchmarking Adversarial Risks in Multi-Agent LLM Systems"
+        ],
+        "twitter:description": [
+          "Large Language Models (LLMs) have demonstrated strong capabilities as autonomous agents through tool use, planning, and decision-making abilities, leading to their widespread adoption across..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "TAMAS: Benchmarking Adversarial Risks in Multi-Agent LLM Systems"
+        ],
+        "citation_author": [
+          "Kavathekar, Ishan",
+          "Jain, Hemang",
+          "Rathod, Ameya",
+          "Kumaraguru, Ponnurangam",
+          "Ganu, Tanuja"
+        ],
+        "citation_date": [
+          "2025/11/07"
+        ],
+        "citation_online_date": [
+          "2025/11/07"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2511.05269"
+        ],
+        "citation_arxiv_id": [
+          "2511.05269"
+        ],
+        "citation_abstract": [
+          "Large Language Models (LLMs) have demonstrated strong capabilities as autonomous agents through tool use, planning, and decision-making abilities, leading to their widespread adoption across diverse tasks. As task complexity grows, multi-agent LLM systems are increasingly used to solve problems collaboratively. However, safety and security of these systems remains largely under-explored. Existing benchmarks and datasets predominantly focus on single-agent settings, failing to capture the unique vulnerabilities of multi-agent dynamics and co-ordination. To address this gap, we introduce $\\textbf{T}$hreats and $\\textbf{A}$ttacks in $\\textbf{M}$ulti-$\\textbf{A}$gent $\\textbf{S}$ystems ($\\textbf{TAMAS}$), a benchmark designed to evaluate the robustness and safety of multi-agent LLM systems. TAMAS includes five distinct scenarios comprising 300 adversarial instances across six attack types and 211 tools, along with 100 harmless tasks. We assess system performance across ten backbone LLMs and three agent interaction configurations from Autogen and CrewAI frameworks, highlighting critical challenges and failure modes in current multi-agent deployments. Furthermore, we introduce Effective Robustness Score (ERS) to assess the tradeoff between safety and task effectiveness of these frameworks. Our findings show that multi-agent systems are highly vulnerable to adversarial attacks, underscoring the urgent need for stronger defenses. TAMAS provides a foundation for systematically studying and improving the safety of multi-agent LLM systems."
+        ]
+      },
+      "extracted_text_characters": 139035,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2602.13255",
+      "title": "DPBench: Structural Determinants of Multi-Agent LLM Coordination Under Simultaneous Resource Contention",
+      "page_url": "https://arxiv.org/abs/2602.13255",
+      "pdf_url": "https://arxiv.org/pdf/2602.13255",
+      "retrieved_at": "2026-09-10T22:57:26.138512+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2602.13255",
+          "resolved_url": "https://arxiv.org/abs/2602.13255",
+          "path": "sources/benchmarks/papers/2602.13255/page.html",
+          "bytes": 42435,
+          "sha256": "47c8a7f9268cfa93a2c7d60fb389f971eed4c287b9e3e0cde9a9a1d762d32883"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2602.13255",
+          "resolved_url": "https://arxiv.org/pdf/2602.13255",
+          "path": "sources/benchmarks/papers/2602.13255/paper.pdf",
+          "bytes": 626864,
+          "sha256": "156f8669bbf465992368e324dd2da4bf386690f66e16ac04240bf7fd724c4e70"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2602.13255: DPBench: Structural Determinants of Multi-Agent LLM Coordination Under Simultaneous Resource Contention"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "DPBench: Structural Determinants of Multi-Agent LLM Coordination Under Simultaneous Resource Contention"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2602.13255v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "We present DPBench, a benchmark for evaluating coordination in multi-agent systems built from large language models. Existing benchmarks measure task-level success under a fixed protocol; the structural conditions under which coordination succeeds or fails at all have not been characterised. DPBench adapts the Dining Philosophers problem into a controlled testbed where the action protocol, the communication structure, and the group size each vary independently. We evaluate six agents: GPT-5.2, Claude Opus 4.5, Grok 4.1, Gemini 2.5 Flash, Llama 4 Maverick, and a uniform-random baseline. Under simultaneous action at N=5 with the default prompt, deadlock ranges from 25.0% (95% Wilson CI [11.2, 46.9]) for GPT-5.2 to 90.0% [74.4, 96.5] for Gemini 2.5 Flash; sequential action is solved by four of the six. Holding the model fixed at Gemini 2.5 Flash, three protocol variables drive deadlock from 90% to within CI of zero: three rounds of pre-commitment communication (0.0% vs. single-round 86.7%), a prompt encoding a classical concurrency primitive (0.0% for resource-ordering and symmetry-breaking, against 100% for the minimal prompt), or doubling the group from N=5 to N=10 (90.0% to 10.0%). Single-round messaging and memory of past timesteps do not change the rate at the sample size we ran. Whether the same model coordinates or deadlocks is determined by the protocol, not by the model's capability."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "DPBench: Structural Determinants of Multi-Agent LLM Coordination..."
+        ],
+        "twitter:description": [
+          "We present DPBench, a benchmark for evaluating coordination in multi-agent systems built from large language models. Existing benchmarks measure task-level success under a fixed protocol; the..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "DPBench: Structural Determinants of Multi-Agent LLM Coordination Under Simultaneous Resource Contention"
+        ],
+        "citation_author": [
+          "Hasan, Najmul",
+          "BusiReddyGari, Prashanth"
+        ],
+        "citation_date": [
+          "2026/02/02"
+        ],
+        "citation_online_date": [
+          "2026/06/03"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2602.13255"
+        ],
+        "citation_arxiv_id": [
+          "2602.13255"
+        ],
+        "citation_abstract": [
+          "We present DPBench, a benchmark for evaluating coordination in multi-agent systems built from large language models. Existing benchmarks measure task-level success under a fixed protocol; the structural conditions under which coordination succeeds or fails at all have not been characterised. DPBench adapts the Dining Philosophers problem into a controlled testbed where the action protocol, the communication structure, and the group size each vary independently. We evaluate six agents: GPT-5.2, Claude Opus 4.5, Grok 4.1, Gemini 2.5 Flash, Llama 4 Maverick, and a uniform-random baseline. Under simultaneous action at N=5 with the default prompt, deadlock ranges from 25.0% (95% Wilson CI [11.2, 46.9]) for GPT-5.2 to 90.0% [74.4, 96.5] for Gemini 2.5 Flash; sequential action is solved by four of the six. Holding the model fixed at Gemini 2.5 Flash, three protocol variables drive deadlock from 90% to within CI of zero: three rounds of pre-commitment communication (0.0% vs. single-round 86.7%), a prompt encoding a classical concurrency primitive (0.0% for resource-ordering and symmetry-breaking, against 100% for the minimal prompt), or doubling the group from N=5 to N=10 (90.0% to 10.0%). Single-round messaging and memory of past timesteps do not change the rate at the sample size we ran. Whether the same model coordinates or deadlocks is determined by the protocol, not by the model's capability."
+        ]
+      },
+      "extracted_text_characters": 75337,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2506.14990",
+      "title": "MEAL: A Benchmark for Continual Multi-Agent Reinforcement Learning",
+      "page_url": "https://arxiv.org/abs/2506.14990",
+      "pdf_url": "https://arxiv.org/pdf/2506.14990",
+      "retrieved_at": "2026-09-10T22:57:27.135698+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2506.14990",
+          "resolved_url": "https://arxiv.org/abs/2506.14990",
+          "path": "sources/benchmarks/papers/2506.14990/page.html",
+          "bytes": 41462,
+          "sha256": "4a212283b00bb6959520819a73e911f6ab8c477aac23073b06f46cf44b261f39"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2506.14990",
+          "resolved_url": "https://arxiv.org/pdf/2506.14990",
+          "path": "sources/benchmarks/papers/2506.14990/paper.pdf",
+          "bytes": 4025343,
+          "sha256": "912eb432e3cd48407a2bc65f0f922a57bacb406426360025d2638b6077afc85b"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2506.14990: MEAL: A Benchmark for Continual Multi-Agent Reinforcement Learning"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "MEAL: A Benchmark for Continual Multi-Agent Reinforcement Learning"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2506.14990v3"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Benchmarks play a central role in reinforcement learning (RL) research, yet their computational constraints often shape what is studied. Despite the motivation of lifelong learning, most continual RL papers consider only 3-10 sequential tasks, as CPU-bound environments make longer sequences impractical. Meanwhile, continual learning in cooperative multi-agent settings remains largely unexplored. To address these gaps, we introduce MEAL (Multi-agent Environments for Adaptive Learning), the first benchmark for continual multi-agent RL. By leveraging JAX and GPU acceleration, MEAL enables training on sequences of 100 tasks in a few hours on a single GPU. We find that long task sequences reveal failure modes that do not appear at smaller scales."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "MEAL: A Benchmark for Continual Multi-Agent Reinforcement Learning"
+        ],
+        "twitter:description": [
+          "Benchmarks play a central role in reinforcement learning (RL) research, yet their computational constraints often shape what is studied. Despite the motivation of lifelong learning, most continual..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "MEAL: A Benchmark for Continual Multi-Agent Reinforcement Learning"
+        ],
+        "citation_author": [
+          "Tomilin, Tristan",
+          "Boogaard, Luka van den",
+          "Garcin, Samuel",
+          "Ruhdorfer, Constantin",
+          "Grooten, Bram",
+          "Kusters, Fabrice",
+          "Du, Yali",
+          "Bulling, Andreas",
+          "Pechenizkiy, Mykola",
+          "Fang, Meng"
+        ],
+        "citation_date": [
+          "2025/06/17"
+        ],
+        "citation_online_date": [
+          "2026/06/18"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2506.14990"
+        ],
+        "citation_arxiv_id": [
+          "2506.14990"
+        ],
+        "citation_abstract": [
+          "Benchmarks play a central role in reinforcement learning (RL) research, yet their computational constraints often shape what is studied. Despite the motivation of lifelong learning, most continual RL papers consider only 3-10 sequential tasks, as CPU-bound environments make longer sequences impractical. Meanwhile, continual learning in cooperative multi-agent settings remains largely unexplored. To address these gaps, we introduce MEAL (Multi-agent Environments for Adaptive Learning), the first benchmark for continual multi-agent RL. By leveraging JAX and GPU acceleration, MEAL enables training on sequences of 100 tasks in a few hours on a single GPU. We find that long task sequences reveal failure modes that do not appear at smaller scales."
+        ]
+      },
+      "extracted_text_characters": 177940,
+      "text_searchable": true
+    },
+    {
+      "kind": "repositories",
+      "id": "cooperbench__CooperBench",
+      "title": "cooperbench/CooperBench",
+      "url": "https://github.com/cooperbench/CooperBench",
+      "retrieved_at": "2026-09-10T22:57:27.272720+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/cooperbench/CooperBench/blob/cdd16702860bbfad28e26d17e7a679caff1a31e3/README.md",
+          "resolved_url": "https://github.com/cooperbench/CooperBench/blob/cdd16702860bbfad28e26d17e7a679caff1a31e3/README.md",
+          "path": "sources/benchmarks/repositories/cooperbench__CooperBench/README.md",
+          "bytes": 10535,
+          "sha256": "c63732976c8bb6aa39947b71b6facf5e65a25c85048cab85d24e859ec4c709ac"
+        }
+      ],
+      "status": "ok",
+      "commit": "cdd16702860bbfad28e26d17e7a679caff1a31e3",
+      "commit_date": "2026-09-09T11:52:49-07:00",
+      "checkout": "sources/benchmarks/repositories/cooperbench__CooperBench/checkout",
+      "experiments_reproduced": false,
+      "license_files": [],
+      "audit": {
+        "path": "src/cooperbench/eval/evaluate.py",
+        "line": 310,
+        "finding": "Separate solo/cooperative patches and feature testing paths. Optional execution backend and dataset setup required.",
+        "scope": "selected file inspection, not full audit"
+      }
+    },
+    {
+      "kind": "repositories",
+      "id": "maseval__MASEval",
+      "title": "maseval/MASEval",
+      "url": "https://github.com/maseval/MASEval",
+      "retrieved_at": "2026-09-10T22:57:27.332716+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/maseval/MASEval/blob/b58f6f9ae27f7d0951aa33b3024f28dcf210a6ff/LICENSE",
+          "resolved_url": "https://github.com/maseval/MASEval/blob/b58f6f9ae27f7d0951aa33b3024f28dcf210a6ff/LICENSE",
+          "path": "sources/benchmarks/repositories/maseval__MASEval/LICENSE",
+          "bytes": 1077,
+          "sha256": "1e9b3bbdf9bc15c340cc09a28f4ab88c008f2daa417144ef62bd210c1c977ab2"
+        },
+        {
+          "url": "https://github.com/maseval/MASEval/blob/b58f6f9ae27f7d0951aa33b3024f28dcf210a6ff/README.md",
+          "resolved_url": "https://github.com/maseval/MASEval/blob/b58f6f9ae27f7d0951aa33b3024f28dcf210a6ff/README.md",
+          "path": "sources/benchmarks/repositories/maseval__MASEval/README.md",
+          "bytes": 11638,
+          "sha256": "5b8e29337404ea186ab8ed92864ac71b1968c54ef22ff975be18a4371a7b61ac"
+        }
+      ],
+      "status": "ok",
+      "commit": "b58f6f9ae27f7d0951aa33b3024f28dcf210a6ff",
+      "commit_date": "2026-07-05T22:39:50+02:00",
+      "checkout": "sources/benchmarks/repositories/maseval__MASEval/checkout",
+      "experiments_reproduced": false,
+      "license_files": [
+        "LICENSE"
+      ],
+      "audit": {
+        "path": "maseval/core/benchmark.py",
+        "line": 142,
+        "finding": "Framework-neutral evaluation hooks and distinct setup/task/evaluation error controls.",
+        "scope": "selected file inspection, not full audit"
+      }
+    },
+    {
+      "kind": "repositories",
+      "id": "yutao1024__EntCollabBench",
+      "title": "yutao1024/EntCollabBench",
+      "url": "https://github.com/yutao1024/EntCollabBench",
+      "retrieved_at": "2026-09-10T22:57:27.334904+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/yutao1024/EntCollabBench/blob/9d085fcb86adaf20254c09e2ca35123e535a9643/README.md",
+          "resolved_url": "https://github.com/yutao1024/EntCollabBench/blob/9d085fcb86adaf20254c09e2ca35123e535a9643/README.md",
+          "path": "sources/benchmarks/repositories/yutao1024__EntCollabBench/README.md",
+          "bytes": 10133,
+          "sha256": "999c22d954a1f7e220472e0d9a322a4cf764dcfd0c3b6c16aa637940887ee39f"
+        }
+      ],
+      "status": "ok",
+      "commit": "9d085fcb86adaf20254c09e2ca35123e535a9643",
+      "commit_date": "2026-05-14T23:16:22+08:00",
+      "checkout": "sources/benchmarks/repositories/yutao1024__EntCollabBench/checkout",
+      "experiments_reproduced": false,
+      "license_files": [],
+      "audit": {
+        "path": "scripts/judge/judge.py",
+        "line": 701,
+        "finding": "Public judge entry point requires model names and uses majority voting; reconcile with paper deterministic-grading claims before adoption.",
+        "scope": "selected file inspection, not full audit"
+      }
+    },
+    {
+      "kind": "repositories",
+      "id": "ulab-uiuc__MARBLE",
+      "title": "ulab-uiuc/MARBLE",
+      "url": "https://github.com/ulab-uiuc/MARBLE",
+      "retrieved_at": "2026-09-10T22:57:27.435522+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/ulab-uiuc/MARBLE/blob/8d60fa17b5596b44458a52d4296061b9fc13d6f2/LICENSE",
+          "resolved_url": "https://github.com/ulab-uiuc/MARBLE/blob/8d60fa17b5596b44458a52d4296061b9fc13d6f2/LICENSE",
+          "path": "sources/benchmarks/repositories/ulab-uiuc__MARBLE/LICENSE",
+          "bytes": 1066,
+          "sha256": "389d00652aaea7a870e1128c95df7171580f347856b3993f8a0890f1a1cf09ae"
+        },
+        {
+          "url": "https://github.com/ulab-uiuc/MARBLE/blob/8d60fa17b5596b44458a52d4296061b9fc13d6f2/README.md",
+          "resolved_url": "https://github.com/ulab-uiuc/MARBLE/blob/8d60fa17b5596b44458a52d4296061b9fc13d6f2/README.md",
+          "path": "sources/benchmarks/repositories/ulab-uiuc__MARBLE/README.md",
+          "bytes": 4620,
+          "sha256": "96578ff185805096bb005ed067033190c9a28cfb7a31199166597398db019faf"
+        }
+      ],
+      "status": "ok",
+      "commit": "8d60fa17b5596b44458a52d4296061b9fc13d6f2",
+      "commit_date": "2025-08-02T23:37:06-05:00",
+      "checkout": "sources/benchmarks/repositories/ulab-uiuc__MARBLE/checkout",
+      "experiments_reproduced": false,
+      "license_files": [
+        "LICENSE"
+      ],
+      "audit": {
+        "path": "marble/evaluator/evaluator.py",
+        "line": 331,
+        "finding": "parse_score can default to 3 after parsing failure; some communication/planning scores are model-judged.",
+        "scope": "selected file inspection, not full audit"
+      }
+    },
+    {
+      "kind": "papers",
+      "id": "2212.07489",
+      "title": "SMACv2: An Improved Benchmark for Cooperative Multi-Agent Reinforcement Learning",
+      "page_url": "https://arxiv.org/abs/2212.07489",
+      "pdf_url": "https://arxiv.org/pdf/2212.07489",
+      "retrieved_at": "2026-09-10T23:04:21.872361+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2212.07489",
+          "resolved_url": "https://arxiv.org/abs/2212.07489",
+          "path": "sources/benchmarks/papers/2212.07489/page.html",
+          "bytes": 44152,
+          "sha256": "f68c51931198664136c3765ed10f5b3a78796123e5ab09ae16ed89a1ed94de5f"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2212.07489",
+          "resolved_url": "https://arxiv.org/pdf/2212.07489",
+          "path": "sources/benchmarks/papers/2212.07489/paper.pdf",
+          "bytes": 12872854,
+          "sha256": "df683e854e614349846432ef712156d706f2fd7df9242e1e7aec4f614d8c39b1"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2212.07489: SMACv2: An Improved Benchmark for Cooperative Multi-Agent Reinforcement Learning"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "SMACv2: An Improved Benchmark for Cooperative Multi-Agent Reinforcement Learning"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2212.07489v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "The availability of challenging benchmarks has played a key role in the recent progress of machine learning. In cooperative multi-agent reinforcement learning, the StarCraft Multi-Agent Challenge (SMAC) has become a popular testbed for centralised training with decentralised execution. However, after years of sustained improvement on SMAC, algorithms now achieve near-perfect performance. In this work, we conduct new analysis demonstrating that SMAC lacks the stochasticity and partial observability to require complex *closed-loop* policies. In particular, we show that an *open-loop* policy conditioned only on the timestep can achieve non-trivial win rates for many SMAC scenarios. To address this limitation, we introduce SMACv2, a new version of the benchmark where scenarios are procedurally generated and require agents to generalise to previously unseen settings (from the same distribution) during evaluation. We also introduce the extended partial observability challenge (EPO), which augments SMACv2 to ensure meaningful partial observability. We show that these changes ensure the benchmark requires the use of *closed-loop* policies. We evaluate state-of-the-art algorithms on SMACv2 and show that it presents significant challenges not present in the original benchmark. Our analysis illustrates that SMACv2 addresses the discovered deficiencies of SMAC and can help benchmark the next generation of MARL methods. Videos of training are available at https://sites.google.com/view/smacv2."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "SMACv2: An Improved Benchmark for Cooperative Multi-Agent..."
+        ],
+        "twitter:description": [
+          "The availability of challenging benchmarks has played a key role in the recent progress of machine learning. In cooperative multi-agent reinforcement learning, the StarCraft Multi-Agent Challenge..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "SMACv2: An Improved Benchmark for Cooperative Multi-Agent Reinforcement Learning"
+        ],
+        "citation_author": [
+          "Ellis, Benjamin",
+          "Cook, Jonathan",
+          "Moalla, Skander",
+          "Samvelyan, Mikayel",
+          "Sun, Mingfei",
+          "Mahajan, Anuj",
+          "Foerster, Jakob N.",
+          "Whiteson, Shimon"
+        ],
+        "citation_date": [
+          "2022/12/14"
+        ],
+        "citation_online_date": [
+          "2023/10/17"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2212.07489"
+        ],
+        "citation_arxiv_id": [
+          "2212.07489"
+        ],
+        "citation_abstract": [
+          "The availability of challenging benchmarks has played a key role in the recent progress of machine learning. In cooperative multi-agent reinforcement learning, the StarCraft Multi-Agent Challenge (SMAC) has become a popular testbed for centralised training with decentralised execution. However, after years of sustained improvement on SMAC, algorithms now achieve near-perfect performance. In this work, we conduct new analysis demonstrating that SMAC lacks the stochasticity and partial observability to require complex *closed-loop* policies. In particular, we show that an *open-loop* policy conditioned only on the timestep can achieve non-trivial win rates for many SMAC scenarios. To address this limitation, we introduce SMACv2, a new version of the benchmark where scenarios are procedurally generated and require agents to generalise to previously unseen settings (from the same distribution) during evaluation. We also introduce the extended partial observability challenge (EPO), which augments SMACv2 to ensure meaningful partial observability. We show that these changes ensure the benchmark requires the use of *closed-loop* policies. We evaluate state-of-the-art algorithms on SMACv2 and show that it presents significant challenges not present in the original benchmark. Our analysis illustrates that SMACv2 addresses the discovered deficiencies of SMAC and can help benchmark the next generation of MARL methods. Videos of training are available at https://sites.google.com/view/smacv2."
+        ]
+      },
+      "extracted_text_characters": 146148,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2410.05080",
+      "title": "ScienceAgentBench: Toward Rigorous Assessment of Language Agents for Data-Driven Scientific Discovery",
+      "page_url": "https://arxiv.org/abs/2410.05080",
+      "pdf_url": "https://arxiv.org/pdf/2410.05080",
+      "retrieved_at": "2026-09-10T23:04:21.872339+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2410.05080",
+          "resolved_url": "https://arxiv.org/abs/2410.05080",
+          "path": "sources/benchmarks/papers/2410.05080/page.html",
+          "bytes": 46801,
+          "sha256": "efa5b42ddf050356e95b207bcc2c3d78153185064f8b875952bf7727b20ddd60"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2410.05080",
+          "resolved_url": "https://arxiv.org/pdf/2410.05080",
+          "path": "sources/benchmarks/papers/2410.05080/paper.pdf",
+          "bytes": 2011302,
+          "sha256": "da5b44b1d7ff4992127ce32daf5343031a109b7104d743bb18f0803fc904da7b"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2410.05080: ScienceAgentBench: Toward Rigorous Assessment of Language Agents for Data-Driven Scientific Discovery"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "ScienceAgentBench: Toward Rigorous Assessment of Language Agents for Data-Driven Scientific Discovery"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2410.05080v3"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "The advancements of large language models (LLMs) have piqued growing interest in developing LLM-based language agents to automate scientific discovery end-to-end, which has sparked both excitement and skepticism about their true capabilities. In this work, we call for rigorous assessment of agents on individual tasks in a scientific workflow before making bold claims on end-to-end automation. To this end, we present ScienceAgentBench, a new benchmark for evaluating language agents for data-driven scientific discovery. To ensure the scientific authenticity and real-world relevance of our benchmark, we extract 102 tasks from 44 peer-reviewed publications in four disciplines and engage nine subject matter experts to validate them. We unify the target output for every task to a self-contained Python program file and employ an array of evaluation metrics to examine the generated programs, execution results, and costs. Each task goes through multiple rounds of manual validation by annotators and subject matter experts to ensure its annotation quality and scientific plausibility. We also propose two effective strategies to mitigate data contamination concerns. Using ScienceAgentBench, we evaluate five open-weight and proprietary LLMs, each with three frameworks: direct prompting, OpenHands CodeAct, and self-debug. Given three attempts for each task, the best-performing agent can only solve 32.4% of the tasks independently and 34.3% with expert-provided knowledge. In addition, we evaluate OpenAI o1-preview with direct prompting and self-debug, which can boost the performance to 42.2%, demonstrating the effectiveness of increasing inference-time compute but with more than 10 times the cost of other LLMs. Still, our results underscore the limitations of current language agents in generating code for data-driven discovery, let alone end-to-end automation for scientific research."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "ScienceAgentBench: Toward Rigorous Assessment of Language Agents..."
+        ],
+        "twitter:description": [
+          "The advancements of large language models (LLMs) have piqued growing interest in developing LLM-based language agents to automate scientific discovery end-to-end, which has sparked both excitement..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "ScienceAgentBench: Toward Rigorous Assessment of Language Agents for Data-Driven Scientific Discovery"
+        ],
+        "citation_author": [
+          "Chen, Ziru",
+          "Chen, Shijie",
+          "Ning, Yuting",
+          "Zhang, Qianheng",
+          "Wang, Boshi",
+          "Yu, Botao",
+          "Li, Yifei",
+          "Liao, Zeyi",
+          "Wei, Chen",
+          "Lu, Zitong",
+          "Dey, Vishal",
+          "Xue, Mingyi",
+          "Baker, Frazier N.",
+          "Burns, Benjamin",
+          "Adu-Ampratwum, Daniel",
+          "Huang, Xuhui",
+          "Ning, Xia",
+          "Gao, Song",
+          "Su, Yu",
+          "Sun, Huan"
+        ],
+        "citation_date": [
+          "2024/10/07"
+        ],
+        "citation_online_date": [
+          "2025/03/31"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2410.05080"
+        ],
+        "citation_arxiv_id": [
+          "2410.05080"
+        ],
+        "citation_abstract": [
+          "The advancements of large language models (LLMs) have piqued growing interest in developing LLM-based language agents to automate scientific discovery end-to-end, which has sparked both excitement and skepticism about their true capabilities. In this work, we call for rigorous assessment of agents on individual tasks in a scientific workflow before making bold claims on end-to-end automation. To this end, we present ScienceAgentBench, a new benchmark for evaluating language agents for data-driven scientific discovery. To ensure the scientific authenticity and real-world relevance of our benchmark, we extract 102 tasks from 44 peer-reviewed publications in four disciplines and engage nine subject matter experts to validate them. We unify the target output for every task to a self-contained Python program file and employ an array of evaluation metrics to examine the generated programs, execution results, and costs. Each task goes through multiple rounds of manual validation by annotators and subject matter experts to ensure its annotation quality and scientific plausibility. We also propose two effective strategies to mitigate data contamination concerns. Using ScienceAgentBench, we evaluate five open-weight and proprietary LLMs, each with three frameworks: direct prompting, OpenHands CodeAct, and self-debug. Given three attempts for each task, the best-performing agent can only solve 32.4% of the tasks independently and 34.3% with expert-provided knowledge. In addition, we evaluate OpenAI o1-preview with direct prompting and self-debug, which can boost the performance to 42.2%, demonstrating the effectiveness of increasing inference-time compute but with more than 10 times the cost of other LLMs. Still, our results underscore the limitations of current language agents in generating code for data-driven discovery, let alone end-to-end automation for scientific research."
+        ]
+      },
+      "extracted_text_characters": 222900,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2407.01725",
+      "title": "DiscoveryBench: Towards Data-Driven Discovery with Large Language Models",
+      "page_url": "https://arxiv.org/abs/2407.01725",
+      "pdf_url": "https://arxiv.org/pdf/2407.01725",
+      "retrieved_at": "2026-09-10T23:04:21.872772+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2407.01725",
+          "resolved_url": "https://arxiv.org/abs/2407.01725",
+          "path": "sources/benchmarks/papers/2407.01725/page.html",
+          "bytes": 43573,
+          "sha256": "c60a12e9857d3ecc90003af69c86b44b03a3fa118228e459ade52171e462f6b1"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2407.01725",
+          "resolved_url": "https://arxiv.org/pdf/2407.01725",
+          "path": "sources/benchmarks/papers/2407.01725/paper.pdf",
+          "bytes": 1505228,
+          "sha256": "f3968dfa91b28f60e5956ce439e2bd39050148a866f3ef86850ba458fc437a3f"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2407.01725: DiscoveryBench: Towards Data-Driven Discovery with Large Language Models"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "DiscoveryBench: Towards Data-Driven Discovery with Large Language Models"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2407.01725v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Can the rapid advances in code generation, function calling, and data analysis using large language models (LLMs) help automate the search and verification of hypotheses purely from a set of provided datasets? To evaluate this question, we present DiscoveryBench, the first comprehensive benchmark that formalizes the multi-step process of data-driven discovery. The benchmark is designed to systematically assess current model capabilities in discovery tasks and provide a useful resource for improving them. Our benchmark contains 264 tasks collected across 6 diverse domains, such as sociology and engineering, by manually deriving discovery workflows from published papers to approximate the real-world challenges faced by researchers, where each task is defined by a dataset, its metadata, and a discovery goal in natural language. We additionally provide 903 synthetic tasks to conduct controlled evaluations across task complexity. Furthermore, our structured formalism of data-driven discovery enables a facet-based evaluation that provides useful insights into different failure modes. We evaluate several popular LLM-based reasoning frameworks using both open and closed LLMs as baselines on DiscoveryBench and find that even the best system scores only 25%. Our benchmark, thus, illustrates the challenges in autonomous data-driven discovery and serves as a valuable resource for the community to make progress."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "DiscoveryBench: Towards Data-Driven Discovery with Large Language Models"
+        ],
+        "twitter:description": [
+          "Can the rapid advances in code generation, function calling, and data analysis using large language models (LLMs) help automate the search and verification of hypotheses purely from a set of..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "DiscoveryBench: Towards Data-Driven Discovery with Large Language Models"
+        ],
+        "citation_author": [
+          "Majumder, Bodhisattwa Prasad",
+          "Surana, Harshit",
+          "Agarwal, Dhruv",
+          "Mishra, Bhavana Dalvi",
+          "Meena, Abhijeetsingh",
+          "Prakhar, Aryan",
+          "Vora, Tirth",
+          "Khot, Tushar",
+          "Sabharwal, Ashish",
+          "Clark, Peter"
+        ],
+        "citation_date": [
+          "2024/07/01"
+        ],
+        "citation_online_date": [
+          "2024/07/01"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2407.01725"
+        ],
+        "citation_arxiv_id": [
+          "2407.01725"
+        ],
+        "citation_abstract": [
+          "Can the rapid advances in code generation, function calling, and data analysis using large language models (LLMs) help automate the search and verification of hypotheses purely from a set of provided datasets? To evaluate this question, we present DiscoveryBench, the first comprehensive benchmark that formalizes the multi-step process of data-driven discovery. The benchmark is designed to systematically assess current model capabilities in discovery tasks and provide a useful resource for improving them. Our benchmark contains 264 tasks collected across 6 diverse domains, such as sociology and engineering, by manually deriving discovery workflows from published papers to approximate the real-world challenges faced by researchers, where each task is defined by a dataset, its metadata, and a discovery goal in natural language. We additionally provide 903 synthetic tasks to conduct controlled evaluations across task complexity. Furthermore, our structured formalism of data-driven discovery enables a facet-based evaluation that provides useful insights into different failure modes. We evaluate several popular LLM-based reasoning frameworks using both open and closed LLMs as baselines on DiscoveryBench and find that even the best system scores only 25%. Our benchmark, thus, illustrates the challenges in autonomous data-driven discovery and serves as a valuable resource for the community to make progress."
+        ]
+      },
+      "extracted_text_characters": 112968,
+      "text_searchable": true
+    }
+  ]
+}

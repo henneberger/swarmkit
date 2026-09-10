@@ -1,0 +1,112 @@
+{
+  "kind": "papers",
+  "id": "2512.03466v1",
+  "title": "AsymPuzl: An Asymmetric Puzzle for multi-agent cooperation",
+  "page_url": "https://arxiv.org/abs/2512.03466v1",
+  "pdf_url": "https://arxiv.org/pdf/2512.03466v1",
+  "retrieved_at": "2026-09-10T22:53:05.980500+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2512.03466v1",
+      "resolved_url": "https://arxiv.org/abs/2512.03466v1",
+      "path": "sources/benchmarks/papers/2512.03466v1/page.html",
+      "bytes": 41179,
+      "sha256": "20c6c81b8b4d70b9ecb1d50f16e5b20097d679e8ccec79133bfe9a05d1ab3c08"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2512.03466v1",
+      "resolved_url": "https://arxiv.org/pdf/2512.03466v1",
+      "path": "sources/benchmarks/papers/2512.03466v1/paper.pdf",
+      "bytes": 1414247,
+      "sha256": "08960eb3faae1844379a1dde5ad3e3a94ddc6d36b900344de2cd23f2b0250b01"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2512.03466v1: AsymPuzl: An Asymmetric Puzzle for multi-agent cooperation"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "AsymPuzl: An Asymmetric Puzzle for multi-agent cooperation"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2512.03466v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Large Language Model (LLM) agents are increasingly studied in multi-turn, multi-agent scenarios, yet most existing setups emphasize open-ended role-play rather than controlled evaluation. We introduce AsymPuzl, a minimal but expressive two-agent puzzle environment designed to isolate communication under information asymmetry. Each agent observes complementary but incomplete views of a symbolic puzzle and must exchange messages to solve it cooperatively. Using a diverse set of current-generation and open-source LLMs, we show that (i) strong models such as GPT-5 and Claude-4.0 reliably converge across puzzle sizes on the solution by sharing complete information in two turns, (ii) weaker models often ignore partner messages or over-correct their hypotheses, and (iii) feedback design is non-trivial: simple self-feedback improves success rates, while detailed joint feedback can hurt performance. These findings show that even in simple cooperative tasks, LLM communication strategies diverge and depend on the granularity of feedback signals. AsymPuzl thus provides a testbed for probing the limits of multi-turn cooperation and opens avenues for studying coordination mechanisms."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "AsymPuzl: An Asymmetric Puzzle for multi-agent cooperation"
+    ],
+    "twitter:description": [
+      "Large Language Model (LLM) agents are increasingly studied in multi-turn, multi-agent scenarios, yet most existing setups emphasize open-ended role-play rather than controlled evaluation. We..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "AsymPuzl: An Asymmetric Puzzle for multi-agent cooperation"
+    ],
+    "citation_author": [
+      "Cadet, Xavier",
+      "Koh, Edward",
+      "Chin, Peter"
+    ],
+    "citation_date": [
+      "2025/12/03"
+    ],
+    "citation_online_date": [
+      "2025/12/03"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2512.03466"
+    ],
+    "citation_arxiv_id": [
+      "2512.03466"
+    ],
+    "citation_abstract": [
+      "Large Language Model (LLM) agents are increasingly studied in multi-turn, multi-agent scenarios, yet most existing setups emphasize open-ended role-play rather than controlled evaluation. We introduce AsymPuzl, a minimal but expressive two-agent puzzle environment designed to isolate communication under information asymmetry. Each agent observes complementary but incomplete views of a symbolic puzzle and must exchange messages to solve it cooperatively. Using a diverse set of current-generation and open-source LLMs, we show that (i) strong models such as GPT-5 and Claude-4.0 reliably converge across puzzle sizes on the solution by sharing complete information in two turns, (ii) weaker models often ignore partner messages or over-correct their hypotheses, and (iii) feedback design is non-trivial: simple self-feedback improves success rates, while detailed joint feedback can hurt performance. These findings show that even in simple cooperative tasks, LLM communication strategies diverge and depend on the granularity of feedback signals. AsymPuzl thus provides a testbed for probing the limits of multi-turn cooperation and opens avenues for studying coordination mechanisms."
+    ]
+  },
+  "extracted_text_characters": 38426,
+  "text_searchable": true
+}

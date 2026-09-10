@@ -1,0 +1,114 @@
+{
+  "kind": "papers",
+  "id": "2511.05269",
+  "title": "TAMAS: Benchmarking Adversarial Risks in Multi-Agent LLM Systems",
+  "page_url": "https://arxiv.org/abs/2511.05269",
+  "pdf_url": "https://arxiv.org/pdf/2511.05269",
+  "retrieved_at": "2026-09-10T22:57:25.928111+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2511.05269",
+      "resolved_url": "https://arxiv.org/abs/2511.05269",
+      "path": "sources/benchmarks/papers/2511.05269/page.html",
+      "bytes": 42780,
+      "sha256": "47354cf70654b6a2574da11e0e5918b22b4f4f9b0427cd82053d02005a3edfb1"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2511.05269",
+      "resolved_url": "https://arxiv.org/pdf/2511.05269",
+      "path": "sources/benchmarks/papers/2511.05269/paper.pdf",
+      "bytes": 5229217,
+      "sha256": "78cb3622c9c4fb6968a2717be48fca347aa881599c04f7ad9da583cc428a2640"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2511.05269: TAMAS: Benchmarking Adversarial Risks in Multi-Agent LLM Systems"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "TAMAS: Benchmarking Adversarial Risks in Multi-Agent LLM Systems"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2511.05269v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Large Language Models (LLMs) have demonstrated strong capabilities as autonomous agents through tool use, planning, and decision-making abilities, leading to their widespread adoption across diverse tasks. As task complexity grows, multi-agent LLM systems are increasingly used to solve problems collaboratively. However, safety and security of these systems remains largely under-explored. Existing benchmarks and datasets predominantly focus on single-agent settings, failing to capture the unique vulnerabilities of multi-agent dynamics and co-ordination. To address this gap, we introduce $\\textbf{T}$hreats and $\\textbf{A}$ttacks in $\\textbf{M}$ulti-$\\textbf{A}$gent $\\textbf{S}$ystems ($\\textbf{TAMAS}$), a benchmark designed to evaluate the robustness and safety of multi-agent LLM systems. TAMAS includes five distinct scenarios comprising 300 adversarial instances across six attack types and 211 tools, along with 100 harmless tasks. We assess system performance across ten backbone LLMs and three agent interaction configurations from Autogen and CrewAI frameworks, highlighting critical challenges and failure modes in current multi-agent deployments. Furthermore, we introduce Effective Robustness Score (ERS) to assess the tradeoff between safety and task effectiveness of these frameworks. Our findings show that multi-agent systems are highly vulnerable to adversarial attacks, underscoring the urgent need for stronger defenses. TAMAS provides a foundation for systematically studying and improving the safety of multi-agent LLM systems."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "TAMAS: Benchmarking Adversarial Risks in Multi-Agent LLM Systems"
+    ],
+    "twitter:description": [
+      "Large Language Models (LLMs) have demonstrated strong capabilities as autonomous agents through tool use, planning, and decision-making abilities, leading to their widespread adoption across..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "TAMAS: Benchmarking Adversarial Risks in Multi-Agent LLM Systems"
+    ],
+    "citation_author": [
+      "Kavathekar, Ishan",
+      "Jain, Hemang",
+      "Rathod, Ameya",
+      "Kumaraguru, Ponnurangam",
+      "Ganu, Tanuja"
+    ],
+    "citation_date": [
+      "2025/11/07"
+    ],
+    "citation_online_date": [
+      "2025/11/07"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2511.05269"
+    ],
+    "citation_arxiv_id": [
+      "2511.05269"
+    ],
+    "citation_abstract": [
+      "Large Language Models (LLMs) have demonstrated strong capabilities as autonomous agents through tool use, planning, and decision-making abilities, leading to their widespread adoption across diverse tasks. As task complexity grows, multi-agent LLM systems are increasingly used to solve problems collaboratively. However, safety and security of these systems remains largely under-explored. Existing benchmarks and datasets predominantly focus on single-agent settings, failing to capture the unique vulnerabilities of multi-agent dynamics and co-ordination. To address this gap, we introduce $\\textbf{T}$hreats and $\\textbf{A}$ttacks in $\\textbf{M}$ulti-$\\textbf{A}$gent $\\textbf{S}$ystems ($\\textbf{TAMAS}$), a benchmark designed to evaluate the robustness and safety of multi-agent LLM systems. TAMAS includes five distinct scenarios comprising 300 adversarial instances across six attack types and 211 tools, along with 100 harmless tasks. We assess system performance across ten backbone LLMs and three agent interaction configurations from Autogen and CrewAI frameworks, highlighting critical challenges and failure modes in current multi-agent deployments. Furthermore, we introduce Effective Robustness Score (ERS) to assess the tradeoff between safety and task effectiveness of these frameworks. Our findings show that multi-agent systems are highly vulnerable to adversarial attacks, underscoring the urgent need for stronger defenses. TAMAS provides a foundation for systematically studying and improving the safety of multi-agent LLM systems."
+    ]
+  },
+  "extracted_text_characters": 139035,
+  "text_searchable": true
+}

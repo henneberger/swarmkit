@@ -1,0 +1,37 @@
+{
+  "kind": "repositories",
+  "id": "maseval__MASEval",
+  "title": "maseval/MASEval",
+  "url": "https://github.com/maseval/MASEval",
+  "retrieved_at": "2026-09-10T22:57:27.332716+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/maseval/MASEval/blob/b58f6f9ae27f7d0951aa33b3024f28dcf210a6ff/LICENSE",
+      "resolved_url": "https://github.com/maseval/MASEval/blob/b58f6f9ae27f7d0951aa33b3024f28dcf210a6ff/LICENSE",
+      "path": "sources/benchmarks/repositories/maseval__MASEval/LICENSE",
+      "bytes": 1077,
+      "sha256": "1e9b3bbdf9bc15c340cc09a28f4ab88c008f2daa417144ef62bd210c1c977ab2"
+    },
+    {
+      "url": "https://github.com/maseval/MASEval/blob/b58f6f9ae27f7d0951aa33b3024f28dcf210a6ff/README.md",
+      "resolved_url": "https://github.com/maseval/MASEval/blob/b58f6f9ae27f7d0951aa33b3024f28dcf210a6ff/README.md",
+      "path": "sources/benchmarks/repositories/maseval__MASEval/README.md",
+      "bytes": 11638,
+      "sha256": "5b8e29337404ea186ab8ed92864ac71b1968c54ef22ff975be18a4371a7b61ac"
+    }
+  ],
+  "status": "ok",
+  "commit": "b58f6f9ae27f7d0951aa33b3024f28dcf210a6ff",
+  "commit_date": "2026-07-05T22:39:50+02:00",
+  "checkout": "sources/benchmarks/repositories/maseval__MASEval/checkout",
+  "experiments_reproduced": false,
+  "license_files": [
+    "LICENSE"
+  ],
+  "audit": {
+    "path": "maseval/core/benchmark.py",
+    "line": 142,
+    "finding": "Framework-neutral evaluation hooks and distinct setup/task/evaluation error controls.",
+    "scope": "selected file inspection, not full audit"
+  }
+}

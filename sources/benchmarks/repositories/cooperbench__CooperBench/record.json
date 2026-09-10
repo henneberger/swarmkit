@@ -1,0 +1,28 @@
+{
+  "kind": "repositories",
+  "id": "cooperbench__CooperBench",
+  "title": "cooperbench/CooperBench",
+  "url": "https://github.com/cooperbench/CooperBench",
+  "retrieved_at": "2026-09-10T22:57:27.272720+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/cooperbench/CooperBench/blob/cdd16702860bbfad28e26d17e7a679caff1a31e3/README.md",
+      "resolved_url": "https://github.com/cooperbench/CooperBench/blob/cdd16702860bbfad28e26d17e7a679caff1a31e3/README.md",
+      "path": "sources/benchmarks/repositories/cooperbench__CooperBench/README.md",
+      "bytes": 10535,
+      "sha256": "c63732976c8bb6aa39947b71b6facf5e65a25c85048cab85d24e859ec4c709ac"
+    }
+  ],
+  "status": "ok",
+  "commit": "cdd16702860bbfad28e26d17e7a679caff1a31e3",
+  "commit_date": "2026-09-09T11:52:49-07:00",
+  "checkout": "sources/benchmarks/repositories/cooperbench__CooperBench/checkout",
+  "experiments_reproduced": false,
+  "license_files": [],
+  "audit": {
+    "path": "src/cooperbench/eval/evaluate.py",
+    "line": 310,
+    "finding": "Separate solo/cooperative patches and feature testing paths. Optional execution backend and dataset setup required.",
+    "scope": "selected file inspection, not full audit"
+  }
+}

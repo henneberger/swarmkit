@@ -1,0 +1,37 @@
+{
+  "kind": "repositories",
+  "id": "ulab-uiuc__MARBLE",
+  "title": "ulab-uiuc/MARBLE",
+  "url": "https://github.com/ulab-uiuc/MARBLE",
+  "retrieved_at": "2026-09-10T22:57:27.435522+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/ulab-uiuc/MARBLE/blob/8d60fa17b5596b44458a52d4296061b9fc13d6f2/LICENSE",
+      "resolved_url": "https://github.com/ulab-uiuc/MARBLE/blob/8d60fa17b5596b44458a52d4296061b9fc13d6f2/LICENSE",
+      "path": "sources/benchmarks/repositories/ulab-uiuc__MARBLE/LICENSE",
+      "bytes": 1066,
+      "sha256": "389d00652aaea7a870e1128c95df7171580f347856b3993f8a0890f1a1cf09ae"
+    },
+    {
+      "url": "https://github.com/ulab-uiuc/MARBLE/blob/8d60fa17b5596b44458a52d4296061b9fc13d6f2/README.md",
+      "resolved_url": "https://github.com/ulab-uiuc/MARBLE/blob/8d60fa17b5596b44458a52d4296061b9fc13d6f2/README.md",
+      "path": "sources/benchmarks/repositories/ulab-uiuc__MARBLE/README.md",
+      "bytes": 4620,
+      "sha256": "96578ff185805096bb005ed067033190c9a28cfb7a31199166597398db019faf"
+    }
+  ],
+  "status": "ok",
+  "commit": "8d60fa17b5596b44458a52d4296061b9fc13d6f2",
+  "commit_date": "2025-08-02T23:37:06-05:00",
+  "checkout": "sources/benchmarks/repositories/ulab-uiuc__MARBLE/checkout",
+  "experiments_reproduced": false,
+  "license_files": [
+    "LICENSE"
+  ],
+  "audit": {
+    "path": "marble/evaluator/evaluator.py",
+    "line": 331,
+    "finding": "parse_score can default to 3 after parsing failure; some communication/planning scores are model-judged.",
+    "scope": "selected file inspection, not full audit"
+  }
+}

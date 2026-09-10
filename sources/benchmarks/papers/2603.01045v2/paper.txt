@@ -1,0 +1,1280 @@
+                                                   S ILO -B ENCH: A Scalable Environment for Evaluating Distributed
+                                                             Coordination in Multi-Agent LLM Systems
+                                          Yuzhe Zhang1 Feiran Liu1 Yi Shan1 Xinyi Huang1 Xin Yang2 Yueqi Zhu1
+                                         Xuxin Cheng4 Cao Liu4 Ke Zeng4 Terry Jingchen Zhang3,5† Wenyuan Jiang3† *
+                                                                     1
+                                                                 Beijing University of Technology, Beijing, China
+                                                         2
+                                                        Zhejiang University, Hangzhou, China 3 ETH Zürich, Switzerland
+                                                 4
+                                                   Meituan LongCat Interaction Team 5 Vector Institute for Artificial Intelligence
+
+                                                                Abstract
+                                                                                                                                          Step 1: Data Partition
+arXiv:2603.01045v2 [cs.MA] 13 Apr 2026
+
+
+
+
+                                              Large language models are increasingly de-                    III-21:
+                                                                                                        Distributed Sort                  9        2        7       1     5      3      8     4       6
+                                              ployed in multi-agent systems to overcome
+                                              context limitations by distributing information
+                                              across agents. Yet whether agents can reli-                                           Step 2: Agent Initialization
+
+                                              ably compute with distributed information,                  This is a Sort task,                    This is a Sort task,           This is a Sort task,
+                                                                                                          I am Agent 0...                         I am Agent 1...                I am Agent 2...
+                                              rather than merely exchange it, remains an
+                                              open question. We introduce S ILO -B ENCH,                               9       2      7                     1       5    3                  8 4       6
+                                              a role-agnostic benchmark of 30 algorithmic
+                                              tasks across three communication complexity                                      Step 3: Collaborative Execution
+
+                                              levels, evaluating 54 configurations over 1,620              I have 9, 2, 7...                  I want to get your data...             Sure ~ I have 8..
+                                              experiments. Our experiments expose a fun-
+                                                                                                                               Iterative                                   Data
+                                              damental Communication-Reasoning Gap:                                            Exchange                                 Propagation
+                                                                                                          Agent 0                                       Agent 1                             Agent 2
+                                              agents spontaneously form task-appropriate co-
+                                              ordination topologies and exchange informa-                                           Step 4: Metric Computation
+                                              tion actively, yet systematically fail to synthe-                                                                               Agent0: ✅ Agent1: ❌
+                                                                                                                   1       2    3     4       5    6    7       8   9
+                                                                                                                                                                              Agent2: ❌
+                                              size distributed state into correct answers. The           Agent 0
+
+                                              failure is localized to the reasoning-integration                    1       2    3     4       7    6    5       8   9                Success Rate: 33.3%
+                                                                                                         Agent 1                                                                    Token Effciency: 194
+                                              stage where agents often acquire sufficient in-                      1       2   Null   4       5     6   7       8   9
+                                                                                                                                                                             Communication Density: 0.92
+                                                                                                                                                                             Partial Corr. Score: 40.0%
+                                              formation but cannot integrate it. This coordi-            Agent 2
+
+
+                                              nation overhead compounds with scale, even-
+                                              tually eliminating parallelization gains entirely.       Figure 1: Pipeline of S ILO -B ENCH. Global information
+                                              These findings demonstrate that naively scaling          is partitioned across N agents, each holding only local
+                                              agent count cannot circumvent context limita-            data. Agents must communicate through the provided
+                                              tions, and S ILO -B ENCH provides a foundation           protocol to reconstruct global truth. Success requires
+                                              for tracking progress toward genuinely collabo-          effective collaboration strategies. This is an example of
+                                              rative multi-agent systems. The code is avail-           the III-21 Distributed Sort (Appendix E.)
+                                              able at https://github.com/jwyjohn/acl26-silo-
+                                              bench.
+                                                                                                       tokens (Reid et al., 2024), the quadratic cost of at-
+                                         1    Introduction                                             tention (Ratner et al., 2023; Yen et al., 2024) makes
+                                                                                                       centralized processing increasingly impractical for
+                                         The rapid advancement of Large Language Models                truly large-scale tasks.
+                                         (LLMs) has demonstrated remarkable capabilities                  Multi-Agent Systems (MAS) offer a compelling
+                                         in individual inference and generation tasks (AI,             architectural paradigm to address this scalability
+                                         2023; Touvron et al., 2023; DeepSeek-AI et al.,               challenge (Zhang et al., 2024a; Wang et al., 2024b).
+                                         2024). However, as the scale and complexity of                By distributing global information across multiple
+                                         real-world problems continue to grow, a fundamen-             agents that collaborate to compute results, MAS
+                                         tal bottleneck has emerged: the limited context               can theoretically overcome the token limitations of
+                                         window of a single model restricts its ability to             single models (Liu et al., 2023). This distributed
+                                         process global information (Li et al., 2024; Chen             approach mirrors successful patterns in traditional
+                                         et al., 2024b; An et al., 2024). Even with recent             computing, from MapReduce to modern distributed
+                                         progress in extending context lengths to millions of          databases, where data partitioning and coordinated
+                                             * † Corresponding Author. Email: wenyjiang@ethz.ch        computation across nodes achieve scales unattain-
+
+                                                                                                   1
+able by a single machine (Dean and Ghemawat,                    success rate, token consumption, and communi-
+2008). In the realm of large models, we define the              cation density.
+scenario where an individual agent has access only
+to partial information, thereby necessitating coordi-       • We expose critical scalability limitations and
+nation to resolve token constraints, as information           the Communication-Reasoning Gap in current
+silos. However, a critical question remains underex-          LLMs. Our results reveal that while agents can
+plored: Can current LLM-based agents effectively              spontaneously discover task-appropriate commu-
+collaborate within information silos to compute a             nication topologies, they fail to translate effective
+globally correct answer (Qian et al., 2024, 2023;             coordination into correct distributed computation.
+Liu et al., 2023)? Existing multi-agent benchmarks            This disconnection, coupled with inefficient in-
+either prescribe fixed communication structures (Li           formation synthesis, causes performance to col-
+et al., 2023; Wu et al., 2024; Hong et al., 2023)             lapse as task complexity increases and the agent
+or focus on social simulation rather than computa-            scale expands.
+tional collaboration (Park et al., 2023; Lan et al.,
+2024). These approaches often introduce inductive           2    Related Work
+bias into the agents’ final outputs (Baltaji et al.,        Context Limitations and Distributed Reason-
+2024). For instance, if an agent is assigned the role       ing. The finite context window of LLMs con-
+of a "doctor", it may exhibit poor performance in           stitutes a fundamental bottleneck for processing
+artistic domains, which contradicts the goal of de-         large-scale information. While recent advances
+veloping general-purpose agents (An et al., 2024;           have extended context lengths to millions of to-
+Qian et al., 2024, 2023; Liu et al., 2023). Further-        kens (Reid et al., 2024; Liu et al., 2024a), the
+more, most benchmarks to date target specific tasks         quadratic computational complexity of attention
+(Deng et al., 2024; Chen et al., 2024a; Gioacchini          mechanisms makes centralized processing increas-
+et al., 2024) and fail to address a significant gap         ingly resource-intensive and prone to “lost-in-the-
+in our understanding: whether logic-based models            middle” phenomena (Liu et al., 2024b). Although
+can autonomously discover and execute effective             Retrieval-Augmented Generation (RAG) offers a
+coordination strategies for distributed computing           palliative solution (Wang et al., 2024c; Islam et al.,
+problems. Addressing this gap is a key objective            2024b), it often fractures global context, strug-
+for future AGI evaluation. To bridge this gap, we           gling with tasks that require holistic reasoning
+propose S ILO -B ENCH—a pioneering benchmark                across disjoint segments. Existing benchmarks like
+for evaluating free-form communication and col-             SCROLLS (Shaham et al., 2022), LongBench (Bai
+laboration in multi-agent LLM systems (Liu et al.,          et al., 2024), and ∞Bench (Zhang et al., 2024b)
+2023). In summary, our contributions are as fol-            effectively evaluate single-agent retrieval but over-
+lows:                                                       look the paradigm of distributed collaboration. We
+• We introduce S ILO -B ENCH, a role-agnostic               posit that overcoming the context barrier requires
+  configurable environment for evaluating dis-              shifting from centralized attention to collaborative
+  tributed coordination under information si-               computation, where agents act as distributed pro-
+  los. Unlike static test suites that prescribe fixed       cessors, to digest partitioned information and syn-
+  roles and communication scripts, our framework            thesize global insights, which is a capability cur-
+  can generate unlimited evaluation instances while         rently unmeasured by standard long-context evalu-
+  providing high-level task hints and allowing ob-          ations.
+  servation of whether agents can translate struc-
+                                                            Multi-Agent      Architectures      and    Role-
+  tural understanding into effective coordination
+                                                            Agnosticism. The paradigm of orchestrating
+  protocols (Press et al., 2021; Liu et al., 2023).
+                                                            multiple LLM agents has evolved from simple
+• We conduct the largest systematic study of                role-playing to complex problem-solving frame-
+  multi-agent collaboration to date by instanti-            works. Foundational works like CAMEL (Li
+  ating 54 representative configurations. Span-             et al., 2023) and MetaGPT (Hong et al., 2023)
+  ning diverse protocols and computing paradigms            utilize role-specialized agents (e.g., assigning
+  (Zhao et al., 2024; Islam et al., 2024a), we pro-         “Manager” or “Coder” personas) embedded
+  pose a multi-dimensional metric suite to com-             within fixed hierarchical or waterfall workflows.
+  prehensively quantify the trade-off between task          While effective for domain-specific tasks like
+
+                                                        2
+                                                    Exchange      1           Exchange       2        I need to exchange
+                                                                                                      with everyone to get        1
+                               4
+                                                                                                      more information~
+                                                                                                                                 Agent 1
+                     Agent 4
+      1    2   3                   I need all       1                                            2
+                                   your data!
+           4                                             Agent 1                   Agent 2
+                                                                                                                                             2
+                                                                                                            3
+                               1                                   Exchange    4
+                     Agent 1                                                                                                               Agent 2
+                                                                                                       Agent 3
+
+    2                                           3   3                                            4     Who have   2   ?      4    Agent 4
+          Agent 2                  Agent 3              Agent 3                    Agent 4
+
+           Level I  ：Aggregation                        Level II      ：Mesh Network                          Level III: Global Shuffle
+
+Figure 2: Three complexity levels in S ILO -B ENCH characterized by their communication patterns. Level I
+(Aggregation): A central agent collects data from all peers via a star topology. Level II (Mesh Network): Agents
+exchange information with immediate neighbors through pairwise communication. Level III (Global Shuffle): All
+agents must communicate with every other agent, requiring full mesh connectivity.
+
+
+software engineering (Islam et al., 2024a) and                                 can be attributed to coordination demands rather
+interactive image generation (Ma et al., 2025),                                than ad hoc task choice. The theoretical founda-
+these approaches entangle the agents’ reasoning                                tion for analyzing distributed computation costs
+capabilities with semantic role priors, making                                 dates back to Yao’s seminal work on communica-
+it difficult to isolate the contribution of the                                tion complexity (Yao, 1979), which established the
+communication architecture itself. Other efforts,                              framework for quantifying the minimum bits re-
+such as debate-based systems (Du et al., 2023) or                              quired for distributed parties to compute a function.
+Mixture-of-Agents (Wang et al., 2024a; Su et al.,                              Building on this foundation, we categorize tasks by
+2026), often prescribe static topological constraints                          their optimal communication complexity:
+that limit dynamic information flow. We introduce
+S ILO -B ENCH, a role-agnostic configurable                                                          τk = (fk , Xk , yk∗ )                    (1)
+environment with task-structural guidance
+for evaluating distributed coordination under                                  where fk specifies the computational function, Xk
+information silos. Unlike static test suites that                              is the global input data, and yk∗ is the ground-
+prescribe fixed roles and communication scripts,                               truth answer. Tasks are organized into three levels
+our framework dynamically generates unlimited                                  based on their optimal communication complex-
+evaluation instances while providing high-level                                ity (complete task specifications are provided in
+task hints, allowing observation of whether agents                             Appendix E).
+can translate structural understanding into effective                          Level I: Aggregation (O(N ) communication).
+coordination protocols (Press et al., 2021; Liu                                As illustrated in Figure 2 (left), these tasks ex-
+et al., 2023).                                                                 hibit embarrassingly parallel structure followed by
+                                                                               reduction. Each agent processes its local shard
+3         S ILO -B ENCH                                                        independently, producing intermediate results ag-
+This section presents the architecture of S ILO -                              gregated through associative operations (e.g., max,
+B ENCH, a configurable environment for evaluating                              sum, xor). The optimal topology is a star or tree
+multi-agent collaboration under information silos.                             structure where one agent collects all partial re-
+Each configuration is defined by three orthogonal                              sults. Representative tasks include global maxi-
+dimensions: agent scale N , communication pro-                                 mum (LC-414: “Third Maximum Number”), dis-
+tocol P , and language model M. We describe                                    tributed voting (LC-169: “Majority Element”), and
+the task space, evaluation metrics, and execution                              word frequency counting (LC-2085).
+pipeline.                                                                      Level II: Mesh Network (O(N ) communication).
+                                                                               As shown in Figure 2 (center), these tasks exhibit
+3.1        Task Space
+                                                                               spatial locality: agent i’s computation depends pri-
+A central design goal of S ILO -B ENCH is to ground                            marily on neighboring agents i − 1 and i + 1. Infor-
+task difficulty in principled communication com-                               mation propagates through a structured mesh via
+plexity theory, so that observed performance gaps                              pairwise exchanges, with optimal topology being
+
+                                                                          3
+a linear chain requiring N − 1 point-to-point ex-            denote the total number of messages successfully
+changes. Representative tasks include prefix sum             transmitted outward by agent i during the entire
+(LC-1480), moving average (LC-346: “Moving Av-               collaboration.
+erage from Data Stream”), and trapping rain water
+                                                             Success Rate (S). Measures the proportion of
+(LC-42).
+                                                             agents converging to the correct answer:
+Level III: Global Shuffle (O(N log N ) to O(N 2 )                                    N
+communication). As depicted in Figure 2 (right),                              1 X
+                                                                           S=     1[ŷi = y∗ ]                 (2)
+these tasks feature irregular, potentially all-to-all                         N
+                                                                                    i=1
+communication patterns where any agent’s out-
+put may depend on information from any other                 A task instance is successful when S = 1, indicat-
+agent. The range O(N log N )–O(N 2 ) spans from              ing unanimous convergence.
+the classical lower bound for distributed reorgani-          Partial Correctness Score (P). Binary success
+zation to the full-consensus cost imposed by our             rate can understate partial progress. We intro-
+evaluation criterion, where every agent must out-            duce a continuous measure of answer quality tai-
+put the complete global answer. Representative               lored to each task category: for Level-I, P is the
+tasks include distributed sorting (LC-912), graph            fraction of agents within tolerance of the ground
+connectivity (LC-323), and matrix multiplication             truth; for Level-II, the fraction of correctly com-
+(LC-311).                                                    puted elements per local segment; for Level-III, the
+                                                             longest correctly ordered subsequence relative to
+3.2   Task Construction Pipeline.
+                                                             total length. Letting qi ∈ [0, 1] denote the per-agent
+LeetCode problems serve solely as algorithmic in-            quality score:
+spiration and we do not transform raw LeetCode
+                                                                                           N
+data. For each task category (e.g., “Global Max-                                   1 X
+imum”), we independently implement a Python                                     P=     qi                      (3)
+                                                                                   N
+                                                                                          i=1
+generator that programmatically produces random
+inputs and exact ground-truth answers. A task                Together with S, this score allows us to isolate
+instance is one concrete input–output pair drawn             where coordination breaks down: the gap P −
+from this generator under a fixed (N, P, M) con-             S quantifies performance lost specifically at the
+figuration, where N is the agent scale, P the com-           reasoning-integration stage rather than at the com-
+munication protocol, and M the language model,               munication stage.
+and a fixed random seed, ensuring reproducibility
+while allowing unlimited fresh instances.                    Token Consumption (C). Quantifies computa-
+   To illustrate: for Level-I Global Maximum (in-            tional cost per communication round:
+spired by LC-414, the “Third Maximum Number”                                   PN PR out
+                                                                                           t [r]
+problem), given agent count N and per-agent shard                          C = i=1 r=1 i            (4)
+                                                                                    Rmax
+size k, the generator (i) samples N × k integers uni-
+formly at random, (ii) partitions them into N equal          where tout
+                                                                     i [r] is the number of output tokens gen-
+shards X1 , . . . , XN , (iii) computes y ∗ = max(X ),       erated by agent i in round r, and Rmax is the max
+and (iv) records the fixed seed for reproducibility.         number of rounds executed.
+Each agent receives only its local shard Xi and must
+coordinate to determine y ∗ . This pipeline general-         Communication Density (D). Captures inter-
+izes directly to all 30 tasks: the generator encodes         agent interaction intensity. Here N (N − 1) is
+the task-specific function fk , scales global input          the directed-edge count when each ordered pair
+size proportionally with N to maintain constant per-         exchanges exactly one message; since agents may
+agent workload, and produces exact ground-truth              send multiple messages to the same recipient across
+answers enabling fully objective evaluation.                 rounds, D ∈ [0, +∞):
+                                                                                     PN
+3.3   Evaluation Metrics                                                                  i=1 mi
+                                                                              D=                               (5)
+                                                                                    N (N − 1)
+We define four complementary metrics to capture
+both what agents achieve and how they coordinate.            Values near 0 suggest sparse, targeted exchanges;
+Let ŷi denote agent i’s submitted answer, and let mi        D = 1 indicates one message per directed pair on
+
+                                                         4
+average; values exceeding 1 reflect iterative multi-         Send to Agent3             Broadcast !
+                                                                                                      Agent 2    Agent 1
+                                                                              Agent 2
+round exchanges. For the SFS protocol (see Ap-                                                                      Agent 2
+
+pendix A), mi counts the number of times other                                                                   File System
+                                                              Agent 1         Agent 3                  Agent 3
+agents successfully read files written by agent i,                                          Agent 1
+                                                                                                                 Agent 3
+                                                               Received                                             Agent 4
+preserving the same “information actually trans-              from Agent1
+                                                                                                      Agent 4
+                                                                              Agent 4
+ferred” semantics as direct message-passing.                        P2P                          BP                SFS
+   Together, S and P measure what agents achieve,
+                                                             Figure 3: The three communication protocols employed
+C measures at what cost, and D reveals how they
+                                                             in S ILO -B ENCH.
+coordinate.
+3.4    Execution Pipeline
+                                                             Agent Scale (N ). We vary team size across
+Given task τ = (f, X , y ∗ ) and configuration               N ∈ {2, 5, 10, 20, 50, 100}, chosen to probe quali-
+(N, P, M), the evaluation proceeds through four              tatively distinct coordination regimes. The min-
+phases.                                                      imal team (N = 2) isolates fundamental pair-
+Phase 1: Data Partition. PARTITION(X , N ) →                 wise coordination without overhead. Small groups
+{X1 , . . . , XN }, where |Xi | ≈ |X |/N ensures equal       (N ∈ {5, 10}) allow agents to feasibly track all
+partition and no agent holds privileged information.         peers simultaneously. Medium scale (N = 20)
+                                                             begins to make exhaustive peer tracking challeng-
+Phase 2: Agent Initialization. Each agent i is               ing, pushing agents toward selective communica-
+initialized with model M and receives I NIT(i) ←             tion. Large scale (N ∈ {50, 100}) makes hierar-
+(desc(f, Xi ), P ), specifying the core task logic,          chical or highly selective coordination effectively
+local data, and protocol constraint. The prompt              necessary—and, as our results confirm, largely be-
+provides task-structural guidance while preserving           yond the reach of current LLMs.
+strategic autonomy (see Appendix B).
+                                                             Communication Protocol (P ). As shown in
+Phase 3: Collaborative Execution. Agents en-                 Figure 3, we instantiate three protocols: P2P—
+gage in iterative communication for up to Rmax               directed messaging where agents explicitly address
+rounds. All N agents are activated in parallel               individual recipients; BP—broadcast messaging
+within each round: they receive incoming messages            where each transmission reaches all agents simul-
+from the previous round, independently decide on             taneously; SFS—indirect coordination through a
+actions, and execute them simultaneously. Mes-               shared file system. Agents retain complete auton-
+sages or files written in round r become visible             omy in deciding what to share, with whom, and
+at the start of round r + 1. Execution terminates            when. Detailed specifications are provided in Ap-
+when all agents submit answers or the round limit            pendix A.
+is reached.
+                                                             Language Model (M). All N agents within a
+Phase 4: Metric Computation. The four metrics
+                                                             configuration share the same model, isolating co-
+(S, P, C, D) are computed from submitted answers
+                                                             ordination capability from heterogeneity effects.
+{ŷi }N
+      i=1 and recorded communication logs.
+                                                             We evaluate three frontier open-source models:
+4     Experiments                                            DeepSeek-V3.1 (DeepSeek-AI et al., 2024), GPT-
+                                                             OSS-120B (OpenAI et al., 2025), and Qwen3-
+We systematically evaluate multi-agent coordina-             Next-80B-A3B (Yang et al., 2025).
+tion across three orthogonal axes: (i) agent scale,
+(ii) communication protocol, and (iii) language                  Our Experimental Setup
+model, yielding a factorial design that covers quali-
+tatively distinct coordination regimes.                          Tasks: 30 (10 per difficulty level)
+                                                                 Scales: 6 (2, 5, 10, 20, 50, 100)
+4.1    Experimental Setup                                        Protocols: 3 (P2P, BP, SFS)
+Each evaluation instance in S ILO -B ENCH is speci-              Models: 3 (DeepSeek, GPT, Qwen)
+fied by agent scale N , communication protocol P ,
+and language model M. All models are deployed                   This yields 6 × 3 × 3 = 54 unique configura-
+locally with default temperature and 128K context            tions and 30 × 54 = 1,620 total experiments (see
+windows.                                                     Appendix C for infrastructure details). To disen-
+
+                                                         5
+tangle coordination overhead from intrinsic task           hold nearly all required information but still fail to
+difficulty, we additionally conduct N =1 baseline          produce a correct final answer.
+experiments where a single agent receives the com-
+                                                           Performance degrades multiplicatively with
+plete global input and answers directly without
+                                                           scale and complexity. Figure 5 and Table 3 show
+communication. We define Relative Coordination
+                                                           that task complexity and agent scale interact mul-
+Cost (RCC) = 1 − SR(N =k)/SR(N =1), captur-
+                                                           tiplicatively. DeepSeek-V3.1 drops from 62% on
+ing the fraction of single-agent performance lost
+                                                           Level-I to 12% on Level-III, and Level-III tasks
+to coordination overhead. The N =1 oracle repre-
+                                                           reach zero success at N ≥50, while Level-I tasks re-
+sents the upper bound; S ILO -B ENCH asks whether
+                                                           main above 40% even at 100 agents. As Figure 4 il-
+distributed agents can approach this bound through
+                                                           lustrates, all models degrade with agent count, and
+coordination alone.
+                                                           communication density decreases at larger scales
+4.2   Overall Performance                                  and agents become sparser in interaction precisely
+Table 1 summarizes performance across all mod-             when denser coordination is most needed.
+els and configurations. DeepSeek-V3.1 achieves             4.3    Protocol Suitability
+a 36.9% average success rate, followed by GPT-
+OSS-120B at 16.9% and Qwen3 at 8.2%—a 4.5×                 Having established that coordination fails broadly,
+spread. Even the strongest model fails nearly two-         we examine whether protocol choice modulates this
+thirds of the time, establishing that current LLMs         failure. Figure 6 reveals distinct model-protocol
+cannot reliably coordinate under information silos.        affinities. DeepSeek-V3.1 prefers broadcast mes-
+                                                           saging (40% with BP vs. 32% with SFS), while
+Coordination overhead, not task difficulty,                GPT-OSS-120B performs best with targeted com-
+drives the performance gap. To confirm that                munication (20% under P2P vs. 14% under BP),
+failures stem from coordination rather than intrin-        suggesting that protocol suitability depends on how
+sic task hardness, we compare multi-agent suc-             a model balances the cognitive cost of address-
+cess rates against the N =1 oracle. Table 2 reports        ing decisions against the noise of undifferentiated
+results for GPT-OSS-120B (trends are consistent            broadcasts. SFS underperforms in most cases: de-
+across models). Even at the smallest team size             spite comparable information transfer volume to
+(k=2), multi-agent systems already lose 15–49%             BP, it consistently yields lower SR, indicating that
+of single-agent performance, and RCC compounds             the bottleneck lies in reasoning about shared state
+steadily with scale, reaching 80–100% at k=50              rather than in communication volume.
+for Level-II and Level-III tasks. Crucially, the
+single-agent success rate difference between Level-        5     Analysis and Discussion
+I and Level-III is modest—only about 15 percent-
+                                                           The preceding results establish that coordination
+age points—yet the multi-agent gap balloons to
+                                                           broadly fails, that failures scale with complexity,
+over 18 percentage points, confirming that perfor-
+                                                           and that agents accumulate partial information they
+mance collapse is driven by coordination failure,
+                                                           cannot synthesize. We now investigate the mecha-
+not by the tasks themselves being harder.
+                                                           nisms: first asking whether agents at least discover
+Agents gather information but fail to integrate it.        the right structural approach, then tracing exactly
+While RCC reveals that coordination fails, the Par-        where execution breaks down.
+tial Correctness Score (PCS) reveals where. PCS
+measures continuous answer quality (Section 3.3),          5.1    Case Study: Emergent Coordination
+and the divergence between PCS and SR isolates                    Patterns
+the reasoning-integration stage as the bottleneck.         Figure 7 visualizes the communication patterns
+At N ≥50 on Level-III tasks, SR drops to 0% while          that agents spontaneously adopt for three represen-
+PCS remains at 8–16%, confirming that agents ac-           tative tasks. In the Global Max heatmap (Level-I,
+quire partial global information but cannot synthe-        left), nearly all message traffic flows into column
+size it correctly. This dissociation appears even on       0: Agent 0 emerges organically as a central aggre-
+simpler tasks: averaged across all scales on Level-I       gator, producing a near-perfect star topology. This
+tasks, DeepSeek-V3.1 achieves a PCS of 88.0% yet           self-organized structure closely matches the theo-
+an SR of only 62.0% (Table 1), a gap of 26 per-            retically optimal pattern and yields high task suc-
+centage points indicating that agents collectively         cess. In the Prefix Sum heatmap (Level-II, center),
+
+                                                       6
+                            DeepSeek-V3.1                        GPT-OSS-120B                     Qwen3-Next-80B-A3B
+   Dimension
+                    SR↑     PCS↑      Token↓    Den.   SR↑       PCS↑    Token↓     Den.   SR↑      PCS↑      Token↓     Den.
+                                                  By Communication Protocol
+       BP           40.4     50.7     297.3     0.93 14.4    33.1     148.7         0.78    4.5      12.2      846.9     0.13
+       P2P          38.9     50.4     363.1     1.52 20.3    42.6     579.8         2.25   10.5      26.5      909.8     0.62
+       SFS          31.5     41.0     308.5     1.13 16.0    34.7     212.8         0.74    9.5      18.7      864.4     0.21
+                                                       By Difficulty Level
+       Level I      62.0     88.0     184.0     0.71   27.4     56.8     187.1      1.05   20.7      44.4      747.1     0.62
+       Level II     35.1     59.7     355.9     0.98   14.5     35.3     330.1      1.18    2.9      11.9      990.1     0.19
+       Level III    11.7     27.9     439.2     1.93    8.8     22.7     424.2      1.54    1.0       1.5      881.6     0.16
+                                                         By Agent Scale
+       N=2          61.2     78.4       12.1    2.80   34.4    52.0        6.3      2.82   17.2      23.7      41.2      0.54
+       N=5          48.5     68.2       44.2    1.94   28.0    47.9       30.6      1.78    9.1      15.7      112.4     0.42
+       N = 10       39.9     59.1       91.3    1.19   14.0    36.8       77.6      1.35    8.6      19.0      261.4     0.38
+       N = 20       33.6     60.2      211.0    0.72   13.2    37.0      194.1      0.88    7.4      20.1      549.6     0.35
+       N = 50       19.0     46.8      510.3    0.25    5.2    27.3      549.8      0.46    5.1       9.1     1466.3     0.14
+       N = 100      18.1     46.5     1093.8    0.14    6.4    28.7     1024.2      0.24    1.3       5.1     2901.1     0.08
+   Average          36.9     47.1     323.0     0.82   16.9      38.3     313.8     1.01    8.2      19.8      873.6     0.25
+
+Table 1: Overall performance summary across all models and configurations. SR = Success Rate (%), PCS = Partial
+Correctness Score (%), Token = Token Consumption (tokens/round), Den. = Communication Density. Best results
+per section in bold.
+
+                           Level I (Aggregation)                 Level II (Mesh)            Level III (Global Shuffle)
+       Scale k       SR(N =1)       SR(N =k)    RCC    SR(N =1)       SR(N =k)     RCC     SR(N =1)    SR(N =k)        RCC
+       k=2             96.7           82.0     15.2%      90.0          62.0       31.1%     80.0           41.0       48.8%
+       k=5             93.3           65.0     30.3%      70.0          47.0       32.9%     73.3           22.0       70.0%
+       k = 10          76.7           51.3     33.1%      73.3          22.0       70.0%     60.0            9.0       85.0%
+       k = 20          63.3           48.0     24.2%      36.7          14.0       61.8%     43.3            7.0       83.8%
+       k = 50          33.3           18.0     45.9%      30.0           6.0       80.0%     26.7            0.0       100%
+       k = 100         20.0           10.0     50.0%      13.3           5.0       62.4%     10.0            0.0       100%
+
+Table 2: Single-agent baseline SR (%), multi-agent SR (%), and Relative Coordination Cost (RCC = 1 −
+SR(N =k)/SR(N =1)) for GPT-OSS-120B across difficulty levels and scales. RCC columns (shaded) quantify the
+fraction of single-agent performance lost to coordination overhead. Trends are consistent across all three models;
+full results in Appendix F.
+
+
+ Level       N=2    N=5     N=10      N=20     N=50    N=100         tributed Sort heatmap (Level-III, right), the matrix
+ I           85.0   72.0     68.7     65.7     38.1    40.6          is uniformly dense: agents exchange messages with
+ II          61.7   55.3     28.3     29.5     17.4    14.3          nearly every other agent, which is precisely what
+ III         36.2   17.2     10.0     5.7      0.0     0.0           global data reorganization demands, yet the high
+ Avg         61.2   48.5     39.9     33.6     19.0    18.1          density comes with highly uneven per-agent loads,
+                                                                     and some senders dominate entire rows, suggest-
+Table 3: Success Rate (%) by agent count and difficulty              ing uncoordinated flooding rather than structured
+level for DeepSeek-V3.1 (averaged across all protocols).             exchange.
+
+                                                                        Taken together, these patterns confirm that
+a prominent diagonal band reflects agents commu-                     agents can translate high-level task descriptions
+nicating primarily with their immediate neighbors,                   into broadly appropriate coordination topologies
+correctly capturing the sequential dependency of                     without explicit instruction. Yet the heatmaps also
+the prefix computation. However, off-diagonal scat-                  reveal a consistent gap between structural intent
+ter reveals that agents also broadcast beyond their                  and execution quality: even when the right topol-
+neighbors, generating redundant overhead rather                      ogy emerges, agents over-communicate, distribute
+than the clean chain the task requires. In the Dis-                  load unevenly, or fail to adhere to the optimal pat-
+
+                                                                 7
+                                                                                                                           ' H H S 6 H H N  9                                                                                                                    ' H H S 6 H H N  9                                                                                                      ' H H S 6 H H N  9   
+                                                                                                                         * 3 7  2 6 6     %                                                                                                                   * 3 7  2 6 6     %                                                                                                        * 3 7  2 6 6     %
+
+
+
+
+                                                                                                                                                                                                                                                                                                                        & R P P X Q L F D W L R Q  ' H Q V L W \
+                                                                                                                                                                                                                                       
+                                                                                                                           4 Z H Q   1 H [ W    %                                                                                                             4 Z H Q   1 H [ W    %                                                                                                    4 Z H Q   1 H [ W    %
+
+
+
+
+                                                                                                                                                                                      7 R N H Q  & R Q V X P S W L R Q
+                                                                                                                                                                                                                                                                                                                                                                       
+                             6 X F F H V V  5 D W H    
+
+
+                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                       
+                                                                 
+                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                                                                                           
+                                                                                                        1 X P E H U  R I  $ J H Q W V                                                                                                                                    1 X P E H U  R I  $ J H Q W V                                                                         1 X P E H U  R I  $ J H Q W V
+
+Figure 4: Scaling behavior across agent counts. (a) Success rates decline for all models as team size increases, with
+sharp drops beyond N = 20. (b) Token consumption scales roughly linearly with agent count. (c) Communication
+density decreases at scale, suggesting coordination sparsification.
+
+
+                                                                                                                                   ' H H S 6 H H N  9                * 3 7  2 6 6     %                                        4 Z H Q   1 H [ W    %
+                                                                                                                                                                                                                                                                                        yielding answer 208 vs. the expected 114. Consen-
+                                       
+  6 X F F H V V  5 D W H    
+
+
+
+
+                                                                                                                                                                                                                                                                                            sus Failure (29.9%) occurs when agents communi-
+                                                                                                                               
+                                                                                                                                                                                                                                                                                        cate actively but cannot converge; one 100-agent
+                                                                                                           
+                                                                                                                                               
+                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                            XOR checksum run produced 12 distinct answers,
+                                                                                                                                                                                                                                                           
+                                           
+                                                                       / H Y H O  ,   $ J J U H J D W L R Q                    / H Y H O  , ,   0 H V K                                                            / H Y H O  , , ,   6 K X I I O H 
+                                                                                                                                                                                                                                                                                            with 86 agents converging on 146 while the re-
+                                                                                                                                                                                                                                                                                            mainder submitted values ranging from 42 to 238.
+                                                                Figure 5: Success rate by difficulty level.                                                                                                                                                                                 Computation Error (28.6%) arises when agents col-
+                                       
+                                                                                                                                                                                                                                                                                            lect all required data yet compute incorrectly, such
+                                                                                                                                   ' H H S 6 H H N  9                * 3 7  2 6 6     %                                        4 Z H Q   1 H [ W    %
+                                       
+                                                                                                                                                                                                                                                                                    as submitting 619 instead of 620 due to an off-by-
+   6 X F F H V V  5 D W H    
+
+
+
+
+                                       
+                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                            one error during final aggregation. These modes
+                                       
+                                                                                           
+                                                                                                                                                 
+                                                                                                                                                                                                                                                                                        frequently co-occur: 67 runs exhibit both Prema-
+                                                                                                                                                                                                                                                          
+                                       
+                                                                                                                                                                                                                                                                                         ture Submission and Consensus Failure, as early
+                                           
+                                                                            % U R D G F D V W   % 3                        3 H H U  W R  3 H H U   3  3                                6 K D U H G  ) L O H  6 \ V W H P   6 ) 6                                              exits prevent subsequent consensus-building and
+                                                                                                                                                                                                                                                                                            widen the convergence gap for remaining agents.
+             Figure 6: Success rate by communication protocol.
+                                                                                                                                                                                                                                                                                               Together, these three modes define the
+                                                                                                                                                                                                                                                                                            Communication-Reasoning Gap: agents ex-
+tern. This raises the core question addressed next:                                                                                                                                                                                                                                         hibit proficiency in the social mechanics of
+given that agents communicate in approximately                                                                                                                                                                                                                                              coordination—formatting messages, responding
+the right way, why do they still so often fail?                                                                                                                                                                                                                                             to peers, organizing information flow—while fail-
+                                                                                                                                                                                                                                                                                            ing at the computational core of determining in-
+5.2                                                            The Communication-Reasoning Gap                                                                                                                                                                                              formation sufficiency and synthesizing distributed
+To classify failure systematically, we apply a two-                                                                                                                                                                                                                                         state. This is not a failure of effort: behavioral com-
+stage hybrid procedure: rule-based detection iden-                                                                                                                                                                                                                                          parison shows successful runs complete in fewer
+tifies Premature Submission (agent submits before                                                                                                                                                                                                                                           rounds, while verification behaviors appear in over
+reaching the task-specific minimum peer count),                                                                                                                                                                                                                                             95% of runs regardless of outcome. The bottleneck
+Consensus Failure (|{ŷi }N
+                          i=1 | > 1), and Computa-
+                                                                                                                                                                                                                                                                                            is reasoning quality at the integration stage, not
+tion Error (full data receipt confirmed in log but                                                                                                                                                                                                                                          communication intent.
+answer incorrect). Two independent annotators
+then reviewed stratified runs, achieving Cohen’s                                                                                                                                                                                                                                            5.3       Implications and Future Directions
+κ = 0.87; disagreements were resolved by discus-                                                                                                                                                                                                                                            The analyses jointly reveal a structural asymmetry
+sion.                                                                                                                                                                                                                                                                                       with practical consequences. Coordination over-
+    Analyzing execution logs under this scheme, we                                                                                                                                                                                                                                          head does not merely reduce parallelization gains.
+identified three distinct failure modes (Table 4).                                                                                                                                                                                                                                          For Level-III tasks at N ≥50, it eliminates them en-
+Premature Submission (37.2%) is the most preva-                                                                                                                                                                                                                                             tirely, leaving a coordinated team outperformed by
+lent: agents submit before gathering sufficient                                                                                                                                                                                                                                             a single agent with full data access. Perhaps most
+information—Agent-77 in Task I-06, for instance,                                                                                                                                                                                                                                            counterintuitively, spontaneous leader emergence
+submitted after contacting only 28 of 100 agents,                                                                                                                                                                                                                                           which is conventionally assumed to help, actively
+
+                                                                                                                                                                                                                                                                                   8
+                                                                                Communication Heatmaps (P2P, deepseek-v3.1)
+                               I-01: Global Max                                                               II-11: Prefix Sum                                                        III-21: Distributed Sort
+                                    (N=20)                         4.0
+                                                                                                                   (N=20)                          6
+                                                                                                                                                                                                (N=20)                       10
+             0                                                                                0                                                                            0
+
+             2                                                     3.5                        2                                                                            2
+                                                                                                                                                   5
+                                                                                                                                                                                                                             8
+             4                                                                                4                                                                            4
+                                                                   3.0
+             6                                                                                6                                                    4                       6
+                                                                   2.5
+                                                                                                                                                                                                                             6
+             8                                                                                8                                                                            8
+Sender ID
+
+
+
+
+                                                                                 Sender ID
+
+
+
+
+                                                                                                                                                              Sender ID
+                                                                     Messages
+
+
+
+
+                                                                                                                                                   Messages
+
+
+
+
+                                                                                                                                                                                                                                 Messages
+                                                                   2.0                                                                             3
+            10                                                                               10                                                                           10
+                                                                                                                                                                                                                             4
+            12                                                     1.5                       12                                                                           12
+                                                                                                                                                   2
+            14                                                                               14                                                                           14
+                                                                   1.0
+                                                                                                                                                                                                                             2
+            16                                                                               16                                    Expected        1                      16
+                                                                   0.5                                                             diagonal
+            18                                                                               18                                                                           18
+                                                                   0.0                                                                             0                                                                         0
+                 0   2     4   6    8   10   12   14   16   18                                    0   2   4    6    8   10   12    14   16    18                               0   2   4   6    8   10   12   14   16   18
+                                   Receiver ID                                                                     Receiver ID                                                                 Receiver ID
+
+
+Figure 7: Communication heatmaps for representative tasks with N = 20 agents using DeepSeek-V3.1. Left: I-01
+(Global Max) shows emergent leader pattern. Center: II-11 (Prefix Sum) exhibits diagonal pattern indicating partial
+spatial locality discovery. Right: III-21 (Distributed Sort) shows dense all-to-all communication.
+
+
+                         Failure Mode                            Count                 Percent                                   overhead eliminates parallelization gains entirely
+                         Success                                  153                        50.8%                               at high complexity. Most strikingly, spontaneous
+                         Premature Submission                     112                        37.2%                               leader emergence actively hurts performance on
+                         Consensus Failure                         90                        29.9%
+                         Computation Error                         86                        28.6%
+                                                                                                                                 complex tasks, revealing that self-organized cen-
+                                                                                                                                 tralization creates bottlenecks rather than resolving
+Table 4: Failure mode distribution (categories not mutu-                                                                         them.
+ally exclusive).                                                                                                                    Closing this gap will require mechanisms for
+                                                                                                                                 information sufficiency detection, explicit consen-
+hurts performance on Level-III tasks, because the                                                                                sus protocols, and adaptive coordination strategies.
+aggregator becomes overwhelmed by the volume                                                                                     S ILO -B ENCH provides the evaluation infrastruc-
+of global data it must process.                                                                                                  ture to track progress along these directions.
+   Three directions follow. First, agents need mech-
+anisms to detect information sufficiency before
+committing to a final answer. Second, the explicit                                                                               Limitations
+synchronization checkpoints present in success-
+ful runs should be formalized as consensus pro-                                                                                  While S ILO -B ENCH provides a comprehensive
+tocols. Third, adaptive protocol selection based                                                                                 framework for evaluating multi-agent collabora-
+on task structure could unlock model-protocol co-                                                                                tion, it has several limitations. Our evaluation only
+optimization, given the model-dependent affinities                                                                               covers three fundamental communication protocols
+observed. S ILO -B ENCH provides the evaluation                                                                                  and does not include other coordination mecha-
+foundation for tracking progress along all three.                                                                                nisms such as hierarchical protocols, gossip-based
+                                                                                                                                 dissemination and hybrid approaches. We adopt
+6                Conclusion
+                                                                                                                                 agent configurations with uniform underlying mod-
+We introduce S ILO -B ENCH to evaluate distributed                                                                               els, whereas real-world multi-agent systems usually
+coordination in multi-agent LLM systems across                                                                                   involve heterogeneous compositions with distinct
+1,620 experiments. The results are unambiguous:                                                                                  coordination patterns. Closed-source models are
+current LLMs cannot reliably escape their informa-                                                                               not evaluated in this work due to their high cost at
+tion silos through coordination alone.                                                                                           our scale and unverifiable, incomparable reported
+   The Communication-Reasoning Gap identifies                                                                                    token usage. In addition, our assessment focuses
+the precise fault line: agents are competent commu-                                                                              on three frontier LLMs, which may not capture
+nicators but poor distributed reasoners. They spon-                                                                              the full spectrum of failure modes across all LLMs
+taneously form task-appropriate topologies and ex-                                                                               since each model has unique characteristics in rea-
+change information actively, yet consistently fail                                                                               soning logic, communication strategies and error
+to integrate what they have gathered—a dissoci-                                                                                  propagation that lead to distinct performance limi-
+ation made concrete by the PCS–SR divergence                                                                                     tations.
+and the RCC analysis showing that coordination
+
+                                                                                                                         9
+References                                                      Luca Gioacchini, Giuseppe Siracusano, Davide Sanvito,
+                                                                  Kiril Gashteovski, David Friede, Roberto Bifulco,
+Open AI. 2023. Gpt-4 technical report. arXiv preprint             and Carolin Lawrence. 2024. Agentquest: A modu-
+  arXiv:2303.08774.                                               lar benchmark framework to measure progress and
+                                                                  improve llm agents. CoRR.
+Chenxin An, Shansan Gong, Ming Zhong, Xingjian
+  Zhao, Mukai Li, Jun Zhang, Lingpeng Kong, and                 Sirui Hong, Mingchen Zhuge, Jonathan Chen, Xiawu
+  Xipeng Qiu. 2024. L-eval: Instituting standardized               Zheng, Yuheng Cheng, Jinlin Wang, Ceyao Zhang,
+  evaluation for long context language models. In Pro-             Zili Wang, Steven Ka Shing Yau, Zijuan Lin, and
+  ceedings of the 62nd Annual Meeting of the Associa-             1 others. 2023. Metagpt: Meta programming for a
+  tion for Computational Linguistics (Volume 1: Long               multi-agent collaborative framework. In The Twelfth
+  Papers), pages 14388–14411.                                      International Conference on Learning Representa-
+                                                                   tions.
+Yushi Bai, Xin Lv, Jiajie Zhang, Hongchang Lyu,
+  Jiankai Tang, Zhidian Huang, Zhengxiao Du, Xiao               Md Ashraful Islam, Mohammed Eunus Ali, and
+  Liu, Aohan Zeng, Lei Hou, and 1 others. 2024. Long-            Md Rizwan Parvez. 2024a. Mapcoder: Multi-agent
+  bench: A bilingual, multitask benchmark for long               code generation for competitive problem solving. In
+  context understanding. In Proceedings of the 62nd              Annual Meeting of the Association of Computational
+  annual meeting of the association for computational            Linguistics 2024, pages 4912–4944. Association for
+  linguistics (volume 1: Long papers), pages 3119–               Computational Linguistics (ACL).
+  3137.
+                                                                Shayekh Islam, Md Asib Rahman, KSM Tozammel Hos-
+Razan Baltaji, Babak Hemmatian, and Lav Varshney.                 sain, Enamul Hoque, Shafiq Joty, and Md Rizwan
+  2024. Conformity, confabulation, and impersonation:             Parvez. 2024b. Open-rag: Enhanced retrieval aug-
+  Persona inconstancy in multi-agent llm collabora-               mented reasoning with open-source large language
+  tion. In Proceedings of the 2nd Workshop on Cross-              models. In Findings of the Association for Compu-
+  Cultural Considerations in NLP, pages 17–31.                    tational Linguistics: EMNLP 2024, pages 14231–
+                                                                  14244.
+Junzhe Chen, Xuming Hu, Shuodi Liu, Shiyu Huang,                Yihuai Lan, Zhiqiang Hu, Lei Wang, Yang Wang, De-
+  Wei-Wei Tu, Zhaofeng He, and Lijie Wen. 2024a.                  heng Ye, Peilin Zhao, Ee-Peng Lim, Hui Xiong, and
+  Llmarena: Assessing capabilities of large language              Hao Wang. 2024. Llm-based agent society investi-
+  models in dynamic multi-agent environments. In                  gation: Collaboration and confrontation in avalon
+  ACL (1).                                                        gameplay. In Proceedings of the 2024 Conference on
+                                                                  Empirical Methods in Natural Language Processing,
+Longze Chen, Ziqiang Liu, Wanwei He, Yinhe Zheng,                 pages 128–145.
+  Hao Sun, Yunshui Li, Run Luo, and Min Yang. 2024b.
+  Long context is not long at all: A prospector of long-        Guohao Li, Hasan Hammoud, Hani Itani, Dmitrii
+  dependency data for large language models. In Pro-              Khizbullin, and Bernard Ghanem. 2023. Camel:
+  ceedings of the 62nd Annual Meeting of the Associa-             Communicative agents for" mind" exploration of
+  tion for Computational Linguistics (Volume 1: Long              large language model society. Advances in Neural
+  Papers), pages 8222–8234.                                       Information Processing Systems, 36:51991–52008.
+
+Jeffrey Dean and Sanjay Ghemawat. 2008. Mapreduce:              Jiaqi Li, Mengmeng Wang, Zilong Zheng, and Muhan
+   simplified data processing on large clusters. Commu-            Zhang. 2024. Loogle: Can long-context language
+   nications of the ACM, 51(1):107–113.                            models understand long contexts? In Proceedings
+                                                                   of the 62nd Annual Meeting of the Association for
+DeepSeek-AI, Aixin Liu, Bei Feng, Bing Xue, Bingx-                 Computational Linguistics (Volume 1: Long Papers),
+  uan Wang, Bochao Wu, Chengda Lu, Chenggang                       pages 16304–16333.
+  Zhao, Chengqi Deng, Chenyu Zhang, Chong, and 1
+                                                                Hao Liu, Wilson Yan, Matei Zaharia, and Pieter Abbeel.
+  others. 2024. Deepseek-v3 technical report. CoRR,
+                                                                  2024a. World model on million-length video and
+  abs/2412.19437.
+                                                                  language with blockwise ringattention. In The Thir-
+Shihan Deng, Weikai Xu, Hongda Sun, Wei Liu, Tao                  teenth International Conference on Learning Repre-
+  Tan, Liujianfeng Liujianfeng, Ang Li, Jian Luan,                sentations.
+  Bin Wang, Rui Yan, and 1 others. 2024. Mobile-                Nelson F Liu, Kevin Lin, John Hewitt, Ashwin Paran-
+  bench: An evaluation benchmark for llm-based mo-                jape, Michele Bevilacqua, Fabio Petroni, and Percy
+  bile agents. In Proceedings of the 62nd Annual Meet-            Liang. 2024b. Lost in the middle: How language
+  ing of the Association for Computational Linguistics            models use long contexts. Transactions of the Asso-
+  (Volume 1: Long Papers), pages 8813–8831.                       ciation for Computational Linguistics, 12:157–173.
+Yilun Du, Shuang Li, Antonio Torralba, Joshua B Tenen-          Xiao Liu, Hao Yu, Hanchen Zhang, Yifan Xu, Xuanyu
+   baum, and Igor Mordatch. 2023. Improving factual-              Lei, Hanyu Lai, Yu Gu, Hangliang Ding, Kaiwen
+   ity and reasoning in language models through multia-           Men, Kejuan Yang, and 1 others. 2023. Agentbench:
+   gent debate. In Forty-first International Conference           Evaluating llms as agents. In The Twelfth Interna-
+   on Machine Learning.                                           tional Conference on Learning Representations.
+
+
+                                                           10
+Shichao Ma, Yunhe Guo, Jiahao Su, Qihe Huang,                   Hugo Touvron, Thibaut Lavril, Gautier Izacard, Xavier
+  Zhengyang Zhou, and Yang Wang. 2025.                            Martinet, Marie-Anne Lachaux, Timothée Lacroix,
+  Talk2image: A multi-agent system for multi-                     Baptiste Rozière, Naman Goyal, Eric Hambro, Faisal
+  turn image generation and editing. arXiv preprint               Azhar, and 1 others. 2023. Llama: Open and effi-
+  arXiv:2508.06916.                                               cient foundation language models. arXiv preprint
+                                                                  arXiv:2302.13971.
+OpenAI, :, Sandhini Agarwal, Lama Ahmad, Jason
+  Ai, Sam Altman, Andy Applebaum, Edwin Arbus,                  Junlin Wang, WANG Jue, Ben Athiwaratkun, Ce Zhang,
+  Rahul K. Arora, Yu Bai, Bowen Baker, Haiming Bao,               and James Zou. 2024a. Mixture-of-agents enhances
+  Boaz Barak, Ally Bennett, Tyler Bertao, Nivedita                large language model capabilities. In The Thirteenth
+  Brett, Eugene Brevdo, Greg Brockman, Sebastien                  International Conference on Learning Representa-
+  Bubeck, and 108 others. 2025. gpt-oss-120b & gpt-               tions.
+  oss-20b model card. Preprint, arXiv:2508.10925.
+                                                                Qineng Wang, Zihao Wang, Ying Su, Hanghang Tong,
+Joon Sung Park, Joseph O’Brien, Carrie Jun Cai, Mered-            and Yangqiu Song. 2024b. Rethinking the bounds of
+  ith Ringel Morris, Percy Liang, and Michael S Bern-             llm reasoning: Are multi-agent discussions the key?
+  stein. 2023. Generative agents: Interactive simulacra           In 62nd Annual Meeting of the Association for Com-
+  of human behavior. In Proceedings of the 36th an-               putational Linguistics, ACL 2024, pages 6106–6131.
+  nual acm symposium on user interface software and               Association for Computational Linguistics (ACL).
+  technology, pages 1–22.
+                                                                Zheng Wang, Shu Teo, Jieer Ouyang, Yongjun Xu, and
+Ofir Press, Noah Smith, and Mike Lewis. 2021. Train               Wei Shi. 2024c. M-rag: Reinforcing large language
+  short, test long: Attention with linear biases enables          model performance through retrieval-augmented gen-
+  input length extrapolation. In International Confer-            eration with multiple partitions. In Proceedings
+  ence on Learning Representations.                               of the 62nd Annual Meeting of the Association for
+Chen Qian, Xin Cong, Cheng Yang, Weize Chen,                      Computational Linguistics (Volume 1: Long Papers),
+  Yusheng Su, Juyuan Xu, Zhiyuan Liu, and Maosong                 pages 1966–1978.
+  Sun. 2023. Communicative agents for software de-              Qingyun Wu, Gagan Bansal, Jieyu Zhang, Yiran Wu,
+  velopment. CoRR.                                                Beibin Li, Erkang Zhu, Li Jiang, Xiaoyun Zhang,
+Chen Qian, Wei Liu, Hongzhang Liu, Nuo Chen, Yufan                Shaokun Zhang, Jiale Liu, and 1 others. 2024. Au-
+  Dang, Jiahao Li, Cheng Yang, Weize Chen, Yusheng                togen: Enabling next-gen llm applications via multi-
+  Su, Xin Cong, and 1 others. 2024. Chatdev: Com-                 agent conversations. In First Conference on Lan-
+  municative agents for software development. In Pro-             guage Modeling.
+  ceedings of the 62nd Annual Meeting of the Associa-
+  tion for Computational Linguistics (Volume 1: Long            An Yang, Anfeng Li, Baosong Yang, Beichen Zhang,
+  Papers), pages 15174–15186.                                     Binyuan Hui, Bo Zheng, Bowen Yu, Chang Gao,
+                                                                  Chengen Huang, Chenxu Lv, Chujie Zheng, Day-
+Nir Ratner, Yoav Levine, Yonatan Belinkov, Ori Ram,               iheng Liu, Fan Zhou, Fei Huang, Feng Hu, Hao
+  Inbal Magar, Omri Abend, Ehud Karpas, Amnon                     Ge, Haoran Wei, Huan Lin, Jialong Tang, and 41
+  Shashua, Kevin Leyton-Brown, and Yoav Shoham.                   others. 2025. Qwen3 technical report. Preprint,
+  2023. Parallel context windows for large language               arXiv:2505.09388.
+  models. In Proceedings of the 61st annual meeting of
+  the association for computational linguistics (volume         Andrew Chi-Chih Yao. 1979. Some complexity ques-
+  1: Long papers), pages 6383–6402.                               tions related to distributive computing (preliminary
+                                                                  report). In Proceedings of the eleventh annual ACM
+Machel Reid, Nikolay Savinov, Denis Teplyashin,                   symposium on Theory of computing, pages 209–213.
+ Dmitry Lepikhin, Timothy P Lillicrap, Jean-Baptiste
+ Alayrac, Radu Soricut, Angeliki Lazaridou, Orhan               Howard Yen, Tianyu Gao, and Danqi Chen. 2024. Long-
+ Firat, Julian Schrittwieser, and 1 others. 2024. Gem-            context language modeling with parallel context en-
+ ini 1.5: Unlocking multimodal understanding across               coding. In Proceedings of the 62nd Annual Meeting
+ millions of tokens of context. CoRR.                             of the Association for Computational Linguistics (Vol-
+                                                                  ume 1: Long Papers), pages 2588–2610.
+Uri Shaham, Elad Segal, Maor Ivgi, Avia Efrat, Ori
+  Yoran, Adi Haviv, Ankit Gupta, Wenhan Xiong,                  Jintian Zhang, Xin Xu, Ningyu Zhang, Ruibo Liu,
+  Mor Geva, Jonathan Berant, and 1 others. 2022.                   Bryan Hooi, and Shumin Deng. 2024a. Exploring
+  Scrolls: Standardized comparison over long language              collaboration mechanisms for llm agents: A social
+  sequences. In Conference on Empirical Methods in                 psychology view. In Proceedings of the 62nd An-
+  Natural Language Processing.                                     nual Meeting of the Association for Computational
+                                                                   Linguistics (Volume 1: Long Papers), pages 14544–
+Jinwei Su, Qizhen Lan, Yinghui Xia, Lifan Sun, Weiyou              14607.
+   Tian, Tianyu Shi, Xinyuan Song, Lewei He, and
+   Yang Jingsong. 2026. Difficulty-aware agentic or-            Xinrong Zhang, Yingfa Chen, Shengding Hu, Zi-
+   chestration for query-specific multi-agent workflows.          hang Xu, Junhao Chen, Moo Khai Hao, Xu Han,
+   Preprint, arXiv:2509.11079.                                    Zhen Leng Thai, Shuo Wang, Zhiyuan Liu, and
+
+
+                                                           11
+  1 others. 2024b. inftybench: Extending long con-
+  text evaluation beyond 100k tokens. arXiv preprint
+  arXiv:2402.13718.
+Xiutian Zhao, Ke Wang, and Wei Peng. 2024. An elec-
+  toral approach to diversify llm-based multi-agent col-
+  lective decision-making. In EMNLP.
+
+
+
+
+                                                           12
+A     Communication Protocols                               and submit_result(answer). Broadcast mes-
+                                                            sages are stored centrally, tagged with sender ID
+This appendix provides complete specifications for          and timestamp, and delivered as a chronologically
+the three communication protocols implemented in            ordered compiled view at each round.
+S ILO -B ENCH. Each protocol defines a distinct co-
+ordination substrate constraining the mechanism of          A.4   Shared File System Protocol (SFS)
+information exchange while preserving full agent
+autonomy over content and strategy.                         The SFS protocol implements indirect coordi-
+                                                            nation through a shared key-value store visible
+A.1    Protocol Overview                                    to all agents. Rather than exchanging messages
+Table 5 summarizes the three protocols. They span           directly, agents read and write to a common
+the spectrum of coordination paradigms along three          namespace, enabling asynchronous coordina-
+axes: (1) explicit vs. implicit addressing—P2P re-          tion analogous to blackboard architectures.
+quires agents to name recipients, BP eliminates ad-         Available actions are: list_files(prefix),
+dressing entirely, SFS routes coordination through          read_file(path),               write_file(path,
+shared state; (2) direct vs. indirect communication—        content), delete_file(path), wait(), and
+P2P and BP involve direct message exchange, SFS             submit_result(answer). The shared file system
+agents never “speak” to each other explicitly; (3)          is backed by an in-memory SQLite database
+default density—P2P encourages sparse targeted              storing path, content, creation time, and last
+exchanges, BP defaults to dense all-to-all dissemi-         modification time. Writes are immediately visible
+nation, SFS density depends entirely on read/write          to subsequent reads; concurrent writes to the same
+behavior.                                                   path follow last-writer-wins semantics.
+
+A.2    Peer-to-Peer Protocol (P2P)                          A.5   The wait() Action: Formal Specification
+The P2P protocol implements directed messaging              The wait() action is semantically uniform across
+through SQLite-backed mailboxes. Each agent                 all three protocols and serves as an explicit round-
+maintains a private inbox; messages are deliv-              boundary signal. When an agent invokes wait(),
+ered asynchronously to the recipient’s buffer un-           all remaining operations in its current round are
+til their next activation. Agents must decide               skipped, and the agent’s decision phase for round
+not only what to communicate but whom to                    r is marked complete. The agent is then suspended
+contact, enabling evaluation of task-appropriate            until the start of round r+1.
+routing strategy discovery. Available actions                   At the start of round r+1, the following activa-
+are: send_message(target_id,              content),         tion and message-delivery rules apply:
+which delivers a message to the specified agent;            • P2P and BP: The agent’s inbox is populated
+receive_messages(), which retrieves all pending               with all messages sent to it (P2P) or broadcast
+messages; wait(), which signals completion of the              by any agent (BP) during round r. These are
+agent’s decision for the current round (see below);            delivered atomically at round start; no message
+and submit_result(answer), which submits the                   sent in round r is visible before round r+1.
+final answer. Messages are stored in an in-memory           • SFS: The agent observes the full shared file sys-
+SQLite database recording sender ID, recipient ID,             tem state as of the end of round r, including all
+content, timestamp, and read status. Delivery order-          writes committed by other agents during round
+ing within each sender-recipient pair is guaranteed;           r.
+no global ordering is enforced.                             • No blocking: wait() does not block on a spe-
+                                                               cific event or agent. It is a “pass” that yields
+A.3    Broadcast Protocol (BP)                                 control to the synchronous round scheduler. If an
+The BP protocol implements broadcast messag-                   agent never calls wait() explicitly, the runtime
+ing where each transmission reaches all other                  automatically advances it to the next round after
+agents simultaneously. An implicit aggrega-                    its action budget is exhausted.
+tor collects messages each round and distributes            • Post-submit behavior: Once an agent has called
+the compiled history to all participants. Avail-               submit_result(), subsequent rounds are no-
+able actions are: broadcast_message(content),                  ops for that agent—it neither receives new mes-
+receive_messages(), list_agents(), wait(),                     sages nor is activated again.
+
+                                                       13
+Protocol    Description                                                Available Actions
+P2P         Directed messaging via agent-addressed mailboxes           send_message, receive_messages, wait,
+                                                                       submit_result
+BP          Broadcast messaging to all agents simultaneously           broadcast_message, receive_messages,
+                                                                       list_agents, wait, submit_result
+SFS         Coordination through shared key-value storage              list_files, read_file, write_file, delete_file,
+                                                                       wait, submit_result
+
+                          Table 5: Comparison of communication protocols in S ILO -B ENCH.
+
+
+   This synchronous round-based model ensures                    B.2     Task Description Examples
+that all N agents observe a consistent snapshot                  Task descriptions convey task structure and poten-
+of the communication state at each round bound-                  tial coordination patterns while leaving concrete
+ary, making execution reproducible and analysis                  implementation decisions to the agents themselves.
+tractable.                                                       The three examples below illustrate how descrip-
+                                                                 tions scale from simple aggregation to global reor-
+B     Prompt Design: Structural Guidance                         ganization tasks.
+      without Role Prescription
+                                                                       Example: Global Maximum (Task I-01)
+This appendix details the prompt templates used to
+initialize agents in S ILO -B ENCH. Our core design                    Find the maximum value across all data
+                                                                       distributed among the agents. Each agent
+philosophy is to provide task-structural informa-                      holds a portion of a larger array. The
+tion while preserving strategic autonomy: prompts                      correct answer is the single largest
+convey high-level dependency patterns and poten-                       integer across the entire distributed
+                                                                       dataset. You must coordinate with other
+tial coordination approaches, but do not prescribe                     agents to determine this global maximum.
+mandatory execution sequences or assign semantic
+roles.
+                                                                       Example: Prefix Sum (Task II-11)
+B.1     Base Prompt Template                                           Compute the prefix sum array for a sequence
+                                                                       distributed across agents. Agent 0 holds
+Each agent receives an initialization prompt follow-                   elements [0, k), Agent 1 holds elements
+ing this structure:                                                    [k, 2k), and so on. The prefix sum at
+                                                                       position i is the sum of all elements from
+      Agent Initialization Prompt                                      position 0 to i. You must coordinate to
+                                                                       compute the correct prefix sum for your
+     You are Agent {agent_id} in a multi-agent                         portion, accounting for cumulative sums
+      system consisting of {N} agents (IDs range                       from preceding agents.
+      from 0 to {N-1}).
+     Task Description:
+     {task_description}                                                Example: Distributed Sort (Task III-21)
+     Your Local Data:
+     {data_shard}                                                   Sort the entire distributed array in
+      Communication Protocol:                                       ascending order. Each agent holds a portion
+     {protocol_description}                                         of the unsorted data. The final result
+     Available Actions:                                             should be the complete sorted sequence.
+     - {protocol_specific_actions}                                  You must coordinate to exchange data and
+     - submit_result(answer): Submit your final                     determine the correct global ordering.
+      answer when confident
+     Your goal is to coordinate with other agents
+      to compute the globally correct answer. No                 B.3     Design Principles
+      single agent has sufficient information to
+      solve this task independently. When you
+                                                                 Our prompts are carefully calibrated to provide
+      have determined the answer, submit it using                structural information without prescribing behav-
+      submit_result().                                           ior. On the one hand, descriptions convey whether
+                                                                 tasks involve aggregation, sequential dependencies,
+   The {protocol_specific_actions} place-                        or global data reorganization (e.g., “accounting for
+holder is instantiated according to the protocol spec-           cumulative sums from preceding agents”); some
+ifications in Appendix A.                                        prompts suggest possible coordination patterns as
+
+                                                            14
+options rather than requirements (e.g., “consider           round, all agents are activated in parallel: they re-
+establishing a coordinator” or “you may exchange            ceive incoming messages from the previous round,
+with neighbors”); and for complex tasks, prompts            independently decide on actions, and execute them
+may mention general algorithmic paradigms (e.g.,            simultaneously. Messages or files written in round
+“sample-based partitioning”) without specifying             r become visible to all agents at the start of round
+concrete steps. On the other hand, we do not assign         r + 1. An agent exits the coordination loop upon in-
+semantic roles—no agent is designated “Manager,”            voking submit_result(answer); agents that fail
+“Worker,” or “Coordinator”—and prompts never                to submit within Rmax rounds are assigned a null
+specify “Step 1: Agent 0 does X, Step 2: Agent              answer counted as incorrect. Due to computational
+1 does Y.” Agents decide their own message tim-             constraints, each configuration is executed once
+ing and recipients, and must discover consensus             with fixed random seeds for data generation.
+and verification mechanisms independently. The
+distinction is illustrated below:                           C.3      Infrastructure
+                                                            Experiments were conducted on a GH200 cluster,
+✗ Prescribed (NOT our approach): “You are the
+                                                            with up to 50 concurrent configurations executed
+  leader. Step 1: Collect data from all agents. Step
+                                                            simultaneously. The compute amounted to approx-
+  2: Compute the result. Step 3: Broadcast the
+                                                            imately 500+ GPU-hours equivalent for each ex-
+  answer.”
+                                                            periment. Complete conversation histories, token
+✓ Our approach: “Can you identify a leader to               counts, and timing information were recorded for
+  collect and compare results? How would agents             all runs.
+  coordinate to reach consensus?”
+                                                            C.4      Model Licenses and Intended Use
+   All agents receive structurally identical prompts        All language models used in this study are open-
+(modulo their ID and data shard), ensuring no agent         source and deployed locally on our infrastruc-
+holds implicit leadership status. The phrase “No            ture. DeepSeek-V3.1 is released under the MIT
+single agent has sufficient information” is included        License1 , GPT-OSS-120B under the Apache 2.0
+explicitly to prevent premature submission of par-          License2 , and Qwen3-Next-80B-A3B under the
+tial results. This design tests whether agents can          Apache 2.0 License3 , all permitting research and
+translate high-level task understanding into con-           commercial use.
+crete coordination protocols—a capability that, as
+our results demonstrate, remains largely absent in          D       Token Budget Feasibility Analysis
+current LLMs.
+                                                            To verify that S ILO -B ENCH operates within prac-
+C     Experimental Details                                  tical token limits, we profile token consumption
+                                                            across all 54 configurations, decomposing total us-
+C.1    Agent Scale Rationale
+                                                            age into three components: the base initialization
+The six agent counts are chosen to probe quali-             prompt (Tbase ), the local data shard (Tdata ), and
+tatively distinct coordination regimes. The min-            accumulated communication messages (Tcomm ).
+imal team (N = 2) isolates fundamental pair-                Table 6 summarizes the fixed components, and
+wise coordination without overhead. Small groups            Table 7 reports model-dependent communication
+(N ∈ {5, 10}) allow agents to feasibly track all            costs.
+peers simultaneously. Medium scale (N = 20)                    Context window utilization, shown in Table 8,
+begins to make exhaustive peer tracking challeng-           remains low on average: DeepSeek-V3.1 uses 7.5%
+ing, pushing agents toward selective communica-             of the 128K budget on average, while GPT-OSS-
+tion. Large scale (N ∈ {50, 100}) makes hierar-             120B and Qwen3 stay below 3%. The 95th per-
+chical or highly selective coordination effectively         centile cases—driven by redundant broadcasting,
+necessary—and, as our results confirm, largely be-          failed convergence with extended verbose rounds,
+yond the reach of current LLMs.
+                                                                1
+                                                                 https://huggingface.co/deepseek-ai/
+C.2    Execution Parameters                                 DeepSeek-V3.1
+                                                               2
+                                                                 https://huggingface.co/openai/gpt-oss-120b
+Each configuration is allocated a maximum of                   3
+                                                                 https://huggingface.co/Qwen/
+Rmax = 100 communication rounds. Within each                Qwen3-Next-80B-A3B-Instruct
+
+
+                                                       15
+    Component              Min   Mean      Max       Std              Model                  Mean Util.   95th Pctl.   Max Util.
+
+    Base Prompt (Tbase )   612   748.8      989    87.3               DeepSeek-V3.1            7.5%        28.4%        76.9%
+    Data Shard (Tdata )     45   312.4     1,856   298.6              GPT-OSS-120B             2.4%         8.2%        35.3%
+                                                                      Qwen3-Next-80B-A3B       2.6%         9.1%        41.3%
+Table 6: Token consumption of base prompt and data
+shard per agent (across all configurations).                          Table 8: Context window utilization (%) for 128K con-
+                                                                      text models.
+
+Model                      Min    Mean       Max           Std
+DeepSeek-V3.1              124   8,498.7    98,432    12,847          F.2 Results by Model, Protocol, and Difficulty
+GPT-OSS-120B                89   2,049.3    45,218     5,632          Table 11 provides success rates for all model-
+Qwen3-Next-80B-A3B         156   2,299.3    52,847     6,891
+                                                                      protocol-difficulty combinations, and Table 12 re-
+                                                                      ports success rates by agent count across models.
+Table 7: Communication (Tcomm ) token consumption
+per agent by model (across all configurations).
+                                                                      Together, they confirm that the patterns observed
+                                                                      for DeepSeek-V3.1 are consistent across all three
+                                                                      models: P2P generally outperforms or matches BP
+or agents copy-pasting full message histories—                        for GPT-OSS-120B and Qwen3, SFS consistently
+are precisely the coordination inefficiencies S ILO -                 underperforms, and performance degrades mono-
+B ENCH is designed to expose. Overall, frontier                       tonically with both complexity level and agent
+models (128K–200K context) can run all config-                        count.
+urations comfortably; mid-tier models (32K) han-
+dle over 90% of configurations, with Level-III at                     F.3     Communication Density Analysis
+N ≥50 potentially requiring truncation; and smaller                   Table 13 reports communication density across con-
+models (8K) are suitable for N ≤10 and Level I–II                     figurations. A consistent pattern emerges across
+tasks.                                                                all models: P2P yields substantially higher densi-
+                                                                      ties than BP, reflecting agents’ tendency to send
+E     Complete Task Specifications                                    multiple targeted messages per pair across rounds;
+                                                                      BP densities cluster below 1.0, consistent with one-
+Table 9 provides the complete mapping between                         to-all single broadcasts; and SFS yields notably
+S ILO -B ENCH tasks and their algorithmic founda-                     lower densities than P2P across all models and
+tions, including the distributed adaptation approach                  difficulty levels, indicating that file-based coordi-
+for each.                                                             nation generates sparser cross-agent information
+                                                                      flow under our operational definition (read-based
+                                                                      transfer counting)—which further explains SFS’s
+F     Detailed Results
+                                                                      systematic under performance on SR despite non-
+                                                                      trivial write activity.
+F.1 Task-Level Breakdown for DeepSeek-V3.1
+Table 10 provides a comprehensive breakdown of                        G     Failure Mode Analysis
+DeepSeek-V3.1’s success rate across all 30 tasks
+and three communication protocols. Tasks achiev-                      G.1     Representative Failure Cases
+ing ≥50% success rate under any protocol are high-                    Table 14 presents representative examples of each
+lighted in green. Level-I aggregation tasks cluster                   failure mode extracted from DeepSeek-V3.1 execu-
+at the top, with Distributed Vote (I-03) and Any                      tion logs. The cases illustrate how failures manifest
+Match (I-04) achieving near-perfect performance                       in practice: premature submission occurs even after
+across all protocols. Performance degrades sharply                    reasonable communication volume (Case 4: only
+for Level-III tasks, with K-Means Iteration (III-25),                 28 of 100 peers contacted before submitting); con-
+Collaborative Filtering (III-27), PageRank Step (III-                 sensus failure can persist despite near-unanimous
+28), and Matrix Multiply (III-30) achieving zero                      agreement, with a single outlier agent preventing
+success across all protocols—these tasks require                      full success (Cases 1 and 3); and computation error
+precise numerical computation over all data shards                    strikes even when agents have gathered the com-
+simultaneously, which proves beyond current dis-                      plete required data (Case 2: off-by-one arithmetic
+tributed LLM capabilities.                                            during aggregation).
+
+                                                                 16
+      ID       Task Name             Reference                    Distributed Adaptation
+       Level I: Aggregation (Optimal: Star/Tree Topology, O(N ) messages)
+      I-01     Global Maximum        LC-414                       Array partitioned; local max → global aggregation
+      I-02     Word Frequency        LC-2085                      Word lists distributed; count target word globally
+      I-03     Distributed Vote      LC-169                       Vote records partitioned; aggregate to find majority
+      I-04     Any Match             LC-28                        String collection split; detect pattern in any shard
+      I-05     Range Count           LC-327                       Count elements in range across shards
+      I-06     Checksum (XOR)        LC-136                       Data blocks distributed; compute global XOR
+      I-07     Average Value         LC-1491                      Array partitioned; combine localSsums and counts
+      I-08     Set Union Size        LC-217                       Elements distributed; compute | i Di |
+      I-09     Top-K Selection       LC-215                       Array partitioned; merge local top-K candidates
+      I-10     Standard Deviation    —                            Two-phase: global mean → global variance
+       Level II: Mesh Network (Optimal: Chain Topology, O(N ) messages)
+      II-11    Prefix Sum            LC-1480                      Sequential dependency; cumulative offset propaga-
+                                                                  tion
+      II-12    Moving Average        LC-346                       Sliding window spans boundaries; neighbor ex-
+                                                                  change
+      II-13    Longest Palindrome    LC-5                         String partitioned; palindromes may cross bound-
+                                                                  aries
+      II-14    1D Life Game          LC-289                       Cellular automaton; boundary cells need neighbor
+                                                                  states
+      II-15    Pattern Search        LC-392                       Subsequence matching across partitioned sequence
+      II-16    Trapping Rain         LC-42                        Global max-left/max-right propagation required
+      II-17    Diff Array            LC-1094                      Difference array with boundary handling
+      II-18    List Ranking          LC-542                       Linked list ranking requires predecessor chain
+      II-19    Merge Neighbors       —                            Boundary element merging between adjacent agents
+      II-20    Pipeline Hash         —                            Sequential hash with chained dependencies
+       Level III: Shuffling (Optimal: Varies, O(N log N ) to O(N 2 ) messages)
+      III-21   Distributed Sort      LC-912                       Sample-sort or merge-sort across partitions
+      III-22   Median of Medians     LC-295                       Iterative median selection across distributed data
+      III-23   Graph Components      LC-323                       Edges distributed; iterative union-find
+      III-24   BFS Distance          LC-542                       Graph BFS with distributed edge list
+      III-25   K-Means Iteration     LC-296                       One K-means iteration with distributed points
+      III-26   Global Distinct       LC-349                       Hash-based global deduplication
+      III-27   Collab. Filtering     LC-1                         User-item matching with distributed vectors
+      III-28   PageRank Step         LC-207                       One PageRank iteration with distributed edges
+      III-29   Load Balance          LC-410                       Task redistribution to minimize load variance
+      III-30   Matrix Multiply       LC-311                       Row/column partitioned matrix multiplication
+
+Table 9: Complete specification of S ILO -B ENCH tasks with LeetCode references and distributed adaptation
+descriptions.
+
+
+G.2   Failure Mode Definitions and                              lating failures in the reasoning phase from those in
+      Co-occurrence                                             the communication phase.
+We formally define the three failure modes as fol-
+lows. Premature Submission occurs when an agent
+invokes submit_result() before receiving infor-
+mation from a sufficient subset of peers—where
+“sufficient” means the minimum number of agents                   These modes frequently co-occur within single
+whose data is required to compute the correct an-               runs, as shown in Table 15. The high co-occurrence
+swer. Consensus Failure occurs when agents sub-                 between premature submission and consensus fail-
+mit multiple distinct answers (|{ŷi }N
+                                      i=1 | > 1), in-           ure (67 cases) suggests a cascading effect: agents
+dicating that coordination failed to synchronize                submitting early cannot participate in subsequent
+agents’ understanding of global state. Computa-                 consensus-building, leaving remaining agents with
+tion Error occurs when an agent receives sufficient             incomplete information and widening the conver-
+information but submits an incorrect answer, iso-               gence gap.
+
+                                                           17
+ Task                        BP    P2P   SFS   Avg             Model                   Protocol   L-I    L-II   L-III
+ Level I: Aggregation                                                                  BP         69.7   34.5   14.7
+ I-01 Global Max             100   100    80   93.3            DeepSeek-V3.1           P2P        62.9   39.9   11.5
+ I-02 Word Frequency         100   52     70   73.9                                    SFS        53.5   30.6   9.0
+ I-03 Distributed Vote       100   100   100   100.0
+ I-04 Any Match              100   100    99   99.6                                    BP         19.6   13.9    9.7
+ I-05 Range Count            83    67     63   71.0            GPT-OSS-120B            P2P        34.9   18.5    7.5
+ I-06 Checksum (XOR)         17     0     2     6.1                                    SFS        27.7   11.0    9.1
+ I-07 Average Value          99    83     46   76.2
+                                                                                       BP          9.0   3.2     1.1
+ I-08 Set Union Size         50    50     42    47.5
+                                                               Qwen3-Next-80B-A3B      P2P        27.6   3.4     0.3
+ I-09 Top-K Select           36    67     21    41.2
+                                                                                       SFS        25.5   2.1     1.7
+ I-10 Standard Deviation     17     17   17    16.7
+ Level II: Structured Mesh                                    Table 11: Success Rate (%) by model, protocol, and
+ II-11 Prefix Sum            84    80    43    68.8
+                                                              difficulty level.
+ II-12 Moving Average         0     0    0     0.0
+ II-13 Longest Palindrome    49    66    48    54.5
+ II-14 1D Life Game          27    47    24    32.4           Model                 N=2 N=5 N=10 N=20 N=50 N=100
+ II-15 Pattern Search         0    17    17    11.1
+ II-16 Trapping Rain         33    33    40    35.6           DeepSeek-V3.1      61.2 48.5 39.9 33.6 19.0 18.1
+ II-17 Diff Array            48    62    20    43.3           GPT-OSS-120B       34.4 28.0 14.0 13.2 5.2 6.4
+                                                              Qwen3-Next-80B-A3B 17.2 9.1 8.6 7.4 5.1 1.3
+ II-18 List Ranking           0     0     0     0.0
+ II-19 Merge Neighbors       59    60    66    61.8
+ II-20 Pipeline Hash         52    36    55    47.6           Table 12: Success Rate (%) by model and agent count.
+ Level III: Global Shuffle
+ III-21 Distributed Sort     33    20    20    24.4
+ III-22 Median of Medians    20    20     0    13.3           achieve 0% success versus 33.3% without one.
+ III-23 Graph Components     40    40    14    31.3           This suggests that spontaneous centralization at
+ III-24 BFS Distance          0     0     0     0.0           high complexity creates coordination bottlenecks—
+ III-25 K-Means Iteration     0     0    0      0.0
+ III-26 Global Distinct      33    33    0     22.2
+                                                              the designated aggregator becomes overwhelmed
+ III-27 Collab. Filtering     0     0    0      0.0           by the volume of global data—rather than resolving
+ III-28 PageRank Step         0     0    0      0.0           them.
+ III-29 Load Balance         32     3    63    32.9
+ III-30 Matrix Multiply      0     0     0     0.0
+                                                              G.4     Successful Coordination Examples
+Table 10: Success Rate (%) by task and communication          To contrast with the failure modes above, we docu-
+protocol for DeepSeek-V3.1. Tasks with ≥50% success           ment two illustrative successful patterns. In Case
+are highlighted in gray background.                           S-1 (Task I-07, N =5), Agent-0 emerged as coordi-
+                                                              nator organically: all agents broadcast local results
+                                                              to Agent-0, which computed and rebroadcast the
+G.3     Behavioral Patterns and Leader                        global answer. All agents verified and submitted
+        Emergence                                             identically within 4 rounds (100% success). In
+Table 16 compares behavioral metrics between suc-             Case S-2 (Task I-01, N =10), agents adopted a dis-
+cessful and failed runs. Successful runs complete             tributed verification strategy, with each agent con-
+in notably fewer rounds (8.3 vs. 12.7), suggest-              firming understanding with two neighbors before
+ing that effective coordination converges quickly             submission. This redundant verification eliminated
+while failed runs engage in extended but ultimately           consensus failures despite higher message over-
+unproductive communication loops. Verification                head. Both successful patterns share a key property:
+behaviors appear in over 95% of runs regardless               explicit synchronization checkpoints where agents
+of outcome, confirming that the bottleneck is not             confirm mutual understanding before proceeding—
+communication intent but reasoning quality.                   a discipline entirely absent in failed runs.
+   We also examined whether spontaneous leader                H     Prompt Scaffold Ablation
+emergence correlates with task success, classifying
+an agent as an emergent leader if it receives more            To assess the sensitivity of our results to prompt de-
+than 1.5× the average number of messages. The                 sign, we ran a controlled ablation under DeepSeek-
+results in Table 17 are counterintuitive: leader emer-        V3.1 + P2P with three scaffolding conditions be-
+gence does not consistently improve outcomes, and             yond the standard neutral prompt: (a) planning
+for Level-III tasks, runs with an emergent leader             round—a dedicated strategy-discussion round be-
+
+                                                         18
+ Model                  Protocol   L-I    L-II   L-III
+                        BP         0.56   0.82   1.46
+ DeepSeek-V3.1          P2P        0.76   1.06   2.83
+                        SFS        0.82   1.08   1.51
+                        BP         0.54   0.84   0.94
+ GPT-OSS-120B           P2P        1.86   2.15   2.73
+                        SFS        0.73   0.54   0.95
+                        BP         0.23   0.10   0.06
+ Qwen3-Next-80B-A3B     P2P        1.15   0.38   0.33
+                        SFS        0.48   0.07   0.09
+
+Table 13: Communication Density by model, protocol,
+and difficulty level.
+
+
+fore data exchange begins; (b) protocol reminder—
+a brief restatement of available communication ac-
+tions injected at each round; and (c) scratchpad
+hint—a suggestion to maintain a shared intermedi-
+ate workspace.
+   The planning round yields the most consistent
+gains (∼5–8 on Level-II/III); the protocol reminder
+helps primarily on Level-I; the scratchpad hint ben-
+efits intermediate scales (N =10–20) but cannot
+prevent collapse at N ≥50. Critically, qualitative
+failure patterns remain stable across all conditions:
+agents continue to communicate actively while fail-
+ing to translate interaction into correct distributed
+computation, and the Communication-Reasoning
+Gap persists regardless of scaffolding. This con-
+firms that the bottleneck reflects genuine LLM lim-
+itations in distributed information synthesis rather
+than a prompting artifact.
+
+
+
+
+                                                         19
+Case       Failure Mode         Description                                          Key Evidence
+ 1         Consensus            In task I-05, agents communicated extensively        97 of 100 agents submitted 1182; Agent-3
+           Failure              but failed to converge, submitting three distinct    submitted 1176; Agent-55 submitted 1167.
+                                answers: {1176, 1182, 1167}.
+ 2         Computation          Agent-10 in task I-05 received complete data         Submitted 619 instead of correct answer 620.
+           Error                from all peers but computed an incorrect range       Arithmetic error during final aggregation.
+                                count.
+ 3         Consensus            In task I-05 (different instance), 50 agents split   49 agents submitted 619; Agent-27 submitted
+           Failure              between two answers despite communication.           631.
+ 4         Premature            Agent-77 in task I-06 submitted before               Submitted after receiving data from only 28 of
+           Submission           collecting sufficient data.                          100 agents. Answer: 208; Expected: 114.
+ 5         Consensus            100 agents in task I-06 produced 12 distinct         Answers ranged from 42 to 238. Majority (86
+           Failure              answers for XOR checksum task.                       agents) converged on 146.
+
+                         Table 14: Representative failure cases from DeepSeek-V3.1 experiments.
+
+
+
+                   Premature       Consensus        Compute
+     Premature           112            67             45
+     Consensus            –             90             52
+     Compute              –              –             86
+
+Table 15: Co-occurrence of failure modes. Diagonal:
+total occurrences; off-diagonal: joint occurrences.
+
+
+
+       Metric                           Success      Failed
+       Verification Rate                 98.7%       95.9%
+       Strategy Discussion Rate          93.5%       87.2%
+       Avg. Messages per Agent            31.2        27.4
+       Avg. Rounds to Completion          8.3         12.7
+
+Table 16: Behavioral comparison between successful
+and failed runs.
+
+
+
+     Level      Leader Rate      w/ Leader      w/o Leader
+     I            27.5%            56.8%            62.1%
+     II           21.8%            23.5%            59.0%
+     III          23.8%             0.0%            33.3%
+
+Table 17: Leader emergence rates and associated suc-
+cess rates by complexity level.
+
+
+
+ Scaffold                      L-I SR    L-II SR      L-III SR
+ No scaffold (baseline)         62.9         39.9       11.5
+ +Planning round                64.3         47.2       17.8
+ +Protocol reminder             65.1         41.3       12.1
+ +Scratchpad hint               63.7         44.6       14.9
+
+Table 18: Prompt scaffold ablation results under
+DeepSeek-V3.1 + P2P. SR = Success Rate (%).
+
+
+
+                                                                  20
+

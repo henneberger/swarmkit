@@ -1,0 +1,120 @@
+{
+  "kind": "papers",
+  "id": "2603.01045v2",
+  "title": "Silo-Bench: A Scalable Environment for Evaluating Distributed Coordination in Multi-Agent LLM Systems",
+  "page_url": "https://arxiv.org/abs/2603.01045v2",
+  "pdf_url": "https://arxiv.org/pdf/2603.01045v2",
+  "retrieved_at": "2026-09-10T22:53:05.980448+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2603.01045v2",
+      "resolved_url": "https://arxiv.org/abs/2603.01045v2",
+      "path": "sources/benchmarks/papers/2603.01045v2/page.html",
+      "bytes": 43162,
+      "sha256": "28c6388e901f64ca6087d6a691fe8139f3a9629816e74a45c8b5289077e331d3"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2603.01045v2",
+      "resolved_url": "https://arxiv.org/pdf/2603.01045v2",
+      "path": "sources/benchmarks/papers/2603.01045v2/paper.pdf",
+      "bytes": 2689853,
+      "sha256": "75ad1a82df89da48d6c5f5e154edf429ea6c63dfa389441763061df4c26e2c83"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2603.01045v2: Silo-Bench: A Scalable Environment for Evaluating Distributed Coordination in Multi-Agent LLM Systems"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Silo-Bench: A Scalable Environment for Evaluating Distributed Coordination in Multi-Agent LLM Systems"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2603.01045v2"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Large language models are increasingly deployed in multi-agent systems to overcome context limitations by distributing information across agents. Yet whether agents can reliably compute with distributed information, rather than merely exchange it, remains an open question. We introduce SILO-BENCH, a role-agnostic benchmark of 30 algorithmic tasks across three communication complexity levels, evaluating 54 configurations over 1,620 experiments. Our experiments expose a fundamental Communication-Reasoning Gap: agents spontaneously form task-appropriate coordination topologies and exchange information actively, yet systematically fail to synthesize distributed state into correct answers. The failure is localized to the reasoning-integration stage where agents often acquire sufficient information but cannot integrate it. This coordination overhead compounds with scale, eventually eliminating parallelization gains entirely. These findings demonstrate that naively scaling agent count cannot circumvent context limitations, and SILO-BENCH provides a foundation for tracking progress toward genuinely collaborative multi-agent systems. The code is available at https://github.com/jwyjohn/acl26-silo-bench ."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Silo-Bench: A Scalable Environment for Evaluating Distributed..."
+    ],
+    "twitter:description": [
+      "Large language models are increasingly deployed in multi-agent systems to overcome context limitations by distributing information across agents. Yet whether agents can reliably compute with..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Silo-Bench: A Scalable Environment for Evaluating Distributed Coordination in Multi-Agent LLM Systems"
+    ],
+    "citation_author": [
+      "Zhang, Yuzhe",
+      "Liu, Feiran",
+      "Shan, Yi",
+      "Huang, Xinyi",
+      "Yang, Xin",
+      "Zhu, Yueqi",
+      "Cheng, Xuxin",
+      "Liu, Cao",
+      "Zeng, Ke",
+      "Zhang, Terry Jingchen",
+      "Jiang, Wenyuan"
+    ],
+    "citation_date": [
+      "2026/03/01"
+    ],
+    "citation_online_date": [
+      "2026/04/13"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2603.01045"
+    ],
+    "citation_arxiv_id": [
+      "2603.01045"
+    ],
+    "citation_abstract": [
+      "Large language models are increasingly deployed in multi-agent systems to overcome context limitations by distributing information across agents. Yet whether agents can reliably compute with distributed information, rather than merely exchange it, remains an open question. We introduce SILO-BENCH, a role-agnostic benchmark of 30 algorithmic tasks across three communication complexity levels, evaluating 54 configurations over 1,620 experiments. Our experiments expose a fundamental Communication-Reasoning Gap: agents spontaneously form task-appropriate coordination topologies and exchange information actively, yet systematically fail to synthesize distributed state into correct answers. The failure is localized to the reasoning-integration stage where agents often acquire sufficient information but cannot integrate it. This coordination overhead compounds with scale, eventually eliminating parallelization gains entirely. These findings demonstrate that naively scaling agent count cannot circumvent context limitations, and SILO-BENCH provides a foundation for tracking progress toward genuinely collaborative multi-agent systems. The code is available at https://github.com/jwyjohn/acl26-silo-bench ."
+    ]
+  },
+  "extracted_text_characters": 130920,
+  "text_searchable": true
+}

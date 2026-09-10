@@ -1,0 +1,37 @@
+{
+  "kind": "repositories",
+  "id": "jwyjohn__acl26-silo-bench",
+  "title": "jwyjohn/acl26-silo-bench",
+  "url": "https://github.com/jwyjohn/acl26-silo-bench",
+  "retrieved_at": "2026-09-10T22:53:06.820621+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/jwyjohn/acl26-silo-bench/blob/e74127782ed1c42fff474249961f022c063d76f2/LICENSE",
+      "resolved_url": "https://github.com/jwyjohn/acl26-silo-bench/blob/e74127782ed1c42fff474249961f022c063d76f2/LICENSE",
+      "path": "sources/benchmarks/repositories/jwyjohn__acl26-silo-bench/LICENSE",
+      "bytes": 1211,
+      "sha256": "6b0382b16279f26ff69014300541967a356a666eb0b91b422f6862f6b7dad17e"
+    },
+    {
+      "url": "https://github.com/jwyjohn/acl26-silo-bench/blob/e74127782ed1c42fff474249961f022c063d76f2/README.md",
+      "resolved_url": "https://github.com/jwyjohn/acl26-silo-bench/blob/e74127782ed1c42fff474249961f022c063d76f2/README.md",
+      "path": "sources/benchmarks/repositories/jwyjohn__acl26-silo-bench/README.md",
+      "bytes": 11188,
+      "sha256": "c01728fb5fdf395db600fe7598940170fb1fe6b022e1455ab64de30d12226267"
+    }
+  ],
+  "status": "ok",
+  "commit": "e74127782ed1c42fff474249961f022c063d76f2",
+  "commit_date": "2026-04-12T13:30:41+08:00",
+  "checkout": "sources/benchmarks/repositories/jwyjohn__acl26-silo-bench/checkout",
+  "experiments_reproduced": false,
+  "license_files": [
+    "LICENSE"
+  ],
+  "audit": {
+    "path": "src/engine.py",
+    "line": 440,
+    "finding": "Loads hidden expected outputs, counts missing submissions as wrong; separate partial correctness metrics.",
+    "scope": "selected file inspection, not full audit"
+  }
+}

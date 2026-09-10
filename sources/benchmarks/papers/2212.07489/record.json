@@ -1,0 +1,117 @@
+{
+  "kind": "papers",
+  "id": "2212.07489",
+  "title": "SMACv2: An Improved Benchmark for Cooperative Multi-Agent Reinforcement Learning",
+  "page_url": "https://arxiv.org/abs/2212.07489",
+  "pdf_url": "https://arxiv.org/pdf/2212.07489",
+  "retrieved_at": "2026-09-10T23:04:21.872361+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2212.07489",
+      "resolved_url": "https://arxiv.org/abs/2212.07489",
+      "path": "sources/benchmarks/papers/2212.07489/page.html",
+      "bytes": 44152,
+      "sha256": "f68c51931198664136c3765ed10f5b3a78796123e5ab09ae16ed89a1ed94de5f"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2212.07489",
+      "resolved_url": "https://arxiv.org/pdf/2212.07489",
+      "path": "sources/benchmarks/papers/2212.07489/paper.pdf",
+      "bytes": 12872854,
+      "sha256": "df683e854e614349846432ef712156d706f2fd7df9242e1e7aec4f614d8c39b1"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2212.07489: SMACv2: An Improved Benchmark for Cooperative Multi-Agent Reinforcement Learning"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "SMACv2: An Improved Benchmark for Cooperative Multi-Agent Reinforcement Learning"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2212.07489v2"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "The availability of challenging benchmarks has played a key role in the recent progress of machine learning. In cooperative multi-agent reinforcement learning, the StarCraft Multi-Agent Challenge (SMAC) has become a popular testbed for centralised training with decentralised execution. However, after years of sustained improvement on SMAC, algorithms now achieve near-perfect performance. In this work, we conduct new analysis demonstrating that SMAC lacks the stochasticity and partial observability to require complex *closed-loop* policies. In particular, we show that an *open-loop* policy conditioned only on the timestep can achieve non-trivial win rates for many SMAC scenarios. To address this limitation, we introduce SMACv2, a new version of the benchmark where scenarios are procedurally generated and require agents to generalise to previously unseen settings (from the same distribution) during evaluation. We also introduce the extended partial observability challenge (EPO), which augments SMACv2 to ensure meaningful partial observability. We show that these changes ensure the benchmark requires the use of *closed-loop* policies. We evaluate state-of-the-art algorithms on SMACv2 and show that it presents significant challenges not present in the original benchmark. Our analysis illustrates that SMACv2 addresses the discovered deficiencies of SMAC and can help benchmark the next generation of MARL methods. Videos of training are available at https://sites.google.com/view/smacv2."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "SMACv2: An Improved Benchmark for Cooperative Multi-Agent..."
+    ],
+    "twitter:description": [
+      "The availability of challenging benchmarks has played a key role in the recent progress of machine learning. In cooperative multi-agent reinforcement learning, the StarCraft Multi-Agent Challenge..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "SMACv2: An Improved Benchmark for Cooperative Multi-Agent Reinforcement Learning"
+    ],
+    "citation_author": [
+      "Ellis, Benjamin",
+      "Cook, Jonathan",
+      "Moalla, Skander",
+      "Samvelyan, Mikayel",
+      "Sun, Mingfei",
+      "Mahajan, Anuj",
+      "Foerster, Jakob N.",
+      "Whiteson, Shimon"
+    ],
+    "citation_date": [
+      "2022/12/14"
+    ],
+    "citation_online_date": [
+      "2023/10/17"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2212.07489"
+    ],
+    "citation_arxiv_id": [
+      "2212.07489"
+    ],
+    "citation_abstract": [
+      "The availability of challenging benchmarks has played a key role in the recent progress of machine learning. In cooperative multi-agent reinforcement learning, the StarCraft Multi-Agent Challenge (SMAC) has become a popular testbed for centralised training with decentralised execution. However, after years of sustained improvement on SMAC, algorithms now achieve near-perfect performance. In this work, we conduct new analysis demonstrating that SMAC lacks the stochasticity and partial observability to require complex *closed-loop* policies. In particular, we show that an *open-loop* policy conditioned only on the timestep can achieve non-trivial win rates for many SMAC scenarios. To address this limitation, we introduce SMACv2, a new version of the benchmark where scenarios are procedurally generated and require agents to generalise to previously unseen settings (from the same distribution) during evaluation. We also introduce the extended partial observability challenge (EPO), which augments SMACv2 to ensure meaningful partial observability. We show that these changes ensure the benchmark requires the use of *closed-loop* policies. We evaluate state-of-the-art algorithms on SMACv2 and show that it presents significant challenges not present in the original benchmark. Our analysis illustrates that SMACv2 addresses the discovered deficiencies of SMAC and can help benchmark the next generation of MARL methods. Videos of training are available at https://sites.google.com/view/smacv2."
+    ]
+  },
+  "extracted_text_characters": 146148,
+  "text_searchable": true
+}

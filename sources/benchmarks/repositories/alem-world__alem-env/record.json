@@ -1,0 +1,37 @@
+{
+  "kind": "repositories",
+  "id": "alem-world__alem-env",
+  "title": "alem-world/alem-env",
+  "url": "https://github.com/alem-world/alem-env",
+  "retrieved_at": "2026-09-10T22:53:06.841057+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/alem-world/alem-env/blob/14d412e5ee961f9c43d6ce92ee05fee9cd1efc5e/LICENSE",
+      "resolved_url": "https://github.com/alem-world/alem-env/blob/14d412e5ee961f9c43d6ce92ee05fee9cd1efc5e/LICENSE",
+      "path": "sources/benchmarks/repositories/alem-world__alem-env/LICENSE",
+      "bytes": 1042,
+      "sha256": "fc5260ded68cef09cf6f46d94eb9cd01032e1821aecf8b0e0ff17fb4cc6d13be"
+    },
+    {
+      "url": "https://github.com/alem-world/alem-env/blob/14d412e5ee961f9c43d6ce92ee05fee9cd1efc5e/README.md",
+      "resolved_url": "https://github.com/alem-world/alem-env/blob/14d412e5ee961f9c43d6ce92ee05fee9cd1efc5e/README.md",
+      "path": "sources/benchmarks/repositories/alem-world__alem-env/README.md",
+      "bytes": 27044,
+      "sha256": "03062a6343afd1346a06e9b5bd1ec39d5358446019d8f82c15e116016c1c5dc0"
+    }
+  ],
+  "status": "ok",
+  "commit": "14d412e5ee961f9c43d6ce92ee05fee9cd1efc5e",
+  "commit_date": "2026-09-10T16:03:48+01:00",
+  "checkout": "sources/benchmarks/repositories/alem-world__alem-env/checkout",
+  "experiments_reproduced": false,
+  "license_files": [
+    "LICENSE"
+  ],
+  "audit": {
+    "path": "README.md",
+    "line": 1,
+    "finding": "Documents per-agent observations, messages and scratchpad. Environment infrastructure, not a small puzzle generator.",
+    "scope": "selected file inspection, not full audit"
+  }
+}

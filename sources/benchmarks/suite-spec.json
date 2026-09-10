@@ -1,0 +1,140 @@
+{
+  "version": "0.1",
+  "date": "2026-09-10",
+  "status": "research_and_specification_only",
+  "scope": "Eight primary capability tracks for whole swarm systems. No benchmark scores or implemented adapters claimed.",
+  "tracks": [
+    {
+      "id": "E1",
+      "name": "Distributed evidence and computation",
+      "status": "specified_not_implemented",
+      "sources": [
+        "https://arxiv.org/abs/2603.01045v2",
+        "https://arxiv.org/abs/2505.11556v4"
+      ],
+      "scenario": "Agents hold different tables, logs or observations. The system must answer a question that requires combining them: identify the only compatible supplier across constraints, reconcile a transaction chain, join records to identify a root cause, or revise a shared initial hypothesis when a private fact invalidates it.",
+      "scaling": "Agent count; records per shard; join/dependency depth; key skew; evidence redundancy; fraction of decisive facts held privately; conflicting observations; communication bandwidth; and graph connectivity. Hold total evidence fixed when studying partition count, then run a separate growing-total-data experiment.",
+      "verification": "A hidden reference query or known generative model supplies the answer and its supporting record IDs. Require the answer and valid supporting references; compute task correctness and evidence recall separately. Some tasks need one final answer, others require globally consistent per-agent outputs\u2014declare which.",
+      "controls": "Same model with all inputs; private-input independent workers plus a fixed aggregator; team with explicit messaging disabled and shared channels accounted for; structured versus free-form disclosure. Use exact SQL/algorithmic solvers as task oracles, not claimed language-agent baselines.",
+      "failure_modes": "Everyone agrees on an unsupported answer, missing evidence is copied until it looks corroborated, or an agent acquires the facts but integrates them incorrectly. Measure these separately rather than using agreement as success.",
+      "repo_fit": "SILO-BENCH and HiddenBench; directly exercises SwarmKit's evidence, communication, topology and deliberation components."
+    },
+    {
+      "id": "E2",
+      "name": "Joint artifact construction",
+      "status": "specified_not_implemented",
+      "sources": [
+        "https://arxiv.org/abs/2601.13295"
+      ],
+      "scenario": "Several agents implement individually specified changes to a shared system. Examples include an API change, a dependent client change, and a migration that must all work together. An individual contribution can pass its local tests while breaking the combined artifact.",
+      "scaling": "Number of contributors; dependency graph width/depth; overlapping files or interfaces; number of conflicting assumptions; test observability; and delayed handoffs. Preserve comparable task work when varying agent count.",
+      "verification": "Freeze the base commit and hidden component/integration tests. Evaluate each contribution and the final merged artifact. Record patch conflicts, interface mismatches, abandoned work, and regressions. Agents cannot modify the evaluator or its hidden tests.",
+      "controls": "A single agent doing the same total workload; parallel agents without messaging; explicit interface-contract exchange; a central integrator; and peer integration. Use the same permitted repository and test access.",
+      "failure_modes": "All local tasks appear complete but the delivered program fails integration. Commitments in messages are measured against actual changes, not judged for persuasiveness.",
+      "repo_fit": "CooperBench is the closest direct reference. Adapt it before inventing a toy coding replacement. SwarmKit's scheduling and artifact mechanisms provide integration points; its core does not provide code-execution isolation."
+    },
+    {
+      "id": "E3",
+      "name": "Heterogeneous tool workflows",
+      "status": "specified_not_implemented",
+      "sources": [
+        "https://arxiv.org/abs/2605.08761",
+        "https://arxiv.org/abs/2503.01935"
+      ],
+      "scenario": "A request spans several stateful services and agent roles. For example, resolve an inventory exception, update a purchase order, arrange delivery, and reconcile the resulting ledger. Each role has limited tools and information; successful delegation must preserve identifiers, requirements and completion conditions.",
+      "scaling": "Role count; cross-role dependencies; tool schema complexity; permission partitioning; necessary context per handoff; workflow length; and concurrent requests sharing records.",
+      "verification": "Check final database state, referential integrity, required events and allowed actions against a fixed specification. A natural-language \u201cdone\u201d message is not completion. Judge failures and unavailable services are recorded distinctly from task failures.",
+      "controls": "Authorized single-agent control with equivalent aggregate access when the task allows it; role-preserving team baselines; explicit structured handoff versus free-form delegation; and capability-based routing versus learned routing. A permission-restricted single role is only a capability ablation.",
+      "failure_modes": "The right department receives the wrong entity ID, changes are made in only one service, or agents stop after delegation without verifying closure.",
+      "repo_fit": "EntCollabBench and MARBLE enterprise/database settings. Resolve the documented discrepancy between EntCollabBench's paper and public LLM-judge path before treating its command-line scores as deterministic ground truth."
+    },
+    {
+      "id": "E4",
+      "name": "Dynamic execution and recovery",
+      "status": "specified_not_implemented",
+      "sources": [
+        "https://arxiv.org/abs/2602.11964",
+        "https://arxiv.org/abs/2603.08835"
+      ],
+      "scenario": "During an ongoing workflow, an external event changes the goal or invalidates a plan: a reservation disappears, a job completes out of order, a tool times out after applying its write, a worker leaves, or a new urgent task arrives. The system must detect the event, update its plan and finish coherently.",
+      "scaling": "Event rate; event delay; task horizon; worker dropout; probability of ambiguous tool completion; deadline tightness; and state-change frequency. Use a controlled virtual clock for reproducibility and a separate real-time evaluation for latency claims.",
+      "verification": "Check final state and event ordering. Count duplicate irreversible effects, missed deadlines, stale-plan actions, recovery duration, and unfinished obligations. Include a run with no disturbance for the same base task.",
+      "controls": "Fixed retry policy; centralized event loop; decentralized reallocation; no shared recovery memory; and idempotent versus naive execution. Pair the same exogenous event schedule where possible, while defining how schedules respond to different action timings.",
+      "failure_modes": "A timeout causes a second payment, the system retries a cancelled task, or all agents continue work based on outdated state. Static final-answer tasks cannot reveal these failures.",
+      "repo_fit": "Gaia2/ARE supplies the dynamic-environment reference; MASEval motivates explicit setup/task/evaluation error categories. SwarmKit's async runtime and persistence need an environment adapter with clearly defined event semantics."
+    },
+    {
+      "id": "E5",
+      "name": "Decentralized coordination and resource contention",
+      "status": "specified_not_implemented",
+      "sources": [
+        "https://arxiv.org/abs/2602.13255",
+        "https://arxiv.org/abs/2505.04364v4",
+        "https://arxiv.org/abs/2606.08340v1"
+      ],
+      "scenario": "Agents must finish jobs while sharing tools, transport capacity, or space. Some jobs need simultaneous contributions from a coalition; others need sequential handoffs. Resource contention can create deadlock or starvation even when every agent follows a locally reasonable plan.",
+      "scaling": "Agent count; shared resources; resource-to-agent ratio; dependency width/depth; local visibility; hyperedge arity/overlap; action simultaneity; communication delay/loss; and topology.",
+      "verification": "A resource ledger and task state machine enforce feasibility. Measure completed work, makespan, utilization, deadlocks, starvation, and coalition completion. Compare to an exact scheduling optimum only on small solvable instances; label larger bounds or heuristics accurately.",
+      "controls": "Random legal policy; deterministic priority rule; centralized scheduler; local policies; pairwise coordination; and hyperedge-aware coordination. Keep per-agent simultaneous action slots identical across conditions.",
+      "failure_modes": "Everyone waits for someone else, retries the same conflict, or succeeds only because the harness resolves nominally simultaneous moves sequentially. Benchmark the harness's timing semantics with deliberately conflicting actions.",
+      "repo_fit": "DPBench, SwarmBench, Collab-Overcooked and ALEM. This evaluates actual execution interdependence, beyond measuring the shape of communication."
+    },
+    {
+      "id": "E6",
+      "name": "Economic and strategic interaction",
+      "status": "specified_not_implemented",
+      "sources": [
+        "https://arxiv.org/abs/2609.02580",
+        "https://arxiv.org/abs/1706.03459"
+      ],
+      "scenario": "Agents with private costs or values negotiate task contracts, buy or sell capacity, bid for complementary resources, or fund a shared artifact. Cooperation can improve total value while individual incentives favor withholding, free riding or aggressive bidding.",
+      "scaling": "Market size; valuation/cost distributions; bundle complementarities; budget tightness; repeated interaction horizon; information asymmetry; partner mixture; and coalition size.",
+      "verification": "Check allocations, inventories, balances, payments and delivered outcomes. Report total surplus and individual utility separately. Use exact small-instance optimum comparisons; estimate unilateral and coordinated deviation gains with a declared search budget. A sampled best deviation is not a proof of equilibrium.",
+      "controls": "Fixed allocation; truthful-reference and random legal bids; simple adaptive policies; homogeneous and mixed LLM/scripted populations; mechanism changes with the same population; unseen partners. Truthful-reference behavior is not optimal in every mechanism.",
+      "failure_modes": "High private profit comes from a broken ledger, collusion harms system welfare, or a team collects payment without completing the verified task. Do not collapse agent utility and principal utility into an unexplained score.",
+      "repo_fit": "[Economic-games research](ECONOMIC_GAMES_RESEARCH.md), including the downloaded September 2026 double-auction experiment and negotiation libraries. This track depends on economic functionality not yet implemented in SwarmKit."
+    },
+    {
+      "id": "E7",
+      "name": "Collective exploration and discovery",
+      "status": "specified_not_implemented",
+      "sources": [
+        "https://arxiv.org/abs/2410.05080",
+        "https://arxiv.org/abs/2407.01725"
+      ],
+      "scenario": "Agents allocate a limited experimental budget across hypotheses and combine results to produce a useful, independently checkable finding. Examples include identifying which change improves a data-processing pipeline, finding a failure region of an algorithm, or deriving a predictive rule across experimental conditions.",
+      "scaling": "Hypothesis count; experiment cost; noise; number of complementary observations; accessible tool types; repeated-query value; and nonseparable interactions. Vary whether a finding requires combining experiments from several agents.",
+      "verification": "Freeze hidden validation data or an external executable test. Require a reproducible artifact: a tested program, predicted held-out outcomes, or a falsifiable hypothesis with supporting observations. Count verified findings, useful coverage, duplicate experiments, false discoveries, and resource expenditure.",
+      "controls": "Single investigator with the same tools/budget; independent parallel search with a fixed selection rule; shared experiment registry; peer critique; and shared artifacts. Allow each control comparable opportunities to discover new information. Avoid selecting the best output using hidden answers unless it is explicitly labeled an oracle ceiling.",
+      "failure_modes": "Agents repeat the same experiments, share an attractive but false explanation, or optimize a visible proxy that fails hidden validation. More discussion and more hypotheses are not success by themselves.",
+      "repo_fit": "ScienceAgentBench/DiscoveryBench are domain-task references, not direct collective-effect proofs. SwarmKit's population search, artifact verification and evidence lineage make this a particularly relevant proposed extension."
+    },
+    {
+      "id": "E8",
+      "name": "Persistent collective learning and transfer",
+      "status": "specified_not_implemented",
+      "sources": [
+        "https://arxiv.org/abs/2506.14990v3"
+      ],
+      "scenario": "A swarm solves a sequence of related tasks, records reusable procedures, transfers them to new agents, and adapts when the environment changes. Some inherited procedures become invalid. Success requires retaining useful knowledge and retiring harmful knowledge.",
+      "scaling": "Sequence length; task-family diversity; relatedness between training and evaluation; agent turnover; memory budget; environmental drift; and the fraction of misleading inherited artifacts.",
+      "verification": "Evaluate new tasks and fresh agents with discoveries frozen before the test phase. Measure paired transfer gain, retained performance on older tasks, adaptation cost, invalid-artifact adoption and rollback. Use held-out task families as well as held-out seeds.",
+      "controls": "No persistent memory; each agent's private memory only; shared raw logs; shared verified artifacts; structured procedures; and no retirement/rollback. Match the information/storage budget or report it explicitly. Reset memory between independent replications, but preserve it within each declared continual episode sequence.",
+      "failure_modes": "Scores rise because test examples leaked into memory, or a once-useful procedure is copied after the world changes. Corpus popularity and reuse count are not evidence of positive transfer.",
+      "repo_fit": "MEAL motivates continual multi-agent evaluation, while the move to explicit artifacts is our proposal. This track directly tests `PeerAdoption`, `ProcedureAbstraction`, `CulturalTransfer`, audits and retirement."
+    }
+  ],
+  "optional_diagnostics": [
+    "Asymmetric information/feedback microtasks, including word grids or puzzle boxes only when testing a stated mechanism hypothesis."
+  ],
+  "shared_requirements": [
+    "Versioned tasks and evaluators",
+    "Declared information and permission matrix",
+    "Explicit sequential/simultaneous/asynchronous semantics",
+    "Measured aggregate compute and tool usage",
+    "Hidden ground truth outside agent observations",
+    "Paired controls with matching access/budget or disclosed changes",
+    "Separate task failure, budget truncation, setup failure and grader failure",
+    "Held-out task structures and partners; cluster-aware continual evaluation"
+  ]
+}

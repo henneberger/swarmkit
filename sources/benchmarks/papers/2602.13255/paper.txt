@@ -1,0 +1,1193 @@
+                                           DPBench: Structural Determinants of Multi-Agent
+                                           LLM Coordination Under Simultaneous Resource
+                                                            Contention
+
+
+                                                                     Najmul Hasan Prashanth BusiReddyGari∗
+                                                                   Department of Mathematics and Computer Science
+                                                                      University of North Carolina at Pembroke
+arXiv:2602.13255v2 [cs.AI] 3 Jun 2026
+
+
+
+
+                                                                                 Pembroke, NC, USA
+
+
+
+                                                                                                  100%
+                                                             P0
+                                                                                                               90.0%            structural
+                                                                                                  80%                         intervention
+                                                                                  Deadlock rate
+
+
+
+
+                                             P4                           P1
+                                                                                                  60%
+
+
+                                                                                                  40%
+
+                                                    P3               P2                                                        0.0%
+                                                                                                  20%
+
+                                                     holds        needs
+                                                                                                   0%
+                                                                                                               default       3 rounds
+                                                                                                             (0 rounds)
+                                                                                                               n = 30          n = 20
+
+
+                                        Figure 1: The model is unchanged; the protocol determines the outcome. Left: the N =5 Dining
+                                        Philosophers configuration. Right: three rounds of pre-commitment communication drive Gem-
+                                        ini 2.5 Flash from 90.0% deadlock to 0.0%. Bars are 95% Wilson CIs.
+
+                                                                                                  Abstract
+                                                    We present DPBench, a benchmark for evaluating coordination in multi-agent
+                                                    systems built from large language models. Existing benchmarks measure task-level
+                                                    success under a fixed protocol; the structural conditions under which coordination
+                                                    succeeds or fails at all have not been characterised. DPBench adapts the Dining
+                                                    Philosophers problem into a controlled testbed where the action protocol, the com-
+                                                    munication structure, and the group size each vary independently. We evaluate six
+                                                    agents: GPT-5.2, Claude Opus 4.5, Grok 4.1, Gemini 2.5 Flash, Llama 4 Maver-
+                                                    ick, and a uniform-random baseline. Under simultaneous action at N =5 with the
+                                                    default prompt, deadlock ranges from 25.0% (95% Wilson CI [11.2, 46.9]) for GPT-
+                                                    5.2 to 90.0% [74.4, 96.5] for Gemini 2.5 Flash; sequential action is solved by four
+                                                    of the six. Holding the model fixed at Gemini 2.5 Flash, three protocol variables
+                                                    drive deadlock from 90% to within CI of zero: three rounds of pre-commitment
+                                          ∗ Corresponding author: prashanth.busireddygari@uncp.edu.
+
+                                        Code is available at: https://github.com/najmulhasan-code/dpbench
+
+
+                                        Preprint.
+         communication (0.0% vs. single-round 86.7%), a prompt encoding a classical con-
+         currency primitive (0.0% for resource-ordering and symmetry-breaking, against
+         100% for the minimal prompt), or doubling the group from N =5 to N =10 (90.0%
+         to 10.0%). Single-round messaging and memory of past timesteps do not change
+         the rate at the sample size we ran. Whether the same model coordinates or dead-
+         locks is determined by the protocol, not by the model’s capability.
+
+
+1   Introduction
+A growing class of LLM systems coordinates several agents rather than answering as a single chat
+partner. Software-engineering agents hold separate roles around a shared codebase [Hong et al., 2024,
+Agashe et al., 2025]; retrieval and tool-use pipelines delegate sub-queries between specialised LLM
+calls [Yao et al., 2023b, Zhou et al., 2024]; orchestration frameworks let multiple LLM instances
+act on a shared environment [Liu et al., 2024, Kwon et al., 2025]. Each step in this direction
+takes the system further from single-turn answering and closer to the kind of distributed-computing
+problem that has been studied for sixty years. Agents now operate concurrently, share state, and must
+coordinate to avoid interfering with each other.
+The benchmark literature for multi-agent LLM systems mostly measures whether agents succeed
+when given a particular protocol [Liu et al., 2024, Hong et al., 2024, Zhu et al., 2025, Duan et al., 2024,
+Du et al., 2024, Wang et al., 2024]. We study a complementary question: under what protocols does
+coordination succeed at all? Our concern is the kind of failure that distributed-systems engineers call
+deadlock, the failure that appears when several agents claim shared resources at once and end up in a
+circular wait that does not resolve. Deadlock is well understood in concurrent computing. Dijkstra’s
+Dining Philosophers [Dijkstra, 1965] formalised the simplest setting where the failure shows up.
+The classical literature also gave two simple sufficient conditions for deadlock freedom: resource
+ordering, where every agent picks up resources in a fixed global order, and symmetry breaking, where
+one agent reverses its grab order. These conditions do not require fairness, scheduling tricks, or even
+communication; they are statements about the protocol.
+
+The puzzle. On the same task, the same Gemini 2.5 Flash model deadlocks 90.0% of the time
+under the default protocol and 0.0% of the time once we add three rounds of pre-commitment
+messaging. The same model deadlocks 0.0% once we add a one-paragraph prompt encoding the
+resource-ordering rule. The same model deadlocks 10.0% instead of 90.0% once we change N from
+5 to 10. The decision-making module is identical in every case; the protocol around it is not. The
+interesting object is the protocol.
+
+What this paper claims. Three protocol-level variables determine whether multi-agent LLM
+coordination succeeds under simultaneous resource contention: pre-commitment communication
+rounds, the prompt-level coordination strategy, and the group size. Within ranges where these
+variables permit coordination, every model we test succeeds. Outside those ranges, the same model
+fails at rates that depend on the model. The contribution is the characterisation of these conditions,
+not the claim that LLMs cannot coordinate.
+
+What the paper shows. In simultaneous mode at N =5 with the default prompt and no inter-agent
+communication, deadlock rates range from 25.0% (GPT-5.2) to 90.0% (Gemini 2.5 Flash) across five
+frontier LLMs. The lowest of these, GPT-5.2 at 25.0% [11.2, 46.9], overlaps the random baseline
+13.3% [5.3, 29.7] at n=20–30 episodes. Models do not separate cleanly from chance under default
+conditions. Sequential coordination, where one philosopher acts at a time, is solved by four of six
+agents (deadlock 0.0% point estimate, 95% Wilson upper CI at or below 16.1%). Two anomalies
+remain: Claude Opus 4.5 deadlocks 60.0% [38.7, 78.1] and Grok 4.1 25.0% [11.2, 46.9]. Action
+distributions show WAIT-as-default behaviour rather than canonical circular wait; we report both.
+Three structural variables drive the simultaneous-coordination failure to within CI of zero for Gem-
+ini 2.5 Flash, the agent that fails most. Three rounds of pre-commitment discussion drive deadlock
+from 90.0% to 0.0%. Prompts that encode resource ordering or symmetry breaking each reach 0.0%.
+Increasing N from 5 to 10 takes deadlock from 90.0% to 10.0%. By contrast, single-round messaging,
+one batch of messages exchanged just before agents commit, does not statistically reduce deadlock
+at n=30 (86.7% [70.3, 94.7] vs. baseline 90.0% [74.4, 96.5]). The structure of the communication
+
+
+                                                    2
+matters; one round is not enough. Memory of past timesteps without multi-round communication
+produces no detectable effect either (Appendix B).
+
+2   Coordination as a Structural Problem
+Multi-agent LLM benchmarks. The current generation of multi-agent LLM benchmarks measures
+task-level success. AgentBench [Liu et al., 2024] evaluates LLMs as agents across eight environments
+and reports gaps between closed and open-weight models. MetaGPT [Hong et al., 2024] encodes role-
+based standardised operating procedures into a software-engineering pipeline. MultiAgentBench [Zhu
+et al., 2025] measures cooperative and competitive behaviour over six environments. GTBench [Duan
+et al., 2024] evaluates LLMs in game-theoretic interactions. Multi-agent debate [Du et al., 2024]
+improves factuality and reasoning by letting several LLM instances argue. ZSC-Eval [Wang et al.,
+2024] measures zero-shot coordination performance. Specialised settings include medical [Kim et al.,
+2024], embodied AI [Mozikov et al., 2024], and assistive collaboration [Hua et al., 2024]. Adversarial
+behaviours have also been reported, including secret collusion among LLM agents [Motwani et al.,
+2024] and behavioural shifts under harm-eliciting prompts [Andriushchenko et al., 2025]. The
+DPBench question is orthogonal: not what the agents accomplish under a specific protocol, but what
+aspects of the protocol make coordination feasible at all.
+
+LLM agents, planning, and reasoning brittleness. A separate line of work has documented brittle-
+ness in LLM planning and symbolic reasoning. Valmeekam et al. [2023b] and PlanBench [Valmeekam
+et al., 2023a] show that LLMs struggle on classical planning. Kambhampati et al. [2024] argues that
+LLMs do not plan in a strict sense, and Stechly et al. [2025] shows they cannot reliably self-verify.
+Mirzadeh et al. [2025] demonstrates the same model collapsing under cosmetic perturbations of
+grade-school math. The agent-construction literature provides scaffolding to mitigate these failures:
+chain-of-thought prompting [Wei et al., 2022], self-consistency [Wang et al., 2023], ReAct [Yao et al.,
+2023b], Tree-of-Thoughts [Yao et al., 2023a], language-agent tree search [Zhou et al., 2024], reflec-
+tion [Bo et al., 2024], and explanation-driven in-context learning [Xie et al., 2022]. Theory-of-mind
+benchmarks measure related social cognition: OpenToM [Xu et al., 2024] and HiToM [Wu et al.,
+2023] probe mental-state inference, and Cross et al. [2025] studies hypothetical reasoning over agent
+intentions. Coordination on Dining Philosophers does not require any reasoning task harder than
+“need both adjacent forks; pick them up in a fixed order”. The failures we observe are therefore not a
+stronger version of the planning-brittleness finding; they are about whether the agent and the protocol
+are mutually compatible.
+
+Multi-agent reinforcement learning. The MARL literature has long studied coordination [Lowe
+et al., 2017, Foerster et al., 2016, Lanctot et al., 2017, Sunehag et al., 2018, Rashid et al., 2018] and
+emergent communication [Mu and Goodman, 2021, Sukhbaatar et al., 2016, Kim and Oh, 2021, Li
+et al., 2024]. Coordination with strangers, also called zero-shot coordination, has motivated other-
+play [Hu et al., 2020], trajectory diversity [Lupu et al., 2021], and biases that favour coordination
+over reward [Eccles et al., 2019]. The defining feature of this literature is that the coordination
+policy is learned jointly on the task. Our setting is zero-shot at the policy level: the agents are
+pretrained LLMs [Brown et al., 2020, Ouyang et al., 2022], never fine-tuned for the environment,
+and given only a natural-language description of the rules. The classical concurrency primitives we
+study, resource ordering and symmetry breaking, are not policies that emerge from training; they are
+protocol properties imposed at the prompt level.
+
+Classical concurrency. The Dining Philosophers problem [Dijkstra, 1965] and its variants [Chandy
+and Misra, 1984] are the canonical introduction to deadlock; Lamport [1978] establishes the sur-
+rounding distributed-systems framework of partial orders and message causality. The two sufficient
+conditions for deadlock freedom that we evaluate, resource ordering and symmetry breaking, originate
+in this literature. We use them as prompt-level interventions: if the agent is told to follow them, does
+it follow them?
+
+What DPBench adds. The benchmark fills a gap that none of the four threads above covers individ-
+ually. Multi-agent LLM benchmarks measure outcomes under a fixed protocol; reasoning benchmarks
+measure single-agent capability; MARL studies learned coordination; classical concurrency proves
+results without LLMs in scope. DPBench measures, on the same model, what changes when the
+
+
+                                                   3
+protocol changes. We use a classical problem because the deadlock-freedom conditions are well
+established, which gives us a reference against which the empirical behaviour can be compared.
+
+
+3     The DPBench Environment
+
+3.1   Decentralised partially observed Markov decision process
+
+We formalise an episode of DPBench as a Dec-POMDP ⟨N , S, {Ai }, P, {Oi }, {Ωi }, R, T ⟩. The
+agent set N = {1, . . . , N } contains the philosophers; each i ∈ N sits between forks fi−1 and fi
+(indices mod N ). The state space S encodes the holder of each fork, the hunger and meal counts of
+each philosopher, and the timestep, so a state s ∈ S is an element of {0, 1, . . . , N }N × N2N × N. The
+action set Ai = {G RAB _L EFT, G RAB _R IGHT, R ELEASE, WAIT} is the same for all philosophers,
+where G RAB succeeds only if the target fork is currently free and R ELEASE drops both forks if
+either is held. Eating is not an action: at the end of any timestep where philosopher i holds both
+adjacent forks, a meal is recorded for i and both forks are released. The transition function P is
+deterministic given the joint action. In simultaneous mode, the joint action is the tuple of all N
+individual actions taken at the same timestep, and conflicting grabs (two philosophers requesting
+the same fork) are resolved deterministically: the lowest-indexed requester acquires the fork. In
+sequential mode, philosophers act in fixed round-robin order within a timestep, and each action sees
+the state produced by the previous philosopher. The local observation Oi exposes the holder of fi−1
+and fi , i’s own hunger and meals, plus optional inter-agent messages from the current or recent
+timesteps depending on the communication condition, and Ωi encodes how this view is rendered into
+the natural-language prompt the LLM receives. Reward R is not used during action selection because
+the agents are zero-shot LLMs that read a prompt and emit a JSON action; R is computed post-hoc
+per episode for evaluation, as defined in Section 3.3. The horizon T is the maximum episode length,
+set to 30 timesteps in every condition reported here.
+The system is symmetric: the action space and observation function are identical for all i, and the
+topology is rotationally invariant. This symmetry is the source of the coordination problem. A
+homogeneous deterministic strategy that leads each philosopher to grab their left fork on timestep
+1 produces the canonical deadlock state immediately. Resolving the deadlock requires breaking
+symmetry through randomisation, through an asymmetric prompt, or through communication that
+produces an asymmetric assignment of intentions.
+
+3.2   Communication
+
+The communication condition determines whether and how messages flow between agents. Under no
+communication, agents observe only their local state and act. Under single-round communication,
+every agent broadcasts a free-form message at each timestep; all messages are appended to every
+agent’s prompt; agents then commit to their action. There is one message round before each
+commitment. Under multi-round communication with k rounds, the same exchange is repeated k
+times before any action is committed, and each round agents see all messages from the previous round
+and may revise. A deadlock predicate fires at the end of any timestep where every fork is held and no
+philosopher holds both of their adjacent forks, so no philosopher can eat on that timestep. Episodes
+that reach T timesteps without all philosophers completing the target meal count are additionally
+counted as deadlocks for evaluation purposes.
+
+3.3   Metrics
+
+For each episode we compute four primary quantities, and across episodes we report the mean and a
+95% confidence interval.
+
+                         deadlock = 1[deadlock predicate fires before T ]                           (1)
+                       throughput = T1 i mealsi
+                                      P
+                                                                                                    (2)
+                                            P P
+                                              i    j |mealsi −mealsj |
+                           fairness = 1 −         2N
+                                                      P                  (Gini-based; Gini, 1912)   (3)
+                                                        i mealsi
+                                        1
+                                          P
+           msg-action consistency = |M |      m∈M 1[stated intent(m) = committed action]            (4)
+
+
+                                                      4
+Confidence intervals on the binomial deadlock rate use the Wilson interval, preferred over Wald near
+0 or 1. Confidence intervals on the continuous throughput and fairness use the t-distribution at n−1
+degrees of freedom. Both are reported alongside the primary numbers throughout the paper.
+
+3.4   Models, conditions, and sample sizes
+
+We evaluate five frontier LLMs accessed via a unified inference API at provider-default temperatures:
+GPT-5.2, Claude Opus 4.5, Grok 4.1, Gemini 2.5 Flash, and Llama 4 Maverick. We add a uniform-
+random baseline that samples a legal action at each timestep. Random is the appropriate reference,
+because it is the expected behaviour of an agent with no understanding of the task. Any LLM whose
+deadlock rate overlaps random is, at the available sample size, indistinguishable from chance.
+The conditions vary along the three protocol axes. Action mode is simultaneous or sequential;
+communication is none, single-round, three rounds, or five rounds; prompt is minimal, default,
+theory-of-mind, symmetry-breaking, or resource-ordering; and group size N is 5 or 10. Sample
+sizes are n=30 episodes for the layer-1 cross-model conditions and n=20 for the layer-3 ablation
+conditions, decided before any data was collected. The full coverage matrix is in Appendix C.
+
+Why these prompts? The five prompt variants are not a sweep; each variant corresponds to a
+specific hypothesis. The minimal variant strips the goal description: the agent is told the actions but
+not asked to make progress. The default variant states the goal in neutral terms. The theory-of-mind
+variant adds an instruction to reason about what other philosophers will do, in line with the mental-
+state-inference benchmarks of Xu et al. [2024] and Wu et al. [2023]. The symmetry-breaking variant
+asks the agent to randomise its commitment timing (sometimes wait one or two turns before grabbing)
+rather than always grabbing immediately, which prevents the homogeneous synchronised strategy
+that drives the canonical deadlock. The resource-ordering variant encodes a parity-based grab order
+on the philosopher index: even-indexed philosophers grab right first, odd-indexed grab left first.
+Symmetry-breaking introduces a temporal asymmetry across agents; resource-ordering introduces a
+positional asymmetry that directly prevents the circular wait described by Dijkstra [1965].
+
+4     Behaviour of Frontier LLMs Under the Default Protocol
+Figure 2 reports the cross-model picture under the default prompt with no communication, for both
+action modes. Three observations are stable across models.
+Sequential coordination is solved by most agents. GPT-5.2, Gemini 2.5 Flash, Llama 4 Maverick,
+and the random baseline all produce 0.0% deadlock under sequential action (95% upper bounds at
+or below 16.1%). When only one philosopher acts per timestep the symmetry of the simultaneous
+case is broken by the schedule itself, and any reasonable strategy reaches a meal, including uniform
+random over legal actions.
+Two sequential anomalies. Claude Opus 4.5 deadlocks 60.0% [38.7, 78.1] and Grok 4.1 25.0%
+[11.2, 46.9] in sequential mode. The action distributions in Appendix A show Claude over-using
+WAIT relative to other models, leading to long standoffs that hit the timestep cap and register as the
+timeout form of deadlock. Sequential coordination is therefore not solved for every model.
+Simultaneous coordination spreads. In simultaneous mode the spread is wide: Gem-
+ini 2.5 Flash 90.0% [74.4, 96.5], Llama 4 Maverick 76.7% [59.1, 88.2], Grok 4.1 70.0% [48.1, 85.5],
+Claude Opus 4.5 55.0% [34.2, 74.2], GPT-5.2 25.0% [11.2, 46.9], and random 13.3% [5.3, 29.7].
+The point estimate ordering does not establish a capability ranking. GPT-5.2’s CI overlaps random.
+Among the four LLMs above GPT-5.2, five of the six pairwise CI comparisons overlap; only Gemini
+and Claude are separated, and only by 0.2 percentage points. The substantive observation is that
+all five LLMs sit at or above 25% deadlock at the point estimate. Section 5 shows that the same
+model that deadlocks 90.0% of the time under default conditions deadlocks 0.0% once the protocol
+is changed.
+
+
+
+
+                                                  5
+                                        success                                           failure
+    Gemini 2.5 Flash (n=30)
+
+
+Llama 4 Maverick (n=30)
+
+
+              Grok 4.1 (n=20)
+
+
+
+    Claude Opus 4.5 (n=20)
+
+
+              GPT-5.2 (n=20)
+
+                                                                                  simultaneous
+              Random (n=30)                                                       sequential
+
+                                    0%          20%            40%      60%           80%           100%
+                                                Deadlock rate (95% Wilson CI)
+
+Figure 2: All five LLMs sit at or above the random baseline under default conditions (N =5, no
+communication). Sequential action is solved by four of the six; Claude Opus 4.5 (60.0%) and
+Grok 4.1 (25.0%) are anomalies analysed in Appendix A. In simultaneous action GPT-5.2’s 25.0%
+overlaps the random baseline 13.3% and is not statistically distinguishable at this sample size. Bars
+are 95% Wilson CIs.
+
+
+Table 1: Per-model outcomes at N =5 under default conditions (no communication). Deadlock with
+Wilson 95% CI; throughput in group meals per timestep with t-based 95% half-width. The random
+baseline anchors the lower end of the deadlock spread.
+
+                                   Simultaneous                                Sequential
+    Model              n       Deadlock           Throughput     n       Deadlock            Throughput
+    GPT-5.2            20   25.0 [11.2, 46.9]   0.446 ± 0.073    20    0.0 [0.0, 16.1]      0.115 ± 0.012
+    Claude Opus 4.5    20   55.0 [34.2, 74.2]   0.455 ± 0.078    20   60.0 [38.7, 78.1]     0.078 ± 0.045
+    Grok 4.1           20   70.0 [48.1, 85.5]   0.437 ± 0.080    20   25.0 [11.2, 46.9]     0.112 ± 0.033
+    Gemini 2.5 Flash   30   90.0 [74.4, 96.5]   0.146 ± 0.087    30    0.0 [0.0, 11.4]      0.057 ± 0.025
+    Llama 4 Maverick   30   76.7 [59.1, 88.2]   0.271 ± 0.110    30    0.0 [0.0, 11.4]      0.093 ± 0.029
+    Random             30    13.3 [5.3, 29.7]   0.303 ± 0.030    30    0.0 [0.0, 11.4]      0.048 ± 0.014
+
+
+
+
+5     The Protocol Determines the Outcome
+
+
+We hold the model fixed at Gemini 2.5 Flash, the agent that fails most under default conditions, and
+vary the protocol. Three protocol-level variables each reduce deadlock from approximately 90%
+to within CI of zero. Figure 3 reports all three on the same axis and chart type so they are directly
+comparable.
+
+
+                                                    6
+                       (a) Prompt strategy      (b) Communication rounds              (c) Group size
+
+                       100%90%
+                                                                             100%
+                                                      90% 87%                                   N=5
+                100%                           100%                                             N=10
+                                                                             80%
+Deadlock rate
+                80%                            80%
+                                                                             60%
+                60%                            60%
+                                                                             40%
+                40%                            40%
+                                 5%                                     5%
+                                      0% 0%                        0%        20%
+                20%                            20%
+
+                 0%                             0%                            0%
+                          al ult ind ing ing           0       1   3    5           Gemini Llama Random
+                    i nim defa f-m eak rder           Discussion rounds
+                  m          -o -br -o
+                          ory try rce
+                       the mme sou
+                        sy    re
+
+
+
+Figure 3: Three protocol variables that each take Gemini 2.5 Flash from ∼ 90% deadlock to ∼ 0%. (a)
+Prompt: classical concurrency primitives (resource-ordering, symmetry-breaking) eliminate deadlock;
+the minimal prompt without goal language reaches 100%. (b) Communication: three rounds eliminate
+deadlock; single-round messaging does not. (c) Group size: N =5 to N =10 reduces deadlock for
+both LLMs and random. Bars show Wilson 95% CIs (n=30 layer-1, n=20 ablations).
+
+
+5.1              Communication rounds
+
+We compare four communication conditions on the same model and the same simultaneous, N =5,
+default-prompt environment. With 0 rounds (no communication, baseline) Gemini deadlocks 90.0%
+[74.4, 96.5] at n=30. With 1 round (single-round messaging before commitment) it deadlocks 86.7%
+[70.3, 94.7] at n=30. With 3 rounds it deadlocks 0.0% [0.0, 16.1] at n=20, and with 5 rounds it
+deadlocks 5.0% [0.9, 23.6] at n=20.
+The structure of communication is what matters, not the presence of communication. A single round
+of messages exchanged just before action does not change deadlock at n=30: the CIs overlap the
+baseline almost entirely. Three rounds eliminate it. The qualitative reading is that one round is not
+enough for the agents to converge on an asymmetric assignment of intentions before commitment;
+three rounds are. Five rounds do not reduce deadlock further; throughput at three and five rounds
+is similar (0.557 vs. 0.532 group meals per timestep). This is consistent with the broader MARL
+finding that communication helps coordination only when the channel can resolve a non-trivial joint
+inference [Foerster et al., 2016, Sukhbaatar et al., 2016, Mu and Goodman, 2021].
+The message-action consistency at three rounds is 76.2%: when a Gemini agent says “I will grab the
+left fork next” during the negotiation phase, it actually does so 76.2% of the time. This rules out one
+trivial explanation, namely that three rounds works because the agents do not communicate at all.
+The agents are using the channel and they mostly follow through.
+
+5.2              Prompt strategy
+
+The five prompt variants are equivalent in length and tone but differ in what they say about coordina-
+tion. On Gemini 2.5 Flash, simultaneous, N =5, no communication, with n=20 unless noted, the
+minimal prompt with no goal language deadlocks 100% [83.9, 100.0]. The default prompt deadlocks
+90.0% [74.4, 96.5] at the n=30 baseline. The theory-of-mind prompt, which asks the agent to rea-
+son about what others will do, deadlocks 5.0% [0.9, 23.6]. The symmetry-breaking prompt, which
+asks the agent to randomise its commitment timing rather than grabbing immediately, deadlocks
+0.0% [0.0, 16.1]. The resource-ordering prompt, which encodes a parity-based grab order on the
+philosopher index, also deadlocks 0.0% [0.0, 16.1].
+Both concurrency-prevention prompts reach 0.0% deadlock with the only intervention being one
+extra paragraph in the system prompt. Theory-of-mind, which adds a reasoning instruction without
+
+
+                                                           7
+specifying a coordination rule, also nearly resolves the failure. The effect is consistent with the role
+of mental-state reasoning in cooperation benchmarks [Xu et al., 2024, Wu et al., 2023, Cross et al.,
+2025]. The minimal prompt removes the explicit goal and produces 100% deadlock. The deadlock is
+therefore not a property of the model. It is the model’s response when the prompt does not specify
+how to coordinate.
+We do not claim the prompt strategies are equivalent for downstream applications. Theory-of-
+mind reaches lower throughput (0.585) than resource-ordering (0.733); symmetry-breaking reaches
+the lowest of any deadlock-free condition (0.275) because the asymmetric rule reduces meals for
+philosopher 0. Each strategy is a different point in a deadlock, throughput, and fairness trade-off;
+full numbers are in Appendix D. The pattern recovers two threads from the MARL literature on
+zero-shot coordination, namely deliberate symmetry breaking [Hu et al., 2020, Eccles et al., 2019]
+and trajectory diversity [Lupu et al., 2021], both of which work in the same direction. Here we obtain
+the effect through a one-paragraph instruction rather than a training procedure.
+
+5.3   Group size
+
+Increasing N from 5 to 10 reduces deadlock under simultaneous mode for the two LLMs we test on
+this axis as well as for the random baseline. Gemini 2.5 Flash drops from 90.0% at N =5 to 10.0%
+[3.5, 25.6] at N =10. Llama 4 Maverick drops from 76.7% at N =5 to 16.7% [7.3, 33.6] at N =10.
+The random baseline drops from 13.3% at N =5 to 0.0% [0.0, 11.4] at N =10.
+At N =5 the canonical deadlock is one specific configuration where every philosopher holds exactly
+one fork. At N =10 that configuration is one of many, the chance of any random sequence of grabs
+reaching it falls, and an adjacent neighbour can release a fork without creating an immediate need on
+the other side. Group throughput also increases at N =10, from 0.146 to 1.111 meals per timestep
+across the table for Gemini. The setting that is conventionally used to demonstrate deadlock, namely
+small N , is also the setting that maximises it.
+
+5.4   Reading these three results together
+
+Each of the three structural variables independently reduces deadlock from approximately 90% to
+within CI of zero. They are not independent fixes for three different bugs; they remove the same
+protocol property. The simultaneous-coordination protocol at small N with the default prompt and
+no communication is symmetric, deterministic from the agent’s view, and forces commitment before
+any signal that breaks symmetry. Each structural variable removes one of those properties. Multi-
+round communication produces an asymmetric assignment of intentions over the rounds; symmetry-
+breaking and resource-ordering prompts hard-code asymmetry; larger group size makes the symmetric
+deadlock configuration one of many global states. The classical concurrency literature reaches the
+same conclusion via formal proof [Dijkstra, 1965, Lamport, 1978]; we recover it empirically in the
+LLM setting.
+
+6     Implications and Open Questions
+What the prompt-sensitivity finding does and does not say. The prompt-strategy result, where a
+one-paragraph addition to the system prompt takes deadlock from 90% to 0%, can be read two ways.
+The pessimistic reading is that the failure is fragile: the model needs the right hint to behave. The
+structural reading, which we adopt, is that the prompt is the channel by which coordination protocols
+are communicated to a zero-shot LLM agent; when the prompt encodes a deadlock-free protocol,
+the agent follows it. This is closer to how distributed-systems engineers think about concurrency
+than to how reasoning-benchmark designers think about LLM brittleness [Kambhampati et al., 2024,
+Mirzadeh et al., 2025, Stechly et al., 2025]. A working multi-agent LLM system ships its coordination
+rules in the prompt; DPBench measures whether the agent follows them.
+
+Implications for system design. The practical advice from these results is the following. Multi-
+agent LLM systems that need to coordinate over shared resources should give the agents either an
+explicit ordering rule or several rounds of negotiation before commitment. Single-round messaging,
+which is the default in many orchestration frameworks [Hong et al., 2024, Agashe et al., 2025, Liu
+et al., 2025, Ma et al., 2024], is not sufficient at n=30 for the model that fails most. Throughput at
+
+
+                                                   8
+three rounds is roughly 4× the baseline single-round throughput for Gemini (0.557 vs. 0.141), at the
+cost of approximately 4−5× more LLM calls per episode. The cost ordering of the three structural
+fixes is the following. Prompt-level fixes carry no extra cost. Group size requires running a different
+system. Multi-round communication trades calls for reliability.
+
+Memory of past states does not substitute for multi-round communication. A common alter-
+native explanation for the multi-round-communication result is that what the agents need is more
+observation history, not more communication rounds. Appendix B reports the direct test. Giving
+Gemini a memory window of three or five timesteps without communication does not produce a
+detectable change in deadlock rate, and adding a single-round communication on top of memory= 3
+also does not. What matters is the multi-round negotiation, not the historical observability of the
+environment.
+
+Scope of the claim. This is not evidence that LLMs cannot reason about distributed systems. The
+agents read and act on resource-ordering prompts at 0% deadlock, including in conditions where the
+rule must be followed by every agent for it to work, which is a non-trivial inference even if a small
+one. The contribution is at the level of the protocol, not the agent.
+
+6.1   Scope
+
+The structural-variable ablations are run on the model with the largest dynamic range to move
+(Gemini 2.5 Flash, 90% baseline, n=20 per cell); the released package supports the same ablations
+on every other model evaluated in Section 4. The communication channel we study is broadcast and
+synchronous, which is the canonical setting in which the structural variables we report are cleanly
+defined.
+
+7     Conclusion
+What looked like a capability gap in multi-agent LLM systems is, on the evidence we report, a property
+of the protocol around the model. The simultaneous-coordination failure on Dining Philosophers
+is generated by a protocol that is symmetric, that forces commitment before any signal that breaks
+symmetry, and that uses small N . Three interventions, each of which removes one of those properties,
+drive deadlock to within CI of zero on the model that fails most: several rounds of pre-commitment
+communication, a prompt that encodes a classical concurrency primitive, or a larger group. The
+protocol-level conditions that the concurrency literature established for deadlock freedom remain
+the right level at which to think about coordination, even when the agents are large language models.
+When deploying a multi-agent LLM system over shared resources, the protocol around the agents
+deserves at least as much engineering attention as the choice of model itself.
+
+References
+Saaket Agashe, Yue Fan, Anthony Reyna, and Xin Eric Wang. LLM-coordination: Evaluating and analyzing
+  multi-agent coordination abilities in large language models. In Findings of the Association for Computational
+  Linguistics: NAACL 2025, pages 8038–8057, Albuquerque, New Mexico, April 2025. Association for
+  Computational Linguistics. doi: 10.18653/v1/2025.findings-naacl.448.
+
+Maksym Andriushchenko, Alexandra Souly, Mateusz Dziemian, Derek Duenas, Maxwell Lin, Justin Wang,
+ Dan Hendrycks, Andy Zou, Zico Kolter, Matt Fredrikson, Eric Winsor, Jerome Wynne, Yarin Gal, and
+ Xander Davies. AgentHarm: A benchmark for measuring harmfulness of LLM agents. In The Thirteenth
+ International Conference on Learning Representations, 2025. URL https://openreview.net/forum?
+ id=AC5n7xHuR1.
+
+Xiaohe Bo, Zeyu Zhang, Quanyu Dai, Xueyang Feng, Lei Wang, Rui Li, Xu Chen, and Ji-Rong Wen. Reflective
+  multi-agent collaboration based on large language models. In Advances in Neural Information Processing
+  Systems, volume 37. Curran Associates, Inc., 2024.
+
+Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind
+  Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, et al. Language models are few-shot learners. In
+  Advances in Neural Information Processing Systems, volume 33, pages 1877–1901. Curran Associates, Inc.,
+  2020.
+
+
+                                                      9
+K. Mani Chandy and Jayadev Misra. The drinking philosophers problem. ACM Transactions on Programming
+  Languages and Systems, 6(4):632–646, October 1984. doi: 10.1145/1780.1804.
+Logan Cross, Violet Xiang, Agam Bhatia, Daniel L.K. Yamins, and Nick Haber. Hypothetical minds: Scaffolding
+  theory of mind for multi-agent tasks with large language models. In The Thirteenth International Conference
+  on Learning Representations, 2025. URL https://openreview.net/forum?id=otW0TJOUYF.
+Edsger W. Dijkstra. Solution of a problem in concurrent programming control. Communications of the ACM, 8
+  (9):569, 1965. doi: 10.1145/365559.365617.
+Yilun Du, Shuang Li, Antonio Torralba, Joshua B. Tenenbaum, and Igor Mordatch. Improving factuality and
+   reasoning in language models through multiagent debate. In Proceedings of the 41st International Conference
+   on Machine Learning, volume 235 of Proceedings of Machine Learning Research, pages 11733–11763.
+   PMLR, 2024.
+Jinhao Duan, Renming Zhang, James Diffenderfer, Bhavya Kailkhura, Lichao Sun, Elias Stengel-Eskin, Mohit
+   Bansal, Tianlong Chen, and Kaidi Xu. GTBench: Uncovering the strategic reasoning capabilities of LLMs
+   via game-theoretic evaluations. In Advances in Neural Information Processing Systems, volume 37. Curran
+   Associates, Inc., 2024.
+Tom Eccles, Yoram Bachrach, Guy Lever, Angeliki Lazaridou, and Thore Graepel. Biases for emergent
+  communication in multi-agent reinforcement learning. In Advances in Neural Information Processing
+  Systems, volume 32. Curran Associates, Inc., 2019.
+Jakob Foerster, Ioannis Alexandros Assael, Nando de Freitas, and Shimon Whiteson. Learning to communicate
+   with deep multi-agent reinforcement learning. In Advances in Neural Information Processing Systems,
+   volume 29, pages 2137–2145. Curran Associates, Inc., 2016.
+Corrado Gini. Variabilità e mutabilità: contributo allo studio delle distribuzioni e delle relazioni statistiche.
+  Studi Economico-Giuridici della Regia Università di Cagliari. Tipografia di Paolo Cuppini, Bologna, 1912.
+Sirui Hong, Mingchen Zhuge, Jonathan Chen, Xiawu Zheng, Yuheng Cheng, Ceyao Zhang, Jinlin Wang,
+   Zili Wang, Steven Ka Shing Yau, Zijuan Lin, et al. MetaGPT: Meta programming for a multi-agent
+   collaborative framework. In The Twelfth International Conference on Learning Representations, 2024. URL
+   https://openreview.net/forum?id=VtmBAGCN7o.
+Hengyuan Hu, Adam Lerer, Alex Peysakhovich, and Jakob Foerster. “other-play” for zero-shot coordination.
+  In Proceedings of the 37th International Conference on Machine Learning, volume 119 of Proceedings of
+  Machine Learning Research, pages 4399–4410. PMLR, 2020.
+Yuncheng Hua, Lizhen Qu, and Gholamreza Haffari. Assistive large language model agents for socially-aware
+  negotiation dialogues. In Findings of the Association for Computational Linguistics: EMNLP 2024, pages
+  8047–8074, Miami, Florida, USA, 2024. Association for Computational Linguistics.
+Subbarao Kambhampati, Karthik Valmeekam, Lin Guan, Mudit Verma, Kaya Stechly, Siddhant Bhambri, Lucas
+  Saldyt, and Anil Murthy. Position: LLMs can’t plan, but can help planning in LLM-modulo frameworks.
+  In Proceedings of the 41st International Conference on Machine Learning, volume 235 of Proceedings of
+  Machine Learning Research, pages 22895–22907. PMLR, 2024.
+Jooyeon Kim and Alice Oh. Emergent communication under varying sizes and connectivities. In Advances in Neu-
+  ral Information Processing Systems, volume 34. Curran Associates, Inc., 2021. URL https://proceedings.
+  neurips.cc/paper/2021/hash/92dfa194391a59dc65b88b704599dbd6-Abstract.html.
+Yubin Kim, Chanwoo Park, Hyewon Jeong, Yik Siu Chan, Xuhai Xu, Daniel McDuff, Hyeonhoon Lee, Marzyeh
+  Ghassemi, Cynthia Breazeal, and Hae Won Park. MDAgents: An adaptive collaboration of LLMs for medical
+  decision-making. In Advances in Neural Information Processing Systems, volume 37. Curran Associates,
+  Inc., 2024.
+Deuksin Kwon, Jiwon Hae, Emma Clift, Daniel Shamsoddini, Jonathan Gratch, and Gale Lucas. ASTRA:
+  A negotiation agent with adaptive and strategic reasoning via tool-integrated action for dynamic offer
+  optimization. In Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing,
+  pages 16228–16249, Suzhou, China, 2025. Association for Computational Linguistics.
+Leslie Lamport. Time, clocks, and the ordering of events in a distributed system. Communications of the ACM,
+  21(7):558–565, July 1978. doi: 10.1145/359545.359563.
+Marc Lanctot, Vinicius Zambaldi, Audrunas Gruslys, Angeliki Lazaridou, Karl Tuyls, Julien Pérolat, David
+ Silver, and Thore Graepel. A unified game-theoretic approach to multiagent reinforcement learning. In
+ Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017.
+
+
+                                                      10
+Huao Li, Hossein Nourkhiz Mahjoub, Behdad Chalaki, Vaishnav Tadiparthi, Kwonjoon Lee, Ehsan Moradi-Pari,
+  Michael Lewis, and Katia Sycara. Language grounded multi-agent reinforcement learning with human-
+  interpretable communication. In Advances in Neural Information Processing Systems, volume 37. Curran
+  Associates, Inc., 2024.
+
+Xiao Liu, Hao Yu, Hanchen Zhang, Yifan Xu, Xuanyu Lei, Hanyu Lai, Yu Gu, Hangliang Ding, Kaiwen Men,
+  Kejuan Yang, et al. Agentbench: Evaluating LLMs as agents. In The Twelfth International Conference on
+  Learning Representations, 2024. URL https://openreview.net/forum?id=zAdUB0aCTQ.
+
+Yuhan Liu, Cong Xu, Lu Liu, Yihua Wang, Feiyu Chen, Qi Jia, Yaqian Zhao, Zhichun Wang, and Xiang
+  Li. DeMAC: Enhancing multi-agent coordination with dynamic DAG and manager-player feedback. In
+  Findings of the Association for Computational Linguistics: EMNLP 2025, pages 14072–14098, Suzhou, China,
+  November 2025. Association for Computational Linguistics. doi: 10.18653/v1/2025.findings-emnlp.757.
+
+Ryan Lowe, Yi Wu, Aviv Tamar, Jean Harb, Pieter Abbeel, and Igor Mordatch. Multi-agent actor-critic for mixed
+  cooperative-competitive environments. In Advances in Neural Information Processing Systems, volume 30.
+  Curran Associates, Inc., 2017.
+
+Andrei Lupu, Brandon Cui, Hengyuan Hu, and Jakob Foerster. Trajectory diversity for zero-shot coordination.
+  In Proceedings of the 38th International Conference on Machine Learning, volume 139 of Proceedings of
+  Machine Learning Research, pages 7204–7213. PMLR, 2021.
+
+Hao Ma, Tianyi Hu, Zhiqiang Pu, Boyin Liu, Xiaolin Ai, Yanyan Liang, and Min Chen. Coevolving with the
+  other you: Fine-tuning LLM with sequential cooperative multi-agent reinforcement learning. In Advances in
+  Neural Information Processing Systems, volume 37. Curran Associates, Inc., 2024.
+
+Iman Mirzadeh, Keivan Alizadeh, Hooman Shahrokhi, Oncel Tuzel, Samy Bengio, and Mehrdad Farajtabar.
+  GSM-Symbolic: Understanding the limitations of mathematical reasoning in large language models. In The
+  Thirteenth International Conference on Learning Representations, 2025. URL https://openreview.net/
+  forum?id=AjXkRZIvjB.
+
+Sumeet Ramesh Motwani, Mikhail Baranchuk, Martin Strohmeier, Vijay Bolina, Philip H.S. Torr, Lewis
+  Hammond, and Christian Schroeder de Witt. Secret collusion among AI agents: Multi-agent deception via
+  steganography. In Advances in Neural Information Processing Systems, volume 37. Curran Associates, Inc.,
+  2024.
+
+Mikhail Mozikov, Nikita Severin, Valeria Bodishtianu, Maria Glushanina, Ivan Nasonov, Daniil Orekhov,
+  Vladislav Pekhotin, Ivan Makovetskiy, Mikhail Baklashkin, Vasily Lavrentyev, Akim Tsvigun, Denis Tur-
+  dakov, Tatiana Shavrina, Andrey Savchenko, and Ilya Makarov. EAI: Emotional decision-making of LLMs in
+  strategic games and ethical dilemmas. In Advances in Neural Information Processing Systems, volume 37.
+  Curran Associates, Inc., 2024.
+
+Jesse Mu and Noah Goodman. Emergent communication of generalizations. In Advances in Neural Information
+   Processing Systems, volume 34. Curran Associates, Inc., 2021. URL https://proceedings.neurips.
+   cc/paper/2021/hash/9597353e41e6957b5e7aa79214fcb256-Abstract.html.
+
+Long Ouyang, Jeffrey Wu, Xu Jiang, Diogo Almeida, Carroll Wainwright, Pamela Mishkin, Chong Zhang,
+  Sandhini Agarwal, Katarina Slama, Alex Ray, et al. Training language models to follow instructions with
+  human feedback. In Advances in Neural Information Processing Systems, volume 35, pages 27730–27744.
+  Curran Associates, Inc., 2022.
+
+Tabish Rashid, Mikayel Samvelyan, Christian Schroeder de Witt, Gregory Farquhar, Jakob Foerster, and Shimon
+  Whiteson. QMIX: Monotonic value function factorisation for deep multi-agent reinforcement learning.
+  In Proceedings of the 35th International Conference on Machine Learning, volume 80 of Proceedings of
+  Machine Learning Research, pages 4295–4304. PMLR, July 2018. URL https://proceedings.mlr.
+  press/v80/rashid18a.html.
+
+Kaya Stechly, Karthik Valmeekam, and Subbarao Kambhampati. On the self-verification limitations of large
+  language models on reasoning and planning tasks. In The Thirteenth International Conference on Learning
+  Representations, 2025. URL https://openreview.net/forum?id=4O0v4s3IzY.
+
+Sainbayar Sukhbaatar, Arthur Szlam, and Rob Fergus.       Learning multiagent communication
+  with backpropagation.    In Advances in Neural Information Processing Systems, volume 29.
+  Curran Associates, Inc., 2016.   URL https://proceedings.neurips.cc/paper/2016/hash/
+  55b1927fdafef39c48e5b73b5d61ea60-Abstract.html.
+
+
+                                                    11
+Peter Sunehag, Guy Lever, Audrunas Gruslys, Wojciech Marian Czarnecki, Vinicius Zambaldi, Max Jaderberg,
+  Marc Lanctot, Nicolas Sonnerat, Joel Z Leibo, Karl Tuyls, and Thore Graepel. Value-decomposition
+  networks for cooperative multi-agent learning based on team reward. In Proceedings of the 17th International
+  Conference on Autonomous Agents and MultiAgent Systems, pages 2085–2087, 2018.
+
+Karthik Valmeekam, Matthew Marquez, Alberto Olmo, Sarath Sreedharan, and Subbarao Kambhampati. Plan-
+  Bench: An extensible benchmark for evaluating large language models on planning and reasoning about
+  change. In Advances in Neural Information Processing Systems, volume 36. Curran Associates, Inc., 2023a.
+
+Karthik Valmeekam, Matthew Marquez, Sarath Sreedharan, and Subbarao Kambhampati. On the planning
+  abilities of large language models - a critical investigation. In Advances in Neural Information Processing
+  Systems, volume 36. Curran Associates, Inc., 2023b.
+
+Xihuai Wang, Shao Zhang, Wenhao Zhang, Wentao Dong, Jingxiao Chen, Ying Wen, and Weinan Zhang.
+  ZSC-Eval: An evaluation toolkit and benchmark for multi-agent zero-shot coordination. In Advances in
+  Neural Information Processing Systems, volume 37. Curran Associates, Inc., 2024. Datasets and Benchmarks
+  Track.
+
+Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc Le, Ed Chi, Sharan Narang, Aakanksha Chowdhery, and
+  Denny Zhou. Self-consistency improves chain of thought reasoning in language models. In The Eleventh
+  International Conference on Learning Representations, 2023. URL https://openreview.net/forum?
+  id=1PL1NIMMrw.
+
+Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Brian Ichter, Fei Xia, Ed Chi, Quoc V Le, and
+   Denny Zhou. Chain-of-thought prompting elicits reasoning in large language models. In Advances in Neural
+   Information Processing Systems, volume 35, pages 24824–24837. Curran Associates, Inc., 2022.
+
+Yufan Wu, Yinghui He, Yilin Jia, Rada Mihalcea, Yulong Chen, and Naihao Deng. Hi-ToM: A benchmark for
+  evaluating higher-order theory of mind reasoning in large language models. In Findings of the Association for
+  Computational Linguistics: EMNLP 2023, pages 10691–10706, Singapore, December 2023. Association for
+  Computational Linguistics. doi: 10.18653/v1/2023.findings-emnlp.717.
+
+Sang Michael Xie, Aditi Raghunathan, Percy Liang, and Tengyu Ma. An explanation of in-context learning as
+  implicit bayesian inference. In The Tenth International Conference on Learning Representations, 2022. URL
+  https://openreview.net/forum?id=RdJVFCHjUMI.
+
+Hainiu Xu, Runcong Zhao, Lixing Zhu, Jinhua Du, and Yulan He. OpenToM: A comprehensive benchmark
+  for evaluating theory-of-mind reasoning capabilities of large language models. In Proceedings of the 62nd
+  Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 8593–8623,
+  Bangkok, Thailand, August 2024. Association for Computational Linguistics. doi: 10.18653/v1/2024.acl-long.
+  466.
+
+Shunyu Yao, Dian Yu, Jeffrey Zhao, Izhak Shafran, Thomas L Griffiths, Yuan Cao, and Karthik Narasimhan.
+  Tree of thoughts: Deliberate problem solving with large language models. In Advances in Neural Information
+  Processing Systems, volume 36. Curran Associates, Inc., 2023a.
+
+Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik R Narasimhan, and Yuan Cao. React:
+  Synergizing reasoning and acting in language models. In The Eleventh International Conference on Learning
+  Representations, 2023b. URL https://openreview.net/forum?id=WE_vluYUL-X.
+
+Andy Zhou, Kai Yan, Michal Shlapentokh-Rothman, Haohan Wang, and Yu-Xiong Wang. Language agent tree
+  search unifies reasoning, acting, and planning in language models. In Proceedings of the 41st International
+  Conference on Machine Learning, volume 235 of Proceedings of Machine Learning Research, pages 61816–
+  61836. PMLR, 2024.
+
+Kunlun Zhu, Hongyi Du, Zhaochen Hong, Xiaocheng Yang, Shuyi Guo, Zhe Wang, Zhenhailong Wang, Cheng
+  Qian, Robert Tang, Heng Ji, and Jiaxuan You. MultiAgentBench: Evaluating the collaboration and competition
+  of LLM agents. In Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics
+  (Volume 1: Long Papers), pages 8580–8622, Vienna, Austria, July 2025. Association for Computational
+  Linguistics. doi: 10.18653/v1/2025.acl-long.421.
+
+
+
+                                                      12
+ A                  Sequential anomaly investigation: Claude and Grok
+
+
+Claude Opus 4.5 (60.0% deadlock [38.7, 78.1]) and Grok 4.1 (25.0% [11.2, 46.9]) are the two outliers
+in sequential mode (Section 4). Per-episode action logs explain both. Figure 4 (left) reports the action
+distribution over deadlocked Claude episodes and over deadlock-free Gemini episodes on the same
+condition. Claude allocates roughly 36% of actions to WAIT; Gemini allocates 11%. The Claude
+episodes that hit the timestep cap are populated almost entirely by alternating WAIT and ineffective
+G RAB actions; no philosopher ever holds two forks simultaneously, but no philosopher releases either.
+These are timeout deadlocks rather than the canonical circular-wait state, but they meet our predicate
+(no progress for T timesteps) and we count them as deadlocks. Grok shows a milder version of the
+same pattern.
+
+
+
+
+                          (a) Action distribution                       (b) Per-episode outcomes
+
+                   40%              Claude Opus 4.5
+                                    Gemini 2.5 Flash
+Share of actions
+
+
+
+
+                                                 Claude Opus 4.5
+                   30%
+
+
+                   20%
+
+                                                 Gemini 2.5 Flash
+                   10%                                                                        deadlock
+                                                                                              completed
+                    0%
+                                                                    0   5     10    15   20      25       30
+                         EFT RIGHT LEASE    WA
+                                               IT
+                      B_L    _    RE
+                   GRA GRAB                                                   Episode index
+
+
+
+ Figure 4: Why Claude and Grok deadlock in sequential mode: an over-use of WAIT. Left: action
+ distributions show Claude allocating ∼ 36% of actions to WAIT versus ∼ 11% for Gemini in the same
+ condition (sequential, N =5, no communication, 20 episodes each). Right: per-episode outcomes;
+ each dot is one episode, coloured by deadlock or completion.
+
+
+
+
+We do not regard this as evidence that Claude or Grok are weaker reasoners. Both models complete
+the task in simultaneous mode at non-zero rates. The interpretation is that, at the temperature and
+prompt we use, these two models have a stronger prior toward WAIT-as-default in sequential mode
+than the other agents, and that prior is enough to dominate the round-robin schedule. A higher
+temperature or a prompt that explicitly discourages WAIT would probably reduce the deadlock rate.
+
+
+
+
+ B                  Memory ablation: a null result
+
+
+A natural intervention not covered in the main paper is giving each agent a memory window over the
+past k timesteps’ observations and actions. We ran three memory conditions on Gemini 2.5 Flash,
+N =5, simultaneous, default prompt, n=20 per cell, and report them in Figure 5.
+
+
+                                                             13
+                                                                                  baseline mean
+                   baseline
+
+      memory window = 3
+
+      memory window = 5
+
+          memory + comm
+
+                               0%         20%        40%      60%       80%        100%
+                                         Deadlock rate (95% Wilson CI)
+Figure 5: Memory of past states does not change deadlock at the sample size we ran. All three
+memory conditions fall within the 95% CI of the no-memory baseline (dashed line, 90.0%).
+
+
+The four conditions are as follows. The no-memory baseline at n=30 deadlocks 90.0% [74.4, 96.5].
+The Memory k=3 condition (window of 3 timesteps, no communication) deadlocks 85.0%
+[64.0, 94.8] at n=20. The Memory k=5 condition (window of 5 timesteps, no communication)
+deadlocks 90.0% [69.9, 97.2] at n=20. The Memory k=3 + 1 round condition (window of 3
+timesteps plus single-round communication) deadlocks 80.0% [58.4, 91.9] at n=20.
+Every memory condition’s CI contains the baseline mean. We report this as it stands: at the sample
+size we ran, memory of past states does not produce a detectable change in deadlock rate. We are
+not claiming memory cannot help; we are claiming our experiment does not show that it does. It is
+plausible that memory is helpful only when paired with multi-round communication, so that the agent
+has both observation history and a channel for asymmetric intent, but the combined condition we
+ran uses only a single round of communication and is therefore not the right test of that hypothesis.
+Section 5.1 suggests pre-commitment rounds are doing the structural work; memory is at best a
+complement.
+
+
+C     Coverage matrix and dropped conditions
+
+The full benchmark package supports more conditions than this paper evaluates. Table 2 records the
+coverage of (model × condition) cells across the experiments reported. Cells with no entry were not
+run.
+
+Table 2: Sample-size coverage by (model, condition); dashes indicate cells not evaluated. Layer-1
+cross-model cells use n=30 for Gemini 2.5 Flash, Llama 4 Maverick, and the random baseline,
+and n=20 for GPT-5.2, Claude Opus 4.5, and Grok 4.1. Layer-3 ablation cells (prompt strategy,
+communication rounds, memory) use n=20 throughout.
+
+                               GPT-5.2      Claude 4.5    Grok 4.1   Gemini 2.5   Llama 4   Random
+    Sim, N =5, no comm.             20          20          20          30          30        30
+    Sim, N =5, 1 round              20          20          20          30          30        30
+    Seq, N =5, no comm.             20          20          20          30          30        30
+    Sim, N =10, no comm.            –           –            –          30          30        30
+    Minimal prompt                   –           –           –          20           –         –
+    Theory-of-mind prompt            –           –           –          20           –         –
+    Symmetry-breaking prompt         –           –           –          20           –         –
+    Resource-ordering prompt         –           –           –          20           –         –
+    3 comm. rounds                   –           –           –          20           –         –
+    5 comm. rounds                   –           –           –          20           –         –
+    Memory k=3                       –           –           –          20           –         –
+    Memory k=5                       –           –           –          20           –         –
+    Memory k=3 + 1 round             –           –           –          20           –         –
+
+
+                                                     14
+We dropped the N =3 cell from the main paper. At N =3 the random baseline deadlocks roughly
+60% of the time and has trouble producing meals at all; the condition does not discriminate between
+strategies. The package supports N ∈ {3, 5, 7, 10}; we report 5 and 10 in the main paper because
+they cover the contention regime relevant to multi-agent LLM systems.
+
+D      Per-condition full statistics
+Table 3 reports every condition we evaluate with all four primary metrics and confidence intervals.
+
+Table 3: Full per-condition statistics. Throughput is in group meals per timestep (summed across all
+N philosophers); fairness is the Gini-based score from Section 3.3. Consistency in the multi-round
+communication conditions is reported in the main paper.
+
+    Model              Condition                    n            Deadlock          Throughput       Fairness
+    Cross-model layer-1
+    GPT-5.2             Sim, N =5, no comm.         20        25.0 [11.2, 46.9]   0.446 ± 0.073   0.576 ± 0.096
+    GPT-5.2             Seq, N =5, no comm.         20         0.0 [0.0, 16.1]    0.115 ± 0.012   0.540 ± 0.098
+    Claude Opus 4.5     Sim, N =5, no comm.         20        55.0 [34.2, 74.2]   0.455 ± 0.078   0.619 ± 0.084
+    Claude Opus 4.5     Seq, N =5, no comm.         20        60.0 [38.7, 78.1]   0.078 ± 0.045   0.890 ± 0.077
+    Grok 4.1            Sim, N =5, no comm.         20        70.0 [48.1, 85.5]   0.437 ± 0.080   0.578 ± 0.125
+    Grok 4.1            Seq, N =5, no comm.         20        25.0 [11.2, 46.9]   0.112 ± 0.033   0.655 ± 0.138
+    Gemini 2.5 Flash    Sim, N =5, no comm.         30        90.0 [74.4, 96.5]   0.146 ± 0.087   0.830 ± 0.106
+    Gemini 2.5 Flash    Seq, N =5, no comm.         30         0.0 [0.0, 11.4]    0.057 ± 0.025   0.746 ± 0.119
+    Llama 4 Maverick    Sim, N =5, no comm.         30        76.7 [59.1, 88.2]   0.271 ± 0.110   0.842 ± 0.069
+    Llama 4 Maverick    Seq, N =5, no comm.         30         0.0 [0.0, 11.4]    0.093 ± 0.029   0.909 ± 0.050
+    Random              Sim, N =5, no comm.         30         13.3 [5.3, 29.7]   0.303 ± 0.030   0.568 ± 0.067
+    Random              Seq, N =5, no comm.         30         0.0 [0.0, 11.4]    0.048 ± 0.014   0.421 ± 0.145
+    Group size and single-round communication
+    Gemini 2.5 Flash     Sim, N =10, no comm.       30        10.0 [3.5, 25.6]    1.111 ± 0.082   0.660 ± 0.035
+    Llama 4 Maverick     Sim, N =10, no comm.       30        16.7 [7.3, 33.6]    0.835 ± 0.132   0.730 ± 0.054
+    Random               Sim, N =10, no comm.       30         0.0 [0.0, 11.4]    0.591 ± 0.043   0.630 ± 0.034
+    Gemini 2.5 Flash     Sim, N =5, 1 round         30        86.7 [70.3, 94.7]   0.141 ± 0.083   0.882 ± 0.084
+    Llama 4 Maverick     Sim, N =5, 1 round         30        93.3 [78.7, 98.2]   0.092 ± 0.077   0.944 ± 0.050
+    Layer-3 ablations on Gemini 2.5 Flash
+    Gemini 2.5 Flash     Minimal prompt             20    100.0 [83.9, 100.0]     0.000 ± 0.000   1.000 ± 0.000
+    Gemini 2.5 Flash     Theory-of-mind prompt      20      5.0 [0.9, 23.6]       0.585 ± 0.023   0.623 ± 0.052
+    Gemini 2.5 Flash     Symmetry-breaking prompt   20      0.0 [0.0, 16.1]       0.275 ± 0.051   0.512 ± 0.090
+    Gemini 2.5 Flash     Resource-ordering prompt   20      0.0 [0.0, 16.1]       0.733 ± 0.000   0.409 ± 0.000
+    Gemini 2.5 Flash     3 comm. rounds             20      0.0 [0.0, 16.1]       0.557 ± 0.026   0.692 ± 0.057
+    Gemini 2.5 Flash     5 comm. rounds             20      5.0 [0.9, 23.6]       0.532 ± 0.060   0.641 ± 0.069
+    Gemini 2.5 Flash     Memory k=3                 20     85.0 [64.0, 94.8]      0.146 ± 0.119   0.896 ± 0.093
+    Gemini 2.5 Flash     Memory k=5                 20     90.0 [69.9, 97.2]      0.272 ± 0.130   0.756 ± 0.131
+    Gemini 2.5 Flash     Memory k=3 + 1 round       20     80.0 [58.4, 91.9]      0.168 ± 0.121   0.932 ± 0.060
+
+
+
+E     Prompts used in DPBench
+The following are the nine prompt templates that drive the LLM agents in every condition reported
+in this paper, reproduced verbatim. Placeholders in curly braces are filled at runtime with per-
+philosopher values (the philosopher’s name, the current fork and meal state, neighbour messages,
+and so on); the surrounding text is fixed. The order below follows the call sequence of an episode:
+the system prompt is sent once at episode start, the decision template is sent at every action step, the
+communication-round template is sent at every discussion round in multi-round conditions, and the
+four prompt-strategy variants replace the default system prompt under their respective conditions.
+
+
+      You are {philosopher_name}, one of {num_philosophers} philosophers seated at a circular
+      dining table.
+      THE DINING PHILOSOPHERS PROBLEM:
+
+
+
+                                                         15
+    - You and your fellow philosophers share forks placed between each pair of adjacent philoso-
+     phers
+    - To eat, you must hold BOTH your left fork AND your right fork simultaneously
+    - Each fork can only be held by one philosopher at a time
+    - After eating, you automatically release both forks
+    YOUR GOAL:
+    - Coordinate with others to avoid DEADLOCK (where everyone holds one fork and waits
+     forever)
+    - Maximize total meals eaten by the group
+    - Ensure fair distribution of meals among all philosophers
+    AVAILABLE ACTIONS:
+    - GRAB_LEFT: Pick up the fork on your left (if available)
+    - GRAB_RIGHT: Pick up the fork on your right (if available)
+    - RELEASE: Release any forks you are holding
+    - WAIT: Do nothing this turn
+     RESPONSE FORMAT:
+    THINKING: [Brief reasoning about the current situation]
+    ACTION: [One of: GRAB_LEFT, GRAB_RIGHT, RELEASE, WAIT]
+
+
+Prompt 1: The default system prompt, sent once at the start of every episode in the no-communication conditions
+across simultaneous and sequential action and across N =5 and N =10.
+
+
+
+    You are {philosopher_name}.
+    CURRENT STATE:
+    - Your state: {state}
+    - Meals eaten: {meals_eaten}
+    - Currently holding: {holding_status}
+    FORK STATUS:
+    - Left fork: {left_fork_status}
+    - Right fork: {right_fork_status}
+    What is your action?
+    THINKING: [Your reasoning]
+    ACTION: [GRAB_LEFT / GRAB_RIGHT / RELEASE / WAIT]
+
+
+Prompt 2: The default decision template, sent once per philosopher per timestep at every action step in the
+no-communication conditions.
+
+
+
+    You are {philosopher_name}, one of {num_philosophers} philosophers seated at a circular
+    dining table.
+    There are {num_philosophers} forks on the table, one between each pair of adjacent philoso-
+    phers. To eat, you need both the fork on your left and the fork on your right. Each fork can
+    only be held by one philosopher at a time. After eating, both forks are released.
+    Choose one action each turn:
+    - GRAB_LEFT: Pick up the fork on your left (if available)
+    - GRAB_RIGHT: Pick up the fork on your right (if available)
+    - RELEASE: Release any forks you are holding
+    - WAIT: Do nothing this turn
+    RESPONSE FORMAT:
+
+
+
+
+                                                      16
+    THINKING: [Brief reasoning]
+    ACTION: [One of: GRAB_LEFT, GRAB_RIGHT, RELEASE, WAIT]
+
+
+Prompt 3: The minimal system prompt, used in the minimal-prompt condition. Strips the explicit goal description:
+the agent is told the rules and the action set but is not asked to coordinate.
+
+
+
+    You are {philosopher_name}, one of {num_philosophers} philosophers seated at a circular
+     dining table.
+    THE DINING PHILOSOPHERS PROBLEM:
+    - You and your fellow philosophers share forks placed between each pair of adjacent philoso-
+     phers
+    - To eat, you must hold BOTH your left fork AND your right fork simultaneously
+    - Each fork can only be held by one philosopher at a time
+    - After eating, you automatically release both forks
+    YOUR GOAL:
+    - Coordinate with others to avoid DEADLOCK (where everyone holds one fork and waits
+     forever)
+    - Maximize total meals eaten by the group
+    - Ensure fair distribution of meals among all philosophers
+     STRATEGY:
+    - Before choosing your action, think about what your neighbors will do
+    - If both your neighbors are hungry and their forks are available, they will probably try to
+     grab a fork
+    - Choose an action that avoids conflict even if your neighbors act on similar reasoning
+    - If everyone is likely to grab at the same time, consider waiting instead
+    AVAILABLE ACTIONS:
+    - GRAB_LEFT: Pick up the fork on your left (if available)
+    - GRAB_RIGHT: Pick up the fork on your right (if available)
+    - RELEASE: Release any forks you are holding
+    - WAIT: Do nothing this turn
+     RESPONSE FORMAT:
+    THINKING: [First predict what each neighbor will do, then decide your action]
+    ACTION: [One of: GRAB_LEFT, GRAB_RIGHT, RELEASE, WAIT]
+
+
+Prompt 4: The theory-of-mind system prompt, used in the theory-of-mind condition. Adds a strategy paragraph
+asking the agent to reason about neighbour intentions before acting.
+
+
+
+    You are {philosopher_name}, one of {num_philosophers} philosophers seated at a circular
+     dining table.
+    THE DINING PHILOSOPHERS PROBLEM:
+    - You and your fellow philosophers share forks placed between each pair of adjacent philoso-
+     phers
+    - To eat, you must hold BOTH your left fork AND your right fork simultaneously
+    - Each fork can only be held by one philosopher at a time
+    - After eating, you automatically release both forks
+    YOUR GOAL:
+    - Coordinate with others to avoid DEADLOCK (where everyone holds one fork and waits
+     forever)
+    - Maximize total meals eaten by the group
+
+
+
+                                                      17
+    - Ensure fair distribution of meals among all philosophers
+    STRATEGY:
+    - When both forks are available, do not always grab immediately
+    - Sometimes WAIT for one or two turns before acting, especially early in the game
+    - If you have been waiting for a long time, then act
+    - The key insight: if everyone grabs at the same time, deadlock occurs
+    AVAILABLE ACTIONS:
+    - GRAB_LEFT: Pick up the fork on your left (if available)
+    - GRAB_RIGHT: Pick up the fork on your right (if available)
+    - RELEASE: Release any forks you are holding
+    - WAIT: Do nothing this turn
+    RESPONSE FORMAT:
+    THINKING: [Brief reasoning about the current situation]
+    ACTION: [One of: GRAB_LEFT, GRAB_RIGHT, RELEASE, WAIT]
+
+
+Prompt 5: The symmetry-breaking system prompt, used in the symmetry-breaking condition. Asks the agent to
+randomise its commitment timing rather than grab immediately, which breaks the homogeneous strategy that
+drives the canonical deadlock.
+
+
+
+    You are {philosopher_name}, one of {num_philosophers} philosophers seated at a circular
+     dining table.
+    THE DINING PHILOSOPHERS PROBLEM:
+    - You and your fellow philosophers share forks placed between each pair of adjacent philoso-
+     phers
+    - To eat, you must hold BOTH your left fork AND your right fork simultaneously
+    - Each fork can only be held by one philosopher at a time
+    - After eating, you automatically release both forks
+     PROTOCOL:
+    - Each philosopher has a number (0 through {num_philosophers_minus_one})
+    - If your number is EVEN: always grab your RIGHT fork first, then your LEFT fork
+    - If your number is ODD: always grab your LEFT fork first, then your RIGHT fork
+    - This ordering prevents circular waits and avoids deadlock
+    - Only grab your second fork after you have secured your first
+    - If your first fork is not available, WAIT
+    AVAILABLE ACTIONS:
+    - GRAB_LEFT: Pick up the fork on your left (if available)
+    - GRAB_RIGHT: Pick up the fork on your right (if available)
+    - RELEASE: Release any forks you are holding
+    - WAIT: Do nothing this turn
+     RESPONSE FORMAT:
+    THINKING: [Brief reasoning about the current situation]
+    ACTION: [One of: GRAB_LEFT, GRAB_RIGHT, RELEASE, WAIT]
+
+
+Prompt 6: The resource-ordering system prompt, used in the resource-ordering condition. Encodes a parity-based
+grab order on the philosopher index that prevents the circular wait of Dijkstra [1965].
+
+
+
+    You are {philosopher_name}, one of {num_philosophers} philosophers seated at a circular
+    dining table.
+    THE DINING PHILOSOPHERS PROBLEM:
+
+
+
+                                                     18
+    - You and your fellow philosophers share forks placed between each pair of adjacent philoso-
+     phers
+    - To eat, you must hold BOTH your left fork AND your right fork simultaneously
+    - Each fork can only be held by one philosopher at a time
+    - After eating, you automatically release both forks
+    YOUR GOAL:
+    - Coordinate with others to avoid DEADLOCK (where everyone holds one fork and waits
+     forever)
+    - Maximize total meals eaten by the group
+    - Ensure fair distribution of meals among all philosophers
+     COMMUNICATION:
+    - You can send a message to your neighbors each turn
+    - Use messages to coordinate and avoid conflicts
+    - Be concise and clear in your communication
+    AVAILABLE ACTIONS:
+    - GRAB_LEFT: Pick up the fork on your left (if available)
+    - GRAB_RIGHT: Pick up the fork on your right (if available)
+    - RELEASE: Release any forks you are holding
+    - WAIT: Do nothing this turn
+     RESPONSE FORMAT:
+    THINKING: [Brief reasoning about the current situation]
+     MESSAGE: [Short message to your neighbors, or “None”]
+    ACTION: [One of: GRAB_LEFT, GRAB_RIGHT, RELEASE, WAIT]
+
+
+Prompt 7: The default system prompt with a communication paragraph appended, used in the single-round and
+multi-round communication conditions.
+
+
+
+    This is discussion round {round_number} of {total_rounds}. You will act after all discussion
+    rounds are complete.
+    Your state: {state}, meals eaten: {meals_eaten}
+    Left fork: {left_fork_status}, Right fork: {right_fork_status}
+    From left neighbor: {left_message}
+    From right neighbor: {right_message}
+    Share your plan with your neighbors. What do you intend to do, and what would you like
+    them to do?
+    THINKING: [Your reasoning about coordination]
+    MESSAGE: [Your message to neighbors]
+
+
+Prompt 8: Communication-round template. Sent once per philosopher per discussion round in the multi-round
+communication conditions, replacing the action step until the final round.
+
+
+
+    You are {philosopher_name}.
+    CURRENT STATE:
+    - Your state: {state}
+    - Meals eaten: {meals_eaten}
+    - Currently holding: {holding_status}
+    FORK STATUS:
+    - Left fork: {left_fork_status}
+
+
+
+
+                                                   19
+    - Right fork: {right_fork_status}
+    NEIGHBOR MESSAGES:
+    - From left neighbor: {left_message}
+    - From right neighbor: {right_message}
+    What is your action? You may also send a message to coordinate.
+    THINKING: [Your reasoning]
+    MESSAGE: [Short message to neighbors, or “None”]
+    ACTION: [GRAB_LEFT / GRAB_RIGHT / RELEASE / WAIT]
+
+
+Prompt 9: Default decision template with communication. Used at the action step in every communication
+condition; in multi-round conditions it appears only after all discussion rounds have completed.
+
+
+
+F   Reproducibility
+The code is publicly available at https://github.com/najmulhasan-code/dpbench and can
+be installed via pip install dpbench. The release includes the benchmark itself, the per-episode
+logs underlying every numerical result reported in this paper, and the deterministic aggregation
+pipeline that produces every number, table, and figure from those logs. Each episode’s log records
+the LLM input and output for every call, every action and message, and the full table state at every
+timestep, so any of the four metrics defined in Section 3.3 can be recomputed without re-running the
+agents.
+
+
+
+
+                                                 20
+

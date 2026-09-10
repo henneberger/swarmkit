@@ -1,0 +1,121 @@
+{
+  "kind": "papers",
+  "id": "2502.20073v3",
+  "title": "Collab-Overcooked: Benchmarking and Evaluating Large Language Models as Collaborative Agents",
+  "page_url": "https://arxiv.org/abs/2502.20073v3",
+  "pdf_url": "https://arxiv.org/pdf/2502.20073v3",
+  "retrieved_at": "2026-09-10T22:53:05.980576+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2502.20073v3",
+      "resolved_url": "https://arxiv.org/abs/2502.20073v3",
+      "path": "sources/benchmarks/papers/2502.20073v3/page.html",
+      "bytes": 45119,
+      "sha256": "d1cf753e04957051ad5a50990d719276e273fa8218ee1f0180675b1212a39284"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2502.20073v3",
+      "resolved_url": "https://arxiv.org/pdf/2502.20073v3",
+      "path": "sources/benchmarks/papers/2502.20073v3/paper.pdf",
+      "bytes": 6230841,
+      "sha256": "4cfcad1987f0a91e5ba44cf6adc4abd1d448a4f09438ef956032e7beb298d068"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2502.20073v3: Collab-Overcooked: Benchmarking and Evaluating Large Language Models as Collaborative Agents"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Collab-Overcooked: Benchmarking and Evaluating Large Language Models as Collaborative Agents"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2502.20073v3"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Large Language Models (LLMs) based agent systems have made great strides in real-world applications beyond traditional NLP tasks. This paper proposes a new LLM-based Multi-Agent System (LLM-MAS) benchmark, Collab-Overcooked, built on the popular Overcooked-AI game with more applicable and challenging tasks in interactive environments. Collab-Overcooked extends existing benchmarks in two novel ways. First, it provides a multi-agent framework supporting diverse tasks and objectives and encourages collaboration through natural language communication. Second, it introduces a spectrum of process-oriented evaluation metrics to assess the fine-grained collaboration capabilities of different LLM agents, a dimension often overlooked in prior work. We conduct extensive experiments with 13 popular LLMs and show that, while the LLMs exhibit a strong ability in goal interpretation, there are significant shortcomings in active collaboration and continuous adaptation, which are critical for efficiently fulfilling complex tasks. Notably, we highlight the strengths and weaknesses of LLM-MAS and provide insights for improving and evaluating LLM-MAS on a unified and open-source benchmark. The environments, 30 open-ended tasks, and the evaluation package are publicly available at https://github.com/YusaeMeow/Collab-Overcooked."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Collab-Overcooked: Benchmarking and Evaluating Large Language..."
+    ],
+    "twitter:description": [
+      "Large Language Models (LLMs) based agent systems have made great strides in real-world applications beyond traditional NLP tasks. This paper proposes a new LLM-based Multi-Agent System (LLM-MAS)..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Collab-Overcooked: Benchmarking and Evaluating Large Language Models as Collaborative Agents"
+    ],
+    "citation_author": [
+      "Sun, Haochen",
+      "Zhang, Shuwen",
+      "Niu, Lujie",
+      "Ren, Lei",
+      "Xu, Hao",
+      "Fu, Hao",
+      "Zhao, Fangkun",
+      "Yuan, Caixia",
+      "Wang, Xiaojie"
+    ],
+    "citation_doi": [
+      "10.18653/v1/2025.emnlp-main.249"
+    ],
+    "citation_date": [
+      "2025/02/27"
+    ],
+    "citation_online_date": [
+      "2025/09/25"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2502.20073"
+    ],
+    "citation_arxiv_id": [
+      "2502.20073"
+    ],
+    "citation_abstract": [
+      "Large Language Models (LLMs) based agent systems have made great strides in real-world applications beyond traditional NLP tasks. This paper proposes a new LLM-based Multi-Agent System (LLM-MAS) benchmark, Collab-Overcooked, built on the popular Overcooked-AI game with more applicable and challenging tasks in interactive environments. Collab-Overcooked extends existing benchmarks in two novel ways. First, it provides a multi-agent framework supporting diverse tasks and objectives and encourages collaboration through natural language communication. Second, it introduces a spectrum of process-oriented evaluation metrics to assess the fine-grained collaboration capabilities of different LLM agents, a dimension often overlooked in prior work. We conduct extensive experiments with 13 popular LLMs and show that, while the LLMs exhibit a strong ability in goal interpretation, there are significant shortcomings in active collaboration and continuous adaptation, which are critical for efficiently fulfilling complex tasks. Notably, we highlight the strengths and weaknesses of LLM-MAS and provide insights for improving and evaluating LLM-MAS on a unified and open-source benchmark. The environments, 30 open-ended tasks, and the evaluation package are publicly available at https://github.com/YusaeMeow/Collab-Overcooked."
+    ]
+  },
+  "extracted_text_characters": 193664,
+  "text_searchable": true
+}

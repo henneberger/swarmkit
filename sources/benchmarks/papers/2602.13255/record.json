@@ -1,0 +1,111 @@
+{
+  "kind": "papers",
+  "id": "2602.13255",
+  "title": "DPBench: Structural Determinants of Multi-Agent LLM Coordination Under Simultaneous Resource Contention",
+  "page_url": "https://arxiv.org/abs/2602.13255",
+  "pdf_url": "https://arxiv.org/pdf/2602.13255",
+  "retrieved_at": "2026-09-10T22:57:26.138512+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2602.13255",
+      "resolved_url": "https://arxiv.org/abs/2602.13255",
+      "path": "sources/benchmarks/papers/2602.13255/page.html",
+      "bytes": 42435,
+      "sha256": "47c8a7f9268cfa93a2c7d60fb389f971eed4c287b9e3e0cde9a9a1d762d32883"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2602.13255",
+      "resolved_url": "https://arxiv.org/pdf/2602.13255",
+      "path": "sources/benchmarks/papers/2602.13255/paper.pdf",
+      "bytes": 626864,
+      "sha256": "156f8669bbf465992368e324dd2da4bf386690f66e16ac04240bf7fd724c4e70"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2602.13255: DPBench: Structural Determinants of Multi-Agent LLM Coordination Under Simultaneous Resource Contention"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "DPBench: Structural Determinants of Multi-Agent LLM Coordination Under Simultaneous Resource Contention"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2602.13255v2"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "We present DPBench, a benchmark for evaluating coordination in multi-agent systems built from large language models. Existing benchmarks measure task-level success under a fixed protocol; the structural conditions under which coordination succeeds or fails at all have not been characterised. DPBench adapts the Dining Philosophers problem into a controlled testbed where the action protocol, the communication structure, and the group size each vary independently. We evaluate six agents: GPT-5.2, Claude Opus 4.5, Grok 4.1, Gemini 2.5 Flash, Llama 4 Maverick, and a uniform-random baseline. Under simultaneous action at N=5 with the default prompt, deadlock ranges from 25.0% (95% Wilson CI [11.2, 46.9]) for GPT-5.2 to 90.0% [74.4, 96.5] for Gemini 2.5 Flash; sequential action is solved by four of the six. Holding the model fixed at Gemini 2.5 Flash, three protocol variables drive deadlock from 90% to within CI of zero: three rounds of pre-commitment communication (0.0% vs. single-round 86.7%), a prompt encoding a classical concurrency primitive (0.0% for resource-ordering and symmetry-breaking, against 100% for the minimal prompt), or doubling the group from N=5 to N=10 (90.0% to 10.0%). Single-round messaging and memory of past timesteps do not change the rate at the sample size we ran. Whether the same model coordinates or deadlocks is determined by the protocol, not by the model's capability."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "DPBench: Structural Determinants of Multi-Agent LLM Coordination..."
+    ],
+    "twitter:description": [
+      "We present DPBench, a benchmark for evaluating coordination in multi-agent systems built from large language models. Existing benchmarks measure task-level success under a fixed protocol; the..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "DPBench: Structural Determinants of Multi-Agent LLM Coordination Under Simultaneous Resource Contention"
+    ],
+    "citation_author": [
+      "Hasan, Najmul",
+      "BusiReddyGari, Prashanth"
+    ],
+    "citation_date": [
+      "2026/02/02"
+    ],
+    "citation_online_date": [
+      "2026/06/03"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2602.13255"
+    ],
+    "citation_arxiv_id": [
+      "2602.13255"
+    ],
+    "citation_abstract": [
+      "We present DPBench, a benchmark for evaluating coordination in multi-agent systems built from large language models. Existing benchmarks measure task-level success under a fixed protocol; the structural conditions under which coordination succeeds or fails at all have not been characterised. DPBench adapts the Dining Philosophers problem into a controlled testbed where the action protocol, the communication structure, and the group size each vary independently. We evaluate six agents: GPT-5.2, Claude Opus 4.5, Grok 4.1, Gemini 2.5 Flash, Llama 4 Maverick, and a uniform-random baseline. Under simultaneous action at N=5 with the default prompt, deadlock ranges from 25.0% (95% Wilson CI [11.2, 46.9]) for GPT-5.2 to 90.0% [74.4, 96.5] for Gemini 2.5 Flash; sequential action is solved by four of the six. Holding the model fixed at Gemini 2.5 Flash, three protocol variables drive deadlock from 90% to within CI of zero: three rounds of pre-commitment communication (0.0% vs. single-round 86.7%), a prompt encoding a classical concurrency primitive (0.0% for resource-ordering and symmetry-breaking, against 100% for the minimal prompt), or doubling the group from N=5 to N=10 (90.0% to 10.0%). Single-round messaging and memory of past timesteps do not change the rate at the sample size we ran. Whether the same model coordinates or deadlocks is determined by the protocol, not by the model's capability."
+    ]
+  },
+  "extracted_text_characters": 75337,
+  "text_searchable": true
+}

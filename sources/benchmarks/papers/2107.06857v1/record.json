@@ -1,0 +1,119 @@
+{
+  "kind": "papers",
+  "id": "2107.06857v1",
+  "title": "Scalable Evaluation of Multi-Agent Reinforcement Learning with Melting Pot",
+  "page_url": "https://arxiv.org/abs/2107.06857v1",
+  "pdf_url": "https://arxiv.org/pdf/2107.06857v1",
+  "retrieved_at": "2026-09-10T22:53:06.407147+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2107.06857v1",
+      "resolved_url": "https://arxiv.org/abs/2107.06857v1",
+      "path": "sources/benchmarks/papers/2107.06857v1/page.html",
+      "bytes": 42917,
+      "sha256": "a3a82c5e62d9d40b76186b3b9bd7fe34b9962314428c53c2c18129df699c334b"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2107.06857v1",
+      "resolved_url": "https://arxiv.org/pdf/2107.06857v1",
+      "path": "sources/benchmarks/papers/2107.06857v1/paper.pdf",
+      "bytes": 2794249,
+      "sha256": "754c178708461c361df11cc00dac6ecdeaea0e91a17ce284e7783360404ec55d"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2107.06857v1: Scalable Evaluation of Multi-Agent Reinforcement Learning with Melting Pot"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Scalable Evaluation of Multi-Agent Reinforcement Learning with Melting Pot"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2107.06857v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Existing evaluation suites for multi-agent reinforcement learning (MARL) do not assess generalization to novel situations as their primary objective (unlike supervised-learning benchmarks). Our contribution, Melting Pot, is a MARL evaluation suite that fills this gap, and uses reinforcement learning to reduce the human labor required to create novel test scenarios. This works because one agent's behavior constitutes (part of) another agent's environment. To demonstrate scalability, we have created over 80 unique test scenarios covering a broad range of research topics such as social dilemmas, reciprocity, resource sharing, and task partitioning. We apply these test scenarios to standard MARL training algorithms, and demonstrate how Melting Pot reveals weaknesses not apparent from training performance alone."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Scalable Evaluation of Multi-Agent Reinforcement Learning with Melting Pot"
+    ],
+    "twitter:description": [
+      "Existing evaluation suites for multi-agent reinforcement learning (MARL) do not assess generalization to novel situations as their primary objective (unlike supervised-learning benchmarks). Our..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Scalable Evaluation of Multi-Agent Reinforcement Learning with Melting Pot"
+    ],
+    "citation_author": [
+      "Leibo, Joel Z.",
+      "Du\u00e9\u00f1ez-Guzm\u00e1n, Edgar",
+      "Vezhnevets, Alexander Sasha",
+      "Agapiou, John P.",
+      "Sunehag, Peter",
+      "Koster, Raphael",
+      "Matyas, Jayd",
+      "Beattie, Charles",
+      "Mordatch, Igor",
+      "Graepel, Thore"
+    ],
+    "citation_date": [
+      "2021/07/14"
+    ],
+    "citation_online_date": [
+      "2021/07/14"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2107.06857"
+    ],
+    "citation_arxiv_id": [
+      "2107.06857"
+    ],
+    "citation_abstract": [
+      "Existing evaluation suites for multi-agent reinforcement learning (MARL) do not assess generalization to novel situations as their primary objective (unlike supervised-learning benchmarks). Our contribution, Melting Pot, is a MARL evaluation suite that fills this gap, and uses reinforcement learning to reduce the human labor required to create novel test scenarios. This works because one agent's behavior constitutes (part of) another agent's environment. To demonstrate scalability, we have created over 80 unique test scenarios covering a broad range of research topics such as social dilemmas, reciprocity, resource sharing, and task partitioning. We apply these test scenarios to standard MARL training algorithms, and demonstrate how Melting Pot reveals weaknesses not apparent from training performance alone."
+    ]
+  },
+  "extracted_text_characters": 197665,
+  "text_searchable": true
+}

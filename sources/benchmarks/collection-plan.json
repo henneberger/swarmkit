@@ -1,0 +1,158 @@
+{
+  "items": [
+    {
+      "kind": "papers",
+      "id": "2512.03466v1",
+      "title": "2512.03466v1",
+      "page_url": "https://arxiv.org/abs/2512.03466v1",
+      "pdf_url": "https://arxiv.org/pdf/2512.03466v1"
+    },
+    {
+      "kind": "papers",
+      "id": "2603.01045v2",
+      "title": "2603.01045v2",
+      "page_url": "https://arxiv.org/abs/2603.01045v2",
+      "pdf_url": "https://arxiv.org/pdf/2603.01045v2"
+    },
+    {
+      "kind": "papers",
+      "id": "2606.08340v1",
+      "title": "2606.08340v1",
+      "page_url": "https://arxiv.org/abs/2606.08340v1",
+      "pdf_url": "https://arxiv.org/pdf/2606.08340v1"
+    },
+    {
+      "kind": "papers",
+      "id": "2503.01935v1",
+      "title": "2503.01935v1",
+      "page_url": "https://arxiv.org/abs/2503.01935v1",
+      "pdf_url": "https://arxiv.org/pdf/2503.01935v1"
+    },
+    {
+      "kind": "papers",
+      "id": "2502.20073v3",
+      "title": "2502.20073v3",
+      "page_url": "https://arxiv.org/abs/2502.20073v3",
+      "pdf_url": "https://arxiv.org/pdf/2502.20073v3"
+    },
+    {
+      "kind": "papers",
+      "id": "2107.06857v1",
+      "title": "2107.06857v1",
+      "page_url": "https://arxiv.org/abs/2107.06857v1",
+      "pdf_url": "https://arxiv.org/pdf/2107.06857v1"
+    },
+    {
+      "kind": "repositories",
+      "id": "jwyjohn__acl26-silo-bench",
+      "title": "jwyjohn/acl26-silo-bench",
+      "url": "https://github.com/jwyjohn/acl26-silo-bench"
+    },
+    {
+      "kind": "repositories",
+      "id": "alem-world__alem-env",
+      "title": "alem-world/alem-env",
+      "url": "https://github.com/alem-world/alem-env"
+    },
+    {
+      "kind": "repositories",
+      "id": "MultiagentBench__MARBLE",
+      "title": "MultiagentBench/MARBLE",
+      "url": "https://github.com/MultiagentBench/MARBLE"
+    },
+    {
+      "kind": "papers",
+      "id": "2601.13295",
+      "title": "2601.13295",
+      "page_url": "https://arxiv.org/abs/2601.13295",
+      "pdf_url": "https://arxiv.org/pdf/2601.13295"
+    },
+    {
+      "kind": "papers",
+      "id": "2603.08835",
+      "title": "2603.08835",
+      "page_url": "https://arxiv.org/abs/2603.08835",
+      "pdf_url": "https://arxiv.org/pdf/2603.08835"
+    },
+    {
+      "kind": "papers",
+      "id": "2605.08761",
+      "title": "2605.08761",
+      "page_url": "https://arxiv.org/abs/2605.08761",
+      "pdf_url": "https://arxiv.org/pdf/2605.08761"
+    },
+    {
+      "kind": "papers",
+      "id": "2602.11964",
+      "title": "2602.11964",
+      "page_url": "https://arxiv.org/abs/2602.11964",
+      "pdf_url": "https://arxiv.org/pdf/2602.11964"
+    },
+    {
+      "kind": "papers",
+      "id": "2511.05269",
+      "title": "2511.05269",
+      "page_url": "https://arxiv.org/abs/2511.05269",
+      "pdf_url": "https://arxiv.org/pdf/2511.05269"
+    },
+    {
+      "kind": "papers",
+      "id": "2602.13255",
+      "title": "2602.13255",
+      "page_url": "https://arxiv.org/abs/2602.13255",
+      "pdf_url": "https://arxiv.org/pdf/2602.13255"
+    },
+    {
+      "kind": "papers",
+      "id": "2506.14990",
+      "title": "2506.14990",
+      "page_url": "https://arxiv.org/abs/2506.14990",
+      "pdf_url": "https://arxiv.org/pdf/2506.14990"
+    },
+    {
+      "kind": "repositories",
+      "id": "cooperbench__CooperBench",
+      "title": "cooperbench/CooperBench",
+      "url": "https://github.com/cooperbench/CooperBench"
+    },
+    {
+      "kind": "repositories",
+      "id": "maseval__MASEval",
+      "title": "maseval/MASEval",
+      "url": "https://github.com/maseval/MASEval"
+    },
+    {
+      "kind": "repositories",
+      "id": "yutao1024__EntCollabBench",
+      "title": "yutao1024/EntCollabBench",
+      "url": "https://github.com/yutao1024/EntCollabBench"
+    },
+    {
+      "kind": "repositories",
+      "id": "ulab-uiuc__MARBLE",
+      "title": "ulab-uiuc/MARBLE",
+      "url": "https://github.com/ulab-uiuc/MARBLE"
+    },
+    {
+      "kind": "papers",
+      "id": "2212.07489",
+      "title": "2212.07489",
+      "page_url": "https://arxiv.org/abs/2212.07489",
+      "pdf_url": "https://arxiv.org/pdf/2212.07489"
+    },
+    {
+      "kind": "papers",
+      "id": "2410.05080",
+      "title": "2410.05080",
+      "page_url": "https://arxiv.org/abs/2410.05080",
+      "pdf_url": "https://arxiv.org/pdf/2410.05080"
+    },
+    {
+      "kind": "papers",
+      "id": "2407.01725",
+      "title": "2407.01725",
+      "page_url": "https://arxiv.org/abs/2407.01725",
+      "pdf_url": "https://arxiv.org/pdf/2407.01725"
+    }
+  ]
+}

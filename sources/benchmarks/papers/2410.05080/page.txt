@@ -1,0 +1,233 @@
+
+
+  [2410.05080] ScienceAgentBench: Toward Rigorous Assessment of Language Agents for Data-Driven Scientific Discovery
+
+    Skip to main content
+
+      Search
+
+    Submit
+    Donate
+
+      Log in
+
+      Search arXiv
+
+      Press Enter to search · Advanced search
+
+Computer Science > Computation and Language
+
+      arXiv:2410.05080 (cs)
+
+  [Submitted on 7 Oct 2024 (v1), last revised 31 Mar 2025 (this version, v3)]
+
+Title:ScienceAgentBench: Toward Rigorous Assessment of Language Agents for Data-Driven Scientific Discovery
+
+Authors:Ziru Chen, Shijie Chen, Yuting Ning, Qianheng Zhang, Boshi Wang, Botao Yu, Yifei Li, Zeyi Liao, Chen Wei, Zitong Lu, Vishal Dey, Mingyi Xue, Frazier N. Baker, Benjamin Burns, Daniel Adu-Ampratwum, Xuhui Huang, Xia Ning, Song Gao, Yu Su, Huan Sun            
+View a PDF of the paper titled ScienceAgentBench: Toward Rigorous Assessment of Language Agents for Data-Driven Scientific Discovery, by Ziru Chen and 19 other authors
+    View PDF
+    HTML (experimental)
+
+            Abstract:The advancements of large language models (LLMs) have piqued growing interest in developing LLM-based language agents to automate scientific discovery end-to-end, which has sparked both excitement and skepticism about their true capabilities. In this work, we call for rigorous assessment of agents on individual tasks in a scientific workflow before making bold claims on end-to-end automation. To this end, we present ScienceAgentBench, a new benchmark for evaluating language agents for data-driven scientific discovery. To ensure the scientific authenticity and real-world relevance of our benchmark, we extract 102 tasks from 44 peer-reviewed publications in four disciplines and engage nine subject matter experts to validate them. We unify the target output for every task to a self-contained Python program file and employ an array of evaluation metrics to examine the generated programs, execution results, and costs. Each task goes through multiple rounds of manual validation by annotators and subject matter experts to ensure its annotation quality and scientific plausibility. We also propose two effective strategies to mitigate data contamination concerns. Using ScienceAgentBench, we evaluate five open-weight and proprietary LLMs, each with three frameworks: direct prompting, OpenHands CodeAct, and self-debug. Given three attempts for each task, the best-performing agent can only solve 32.4% of the tasks independently and 34.3% with expert-provided knowledge. In addition, we evaluate OpenAI o1-preview with direct prompting and self-debug, which can boost the performance to 42.2%, demonstrating the effectiveness of increasing inference-time compute but with more than 10 times the cost of other LLMs. Still, our results underscore the limitations of current language agents in generating code for data-driven discovery, let alone end-to-end automation for scientific research.
+
+          Comments:
+          ICLR 2025. 60 pages
+
+          Subjects:
+
+            Computation and Language (cs.CL); Artificial Intelligence (cs.AI); Machine Learning (cs.LG)
+
+          Cite as:
+          arXiv:2410.05080 [cs.CL]
+
+          (or 
+              arXiv:2410.05080v3 [cs.CL] for this version)
+
+                        https://doi.org/10.48550/arXiv.2410.05080
+
+                Focus to learn more
+
+                                  arXiv-issued DOI via DataCite
+
+Submission history From: Ziru Chen [view email]      
+            [v1]
+        Mon, 7 Oct 2024 14:33:50 UTC (1,550 KB)
+
+            [v2]
+        Thu, 24 Oct 2024 03:37:05 UTC (1,555 KB)
+
+    [v3]
+        Mon, 31 Mar 2025 14:39:44 UTC (1,558 KB)
+
+      Full-text links:
+
+Access Paper:
+
+View a PDF of the paper titled ScienceAgentBench: Toward Rigorous Assessment of Language Agents for Data-Driven Scientific Discovery, by Ziru Chen and 19 other authors
+View PDF
+HTML (experimental)
+TeX Source
+
+view license
+
+Current browse context:
+
+cs.CL
+
+      < prev
+
+      |      
+      next >
+
+    new
+     | 
+    recent
+     | 2024-10
+
+    Change to browse by:
+
+        cs
+
+        cs.AI
+
+        cs.LG
+
+References & Citations
+
+NASA ADS
+Google Scholar
+
+Semantic Scholar
+
+    export BibTeX citation
+    Loading...
+
+BibTeX formatted citation
+            ×
+
+            loading...
+
+            Data provided by: 
+
+Bookmark
+
+    Bibliographic Tools
+
+Bibliographic and Citation Tools
+
+              Bibliographic Explorer Toggle
+
+            Bibliographic Explorer (What is the Explorer?)
+
+              Connected Papers Toggle
+
+            Connected Papers (What is Connected Papers?)
+
+              Litmaps Toggle
+
+            Litmaps (What is Litmaps?)
+
+              scite.ai Toggle
+
+            scite Smart Citations (What are Smart Citations?)
+
+    Code, Data, Media
+
+Code, Data and Media Associated with this Article
+
+              alphaXiv Toggle
+
+            alphaXiv (What is alphaXiv?)
+
+              Links to Code Toggle
+
+            CatalyzeX Code Finder for Papers (What is CatalyzeX?)
+
+              DagsHub Toggle
+
+            DagsHub (What is DagsHub?)
+
+              GotitPub Toggle
+
+            Gotit.pub (What is GotitPub?)
+
+              Huggingface Toggle
+
+            Hugging Face (What is Huggingface?)
+
+              ScienceCast Toggle
+
+            ScienceCast (What is ScienceCast?)
+
+      Demos
+
+Demos
+
+                Replicate Toggle
+
+              Replicate (What is Replicate?)
+
+                Spaces Toggle
+
+              Hugging Face Spaces (What is Spaces?)
+
+                Spaces Toggle
+
+              TXYZ.AI (What is TXYZ.AI?)
+
+      Related Papers
+
+Recommenders and Search Tools
+
+                Link to Influence Flower
+
+              Influence Flower (What are Influence Flowers?)
+
+                Core recommender toggle
+
+              CORE Recommender (What is CORE?)
+
+Author
+
+Venue
+
+Institution
+
+Topic
+
+        About arXivLabs
+
+arXivLabs: experimental projects with community collaborators
+
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+
+Have an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.
+
+    Which authors of this paper are endorsers? |
+    Disable MathJax (What is MathJax?)
+
+        We gratefully acknowledge support from
+        our major funders,
+        member institutions, ,
+        and all contributors.
+
+        About
+        ·
+        Help
+        ·
+        Contact
+        ·
+        Subscribe
+        ·
+        Copyright
+        ·
+        Privacy
+        ·
+        Accessibility
+        ·
+        Operational Status (opens in new tab)
+
+Major funding support from
+

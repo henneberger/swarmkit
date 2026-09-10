@@ -1,0 +1,116 @@
+{
+  "kind": "papers",
+  "id": "2603.08835",
+  "title": "MASEval: Extending Multi-Agent Evaluation from Models to Systems",
+  "page_url": "https://arxiv.org/abs/2603.08835",
+  "pdf_url": "https://arxiv.org/pdf/2603.08835",
+  "retrieved_at": "2026-09-10T22:57:25.927904+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2603.08835",
+      "resolved_url": "https://arxiv.org/abs/2603.08835",
+      "path": "sources/benchmarks/papers/2603.08835/page.html",
+      "bytes": 41379,
+      "sha256": "a4f96e9fc75b28529b8c87deae2bcb70b5c53bf8f941f1d855cdcaca793fe90d"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2603.08835",
+      "resolved_url": "https://arxiv.org/pdf/2603.08835",
+      "path": "sources/benchmarks/papers/2603.08835/paper.pdf",
+      "bytes": 313403,
+      "sha256": "ee28d2414944bc790eddeb19c547b305b4e43eacec7c28a5ad73fc3127850d8b"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2603.08835: MASEval: Extending Multi-Agent Evaluation from Models to Systems"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "MASEval: Extending Multi-Agent Evaluation from Models to Systems"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2603.08835v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "The rapid adoption of LLM-based agentic systems has produced a rich ecosystem of frameworks (smolagents, LangGraph, AutoGen, CAMEL, LlamaIndex, i.a.). Yet existing benchmarks are model-centric: they fix the agentic setup and do not compare other system components. We argue that implementation decisions substantially impact performance, including choices such as topology, orchestration logic, and error handling. MASEval addresses this evaluation gap with a framework-agnostic library that treats the entire system as the unit of analysis. Through a systematic system-level comparison across 3 benchmarks, 3 models, and 3 frameworks, we find that framework choice matters as much as model choice. MASEval allows researchers to explore all components of agentic systems, opening new avenues for principled system design, and practitioners to identify the best implementation for their use case.\n  MASEval is available under the MIT licence https://github.com/parameterlab/MASEval."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "MASEval: Extending Multi-Agent Evaluation from Models to Systems"
+    ],
+    "twitter:description": [
+      "The rapid adoption of LLM-based agentic systems has produced a rich ecosystem of frameworks (smolagents, LangGraph, AutoGen, CAMEL, LlamaIndex, i.a.). Yet existing benchmarks are model-centric:..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "MASEval: Extending Multi-Agent Evaluation from Models to Systems"
+    ],
+    "citation_author": [
+      "Emde, Cornelius",
+      "Rubinstein, Alexander",
+      "Goel, Anmol",
+      "Heakl, Ahmed",
+      "Yun, Sangdoo",
+      "Oh, Seong Joon",
+      "Gubri, Martin"
+    ],
+    "citation_date": [
+      "2026/03/09"
+    ],
+    "citation_online_date": [
+      "2026/03/09"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2603.08835"
+    ],
+    "citation_arxiv_id": [
+      "2603.08835"
+    ],
+    "citation_abstract": [
+      "The rapid adoption of LLM-based agentic systems has produced a rich ecosystem of frameworks (smolagents, LangGraph, AutoGen, CAMEL, LlamaIndex, i.a.). Yet existing benchmarks are model-centric: they fix the agentic setup and do not compare other system components. We argue that implementation decisions substantially impact performance, including choices such as topology, orchestration logic, and error handling. MASEval addresses this evaluation gap with a framework-agnostic library that treats the entire system as the unit of analysis. Through a systematic system-level comparison across 3 benchmarks, 3 models, and 3 frameworks, we find that framework choice matters as much as model choice. MASEval allows researchers to explore all components of agentic systems, opening new avenues for principled system design, and practitioners to identify the best implementation for their use case. MASEval is available under the MIT licence https://github.com/parameterlab/MASEval."
+    ]
+  },
+  "extracted_text_characters": 73716,
+  "text_searchable": true
+}

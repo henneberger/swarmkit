@@ -1,0 +1,28 @@
+{
+  "kind": "repositories",
+  "id": "yutao1024__EntCollabBench",
+  "title": "yutao1024/EntCollabBench",
+  "url": "https://github.com/yutao1024/EntCollabBench",
+  "retrieved_at": "2026-09-10T22:57:27.334904+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/yutao1024/EntCollabBench/blob/9d085fcb86adaf20254c09e2ca35123e535a9643/README.md",
+      "resolved_url": "https://github.com/yutao1024/EntCollabBench/blob/9d085fcb86adaf20254c09e2ca35123e535a9643/README.md",
+      "path": "sources/benchmarks/repositories/yutao1024__EntCollabBench/README.md",
+      "bytes": 10133,
+      "sha256": "999c22d954a1f7e220472e0d9a322a4cf764dcfd0c3b6c16aa637940887ee39f"
+    }
+  ],
+  "status": "ok",
+  "commit": "9d085fcb86adaf20254c09e2ca35123e535a9643",
+  "commit_date": "2026-05-14T23:16:22+08:00",
+  "checkout": "sources/benchmarks/repositories/yutao1024__EntCollabBench/checkout",
+  "experiments_reproduced": false,
+  "license_files": [],
+  "audit": {
+    "path": "scripts/judge/judge.py",
+    "line": 701,
+    "finding": "Public judge entry point requires model names and uses majority voting; reconcile with paper deterministic-grading claims before adoption.",
+    "scope": "selected file inspection, not full audit"
+  }
+}

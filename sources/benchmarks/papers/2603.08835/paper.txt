@@ -1,0 +1,789 @@
+                                            MASEval: Extending Multi-Agent Evaluation from Models to Systems
+
+                                                  Cornelius Emde1,2 * , Alexander Rubinstein3,§ , Anmol Goel1,4,§ , Ahmed Heakl1,5,§ ,
+                                                                Sangdoo Yun6 , Seong Joon Oh1,3,7† , Martin Gubri1‡
+                                                 §Equal contribution. 1 Parameter Lab, 2 University of Oxford, 3 University of Tübingen,
+                                                                4
+                                                                  TU Darmstadt, 5 MBZUAI, 6 NAVER AI Lab, 7 KAIST
+
+
+                                                                                                             Frameworks                         Benchmarks
+
+                                                                   Abstract                                 smolagents                            GAIA
+                                                                                                            LangGraph                            MACS
+                                                The rapid adoption of LLM-based agentic                                        MASEval
+arXiv:2603.08835v1 [cs.AI] 9 Mar 2026
+
+
+
+
+                                                systems has produced a rich ecosystem of                      CAMEL                               Tau2
+                                                frameworks (smolagents, LangGraph, Auto-                    Your Agents                          Your Benchmark
+                                                Gen, CAMEL, LlamaIndex, i.a.). Yet exist-
+                                                ing benchmarks are model-centric: they fix the             Figure 1: MASEval provides a unified evaluation layer
+                                                agentic setup and do not compare other system              that enables framework-agnostic, system-level compari-
+                                                components. We argue that implementation                   son across any agent framework and benchmark.
+                                                decisions substantially impact performance, in-
+                                                cluding choices such as topology, orchestration
+                                                logic, and error handling. MASEval addresses
+                                                                                                           CAMEL (Li et al., 2023), which embody differ-
+                                                this evaluation gap with a framework-agnostic              ent architectural choices for agent communication,
+                                                library that treats the entire system as the unit of       memory management, and coordination.
+                                                analysis. Through the first systematic system-                This transition from single-agent to multi-agent
+                                                level comparison across 3 benchmarks, 3 mod-               systems fundamentally changes evaluation require-
+                                                els, and 3 frameworks, we find that, across mod-
+                                                                                                           ments. For single-agent setups, benchmarks could
+                                                els within a capability tier, framework choice
+                                                matters as much as model choice. MASEval                   reasonably focus on model capabilities within a
+                                                allows researchers to explore all components               fixed agentic scaffold. Multi-agent systems, how-
+                                                of agentic systems, opening new avenues for                ever, introduce new dimensions that demand atten-
+                                                principled system design, and practitioners to             tion, including organisational topologies, communi-
+                                                identify the best implementation for their use             cation protocols, memory architectures, role differ-
+                                                case. MASEval is available under the MIT li-               entiation, and the orchestration logic that governs
+                                                cence at github.com/parameterlab/MASEval.                  their interaction (Guo et al., 2024). Moreover, the
+                                                                                                           proliferation of frameworks raises a question that
+                                        1       Introduction                                               current benchmarks cannot answer: which frame-
+                                        LLM-based agentic systems have become popular                      work should I use?
+                                        for automating complex workflows. Single-agent                        Existing benchmarks such as GAIA (Mialon
+                                        architectures use one LLM equipped with tools to                   et al., 2024) and AgentBench (Liu et al., 2024) re-
+                                        iteratively reason toward a solution. Yet as work-                 main predominantly model-oriented and static. The
+                                        flows grow in complexity, the field is increasingly                typical benchmark report states ‘GPT-4 achieves
+                                        adopting multi-agent systems, where specialised                    85% on task X,’ which conflates model capabil-
+                                        agents collaborate through structured coordination.                ity with framework implementation. Evaluation
+                                        This shift promises improved task decomposition                    libraries for single-agent setups also lack infrastruc-
+                                        and cost efficiency through smaller, specialised                   ture to trace multi-agent coordination. This leaves
+                                        models (Belcak et al., 2025). The growing adop-                    fundamental questions unanswered: is multi-agent
+                                        tion of multi-agent approaches is reflected in the                 topology better than single-agent for task X? Which
+                                        proliferation of frameworks such as AutoGen (Wu                    tool-calling format? Does smolagents outperform
+                                        et al., 2024), LangGraph (LangChain, 2024a), and                   LangGraph?
+                                            * ai@corneliusemde.com
+                                                                                                              This evaluation gap has concrete consequences.
+                                            †
+                                                coallaoh@gmail.com                                         Researchers lack a principled way to compare de-
+                                            ‡
+                                                martin.gubri@parameterlab.de                               sign decisions such as communication topologies
+
+                                                                                                       1
+ Library                                     Multi-Agent   System Eval   Agent-Agnostic    Benchmarks   Flexible Interaction   BYO   Trace-First   Mature
+ MASEval (Ours)                                  ✓             ✓               ✓               ✓                 ✓             ✓         ✓           ✓
+ AnyAgent (Mozilla AI, 2025)                     ◦             ✓               ✓               ✗                 ◦             ✓         ◦           ✓
+ MLflow GenAI (Zaharia et al., 2018)             ◦             ◦               ✓               ✗                 ◦             ✓         ✓           ✓
+ HAL Harness (Kapoor et al., 2026)               ◦             ✓               ✓               ✓                 ◦             ◦         ◦           ◦
+ Inspect-AI (UK AI Safety Institute, 2024)       ◦             ✓               ◦               ✓                 ◦             ◦         ◦           ✓
+ OpenCompass (Contributors, 2023)                ✗             ◦               ✗               ✓                 ◦             ◦         ◦           ✓
+ AgentGym (Xi et al., 2024)                      ✗             ✗               ✗               ✓                 ◦             ✓         ◦           ◦
+ Arize Phoenix (Arize AI, 2022)                  ◦             ✗               ◦               ✗                 ✗             ◦         ✓           ✓
+ TruLens (TruEra, 2020)                          ◦             ✗               ◦               ✗                 ✗             ◦         ✓           ✓
+ MARBLE (Zhu et al., 2025)                       ✓             ✗               ✗               ✓                 ✗             ✗         ◦           ◦
+ DeepEval (Ip and Vongthongsri, 2026)            ◦             ✗               ◦               ✗                 ◦             ◦         ◦           ✓
+ MCPEval (LastMile AI, 2025)                     ✗             ✗               ✗               ✓                 ✗             ◦         ◦           ◦
+
+Table 1: Comparison with related libraries. ✓ = built-in support or explicitly designed to be extensible, ◦ = partial
+support, ✗ = not supported/impractical. Multi-Agent: native orchestration with per-agent tracing and independent
+message histories. System-Level: compare framework implementations, not just LLMs. Agent-Agnostic: evaluate
+any framework via thin adapters without code recreation. Benchmarks: ships complete, ready-to-run benchmarks.
+Flexible Interaction: Flexible Agent-Environment-User Interaction. First-class user simulation with personas
+and tool access. BYO: bring your own logging, agents, environments, and tools. Open-source, works offline, no
+mandatory cloud services. Trace-First: evaluate intermediate steps across environment and agents via first-class
+traces, not post-hoc fixes. Mature: published on PyPI, CI/CD, good test coverage, active maintenance.
+
+or coordination strategies and cannot easily build                                 val’s design. MASEval reduces implementation
+on prior architectural findings. Practitioners re-                                 effort by 83–91% for benchmark consumers who
+ceive no data-driven guidance on framework choice.                                 adopt existing benchmarks and by 35–57% for
+Benchmark consumers face fragmented interfaces,                                    benchmark producers who build new evaluations.
+as evaluating a system across multiple benchmarks
+requires significant boilerplate reimplementation.                                 2      Related Work
+Benchmark producers must reinvent increasingly
+complex evaluation infrastructure for each new                                     MASEval is at the intersection of agent frameworks
+benchmark.                                                                         that build systems, benchmarks that define tasks,
+   We introduce MASEval, the first framework-                                      and evaluation libraries that measure performance.
+agnostic evaluation library for multi-agent sys-                                   Multi-agent frameworks. LLM-based agent
+tems (Figure 1). Our key principle is to evaluate                                  frameworks span academic systems (Li et al., 2023;
+the complete system (agents, framework, and coor-                                  Hong et al., 2024; Chen et al., 2024), developer-
+dination logic). MASEval provides:                                                 oriented tools (Wu et al., 2024; LangChain, 2024a;
+                                                                                   Liu, 2022; CrewAI, 2024; Roucher et al., 2025; Ser-
+1. System-level evaluation infrastructure for                                      vices, 2024), and frontier-provider SDKs (OpenAI,
+   comparing design decisions and framework im-                                    2025; Google, 2025; Anthropic, 2025). Frame-
+   plementations. Both matter for building effec-                                  works differ in design philosophy: stateless vs.
+   tive multi-agent systems.                                                       stateful execution, static vs. dynamic control flow,
+2. Unified benchmark interface for evaluating                                      centralised vs. decentralised communication, and
+   agents across multiple benchmarks with mini-                                    JSON-based vs. code-based tool calling. AnyAgent
+   mal integration overhead.                                                       (Mozilla AI, 2025) unifies execution across frame-
+3. Benchmark development toolkit for creating                                      works but does not address evaluation. No prior
+   new benchmarks without reinventing evalua-                                      work provides infrastructure for cross-framework
+   tion boilerplate.                                                               evaluation that decouples the system under test
+                                                                                   from the benchmark harness.
+4. Multi-agent tracing with per-agent message
+   histories for debugging coordination patterns.                                  Evaluation libraries. Inspect AI (UK AI Safety
+                                                                                   Institute, 2024) offers a convenient, batteries-
+  To validate MASEval’s utility, we conduct ex-                                    included evaluation framework with pre-built
+periments across 3 benchmarks, 3 frameworks, and                                   benchmarks, but its solver abstraction has no notion
+3 models. Our key finding: framework choice im-                                    of multiple cooperating agents, making per-agent
+pacts performance comparably to model choice.                                      tracing with arbitrary agent implementations non-
+This result was previously obscured by existing                                    trivial. HAL (Kapoor et al., 2026) is limited to
+model-centric benchmarks, and demonstrates the                                     single-agent and locks logging to W&B Weave.
+importance of system-level evaluation in MASE-                                     MARBLE (Zhu et al., 2025) supports multi-agent
+
+                                                                             2
+coordination but restricts topologies to a predefined             measure) are cleanly separated. Each compo-
+set and requires agents to be implemented within                  nent can be varied independently to isolate its
+its own paradigm, precluding the use of custom                    effect on performance.
+frameworks. LLM observability tools (Arize AI,              5. Trace-first evaluation. All components log to
+2022; TruEra, 2020; Zaharia et al., 2018) focus on             a shared trace organised by component. Agent
+monitoring rather than benchmark execution. Com-               messages, model usage, and tool calls can be
+mercial platforms (LangChain, 2024b; Braintrust,               directly inspected. Per-agent traces are kept
+2023; Galileo (Rungalileo), 2025) introduce ven-               independent to support partial observability.
+dor lock-in. None supports evaluating multi-agent
+                                                               These principles involve deliberate tradeoffs.
+systems across frameworks with per-agent tracing.
+                                                            Agent systems are architecturally diverse. One is a
+Table 1 compares MASEval with other libraries.
+                                                            Python library call, another a command-line tool,
+Benchmark datasets. Agent benchmarks cover
+                                                            another a containerised service or remote endpoint.
+single-agent capabilities (Jimenez et al., 2024; Mi-
+                                                            Any assumption about agent internals therefore ex-
+alon et al., 2024; Barres et al., 2025; Liu et al.,
+                                                            cludes valid implementations. The “Bring Your
+2024), multi-agent collaboration (Zhu et al., 2025;
+                                                            Own” philosophy keeps the adapter contract min-
+Shu et al., 2024; Xu et al., 2024; Froger et al.,
+                                                            imal (run the agent and retrieve its messages) be-
+2025), and safety (Vijayvargiya et al., 2026; Go-
+                                                            cause that is all one can assume. The cost is higher
+maa et al., 2025). Each ships with an incompatible
+                                                            initial setup compared to opinionated libraries. The
+evaluation interface, requiring bespoke integration
+                                                            gain is flexibility: wrapping a containerised service
+code. MASEval’s unified benchmark interface ad-
+                                                            is as straightforward as wrapping an in-process
+dresses this fragmentation.
+                                                            framework agent.
+3     System Architecture                                      This flexibility extends to infrastructure. Exist-
+                                                            ing evaluation codebases couple the original au-
+MASEval bridges the gap between frameworks and
+                                                            thors’ choices (a specific cloud platform, a hard-
+benchmarks. It is neither an agent framework nor
+                                                            coded provider SDK) throughout the code. A team
+a benchmark dataset, but an evaluation infrastruc-
+                                                            without access to that platform must rewrite far be-
+ture that enables any agent to be evaluated on any
+                                                            yond the evaluation logic. MASEval isolates these
+benchmark through a universal interface.
+                                                            choices behind pluggable interfaces. The cost is
+3.1    Design Principles                                    a thinner per-platform feature surface, forgoing
+                                                            turnkey dashboards or native experiment tracking.
+The challenges from §2 motivate five design prin-
+                                                            The gain is that no team is locked out by a depen-
+ciples that distinguish MASEval from prior evalua-
+                                                            dency they cannot use, and swapping a backend is
+tion approaches:
+                                                            a single-line change.
+1. System as unit of analysis. The agent system                Finally, we keep the abstraction surface minimal.
+   is evaluated as a whole, enabling comparison             In production systems, robustness means defensive
+   of architectural choices and framework imple-            coding with deep exception hierarchies and exhaus-
+   mentations, not just model capabilities.                 tive validation. In a research context, such pat-
+2. Bring your own. No framework, model                      terns obscure the evaluation logic and mask rather
+   provider, or logging backend is privileged. The          than surface problems. For MASEval, robustness
+   core never imports framework-specific code               means reliable, reproducible results with code that
+   (enforced via CI). Pre-built adapters exist for          remains readable and easy to extend.
+   common choices.
+3. Infrastructure, not implementation. MASE-                3.2    Module Architecture
+   val provides orchestration, tracing, and lifecy-         MASEval realises these principles through a mod-
+   cle management; users control tools, agent be-           ule structure with strict dependency boundaries that
+   haviour, and evaluation metrics. Like PyTorch            keep evaluation logic independent of any particular
+   Lightning, it reduces boilerplate without ab-            framework, model provider, or logging solution
+   stracting away evaluation logic.                         (Figure 2).
+4. Separation of concerns. Task definition (what            Core maseval/core/ . Abstract base classes
+   to solve), environment (tools and state), agent          and evaluation runtime defining the contracts
+   logic (how to solve), and evaluation (how to             ( AgentAdapter , Environment , Evaluator ,
+
+                                                        3
+                                                      DataEngineerBenchmark
+
+
+                                                            Benchmark
+  smolagents          AgentAdapter                                                                             Evaluator                            LLMJudge
+
+   MyTools             Environment     Core Runtime: Orchestration, Tracing, Error Attribution              ModelAdapter                             OpenAI
+
+ SWESimulator             User                                                                                  Logging                              WandB
+                                                             TaskQueue
+
+
+                                                       Item-Response Queue
+
+
+
+Figure 2: MASEval adopts a “Bring Your Own” (BYO) philosophy. Users implement custom components by
+extending MASEval’s abstract base classes ; the core runtime orchestrates execution and collects traces. This
+enables maximum flexibility while minimizing boilerplate code.
+
+                                                                                                                                           × task
+ ModelAdapter , User ). Orchestrates the bench-                                      TASK: environment, evaluation and metadata
+                                                                                                                                       × repeat
+mark lifecycle with minimal dependencies.
+                                                                                                             1. S ETUP
+Interface maseval/interface/ . Lazy-loaded
+                                                                                        Create tools and environment: setup_environment
+adapters for frameworks (smolagents, LangGraph,
+                                                                                           Create user simulator (optional): setup_user
+LlamaIndex), model providers (OpenAI, An-                                                    Wrap agents in adapters: setup_agents
+thropic, Google), and logging destinations. Sup-                                           Create metric evaluators: setup_evaluators
+porting a new framework requires implementing
+only a thin adapter.                                                                                      2. E XECUTE
+
+Benchmark maseval/benchmark/ . Complete                                                 Customizable turn orchestration: execution_loop
+
+benchmark implementations (e.g., τ 2 -Bench, Mul-                                        Agent              Environment                User
+
+tiAgentBench) serving as both ready-to-use evalua-
+                                                                                                          3. C OLLECT
+tions and reference implementations.
+                                                                                       Gather traces and configs from registered components
+                                                                                           Gather system metadata (git, python env, etc.)
+3.3    Core Abstractions
+MASEval defines seven core abstractions that                                                              4. E VALUATE
+
+benchmark producers implement and benchmark                                                  Compute metrics from traces: evaluate
+
+consumers rely on:
+                                                                                                           5. R EPORT
+Task. The atomic unit of evaluation: bundles the                                          Store report: task_id, status, traces, config, eval
+query, environment data, evaluation criteria, and                                                 Clear registry for next repetition
+execution protocol.
+Benchmark. Orchestrates the evaluation lifecycle                     Figure 3: Benchmark task lifecycle with flexible execu-
+for a task collection. Users subclass Benchmark                      tion. The outer loop iterates over tasks; the inner loop
+and override hooks ( setup_environment ,                             handles repetitions. The Execute phase shows agent-
+ setup_agents , setup_evaluators , etc.) while                       user interaction as a flexible bidirectional loop.
+inheriting execution and tracing infrastructure.
+Environment. Manages state and exposes tools                         providers with tool calling and token tracking.
+that agents can invoke, remaining stateful across                    Used by simulators and LLM-based evaluators;
+turns within a task execution.                                       agents use their framework’s native integration.
+AgentAdapter. Wraps any framework’s agent in                         3.4       Benchmark Lifecycle
+a standard interface. Exposes message history for
+tracing.                                                             Each task execution proceeds through five phases
+                                                                     (Figure 3), iterated over tasks and repetitions
+User. Simulates user responses for multi-turn
+                                                                     ( n_task_repeats ):
+benchmarks, with configurable personas and turn
+limits.                                                                1. Setup. Instantiate environment, tools, user sim-
+Evaluator. Computes metrics via a two-stage pat-                          ulator, agents, and evaluators; register all com-
+tern: filter traces to extract relevant data, then com-                   ponents for automatic trace collection.
+pute metrics.                                                          2. Execute. Run agents with customisable turn
+ModelAdapter.           Unified interface for LLM                         orchestration.
+
+                                                                 4
+3. Collect. Gather traces from all registered com-           3.6    Key Features
+   ponents and system metadata.                              MASEval provides production-quality infras-
+4. Evaluate. Compute metrics from full traces,               tructure for evaluation: parallel task execu-
+   including intermediate steps and tool usage.              tion, structured error attribution, pluggable log-
+5. Report. Store a structured report (task ID, sta-          ging backends, adaptive task scheduling, and
+   tus, traces, configuration, results) and clear the        reproducibility tooling.       Appendix B lists
+   registry for the next repetition.                         key features.      MASEval is installable via
+                                                              pip install maseval (MIT licence). The doc-
+Implementing multiple benchmarks with diverse                umentation at maseval.readthedocs.io covers API
+designs (Table 4) has validated that this phase order-       reference, implementation examples, and design
+ing and separation of concerns hold across different         patterns.
+benchmark designs.
+                                                             4     System-Level Benchmarking
+3.5    Key Capabilities
+                                                             Current benchmarks focus on model comparison,
+Multi-agent tracing. Each agent maintains an in-             neglecting framework implementations and design
+dependent message history; the component registry            decisions. We use MASEval to conduct a sys-
+automatically collects per-agent traces, enabling            tematic cross-framework comparison that holds
+debugging of coordination failures.                          the agent architecture constant and varies only the
+Callback system. Lifecycle hooks at benchmark,               framework and model. Consider a practitioner who
+environment, and agent levels enable extensible              has a multi-agent design in mind and must choose
+monitoring without modifying core logic. Built-in            both a model and a framework to implement it.
+callbacks cover progress bars and result logging.            Our experiment measures exactly this: given the
+Users can add custom callbacks for experiment                same design implemented idiomatically in three
+tracking, early stopping, or external platform inte-         frameworks and powered by three models, what
+gration.                                                     performance differences emerge out of the box?
+Adaptive testing. The cost of evaluating modern              We find that framework-level design choices can
+LLMs can be dramatically reduced by selecting                match or exceed the performance differences be-
+only the most informative benchmark tasks rather             tween models of comparable capability.
+than evaluating on the entire dataset (Vivek et al.,
+                                                             4.1    Experimental Setup
+2024; Polo et al., 2024; Rubinstein et al., 2026).
+The AdaptiveTaskQueue enables this by select-                We conduct a full factorial experiment across 3
+ing the next task adaptively based on the model’s            frameworks, 3 models, and 3 benchmarks (27 con-
+current estimated skill, for instance using Item Re-         figurations). For each benchmark we select 2 do-
+sponse Theory (Lord, 1952; Rasch, 1960; Lord                 mains and run all tasks within each domain.
+et al., 1968). The InformativeSubsetQueue in-                Benchmarks. We select three benchmarks span-
+terface supports various strategies to pre-select sub-       ning capability and safety evaluation in multi-agent
+sets of tasks from which overall performance can be          settings. MACS (Shu et al., 2024) tests multi-agent
+estimated. For example, the DISCO algorithm (Ru-             coordination on enterprise tasks. We report partial
+binstein et al., 2026) can estimate overall bench-           goal success rate (pGSR). C ON V ERSE (Gomaa
+mark performance within roughly 2pp of a full eval-          et al., 2025) measures resistance to security attacks
+uation while using only 1% of all available tasks.           in agent-to-agent conversations. We report robust-
+This compute reduction is particularly valuable for          ness (1 − ASR). The attacker agent is held constant
+frontier models, where a single benchmark run can            and only the defending agent varies across frame-
+cost tens of thousands of dollars1 .                         works. MultiAgentBench (Zhu et al., 2025) eval-
+Reproducibility infrastructure. Every report in-             uates both collaboration and competition between
+cludes git state, system information, and package            agents. We report Task Completion Rate for the
+versions; ConfigurableMixin extends this to any              Research domain and scaled Task Scores (TS) for
+user-defined component.                                      Bargaining.
+                                                             Frameworks. We compare three frameworks
+   1
+    https://x.com/DimitrisPapail/status/                     through MASEval’s built-in adapters. For smo-
+2026699305021587641                                          lagents (Roucher et al., 2025) (minimalist, code-
+
+                                                         5
+                                      MACS ↑                      C ON V ERSE ↑             MultiAgentBench ↑
+Framework     Model               Travel   Mortgage        Travel Planning   Real Estate   Research   Bargaining
+              Gemini-3.0-Flash      84.0       94.4                   84.8          82.4       99.0          89.0
+smolagents    GPT-5-mini            59.8       85.8                   90.1          84.2       98.1          91.7
+              Haiku 4.5             90.4       85.6                   86.2          86.0      100.0          90.2
+              Gemini-3.0-Flash      85.8       89.4                   60.0          72.2       98.0          82.7
+LangGraph     GPT-5-mini            60.8       73.7                   73.3          77.0       95.5          93.6
+              Haiku 4.5             68.3       81.2                   95.8          96.7       92.4          87.1
+              Gemini-3.0-Flash      74.7       93.2                   93.8        100.0        96.0          75.6
+LlamaIndex    GPT-5-mini            71.0       76.7                   85.4         75.3        92.0          90.8
+              Haiku 4.5             59.5       76.7                   94.7         97.4        95.8          87.1
+              Cross-Model           23.6       13.7                   16.8          17.6        3.8           9.6
+Mean Range
+              Cross-Framework       17.7        8.7                   20.1          16.0        5.6           6.4
+              Cross-Model           12.3         7.5                   8.7           9.5        2.0           4.9
+Mean SD
+              Cross-Framework        9.4         4.5                  10.5           8.4        2.8           3.3
+
+Table 2: Performance across frameworks, models, benchmarks, and domains. ConVerse columns shows (1 − ASR)
+on security split. MultiAgentBench Research reports Completion Rate and Bargaining reports Task Score. Bold
+marks the best result per task column. Cross-Model statistics measure variability across models within each
+framework, averaged over frameworks. Cross-Framework statistics measure the reverse.
+
+based tool calling) we wrap ToolCallingAgent                in step granularity (e.g., one step accounting for
+via SmolAgentAdapter ;        for LangGraph                 tool call and response vs. two separate steps), we
+(LangChain, 2024a) (state machine-based coordi-             map limits accordingly. For judges, environment
+nation with explicit state management) we wrap              simulation, and attackers, we utilise the Gemini-
+ StateGraph via LangGraphAgentAdapter ;                     3.0-Flash model across all conditions. Only the
+and for LlamaIndex (Liu, 2022) (flexible                    framework varies, together with its built-in defaults:
+single- and multi-agent framework) we connect               system prompts, tool-mounting mechanisms, and
+ FunctionAgent with AgentWorkflow via                       error handling. We do not modify or align these
+ LlamaIndexAgentAdapter .                                   internals across frameworks.
+Models. We test three current-generation, cost-
+efficient mid-tier models from different providers:         4.2   Results
+GPT-5-mini, Gemini-3.0-Flash, and Claude-Haiku-            Agentic evaluations are inherently noisy due to
+4.5. All sit at a similar price and latency point,         stochastic model outputs and compounding deci-
+representing a realistic set of alternatives a prac-       sion paths, so we focus on aggregate patterns rather
+titioner faces alongside the choice of framework.          than definitive pairwise rankings. Table 2 presents
+Comparing across tiers (e.g. GPT-5-mini against            our main results. To compare the relative impact of
+GPT-5-Pro) would likely yield larger model effects         framework and model choice, we quantify the vari-
+but also shift focus towards the cost-performance          ability either choice induces. The bottom four rows
+frontier, complicating the analysis. All models are        capture how much performance shifts when each
+used with temperature 1.0 and top-p 1.0 as these           factor is swapped while holding the other fixed,
+are universally available across all models.               reporting both range and standard deviation of that
+Controlled variables. We aim to isolate the design         spread. Each value averages over the complemen-
+choices made by each framework while keeping               tary axis: the cross-model range in a given domain,
+all other variables constant. We run each bench-           for instance, is the mean of the best-minus-worst
+mark with hyperparameters chosen to replicate the          model score taken within each of the three frame-
+original paper and applied uniformly across condi-         works.
+tions, including tool definitions, agent topologies,       Framework impact is substantial. Framework
+user simulations, environment dynamics, evalua-            choice produces performance differences compara-
+tion logic, and execution limits (e.g., maximum            ble in magnitude to model choice within the same
+user turns, step budgets). Where frameworks differ         capability tier. Across the six domains, the range
+
+                                                       6
+between frameworks exceeds that between models                                                                Change
+in two of the six domains. Averaging over all six          Benchmark     Component    Original   MASEval      LoC       %
+
+domains, the mean range is 14.2 percentage points                        Definition      6,822      3,450   −3,372   −49.4
+                                                           τ 2 -Bench    Interface       1,982        343   −1,639   −82.7
+(pp) across models and 12.4 pp across frameworks,                        Total           8,804      3,793   −5,011   −56.9
+with mean standard deviations of 7.5 pp and 6.5 pp                       Definition      1,320      1,283     −37     −2.8
+respectively. The most striking single-cell exam-          C ON V ERSE   Interface         778         71    −707    −90.9
+                                                                         Total           2,098      1,354    −744    −35.5
+ple is Haiku 4.5 on MACS Travel, which scores
+90.4 with smolagents but 59.5 with LlamaIndex,             Table 3: Lines of code comparison for benchmark eval-
+a 30.9pp gap between frameworks. Practitioners             uation logic. Definition covers task specifications, envi-
+who tune only the model are therefore optimising           ronments, and evaluators. Interface covers the CLI and
+part of the system.                                        entry points that wire components into a runnable bench-
+Framework-model interactions. No single frame-             mark. MASEval replaces framework- and benchmark-
+work dominates across all models. On MACS, smo-            specific orchestration with shared abstractions.
+lagents achieves the highest scores with Haiku 4.5
+but the lowest with GPT-5-mini. To investigate             tations, adjusted for formatting, docstrings, and
+such a strong difference, we carefully analysed            ablation code. We focus on C ON V ERSE and τ 2 -
+traces for smolagents running on MACS and es-              bench as complete reimplementations in MASEval
+tablished surprising results. GPT-5-mini struggles         that do not rely on vendored dependencies.
+with smolagents as the framework forces a tool call           The most consistent reduction appears in the or-
+at every step, causing GPT-5-mini to overengage            chestration layer. The interface code that wires
+the user through repeated clarification attempts. On       components into a runnable benchmark shrinks by
+MACS, where the number of clarifying questions is          83–91%, as MASEval provides lifecycle manage-
+capped at five, GPT-5-mini misinterprets the “max          ment, trace collection, and execution infrastructure
+turns reached” error message and retries the same          that original implementations build from scratch.
+tool call up to 23 times, only rephrasing the ques-        This is the key gain for benchmark consumers, who
+tion rather than adjusting its strategy in response        need only the interface to run existing benchmarks.
+to the systemic failures of this tool call. While it       Benchmark definitions vary depending on the orig-
+can finally achieve its goals, it often does so with       inal codebase’s structure: τ 2 -bench sees a 49%
+≥ 10× higher token consumption compared to                 reduction because its original implementation em-
+other models. Other models and frameworks do               bedded orchestration logic within component defi-
+not exhibit this failure mode. These interactions          nitions, whereas C ON V ERSE’s cleanly factored de-
+illustrate how framework conventions (mandatory            sign yields nearly identical definition sizes. Overall,
+tool calling, error message format) can combine            total implementation effort decreases by 35–57%,
+with model tendencies to produce failures that nei-        allowing benchmark producers to focus on evalua-
+ther component would exhibit in isolation.                 tion logic rather than orchestration boilerplate.
+Implications. These results validate MASEval’s
+core premise that framework choice matters for             5     Conclusion
+agent performance. Model-only evaluation serves
+model developers, but practitioners and researchers        MASEval provides framework-agnostic evaluation
+building agentic systems need more: they must              infrastructure that treats the complete agent sys-
+also evaluate the orchestration harness and its in-        tem as the unit of analysis. Through multi-agent
+teraction with the model. System-level evaluation          tracing, structured error attribution, and a unified
+infrastructure like MASEval is necessary for the           benchmark interface, it enables systematic compar-
+field to make informed architectural decisions.            ison of architectural choices and framework imple-
+                                                           mentations. Our experiments show that, within a
+4.3   Implementation Effort                                capability tier, framework choice impacts perfor-
+To quantify MASEval’s value as benchmark in-               mance comparably to model choice, challenging
+frastructure, Table 3 compares the lines of code           the model-centric status quo. System-level evalua-
+required to define and run benchmarks in MASE-             tion is essential for moving beyond ad-hoc imple-
+val against their original codebases. We report            mentations towards principled system design. We
+evaluation-related logic, excluding data and prompt        welcome community contributions of additional
+templates that remain constant across implemen-            framework adapters and benchmark integrations.
+
+                                                       7
+Ethics Statement                                             practice, frameworks differ substantially in their ab-
+                                                             stractions for memory management, asynchronous
+MASEval is an evaluation infrastructure that does
+                                                             execution, and tool calling. Some require thicker
+not introduce new capabilities for language mod-
+                                                             adapters that bridge these differences to MASE-
+els. The benchmarks we implement were designed
+                                                             val’s lifecycle model. The current interface has
+by their original authors with appropriate ethical
+                                                             proven sufficient for four frameworks spanning di-
+considerations. By lowering the barrier to system-
+                                                             verse design philosophies, but novel architectures
+atic benchmarking, MASEval could accelerate the
+                                                             may require extending the adapter contract. How
+development of more capable autonomous agent
+                                                             well this minimal contract accommodates future
+systems. We believe this risk is outweighed by the
+                                                             frameworks will determine whether MASEval can
+benefit of enabling the safety community to identify
+                                                             remain a unifying layer as the ecosystem evolves.
+failure modes and compare mitigation strategies
+                                                                By design, MASEval prioritises flexibility over
+across frameworks in a reproducible manner. We
+                                                             convenience. Its lightweight abstractions require
+release MASEval under an open-source licence to
+                                                             more manual work than end-to-end evaluation li-
+promote reproducible research and fair comparison
+                                                             braries, a deliberate trade-off to support a wide
+in the multi-agent systems community.
+                                                             range of benchmark designs. This entry barrier
+Broader Impact Statement                                     may slow adoption outside research settings. MA-
+                                                             SEval’s primary audience is the research commu-
+By providing standardised evaluation infrastruc-             nity. We expect that benchmark producers and con-
+ture for multi-agent systems, MASEval lowers the             sumers will benefit most from shared infrastructure
+barrier to systematic benchmarking of both capa-             that makes safety-relevant findings reproducible
+bility and safety properties. This dual applicability        and comparable across the fragmented multi-agent
+carries inherent tension. On one hand, MASEval               landscape.
+can accelerate the development of more effective
+agentic systems. These systems inherit the risks             Acknowledgments
+associated with autonomous AI action, including
+compounding errors across agents and reduced hu-             This work was supported by the NAVER corpo-
+man oversight in multi-agent coordination. On the            ration. AR thanks the International Max Planck
+other hand, the absence of rigorous, framework-              Research School for Intelligent Systems (IMPRS-
+agnostic evaluation tools makes it harder for the            IS) and Tübingen AI center for support.
+safety community to identify failure modes and
+compare mitigation strategies across implementa-             Contribution Statement
+tions. We believe that standardised evaluation is a
+prerequisite for responsible deployment: systems             C. Emde conceived and implemented the MA-
+that cannot be systematically measured cannot be             SEval library (core abstractions, framework inter-
+systematically improved.                                     faces, and all benchmark implementations unless
+   MASEval currently integrates four frameworks              noted otherwise), built the DevOps infrastructure,
+and seven benchmarks, and broader coverage de-               and wrote the documentation. He drafted the ex-
+pends on community contributions. For MASEval                perimental settings, ran all experiments, analyzed
+to serve as shared evaluation infrastructure at scale,       results, prepared visualizations, reviewed related
+this coverage must grow substantially. Our archi-            work, and drafted the paper.
+tecture has been tested with up to five agents. Trac-        M. Gubri provided daily supervision, helped refine
+ing overhead grows linearly with the number of               the experimental settings, consolidated the paper’s
+agents, but trace collection is negligible compared          objectives, offered technical support, contributed
+to the cost of running the agents themselves, which          to the initial and final draft.
+dominate wall-clock time and API spend. Scaling              A. Goel contributed the C ON V ERSE benchmark
+behaviour to larger multi-agent systems remains              and provided feedback throughout.
+unexplored, and understanding these limits is im-            A. Rubinstein contributed the task queue for in-
+portant as real-world deployments move toward                formative subsets for efficient agent evaluation, the
+more complex agent topologies.                               DISCO example, and the MMLU and MMLU-Pro
+   On the adapter side, MASEval’s minimal inter-             benchmarks.
+face (two methods) is designed as a lower bound. In          A. Heakl contributed the ColBench benchmark.
+
+                                                         8
+M. Gubri, S. J. Oh, and S. Yun provided weekly                Taicheng Guo, Xiuying Chen, Yaqi Wang, Ruidi Chang,
+supervision and supported the project through or-                Shichao Pei, Nitesh V. Chawla, Olaf Wiest, and
+                                                                Xiangliang Zhang. 2024. Large language model
+ganizational and funding contributions.
+                                                                 based multi-agents: A survey of progress and chal-
+                                                                 lenges. In Proceedings of the Thirty-Third Inter-
+                                                                 national Joint Conference on Artificial Intelligence,
+References                                                      IJCAI-24, pages 8048–8057. International Joint Con-
+Anthropic. 2025.       Claude Agent              SDK.            ferences on Artificial Intelligence Organization. Sur-
+  https://github.com/anthropics/                                vey Track.
+  claude-agent-sdk-python.
+                                                              Dan Hendrycks, Collin Burns, Steven Basart, Andy
+Arize AI. 2022. Phoenix: Ai observability & evaluation.         Zou, Mantas Mazeika, Dawn Song, and Jacob Stein-
+  https://github.com/Arize-ai/phoenix.                          hardt. 2021. Measuring massive multitask language
+                                                                understanding. Proceedings of the International Con-
+Victor Barres, Honghua Dong, Soham Ray, Xujie Si,               ference on Learning Representations (ICLR).
+  and Karthik Narasimhan. 2025. τ 2 -bench: Evaluat-
+  ing conversational agents in a dual-control environ-        Sirui Hong, Mingchen Zhuge, Jonathan Chen, Xiawu
+  ment. Preprint, arXiv:2506.07982.                              Zheng, Yuheng Cheng, Jinlin Wang, Ceyao Zhang,
+                                                                 Zili Wang, Steven Ka Shing Yau, Zijuan Lin, Liyang
+Peter Belcak, Greg Heinrich, Shizhe Diao, Yonggan
+                                                                 Zhou, Chenyu Ran, Lingfeng Xiao, Chenglin Wu,
+  Fu, Xin Dong, Saurav Muralidharan, Yingyan Ce-
+                                                                 and Jürgen Schmidhuber. 2024. MetaGPT: Meta pro-
+  line Lin, and Pavlo Molchanov. 2025. Small lan-
+                                                                 gramming for a multi-agent collaborative framework.
+  guage models are the future of agentic ai. Preprint,
+                                                                 In The Twelfth International Conference on Learning
+  arXiv:2506.02153.
+                                                                 Representations.
+Braintrust. 2023. Braintrust sdk. https://github.
+  com/braintrustdata/braintrust-sdk.                          Jeffrey Ip and Kritin Vongthongsri. 2026. deepeval.
+
+Weize Chen, Yusheng Su, Jingwei Zuo, Cheng Yang,              Carlos E Jimenez, John Yang, Alexander Wettig,
+ Chenfei Yuan, Chi-Min Chan, Heyang Yu, Yaxi Lu,                Shunyu Yao, Kexin Pei, Ofir Press, and Karthik R
+ Yi-Hsin Hung, Chen Qian, Yujia Qin, Xin Cong,                  Narasimhan. 2024. SWE-bench: Can language mod-
+ Ruobing Xie, Zhiyuan Liu, Maosong Sun, and Jie                 els resolve real-world github issues? In The Twelfth
+ Zhou. 2024. AgentVerse: Facilitating multi-agent               International Conference on Learning Representa-
+ collaboration and exploring emergent behaviors. In             tions.
+ The Twelfth International Conference on Learning
+ Representations.                                             Sayash Kapoor, Benedikt Stroebl, Peter Kirgis, Nitya
+                                                                Nadgir, Zachary S Siegel, Boyi Wei, Tianci Xue,
+OpenCompass Contributors. 2023. Opencompass:                    Ziru Chen, Felix Chen, Saiteja Utpala, Franck Nd-
+  A universal evaluation platform for foundation                zomga, Dheeraj Oruganty, Sophie Luskin, Kangheng
+  models.   https://github.com/open-compass/                    Liu, Botao Yu, Amit Arora, Dongyoon Hahm, Harsh
+  opencompass.                                                  Trivedi, Huan Sun, and 12 others. 2026. Holistic
+CrewAI. 2024. CrewAI.          https://github.com/              agent leaderboard: The missing infrastructure for AI
+  crewAIInc/crewAI.                                             agent evaluation. In The Fourteenth International
+                                                                Conference on Learning Representations.
+Romain Froger, Pierre Andrews, Matteo Bettini, Amar
+  Budhiraja, Ricardo Silveira Cabral, Virginie Do,            LangChain. 2024a. LangGraph. https://github.
+  Emilien Garreau, Jean-Baptiste Gaya, Hugo Lau-                com/langchain-ai/langgraph.
+  rençon, Maxime Lecanu, Kunal Malkan, Dheeraj
+  Mekala, Pierre Ménard, Gerard Moreno-Torres                 LangChain. 2024b. Langsmith: Llm application eval-
+  Bertran, Ulyana Piterbarg, Mikhail Plekhanov, Math-           uation and observability platform. https://docs.
+  ieu Rita, Andrey Rusakov, Vladislav Vorotilov, and            smith.langchain.com/.
+  5 others. 2025. Are: Scaling up agent environments
+  and evaluations. Preprint, arXiv:2509.17158.                LastMile AI. 2025. Mcp-eval: Lightweight eval
+                                                                framework for mcp servers. https://github.com/
+Galileo (Rungalileo). 2025. Galileo-python: Python              lastmile-ai/mcp-eval. Built on mcp-agent.
+  client library for the galileo platform. https://
+  github.com/rungalileo/galileo-python.
+                                                              Guohao Li, Hasan Abed Al Kader Hammoud, Hani
+Amr Gomaa, Ahmed Salem, and Sahar Abdelnabi. 2025.              Itani, Dmitrii Khizbullin, and Bernard Ghanem. 2023.
+  Converse: Benchmarking contextual safety in agent-            CAMEL: Communicative agents for “mind” explo-
+  to-agent conversations. Preprint, arXiv:2511.05359.           ration of large language model society. In Thirty-
+                                                                seventh Conference on Neural Information Process-
+Google. 2025. Agent Development Kit (ADK). https:               ing Systems.
+  //github.com/google/adk-python.       Accessed:
+  2026-02-07.                                                 Jerry Liu. 2022. LlamaIndex. Accessed: 2025-12-01.
+
+
+                                                          9
+Xiao Liu, Hao Yu, Hanchen Zhang, Yifan Xu, Xuanyu             Sanidhya Vijayvargiya, Aditya Bharat Soni, Xuhui
+  Lei, Hanyu Lai, Yu Gu, Hangliang Ding, Kaiwen                 Zhou, Zora Zhiruo Wang, Nouha Dziri, Graham Neu-
+  Men, Kejuan Yang, Shudan Zhang, Xiang Deng, Ao-               big, and Maarten Sap. 2026. Openagentsafety: A
+  han Zeng, Zhengxiao Du, Chenhui Zhang, Sheng                  comprehensive framework for evaluating real-world
+  Shen, Tianjun Zhang, Yu Su, Huan Sun, and 3 others.           AI agent safety. In The Fourteenth International
+  2024. Agentbench: Evaluating LLMs as agents. In               Conference on Learning Representations.
+  The Twelfth International Conference on Learning
+  Representations.                                            Rajan Vivek, Kawin Ethayarajh, Diyi Yang, and Douwe
+                                                                Kiela. 2024. Anchor points: Benchmarking models
+Frederic M. Lord. 1952. A Theory of Test Scores. Psy-           with much fewer examples. In Proceedings of the
+  chometric Monograph No. 7. Psychometric Society.              18th Conference of the European Chapter of the As-
+                                                                sociation for Computational Linguistics (Volume 1:
+Frederic M. Lord, Melvin R. Novick, and Allan Birn-             Long Papers), pages 1576–1601, St. Julian’s, Malta.
+  baum. 1968. Statistical Theories of Mental Test               Association for Computational Linguistics.
+  Scores. Addison-Wesley, Reading, MA.
+                                                              Qingyun Wu, Gagan Bansal, Jieyu Zhang, Yiran Wu,
+Grégoire Mialon, Clémentine Fourrier, Thomas Wolf,              Beibin Li, Erkang Zhu, Li Jiang, Xiaoyun Zhang,
+  Yann LeCun, and Thomas Scialom. 2024. GAIA: a                 Shaokun Zhang, Jiale Liu, Ahmed Hassan Awadallah,
+  benchmark for general AI assistants. In The Twelfth           Ryen W White, Doug Burger, and Chi Wang. 2024.
+  International Conference on Learning Representa-              Autogen: Enabling next-gen LLM applications via
+  tions.                                                        multi-agent conversations. In First Conference on
+                                                                Language Modeling.
+Mozilla AI. 2025. any-agent. https://github.com/
+ mozilla-ai/any-agent.                                        Zhiheng Xi, Yiwen Ding, Wenxiang Chen, Boyang
+OpenAI. 2025. OpenAI Agents SDK. https://                       Hong, Honglin Guo, Junzhe Wang, Dingwen Yang,
+  github.com/openai/openai-agents-python.                       Chenyang Liao, Xin Guo, Wei He, Songyang Gao,
+                                                                Lu Chen, Rui Zheng, Yicheng Zou, Tao Gui,
+Felipe Maia Polo, Lucas Weber, Leshem Choshen,                  Qi Zhang, Xipeng Qiu, Xuanjing Huang, Zuxuan
+  Yuekai Sun, Gongjun Xu, and Mikhail Yurochkin.                Wu, and Yu-Gang Jiang. 2024. Agentgym: Evolv-
+  2024. tinybenchmarks: evaluating LLMs with fewer              ing large language model-based agents across diverse
+  examples. In Forty-first International Conference on          environments. Preprint, arXiv:2406.04151.
+  Machine Learning.
+                                                              Frank F. Xu, Yufan Song, Boxuan Li, Yuxuan Tang,
+Georg Rasch. 1960. Probabilistic Models for Some                Kritanjali Jain, Mengxue Bao, Zora Z. Wang, Xuhui
+  Intelligence and Attainment Tests. Danmarks Paeda-            Zhou, Zhitong Guo, Murong Cao, Mingyang Yang,
+  gogiske Institut, Copenhagen.                                 Hao Yang Lu, Amaad Martin, Zhe Su, Leander
+                                                                Maben, Raj Mehta, Wayne Chi, Lawrence Jang,
+Aymeric Roucher, Albert Villanova del Moral, Thomas             Yiqing Xie, and 2 others. 2024. Theagentcom-
+  Wolf, Leandro von Werra, and Erik Kaunismäki.                 pany: Benchmarking llm agents on consequential
+  2025. ‘smolagents‘: a smol library to build                   real world tasks. Preprint, arXiv:2412.14161.
+  great agentic systems.      https://github.com/
+  huggingface/smolagents. Accessed: 2025-12-01.               Matei A. Zaharia, Andrew Chen, Aaron Davidson, Ali
+                                                               Ghodsi, Sue Ann Hong, Andy Konwinski, Siddharth
+Alexander Rubinstein, Benjamin Raible, Martin Gubri,           Murching, Tomas Nykodym, Paul Ogilvie, Mani
+  and Seong Joon Oh. 2026. DISCO: Diversifying                 Parkhe, Fen Xie, and Corey Zumar. 2018. Acceler-
+  sample condensation for accelerating model evalua-           ating the Machine Learning Lifecycle with MLflow.
+  tion. In The Fourteenth International Conference on          IEEE Data Eng. Bull., 41:39–45.
+  Learning Representations.
+                                                              Yifei Zhou, Song Jiang, Yuandong Tian, Jason We-
+Pydantic Services. 2024. PydanticAI: GenAI Agent                ston, Sergey Levine, Sainbayar Sukhbaatar, and
+  Framework.       https://github.com/pydantic/                 Xian Li. 2025. Sweet-rl: Training multi-turn llm
+  pydantic-ai.                                                  agents on collaborative reasoning tasks. Preprint,
+                                                                arXiv:2503.15478.
+Raphael Shu, Nilaksh Das, Michelle Yuan, Monica
+  Sunkara, and Yi Zhang. 2024. Towards effec-                 Kunlun Zhu, Hongyi Du, Zhaochen Hong, Xiaocheng
+  tive genai multi-agent collaboration: Design and              Yang, Shuyi Guo, Zhe Wang, Zhenhailong Wang,
+  evaluation for enterprise applications. Preprint,             Cheng Qian, Robert Tang, Heng Ji, and Jiaxuan You.
+  arXiv:2412.05449.                                             2025. MultiAgentBench : Evaluating the collabora-
+                                                                tion and competition of LLM agents. In Proceedings
+TruEra. 2020. Trulens: Evaluation and tracking for llm          of the 63rd Annual Meeting of the Association for
+  experiments and ai agents. https://github.com/                Computational Linguistics (Volume 1: Long Papers),
+  truera/trulens.                                               pages 8580–8622, Vienna, Austria. Association for
+UK AI Safety Institute. 2024. Inspect ai. https:                Computational Linguistics.
+ //github.com/UKGovernmentBEIS/inspect_ai.
+ Accessed: 2025-12-01.
+
+
+                                                         10
+Appendix                                                                          tured execution flow with overridable hooks:
+                                                                                   setup_environment() , setup_agents() ,
+A     Benchmarks and Frameworks
+                                                                                   setup_user() ,      setup_evaluators() ,
+Tables 4 and 5 report the list of supported bench-                                 run_agents() , and evaluate() . Users
+marks and agentic frameworks.                                                     override specific hooks while inheriting
+                                                                                  orchestration logic.
+ Benchmark                            Type    Domain
+ GAIA-2 (Mialon et al., 2024)         SA      Capability
+                                                                                • Callback hook system.         Abstract call-
+ τ 2 -bench (Barres et al., 2025)     SA      Capability                          back base classes ( BenchmarkCallback ,
+ MMLU (Hendrycks et al., 2021)        SA      Capability
+ MACS (Shu et al., 2024)              MA      Collaboration                        EnvironmentCallback , AgentCallback )
+ MultiAgentBench (Zhu et al., 2025)   MA      Coordination & Competition          provide lifecycle hooks at benchmark, envi-
+ C ON V ERSE (Gomaa et al., 2025)     MA      Safety & Security
+ C OL B ENCH (Zhou et al., 2025)      MA      Capability                          ronment, and agent levels; built-in callbacks
+                                                                                  include progress bars (tqdm, Rich) and result
+Table 4: Currently supported benchmarks. SA=Single-                               logging.
+Agent, MA=Multi-agent.
+                                                                                • Environment abstraction.            Abstract
+                                                                                   Environment base class for custom task envi-
+ Framework                                   Architecture                         ronments; users implement setup_state()
+ smolagents (Roucher et al., 2025)           Code-based tool calling              and create_tools() to define environment
+ LangGraph (LangChain, 2024a)                Stateful graph execution             initialisation and available tools.
+ LlamaIndex (Liu, 2022)                      Async-first workflows
+ CAMEL (Li et al., 2023)                     Role-playing multi-agent           • Standardised         two-stage      evaluation.
+                                                                                  Abstract Evaluator base class with
+Table 5: Currently supported agentic frameworks. Each                              filter_traces() to extract relevant data
+framework is integrated via a thin adapter that exposes a                         (e.g., specific tool calls) before __call__()
+unified interface for execution, message history, tracing,                        computes metrics; this separation enables
+and configuration capture.
+                                                                                  reusable evaluation logic across different trace
+                                                                                  sources.
+B     Key Features                                                              • Custom execution loop. The run_agents()
+                                                                                  method can be overridden to implement cus-
+  • Agent framework-agnostic. Permissive ab-
+                                                                                  tom turn-taking strategies: user-initiated (user
+    stract base class with documentation for cus-
+                                                                                  speaks first), model-initiated (agent speaks
+    tom adapters, plus pre-built adapters for
+                                                                                  first), alternating, or fully custom interaction
+    smolagents, LangGraph, and LlamaIndex.
+                                                                                  patterns. Default implementation supports con-
+    Adding a new framework requires implement-
+                                                                                  figurable multi-turn agent-user exchanges.
+    ing only two methods: _run_agent() and
+     get_messages() .                                                           • Multi-turn user simulation. Abstract User
+                                                                                  base class for custom user simulation logic,
+  • Multi-agent native. Built for multi-agent sys-
+                                                                                  plus pre-built UserLLMSimulator for LLM-
+    tems from the ground up with automatic col-
+                                                                                  based response generation. Configurable max-
+    lection of per-agent message histories, main-
+                                                                                  imum turns, stop tokens for early termination,
+    taining independent conversation contexts that
+                                                                                  and automatic conversation history tracking.
+    respect partial observability. Each agent sees
+                                                                                  Supports both message-based turn-taking (stan-
+    only its own messages, not other agents’ inter-
+                                                                                  dard chatbot interaction) and tool-based inter-
+    nal states.
+                                                                                  action for frameworks that model user queries
+  • Comprehensive tracing. Context-specific                                       as tool calls (e.g., ask_user ).
+    trace collection via TraceableMixin : agents
+                                                                                • Parallel execution. The num_workers pa-
+    log steps and message histories; models log in-
+                                                                                  rameter enables concurrent task execution via
+    put/output pairs, token usage, and latency; tools
+                                                                                  thread pool. All library components are thread-
+    log invocations with inputs, outputs, and status;
+                                                                                  safe: per-thread component registries prevent
+    simulators log generation attempts and retries.
+                                                                                  cross-contamination, locks serialise callback
+    Each component type captures what matters for
+                                                                                  invocations and report aggregation, and trace
+    its role.
+                                                                                  collection is designed for concurrent access.
+  • Benchmark lifecycle management. The
+                                                                                • Structured error attribution. Exception hi-
+    Benchmark base class orchestrates a struc-
+
+                                                                           11
+ erarchy distinguishes AgentError (agent vio-            • Robust task execution with timeout handling
+ lated contract, i.e., counts against score) from          and repetition. The n_task_repeats param-
+  EnvironmentError and UserError (infras-                  eter runs each task multiple times for statistical
+ tructure failures, i.e., excluded from scoring).          robustness. Reports include repeat_idx for
+ This prevents penalising agents for benchmark             aggregation across runs. Per-task deadlines via
+ bugs. Developers can raise AgentError with                 TaskContext with cooperative checkpoint-
+ an optional suggestion field; custom agent                based timeout (not forced thread termination).
+ implementations can catch these errors and use            Configurable timeout actions: skip, retry, or
+ the suggestion to retry with corrected inputs.            extend.
+• Component registry. Thread-safe registration           • Structured task protocol. Each Task carries
+  of agents, models, tools, and simulators via             metadata including timeout configuration, retry
+   ComponentRegistry . Components returned                 policies, priority levels, and custom tags for
+  from setup methods are automatically regis-              fine-grained control over execution behaviour.
+  tered; additional components can be manually
+  registered. Enables systematic trace and config
+  collection across all registered components.
+• Unified model interface. Abstract base class
+   ModelAdapter for custom LLM providers,
+  plus pre-built adapters for OpenAI, Google,
+  Anthropic, and HuggingFace with automatic
+  token tracking and tool-calling support.
+• LLM simulators. Abstract simulator base
+  classes with pre-built ToolLLMSimulator and
+   UserLLMSimulator that generate realistic
+  tool responses and user turns when real APIs
+  are unavailable, enabling offline development
+  and testing.
+• Configuration snapshotting.                The
+   ConfigurableMixin can be added to
+  any user-defined class to participate in
+  configuration capture for reproducibility;
+  built-in collection includes Git state, system
+  information, and package versions.
+• Pluggable logging backends. Abstract call-
+  back base class enables routing results and
+  traces to any destination; JSON file logging is
+  pre-built, with documentation for WandB and
+  Langfuse integration.
+• Debugging tools. Configurable error han-
+  dling lets benchmarks continue on failures
+  ( fail_on_task_error=False ) for batch runs
+  or fail fast ( fail_on_task_error=True ) for
+  interactive debugging. Failed tasks are tracked
+  automatically and can be retried selectively.
+• Adaptive testing. Abstract TaskQueue base
+  class enables custom task selection strategies
+  such as Item-Response Theory-based testing
+  or DISCO (Rubinstein et al., 2026) to reduce
+  evaluation costs; priority-based and sequential
+  queues are pre-implemented.
+
+
+                                                    12
+

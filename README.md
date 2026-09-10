@@ -11,7 +11,7 @@ The library includes **49 registered methods**, a provider-neutral async runtime
 [Economic games research](docs/ECONOMIC_GAMES_RESEARCH.md) maps classical and modern game theory to proposed hypergraph-agent mechanisms, strategies, and evaluation methods. Its [downloaded source archive](sources/economic-games/README.md) includes papers, blog posts, pinned repository checkouts, and 26 implementation candidates; these extensions are research proposals, not registered methods yet.
 
 
-**On this page:** [Goals](#goals-and-motivation) · [Feature tour](#feature-tour) · [Get started](#get-started) · [Knowledge management and context graphs](#knowledge-management-and-context-graphs) · [Economic games: when to use them](#economic-games-when-to-use-them) · [Extension points](#extending-swarmkit) · [Relevance](#why-it-is-relevant) · [Scope](#scope-and-research-fidelity) · [Development](#development-and-project-layout)
+**On this page:** [Goals](#goals-and-motivation) · [Feature tour](#feature-tour) · [Get started](#get-started) · [Knowledge management and context graphs](#knowledge-management-and-context-graphs) · [Benchmarks and evaluations](#swarm-benchmarks-and-evaluations) · [Economic games: when to use them](#economic-games-when-to-use-them) · [Extension points](#extending-swarmkit) · [Relevance](#why-it-is-relevant) · [Scope](#scope-and-research-fidelity) · [Development](#development-and-project-layout)
 
 ## Goals and motivation
 
@@ -492,6 +492,29 @@ The W3C PROV family supplies a reference vocabulary for provenance across entiti
 
 The communication graph and the context graph serve different purposes: the first controls which peers exchange information during execution; the second preserves relationships among evidence, decisions, and outcomes for later inspection and reuse. An application can use the latter to retrieve relevant precedents for a future swarm task. Retaining a stated rationale documents what an agent reported; external observations and checks are still needed to establish what happened and whether the decision worked.
 
+## Swarm benchmarks and evaluations
+
+Use the [benchmark research review](docs/BENCHMARK_RESEARCH.md) and [evaluation suite specification](docs/BENCHMARK_SUITE.md) when designing experiments to determine **whether a collective mechanism improves useful outcomes at a known cost**. The review covers current multi-agent benchmarks, realistic workflow and coding tasks, decentralized coordination, strategic interaction, and continual learning. It includes code-level grading limitations that matter when interpreting published results.
+
+The suite specifies eight primary tracks:
+
+| Use this track when testing… | What must be verified |
+|---|---|
+| Distributed evidence and computation | Correct integration of information held by different agents |
+| Joint artifact construction | Component changes work together in the final artifact |
+| Heterogeneous tool workflows | Delegation across roles produces the required final system state |
+| Dynamic execution and recovery | Agents handle changing events, failed tools and incomplete work |
+| Decentralized coordination and contention | Shared resources and simultaneous contributions produce feasible progress |
+| Economic and strategic interaction | Allocations, delivered work and payoffs remain valid across partner strategies |
+| Collective exploration and discovery | Shared experiments produce independently verified findings |
+| Persistent learning and transfer | Reused knowledge improves held-out tasks and adapts to change |
+
+Each specification defines a scenario, scaling axes, verifier, controls, failure modes and integration path. Compare task success, resource use and robustness separately. A no-message condition still permits indirect communication if agents share files or environment state; a full-information single-agent condition changes access and must be labeled accordingly. Puzzles are optional microdiagnostics rather than the organizing principle of the suite.
+
+**Status:** this is completed research and a proposed evaluation specification. Runnable environment adapters and generators are not implemented or registered. Existing utilities in [`swarmkit.evaluation`](src/swarmkit/evaluation.py) remain available for paired controls, evidence recovery and transfer measurements.
+
+The [source archive](sources/benchmarks/README.md) contains 16 paper downloads, seven pinned Git checkouts, a [repository audit](sources/benchmarks/repository-audit.md), and [machine-readable specifications](sources/benchmarks/suite-spec.json). Read the research review for distinctions between published claims, inspected code, and our proposed adaptations.
+
 ## Economic games: when to use them
 
 Use economic-game models when agents' choices depend on **scarce resources, different objectives, private information, or the behavior of other agents**. They let you study who should do a task, what information an agent chooses to share, how a team divides rewards, and whether a strategy remains effective against unfamiliar partners.
@@ -591,6 +614,7 @@ Tests use synthetic fixtures and fake provider transports; API credentials are n
 | `docs/` | Method catalog, API contracts, and application documentation |
 | `sources/`, `repositories/` | Research inventory and pinned upstream Git submodules |
 | `sources/economic-games/` | Economic-game papers, posts, provenance records, candidate catalog, and separate Git-ignored research checkouts |
+| `sources/benchmarks/` | Benchmark research, source provenance, repository audits and eight evaluation specifications |
 
 Research submodules are optional for library use. To fetch them for comparison:
 
@@ -603,6 +627,13 @@ The economic-games checkouts use their own collector rather than the submodule c
 ```bash
 python3 scripts/collect_economic_games.py
 python3 scripts/collect_economic_games.py --verify
+```
+
+The benchmark research archive uses the same collection and verification workflow:
+
+```bash
+python3 scripts/collect_benchmarks.py
+python3 scripts/collect_benchmarks.py --verify
 ```
 
 New project code is [MIT-licensed](LICENSE). Research documents and upstream projects retain their respective rights; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

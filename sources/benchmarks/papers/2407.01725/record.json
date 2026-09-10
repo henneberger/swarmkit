@@ -1,0 +1,119 @@
+{
+  "kind": "papers",
+  "id": "2407.01725",
+  "title": "DiscoveryBench: Towards Data-Driven Discovery with Large Language Models",
+  "page_url": "https://arxiv.org/abs/2407.01725",
+  "pdf_url": "https://arxiv.org/pdf/2407.01725",
+  "retrieved_at": "2026-09-10T23:04:21.872772+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2407.01725",
+      "resolved_url": "https://arxiv.org/abs/2407.01725",
+      "path": "sources/benchmarks/papers/2407.01725/page.html",
+      "bytes": 43573,
+      "sha256": "c60a12e9857d3ecc90003af69c86b44b03a3fa118228e459ade52171e462f6b1"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2407.01725",
+      "resolved_url": "https://arxiv.org/pdf/2407.01725",
+      "path": "sources/benchmarks/papers/2407.01725/paper.pdf",
+      "bytes": 1505228,
+      "sha256": "f3968dfa91b28f60e5956ce439e2bd39050148a866f3ef86850ba458fc437a3f"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2407.01725: DiscoveryBench: Towards Data-Driven Discovery with Large Language Models"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "DiscoveryBench: Towards Data-Driven Discovery with Large Language Models"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2407.01725v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Can the rapid advances in code generation, function calling, and data analysis using large language models (LLMs) help automate the search and verification of hypotheses purely from a set of provided datasets? To evaluate this question, we present DiscoveryBench, the first comprehensive benchmark that formalizes the multi-step process of data-driven discovery. The benchmark is designed to systematically assess current model capabilities in discovery tasks and provide a useful resource for improving them. Our benchmark contains 264 tasks collected across 6 diverse domains, such as sociology and engineering, by manually deriving discovery workflows from published papers to approximate the real-world challenges faced by researchers, where each task is defined by a dataset, its metadata, and a discovery goal in natural language. We additionally provide 903 synthetic tasks to conduct controlled evaluations across task complexity. Furthermore, our structured formalism of data-driven discovery enables a facet-based evaluation that provides useful insights into different failure modes. We evaluate several popular LLM-based reasoning frameworks using both open and closed LLMs as baselines on DiscoveryBench and find that even the best system scores only 25%. Our benchmark, thus, illustrates the challenges in autonomous data-driven discovery and serves as a valuable resource for the community to make progress."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "DiscoveryBench: Towards Data-Driven Discovery with Large Language Models"
+    ],
+    "twitter:description": [
+      "Can the rapid advances in code generation, function calling, and data analysis using large language models (LLMs) help automate the search and verification of hypotheses purely from a set of..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "DiscoveryBench: Towards Data-Driven Discovery with Large Language Models"
+    ],
+    "citation_author": [
+      "Majumder, Bodhisattwa Prasad",
+      "Surana, Harshit",
+      "Agarwal, Dhruv",
+      "Mishra, Bhavana Dalvi",
+      "Meena, Abhijeetsingh",
+      "Prakhar, Aryan",
+      "Vora, Tirth",
+      "Khot, Tushar",
+      "Sabharwal, Ashish",
+      "Clark, Peter"
+    ],
+    "citation_date": [
+      "2024/07/01"
+    ],
+    "citation_online_date": [
+      "2024/07/01"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2407.01725"
+    ],
+    "citation_arxiv_id": [
+      "2407.01725"
+    ],
+    "citation_abstract": [
+      "Can the rapid advances in code generation, function calling, and data analysis using large language models (LLMs) help automate the search and verification of hypotheses purely from a set of provided datasets? To evaluate this question, we present DiscoveryBench, the first comprehensive benchmark that formalizes the multi-step process of data-driven discovery. The benchmark is designed to systematically assess current model capabilities in discovery tasks and provide a useful resource for improving them. Our benchmark contains 264 tasks collected across 6 diverse domains, such as sociology and engineering, by manually deriving discovery workflows from published papers to approximate the real-world challenges faced by researchers, where each task is defined by a dataset, its metadata, and a discovery goal in natural language. We additionally provide 903 synthetic tasks to conduct controlled evaluations across task complexity. Furthermore, our structured formalism of data-driven discovery enables a facet-based evaluation that provides useful insights into different failure modes. We evaluate several popular LLM-based reasoning frameworks using both open and closed LLMs as baselines on DiscoveryBench and find that even the best system scores only 25%. Our benchmark, thus, illustrates the challenges in autonomous data-driven discovery and serves as a valuable resource for the community to make progress."
+    ]
+  },
+  "extracted_text_characters": 112968,
+  "text_searchable": true
+}
