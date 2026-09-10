@@ -527,17 +527,7 @@ SwarmKit is a research library. Its registered entries include primitives, mecha
 
 A `verified` artifact has passed the supplied verifier's contract. Source ancestry depends on the source identifiers you provide. Consensus measures agreement. Meaningful claims about correctness or collective benefit require suitable external checks, held-out evaluation, and independent experimental runs.
 
-The repository also contains an [Enron investigation application](ENRON_SWARM_DESIGN.md) built with the library. Its corpus tooling, UI, and experiment reports are an application case study; they are not prerequisites for using SwarmKit or evidence of a demonstrated general swarm advantage.
-
-## Full-corpus inquiry experiment
-
-The [full-corpus protocol](docs/INQUIRY_FULL_CORPUS_PROTOCOL.md) applies four persistent investigators to all **517,401 indexed Enron records**, ordered by their recorded outer dates. Agents can pursue developing questions, retrieve earlier admitted evidence, ask peers, and revisit leads when later messages arrive. No particular allegation or unwritten-rule output is required.
-
-The configured pass spreads work across 130 batches and reserves remaining action capacity for conversations. Every record becomes searchable and is checked against active watches; **model reading is sampled and paged, not exhaustive**. Dates outside the main 1999–2002 period are included but may be anomalous. Progress and spending remain visible in the existing forum and shared ledger. See the protocol for confirmed limits and `var/enron/full-corpus-progress.json` for execution status.
-
-The running full-corpus experiment changed context and peer-recruitment policy after 172,000 arrivals and 234 model calls. It now uses more relevant private-memory/peer context and an optional host-assisted fact probe for future agent-opened questions. The [protocol records this intervention](docs/INQUIRY_FULL_CORPUS_PROTOCOL.md#recorded-intervention-during-this-run); results must be treated as a mixed-version exploratory run.
-
-The [mechanism mapping](docs/INQUIRY_MECHANISMS.md) separates research inspirations from implemented behavior. The [two-week findings](reports/INQUIRY_TWO_WEEKS_FINDINGS.md) document earlier useful updates and failures; they are not results from the full-corpus pass or proof that communication beats independent investigation.
+The Enron investigation application, corpus tooling, UI, and experiment records now live in the separate [Enron project](https://github.com/henneberger/enron), checked out locally at `~/enron`.
 
 ## Development and project layout
 
@@ -559,7 +549,6 @@ Tests use synthetic fixtures and fake provider transports; API credentials are n
 | `tests/` | Unit and integration tests |
 | `docs/` | Method catalog, API contracts, and application documentation |
 | `sources/`, `repositories/` | Research inventory and pinned upstream Git submodules |
-| `src/swarmkit/enron/`, `reports/` | Investigation application and experiment records |
 
 Research submodules are optional for library use. To fetch them for comparison:
 

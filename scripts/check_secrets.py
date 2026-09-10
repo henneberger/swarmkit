@@ -7,8 +7,8 @@ Only file names and detector names are printed, never matched secret text.
 """
 from __future__ import annotations
 
-import os
 import gzip
+import os
 import re
 import subprocess
 from pathlib import Path

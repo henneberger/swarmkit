@@ -4,7 +4,7 @@ A Python library for **agentic swarms, social agent populations, and collective 
 
 The library contains **49 registered methods**, including topology learning, evidence exchange, artifact inheritance, social conventions, gossip, trust, latent communication, and coordination-policy learning. Methods are composable implementations and explicitly labeled adaptations—not a claim to reproduce every paper's models, environments, or benchmark results.
 
-[Enron swarm project design](../ENRON_SWARM_DESIGN.md) · [Algorithm catalog](../docs/METHODS.md) · [API and composition](../docs/API.md) · [Research report](../SWARMS_REPORT.md) · [Source archive](../sources/catalog.json) · [Attribution](../THIRD_PARTY_NOTICES.md)
+[Algorithm catalog](../docs/METHODS.md) · [API and composition](../docs/API.md) · [Research report](../SWARMS_REPORT.md) · [Source archive](../sources/catalog.json) · [Attribution](../THIRD_PARTY_NOTICES.md)
 
 ## Install and run
 

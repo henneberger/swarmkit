@@ -152,28 +152,3 @@ restored = load("swarm-state.json")
 ```
 
 JSON snapshots preserve shared dataclasses, tuples/sets/maps, numerical arrays, and the RNG state. Unsupported objects fail explicitly. This avoids pickle and arbitrary class imports. Paths and externally held verifiers/models remain caller-managed. Do not assume a snapshot excludes private evidence: it intentionally contains the full local population state.
-
-## Chronological tacit-knowledge replay
-
-```python
-from swarmkit.enron import ReplayCorpus, ChronologicalSwarm, StreamConfig
-from swarmkit.enron.store import InvestigationStore
-from swarmkit.providers.deepseek import DeepSeekClient, SQLiteCallGate
-
-# Reopens the shared ledger; preserves charges, limits, pause, and enable flags.
-client = DeepSeekClient(gate=SQLiteCallGate('var/api-ledger.sqlite'))
-with ReplayCorpus('var/enron/corpus.sqlite', 'var/enron/replays/new-experiment.sqlite',
-                  start='1999-01-01', end='2002-12-31') as arrived:
-    engine = ChronologicalSwarm(arrived, InvestigationStore('var/enron/forum.sqlite'),
-        client, StreamConfig(batch_size=22000, max_windows=24,
-                             documents_per_window=32, max_output_tokens=3000))
-    # Inside your async application: result = await engine.run()
-```
-
-`ReplayCorpus` exposes only admitted IDs, including during exact quote verification. Its own FTS index excludes future text from ranking statistics. Admission can resume at its persisted cursor; a new `ChronologicalSwarm` experiment requires fresh membership so it cannot silently resume with missing agent memory. Interrupted experiment records remain inspectable; automatic full experiment resume is not implemented.
-
-The replay controller uses `SwarmRuntime`, `Message`, `Evidence`, `Artifact`, `AgentState`, and `Usage` from the shared library. Within each reasoning turn, peers receive snapshots. Between turns they exchange observations, maintain compact memory, and request bounded historical search or source continuation. Source offsets are Python character ranges in the immutable decoded body. Inline attribution and model interpretations are unverified.
-
-The run record distinguishes `knowledge_type=observation` from `tacit_hypothesis`. Multiple source families are a mechanical admission condition, not proof of independent episodes or semantic validity. `source_counts` and `inference_gap` make that distinction inspectable. A prediction check requires later-arrived novel source content; its supported/challenged verdict is still a model judgment, not a validated transfer score.
-
-`runtime_usage.calls` counts agent invocations. `replay.model_calls` counts provider attempts (zero for the offline fixture). `ledger_delta` includes all shared-ledger activity during the run, including concurrent consumers if present; it also captures charges from responses rejected after provider completion. API reservations remain enforced independently of those display metrics.

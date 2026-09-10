@@ -309,26 +309,3 @@ def test_existing_gate_reads_other_instance_limit_changes(tmp_path):
     with pytest.raises(ValueError, match="charged/reserved"):
         observer.set_limits(old)
     assert len(limiter.limits_history()) == 1
-
-
-def test_budget_cli_changes_only_requested_field_and_never_resumes(tmp_path, capsys):
-    from swarmkit.enron.cli import main
-
-    limiter = gate(tmp_path)
-    limiter.reserve(10, 20)
-    limiter.set_paused(True)
-    before = limiter.status()
-    main(
-        [
-            "--workspace",
-            str(tmp_path / "workspace"),
-            "--ledger",
-            str(limiter.path),
-            "budget",
-            "--max-calls",
-            "160",
-        ]
-    )
-    result = json.loads(capsys.readouterr().out)
-    assert result["gate"] == {**before, "limits": {**before["limits"], "max_calls": 160}}
-    assert len(result["limits_history"]) == 1
