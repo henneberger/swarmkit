@@ -1,0 +1,77 @@
+{
+  "kind": "posts",
+  "id": "deepmind-barter",
+  "title": "Emergent Bartering Behaviour in Multi-Agent Reinforcement Learning",
+  "page_url": "https://deepmind.google/blog/emergent-bartering-behaviour-in-multi-agent-reinforcement-learning/",
+  "retrieved_at": "2026-09-10T22:39:44.760567+00:00",
+  "artifacts": [
+    {
+      "url": "https://deepmind.google/blog/emergent-bartering-behaviour-in-multi-agent-reinforcement-learning/",
+      "resolved_url": "https://deepmind.google/blog/emergent-bartering-behaviour-in-multi-agent-reinforcement-learning/",
+      "path": "sources/economic-games/posts/deepmind-barter/page.html",
+      "bytes": 142224,
+      "sha256": "9f00e3418dfecf736b076aa5645d5e1e06ce080a567f69145f83ce19082bf56c"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "": [
+      "",
+      "ie=edge"
+    ],
+    "viewport": [
+      "width=device-width,initial-scale=1.0"
+    ],
+    "description": [
+      "In our recent paper, we explore how populations of deep reinforcement learning (deep RL) agents can learn microeconomic behaviours, such as production, consumption, and trading of goods. We find that\u2026"
+    ],
+    "author": [
+      "Mike Johanson, Edward Hughes, Finbarr Timbers, Joel Leibo"
+    ],
+    "og:title": [
+      "Emergent Bartering Behaviour in Multi-Agent Reinforcement Learning"
+    ],
+    "og:description": [
+      "In our recent paper, we explore how populations of deep reinforcement learning (deep RL) agents can learn microeconomic behaviours, such as production, consumption, and trading of goods. We find that artificial agents learn to make economically rational decisions about production, consumption, and prices, and react appropriately to supply and demand changes."
+    ],
+    "og:image": [
+      "https://lh3.googleusercontent.com/zC7H0heD4IBjHjI3_hd1vFVKrP4Jg7hY6RSXCViM1xhpZfmIdxZ5xQDxJchD574Fqr7JFVAZ9c1LMpoKGhsN9lxoEMPZsy0GYRNWOFwDqRlr4J5x6A=w1200-h630-n-nu-rw"
+    ],
+    "og:site_name": [
+      "Google DeepMind"
+    ],
+    "og:url": [
+      "https://deepmind.google/blog/emergent-bartering-behaviour-in-multi-agent-reinforcement-learning/"
+    ],
+    "og:type": [
+      "article"
+    ],
+    "article:author": [
+      "Mike Johanson, Edward Hughes, Finbarr Timbers, Joel Leibo"
+    ],
+    "article:published_time": [
+      "2022-05-16T00:00:00+00:00"
+    ],
+    "article:modified_time": [
+      "2026-07-07T08:54:03.823870+00:00"
+    ],
+    "article:section": [
+      "Research"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Emergent Bartering Behaviour in Multi-Agent Reinforcement Learning"
+    ],
+    "twitter:image": [
+      "https://lh3.googleusercontent.com/zC7H0heD4IBjHjI3_hd1vFVKrP4Jg7hY6RSXCViM1xhpZfmIdxZ5xQDxJchD574Fqr7JFVAZ9c1LMpoKGhsN9lxoEMPZsy0GYRNWOFwDqRlr4J5x6A=w1200-h630-n-nu-rw"
+    ],
+    "twitter:description": [
+      "In our recent paper, we explore how populations of deep reinforcement learning (deep RL) agents can learn microeconomic behaviours, such as production, consumption, and trading of goods. We find that artificial agents learn to make economically rational decisions about production, consumption, and prices, and react appropriately to supply and demand changes."
+    ],
+    "twitter:site": [
+      "@GoogleDeepMind"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "kind": "papers",
+  "id": "hanson-market-scoring",
+  "title": "Logarithmic Market Scoring Rules for Modular Combinatorial Information Aggregation",
+  "topic": "prediction markets",
+  "page_url": null,
+  "pdf_url": "https://hanson.gmu.edu/mktscore.pdf",
+  "retrieved_at": "2026-09-10T22:39:43.457528+00:00",
+  "artifacts": [
+    {
+      "url": "https://hanson.gmu.edu/mktscore.pdf",
+      "resolved_url": "https://mason.gmu.edu/~rhanson/mktscore.pdf",
+      "path": "sources/economic-games/papers/hanson-market-scoring/paper.pdf",
+      "bytes": 152260,
+      "sha256": "fb1520ff080adaf8deff74d6789ca8d0b2d78a6979add1731468c0d1ceeb47b9"
+    }
+  ],
+  "status": "ok",
+  "extracted_text_characters": 38946,
+  "text_searchable": true
+}

@@ -1,0 +1,38 @@
+{
+  "kind": "repositories",
+  "id": "google-deepmind__meltingpot",
+  "title": "google-deepmind/meltingpot",
+  "url": "https://github.com/google-deepmind/meltingpot",
+  "topic": "social dilemmas and cross play",
+  "retrieved_at": "2026-09-10T22:40:00.542814+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/google-deepmind/meltingpot/blob/817f8c1974863a91909c04c7a69dd33993199ec6/LICENSE",
+      "resolved_url": "https://github.com/google-deepmind/meltingpot/blob/817f8c1974863a91909c04c7a69dd33993199ec6/LICENSE",
+      "path": "sources/economic-games/repositories/google-deepmind__meltingpot/LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "url": "https://github.com/google-deepmind/meltingpot/blob/817f8c1974863a91909c04c7a69dd33993199ec6/README.md",
+      "resolved_url": "https://github.com/google-deepmind/meltingpot/blob/817f8c1974863a91909c04c7a69dd33993199ec6/README.md",
+      "path": "sources/economic-games/repositories/google-deepmind__meltingpot/README.md",
+      "bytes": 6973,
+      "sha256": "8ebf8c19383c274823f617f48c74f88d786ff356b15db0704087a4e884d529ae"
+    }
+  ],
+  "status": "ok",
+  "commit": "817f8c1974863a91909c04c7a69dd33993199ec6",
+  "commit_date": "2026-09-10T10:24:09-07:00",
+  "checkout": "sources/economic-games/repositories/google-deepmind__meltingpot/checkout",
+  "experiments_reproduced": false,
+  "license_files": [
+    "LICENSE"
+  ],
+  "audit": {
+    "anchor": "meltingpot/configs/substrates/__init__.py",
+    "finding": "Substrate registry located; full environment stack is separate from SwarmKit.",
+    "proposed_use": "Social-game evaluation reference",
+    "review_level": "selected code or README; not full audit"
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "kind": "papers",
+  "id": "1908.09453",
+  "title": "OpenSpiel: A Framework for Reinforcement Learning in Games",
+  "topic": "game interfaces and solvers",
+  "page_url": "https://arxiv.org/abs/1908.09453",
+  "pdf_url": "https://arxiv.org/pdf/1908.09453",
+  "retrieved_at": "2026-09-10T22:39:39.887885+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/1908.09453",
+      "resolved_url": "https://arxiv.org/abs/1908.09453",
+      "path": "sources/economic-games/papers/1908.09453/page.html",
+      "bytes": 46676,
+      "sha256": "5a037b8db297d8bbe3dc71a4dd6ea3b0d114862199d0bfb62abed976200997a5"
+    },
+    {
+      "url": "https://arxiv.org/pdf/1908.09453",
+      "resolved_url": "https://arxiv.org/pdf/1908.09453",
+      "path": "sources/economic-games/papers/1908.09453/paper.pdf",
+      "bytes": 5003395,
+      "sha256": "503801fde0d598bd22c092e102b029878af857903da6688ac5861393c2428218"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 1908.09453: OpenSpiel: A Framework for Reinforcement Learning in Games"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "OpenSpiel: A Framework for Reinforcement Learning in Games"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/1908.09453v6"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "OpenSpiel is a collection of environments and algorithms for research in general reinforcement learning and search/planning in games. OpenSpiel supports n-player (single- and multi- agent) zero-sum, cooperative and general-sum, one-shot and sequential, strictly turn-taking and simultaneous-move, perfect and imperfect information games, as well as traditional multiagent environments such as (partially- and fully- observable) grid worlds and social dilemmas. OpenSpiel also includes tools to analyze learning dynamics and other common evaluation metrics. This document serves both as an overview of the code base and an introduction to the terminology, core concepts, and algorithms across the fields of reinforcement learning, computational game theory, and search."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "OpenSpiel: A Framework for Reinforcement Learning in Games"
+    ],
+    "twitter:description": [
+      "OpenSpiel is a collection of environments and algorithms for research in general reinforcement learning and search/planning in games. OpenSpiel supports n-player (single- and multi- agent)..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "OpenSpiel: A Framework for Reinforcement Learning in Games"
+    ],
+    "citation_author": [
+      "Lanctot, Marc",
+      "Lockhart, Edward",
+      "Lespiau, Jean-Baptiste",
+      "Zambaldi, Vinicius",
+      "Upadhyay, Satyaki",
+      "P\u00e9rolat, Julien",
+      "Srinivasan, Sriram",
+      "Timbers, Finbarr",
+      "Tuyls, Karl",
+      "Omidshafiei, Shayegan",
+      "Hennes, Daniel",
+      "Morrill, Dustin",
+      "Muller, Paul",
+      "Ewalds, Timo",
+      "Faulkner, Ryan",
+      "Kram\u00e1r, J\u00e1nos",
+      "De Vylder, Bart",
+      "Saeta, Brennan",
+      "Bradbury, James",
+      "Ding, David",
+      "Borgeaud, Sebastian",
+      "Lai, Matthew",
+      "Schrittwieser, Julian",
+      "Anthony, Thomas",
+      "Hughes, Edward",
+      "Danihelka, Ivo",
+      "Ryan-Davis, Jonah"
+    ],
+    "citation_date": [
+      "2019/08/26"
+    ],
+    "citation_online_date": [
+      "2020/09/26"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/1908.09453"
+    ],
+    "citation_arxiv_id": [
+      "1908.09453"
+    ],
+    "citation_abstract": [
+      "OpenSpiel is a collection of environments and algorithms for research in general reinforcement learning and search/planning in games. OpenSpiel supports n-player (single- and multi- agent) zero-sum, cooperative and general-sum, one-shot and sequential, strictly turn-taking and simultaneous-move, perfect and imperfect information games, as well as traditional multiagent environments such as (partially- and fully- observable) grid worlds and social dilemmas. OpenSpiel also includes tools to analyze learning dynamics and other common evaluation metrics. This document serves both as an overview of the code base and an introduction to the terminology, core concepts, and algorithms across the fields of reinforcement learning, computational game theory, and search."
+    ]
+  },
+  "extracted_text_characters": 104738,
+  "text_searchable": true
+}

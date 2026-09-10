@@ -1,0 +1,2112 @@
+                                                        Information Design with Large Language Models∗
+                                             Paul Dütting            Safwan Hossain†                   Tao Lin†                 Renato Paes Leme
+                                            Google Research          Harvard University             Harvard University            Google Research
+                                                  Sai Srivatsa Ravindranath                   Haifeng Xu                       Song Zuo
+                                                      Harvard University                  University of Chicago             Google Research
+arXiv:2509.25565v2 [cs.GT] 3 Mar 2026
+
+
+
+
+                                                                                            Abstract
+                                                    Information design is typically studied through the lens of Bayesian signaling, where sig-
+                                                nals shape beliefs purely based on their correlation with the true state of the world. However,
+                                                behavioral economics and psychology emphasize that human decision-making is more complex
+                                                and can depend on how information is framed. This paper formalizes a language-based no-
+                                                tion of framing and bridges this to the popular Bayesian-persuasion model. We model framing
+                                                as a possibly non-Bayesian, linguistic way to influence a receiver’s prior belief, while a signal-
+                                                ing/recommendation scheme can further refine this belief in the classic Bayesian way. A key
+                                                challenge in systematically optimizing in this framework is the vast space of possible framings
+                                                and the difficulty of predicting their effects on receivers. Based on growing evidence that Large
+                                                Language Models (LLMs) can effectively serve as proxies for human behavior, we formulate
+                                                a theoretical model based on access to a framing-to-belief mapping. This model then enables
+                                                us to precisely characterize when solely optimizing framing or jointly optimizing framing and
+                                                signaling is tractable. We substantiate our theoretical analysis with an empirical study that
+                                                leverages LLMs to optimize over the natural-language framing space using an iterative prompt
+                                                optimization method combined with analytical solvers for optimal signaling schemes.
+
+
+                                        1       Introduction
+                                        Information design is a core concept in microeconomics and decision theory that considers the
+                                        strategic communication of information from one party (i.e., sender ) to shape the decisions of
+                                        another (i.e., receiver ) [4]. Classical information design models, such as cheap talk [9] and Bayesian
+                                        persuasion [22], assume that the sender can choose and reveal some correlation between the relevant
+                                        states of the world and communicated information (signal ), allowing the decision-maker to update
+                                        their belief in a fully Bayesian manner. That is, the chosen quantitative correlations between states
+                                        and signals are all that is relevant in influencing beliefs in such theoretical models.
+                                            This purely Bayesian perspective, however, stands in contrast to established findings in behav-
+                                        ioral economics and psychology, which emphasize that human decision-making is more complex
+                                        and can depend on the framing of information. The landmark work of Tversky and Kahneman
+                                        [34] observes that humans, asked to choose between two options to combat the outbreak of a hy-
+                                        pothetical disease, decide differently depending on how the downstream effects of the two options
+                                            ∗
+                                             This work features both a theoretical framework, and empirical results. For the experiments, we use GPT-
+                                        5.2 [1] and Claude Sonnet 4 [3] for the LLM portions of the framework, and SciPy [36] for the analytical parts. All
+                                        experiments were conducted by the Harvard University group.
+                                           †
+                                             Authors listed alphabetically. Correspondence to shossain@g.harvard.edu or lintao@cuhk.edu.cn
+
+
+                                                                                                1
+are phrased (e.g., “30% change of saving 600 people” vs “70% chance that all people will die”). To
+explain this seemingly irrational behavior, they argue that raw information combines with societal
+norms to affect the decision-maker’s perception of “acts, outcomes, and contingencies”. Closer to
+our setting, there is ample evidence that “persuasion in the field” is much richer than the exist-
+ing information design models (see, e.g., the influential survey by DellaVigna and Gentzkow [11]),
+where (i) tangential information given before a recommendation (signal); (ii) text or phrasing used
+to support a recommendation; (iii) and even non-textual cues such as color, background images, or
+fonts, all impact the effectiveness of persuasive communication.
+    To make this concrete and outline a running example, consider an advertising scenario where a
+clothing brand designs the slogan for a new line of products to target a group of consumers (e.g.,
+outdoor enthusiasts or fashion forward youth). The slogan (framing) typically contains generic plat-
+itudes or information that applies to all products carried by the brand. Different slogans, which can
+emphasize different aspects of the brand or use specific phrasing, induce different perceptions. This
+mapping from slogans to perception is consumer-specific, possibly non-Bayesian and importantly,
+influenced by a myriad of factors that the sender cannot influence. Alongside designing a slogan
+(which is common for all products in this line), the clothing brand can offer different discounts for
+different products. We view discounts as state-dependent signals because a consumer can observe
+using historical trends how strongly a large discount correlates with product quality or style, and
+update their belief about a product accordingly. This correlation between discounts and product
+features is directly determined by the brand. From the clothing brand’s perspective then, it may be
+free to optimize over both the slogan (framing) and the discounting strategy (signaling) to better
+persuade its target demographic.
+    Systematically reasoning about and optimizing over framing is generally challenging. First,
+the space of all framings to choose from is a vast, primarily linguistic space. Second, the effect
+of framing on a receiver is personalized and difficult to characterize rigorously. Fortunately, the
+advent of Large Language Models (LLMs) offers a new approach to addressing these twin challenges.
+LLMs are adept at understanding the structure of natural language. Furthermore, a growing line
+of work in economics (e.g., [21, 6, 23, 12, 27]) shows that LLMs can be used to simulate human
+behavior on a host of problems, or even tuned to be agents that make decisions on behalf of humans
+[18, 33]. Thus, it it timely to initiate a formal exploration of these challenges within the context
+of information design. We propose a theoretical model for information design with framing effect,
+analyze different variants of framing optimization problems under this model, and employ LLMs
+to explore and exploit framing effects in information design.
+
+1.1   Summary of Our Contributions
+Model and Problem Formulation: Our first contribution is a theoretical framework for in-
+formation design with framing effect (Section 2) that builds on the classical Bayesian Persuasion
+model [22]. There is a sender (she) and a receiver (he). A state of the world ω ∈ Ω is drawn from
+a distribution µ0 ∈ ∆(Ω), with the sender observes ω and the receiver not. The receiver has a set
+of actions A that affect the possibly misaligned utilities of the two players. He chooses an action
+a⋆ ∈ A to maximize his expected utility given his belief. The sender seeks to influence the receiver’s
+action by influencing his belief over the states.
+    We define a “framing” as a state-independent message c in some abstract space C (in the
+advertising example, this is the set of all possible slogans) that affects the receiver’s belief in a non-
+Bayesian way. The sender chooses a framing c ∈ C before observing the state, which induces/primes
+the receiver to form a subjective prior belief µc ∈ B ⊆ ∆(Ω) about the state, where B is the space
+
+                                                    2
+of inducible beliefs. The mapping ℓ : c 7→ µc from framing to induced belief is determined by
+nature or societal norms, not by the sender. Our approach of modeling framing as affecting belief
+formation, rather than perception of payoffs, is supported by the framing effect literature [15, 13].
+In addition to choosing a framing c to shape the receiver’s prior belief µc , the sender can also
+commit to a signaling scheme π : Ω → ∆(S), which is a possibly randomized mapping from states
+to signals. By communicating a realized signal s upon observing ω, the sender further refines the
+receiver’s prior belief µc to a posterior µc,s via Bayes rule. As in classic Bayesian persuasion, the
+receiver takes an expected utility maximizing action based on his posterior belief. This model gives
+rise to three possible optimization problems for the sender:
+(a) Signaling-only: The framing c (and thus the receiver’s prior belief µc ) is fixed; the sender only
+    optimizes the signaling scheme π.
+(b) Framing-only: The sender’s signaling scheme π is fixed; she only optimizes the framing c.
+(c) Framing-signaling joint optimization: The sender jointly optimizes both framing c and signaling
+    scheme π.
+The first setting corresponds to facing a receiver with a fixed but possibly distinct (from the sender)
+prior belief. This direction has been studied by the literature on Bayesian persuasion with hetero-
+geneuous priors (e.g., [2]). The key thrust of our work is thus to study settings (b) and (c), both
+theoretically and empirically. Setting (b) is relevant when the sender is bound to an information
+revelation scheme they have committed to in the past (e.g., a multi-year advertising strategy or
+regulation restrictions), but can change the framing (e.g., endorsement, wording). Setting (c) allows
+the sender to choose both with full freedom.
+    Theoretical Results: Our theoretical investigations take an optimistic perspective that LLMs
+can (1) simulate framing effects and (2) search in language space. As such, we primarily consider
+the easier problem of directly optimizing over the numerical framing induced belief space B, as
+opposed to the natural language framing space C. Within this setting, Section 3 investigates
+setting (b), optimizing framing for a fixed signaling scheme, while Section 4 studies setting (c),
+jointly optimizing framing and signaling scheme.
+      Our results reveal that setting (b) poses severe challenges, even under this generous LLM-
+inspired setting. Specifically, we show that the sender’s expected utility will generally be a discon-
+tinuous function of the receiver’s framing induced prior belief µc (Proposition 3). This means that
+even slight errors in the mapping between framing and belief can have significant implications. We
+also show that the computation of the approximately optimal framing induced belief under a fixed
+signaling scheme is NP-hard (Theorem 1). In contrast, setting (c), jointly optimizing framing and
+signaling scheme, is more tractable. In particular, we show that the sender’s expected utility, as
+a function of the framing-induced pior belief µc and the corresponding optimal signaling scheme
+πc∗ , is continuous (Theorem 2), making the setting graceful to errors. We also provide a quasi-
+polynomial-time approximation scheme (QPTAS) for the joint optimization problem (Theorem 4),
+with specific instances admitting better results (Theorem 3). These findings support the conclu-
+sion that the joint optimization problem tends to be the more tractable problem for systematic
+optimization, inspiring our experiments. Overall, our work characterizes the unique structural and
+optimization landscape of this generalized model of information design.
+    Empirical Results: Section 5 shifts the work from a theoretical exploration to a practical one
+where we study the systematic co-design of natural language framing and signaling scheme. LLMs
+are used to (1) approximate how receivers would perceive a given framing and (2) directly search
+over the language-base framing space C and improve based on feedback. Combining this with
+analytical methods for computing the optimal signaling scheme given a belief yields an end-to-end
+
+
+                                                  3
+optimization framework. We demonstrate the efficacy of our approach through a case-study based
+on the advertising example discussed above. The results include preliminary explorations on how
+well LLMs estimate beliefs from framing, and evidence that the proposed framework is effective in
+generating good framing and signaling candidates.
+
+1.2   Related Work
+Algorithmic information design. The algorithmic study of information design has attracted
+significant recent interest. This literature starts from the complexity-theoretic study initiated
+by Dughmi and Xu [14], and lately has integrated many aspects of machine learning to address
+unknowns in the setting [7, 17, 26]. Haghtalab et al. [19] study a communication game where the
+sender persuades a receiver by providing “anecdotes”, instead of committing to recommendation
+strategies, assuming a known specific model of how anecdotes influence the receiver’s behavior.
+While their anecdote effect shares a similar spirit to our framing effect, we do not assume any
+specific framing effect. The use of LLM allows us to model real-world framing effects that cannot
+be easily characterized theoretically.
+    Information design with LLMs. Among recent works on the interface of information de-
+sign and LLMs, Harris et al. [20] study a learning-theoretic question about learning an optimal
+recommendation strategy by querying an LLM that simulates a receiver with unknown prior belief.
+This differs from our aim of introducing a new dimension, i.e., framing, to information design. Li
+et al. [24] explore how Bayesian persuasion mechanisms can be implemented in natural language,
+while Wu et al. [37] develop methods for generating persuasive marketing content that is both
+linguistically coherent and grounded in product attributes. Both works share our emphasis on
+bridging formal persuasion models with natural language generation, but differ in the focus: while
+they design practical systems for persuasive text generation, our work provides a theoretical frame-
+work that explicitly integrates framing into information design and studies its tractability when
+combined with signaling.
+    Additional evidence for framing effects. In addition to the landmark study of Tversky and
+Kahneman [34], there are numerous studies in Behavioral Economics and Psychology that provide
+evidence for framing effects. For instance, Ellingsen et al. [15] show that naming the standard
+prisoner’s dilemma game differently (e.g., as the “Community Game” or “Stock Market Game”)
+will lead to different players behaviors despite playing the same underlying game. These behavioral
+studies are consistent with “the hypothesis that social frames are coordination devices... enter
+people’s beliefs rather than their preferences”[15]. Nelson and Oxley [30] observe similar belief
+influence by framing in persuasion problems. These behavioral studies motivate our principled
+study of using framing in information design.
+   LLMs as proxys for human behavior. Our work subscribes to the recent studies that use
+LLMs as proxies of human agents to understand the social norms they carry and/or the economic
+decisions they make [21, 6, 23, 12]. Our work fits this general theme, but is different from these
+works in research questions.
+
+
+2     Model: Information Design with Framing Effect
+Bayesian Persuasion and Signaling. A fundamental model of information design is the classic
+Bayesian persuasion problem between two rational players: a sender (persuader, with she/her
+pronouns) and a receiver (decision maker, with he/him pronouns). Both players’ utilities depend
+
+
+                                                 4
+on a state of the world ω ∈ Ω. The receiver must take an action a from some finite set A, which,
+along with the state ω, jointly determines the utilities of both players.1 Formally, the sender’s
+utility function is u : A × Ω → R and the receiver’s utility function is v : A × Ω → R. The
+sender does not act, but possesses an information advantage: she is assumed to perfectly observe
+the realized state of the world ω, whereas the receiver only knows the prior distribution µ0 ∈ ∆(Ω)
+of the state.
+    For simplicity, we make a few mild regularity assumptions. First, µ0 has full support, i.e.,
+µ0 (ω) > 0 for every state ω ∈ Ω. Second, every action a ∈ A is strictly inducible: that is, for every
+a ∈ A, there is some belief µ ∈ ∆(Ω) wherein action a is the unique best response action for the
+receiver, i.e., Eω∼µ [v(ω, a)] > Eω∼µ [v(ω, a′ )] for all a′ ∈ A \ {a}.2 Third, some of our computational
+results are about additive approximation, which requires players’ utilities to be bounded. Hence
+without loss of generality we assume both players’ utilities u, v are normalized to be within [0, 1].
+    The standard sender-receiver interaction in Bayesian persuasion is through a sender-designed
+signaling scheme that partially reveal the realized state ω to the receiver. Formally, for a signaling
+space S, the sender designs and commits to a randomized mapping π : Ω → ∆(S), where π(s|ω)
+specifies the probability of sending signal s ∈ S when the realized state is ω. The receiver, upon
+observing a signal s sampled from this signaling scheme, updates his belief over Ω and takes an
+expected-utility-maximizing action. As a textbook assumption in this literature, ties are assumed
+to be broken in favor of the sender. In the special case where the signaling space S equals A, the
+signaling scheme π : Ω → ∆(A) is also called a recommendation scheme, where signals correspond
+to action recommendations. A recommendation scheme π is obedient if whenever π recommends
+an action a ∈ A to the receiver, a is indeed optimal based on the receiver’s posterior belief. We
+will consider general signaling schemes as well as recommendation schemes in this work.
+
+Framing. We define framing as a message that affects the receiver’s belief in a possibly non-
+Bayesian way. For example, framing can correspond to natural language phrases that describe the
+sender, the signaling scheme, or the signal. The sender selects this framing prior to state observation
+and it is thus state-independent from the sender’s perspective. As an aside, we note that a state-
+dependent framing is a strange object. A sender-determined state-to-framing correlation is (1)
+functionally no different than signaling and (2) may be inconsistent with the behavioral implications
+of that framing (e.g. correlating the color red (framing) with feeling full despite this color being
+known to induce sensations of hunger).
+    Formally, let C be an abstract space of all possible framings, which may depend on the problem
+instance I. To connect framing to belief, we assume that each framing c ∈ C induces a subjective
+prior belief µc ∈ ∆(Ω) of the receiver about the states. The mapping from c to µc is captured
+by a function ℓ : C → B, with µc = ℓ(c), where B = {ℓ(c) : c ∈ C} is the set of all inducible
+prior beliefs. Importantly, the sender cannot influence this mapping ℓ and it is instead dictated by
+personal or societal norms. This mapping ℓ abstracts out the belief update procedure, which could
+be Bayesian or non-Bayesian. From a non-Bayesian perspective, the framing may simply form
+some receiver belief inherited from common sense in human languages. To exposit the Bayesian
+perspective, one can imagine that the receiver has some initial belief about the state ω, which
+was then Bayesian updated to µc based on certain “societally consensed” signaling scheme σ(c|ω)
+after observing the framing c. In any case, how the mapping ℓ was formed is not concerned in
+  1
+    We use 0 index for actions and states. That is, A = {a0 , . . . , a|A|−1 }, and Ω = {ω0 , . . . , ω|Ω|−1 }.
+  2
+    If this assumption does not hold, then action a is weakly dominated and can be removed from the receiver’s
+action set.
+
+
+
+                                                      5
+the mathematics of our model. Instead, in Section 5, we will empirically demonstrate that such a
+framing-to-belief mapping ℓ can be robustly simulated by LLMs, serving as a justification for this
+modeling primitive. In Sections 3 and 4, we will also analyze the robustness of the optimization
+problem to the inaccuracy of a simulated framing-to-belief mapping, where we allow the simulated
+mapping, denoted by ℓε , to have a small error in the sense of |ℓϵ (c) − ℓ(c)| ≤ ϵ for every c ∈ C.
+    A natural-language framing space C is discrete by nature, though it is enormous. In this case,
+the corresponding inducible prior belief set B is also discrete. We will also consider the relaxation
+to continuous framing space, in which case the inducible prior belief set B is assumed to be a
+convex subset of the simplex ∆(Ω). That is, if two beliefs µ1 , µ2 can be induced by some framings,
+then there is a framing to induce any belief in between. It is valuable to consider the continuous
+relaxation for two reasons. First, the geometry of the inducible belief set B enables more structural
+characterization of the optimal design. Second, while this may not precisely map to the ultimately
+discrete linguistic framing space in practice, the richness of human language renders the continuous
+approximation reasonable. We formalize these notions below.
+Definition 1 (Framing Space). Let C be a framing space, ℓ : C → B be a framing-to-belief mapping,
+and B = {ℓ(c) : c ∈ C} ⊆ ∆(Ω) be the set of inducible prior beliefs. In a discrete framing space,
+both C and B are discrete. In a continuous framing space, C is continuous and B is assumed to
+be a convex subset of the belief simplex ∆(Ω).
+
+Sender-Receiver Interactions and the Equilibrium. The interaction between sender and
+receiver is consistent with prior literature on persuasion, except that the sender’s policy now addi-
+tionally has a framing strategy. The sender chooses a framing c ∈ C prior to state observation (c is
+thus state-independent from the sender’s perspective); any state-dependent information is conveyed
+by the signal s ∼ π(·|ω). This separation of state-independent framing and state-dependent signal
+is a key feature of our model. The formulation of information design with framing is described
+below.
+Definition 2 (Information Design with Framing).
+                                                        An information design policy with framing is
+denoted by a tuple c ∈ C, π : Ω → ∆(S) . The sender first commits to a tuple c, π , and upon
+state realization ω ∼ µ0 , the receiver observes the pair (c ∈ C, s ∼ π(·|ω)) and updates his belief
+                                                               | ω)
+from µc = ℓ(c) to the posterior µc (ω | s) = P ′ µc (ω)π(s   ′        ′ , ∀ω ∈ Ω. The receiver then takes a
+                                                   ω ∈Ω µc (ω )π(s | ω )
+best-response action that maximizes his expected utility under the updated belief µc (· | s):
+                                X                                      X
+              a∗c,π,s ∈ arg max    µc (ω | s)v(a, ω) = arg max              µc (ω)π(s | ω)v(a, ω).      (1)
+                         a∈A    ω∈Ω                         a∈A    ω∈Ω
+
+Therefore, under an information design policy (c, π), the sender’s ex-ante (expected) utility is:
+                                                         X        X
+           U (c, π) := Eω∼µ0 , s∼π(·|ω) u(a∗c,π,s , ω) =             π(s | ω)u(a∗c,π,s , ω).
+                                                     
+                                                           µ0 (ω)                                 (2)
+                                                           ω∈Ω        s∈S
+
+    To map the above abstract model to our running example of advertising, this means the ad-
+vertiser (sender) chooses a slogan (framing c) for a line of products, and based on each product’s
+feature/quality (state ω) chooses a discount (signal s). The sender’s goal is to choose an optimal
+framing and signaling strategy to maximize her expected utility assuming that the receiver will
+best-respond to the sender’s strategy. This corresponds to a Stackelberg equilibrium.
+   We study two variants of the sender’s information design problem with framing. The first is the
+optimization of framing under a given/fixed signaling scheme, coined framing-only optimization.
+
+                                                    6
+An instance of such a problem is denoted by I = (µ0 , u, v, π) where π is a given signaling scheme.
+The second is the joint optimization of framing c and signaling scheme π. Here, a problem instance
+is I = (µ0 , u, v). Note that the third possible variant, optimizing the signaling scheme π under a
+fixed framing (i.e., a fixed prior belief of the receiver) is essentially captured by previous work on
+Bayesian persuasion with heterogenous priors [2] and thus not the focus of our work. In all cases,
+the sender is selecting a strategy to maximize her ex-ante utility with a best-responding receiver.
+Definition 3. The sender’s Stackelberg equilibrium (i.e., optimal) strategy is:
+
+    • In a framing-only optimization problem I = (µ0 , u, v, π),    c∗ = arg maxc∈C U (c, π);
+
+    • In a joint optimization problem I = (µ0 , u, v),   (c∗ , π ∗ ) = arg maxc∈C, π:Ω→∆(S) U (c, π).
+
+
+3     Framing-Only Optimization
+This section analyzes the conceptually simpler situation where we optimize the framing while fixing
+the signaling scheme. Formally, given an information design instance I = (µ0 , u, v, π), the sender
+aims to find the optimal framing c∗ in the Stackelberg equilibrium (Definition 3). We first specify
+an important distinction. The classic literature on Bayesian persuasion typically considers obedient
+signaling schemes, with signal space S equal to the action space A, due to a revelation-principle-
+styled argument [22, 14]. But in our setting, the signaling scheme π is given exogenously and not
+within the designer’s control, while the receiver’s prior µc is optimized by the designer. As such,
+signals from π cannot be freely interpreted as direct action recommendations, so we consider a
+general (non-direct) signaling space.
+   We start by showing that randomizing over framings does not increase the expected utility of
+the sender under any signaling scheme π. This means that it is without loss of generality to focus
+on deterministic framing both here and in the forthcoming section that studies jointly optimizing π
+and c. All missing proofs from this section, including the one below, can be found in Appendix A.
+Proposition 1. For any instance I with a given signaling scheme π, the optimal sender utility can
+always be achieved by some deterministic framing c∗ .
+
+   As a simple corollary, for a discrete framing space, the optimal framing can be computed in a
+polynomial time proportional to the size of the framing space, by enumerating the framing c ∈ C
+and evaluating its sender utility U (c, π).
+Corollary 1. For a discrete framing space C, the optimal framing c∗ can be computed in |C| ·
+poly(|Ω|, |A|, |S|) time.
+
+    In practice (e.g., our running example of advertising), however, framing encompasses contex-
+tually relevant natural language expressions, hence the space C is enormous. This gives rise to a
+structurally more interesting question: are there algorithms that scale more gracefully with respect
+to the size of the framing space C? To study this problem, we turn to the relaxed problem that
+considers framing optimization in a continuous space.
+
+3.1    Optimizing Framing in a Continuous Space
+We turn to the continuous framing space with a convex belief space B = {ℓ(c) : c ∈ C} ⊆ ∆(Ω) and
+consider directly optimizing in this space. In the most optimistic case, the sender can use framing
+
+                                                  7
+to induce any receiver prior belief in the entire probability simplex: B = ∆(Ω). This means that
+the framing space C is no longer a parameter, and the instance size is completely determined
+by |Ω|, |A|, and |S|. We will show that the continuous framing-only optimization problem is bi-
+directional equivalent to a classic problem in algorithmic game theory, Bayesian Stackelberg game,
+but unfortunately the problem is NP-hard, even when B = ∆(Ω).
+    Formally, we directly optimize in the prior belief space B = ∆(Ω). For any framing-induced
+receiver prior belief µc ∈ B, let Uπ (µc ) = U (c, π) be the expected utility of sender, with fixed
+signaling scheme π. The framing-only optimization problem is to find an optimal µ∗c ∈ B to solve:
+                                        XX
+                       max Uπ (µc ) =           µ0 (ω)π(s|ω)u(a∗µc ,s , ω)                      (3)
+                   µc ∈B=∆(Ω)
+                                             ω∈Ω s∈S
+                                                     X
+                        s.t.     a∗µc ,s ∈ arg max             µc (ω ′ )π(s|ω ′ )v(a, ω ′ ), ∀s ∈ S.
+                                             a∈A
+                                                     ω ′ ∈Ω
+
+   We now connect the framing-only optimization problem to a classic problem in algorithmic
+game theory, Bayesian Stackelberg game (Definition 4). We then show in Proposition 2 that our
+framing-only optimization problem can be converted to finding the equilibrium of this game.
+Definition 4 (Bayesian Stackelberg game). A Bayesian Stackelberg Game (BSG) consists of a
+leader with action space Aℓ and a follower with action space Af and private type θ drawn from
+a known distribution P ∈ ∆(Θ), and type-dependent leader utility uℓ (aℓ , af , θ) and follower utility
+uθf (aℓ , af ). The leader commits to a mixed strategy x ∈ ∆(Aℓ ), and the follower best responds. The
+leader’s optimal (Stackelberg equilibrium) utility is given by:
+                               X          X
+                          max       P (θ)     x(aℓ )uℓ (aℓ , a∗f (θ, x), θ)
+                     x∈∆(Aℓ )
+                                θ∈Θ        aℓ ∈Aℓ
+                                                           X
+                       s.t.     a∗f (θ, x) ∈ arg max      x(aℓ )uθf (aℓ , af ),                ∀θ ∈ Θ.
+                                              af ∈Af a ∈A
+                                                           ℓ        ℓ
+
+Proposition 2. The continuous framing-only optimization problem (3) can be reduced to finding
+the Stackelberg equilibrium of a Bayesian Stackelberg game.
+
+Proof. We convert a continuous framing-only optimization problem to a BSG. Consider the BSG
+where the leader’s action space is  Pthe space of states Ω, the follower’s type space is S,s and the
+probability of type s is P (s) = ω∈Ω µ0 (ω)π(s|ω). The follower’s utility function is v (a, ω) =
+π(s|ω)v(a, ω), and the leader’s utility function is ũ(a, s) = ω∈Ω µ0 (ω)π(s|ω)
+                                                                   P
+                                                                         P (s)  u(a, ω). Note that the
+leader’s utility ũ(a, s) depends on the follower’s action a and type s, but not the leader’s action ω.
+By definition, the leader’s optimization problem in the BSG is
+                                           X
+                           max UP (x) =        P (s)ũ(a∗ (s, x), s)                                (4)
+                       x∈∆(Ω)
+                                             s∈S
+                                                            X
+                                   ∗
+                         s.t.    a (s, x) ∈ arg max                     x(ω ′ )ṽ s (a, ω ′ ), ∀s ∈ S,
+                                                 a∈A
+                                                           ω ′ ∈Ω
+
+namely,
+                                          X             X µ0 (ω)π(s|ω)
+                     max       UP (x) =         P (s)                               u(a∗ (s, x), ω)      (5)
+                   x∈∆(Ω)                                                P (s)
+                                          s∈S           ω∈Ω
+                                                        X
+                      s.t.     a∗ (s, x) ∈ arg max                 x(ω ′ )π(s|ω ′ )v(a, ω ′ ), ∀s ∈ S.
+                                             a∈A
+                                                        ω ′ ∈Ω
+
+
+                                                               8
+We note that the optimization problems (5) and (3) are equivalent, where x corresponds to µc and
+a∗ (s, x) corresponds to a∗µc ,s . Therefore, we conclude that the continuous framing-only optimization
+problem can be reduced to a Bayesian Stackelberg game.
+
+    The reduction from framing-only optimization to Bayesian Stackelberg games suggests that
+one approach to finding the optimal framing is to use existing computational methods for BSG
+(e.g., [31]). However, Conitzer and Sandholm [8] show that a family of BSGs are computationally
+intractable (NP-hard). Our Theorem 1 proves that any BSG in that family can be converted to a
+continuous framing-only optimization problem. Combining with Proposition 2, our analyses show
+that framing-only optimization is (bi-directional) equivalent to a subset of BSGs that are known to
+be computationally hard. Hence, the framing-only optimization problem is NP-hard and not easily
+solvable even with access to a perfect mapping ℓ from framing to belief.
+
+Theorem 1 (NP-hardness). For the continuous framing-only problem I = (µ0 , u, v, π), there is
+no additive Fully Polynomial-Time Approximation Scheme (FPTAS) for computing the optimal
+framing-induced prior belief µ∗c ∈ B in (3), unless P = NP. This hardness holds even when B =
+∆(Ω).
+
+Proof Sketch. The full proof is technical and given in Appendix A.2; we sketch the high-level
+intuition here. Conitzer and Sandholm [8] show that a family of BSGs where the followers have
+binary actions is NP-hard. We show that any such BSG can be cast into a framing-only optimization
+problem I with |Ω| = |Aℓ | + |Θ| + 1 states, |A| = |Θ||Af | + 2 actions, |S| = |Θ| signals, and a
+continuous framing space B = ∆(Ω). Specifically, we create a state for each leader action, ωaℓ , and
+each follower type ωθ . We create receiver actions for each binary action a follower of a type θ can
+take – i.e. aθi for all θ. When the receiver sees a signal sθ (which is proxying type θ in BSG), we
+want them to only consider actions aθ0 , aθ1 , which should directly correspond to follower θ’s utility in
+taking action 0 or 1 in the BSG. Since the receiver’s utility in the information design problem does
+not explicitly depend on type θ, we use the states ωθ to achieve this effect. The receiver is heavily
+                                  ′
+penalized for taking an action aθ∗ at state ωθ . We carefully construct the sender’s utilities and add
+additional dummy states and actions to ensure that (1) on the optimal prior µ∗c , the sender places
+sufficient weight on states corresponding to ωθ to ensure that the receiver takes this type-consistent
+action, and (2) the information design objective captures the type-dependent Bayesian Stackelberg
+objective. The inapproximability stems from a more careful analysis of the original result of [8].
+
+3.2   The Effect of Framing on Sender Utility
+Next, we analyze how much the sender can improve her utility via manipulating framing with a
+given signaling scheme π. To build intuition for this section’s result, we start with an example to
+demonstrate how much a belief shift induced by framing can lead to a meaningful improvement in
+the sender’s utility – is a substantial belief change necessary?
+    The following variant of the well-known prosecutor-judge example in Kamenica and Gentzkow
+[22] shows that the answer is No, meaning that a small change in framing can significantly change
+the sender’s utility. Specifically, consider a Bayesian persuasion setting where a defendant may
+be either innocent or guilty (two possible states of the world), and the judge (receiver) decides
+whether to acquit or convict the defendant, receiving utility 1 for the just action and 0 otherwise.
+The prosecutor (sender) observes the defendant’s true state and can signal accordingly to maximize
+their utility, which is 1 for a conviction regardless of the state. Now suppose the prosecutor, when
+innocent, always recommends acquittal, and when guilty, recommends either action with probability
+
+                                                    9
+0.5. If the prosecutor’s prior belief over the states is [0.67, 0.33] and the judge shares this belief
+(as is the case in Bayesian Persuasion), then the prosecutor achieves utility 0. If, however, the
+prosecutor can use framing (style of argument/language) to slightly alter the judge’s prior belief to
+[ 23 , 31 ], then the prosecutor’s utility under the same signaling scheme jumps to 0.66! This is because
+the sender’s utility as a function of the receiver’s belief is not continuous for the given signaling
+scheme. This discontinuity highlights the power of leveraging framings: for a fixed signaling scheme,
+slightly altering the receiver’s belief by framing can have a major impact on the receiver’s action
+and hence the sender’s utility.
+    To formalize this, let Uπ (µ) denote the sender’s expected utility (3) under fixed signaling scheme
+π when the receiver’s prior belief is µ. In the prosecutor-judge instance, this function is discon-
+tinuous at µ = [ 32 , 13 ]. We show below that such discontinuities occur in general instances almost
+surely for a large class of signaling schemes, specifically, schemes in which some signal s is sent with
+positive probability at every state. In other words, schemes not satisfying this condition must be
+“very revealing”: upon observing any signal s, the receiver can rule out at least some state(s) with
+full confidence. The proof of this result is in Appendix A.3.
+
+Proposition 3 (Discontinuous sender utility). Consider any signaling scheme π in which there
+exists a signal s0 ∈ S such that π(s0 |ω) > 0 for every state ω ∈ Ω. Then the sender’s expected
+utility Uπ (µ) as a function of the receiver’s prior belief µ is generally discontinuous in the following
+sense: for any µ0 , for u and v sampled from any continuous distribution over utility functions,
+Uπ (µ) is discontinuous in µ ∈ ∆(Ω) with probability 1. This holds even if u(a, ω) is independent of
+ω.
+
+    This discontinuity also implies that the sender’s utility is highly sensitive to errors in a simulated
+framing-to-belief mapping ℓ. Suppose using an imperfect mapping ℓε with error ε, we find an
+optimal framing ĉ that happens to induce a belief µ̂ = ℓε (ĉ) such that Uπ (·) was discontinuous at
+µ̂. Then if this framing is deployed, even though the true induced prior µ∗ = ℓ(ĉ) is within distance
+ε to µ̂ (i.e., |µ∗ − µ̂| ≤ ε), the discontinuity means that the realized utility can be arbitrarily far
+from the utility achieved under the imperfect mapping, regardless of how small ε is. In particular,
+there does not exist a scalar λ such that |Uπ (µ̂) − Uπ (µ∗ )| ≤ λε. Indeed, this discontinuity is the
+fundamental reason for the hardness result shown in Theorem 1.
+
+
+4    Framing-Signaling Joint Optimization
+We now consider the joint design of framing and signaling scheme: given an instance I = (µ0 , u, v),
+the sender selects a framing c ∈ C and a signaling scheme π to maximize her utility U (c, π). This is
+a strict generalization of the standard Bayesian persuasion model, which is the special case where
+C is a singleton set hence only the signaling scheme π is a variable. As shown by Proposition 1,
+there is no benefit in randomizing over framings, so we focus on deterministic framing.
+    The ability to design π offers the sender more freedom as compared to framing-only optimization.
+Indeed, a key challenge in the restricted framing-only case was the inability to interpret signals as
+action recommendations. But for the design of joint strategy, it is without loss of generality to
+focus on obedient recommendation schemes, as we show below (the proof is in Appendix B).
+
+Observation 1. To compute the optimal joint framing-signaling strategy (c∗ , π ∗ ), it suffices to
+consider signaling scheme π with a direct signal space, i.e., S = A, in which each signal a ∈ A
+makes an obedient action recommendation to the receiver.
+
+
+                                                   10
+    Observation 1 allows us to restrict attention to the design of direct signaling schemes without loss
+of generality. This succinct representation gives rise to the following corollary about polynomial-
+time solvability under discrete framing space. The algorithm simply enumerates all possible c ∈ C,
+and for each c computes the corresponding optimal signaling scheme via the standard Bayesian
+persuasion linear program [14].
+
+Corollary 2. For a discrete framing space C, the optimal joint strategy (c∗ , π ∗ ) can be computed
+in |C| · poly(|A|, |Ω|) time.
+
+    Similar to Section 3, next we answer two key questions: (1) the effect of framing on the sender’s
+utility and the sensitivity to errors in framing-to-belief simulation, and (2) the efficient computabil-
+ity of the optimal joint strategy with perfect simulation. Our results highlight key differences
+between joint design and framing-only design. The joint design problem turns out to be more
+tractable.
+
+4.1   The Effect of Framing on Sender Utility
+To compare with Proposition 3, we start our analysis by analyzing the continuity property of
+the optimal sender utility as a function of the framing-induced receiver prior belief µ. It is not
+difficult to see that, in the optimal joint design, given any framing-induced receiver prior belief µ,
+the sender’s corresponding optimal signaling scheme is the one that optimally accompanies this
+receiver prior belief. We denote this signaling scheme as πµ∗ and the resulting sender utility U ∗ (µ)
+as a function of the framing-induced receiver prior belief µ. Observation 1 shows that U ∗ (µ) can
+be efficiently computed for any µ ∈ ∆(Ω) using the following linear program, with the constraints
+referred to as the obedience constraints as is standard in the literature [4]:
+                                  XX
+            U ∗ (µ) :=    max             µ0 (ω)π(a|ω)u(a, ω)                                      (6)
+                      π:Ω→∆(A)
+                                 ω∈Ω a∈A
+                                 X
+                                       µ(ω)π(a|ω) v(a, ω) − v(a′ , ω) ≥ 0,   ∀a, a′ ∈ A × A.
+                                                                    
+                          s.t.                                                                      (7)
+                                 ω∈Ω
+
+The U ∗ (µ) above tracks the sender’s utility as a function of the receiver’s prior belief µ under
+an optimal signaling scheme. It is worthwhile to compare U ∗ (µ) to the earlier function Uπ (µ)
+introduced in Section 3 to capture the same quantity but with a fixed signaling scheme π. In
+contrast to the discontinuity of Uπ (µ) shown in Proposition 3, our following Theorem 2 (proof
+deferred to Appendix B.2) shows that once π becomes part of the strategy space, the sender’s
+optimal utility becomes continuous in the receiver’s prior belief µ.
+
+Theorem 2 (Continuous sender utility). The sender’s utility U ∗ (µ), defined in (6), is a locally
+Lipschitz continuous function of the induced receiver prior belief µ in the interior of the simplex
+∆(Ω).
+
+Proof Sketch. The high-level idea is a sensitivity analysis for the linear program (6)(7), whose
+variable is π and parameter is µ. We want to show that the optimal objective U ∗ (µ) cannot change
+a lot when the parameter µ is slightly perturbed. In particular, let πµ∗ be an optimal solution of
+the linear program when the parameter is µ. We modify πµ∗ slightly to be another solution π̃ that
+satisfies the obedience constraint (7) simultaneously for all parameters µ′ that are close to µ (in the
+sense of ∥µ′ − µ∥1 ≤ ε). Such modification is possible due to the conditions that (1) every action
+a ∈ A of the receiver is strictly inducible by some belief; (2) µ(ω) > 0 for every ω ∈ Ω. Since the
+
+                                                   11
+modification is small, the utility of π̃ is only slightly worse than the utility of πµ∗ , which is U ∗ (µ).
+So, the optimal objective U ∗ (µ′ ) with parameter µ′ cannot be too much worse than U ∗ (µ), which
+establishes the continuity of the U ∗ (·) function. See details in Appendix B.2.
+
+     Theorem 2 has useful implications on understanding the sender’s utility loss due to the error
+in a simulated belief-to-framing mapping ℓε . To illustrate this, it is helpful to relax the obedience
+constraint. Formally, we say an action
+                                    P recommendaiton            a ∈ A is ε-obedient for a receiver with prior
+belief µ if for every action a ∈ A, ω µ(ω)π(a|ω) v(a, ω)−v(a , ω) ≥ −ε. Now let (µ∗ , πµ∗ ∗ ) denote
+                               ′                                      ′           3
+                                                                         
+
+an optimal joint strategy, where prior belief µ∗ = arg maxµ∈B U ∗ (µ), with framing c∗ inducing
+ℓ(c∗ ) = µ∗ under the true belief-to-framing mapping ℓ. Choosing c∗ under the imperfect mapping
+ℓε will result in a perceived belief ℓε (c∗ ) within the ball Bε (µ∗ ) = {µ ∈ ∆(Ω) : ∥µ − µ∗ ∥ ≤ ε}, and
+due to Theorem 2, the perceived utility will be within λ1 ε of the optimal, where λ1 is the local
+Lipschitz constant of U ∗ , hence |U ∗ (ℓε (c∗ )) − U ∗ (µ∗ )| ≤ λ1 ε. If we find the optimal joint strategy
+(µ̂, πµ̂∗ ) under the imperfect mapping ℓε , with µ̂ = arg maxµ∈B̂ U ∗ (µ) where B̂ = ℓε (C), and find the
+corresponding framing ĉ inducing ℓε (µ̂) = µ̂, then we have: U ∗ (µ̂) ≥ U ∗ (ℓε (c∗ )) ≥ U ∗ (µ∗ ) − λ1 ε.
+
+                                                     When using framing ĉ in practice, however, the
+                                                     actual belief induced by ĉ is µ′ = ℓ(ĉ) ̸= µ̂ where
+                                                     ∥µ′ − µ̂∥ ≤ ε. Since the signaling πµ̂∗ is unchanged,
+                                                     when the prior belief is shifted from µ̂ to µ′ , it is
+                                                     evident that the obedience constraints, which were
+                                                     exactly satisfied for µ̂, are violated by at most ε
+                                                     for µ′ – in other words, the deployed scheme is
+                                                     ε-obedient. If the sender was aware of this error
+                                                     and wished to be conservative, she could slightly
+                                                     modify πµ̂∗ to make it exactly obedient for µ′ : this
+                                                     is feasible because µ′ is close to µ̂, but will cause
+                                                     an additional λ2 ε loss to the sender’s utility. The
+                                                     total loss is λ1 ε + λ2 ε = O(ε). We illustrate this
+                                                     visually on the left and state it formally below:
+
+Corollary 3. The realized utility in facing an ε-obedient receiver under a joint optimal strategy
+based on an imperfect mapping ℓε is at most λ1 ϵ = O(ε) away from the optimal utility U ∗ (µ∗ ) for
+an exactly obedient receiver. In slightly modifying the signaling scheme of this strategy, the strategy
+can be exactly obedient and at most λ1 ε + λ2 ε = O(ε) away from the optimal utility U ∗ (µ∗ ).
+
+    We will thus allow the design of ε-obedient signaling schemes throughout this section. This is
+primarily for mathematical convenience since under mild regularity assumptions, the loss in the
+obedience constraint can be transferred into the loss in the objective with the same order. The main
+idea is to compute strictly obedient schemes by adding an O(ε) amount of margin to obedience
+constraints, hence this scheme is still obedient even when the receiver’s prior belief is off by an
+ε amount. What remains is then to bound the sender’s utility loss due to imposing a stricter
+obedience constraint, which can be bounded as O(ϵ) (see, e.g., [38, 26]).
+  3
+    As per convention, ε-obedience means the obedience constraints may be violated by at most ε. The notation
+(−ε)-obedience thus means the obedience constraints are strictly satisfied with an ε margin.
+
+
+
+
+                                                     12
+4.2   Optimizing the Joint Strategy in a Continuous Framing Space
+Under discrete framing space, the optimal joint strategy can be computed in time linear in |C|, the
+size of framing space. This space in reality can be enormous, hence it is more insightful to consider
+continuous yet naturally structured framing space. Specifically, we consider the case where the
+framing-induced prior belief space B = {ℓ(c) : c ∈ C} ⊆ ∆(Ω) is convex. As in Section 3.1, we
+consider directly optimizing in the belief space B. This leads to the following optimization problem
+with a linear objective subject to bi-linear constraints:
+                                     XX
+       max U ∗ (µ) =      max                 µ0 (ω)π(a|ω)u(a, ω)                                 (8)
+      µ∈B             µ∈B, π:Ω→∆(A)
+                                      ω∈Ω a∈A
+                                      X
+                                            µ(ω)π(a|ω) v(a, ω) − v(a′ , ω) ≥ 0,    ∀ a, a′ ∈ A × A.
+                                                                         
+                            s.t.
+                                      ω∈Ω
+
+Bi-linear optimization problems are well-known to be challenging to solve in general. In the follow-
+ing example, we illustrate this challenge by demonstrating the non-convexity and non-concavity of
+U ∗ (µ) even in simple instances.
+Example 1 (Non-convexity and non-concavity of
+U ∗ (µ)). Consider an instance with 2 states Ω = {0, 1}
+and 3 actions {0, 1, 2}, with the following utility matri-
+ces for the sender and the receiver (rows are actions,
+columns are states):
+                                             
+              0     1                0.65 0.15
+        u= 1       0 ,       v = 0.60 0.30 .
+             0.2 0.2                 0.10 0.50
+
+The sender has prior µ0 = ( 31 , 32 ) for the two states.
+We use the probability of state 0 to denote the receiver’s
+belief µ ∈ [0, 1]. The sender’s optimal utility function
+U ∗ (µ) is plotted to the right. It is continuous but not
+convex, concave, or quasi-concave.
+    The example above hints at potential barriers for the optimization problem. Indeed, recall that
+the framing-only problem in Section 3 is NP-hard even when there is no constraint on the induced
+belief space B, i.e., B = ∆(Ω) is the entire simplex. But interestingly, we obtain a positive result for
+                                                                                   1
+unconstrained belief space in the joint design case: there is an algorithm with |Ω|   loss in objective
+and ε loss in obedience constraint with poly (|Ω|, |A|, 1/ε) running time. Further, when the sender’s
+utility is state-independent and only depends on the receiver’s action (e.g., the prosecutor-judge
+example), the exactly optimal policy can be computed in polynomial time.
+
+Theorem 3 (Positive results for unconstrained belief space). For the framing-signaling joint opti-
+mization problem with unconstrained belief space B = ∆(Ω), the following hold:
+
+   • A 1 − |Ω|1
+                
+                  multiplicative-approximation of the optimal joint strategy utility can be computed
+     in poly-time under ε-obedience constraint;
+
+   • If the sender’s utility is state-independent, i.e., ∀a, ∀(ω, ω ′ ), u(ω, a) = u(ω ′ , a), then the ex-
+     actly optimal strategy can be computed in poly-time.
+
+
+                                                    13
+Proof. See Appendix B.3.
+
+   Theorem 3 studies unconstrained belief space. Next, we turn to the constrained (general) belief
+space and present a Quasi-Polynomial Time Approximation Scheme (QPTAS) in Theorem 4, which
+computes an ε-obedient joint strategy that is at least as good as the optimal obedient strategy in
+          2 log |A|
+poly(|Ω| ε2 ) time. While the hardness of the exact optimization problem is an interesting open
+question, we view the existence of a QPTAS as evidence that the joint optimization problem is
+more tractable than the framing-only variant in Section 3, which was shown to be reducible from
+the Independent-Set problem that has no known QPTAS.
+
+Theorem 4 (QPTAS for constrained belief space). For any instance I = (µ0 , u, v) with convex
+                                                                             4 log |A|
+belief space B ⊆ ∆(Ω), for any ε > 0, there exists a poly(|Ω| ε2 )-time algorithm that computes
+an ε-obedient joint strategy with utility at least as the optimal joint strategy under exact obedience.
+
+Proof. Let µ∗ ∈ B and π ∗ : Ω → ∆(A) be the optimal induced prior belief and signaling scheme
+for this instance under exact obedience constraints. As µ∗ is a distribution over Ω, we can draw n
+samples from µ∗ , and the resulting empirical distribution, denoted µ̂, is an n-uniform distribution
+– i.e., each entry of µ̂ is a multiple of n1 . Because
+           hX                                     i X ∗
+                µ̂(ω)π ∗ (a|ω) v(a, ω) − v(a′ , ω) =   µ (ω)π ∗ (a|ω) v(a, ω) − v(a′ , ω) ≥ 0,
+                                                                                       
+         E
+             ω∈Ω                                                ω∈Ω
+
+by Hoeffding’s inequality, we have
+                             hX                                           i
+        ∀a, a′ ∈ A × A, Pr         µ̂(ω)π ∗ (a|ω) v(a, ω) − v(a′ , ω) < −ε ≤ exp −nε2 /2 .
+                                                                                      
+
+                                      ω∈Ω
+
+Taking a union bound over all |A|2 pairs (a, a′ ), we have ω µ̂(ω)π ∗ (a|ω)v(a, ω) − v(a′ , ω) ≥ −ε
+                                                                   P                                
+
+satisfied for all pairs of (a, a′ ) with probability at least 1−|A|2 exp −nε2 /2 , hence µ̂ in conjunction
+                                                                 |A|
+with π ∗ satisfies ε-obedience constraints. Pick n = 4 log                                    2 exp −nε2 /2
+                                                                                                           
+                                                              ε 2    . The probability 1 − |A|
+will be positive. This means that there must exist an n-uniform distribution µ̂ satisfying ε-obedience
+in conjunction with π ∗ . Note that the sender’s utility under the (µ̂, π ∗ ) strategy is the same as the
+(µ∗ , π ∗ ) strategy because the sender’s utility depends on π ∗ but not the receiver’s prior belief.
+    Now consider the following algorithm: enumerate over all n-uniform distributions in B, and for
+each, solve the optimal signaling linear program (6)-(7) but with a relaxed ε-obedience constraint.4
+Return the solution with the best sender utility. This solution must be weakly better than the
+ε-obedience solution (µ̂, π ∗ ) mentioned above, which is therefore weakly better than the optimal
+solution (µ∗ , π ∗ ).
+    We then consider the runtime of the algorithm. The runtime depends on the number of n-
+uniform distributions and the time to check whether each distribution is included within the in-
+ducible belief set B. Since B is convex, checking this inclusion can be done in poly-time. As for
+the number of n-uniform distributions, since the probability of each state ω can take on n possible
+values {0, n1 , n2 , . . . , 1} and the sum must equal 1, it is equivalent to placing n elements into |Ω| dis-
+tinct buckets. Thus, the number of possible distributions is at most n+|Ω|−1
+                                                                                      
+                                                                                |Ω|−1
+                                                                                        . For a fixed |Ω| and n
+   4
+    We assume that B contains at least one n-uniform distribution, a mild assumption given a rich B. If not, then we
+project the closest n-uniform distribution to B, which, because the set of n-uniform distributions is an O( |Ω|
+                                                                                                             n
+                                                                                                                )-cover
+                                                            2
+of ∆(Ω) under ℓ1 distance, only causes O( |Ω|
+                                           n
+                                                      |Ω|ε
+                                              ) = O( log |A|
+                                                             ) loss to the sender’s utility.
+
+
+                                                            14
+growing large, this quantity is a polynomial in n of degree |Ω|−1, which is clearly upper bounded by
+                                                                            (n+|Ω|−1)n
+O(|Ω|n ). For a fixed n and as |Ω| grows large, we have n+|Ω|−1  = n+|Ω|−1                 = O(|Ω|n ).
+                                                               
+                                                         |Ω|−1         n      ≤      n!
+                                                                                2 log |A|
+Thus, the runtime of this algorithm is bounded by poly · O(|Ω|n ) = poly(|Ω|        ε2      ).
+
+
+5     Empirical Study with Large Language Models
+Our theoretical result illustrates that, while optimizing the framing-induced prior belief µc (let
+alone the language framing c) for a fixed signaling scheme π is computationally difficult, jointly
+optimizing both is more tractable. So, we conduct an empirical study on the joint optimization
+problem. We will co-design the framing-signaling pair (c, π), as opposed to directly optimizing the
+belief-signaling pair (µc , π) as in the theoretical section. Since c belongs to a rich natural language
+space, our investigation here makes use of large language models (LLMs).
+    There are two possible approaches to optimizing the framing-signaling pair (c, π). One approach
+is to first leverage Theorems 3 or 4 to find the optimal (µc , π) pair in quasi-polynomial time, then
+appeal to LLMs to approximate the function ℓ−1 that maps the belief µc back to a framing c
+that would induce that belief. While our theoretical results do much of the heavy-lifting for this
+approach, it suffers from one crucial drawback: it requires a priori knowledge of the inducible belief
+set B, which in many cases may be unavailable. This motivates a second approach inspired by
+iterative improvement/hill-climbing in prompt optimization: Leverage LLMs to (1) directly search
+over the language space of framings and (2) approximate the belief mapping ℓ. For any candidate
+framing c with LLM approximated induced belief µc , the corresponding optimal signaling scheme
+can be computed using the linear program in Equation (7). This is used as feedback to guide the
+LLM framing search. We elaborate on this approach below; as an aside, this approach can also be
+used to search over framings under a fixed signaling scheme, i.e., the framing-only problem variant.
+
+5.1   Methodology
+We present our proposed approach for optimizing in the framing space in Figure 1. LLMs search
+the framing space and estimate the prior belief of a receiver induced by a framing. These two
+LLMs modules are complemented with an additional LLM that verifies the soundness/correctness
+of any framing, and analytical solvers that compute the sender’s utility under the optimal signaling
+scheme for a given quantitative receiver belief. We now discuss each of these roles:
+    Instance information: Information relevant for optimal framing and signaling is not just the
+quantitative parameters like (u, v) but also qualitative descriptions about the setting, the receiver
+and sender, and any related meta information. This is because the belief formation process induced
+by framing is not explicit or mathematical. Rather, it captures how a string describing some aspect
+of the instance will be perceived by a given receiver, factoring in social, environmental, and personal
+factors. It is thus important to provide these additional contexts.
+    Estimating the framing-to-belief mapping ℓ: We use an LLM to estimate how a framing
+would influence a given receiver/decision maker’s belief. In cases where the decision-making has
+been delegated to LLMs, an increasingly common scenario [18], we can simply query that LLM
+and the approximation is essentially exact. When the decision-maker is human, a nascent line of
+economics research argues that LLMs can approximate the human decision-maker in various set-
+tings [21, 27], including as a statistical proxy to model human beliefs [29]. This involves endowing
+the LLM with information about the human it is modeling – demographics, preferences, and back-
+
+
+                                                  15
+Figure 1: Diagram of our proposed framework for optimizing framing and signaling. It includes
+LLMs searching the framing space, verifying the correctness of framing, and generating framing-
+induced beliefs. It also includes poly-time analytical solvers to compute optimal signaling scheme
+for a given belief.
+
+grounds. What we precisely require from the LLM is that it outputs a quantitative estimation of
+the receiver’s belief. This can be gathered by either: asking the LLM to generate one of |Ω| tokens
+corresponding to each state and recording the log probabilities, or directly asking it to return nu-
+merical probabilities. Cruz et al. [10] show that on distributional (non-factual) questions, the first
+approach leads to uncalibrated answers (the log probabilities are far from the true distribution),
+while direct elicitation in a chat-style prompt has better outcomes. We thus use the direct elicita-
+tion approach and comment on our empirical observations in Section 5.2. Lastly, Theorem 2 and
+Corollary 3 imply that any errors in this belief approximation will only have small influences on
+the sender’s utility, which is practically helpful.
+    Validation of framing: Using LLMs to generate framing risks hallucinations. For example, if
+asked to design a framing for a Nike basketball shoe, a blurb highlighting their collaboration with
+a non-existent NBA team or player would be incorrect. In general, the soundness may be more
+nuanced than a binary outcome; the framing could take certain liberties that, while not blatantly
+incorrect, may be undesired. As such, we propose using an LLM to score soundness with a set of
+values between 0 and 1. This module is given in-context information about the instance along with
+the generated framing. This score is part of the feedback to the framing-generating LLM.
+    Computing sender utility: For any given instance with a receiver prior belief µc , the cor-
+responding optimal signaling scheme π ∗ (µc ) can be analytically computed by solving the linear
+program specified in Equations (6) in poly-time.
+    Generating framing: Building on the success of in-context learning via textual gradients [32],
+we propose that an LLM generate a framing based on instance-relevant information and a task
+description, and iteratively refine it through feedback. The task description defines key parameters
+for the framing, such as word count and style, while also outlining the feedback to be expected.
+For each generated framing, the induced prior belief is estimated and then used to compute the
+corresponding sender utility; this is scaled by the soundness score. This final quantitative score is
+
+
+                                                 16
+supplemented with the reasoning behind the generated belief and soundness score to construct the
+feedback string. Alongside this, the feedback also contains a textual gradient where we outline how
+the induced belief and utility changed between the last generated framing and the current one. The
+LLM context maintains a window of the last k generated framings, their feedback, and the best
+candidate framing generated so far.
+
+5.2      An Advertising Case Study
+To evaluate our proposed empirical framework, we conduct a case study focused on advertising.
+We consider a fictional clothing brand, Himalaya, known for durable, high-quality gear favored by
+outdoor enthusiasts. The brand is launching a new outerwear line targeting the style-conscious,
+casually active athleisure market. Such consumers primarily care about looking good but like the
+idea of performance wear. The brand’s advertising campaign aims to attract this new demographic
+without compromising brand identity and includes: (1) a new slogan, (2) a description of the new
+product line, and (3) discount offers. The first two constitute the framing since they are chosen a
+priori and apply to all products; for the third, the sender chooses how the discounts are correlated
+with product features, and thus represents the signaling scheme.
+    There are four product categories based on two mutually exclusive attributes: (Chic vs Func-
+tional) and (Durable vs Not Durable). Buyers can choose from three actions: “buy on sale”, “buy
+at regular price”, or “not buy”, and there are three corresponding signals: “Ad with Discount”,
+“Ad without Discount”, and “No Ad”. Both the user and brand receive zero utility from not
+buying. As a realistic constraint, the very desirable (Chic, Durable) set of products are never on
+sale5 , but still provide positive utility to both parties if purchased at regular prices. The consumer
+would prefer not buying clothes that are not chic, followed by buying them on sale. The brand,
+on the other hand, would always prefer to sell at regular prices over discounts, over not selling
+at all. The utilities matrices are specified in Appendix C. The appendix also contains the exact
+prompts used to describe the target demographic, and the description of the brand and its product
+features, which is taken directly from a real-world product line. For all LLM experiments, we used
+the default temperature setting.
+
+Estimating the Framing Induced Belief: We conduct a preliminary investigation to evaluate
+how well LLMs can estimate the framing-induced belief. The framing for this exploration is the
+brand slogan and product description that a real-world brand (Patagonia) uses to describe its
+outerwear lineup, which happens to not include the brand name.6 GPT-5.2 and Claude Sonnet 4
+are then used to estimate the induced belief of our target demographic, following the procedure
+outlined in Section 5.1. We elicit the belief 10 times per model and plot the average beliefs and
+95% confidence intervals over the four states in Figure 3.
+    To validate these LLM-generated beliefs against human judgments, we recruit 55 participants
+from Prolific and provide them with the same context given to the LLMs: a description of the
+target demographic, the four possible product states, and the framing. While one approach would
+be to directly elicit numerical beliefs from humans (same way as done for LLMs), a body of work in
+survey methodology and judgment under uncertainty finds that untrained respondents struggle to
+provide well-calibrated probability distributions [25, 35]. This is particularly the case when there are
+several outcomes due to the cognitive difficulty of ensuring consistency and proper normalization.
+  5
+      This also ensures there is no dominant action for either party, making the instance non-degenerate.
+  6
+      See Appendix C.2 for the exact slogan and description as well as full prompts.
+
+
+
+                                                          17
+                                                  Figure 3: The induced beliefs generated by Claude
+Figure 2: Evolution of the scores (product
+                                                  and GPT models for the framing (slogan and brand
+of sender utility and soundness) from LLM
+                                                  description) of a real-world brand (Patagonia). They
+generated framing. For a framing c we deter-
+                                                  are compared against how humans (through Prolific)
+mine the induced belief µc by an LLM, and
+                                                  evaluated the same framing. Dashed lines are the
+then compute the sender utility for it under
+                                                  sender utility under those beliefs. All results are pre-
+optimal signaling.
+                                                  sented with 95% confidence intervals.
+
+
+To sidestep this issue, we ask participants to make pairwise comparisons. Specifically, given two
+possible states (e.g., “Chic & Durable” vs “Chic & Not Durable”), we ask the participant which
+of the two is a more likely descriptor of the products from this brand from the perspective of
+the target consumer. Eliciting all possible pairwise comparisons then allows us to fit the classical
+Bradley-Terry model [5], which posits that for two options i, j, Pr(i > j) = exp(λexp(λ i)
+                                                                                   i )+exp(λj )
+                                                                                                , where the
+λ parameters represent numerical preferences. We determine λ by maximizing the log-likelihood
+given the participants’ pairwise comparison responses, which after normalization yields a valid
+probability distribution (belief over the 4 states). We plot the human belief with green bars and
+95% confidence intervals in Figure 3.
+    We observe that the LLM-generated beliefs, especially that of GPT-5.2, are very close to the
+aggregate human belief. The Claude belief also induces the same rankings over the states as the
+human belief. While the difference between Claude’s and human’s beliefs may seem somewhat
+significant in the belief space, it is much less so in the sender utility space. That is, if we compute
+the sender utility under optimal signaling scheme for each belief (plotted in the dashed lines), they
+are very similar. Beyond the similarity between beliefs, we observe that the LLM generated beliefs
+tend to have less variance than the human evaluated beliefs. Given the excellent performance of
+GPT-5.2, we end up using this to estimate induced beliefs for the end-to-end experiment.
+
+Optimizing in the Framing Space:            With the framing-to-belief mapping approximated by
+GPT-5.2, we run our end-to-end framework to jointly optimize framing and signaling for this case
+study. For each generated framing, we compute both the soundness score and the sender utility
+under optimal signaling for that induced belief. The product of soundness and utility (denoted as
+the score), along with a textual gradient of how the current framing influences beliefs and scores
+compared to the last one, is provided as in-context feedback. We experiment with both GPT-
+5.2 and Claude Sonnet 4, with their respective scores plotted as a function of the iteration in
+Figure 2. Both models start with the framing that is currently used by Patagonia (and used in
+
+
+
+                                                    18
+the induced belief estimation experiments above).7 We note that Claude tends to have aggressive
+changes in score. This is consistent with its generation traces, which show substantial exploration
+and modification between rounds. This leads to Claude achieving a better score than GPT-5.2,
+which tends to take a more conservative approach. Indeed, the GPT-5.2 traces show light framing
+modification between rounds. The best generated framings are given in Appendix C.3.
+    We conclude with two observations. First, the gray dashed line in Figure 2 refers to the maxi-
+mum achievable score assuming that the entire simplex is inducible, i.e., B = ∆(Ω). This requires
+a belief that is highly concentrated in the “functional and durable” class. While the LLM framings
+also optimize toward that belief, they are limited by what is actually inducible in the receiver
+through framing. Second, the fact that the LLM framings outperform the starting framing used
+by Patagonia should not be interpreted as evidence that Patagonia’s current advertising strategy
+is ineffective. Patagonia’s framing is likely well-suited to its core customer base, but not for the
+fashion-conscious athleisure demographic we target in this case study. This underscores the nuanced
+and context-dependent nature of framing.
+
+
+6       Discussion
+This paper bridges classical Bayesian signaling with insights from behavioral economics and psychol-
+ogy, which emphasize that linguistic and contextual framing plays an important role in shaping the
+beliefs and perceptions of decision-makers. Historically, the study and optimization of framing re-
+quired costly and time-intensive methods such as focus groups, limiting systematic exploration. The
+emergence of large language models (LLMs) offers a practical alternative: they enable cost-effective
+generation, evaluation, and iterative refinement of framing. Our empirical results demonstrate the
+viability of this approach, while our theoretical analysis characterizes the resulting optimization
+landscape.
+     From a theoretical perspective, we show that framing can be extremely powerful – small be-
+lief shifts induced by framing may lead to large gains in sender utility – but also fundamentally
+challenging to optimize. In particular, framing-only optimization under a fixed signaling scheme is
+computationally intractable and sensitive to approximation error. In contrast, the joint optimiza-
+tion of framing and signaling is substantially more benign: the sender’s optimal utility becomes
+continuous in the induced belief, admits efficient approximation algorithms, and is robust to errors
+in belief estimation. This distinction precisely identifies when algorithmic, LLM-assisted persuasion
+is promising and when it faces intrinsic barriers.
+    Empirically, we take first steps toward a systematic, algorithmically driven alternative to human-
+crafted persuasive communication. Our framework combines LLM-based search over natural-
+language framing with analytical optimization of signaling schemes, resulting in a simple and
+practical procedure for co-designing textual framings and quantitative signals. Nevertheless, our
+results should not be interpreted as suggesting that existing real-world advertising strategies are
+ineffective; rather, they highlight the context-dependent nature of framing and its interaction with
+target demographics.
+   This work opens several avenues for future research. On the theoretical side, the exact com-
+putational complexity of framing–signaling joint optimization remains open. Empirically, further
+study is needed to better understand how closely LLM-generated beliefs align with human beliefs,
+or how satisfied humans are with LLM-delegated decision-making in signaling settings. Finally,
+    7
+   The Patagonia slogan and product description do not reference the brand name. And we do not explicitly mention
+“Patagonia” in any of the LLM experiments.
+
+
+                                                       19
+beyond Bayesian persuasion, it would be fruitful to investigate other influential communication
+models, such as cheap talk [9, 16] and mediation [28], to further broaden the scope of information
+design with behavioral framing effects.
+
+
+References
+ [1] Sandhini Agarwal, Lama Ahmad, Jason Ai, Sam Altman, Andy Applebaum, Edwin Arbus,
+     Rahul K Arora, Yu Bai, Bowen Baker, Haiming Bao, et al. gpt-oss-120b & gpt-oss-20b model
+     card. arXiv preprint arXiv:2508.10925, 2025.
+ [2] Ricardo Alonso and Odilon Câmara. Bayesian persuasion with heterogeneous priors. Journal
+     of Economic Theory, 165:672–706, September 2016. ISSN 00220531. doi: 10.1016/j.jet.2016.
+     07.006. URL https://linkinghub.elsevier.com/retrieve/pii/S0022053116300497.
+ [3] Anthropic.    System card:   Claude Opus 4 & Claude Sonnet 4.               Techni-
+     cal report, Anthropic, May 2025.         URL https://www-cdn.anthropic.com/
+     6d8a8055020700718b0c49369f60816ba2a7c285.pdf. Last revised September 2, 2025.
+ [4] Dirk Bergemann and Stephen Morris. Information design: A unified perspective. Journal of
+     Economic Literature, 57(1):44–95, 2019.
+ [5] Ralph Allan Bradley and Milton E Terry. Rank analysis of incomplete block designs: I. the
+     method of paired comparisons. Biometrika, 39(3/4):324–345, 1952.
+ [6] James Brand, Ayelet Israeli, and Donald Ngwe. Using gpt for market research. Harvard
+     Business School Marketing Unit Working Paper, (23-062), 2023.
+ [7] Matteo Castiglioni, Andrea Celli, Alberto Marchesi, and Nicola Gatti. Online bayesian per-
+     suasion. Advances in Neural Information Processing Systems, 33:16188–16198, 2020.
+ [8] Vincent Conitzer and Tuomas Sandholm. Computing the optimal strategy to commit to. In
+     Proceedings of the 7th ACM conference on Electronic commerce, pages 82–90, 2006.
+ [9] Vincent P. Crawford and Joel Sobel. Strategic Information Transmission. Econometrica, 50
+     (6):1431, November 1982.
+[10] André F. Cruz, Moritz Hardt, and Celestine Mendler-Dünner. Evaluating language models
+     as risk scores. In The Thirty-eight Conference on Neural Information Processing Systems
+     Datasets and Benchmarks Track (NeurIPS), 2024. URL https://openreview.net/forum?
+     id=qrZxL3Bto9.
+[11] Stefano DellaVigna and Matthew Gentzkow. Persuasion: empirical evidence. Annu. Rev.
+     Econ., 2(1):643–669, 2010.
+[12] Danica Dillion, Niket Tandon, Yuling Gu, and Kurt Gray. Can ai language models replace
+     human participants? Trends in Cognitive Sciences, 27(7):597–600, 2023.
+[13] James N Druckman. On the limits of framing effects: Who can frame? The journal of politics,
+     63(4):1041–1066, 2001.
+[14] Shaddin Dughmi and Haifeng Xu. Algorithmic Bayesian persuasion. In Proceedings of the
+     forty-eighth annual ACM symposium on Theory of Computing, pages 412–425, Cambridge
+     MA USA, June 2016. ACM.
+
+                                               20
+[15] Tore Ellingsen, Magnus Johannesson, Johanna Mollerstrom, and Sara Munkhammar. Social
+     framing effects: Preferences or beliefs? Games and Economic Behavior, 76(1):117–130, 2012.
+
+[16] Joseph Farrell and Matthew Rabin. Cheap talk. Journal of Economic perspectives, 10(3):
+     103–118, 1996.
+
+[17] Yiding Feng, Wei Tang, and Haifeng Xu. Online bayesian recommendation with no regret.
+     In Proceedings of the 23rd ACM Conference on Economics and Computation, pages 818–819,
+     2022.
+
+[18] Sara Fish, Paul Gölz, David C Parkes, Ariel D Procaccia, Gili Rusak, Itai Shapira, and Manuel
+     Wüthrich. Generative social choice. arXiv preprint arXiv:2309.01291, 2023.
+
+[19] Nika Haghtalab, Nicole Immorlica, Brendan Lucier, Markus Mobius, and Divyarthi Mohan.
+     Communicating with Anecdotes (Extended Abstract). 15th Innovations in Theoretical Com-
+     puter Science Conference (ITCS), 287, 2024.
+
+[20] Keegan Harris, Nicole Immorlica, Brendan Lucier, and Aleksandrs Slivkins. Algorithmic per-
+     suasion through simulation: Information design in the age of generative ai. arXiv preprint
+     arXiv:2311.18138, 2023.
+
+[21] John J Horton. Large language models as simulated economic agents: What can we learn from
+     homo silicus? Technical report, National Bureau of Economic Research, 2023.
+
+[22] Emir Kamenica and Matthew Gentzkow. Bayesian persuasion. American Economic Review,
+     101(6):2590–2615, 2011.
+
+[23] Yan Leng. Can llms mimic human-like mental accounting and behavioral biases? Available at
+     SSRN 4705130, 2024.
+
+[24] Wenhao Li, Yue Lin, Xiangfeng Wang, Bo Jin, Hongyuan Zha, and Baoxiang Wang. Verbalized
+     Bayesian Persuasion, 2025. URL https://arxiv.org/abs/2502.01587.
+
+[25] Sarah Lichtenstein, Baruch Fischhoff, and Lawrence D Phillips. Calibration of probabilities:
+     The state of the art to 1980. 1981.
+
+[26] Tao Lin and Ce Li. Information Design with Unknown Prior (Extended Abstract). In 16th
+     Innovations in Theoretical Computer Science Conference (ITCS), 325:72:1–72:1, 2025.
+
+[27] Benjamin S Manning, Kehang Zhu, and John J Horton. Automated social science: Language
+     models as scientist and subjects. Technical report, National Bureau of Economic Research,
+     2024.
+
+[28] Roger B. Myerson. Game theory: analysis of conflict. The President and Fellows of Harvard
+     College, USA, 66, 1991.
+
+[29] Keiichi Namikoshi, Alex Filipowicz, David A Shamma, Rumen Iliev, Candice L Hogan, and
+     Nikos Arechiga. Using llms to model the beliefs and preferences of targeted populations. arXiv
+     preprint arXiv:2403.20252, 2024.
+
+[30] Thomas E Nelson and Zoe M Oxley. Issue framing effects on belief importance and opinion.
+     The journal of politics, 61(4):1040–1067, 1999.
+
+
+
+                                                21
+[31] Praveen Paruchuri, Jonathan P. Pearce, Janusz Marecki, Milind Tambe, Fernando Ordóñez,
+     and Sarit Kraus. Playing Games for Security: An Efficient Exact Algorithm for Solving
+     Bayesian Stackelberg Games. In Proceedings of the 7th International Joint Conference on Au-
+     tonomous Agents and Multiagent Systems (AAMAS), pages 895–902. International Foundation
+     for Autonomous Agents and Multiagent Systems, 2008.
+
+[32] Reid Pryzant, Dan Iter, Jerry Li, Yin Tat Lee, Chenguang Zhu, and Michael Zeng. Automatic
+     prompt optimization with ”gradient descent” and beam search. In The 2023 Conference on
+     Empirical Methods in Natural Language Processing, 2023. URL https://openreview.net/
+     forum?id=WRYhaSrThy.
+
+[33] Ermis Soumalias, Yanchen Jiang, Kehang Zhu, Michael Curry, Sven Seuken, and David C.
+     Parkes. Llm-powered preference elicitation in combinatorial assignment, 2025. URL https:
+     //arxiv.org/abs/2502.10308.
+
+[34] Amos Tversky and Daniel Kahneman. The framing of decisions and the psychology of choice.
+     science, 211(4481):453–458, 1981.
+
+[35] Amos Tversky, Daniel Kahneman, Paul Slovic, et al. Judgment under uncertainty: Heuristics
+     and biases. Cambridge, 1982.
+
+[36] Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David
+     Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J.
+     van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew
+     R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W.
+     Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen,
+     E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa,
+     Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for
+     Scientific Computing in Python. Nature Methods, 17:261–272, 2020.
+
+[37] Jibang Wu, Chenghao Yang, Simon Mahns, Yi Wu, Chaoqi Wang, Hao Zhu, Fei Fang, and
+     Haifeng Xu. Grounded Persuasive Language Generation for Automated Marketing, 2025. URL
+     https://arxiv.org/abs/2502.16810.
+
+[38] You Zu, Krishnamurthy Iyer, and Haifeng Xu. Learning to Persuade on the Fly: Robustness
+     Against Ignorance. In Proceedings of the 22nd ACM Conference on Economics and Computa-
+     tion, pages 927–928, Budapest Hungary, July 2021. ACM.
+
+
+
+
+                                               22
+A         Omitted Proofs in Section 3
+A.1         Proof of Proposition 1
+Let PC ∈ ∆(C) be a distribution over the framing space. Consider the sender’s expected utility
+under this distribution (we consider the framing
+                                               Pspace toRbe discrete here, but the result immediately
+holds for the continuous setting by replacing c with c ):
+                                             X        XX
+                          EPC u(a∗c,π,s , ω) =            µ0 (ω)π(s|ω)u(a∗c,π,s , ω).
+                             
+                                                PC (c)
+                                                  c∈C         ω∈Ω s∈S
+
+Let cmax = arg maxc∈C ω s µ0 (ω)π(s|ω)u(a∗c,π,s , ω). Then it is clear that using framing cmax
+                                 P P
+upper-bounds the expected utility achieved from the randomized strategy. Formally:
+                              XX
+           EPC u(a∗c,π,s , ω) ≤        µ0 (ω)π(s|ω)u(a∗cmax ,π,s , ω) = E u(a∗cmax ,π,s , ω) .
+                                                                                          
+
+                                          ω∈Ω s∈S
+
+So, there is no need to use randomized framing strategies.
+
+A.2         Proof of Theorem 1
+We will show that finding the optimal utility in a specific class of Bayesian Stackelberg games
+(BSG) can be reduced to our problem of computing the optimal sender utility by optimizing only
+framing/receiver prior (OF). Conitzer and Sandholm [8] prove that the former problem is NP-Hard.
+Specifically, it is hard to compute the optimal utility for the following class of BSG problems, which
+they show is sufficient to ensure that the Independent Set problem can be reduced to it.
+ • Follower has binary actions (a0 , a1 ) with positive bounded utility: uθf (aℓ , af ) ∈ [0, v max ], where
+   v max ≤ |Aℓ |.
+ • Follower always has utility 1 for a0 . That is, ∀θ, aℓ , uθf (aℓ , a0 ) = 1.
+ • Leader utility is binary and does not depend on the leader’s action (only the follower): uℓ (af ) ∈
+   {0, 1}.
+ • The least probable type occurs with non-zero probability: minθ P (θ) ≜ Pmin ≥ 0.
+    For any given instance of the BSG with the above characteristics, denoted by IBS , with optimal
+solution x∗ achieving optimal leader utility BS(IBS , x∗ ), we will give a poly-time construction of
+an OF problem instance IOF       ′   whose optimal solution µ∗c is such that OF(IOF
+                                                                                 ′ , µ∗ ) = BS(I         ∗
+                                                                                                  BS , x ).
+Hence if the OF problem can be efficiently solved, it would imply efficient solving of the class
+of BSG problem described above, which is known to be NP-Hard. For a given instance IBS =
+(Θ, Aℓ , Af , P (θ), uℓ , uf ), we first construct an intermediate instance IOF = (Ω, C, A, S, µ0 , u, v, π)
+as follows:
+ • The state space for IOF is: Ω = {ωaℓ }aℓ ∈Aℓ ∪ {ωθ }∀θ∈Θ ∪ ω e
+ • The receiver’s action space is: A = {aθ0 }∀θ∈Θ ∪ {aθ1 }∀θ∈Θ ∪ e
+                                                                 a1 ∪ e
+                                                                      a2
+ • The signal space is: S = {sθ }θ∈Θ .
+   For this instance and ε > 0, we specify the sender’s prior µ0 , the fixed signaling scheme π and
+the sender and receiver utilities u, v as follows:
+                                                ε
+ • Prior µ0 : µ0 (e
+                  ω ) = 1 − ε ; ∀θ, µ0 (ωθ ) = |Θ| ; ∀aℓ , µ0 (ωaℓ ) = 0.8
+    8
+        We let µ0 (ωaℓ ) = 0 for convenience. One can also construct an instance with a small positive µ0 (ωaℓ ) > 0.
+
+
+                                                             23
+                          ω ) = P (θ), π(sθ |ωθ ) = 1; ∀θ ̸= θ′ , π(sθ′ |ωθ ) = 0 ; ∀θ, aℓ , π(sθ |ωaℓ ) = |Θ|
+ • Signaling π: ∀θ, π(sθ |e                                                                                 1
+                                                                                                               .
+ • Sender Utility u(a, ω):
+     • ∀aℓ , u(aθ∗ , ωaℓ ) = uℓ (a∗ ), where ∗ ∈ {0, 1}.
+                  ′
+     • ∀θ, u(aθ∗ , ωθ ) = −L if θ′ ̸= θ ; otherwise u(aθ∗ , ωθ ) = 0.
+     • ∀ω, u(e a1 , ω) = −N ; u(e    a2 , ω) = −K
+     • u(aθ∗ , ω
+               e ) = uℓ (a∗ ), for all θ.
+ • Receiver Utility v(a, ω):
+     • ∀aℓ , v(aθ∗ , ωaℓ ) = uθf (aℓ , a∗ ) ; v(e a1 , ωaℓ ) = −M − 1 ; v(ea2 , ωaℓ ) = 0
+               θ ′                              ′       θ
+     • ∀θ, v(a∗ , ωθ ) = −M for θ ̸= θ ; v(a∗ , ωθ ) = 0 ; v(e       a1 , ωθ ) = −M − 1 ; v(e
+                                                                                            a2 , ωθ ) = +K
+     • v(e    e ) = +N ; v(a ̸= e
+         a1 , ω                        a1 , ω
+                                            e ) = 0.
+The high-level intuition for this instance is as follows. When the receiver sees a signal sθ (which is
+proxying type θ in BS), we want them to only consider actions aθ0 , aθ1 , which directly corresponds
+to follower utility of type θ in BS. Receiver utility in O, however, does not explicitly depend on
+θ, but rather on the state ω. Hence we expand the state space to include ωθ states. Using a
+fixed signaling scheme, we want to ensure that µc always induces a slight belief in the receiver
+that states ωθ occurred. The sender is incentivized to do this since otherwise, the receiver could
+        ′
+take aθ∗ actions at state ωθ (which occurs with non-zero probability), which is very bad for the
+sender. They also don’t want to put too much weight on ωθ states, lest the receiver take the bad
+(for sender) e
+             a2 action. Lastly, we add an additional state ω   e to ensure the OF objective captures
+the BSG objective, which depends on the type. Formally, the OF optimization problem under this
+instance construction above can be written as:
+                       X                            ε X
+    maximize (1 − ε)      P (θ)u(a∗ (µc , sθ )) +       u(a∗ (µc , sθ ), ωθ )                     (9)
+        µc                                        |Θ|
+                        θ                             θ
+               |            {z                }   |        {z              }
+                             state ω
+                                   e                  for states ωθ where π(sθ |ωθ ) = 1
+                                                                                                    
+                                                                             1  X
+   s.t   a∗ (µc , sθ ) = arg max µc (ωθ )v(a, ωθ ) + P (θ)µc (e
+                                                               ω )v(a, ω
+                                                                       e) +       µc (ωaℓ )v(a, ωaℓ )       (10)
+                           a∈A                                              |Θ| ω
+                                                                                           aℓ
+
+
+We now prove three intermediate results that will specify the necessary relations between the
+constants used in our IOF instance and disentangle the key arguments needed for the reduction.
+                       v     max                             M
+Lemma 1. If µc (ωθ ) = |Θ|M           ω ) = 0, with v max ≤ 1+K
+                            , ∀θ, µc (e                         , then (1) the receiver always chooses
+between the two action {aθ0 , aθ1 } on receiving signal sθ and (2) the sender utility is at least 0.
+
+Proof. Since µc (e  ω ) = 0, we need not consider the receiver taking action e    a1 , since it is dominated
+by some other action at all remaining states. We first show that on some signal sθ , they will never
+take action e a2 . Indeed, it is obedient for the receiver to take action aθ0 as opposed to e a2 on receiving
+a signal sθ :
+                                             1 X
+             µc (ωθ )[v(aθ0 , ωθ ) − v(e
+                                       a2 , ωθ )] +  µc (ωaℓ )[v(aθ0 , ωaℓ ) − v(e
+                                                                                 a2 , ωaℓ )]                 (11)
+                                            |Θ| a
+                                                   ℓ
+
+                                                                         v max       Kv max
+                                                                              
+                              1 X              θ             1
+              = −µc (ωθ )K +       µc (ωaℓ )v(a0 , ωaℓ ) =        1−             −           ≥0              (12)
+                             |Θ| ω                         |Θ|             M          |Θ|M
+                                        aℓ
+
+
+where the second equality in the second line follows since at state ωaℓ , the receiver utility matches
+that of the BSG setting - i.e v(aθ0 , ωaℓ ) = uθf (a0 , aℓ ) - and in the BSG instances we care about, the
+
+                                                          24
+receiver always gets utility 1 by taking action a0 , v(aθ0 , ωaℓ ) = 1 for all ωaℓ . This is greater than or
+                                                                   M
+equal to 0 due to our choice of constants satisfying v max ≤ 1+K       (we assume ties break in favour of
+ θ
+a actions). Thus the receiver will not take action e  a2 on any signal sθ .
+                                                                                              ′
+Next, we show that the receiver will not take any “incorrect type” actions aθ∗ on receiving signal
+                                                              ′
+sθ . Suppose by contradiction they take a deviating action aθ∗ . Then they can expect a utility of
+          max    max
+at most v|Θ| − v|Θ| = 0. But we know they can achieve a utility of at least 1 by playing aθ0 on
+each signal sθ . Thus, under the given specifications of µc , the receiver will always play action aθ∗ on
+signal sθ . Since the sender’s utility on such actions is always at least 0 (mainly due to BSG instance
+having binary leader utility), the sender achieves at least 0 expected utility under this µc .
+
+Lemma 2. Let ε ∈ (0, 1), L > |Θ|
+                              ε , v
+                                    max ≤ M , and N, K >
+                                          1+K
+                                                             1
+                                                         (1−ε)Pmin . Then for an optimal
+solution µ∗c , the receiver only takes actions from {aθ0 , aθ1 } when receiving signal sθ . This holds even
+if sender utilities are scaled by a positive constant.
+
+Proof. We partition the cases where this does not hold into three cases and for each, we indicate
+the suboptimality of µ∗c with respect to a feasible solution that does conform to the above.
+
+    (1) ∃ a signal sθ where the receiver takes action e
+                                                      a1 . If this were to occur, the sender utility is
+at most (note that the max sender utility in our IOF instance is 1 and in states ωθ , the maximum
+utility is 0):
+
+                                                       Nε                                    −P (θ)
+  −N (1 − ε)P (θ) +          (1 − ε)            −                  ≤ −N (1 − ε)P (θ) + 1 <          +1≤0   (13)
+  |     {z      }            | {z }                     |Θ|                                  Pmin
+   on ω
+      e and signal θ   on ω
+                          e and other signals          |{z}
+                                                    on ωθ and sθ
+
+where the last inequality arises from substituting the lower bound of N specified. The sender thus
+achives negative utility. However, using claim 1, we know of a feasible specification of µc under
+these parameters where the sender can achieve at least 0 utility. Thus the µ∗c here cannot be
+optimal.
+ h       Note
+           i that when we scale by a positive constant, the last part of Eq. (13) simply becomes
+   P (θ)
+c Pmin + 1 ≤ 0 for the same reason as above.
+    (2) ∃ a signal sθ where the receiver takes action e
+                                                      a2 . As before, if this were to occur, the sender
+                  ∗
+utility for this µc is at most:
+
+                                                    Kε                         −P (θ)
+              −K(1 − ε)P (θ) + (1 − ε) −                ≤ −K(1 − ε)P (θ) + 1 ≤        +1≤0                 (14)
+                                                    |Θ|                        Pmin
+
+where in the last inequality, we substitute the lower bound of K specified. As before, the sender
+achieves negative utility, even through claim 1 shows it is possible to achieve a utility of 0, indicating
+suboptimality. Further, it is impervious to positive scaling of sender utilities.
+                                                                       ′
+    (3) ∃ a signal sθ where the receiver takes an action aθ∗ . If this were to occur, consider the sender
+utility:
+                        X                            ε       ′          ε X
+                (1 − ε)     P (θ)u(a∗ (µc , sθ )) +     u(aθ∗ , ωθ ) +         u(a∗ (µc , sθ̂ ), ωθ̂ ) (15)
+                         sθ
+                                                    |Θ| |   {z    }    |Θ| sθ̂
+                                                                               |      {z            }
+                        |         {z            }          −L                      at most 0
+                                at most 1
+                             Lε      Lε
+                 ≤ (1 − ε) −     ≤1−     <0                                                                (16)
+                             |Θ|     |Θ|
+
+
+                                                              25
+where the last inequality follows since |Θ|ε < L. Again the sender receives negative utility when it
+is possible to achieve at least 0 utility due tohclaim 1. As before,
+                                                              i      if we were to scale by a positive
+                                                           Lε
+constant c, inequality (16) simply becomes c (1 − ε) − |Θ| < 0 which still becomes negative due
+to the choice of L.
+
+Lemma 3. Let ε ∈ (0, 1), L > |Θ|             ε , v
+                                                   max ≤ M , and N, K >
+                                                         1+K
+                                                                                1
+                                                                           (1−ε)Pmin . Then for an optimal
+solution µ∗c , we can construct a solution µ′ in poly-time such that OF(IOF , µ∗ ) = OF(IOF , µ′ ),
+µ′ (e
+    ω ) = 0, a∗ (µ′c , sθ ) ∈ {aθ1 , aθ0 }. This holds even when all sender utilities are scaled by a positive
+constant.
+
+Proof. From claim 2, we already know that µ∗c satisfies a∗ (µ∗c , sθ ) ∈ {aθ1 , aθ0 }. We now show that
+any weight µ∗c places on µ(e
+                           ω ) can be shifted without changing this invariant. For each signal sθ , let
+aθ denote the receiver’s optimal action for this signal. Then the receiver’s obedience for aθ implies:
+                                                         1 X
+           ω )P (θ)v(a′ , ω
+      −µc (e              e ) − µc (ωθ )v(a′ , ωθ ) +         µc (ω)[v(aθ , ωaℓ ) − v(a′ , ωaℓ )] ≥ 0 ∀a′       (17)
+                                                        |Θ| a
+                                                                ℓ
+
+
+Now consider a µ′c where µ′c (e      ω ) = 0 and µ′c (ω ̸= ω       e ) = 1−µ1∗ (eω) µ∗c (ω). This is clearly a valid
+                                                                              c
+                         µc (ω) = 1−µ1∗ (eω) µ∗c (ω) = 1. When a′ = e
+                    P                          P
+distribution since                                                             a1 , since the invariant is originally
+                                         c
+maintained and v(e    a1 , ω
+                           e ) = +N , the negative first term in Eq. (17) becomes 0 and the last two
+terms (which together must have been positive) are just increased in scale. Hence the invariant is
+maintained. For any a′ ̸= e    a1 , the first term is 0 in Eq. (17), and the adjusted µ′c simply scales the
+remaining two terms which must be non-negative. Hence the invariant is always maintained. In
+other words, a∗ (µ′c , sθ ) = a∗ (µ∗c , sθ ) ∈ {aθ0 , aθ1 }. Lastly, since the choice of µc only affects the sender
+through the decision taken by the receiver, and both µ∗c and µ′c lead the receiver to always behave
+in the same way, the sender utility is unchanged and the claim holds.
+
+    We now prove BSG can be reduced to OF. For a BSG instance IBS = (Θ, Aℓ , Af , P (θ), uℓ , uf ),
+we construct an instance IOF = (Ω, A, S, µ0 , π, u, v) as described earlier, in poly-time. Next,
+consider an instance IOF  ′                        1
+                              = (Ω, A, S, µ0 , π, 1−ε u, v), which is identical to IOF , except all sender
+                               1
+utilities are now scaled by 1−ε . Note that claims (1) and (3) depend purely on the receiver utility
+and sender utilities for aθ actions at ωaℓ states being non-negative and the statement of (2) highlights
+that it holds when the sender utilities are scaled by a positive constant. In other words, all three
+claims hold on instance IOF  ′ . We now show that for any optimal µ∗ to instance I ′ , there exists
+                                                                           c              OF
+             ′
+a feasible x that achieves the same utility on the corresponding BSG instance. Similarly, for an
+optimal x∗ to IBS , there exists a µ′c that achieves the same utility on the corresponding OF instance.
+This naturally implies BS(IBS , x∗ ) = OF(IOF    ′ , µ∗ ).
+                                                       c
+The “=⇒” direction: Suppose we have an optimal µ∗c for instance IOF             ′ ; without loss of generality,
+
+we assume µ∗c (eω ) = 0 (if this is not the case, we can use Claim 3 to construct it to be so in poly-
+time). Since   at each sθ , we are guaranteed that a∗ (µ∗c , sθ ) ∈ {aθ1 , aθ0 }, the sender utility is simply
+(1 − ε) θ P (θ)u(a∗ (µ∗c , sθ )), which corresponds to the utility at state ω
+       P
+                                                                                   e (note that µ0 (eω ) is not
+                                                   θ
+0). For any sθ , without loss of generality, let a1 denote the optimal action. Then obedience with
+respect to aθ0 (the only other action possible since claim 3 disavows all others) implies:
+
+                1 X ∗
+                     µc (ωaℓ )[v(aθ1 , ωaℓ ) − v(aθ0 , ωaℓ )] + µ∗c (ωθ ) [v(aθ1 , ωθ ) − v(aθ0 , ωθ )] ≥ 0     (18)
+               |Θ| ω                                                      |             {z            }
+                     aℓ
+                                                                                       0
+
+
+
+
+                                                           26
+Let x′ ∈ ∆|Aℓ | be as follows: x(aℓ ) = P ′ µ1∗ (ω′ ) µ∗c (ωaℓ ). Clearly this is a valid strategy since
+                                               ωa  c  aℓ
+                                                 ℓ
+                                                      of the µ∗c (ωaℓ ) we have that:
+P
+  aℓ x(a ℓ ) = 1. Further, since this is just scaling
+                     X                                               X
+                0≤         x(aℓ )[v(aθ1 , ωaℓ ) − v(aθ0 , ωaℓ )] =        x(aℓ )[uθf (a1 , aℓ ) − uθf (a0 , aℓ )]   (19)
+                      aℓ                                             aℓ
+
+This implies that the optimal action for a follower of type θ for strategy x′ , a∗f (θ, x) = a∗ (µ∗c , sθ ),
+which is the optimal action for the OF receiver for the optimal framing µ∗c and signal sθ . For
+∗ ∈ {0, 1}, since the sender utility for aθ∗ actions at the ωe state in IOF is the same as the leader’s
+utility for action a∗ in BS, and we are using IOF′    where this sender utility is scaled by 1−ε1
+                                                                                                  , we have
+that:                             X                          X
+               OF(µ∗c ) = (1 − ε)   P (θ)u(a∗ (µ∗c , sθ )) =   P (θ)uℓ (a∗f (x′ , θ)) = BS(x′ )        (20)
+                                         θ                                θ
+
+The “⇐=” direction: Suppose we have an optimal solution to the x∗ to the BSG instance IBS .
+Then by definition, the obedience condition holds for any type θ and the follower’s optimal action.
+For an arbitrary type θ, let the optimal receiver action be a1 without loss of generality. Then:
+                               X
+                                   x∗ (aℓ )[uθf (a1 , aℓ ) − uθf (a0 , aℓ )] ≥ 0                (21)
+                                         aℓ
+
+                                                                                                          max
+Now consider constructing µ′c as follows. We first set µ′c (e            ω ) = 0 and µ′c (ωθ ) = |Θ|Mv
+                                                                                                        for all θ. Due
+to claim 1, we already know that under this strategy, the receiver in the IOF instance will only
+choose between {aθ0 , aθ1 } upon receiving a signal sθ - in other words, we need not concern ourselves
+                                   ′                                                        ′ (ω ) = 1 − v max x∗ (a ).
+                      a2 or any aθ∗ , since these are dominated.
+                                                                                                              
+with actions e   a1 , e                                                  Next,    we set  µ c   aℓ         M         ℓ
+                                                               P ′                     v max       max
+                                                                                                + v M = 1. We then
+                                                                                              
+Observe that this is a valid distribution since                   ω µc (ω) = 1 − M
+observe since Eq. (21) holds for x(aℓ ), and µ′c is simply a rescaling of x(aℓ ) on the ωaℓ states, and
+uθf (a∗ , aℓ ) = v(aθ∗ , ωaℓ ):
+                                      X
+                                          µ′c (ωaℓ )[v(aθ1 , ωaℓ ) − v(aθ0 , ωaℓ )] ≥ 0                            (22)
+                                        ωaℓ
+
+The expression is indeed sufficient to conclude that aθ1 is optimal for the OF instance receiver
+on getting signal sθ since our construction of µ′c ruled out all other actions except aθ∗ . Since
+uℓ (aθ∗ , aℓ ) = uℓ (aθ∗ ) = u(aθ∗ , ω                                          ′
+                                     e ) in the IOF instance, and we are using IOF where this sender utility
+                  1
+is scaled by 1−ε , we have that:
+                                   X                                          X              1
+               BS(x∗ , IBS ) =           P (θ)uℓ (a∗f (x, θ)) = (1 − ε)           P (θ)           uℓ (a∗f (x, θ))   (23)
+                                                                                          (1 − ε)
+                                    θ                                         θ
+                                              X
+                                = (1 − ε)         P (θ)u(a∗ (µ′c , sθ )) = OF(µ′ , IOF
+                                                                                    ′
+                                                                                       )                            (24)
+                                              θ
+
+where the last equality follows from the fact that µ0 (ωaℓ ) = 0 and the receiver is always taking
+actions of type aθ∗ on signal sθ , wherein we recall that π(sθ |ωθ ) = 1 sender utility u(aθ∗ , ωθ ) = 0.
+    We have thus shown that the specific class of Bayesian Stackelberg games proven by Conitzer
+and Sandholm [8] to be NP-Hard, can be expressed as an instance of the optimal framing problem,
+whose optimal solution exactly matches that of the BSG instance. The result of [8] in-fact, implies
+something stronger. They show that for a graph G = (V, E), it is possible to construct a BSG
+instance of the type above such that the graph has an independent set of size K if and only if the
+                                                        |E|          K
+optimal leader utility in the BSG instance is at least |E|+1 + |V |(|E|+1) .
+
+                                                            27
+                                                            1
+Their reduction uses |E| + |V | types with the Pmin = |V |(|E|+1) . Since the sender utility is binary,
+                                                                                    |E|       K−1
+there is no independent set of size K if and only if the optimal leader utility ≤ |E|+1 + |V |(|E|+1) .
+                          1
+This means that any 2|V |(|E|+1) additive approximation to the optimal leader utility would allow us
+to solve the K-Independent set problem, which is NP-Hard. Since they have |E|+|V | and |V | leader
+                                                                    1
+actions, we can formally state that it is NP-Hard to compute a 2|Θ||A ℓ|
+                                                                         additive approximation to
+the BSG problem.
+     This additive approximation factor is predicated when the sender utility includes constant
+L > |Θ|                     1
+        ε and N, K ≥ (1−ε)Pmin for some ε ∈ (0, 1). To normalize this for utilities in the range
+                                                                                1
+[0, 1], we must divide by the range. If N or K dominates, then the range is (1−ε)P min
+                                                                                       + 1 and any
+                                                         (1−ε)Pmin
+                                               1
+approximation constant must be greater than 2|Θ||A ℓ|
+                                                      · 1+(1−ε)Pmin
+                                                                    ≥ P4|Θ||A
+                                                                       min (1−ε)
+                                                                              ℓ|
+                                                                                 . Now conversely,
+if L dominates, then the range is |Θ|    ε + 1 and thus the approximation constant must be greater
+            ε               ε
+than 2|Θ||Aℓ |(ε+|Θ|) ≥ 4|Θ|2 |A | . In the optimal framing instance we construct for the reduction,
+                                ℓ
+|Θ| =
+     |S| and |Ω| ≥ |Aℓ|. Thus, it is NP-Hard to approximate the OF problem up to an additive
+min Pmin  (1−ε)       ε
+       2|S||Ω| , 4|Θ|2 |A | factor.
+                       ℓ
+
+
+
+A.3    Proof of Proposition 3
+Let (u, v) be a pair of utility functions sampled from some continuous distribution. Recall that we
+consider receiver utility functions v such that for every possible action, there is some belief in ∆(Ω)
+such that this action is strictly optimal (inducible). Consider any pair of actions a1 , a2 ∈ A. Since
+a1 is strictly inducible, there must be some state ω1 ∈ Ω under which v(a1 , ω1 ) > v(a2 , ω1 ). Since
+a2 is strictly inducible, there must be some state ω2 ∈ Ω under which v(a1 , ω2 ) < v(a2 , ω2 ). This
+means that, if the receiver’s prior µ is deterministically on ω1 , then we have
+                               X                                   
+                                  µ(ω)π(s0 |ω) v(a1 , ω) − v(a2 , ω) > 0
+                              ω∈Ω
+
+since π(s0 |ω1 ) > 0 by assumption. If the receiver’s prior µ is deterministically on ω2 , then we have
+                             X                                    
+                                 µ(ω)π(s0 |ω) v(a1 , ω) − v(a2 , ω) < 0
+                              ω∈Ω
+
+since π(s0 |ω2 ) > 0 by assumption. Then, by the intermediate value theorem, there must exist a
+prior belief µ̃ supported on {ω1 , ω2 } only, namely, µ̃ ∈ Bω1 ,ω2 = {µ ∈ ∆(Ω) | µ(ω1 ) > 0, µ(ω2 ) >
+      / {ω1 , ω2 }, µ(ω) = 0}, and an action a′ ̸= a1 such that the receiver is indifferent between a1
+0, ∀ω ∈
+      ′
+and a upon receiving signal s0 :
+                 X                                      
+         0 =         µ̃(ω)π(s0 |ω) v(a1 , ω) − v(a′ , ω)
+               ω∈Ω
+                                                                                                    
+           = µ̃(ω1 )π(s0 |ω1 ) v(a1 , ω1 ) − v(a′ , ω1 ) + µ̃(ω2 )π(s0 |ω2 ) v(a1 , ω2 ) − v(a′ , ω2 )
+
+and moreover a′ and a1 are both weakly better than any other actions:
+                                              X
+                            a′ , a1 ∈ arg max   µ̃(ω)π(s0 |ω)v(a, ω).
+                                            a∈A    ω∈Ω
+
+
+
+
+                                                      28
+Note that a′ may or may not be equal to a2 . Next, consider the receiver’s best-response action ã∗s
+upon receiving any signal s ̸= s0 , under signaling scheme π and prior µ̃:
+                                               X
+                                ã∗s ∈ arg max     µ̃(ω)π(s|ω)v(a, ω).
+                                                  a∈A      ω∈Ω
+
+Because v is randomly sampled from a continuous distribution, and µ̃ already made the receiver
+indifferent between a′ and a1 at signal s0 , the probability that µ̃ will make the receiver indifferent
+between any two actions under signal s is 0. So, ã∗s must be unique for any s ̸= s0 , with strict
+inequality
+                X                             X
+                    µ̃(ω)π(s|ω)v(ã∗ , ω) >      µ̃(ω)π(s|ω)v(a, ω), ∀a ∈ A \ {ã∗s }.
+                   ω∈Ω                                    ω∈Ω
+
+This means that, for sufficiently small ε > 0, the receiver’s best-response actions under the following
+two prior beliefs
+
+           µ̃+ε = (µ̃(ω1 ) + ε, µ̃(ω2 ) − ε, 0, . . . , 0),            µ̃−ε = (µ̃(ω1 ) − ε, µ̃(ω2 ) + ε, 0, . . . , 0)
+
+will still be ã∗s , given signal s ̸= s0 .
+    However, given signal s0 , because the receiver is indifferent between a′ and a1 under prior µ̃,
+the receiver will strictly prefer action a1 under prior µ̃+ε and strictly prefer action a′ under prior
+µ̃−ε , for sufficiently small ε > 0. This means that the sender’s utilities under priors µ̃+ε and µ̃−ε
+are
+                                X         X                                           
+                   Uπ (µ̃+ε ) =    µ0 (ω)        π(s|ω)u(ã∗s , ω) + π(s0 |ω)u(a1 , ω)
+                                      ω∈Ω             s∈S\{s0 }
+                                      X                X                                              
+                           −ε
+                  Uπ (µ̃        ) =         µ0 (ω)                π(s|ω)u(ã∗s , ω) + π(s0 |ω)u(a′ , ω) .
+                                      ω∈Ω             s∈S\{s0 }
+
+We see that
+                                                        X                                        
+                      Uπ (µ̃+ε ) − Uπ (µ̃−ε ) =               µ0 (ω)π(s0 |ω) u(a1 , ω) − u(a′ , ω) .
+                                                        ω∈Ω
+
+Because we assumed µ0 (ω) > 0, π(s0 |ω) > 0, ∀ω ∈ Ω, and the randomly sampled utility function
+satisfies u(a1 , ω) ̸= u(a′ , ω) with probability 1, we have
+
+                                              Uπ (µ̃+ε ) − Uπ (µ̃−ε ) = C ̸= 0
+
+for some constant C ̸= 0 independent of ε. This means that Uπ (µ) is not continuous at µ̃.
+
+
+B      Omitted Proofs in Section 4
+B.1     Proof of Observation 1
+Proof. Consider an unrestricted signal space S, and for an instance I, let (c∗ , π ∗ ) denote the optimal
+strategy, with µ∗c denoting the framing-induced belief. For this strategy, let m : A → S denote the
+correspondence between actions to signals under (µ∗c , π ∗ ). Then the sender utility is:
+                                    XX              X
+                                           u(a, ω)         π ∗ (s|ω)                                 (25)
+                                              ω∈Ω a∈A               s∈m(a)
+
+
+                                                                  29
+Consider a scheme π ′ (a|ω) = s∈m(a) π(s|ω). We note that the receiver takes action a when the
+                                  P
+receiver observes signal a under this scheme since:
+                  X
+                      µ∗c (ω)π ∗ (s|ω)[v(a, ω) − v(a′ , ω)] ≥ 0 ∀s ∈ m(a), ∀a′ ∈ A
+                  ω∈Ω
+                          X                                         X
+                   =⇒           µ∗c (ω)[v(a, ω) − v(a′ , ω)]                π ∗ (s|ω) ≥ 0     ∀a′ ∈ A
+                          ω∈Ω                                      s∈m(a)
+
+It is thus clear that the sender utility from Eq. (25) in unchanged by using this direct scheme with
+signal space S equal A as action recommendations.
+
+B.2    Proof of Theorem 2
+Without loss of generality, assume that the utility functions of the sender and the receiver are
+bounded: ∀a ∈ A, ∀ω ∈ Ω, u(a, ω) ∈ [0, 1], v(a, ω) ∈ [0, 1]. Recall that U ∗ (µ) is the solution to
+the linear program outlined in (6). We aim to show that U ∗ (µ) is continuous at any µ ∈ ∆(Ω)
+satisfying µ(ω) > 0, ∀ω ∈ Ω. We break this result into a set of intermediate claims.
+
+Lemma 4 (Continuity of posterior). Let π : Ω → ∆(S) be any signaling scheme. Let µ, µ′ ∈ ∆(Ω)
+be two receiver beliefs. Let µs , µ′s be the posterior beliefs induced by signal s under π and priors µ,
+µ′ respectively. Suppose minω∈Ω µ(ω) ≥ p0 > 0. Then, ∥µs − µ′s ∥1 ≤ p20 ∥µ − µ′ ∥1 .
+
+Proof of Lemma 4. Let π(s) = ω∈Ω µ(ω)π(s|ω) and π ′ (s) = ω∈Ω µ′ (ω)π(s|ω) be the probability
+                                P                               P
+of signal s under prior µ and µ′ respectively. By the definition of µs , µ′s and by triangle inequality,
+                             X µ(ω)π(s|ω) µ′ (ω)π(s|ω)
+              ∥µs − µ′s ∥1 =        π(s)  − π′ (s)
+                                ω∈Ω
+                                X µ(ω)π(s|ω)              ′                X µ′ (ω)π(s|ω)       ′
+                           ≤              π(s)         − µ (ω)π(s|ω)
+                                                             π(s)    +              π(s)    − µ (ω)π(s|ω)
+                                                                                                 π ′ (s)  .
+                                ω∈Ω                                        ω∈Ω
+
+For the first term above,
+                      X µ(ω)π(s|ω)                 ′
+                                              − µ (ω)π(s|ω)
+                                                                    X π(s|ω)
+                                                                                          ′
+                                   π(s)             π(s)    =               π(s) |µ(ω) − µ (ω)|.
+                        ω∈Ω                                         ω∈Ω
+
+We note that, ∀ω ∈ Ω,
+                        π(s|ω)          π(s|ω)             P π(s|ω)         1
+                         π(s) =             ′      ′ ≤ p                ′ ≤ p .                               (26)
+                                P
+                                  ω ′ ∈Ω µ(ω )π(s|ω )    0  ω ′ ∈Ω π(s|ω )   0
+
+                                              µ′ (ω)π(s|ω)
+                    X µ(ω)π(s|ω)                                  X
+                                                                        1           ′       1        ′
+              =⇒               π(s)       −      π(s)         ≤         p0 |µ(ω) − µ (ω)| = p0 ∥µ − µ ∥1 .    (27)
+                    ω∈Ω                                           ω∈Ω
+
+
+
+
+                                                              30
+   For the second term,
+          X µ′ (ω)π(s|ω)      ′                                        ′
+                           − µ (ω)π(s|ω)              µ′ (ω)π(s|ω) ππ(s)π
+                                                                     (s)−π(s)
+                                                X
+                   π(s)         π ′ (s)  =                                ′ (s)
+           ω∈Ω                                  ω∈Ω
+                                                                                    ′  ′         ′   ′
+                                                                      P
+                                                                           ω ′ ∈Ω (µ (ω )−µ(ω ))π(s|ω )
+                                                X
+                                           =          µ′ (ω)π(s|ω)                   π(s)π ′ (s)
+                                                ω∈Ω
+                                                                                  ′  ′     ′                  ′
+                                                                     P
+                                                                         ω ′ ∈Ω |µ (ω )−µ(ω )|·maxω ′ ∈Ω π(s|ω )
+                                                X
+                                           ≤          µ′ (ω)π(s|ω)                     π(s)π ′ (s)
+                                                ω∈Ω
+                                                              X µ′ (ω)π(s|ω) max ′              ′
+                                                                                      ω ∈Ω π(s|ω )
+                                           = ∥µ′ − µ∥1                π ′ (s)           π(s)
+                                                              ω∈Ω
+                                                              X µ′ (ω)π(s|ω)
+                                  by (26) ≤ ∥µ′ − µ∥1                 π ′ (s)
+                                                                                 1    1    ′
+                                                                                 p0 = p0 ∥µ − µ∥1 .
+                                                              ω∈Ω
+
+
+   Therefore, we obtain ∥µs − µ′s ∥1 ≤ p20 ∥µ′ − µ∥1 .
+
+   Recall that in the model (Section 2) we assumed “every action a ∈ A is strictly inducible” in
+the receiver. This means that there exists a constant D > 0 such that, for every action a ∈ A,
+there exists a belief ηa ∈ ∆(Ω) for which Eω∼ηa [v(a, ω) − v(a′ , ω)] ≥ D > 0 for every a′ ̸= a.
+   We now want to show the following: Suppose the prior µ ∈ ∆(Ω) satisfies µ(ω) ≥ 2p0 > 0, ∀ω ∈
+                                                             p2 D
+Ω. Then, for any prior µ′ satisfying ∥µ′ − µ∥1 ≤ ε < min{p0 , 02 }, we have:
+                                                                      4ε
+                                          U ∗ (µ′ ) − U ∗ (µ) ≤            .
+                                                                     p20 D
+This will directly prove the theorem.
+    Let π ∗ be the optimal signaling scheme for µ, namely, a solution to the linear program in the
+definition ofPU ∗ (µ). Let π ∗ (a) be the unconditional probability that π ∗ sends signal a under prior
+µ: π ∗ (a) = ω∈Ω µ(a)π ∗ (a|ω). Let µa ∈ ∆(Ω) be the posterior belief induced by signal a under
+prior µ:
+                                                µ(ω)π ∗ (a|ω)
+                                     µa (ω) =                 ,       ∀ω ∈ Ω.
+                                                   π ∗ (a)
+Since π ∗ is persuasive (the constraint in the linear program), a must be an optimal action for the
+receiver on posterior µa :
+
+                                  Eω∼µa [v(a, ω) − v(a′ , ω)] ≥ 0, ∀a′ ̸= a.
+
+According to inducibility assumption, there exists a belief ηa ∈ ∆(Ω) for which Eω∼ηa [v(a, ω) −
+v(a′ , ω)] ≥ D > 0 for every a′ ̸= a. Consider the convex combination of µa and ηa with coefficients
+1 − δ, δ (we will choose δ in the end): ξa = (1 − δ)µa + δηa . By the linearity of expectation, a must
+be better than any other action a′ by δD on belief ξa :
+
+    Eξa [v(a, ω) − v(a′ , ω)] = (1 − δ)Eµ̂a [v(a, ω) − v(a′ , ω)] + δEηa [v(a, ω) − v(a′ , ω)] ≥ δD. (28)
+
+Let ξ = a∈A π ∗ (a)ξa ∈ ∆(Ω), and write µ as the convex combination of ξ and another belief
+          P
+χ ∈ ∆(Ω):
+                                                      X
+                           µ = (1 − y)ξ + yχ =           (1 − y)π ∗ (a)ξa + yχ.                      (29)
+                                                          a∈A
+
+
+                                                         31
+Lemma 5 (Proposition 1 of Zu et al. [38]). If δ ≤ p0 , then there exist χ on the boundary of ∆(Ω)
+and 0 ≤ y ≤ pδ0 ≤ 1 that satisfy (29).
+   Since (29) is a convex decomposition of the prior µ, according to [22], there exists a signaling
+scheme π̃ that induces posterior ξa with probability (1 − y)π ∗ (a), for a ∈ A, and the posterior that
+puts all probability on ω with probability yχ(ω), for ω ∈ Ω. Namely, π̃ has signal space S = A ∪ Ω
+and signal probability
+                                        (1−y)π ∗ (a)ξa (ω)
+                                     
+                                     
+                                     
+                                            µ(ω)          for s = a ∈ A;
+                                            yχ(ω)
+                              π̃(s|ω) =     µ(ω)                for s = ω ∈ Ω;
+                                          
+                                          
+                                          0                    otherwise.
+It is not hard to verify that, under prior µ and signaling scheme π̃, the posterior induced by signal
+a ∈ A is equal to ξa , and the posterior induced by signal ω is the deterministic distribution on ω.
+   We show that, whenever π̃ sends an action recommendation a ∈ A, the recommendation is
+persuasive for the receiver under any prior µ′ in B1 (µ, ε) = {µ′ : ∥µ′ − µ∥1 ≤ ε}.
+Claim 1. Suppose δ ≥ p2ε
+                       0D
+                          . Then, for any prior µ′ ∈ B1 (µ̂, ε), any action recommendation a ∈ A
+from π̃ is persuasive.
+
+Proof. By continuity of posterior (Lemma 4), the posteriors induced by signal a under prior µ and
+µ′ satisfy
+                                     ∥µa − µ′a ∥1 ≤ p20 ∥µ − µ′ ∥1 ≤ p2ε0 .
+
+Note that the posterior µa = ξa , so ∥ξa − µ′a ∥1 ≤ p2ε0 . Then, since the receiver’s utility is in [0, 1],
+for any action a′ ̸= a,
+               Eω∼µ′a [v(a, ω) − v(a′ , ω)] − Eω∼ξa [v(a, ω) − v(a′ , ω)] ≤ ∥µa − ξa ∥1 ≤ p2ε0 .
+Together with (28), we get
+                                Eω∼µa [v(a, ω) − v(a′ , ω)] ≥ δD − p2ε0 ≥ 0.
+Thus, the action recommendation a is persuasive.
+
+   Then, we show that the signaling scheme π̃ is “close to” π ∗ in the following sense:
+Claim 2. For any a ∈ A and ω ∈ Ω, |π̃(a|ω) − π ∗ (a|ω)| ≤ pδ0 + y.
+
+Proof. By definition,
+                                      (1 − y)π ∗ (a)ξa (ω) π ∗ (a)µa (ω)
+             |π̃(a|ω) − π ∗ (a|ω)| =                         −
+                                             µ(ω)                 µ(ω)
+                                              π ∗ (a)ξa (ω) π ∗ (a)µa (ω)           π ∗ (a)µa (ω)
+                                   ≤ (1 − y)                 −              +y·
+                                                   µ(ω)           µ(ω)                   µ(ω)
+                                               ∗
+                                             π (a)
+                                   = (1 − y)         ξa (ω) − µa (ω) + y · π ∗ (a|ω)
+                                             µ(ω)
+                                             π ∗ (a)
+                                   = (1 − y)         · δ ηa (ω) − µa (ω) + y · π ∗ (a|ω)
+                                             µ(ω)
+                                             1                      δ
+                                   ≤ (1 − y) · δ · 1 + y · 1 ≤         + y.
+                                             p0                    p0
+
+
+
+                                                      32
+    Let U (µ, π̃) be the sender’s expected utility when using signaling scheme π̃. Since the action
+recommendation from π̃ are persuasive under prior µ (Claim 1), the receiver takes a when receiving
+signal a. When receiving any signal ω, the receiver takes some action a∗ω ∈ arg maxa∈A v(a, ω). So,
+                                X         X                                     
+                    U (µ, π̃) =     µ0 (ω)     π̃(a|ω)u(a, ω) + π̃(ω|ω)u(a∗ω , ω) .
+                                     ω∈Ω             a∈A
+
+Because we assumed u(a, ω) ≥ 0,
+                                           X                X
+                           U (µ, π̃) ≥             µ0 (ω)         π̃(a|ω)u(a, ω) =: UA (π̃).
+                                           ω∈Ω              a∈A
+
+where UA (π̃) denotes the expected utility from action recommendation signals, which is also the
+objective function of the linear program in the definition in U ∗ (µ). Note that UA (π ∗ ) = U ∗ (µ). We
+claim that UA (π̃) cannot be too much worse than UA (π ∗ ):
+
+Claim 3. Given δ ≥ p2ε
+                    0D
+                       , we have UA (π̃) ≥ UA (π ∗ ) − p2δ0 .
+
+Proof. By definition,
+                               X              X
+                   UA (π̃) =         µ0 (ω)         π̃(a|ω)u(a, ω)
+                               ω∈Ω            a∈A
+                               X              X                           δ         X             X
+           (by Claim 2) ≥            µ0 (ω)         π ∗ (a|ω)u(a, ω) −          +y         µ0 (ω)         u(a, ω)
+                                                                           p0
+                               ω∈Ω            a∈A                                    ω∈Ω            a∈A
+                                                                                     |          {z             }
+                                                                                                ≤1
+                                                    δ
+                           ≥ UA (π ∗ ) − y −
+                                                    p0
+                                              2δ
+                           ≥ UA (π ∗ ) −
+                                              p0
+
+where the last line used y ≤ pδ0 from Lemma 5.
+
+    Because π̃ is persuasive for any prior µ′ ∈ B1 (µ, ε) and UA (π̃) ≥ UA (π ∗ ) − p2δ0 , we have:
+
+                           U ∗ (µ′ ) ≥ U (µ′ , π̃) ≥ UA (π̃)
+                                                                      2δ
+                                                         ≥ UA (π ∗ ) −
+                                                                      p0
+                                                                     2δ             4ε
+                                                         = U ∗ (µ) −    ≥ U ∗ (µ) − 2
+                                                                     p0            p0 D
+
+where we let δ = p2ε
+                  0D
+                     . By a symmetric argument, we also have U ∗ (µ) ≥ U ∗ (µ′ ) − p4ε
+                                                                                    2 D , which
+                                                                                                                    0
+implies |U ∗ (µ′ ) − U ∗ (µ)| ≤ p4ε
+                                 2D .
+                                 0
+
+
+
+B.3     Proof of Theorem 3
+Proof. Beginning with the first claim, recall that we consider sender utilities to be positive (this is
+without loss of generality since the sender utility is linear in u(a, ω), allowing us to normalize as
+needed). Let au (ω) = arg maxa u(a, ω) and av (ω) = arg maxa v(a, ω) denote the optimal action for
+
+                                                              33
+the sender and receiver at state ω respectively. Further, let ωmin = arg minω µ0 (ω)u(au (ω), ω); it
+captures the “least” important state for the sender assuming sender-optimal action at each state.
+                                                                                       ε
+    Since B = ∆(Ω), consider using framing to induce a belief µc (ωmin ) = 1 − ε and |Ω|−1 for all
+other states; let the signaling scheme π deterministically recommend the received optimal action
+at ωmin and sender optimal actions at all other states. In other words:
+
+                     π(av (ωmin )|ωmin ) = 1   and     ∀ω ̸= ωmin : π(au (ω)|ω) = 1.
+
+Since the sender’s utility is non-negative, if the receiver follows the recommended actions outlined
+by this scheme, the sender is guaranteed to achieve at least the following utility:
+                                                                             
+                    X
+                                    u                    1                 1
+                           µ0 (ω)u(a (ω), ω) ≥ umax −       umax = 1 −          umax
+                                                        |Ω|               |Ω|
+                   ω̸=ωmin
+
+where we note that the maximal possible utility achievable by the sender is umax = ω µ0 (ω)u(au (ω), ω)
+                                                                                      P
+                                                                   1
+and by the pigeonhole principle, µ0 (ωmin )u(au (ωmin ), ωmin ) ≤ |Ω| umax . We now show that following
+the recommended actions is ε-obedient for the receiver. Indeed, for a recommended action a and
+any other action a′ , the ε-obedience expression for this pair under the scheme π is:
+                                                     X       ε
+    (1 − ε)π(a|ωmin )[v(a, ωmin ) − v(a′ , ωmin )] +              π(a|ω)[v(a, ω) − v(a′ , ω)] ≥ −ε.
+                                                          |Ω| − 1
+                                                     ω̸=ωmin
+
+When the receiver gets recommended action av (ωmin ), this expression becomes at least (1 − ε)
+[v(av (ωmin ), ωmin ) − v(a′ , ωmin )] − ε ≥ −ε since at state ωmin , action av (ωmin ) is optimal for the
+receiver.
+    P Conversely,        if the receiver is recommended some action a ̸= av (ωmin ), then the expression
+                  ε                          ′
+is:    ω̸=ωmin |Ω|−1 π(a|ω)[v(a, ω) − v(a , ω)] ≥ −ε since the utilities are bounded to [0, 1]. So, ε-
+obedience is satisfied.
+    For the second claim, we can make use of an additional assumption: the sender utility is state-
+independent. This means that their utility is maximized if the receiver takes some action au at all
+possible states. We also recall from Section 2 that any action of the receiver is inducible – that is,
+for any action a ∈ A, there exists some belief µa wherein taking a is optimal for the receiver. For
+the sender optimal action au , let µau be the belief where au is optimal for the receiver. Indeed, µau
+can be computed using the following set of linear constraints:
+                            X
+                                 µ(ω)[v(au , ω) − v(a′ , ω)] ≥ 0, ∀a′ ∈ A.
+                              ω
+
+Since B = ∆(Ω), we can choose a framing c to induce belief µau . We accompany this framing with
+an uninformative signaling scheme π. Such a scheme reveals no information about the realized
+state. For example, for a given action a1 , π(a1 |ω) = 1 for all ω is an uninformative scheme. Under
+this joint strategy, the receiver’s belief is always µau , where their best-response is to take the sender
+optimal action au . This is thus an optimal strategy for the sender.
+
+
+C     Experimental Setup: Advertising Case Study
+C.1    Instance Setup and Parameters
+Here we include the detailed setup of the advertising example we used to verify our framework
+experimentally. We describe the target customer and brand to the LLM as follows. These are used
+
+                                                     34
+to generate new framing as well as estimate customers’ priors. The description of the outerwear
+line are taken directly from the product line of a real-world clothing brand (Patagonia), with the
+brand name changed to “Himalaya”. Note that the utilities here are not within the range [0, 1],
+but can be normalized to be so without loss of generality.
+
+   • States: There are 4 possible states: (Chic/Trendy, Durable), (Chic/Trendy, Not Durable),
+     (Functional/Practical, Durable), (Functional/Practical, Not Durable).
+
+   • Description of Target Demographic: Our new target demographic are fashion-aware average
+     mall consumers, who are casually into an active lifestyle. They are middle class, but are will-
+     ing to pay a slight premium for quality and style. This is a segment that the athleisure market
+     has dominated of late, with brands like Lululemon, Nike being the main players. Consumers
+     here like the idea of performance wear (e.g., for hiking or skiing) but are not deeply famil-
+     iar with or motivated by technical characteristics. What matters most is whether the clothes
+     looks stylish in everyday environments like schools, cafés, or city streets. Functionality and
+     durability is a nice bonus, but aesthetic appeal primarily drives their interest.
+
+   • Description of the Brand: Himalaya is fairly well known brand in the outdoor enthusiast,
+     mountaineering, and adventure community. It has a reputation for bulletproof build quality
+     and performance, and valuing sustainability. It is launching a new outerwear line, that in-
+     cludes parkas, ski-jackets and ski-pants, windbreakers, and thermal layers. All products here
+     are made with 100% postconsumer recycled nylon ripstop and without PFAS. They meet H2No
+     Performance Standard for waterproofness and breathability. Fabric and inner membrane have
+     durable water repellent (DWR) finish.
+
+   • True/Sender/Brand Prior: µ0 = [0.225, 0.125, 0.5, 0.15]. This was obtained by asking the
+     LLM about how products would fit into each of the categories (i.e. their prior) given the
+     brand description above.
+
+   • Brand Utility (columns correspond to the 4 states and the rows are ”buy on sale”, ”buy
+     regular price” and ”not buy” actions:
+                                                         
+                                         N/A 4.0 5.0 4.5
+                                        8.0 7.0 6.5 6.0
+                                           0  0    0    0
+
+   • Target Consumer Utility (columns correspond to the 4 states and the rows are ”buy on sale”,
+     ”buy regular price” and ”not buy” actions:
+                                                            
+                                       N/A 5.0 −30 −40
+                                      6.0 4.0 −50 −65
+                                        0      0   0      0
+
+C.2    Prompts Used for LLMs
+Estimating framing induced beliefs:       To estimate the belief for a given framing, we use the
+following prompt template. The strings Target Demographic and Brand Description are given
+above.
+    You will be used as a proxy for a target demographic to assess shopping inclinations for market
+research. You will be given a description of the demographic (their preferences, etc) and the motto
+
+                                                35
+and description of a clothing line. You will be asked to provide your responses in a JSON format
+specified in the prompt
+   GENERAL PROBLEM DESCRIPTION: You are taking the role of someone in the given de-
+mographic. You can imagine they categorize clothing into the following categories: (trendy, more
+durable), (trendy, less durable), (not trendy, more durable), (not trendy, less durable). Please see
+BUYER DESC for what this buyer values.
+    BUYER DESC: Target Demographic
+    BRAND DESC: Brand Description
+    TASK: Your role is to act as a member of the described demographic and evaluate how you would
+interpret the products from a new outerwear line based solely on the brand’s motto and product
+description (See BRAND DESC). Your goal is to determine how you (as an average style-aware
+mall-shopper) would categorize the product line into the following four quadrants: (Chic/Trendy,
+Durable), (Chic/Trendy, Not Durable), (Functional/Practical, Durable) and (Functional/Practical,
+Not Durable). Please return what probabilities (recall they sum to 1) this average user from this
+demographic would assign to each of these categories for products from this line. Note that this
+is not about what the demographic cares about or prioritizes in purchases. Instead, focus on how
+they would interpret the messaging — what assumptions they would make about the clothing’s
+fashionability and durability from the language, tone, and emphasis in the brand’s description and
+motto. IMPORTANT: DO NOT MAKE FAR REACHING ASSUMPTIONS OR TRY TO BE
+UNJUSTIFIABILY AGGRESSIVE. Provide your response in the following JSON format:
+
+{
+     "reasoning": string,
+     "probabilities": {
+         "trendy_more_durable": float,
+         "trendy_less_durable": float,
+         "not_trendy_more_durable": float,
+         "not_trendy_less_durable": float
+     },
+}
+
+Optimizing over the framing space:        To search over the framing space, we use the following
+prompt template. The key-words BRAND DESC and BUYER DESC correspond to the instance param-
+eters mentioned earlier. Any generated framing and corresponding feedback is appended to this
+prompt for the next iteration:
+   You will be asked to generate a brand motto and description for one of its product lines. For
+each motto, description you generate, quantitative feedback will be provided on the generated, which
+you will use to improve what you generate.
+    TASK DESC: You will be given a BRAND DESC that describes the clothing brand ’Himalaya’
+and a new product line they are trying to launch. You will be given BUYER DESC that outlines the
+features of the demographic they are targeting for this new product line. Your task is to generate a
+BRAND MOTTO (at most 10 words) and PRODUCT LINE DESC of their new product line (at
+most 100 words). The motto and description will be shown to members in the target demographic.
+Their perception of how products from this new line fit into the 4 possible categories this demographic
+cares about will be measures (quantitatively). Please see BUYER DESC for how they partition
+clothes into 4 possible states - it is their belief over these states that we measure. Feel free to USE
+
+                                                  36
+OR NOT USE any information in the provided BRAND DESC to sway the target demographic.
+Not revealing information can sometimes be helpful. Using this perceived prior, we will signal the
+buyer (using Bayesian Persuasion) to influence their actions (which buy-on-sale, buy-regular-price,
+not buy). We will compute all of this and give you the numerical utility the company achieves when
+using your generated motto and description. See FEEDBACK DESC on how the feedback will be
+structured. Please use this feedback to improve the BRAND MOTTO and PRODUCT DESC you
+generate. Note that your generated motto and description directly influences how the buyer perceives
+this Himalaya’s new product line. This is captured in their prior, which will directly influence the
+utility we can derive after signaling. Lastly, feel free to navigate this space to see what works and
+what doesn’t.
+   FEEDBACK DESC: After each BRAND MOTTO and PRODUCT LINE DESC you generate,
+you will receive feedback:
+   1) Current Belief: The belief induced by your framing and the consumer’s reasoning.
+   2) Current Utility, Correctness and Language score: The expected utility the brand achieves
+with this belief and your scores on not using false claims and use of good natural language.
+   3) Total Score: (average of quality scores) * utility. THIS IS WHAT WE MAXIMIZE.
+   4) Belief Change: How beliefs changed from the previous round and whether utility improved or
+decreased.
+   5) Best So Far: The best framing found so far with its belief and total score for reference.
+   IMPORTANT: Use natural, common language. Do not fabricate claims not supported by the
+brand facts.”
+   Please generate a BRAND MOTTO and PRODUCT LINE DESC in json form with those as
+keys. Avoid just re-stating the preferences of the buyer.
+
+Verifying soundness of framing:          We use LLMs to also verify the framings generated to
+ensure they are not making incorrect claims or using poor language.
+   You will be given factual information about a clothing brand (labelled BRAND DESC) and a
+generated marketing description (labelled GENERATED DESC) that will be shown to consumers.
+    Your goal is to score the GENERATED DESC on factual correctness using ONLY these three
+scores: 1.0, 0.5, or 0.0.
+    CORRECTNESS CRITERIA: - The description should NOT contain claims that directly con-
+tradict the BRAND DESC
+    - The description should NOT fabricate specific claims not supported by BRAND DESC (e.g.,
+claiming ”award-winning” when not mentioned)
+   - Omitting information is FINE and does not violate correctness
+   - General marketing language and subjective claims (e.g., ”stylish”) are FINE
+   - Specific technical claims must align with BRAND DESC if made
+    SCORING GUIDE (use ONLY these values): - 1.0: Minor issues or no issues. No clear
+factual contradictions. Plausible marketing claims are acceptable even if not explicitly stated in
+BRAND DESC. Be generous here.
+    - 0.5: Some claims are erroneous or stretch the facts. Contains unsupported specific claims that
+go beyond reasonable marketing language.
+   - 0.0: Major errors. Contains clear factual lies or direct contradictions of BRAND DESC.
+
+
+                                                 37
+   Return JSON with keys: ”reasoning” (string explaining your score) and ”correctness score”
+(must be exactly 1.0, 0.5, or 0.0).
+
+C.3    Framings
+The following is the Patagonia framing (their actual motto and description of a product line) used
+for the belief estimation experiments and as the starting point for the optimal framing search.
+Thereafter, we give the best framings generated by Claude Sonnet 4 and GPT 5.2.
+Patagonia Slogan: Build the best product.
+Patagonia Product Line Description: Whether you’re seeking boulders and alpine views
+or stalking rainbow trout, this low-profile, waterproof jacket will keep you dry and provide rain
+protection from the fork in the trail to the places less traveled, and back again. This 3-layer shell
+meets our H2No® Performance Standard for exceptional waterproof/breathable protection, and
+the fabric, membrane and durable water repellent (DWR) finish are made without intentionally
+added PFAS.
+Claude Optimal Slogan: City Sharp. Mountain Ready.
+Claude Product Line Description: Our newest collection redefines modern outerwear with
+clean lines, contemporary cuts, and versatile designs that transition effortlessly from city to coun-
+tryside. Each piece features premium sustainable fabrics and thoughtful construction details that
+ensure lasting quality without compromising on style. Perfect for the modern lifestyle - whether
+you’re commuting to work, meeting friends for brunch, or enjoying weekend adventures. These
+aren’t just clothes, they’re wardrobe essentials that reflect your values and elevate your everyday
+look with confidence and sophistication.
+GPT Optimal Slogan: Where style meets substance.
+GPT Product Line Description: Himalaya’s new outerwear brings modern, everyday style
+to real weather: streamlined parkas, ski jackets and pants, windbreakers, and thermal layers that
+look clean on campus, in cafés, and on the go. The fits are sleek and easy to layer—made to pair
+with denim, joggers, and sneakers. Underneath the minimal finish: 100% recycled nylon ripstop, a
+durable water-repellent finish, and high performance waterproof/breathable comfort for rainy days
+and weekend trips.
+
+
+
+
+                                                 38
+

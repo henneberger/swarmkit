@@ -1,0 +1,117 @@
+{
+  "kind": "papers",
+  "id": "2509.25565",
+  "title": "Information Design With Large Language Models",
+  "topic": "strategic information",
+  "page_url": "https://arxiv.org/abs/2509.25565",
+  "pdf_url": "https://arxiv.org/pdf/2509.25565",
+  "retrieved_at": "2026-09-10T22:39:42.605654+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2509.25565",
+      "resolved_url": "https://arxiv.org/abs/2509.25565",
+      "path": "sources/economic-games/papers/2509.25565/page.html",
+      "bytes": 42251,
+      "sha256": "6a7243cbd0e317ef49a5bc1f1cd8e745af8317648fe3608d96bc4e1f260ade37"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2509.25565",
+      "resolved_url": "https://arxiv.org/pdf/2509.25565",
+      "path": "sources/economic-games/papers/2509.25565/paper.pdf",
+      "bytes": 1605189,
+      "sha256": "f30ad055356623241795a5c4cf58018b101881311c860b340b148f9440fb1d32"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2509.25565: Information Design With Large Language Models"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Information Design With Large Language Models"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2509.25565v2"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Information design is typically studied through the lens of Bayesian signaling, where signals shape beliefs purely based on their correlation with the true state of the world. However, behavioral economics and psychology emphasize that human decision-making is more complex and can depend on how information is framed. This paper formalizes a language-based notion of framing and bridges this to the popular Bayesian-persuasion model. We model framing as a possibly non-Bayesian, linguistic way to influence a receiver's prior belief, while a signaling/recommendation scheme can further refine this belief in the classic Bayesian way. A key challenge in systematically optimizing in this framework is the vast space of possible framings and the difficulty of predicting their effects on receivers. Based on growing evidence that Large Language Models (LLMs) can effectively serve as proxies for human behavior, we formulate a theoretical model based on access to a framing-to-belief mapping. This model then enables us to precisely characterize when solely optimizing framing or jointly optimizing framing and signaling is tractable. We substantiate our theoretical analysis with an empirical study that leverages LLMs to optimize over the natural-language framing space using an iterative prompt optimization method combined with analytical solvers for optimal signaling schemes."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Information Design With Large Language Models"
+    ],
+    "twitter:description": [
+      "Information design is typically studied through the lens of Bayesian signaling, where signals shape beliefs purely based on their correlation with the true state of the world. However, behavioral..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Information Design With Large Language Models"
+    ],
+    "citation_author": [
+      "Duetting, Paul",
+      "Hossain, Safwan",
+      "Lin, Tao",
+      "Leme, Renato Paes",
+      "Ravindranath, Sai Srivatsa",
+      "Xu, Haifeng",
+      "Zuo, Song"
+    ],
+    "citation_date": [
+      "2025/09/29"
+    ],
+    "citation_online_date": [
+      "2026/03/03"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2509.25565"
+    ],
+    "citation_arxiv_id": [
+      "2509.25565"
+    ],
+    "citation_abstract": [
+      "Information design is typically studied through the lens of Bayesian signaling, where signals shape beliefs purely based on their correlation with the true state of the world. However, behavioral economics and psychology emphasize that human decision-making is more complex and can depend on how information is framed. This paper formalizes a language-based notion of framing and bridges this to the popular Bayesian-persuasion model. We model framing as a possibly non-Bayesian, linguistic way to influence a receiver's prior belief, while a signaling/recommendation scheme can further refine this belief in the classic Bayesian way. A key challenge in systematically optimizing in this framework is the vast space of possible framings and the difficulty of predicting their effects on receivers. Based on growing evidence that Large Language Models (LLMs) can effectively serve as proxies for human behavior, we formulate a theoretical model based on access to a framing-to-belief mapping. This model then enables us to precisely characterize when solely optimizing framing or jointly optimizing framing and signaling is tractable. We substantiate our theoretical analysis with an empirical study that leverages LLMs to optimize over the natural-language framing space using an iterative prompt optimization method combined with analytical solvers for optimal signaling schemes."
+    ]
+  },
+  "extracted_text_characters": 149537,
+  "text_searchable": true
+}

@@ -1,0 +1,23 @@
+{
+  "kind": "papers",
+  "id": "shapley-1952-value",
+  "title": "A Value for n-Person Games (1952 RAND precursor to 1953 chapter)",
+  "topic": "coalition credit",
+  "page_url": "https://www.rand.org/pubs/papers/P295.html",
+  "pdf_url": "https://www.rand.org/content/dam/rand/pubs/papers/2021/P295.pdf",
+  "retrieved_at": "2026-09-10T22:40:36.395399+00:00",
+  "artifacts": [],
+  "status": "failed",
+  "errors": [
+    {
+      "url": "https://www.rand.org/pubs/papers/P295.html",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://www.rand.org/content/dam/rand/pubs/papers/2021/P295.pdf",
+      "error": "HTTP Error 403: Forbidden"
+    }
+  ],
+  "extracted_text_characters": 0,
+  "text_searchable": false
+}

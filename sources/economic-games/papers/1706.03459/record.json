@@ -1,0 +1,115 @@
+{
+  "kind": "papers",
+  "id": "1706.03459",
+  "title": "Optimal Auctions through Deep Learning: Advances in Differentiable Economics",
+  "topic": "learned mechanisms",
+  "page_url": "https://arxiv.org/abs/1706.03459",
+  "pdf_url": "https://arxiv.org/pdf/1706.03459",
+  "retrieved_at": "2026-09-10T22:39:41.597465+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/1706.03459",
+      "resolved_url": "https://arxiv.org/abs/1706.03459",
+      "path": "sources/economic-games/papers/1706.03459/page.html",
+      "bytes": 42932,
+      "sha256": "342ede352b47e7753495b5cee6590240e113fc0ea4f3b4b27e45bd02d5139163"
+    },
+    {
+      "url": "https://arxiv.org/pdf/1706.03459",
+      "resolved_url": "https://arxiv.org/pdf/1706.03459",
+      "path": "sources/economic-games/papers/1706.03459/paper.pdf",
+      "bytes": 2408406,
+      "sha256": "c79d424f6dee28b7637fb2ac73079ed85b2b485e7b9dfc2857903f9f6f859a02"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 1706.03459: Optimal Auctions through Deep Learning: Advances in Differentiable Economics"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Optimal Auctions through Deep Learning: Advances in Differentiable Economics"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/1706.03459v6"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Designing an incentive compatible auction that maximizes expected revenue is an intricate task. The single-item case was resolved in a seminal piece of work by Myerson in 1981, but more than 40 years later a full analytical understanding of the optimal design still remains elusive for settings with two or more items. In this work, we initiate the exploration of the use of tools from deep learning for the automated design of optimal auctions. We model an auction as a multi-layer neural network, frame optimal auction design as a constrained learning problem, and show how it can be solved using standard machine learning pipelines. In addition to providing generalization bounds, we present extensive experimental results, recovering essentially all known solutions that come from the theoretical analysis of optimal auction design problems and obtaining novel mechanisms for settings in which the optimal mechanism is unknown."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Optimal Auctions through Deep Learning: Advances in Differentiable..."
+    ],
+    "twitter:description": [
+      "Designing an incentive compatible auction that maximizes expected revenue is an intricate task. The single-item case was resolved in a seminal piece of work by Myerson in 1981, but more than 40..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Optimal Auctions through Deep Learning: Advances in Differentiable Economics"
+    ],
+    "citation_author": [
+      "D\u00fctting, Paul",
+      "Feng, Zhe",
+      "Narasimhan, Harikrishna",
+      "Parkes, David C.",
+      "Ravindranath, Sai Srivatsa"
+    ],
+    "citation_date": [
+      "2017/06/12"
+    ],
+    "citation_online_date": [
+      "2022/10/14"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/1706.03459"
+    ],
+    "citation_arxiv_id": [
+      "1706.03459"
+    ],
+    "citation_abstract": [
+      "Designing an incentive compatible auction that maximizes expected revenue is an intricate task. The single-item case was resolved in a seminal piece of work by Myerson in 1981, but more than 40 years later a full analytical understanding of the optimal design still remains elusive for settings with two or more items. In this work, we initiate the exploration of the use of tools from deep learning for the automated design of optimal auctions. We model an auction as a multi-layer neural network, frame optimal auction design as a constrained learning problem, and show how it can be solved using standard machine learning pipelines. In addition to providing generalization bounds, we present extensive experimental results, recovering essentially all known solutions that come from the theoretical analysis of optimal auction design problems and obtaining novel mechanisms for settings in which the optimal mechanism is unknown."
+    ]
+  },
+  "extracted_text_characters": 252059,
+  "text_searchable": true
+}

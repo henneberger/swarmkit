@@ -1,0 +1,113 @@
+{
+  "kind": "papers",
+  "id": "2406.18872",
+  "title": "Efficacy of Language Model Self-Play in Non-Zero-Sum Games",
+  "topic": "language self play",
+  "page_url": "https://arxiv.org/abs/2406.18872",
+  "pdf_url": "https://arxiv.org/pdf/2406.18872",
+  "retrieved_at": "2026-09-10T22:39:42.801735+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2406.18872",
+      "resolved_url": "https://arxiv.org/abs/2406.18872",
+      "path": "sources/economic-games/papers/2406.18872/page.html",
+      "bytes": 41095,
+      "sha256": "63f184d50e3cf8b4608fc66b229811504caac2af669fb8405626327790edc4ef"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2406.18872",
+      "resolved_url": "https://arxiv.org/pdf/2406.18872",
+      "path": "sources/economic-games/papers/2406.18872/paper.pdf",
+      "bytes": 1706867,
+      "sha256": "604bcbad10079a5281803a8bbe408810fe607e29f93f6a0b22fd02992cea89d5"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2406.18872: Efficacy of Language Model Self-Play in Non-Zero-Sum Games"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Efficacy of Language Model Self-Play in Non-Zero-Sum Games"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2406.18872v2"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Game-playing agents like AlphaGo have achieved superhuman performance through self-play, which is theoretically guaranteed to yield optimal policies in competitive games. However, most language tasks are partially or fully cooperative, so it is an open question whether techniques like self-play can effectively be used to improve language models. We empirically investigate this question in a negotiation game setting known as Deal or No Deal (DoND). Crucially, the objective in DoND can be modified to produce a fully cooperative game, a strictly competitive one, or anything in between. We finetune language models in self-play over multiple rounds of filtered behavior cloning in DoND for each of these objectives and evaluate them in self-play and in collaboration with humans. We find that language models improve substantially in self-play, achieving 14-17x higher scores in task reward after finetuning. Further, the trained models generalize to both cooperation and competition with humans, scoring 2.5-6x higher than base models. We view these results as an early promising sign for language model self-play in cooperative settings, despite a lack of theoretical guarantees."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Efficacy of Language Model Self-Play in Non-Zero-Sum Games"
+    ],
+    "twitter:description": [
+      "Game-playing agents like AlphaGo have achieved superhuman performance through self-play, which is theoretically guaranteed to yield optimal policies in competitive games. However, most language..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Efficacy of Language Model Self-Play in Non-Zero-Sum Games"
+    ],
+    "citation_author": [
+      "Liao, Austen",
+      "Tomlin, Nicholas",
+      "Klein, Dan"
+    ],
+    "citation_date": [
+      "2024/06/27"
+    ],
+    "citation_online_date": [
+      "2024/12/09"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2406.18872"
+    ],
+    "citation_arxiv_id": [
+      "2406.18872"
+    ],
+    "citation_abstract": [
+      "Game-playing agents like AlphaGo have achieved superhuman performance through self-play, which is theoretically guaranteed to yield optimal policies in competitive games. However, most language tasks are partially or fully cooperative, so it is an open question whether techniques like self-play can effectively be used to improve language models. We empirically investigate this question in a negotiation game setting known as Deal or No Deal (DoND). Crucially, the objective in DoND can be modified to produce a fully cooperative game, a strictly competitive one, or anything in between. We finetune language models in self-play over multiple rounds of filtered behavior cloning in DoND for each of these objectives and evaluate them in self-play and in collaboration with humans. We find that language models improve substantially in self-play, achieving 14-17x higher scores in task reward after finetuning. Further, the trained models generalize to both cooperation and competition with humans, scoring 2.5-6x higher than base models. We view these results as an early promising sign for language model self-play in cooperative settings, despite a lack of theoretical guarantees."
+    ]
+  },
+  "extracted_text_characters": 84720,
+  "text_searchable": true
+}

@@ -1,0 +1,114 @@
+{
+  "kind": "papers",
+  "id": "2210.10125",
+  "title": "Proximal Learning With Opponent-Learning Awareness",
+  "topic": "opponent shaping extensions",
+  "page_url": "https://arxiv.org/abs/2210.10125",
+  "pdf_url": "https://arxiv.org/pdf/2210.10125",
+  "retrieved_at": "2026-09-10T22:39:40.761236+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2210.10125",
+      "resolved_url": "https://arxiv.org/abs/2210.10125",
+      "path": "sources/economic-games/papers/2210.10125/page.html",
+      "bytes": 42690,
+      "sha256": "d2a08d05ede4f125e8e2fb255613cf85e2f0d5dd23e64b38390adf26e85eb027"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2210.10125",
+      "resolved_url": "https://arxiv.org/pdf/2210.10125",
+      "path": "sources/economic-games/papers/2210.10125/paper.pdf",
+      "bytes": 886600,
+      "sha256": "dadd11d461c02c11b0287c1a4f11e45d050c9adf95b9d29bade52ba9beb4e828"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2210.10125: Proximal Learning With Opponent-Learning Awareness"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Proximal Learning With Opponent-Learning Awareness"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2210.10125v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Learning With Opponent-Learning Awareness (LOLA) (Foerster et al. [2018a]) is a multi-agent reinforcement learning algorithm that typically learns reciprocity-based cooperation in partially competitive environments. However, LOLA often fails to learn such behaviour on more complex policy spaces parameterized by neural networks, partly because the update rule is sensitive to the policy parameterization. This problem is especially pronounced in the opponent modeling setting, where the opponent's policy is unknown and must be inferred from observations; in such settings, LOLA is ill-specified because behaviorally equivalent opponent policies can result in non-equivalent updates. To address this shortcoming, we reinterpret LOLA as approximating a proximal operator, and then derive a new algorithm, proximal LOLA (POLA), which uses the proximal formulation directly. Unlike LOLA, the POLA updates are parameterization invariant, in the sense that when the proximal objective has a unique optimum, behaviorally equivalent policies result in behaviorally equivalent updates. We then present practical approximations to the ideal POLA update, which we evaluate in several partially competitive environments with function approximation and opponent modeling. This empirically demonstrates that POLA achieves reciprocity-based cooperation more reliably than LOLA."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Proximal Learning With Opponent-Learning Awareness"
+    ],
+    "twitter:description": [
+      "Learning With Opponent-Learning Awareness (LOLA) (Foerster et al. [2018a]) is a multi-agent reinforcement learning algorithm that typically learns reciprocity-based cooperation in partially..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Proximal Learning With Opponent-Learning Awareness"
+    ],
+    "citation_author": [
+      "Zhao, Stephen",
+      "Lu, Chris",
+      "Grosse, Roger Baker",
+      "Foerster, Jakob Nicolaus"
+    ],
+    "citation_date": [
+      "2022/10/18"
+    ],
+    "citation_online_date": [
+      "2022/10/18"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2210.10125"
+    ],
+    "citation_arxiv_id": [
+      "2210.10125"
+    ],
+    "citation_abstract": [
+      "Learning With Opponent-Learning Awareness (LOLA) (Foerster et al. [2018a]) is a multi-agent reinforcement learning algorithm that typically learns reciprocity-based cooperation in partially competitive environments. However, LOLA often fails to learn such behaviour on more complex policy spaces parameterized by neural networks, partly because the update rule is sensitive to the policy parameterization. This problem is especially pronounced in the opponent modeling setting, where the opponent's policy is unknown and must be inferred from observations; in such settings, LOLA is ill-specified because behaviorally equivalent opponent policies can result in non-equivalent updates. To address this shortcoming, we reinterpret LOLA as approximating a proximal operator, and then derive a new algorithm, proximal LOLA (POLA), which uses the proximal formulation directly. Unlike LOLA, the POLA updates are parameterization invariant, in the sense that when the proximal objective has a unique optimum, behaviorally equivalent policies result in behaviorally equivalent updates. We then present practical approximations to the ideal POLA update, which we evaluate in several partially competitive environments with function approximation and opponent modeling. This empirically demonstrates that POLA achieves reciprocity-based cooperation more reliably than LOLA."
+    ]
+  },
+  "extracted_text_characters": 90481,
+  "text_searchable": true
+}

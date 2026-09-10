@@ -1,0 +1,706 @@
+
+
+	The AI Economist: Join the Moonshot - Salesforce
+
+			Skip to Content		
+
+	0%
+
+Become an agentic enterprise with our refreshed step-by-step guide. Read it now
+
+	AI
+
+The AI Economist: Join the Moonshot
+
+We are launching an open source collaborative project to build an AI Economist that can be used to guide policy making in the real world.
+
+We invite you to join us in our mission to help improve the world with AI and economics.
+
+						Stephan Zheng 					
+
+			August 6, 2020
+
+			5 min read		
+
+Share article
+
+“As a society, we are entering uncharted territory — a new world in which governments, business leaders, the scientific community and citizens need to work together to define the paths that direct these technologies at improving the human condition and minimizing the risks.” 
+
+Marc Benioff, Chairman and CEO
+
+At Salesforce, we believe that business is the greatest platform for change and our mission to do well and to do good is one of the key drivers that led us to develop the AI Economist.
+
+The AI Economist has already shown promise in designing economic policies that improve social welfare for all, but the work has only just begun. We are launching an open source collaborative project to build an AI Economist that can be used to guide policy making in the real world. 
+
+We invite you to join us in our mission to help improve the world with AI and economics.
+
+AI Researchers: Collaborate on research, contribute to our code, and exchange ideas on how we can build on this work.
+Economics Community: Contribute your expertise to develop rich economic simulations, evaluate AI policies, and explore how AI can solve complex economic problems.
+Policy Experts: Guide this research and tell us which social issues you would like to address using our framework.
+
+Economic Policy Design is Ripe for Change
+
+Economic policy is one of the greatest drivers of social impact within communities of all sizes, but the challenges of designing effective economic policy are significant.
+
+For starters, the design and evaluation of economic policies cannot evolve as rapidly as the world around us, and they cannot adapt to black swan events like what we’ve experienced with COVID-19.
+
+Economic models also need many assumptions to keep the mathematical analysis tractable. This limits the ability for models to fully describe modern economic conditions: they might only study a specific policy lever in isolation (e.g., income tax but not income and consumption tax), a subset of the economy (e.g., manufacturing but not services), abstract away low-level processes (e.g., irrational human responses to changes in tax), or assume the economy is at an equilibrium.
+
+In addition, there is often insufficient high quality economic data to understand the effect of policy. Even when data are available they can introduce biases and perpetuate these biases when used to inform policy.
+
+AI can help.
+
+Challenging Tradition with a New Approach
+
+AI offers a powerful algorithmic and computational solution to complex economic optimization problems. That’s why we have developed an approach to economic policy design that applies reinforcement learning and economic simulations to enable fast and data-driven design and evaluation of new economic policy.
+
+We are open sourcing the AI Economist with the goal of developing a next-generation AI Economist that would allow policy makers and researchers  to:
+
+Scale-up to richer world models and study choices between multiple kinds of policy levers.
+Objectively analyze the impact of various kinds of economic policy, serving to ground policy discussions in principled simulation and reduce ideological bias.
+Be more flexible, for example, in the choice of design objective. This can serve to focus discussions around the choice of policy goals and constraints, for example, tradeoffs in equality and productivity.
+
+Our First Moonshot: A Real World AI Economist
+
+The moonshot goal of this project is to build a reinforcement learning framework that will recommend economic policies that drive social outcomes in the real world, such as improving sustainability, productivity, and equality. To achieve this, we’ll need to advance AI, challenge conventional economic thinking, and create AI that can ground and guide policy making. While none of these tasks are easy, together, they make for a true moonshot.
+
+This moonshot is both ambitious and necessary, and more timely than ever given economic challenges around the world. Importantly, the AI Economist is a powerful optimization framework that can objectively automate policy design and evaluation. This will allow economists and policy experts to focus on the end goal of improving social welfare.
+
+Given the social and ethical implications that economic policies can have, we believe it is essential to have transparency in the process. By open sourcing the AI Economist, not only do we empower collaboration from all over the world but we also enable unfettered review of policy simulations.
+
+The key ingredients are:
+
+A high-fidelity simulation that should be grounded in data, and aligned with economic theory as well as with social and ethical values. Simulations should not be prohibitively expensive to run, and should be maintainable and modular.
+AI policy models should be effective in a wide range of scenarios, explainable, and robust to economic shocks.
+The simulation and policy models should be calibrated against real-world data and, as much as possible, validated in human-subject studies.
+
+Adoption of AI methods by economists and social scientists remains relatively nascent, however, we are at an inflection point where AI, big data, and economics are ready for a seismic shift. The results we’ve seen so far make us hopeful that successful development and adoption could drive impactful change for society.
+
+Help us make this a reality.
+
+Our Path to Success Begins with Trust
+
+As with everything we do at Salesforce, establishing Trust will be core to our success. Our AI research is guided by our trusted AI principles: be Responsible, Accountable, Transparent, Empowering, and Inclusive. These values are the foundation of all our AI endeavors and we expect all contributors to this project to follow these guidelines. In practice, this means:
+
+We aim to improve social welfare for all. We will seek multilateral feedback from affected communities, civil rights groups, and advocacy organizations for underrepresented groups.
+We work with data that is fair and representative of all groups, including minority groups, being aware of the social context that produced the data.
+We provide clear documentation for public data sets and models, for example, through the use of data sheets, model cards, or appropriate alternatives.
+We open source the code used for research and any real-world policy recommendations.
+We evaluate economic policies against objective quantitative metrics, such as GDP, Gini Index, and others.
+We conduct ethical risk analyses about the work, as in Zheng et al., 2020.
+AI policy recommendations should not be influenced by funding partners or other financial interests. Real-world recommendations should only be made after thorough field testing, conversations with stakeholders, and review by an ethical review board.
+
+Join us!
+
+We invite AI researchers, the economics community, and policy experts to contribute to this moonshot. Join us in our mission and let’s improve the world together.
+
+Learn more on our webpage.
+Join our Slack channel.
+Check out the code and tutorials.
+Ask your questions during our Reddit AMA at 11am PST on Friday August 7th hosted on r/Futurology.
+
+Share article
+
+Just For You
+
+					Build Your Dreamforce 2026 Agenda				
+
+	4 min read
+
+					What Does Salesforce Do?				
+
+	18 min read
+
+Explore related content by topic
+
+						AI					
+
+						AI Research					
+
+															Stephan Zheng
+
+					More by Stephan					
+
+			Get the latest articles in your inbox.		
+
+			Sign up now		
+
+					Just For You				
+
+					What 2,000 Leaders Told Us About Winning With Agentic AI				
+
+	5 min read
+
+					What’s the Real Cost of Disconnected Data? Here Are the Numbers				
+
+	4 min read
+
+					Assist Your Front Desk Team With an AI Receptionist				
+
+	5 min read
+
+					Scale Customer Support With AI Agents: 5 Service Tips For SMBs				
+
+	6 min read
+
+					How to Make AI a Trusted Business Partner With Anti-Hallucination Practices				
+
+	9 min read
+
+					Salesforce Connectors: CRM Integrations For Small Business				
+
+	4 min read
+
+					5 AI Service Report Insights for Growing Businesses				
+
+	6 min read
+
+					Agentic AI in HR: Why Employee Trust Starts with the Data Foundation				
+
+	5 min read
+
+Get the latest articles in your inbox.
+
+							Sign up now
+
+		Close
+
+			Get the latest articles in your inbox.		
+
+360 Highlights
+
+							Selected
+
+IT
+
+							Selected
+
+Commerce
+
+							Selected
+
+Marketing
+
+							Selected
+
+Service
+
+							Selected
+
+Sales
+
+							Selected
+
+		Please select at least one newsletter.	
+
+						Email Address
+						Enter a valid e-mail address
+
+		Select your country
+					United States
+					Afghanistan
+					Albania
+					Algeria
+					American Samoa
+					Andorra
+					Anguilla
+					Antarctica
+					Antigua & Barbuda
+					Argentina
+					Armenia
+					Aruba
+					Australia
+					Austria
+					Azerbaijan
+					Bahamas
+					Bahrain
+					Bangladesh
+					Barbados
+					Belarus
+					Belgium
+					Belize
+					Benin
+					Bermuda
+					Bhutan
+					Bolivia
+					Bosnia & Herzegovina
+					Botswana
+					Bouvet Island
+					Brazil
+					British Indian Ocean Territory
+					British Virgin Islands
+					Brunei
+					Bulgaria
+					Burkina Faso
+					Burundi
+					Cambodia
+					Cameroon
+					Canada
+					Cape Verde
+					Caribbean Netherlands
+					Cayman Islands
+					Central African Republic
+					Chad
+					Chile
+					China
+					Christmas Island
+					Cocos (Keeling) Islands
+					Colombia
+					Comoros
+					Congo - Brazzaville
+					Congo - Kinshasa
+					Cook Islands
+					Costa Rica
+					Croatia
+					Curaçao
+					Cyprus
+					Czechia
+					Côte d’Ivoire
+					Denmark
+					Djibouti
+					Dominica
+					Dominican Republic
+					Ecuador
+					Egypt
+					El Salvador
+					Equatorial Guinea
+					Eritrea
+					Estonia
+					Eswatini
+					Ethiopia
+					Falkland Islands
+					Faroe Islands
+					Fiji
+					Finland
+					France
+					French Guiana
+					French Polynesia
+					French Southern Territories
+					Gabon
+					Gambia
+					Georgia
+					Germany
+					Ghana
+					Gibraltar
+					Greece
+					Greenland
+					Grenada
+					Guadeloupe
+					Guam
+					Guatemala
+					Guinea
+					Guinea-Bissau
+					Guyana
+					Haiti
+					Heard & McDonald Islands
+					Honduras
+					Hong Kong SAR China
+					Hungary
+					Iceland
+					India
+					Indonesia
+					Ireland
+					Israel
+					Italy
+					Jamaica
+					Japan
+					Jordan
+					Kazakhstan
+					Kenya
+					Kiribati
+					Kuwait
+					Kyrgyzstan
+					Laos
+					Latvia
+					Lebanon
+					Lesotho
+					Liberia
+					Liechtenstein
+					Lithuania
+					Luxembourg
+					Macao SAR China
+					Madagascar
+					Malawi
+					Malaysia
+					Maldives
+					Mali
+					Malta
+					Marshall Islands
+					Martinique
+					Mauritania
+					Mauritius
+					Mayotte
+					Mexico
+					Micronesia
+					Moldova
+					Monaco
+					Mongolia
+					Montserrat
+					Morocco
+					Mozambique
+					Myanmar (Burma)
+					Namibia
+					Nauru
+					Nepal
+					Netherlands
+					New Caledonia
+					New Zealand
+					Nicaragua
+					Niger
+					Nigeria
+					Niue
+					Norfolk Island
+					North Macedonia
+					Northern Mariana Islands
+					Norway
+					Oman
+					Pakistan
+					Palau
+					Panama
+					Papua New Guinea
+					Paraguay
+					Peru
+					Philippines
+					Pitcairn Islands
+					Poland
+					Portugal
+					Puerto Rico
+					Qatar
+					Romania
+					Russia
+					Rwanda
+					Réunion
+					Samoa
+					San Marino
+					Saudi Arabia
+					Senegal
+					Serbia
+					Seychelles
+					Sierra Leone
+					Singapore
+					Sint Maarten
+					Slovakia
+					Slovenia
+					Solomon Islands
+					Somalia
+					South Africa
+					South Georgia & South Sandwich Islands
+					South Korea
+					Spain
+					Sri Lanka
+					St. Helena
+					St. Kitts & Nevis
+					St. Lucia
+					St. Pierre & Miquelon
+					St. Vincent & Grenadines
+					Suriname
+					Svalbard & Jan Mayen
+					Sweden
+					Switzerland
+					São Tomé & Príncipe
+					Taiwan
+					Tajikistan
+					Tanzania
+					Thailand
+					Timor-Leste
+					Togo
+					Tokelau
+					Tonga
+					Trinidad & Tobago
+					Tunisia
+					Turkey
+					Turkmenistan
+					Turks & Caicos Islands
+					Tuvalu
+					U.S. Outlying Islands
+					U.S. Virgin Islands
+					Uganda
+					Ukraine
+					United Arab Emirates
+					United Kingdom
+					Uruguay
+					Uzbekistan
+					Vanuatu
+					Vatican City
+					Venezuela
+					Vietnam
+					Wallis & Futuna
+					Western Sahara
+					Yemen
+					Zambia
+					Zimbabwe
+
+	Select your Country
+	Select your Country
+
+		State/province
+					北海道 - Hokkaido
+					青森県 - Aomori
+					岩手県 - Iwate
+					宮城県 - Miyagi
+					秋田県 - Akita
+					山形県 - Yamagata
+					福島県 - Fukushima
+					茨城県 - Ibaraki
+					栃木県 - Tochigi
+					群馬県 - Gunma
+					埼玉県 - Saitama
+					千葉県 - Chiba
+					東京都 - Tokyo
+					神奈川県 - Kanagawa
+					新潟県 - Niigata
+					富山県 - Toyama
+					石川県 - Ishikawa
+					福井県 - Fukui
+					山梨県 - Yamanashi
+					長野県 - Nagano
+					岐阜県 - Gifu
+					静岡県 - Shizuoka
+					愛知県 - Aichi
+					三重県 - Mie
+					滋賀県 - Shiga
+					京都府 - Kyoto
+					大阪府 - Osaka
+					兵庫県 - Hyogo
+					奈良県 - Nara
+					和歌山県 - Wakayama
+					鳥取県 - Tottori
+					島根県 - Shimane
+					岡山県 - Okayama
+					広島県 - Hiroshima
+					山口県 - Yamaguchi
+					徳島県 - Tokushima
+					香川県 - Kagawa
+					愛媛県 - Ehime
+					高知県 - Kochi
+					福岡県 - Fukuoka
+					佐賀県 - Saga
+					長崎県 - Nagasaki
+					熊本県 - Kumamoto
+					大分県 - Oita
+					宮崎県 - Miyazaki
+					鹿児島県 - Kagoshima
+					沖縄県 - Okinawa
+
+	Select a state/province
+	Select a state/province
+
+		State/province
+					Alberta
+					British Columbia
+					Manitoba
+					New Brunswick
+					Newfoundland
+					Northwest Territories
+					Nova Scotia
+					Nunavut
+					Ontario
+					Prince Edward Island
+					Quebec
+					Saskatchewan
+					Yukon
+
+	Select a state/province
+	Select a state/province
+
+		State/province
+					Alabama
+					Alaska
+					Arizona
+					Arkansas
+					California
+					Colorado
+					Connecticut
+					Delaware
+					District of Columbia
+					Florida
+					Georgia
+					Hawaii
+					Idaho
+					Illinois
+					Indiana
+					Iowa
+					Kansas
+					Kentucky
+					Louisiana
+					Maine
+					Maryland
+					Massachusetts
+					Michigan
+					Minnesota
+					Mississippi
+					Missouri
+					Montana
+					Nebraska
+					Nevada
+					New Hampshire
+					New Jersey
+					New Mexico
+					New York
+					North Carolina
+					North Dakota
+					Ohio
+					Oklahoma
+					Oregon
+					Pennsylvania
+					Rhode Island
+					South Carolina
+					South Dakota
+					Tennessee
+					Texas
+					Utah
+					Vermont
+					Virginia
+					Washington
+					West Virginia
+					Wisconsin
+					Wyoming
+
+	Select a state/province
+	Select a state/province
+
+			Yes,
+			I would like to receive the Salesforce 360 Highlights newsletter as well as marketing emails regarding Salesforce products, services, and events. I can unsubscribe at any time.		
+
+						I agree to the Privacy Statement and to the handling of my personal information. In particular, I consent to the transfer of my personal information to other countries, including the United States, for the purpose of hosting and processing the information as set forth in the Privacy Statement. Learn More
+
+							I understand that these countries may not have the same data protection laws as the country from which I provide my personal information. For more information, click here.						
+
+					Please read and agree to the Master Subscription Agreement				
+
+				By registering, you confirm that you agree to the processing of your personal data by Salesforce as described in the Privacy Statement.			
+
+						Sign up now					
+
+			Thanks, you're subscribed!		
+
+								CALL US AT
+																		1-800-664-9073
+
+							New to Salesforce?
+
+								What is Salesforce?
+
+								Best CRM software
+
+								Explore all products
+
+								What is cloud computing
+
+								Customer success
+
+								Product pricing
+
+							About Salesforce
+
+								Our story
+
+								Press
+
+								Blog
+
+								Careers
+
+								Trust
+
+								Salesforce.org
+
+								Sustainability
+
+								Investors
+
+								Legal
+
+							Popular Links
+
+								Salesforce Mobile
+
+								AppExchange
+
+								Dreamforce
+
+								CRM software
+
+								Salesforce LIVE
+
+								Salesforce for startups
+
+				Worldwide
+
+Americas
+
+				América Latina (Español)
+
+				Brasil (Português)
+
+				Canada (English)
+
+				Canada (Français)
+
+				United States (English)
+
+Europe, Middle East, and Africa
+
+				España (Español)
+
+				Deutschland (Deutsch)
+
+				France (Français)
+
+				Italia (Italiano)
+
+				Nederland (Nederlands)
+
+				Sverige (Svenska)
+
+				United Kingdom (English)
+
+				All other countries (English)
+
+Asia Pacific
+
+				Australia (English)
+
+				India (English)
+
+				日本 (日本語)
+
+				中国 (简体中文)
+
+				香港 (繁體中文)
+
+				台灣 (繁體中文)
+
+				한국 (한국어)
+
+				Malaysia (English)
+
+				ประเทศไทย (ไทย)
+
+				All other countries (English)
+
+									© Copyright 2026 Salesforce, Inc. All rights reserved. Various trademarks held by their respective owners. Salesforce, Inc. Salesforce Tower, 415 Mission Street, 3rd Floor, San Francisco, CA 94105, United States
+
+Legal
+
+Terms of Service
+
+Privacy Information
+
+Responsible Disclosure
+
+Trust
+
+Contact
+
+Cookie Preferences
+Your Privacy Choices			
+
+			Copied
+
+					Close
+
+					Previous
+
+					Next
+

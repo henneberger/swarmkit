@@ -1,0 +1,38 @@
+{
+  "kind": "repositories",
+  "id": "jiangjiechen__auction-arena",
+  "title": "jiangjiechen/auction-arena",
+  "url": "https://github.com/jiangjiechen/auction-arena",
+  "topic": "LLM auction benchmark",
+  "retrieved_at": "2026-09-10T22:39:50.675171+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/jiangjiechen/auction-arena/blob/d0f3bc851eb376d4ea5e69ae5fe52ec5be987bb3/LICENSE",
+      "resolved_url": "https://github.com/jiangjiechen/auction-arena/blob/d0f3bc851eb376d4ea5e69ae5fe52ec5be987bb3/LICENSE",
+      "path": "sources/economic-games/repositories/jiangjiechen__auction-arena/LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "url": "https://github.com/jiangjiechen/auction-arena/blob/d0f3bc851eb376d4ea5e69ae5fe52ec5be987bb3/README.md",
+      "resolved_url": "https://github.com/jiangjiechen/auction-arena/blob/d0f3bc851eb376d4ea5e69ae5fe52ec5be987bb3/README.md",
+      "path": "sources/economic-games/repositories/jiangjiechen__auction-arena/README.md",
+      "bytes": 2003,
+      "sha256": "74485755484b290f92c3144e345c139c42540b595c6b4c16a316121ed073b6d1"
+    }
+  ],
+  "status": "ok",
+  "commit": "d0f3bc851eb376d4ea5e69ae5fe52ec5be987bb3",
+  "commit_date": "2024-01-28T17:28:27+08:00",
+  "checkout": "sources/economic-games/repositories/jiangjiechen__auction-arena/checkout",
+  "experiments_reproduced": false,
+  "license_files": [
+    "LICENSE"
+  ],
+  "audit": {
+    "anchor": "src/auctioneer_base.py",
+    "finding": "Auctioneer model and separate bidder implementation present. Model calls require separate setup.",
+    "proposed_use": "LLM benchmark adapter candidate",
+    "review_level": "selected code or README; not full audit"
+  }
+}

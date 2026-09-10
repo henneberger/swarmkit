@@ -1,0 +1,97 @@
+{
+  "kind": "posts",
+  "id": "salesforce-ai-economist",
+  "title": "The AI Economist: Improving Equality and Productivity with AI-Driven Tax Policies",
+  "page_url": "https://www.salesforce.com/blog/the-ai-economist/",
+  "retrieved_at": "2026-09-10T22:39:44.786603+00:00",
+  "artifacts": [
+    {
+      "url": "https://www.salesforce.com/blog/the-ai-economist/",
+      "resolved_url": "https://www.salesforce.com/blog/the-ai-economist/?bc=OTH",
+      "path": "sources/economic-games/posts/salesforce-ai-economist/page.html",
+      "bytes": 272546,
+      "sha256": "b0fbaa3ca6a9a873f01857d01b8283f14e2327fea8e701349c1f4f33da2d2e75"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "": [
+      ""
+    ],
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "theme-color": [
+      "#0D9DDA"
+    ],
+    "robots": [
+      "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:type": [
+      "article"
+    ],
+    "og:title": [
+      "The AI Economist: Improving Equality and Productivity with AI-Driven Tax Policies"
+    ],
+    "og:description": [
+      "In this work, we focus on the opportunity to use AI to promote social welfare through the design of optimal tax policies in dynamic economies."
+    ],
+    "og:url": [
+      "https://www.salesforce.com/blog/the-ai-economist/"
+    ],
+    "og:site_name": [
+      "Salesforce"
+    ],
+    "article:publisher": [
+      "https://www.facebook.com/salesforce"
+    ],
+    "article:published_time": [
+      "2020-04-28T20:44:51+00:00"
+    ],
+    "article:modified_time": [
+      "2024-10-30T19:23:09+00:00"
+    ],
+    "og:image": [
+      "https://www.salesforce.com/blog/wp-content/uploads/sites/2/2020/04/1a-2-1.png"
+    ],
+    "og:image:width": [
+      "1858"
+    ],
+    "og:image:height": [
+      "764"
+    ],
+    "og:image:type": [
+      "image/png"
+    ],
+    "author": [
+      "Richard Socher, Alex Trott, Stephan Zheng, Sunil Srinivasa, Nikhil Naik, Melvin Gruesbeck, David Parkes"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:creator": [
+      "@salesforce"
+    ],
+    "twitter:site": [
+      "@salesforce"
+    ],
+    "twitter:label1": [
+      "Written by"
+    ],
+    "twitter:data1": [
+      "Richard Socher, Alex Trott, Stephan Zheng, Sunil Srinivasa, Nikhil Naik, Melvin Gruesbeck and David Parkes"
+    ],
+    "twitter:label2": [
+      "Est. reading time"
+    ],
+    "twitter:data2": [
+      "17 minutes"
+    ],
+    "msapplication-TileImage": [
+      "https://www.salesforce.com/blog/wp-content/uploads/sites/2/2020/10/cropped-salesforce-icon2-1.png?w=270"
+    ]
+  }
+}

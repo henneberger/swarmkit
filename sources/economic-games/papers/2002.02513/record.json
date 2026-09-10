@@ -1,0 +1,114 @@
+{
+  "kind": "papers",
+  "id": "2002.02513",
+  "title": "Multi Type Mean Field Reinforcement Learning",
+  "topic": "heterogeneous populations",
+  "page_url": "https://arxiv.org/abs/2002.02513",
+  "pdf_url": "https://arxiv.org/pdf/2002.02513",
+  "retrieved_at": "2026-09-10T22:39:41.583739+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2002.02513",
+      "resolved_url": "https://arxiv.org/abs/2002.02513",
+      "path": "sources/economic-games/papers/2002.02513/page.html",
+      "bytes": 42816,
+      "sha256": "298cb5915c56068ce6f70b726453d2e184d3bb5e42b4cc906f413b519a2ccbba"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2002.02513",
+      "resolved_url": "https://arxiv.org/pdf/2002.02513",
+      "path": "sources/economic-games/papers/2002.02513/paper.pdf",
+      "bytes": 931227,
+      "sha256": "86311d8ab2135f883051a6b6b697b1c92ff4ac7cacb9676741d6fe17734096d1"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2002.02513: Multi Type Mean Field Reinforcement Learning"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Multi Type Mean Field Reinforcement Learning"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2002.02513v7"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Mean field theory provides an effective way of scaling multiagent reinforcement learning algorithms to environments with many agents that can be abstracted by a virtual mean agent. In this paper, we extend mean field multiagent algorithms to multiple types. The types enable the relaxation of a core assumption in mean field reinforcement learning, which is that all agents in the environment are playing almost similar strategies and have the same goal. We conduct experiments on three different testbeds for the field of many agent reinforcement learning, based on the standard MAgents framework. We consider two different kinds of mean field environments: a) Games where agents belong to predefined types that are known a priori and b) Games where the type of each agent is unknown and therefore must be learned based on observations. We introduce new algorithms for each type of game and demonstrate their superior performance over state of the art algorithms that assume that all agents belong to the same type and other baseline algorithms in the MAgent framework."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Multi Type Mean Field Reinforcement Learning"
+    ],
+    "twitter:description": [
+      "Mean field theory provides an effective way of scaling multiagent reinforcement learning algorithms to environments with many agents that can be abstracted by a virtual mean agent. In this paper,..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Multi Type Mean Field Reinforcement Learning"
+    ],
+    "citation_author": [
+      "Subramanian, Sriram Ganapathi",
+      "Poupart, Pascal",
+      "Taylor, Matthew E.",
+      "Hegde, Nidhi"
+    ],
+    "citation_date": [
+      "2020/02/06"
+    ],
+    "citation_online_date": [
+      "2022/06/21"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2002.02513"
+    ],
+    "citation_arxiv_id": [
+      "2002.02513"
+    ],
+    "citation_abstract": [
+      "Mean field theory provides an effective way of scaling multiagent reinforcement learning algorithms to environments with many agents that can be abstracted by a virtual mean agent. In this paper, we extend mean field multiagent algorithms to multiple types. The types enable the relaxation of a core assumption in mean field reinforcement learning, which is that all agents in the environment are playing almost similar strategies and have the same goal. We conduct experiments on three different testbeds for the field of many agent reinforcement learning, based on the standard MAgents framework. We consider two different kinds of mean field environments: a) Games where agents belong to predefined types that are known a priori and b) Games where the type of each agent is unknown and therefore must be learned based on observations. We introduce new algorithms for each type of game and demonstrate their superior performance over state of the art algorithms that assume that all agents belong to the same type and other baseline algorithms in the MAgent framework."
+    ]
+  },
+  "extracted_text_characters": 120570,
+  "text_searchable": true
+}

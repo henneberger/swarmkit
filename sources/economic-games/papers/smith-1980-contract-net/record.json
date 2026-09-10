@@ -1,0 +1,21 @@
+{
+  "kind": "papers",
+  "id": "smith-1980-contract-net",
+  "title": "The Contract Net Protocol",
+  "topic": "distributed task contracts",
+  "page_url": null,
+  "pdf_url": "https://reidgsmith.com/The_Contract_Net_Protocol_Dec-1980.pdf",
+  "retrieved_at": "2026-09-10T22:39:42.936988+00:00",
+  "artifacts": [
+    {
+      "url": "https://reidgsmith.com/The_Contract_Net_Protocol_Dec-1980.pdf",
+      "resolved_url": "https://reidgsmith.com/The_Contract_Net_Protocol_Dec-1980.pdf",
+      "path": "sources/economic-games/papers/smith-1980-contract-net/paper.pdf",
+      "bytes": 227621,
+      "sha256": "0b098a438af2bfe720c548f810474108c1d95859f9a488190ba49fee837f64cc"
+    }
+  ],
+  "status": "ok",
+  "extracted_text_characters": 75924,
+  "text_searchable": true
+}

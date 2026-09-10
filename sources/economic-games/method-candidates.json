@@ -1,0 +1,617 @@
+{
+  "scope": "Proposed economic game extensions; not the existing SwarmKit runtime catalog",
+  "candidates": [
+    {
+      "id": "normal_form",
+      "component_kind": "game",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 1,
+      "proposed_api": [
+        "NormalFormGame"
+      ],
+      "source_ids": [
+        "roughgarden-2013-agt"
+      ],
+      "swarm_application": "Small local strategic interactions",
+      "strategy_options": [
+        "fixed",
+        "mixed",
+        "best response",
+        "fictitious play"
+      ],
+      "assumptions_and_limits": "Known payoff tensors; finite legal actions",
+      "metrics": [
+        "unilateral deviation gain",
+        "welfare"
+      ]
+    },
+    {
+      "id": "repeated_games",
+      "component_kind": "game_and_strategies",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 1,
+      "proposed_api": [
+        "RepeatedGame"
+      ],
+      "source_ids": [
+        "1908.09453"
+      ],
+      "swarm_application": "Repeated evidence sharing",
+      "strategy_options": [
+        "tit for tat",
+        "generous reciprocity",
+        "win stay lose shift",
+        "always defect"
+      ],
+      "assumptions_and_limits": "Continuation and observation noise explicitly modeled",
+      "metrics": [
+        "cross play",
+        "cooperation",
+        "worst partner utility"
+      ]
+    },
+    {
+      "id": "public_goods",
+      "component_kind": "game",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 1,
+      "proposed_api": [
+        "HypergraphPublicGoods"
+      ],
+      "source_ids": [
+        "2001.10313",
+        "2410.10921"
+      ],
+      "swarm_application": "Shared evidence and costly verification",
+      "strategy_options": [
+        "contribute",
+        "free ride",
+        "conditional contributor"
+      ],
+      "assumptions_and_limits": "State contribution budget per agent versus per edge",
+      "metrics": [
+        "welfare",
+        "cooperation",
+        "degree bias"
+      ]
+    },
+    {
+      "id": "threshold_coalitions",
+      "component_kind": "game",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 3,
+      "proposed_api": [
+        "ThresholdTeamGame"
+      ],
+      "source_ids": [
+        "2001.10313"
+      ],
+      "swarm_application": "Complementary specialist teams",
+      "strategy_options": [
+        "join",
+        "exit",
+        "conditional pledge"
+      ],
+      "assumptions_and_limits": "Our nonlinear task adaptation; no generic stability theorem",
+      "metrics": [
+        "task success",
+        "blocking coalitions"
+      ]
+    },
+    {
+      "id": "contract_net",
+      "component_kind": "mechanism",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 2,
+      "proposed_api": [
+        "ContractNet"
+      ],
+      "source_ids": [
+        "smith-1980-contract-net"
+      ],
+      "swarm_application": "Distributed task procurement",
+      "strategy_options": [
+        "capability bids",
+        "cost bids",
+        "team bids"
+      ],
+      "assumptions_and_limits": "Task-sharing protocol; not inherently truthful",
+      "metrics": [
+        "completion",
+        "allocation cost",
+        "failed delivery"
+      ]
+    },
+    {
+      "id": "single_item_auctions",
+      "component_kind": "mechanism",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 2,
+      "proposed_api": [
+        "FirstPriceAuction",
+        "SecondPriceAuction",
+        "ReverseAuction"
+      ],
+      "source_ids": [
+        "roughgarden-2013-agt"
+      ],
+      "swarm_application": "Allocate tools or procure work",
+      "strategy_options": [
+        "truthful",
+        "shaded",
+        "random legal bids"
+      ],
+      "assumptions_and_limits": "State private-value utility, budgets, reserves and tie rules",
+      "metrics": [
+        "allocation efficiency",
+        "payment correctness",
+        "misreport gain"
+      ]
+    },
+    {
+      "id": "combinatorial_vcg",
+      "component_kind": "mechanism",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 3,
+      "proposed_api": [
+        "CombinatorialAuction",
+        "VCGPayments"
+      ],
+      "source_ids": [
+        "1607.07684",
+        "1706.03459"
+      ],
+      "swarm_application": "Allocate complementary resource bundles",
+      "strategy_options": [
+        "bundle bids",
+        "single-minded bids"
+      ],
+      "assumptions_and_limits": "Truthfulness requires suitable exact allocation and utility assumptions",
+      "metrics": [
+        "oracle welfare",
+        "deviation gain",
+        "solver cost"
+      ]
+    },
+    {
+      "id": "double_auction",
+      "component_kind": "mechanism",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 2,
+      "proposed_api": [
+        "DoubleAuction"
+      ],
+      "source_ids": [
+        "2609.02580"
+      ],
+      "swarm_application": "Exchange resource allocations",
+      "strategy_options": [
+        "zero intelligence",
+        "truthful reference",
+        "adaptive quotes"
+      ],
+      "assumptions_and_limits": "Explicit clearing and inventories; no automatic truthfulness",
+      "metrics": [
+        "gains from trade",
+        "price dispersion",
+        "role surplus"
+      ]
+    },
+    {
+      "id": "congestion",
+      "component_kind": "game",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 2,
+      "proposed_api": [
+        "CongestionGame"
+      ],
+      "source_ids": [
+        "roughgarden-2013-agt"
+      ],
+      "swarm_application": "Route work across shared tools",
+      "strategy_options": [
+        "best response",
+        "multiplicative weights"
+      ],
+      "assumptions_and_limits": "Exact-potential guarantees require the corresponding game assumptions",
+      "metrics": [
+        "load",
+        "latency",
+        "empirical efficiency"
+      ]
+    },
+    {
+      "id": "stable_matching",
+      "component_kind": "mechanism",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 2,
+      "proposed_api": [
+        "DeferredAcceptance"
+      ],
+      "source_ids": [
+        "gale-shapley-1962"
+      ],
+      "swarm_application": "Match agents and projects",
+      "strategy_options": [
+        "preference reports",
+        "deferred acceptance"
+      ],
+      "assumptions_and_limits": "Classical preference domain; arbitrary complementary teams excluded",
+      "metrics": [
+        "blocking pairs",
+        "participation",
+        "task fit"
+      ]
+    },
+    {
+      "id": "bargaining",
+      "component_kind": "game_and_solution",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 3,
+      "proposed_api": [
+        "AlternatingOffers",
+        "NashBargaining"
+      ],
+      "source_ids": [
+        "nash-1950-bargaining",
+        "1706.05125"
+      ],
+      "swarm_application": "Negotiate deadline quality and price",
+      "strategy_options": [
+        "deadline concessions",
+        "reciprocal offers",
+        "hardline"
+      ],
+      "assumptions_and_limits": "Nash solution separate from dialogue; disagreement utility explicit",
+      "metrics": [
+        "agreement surplus",
+        "fairness",
+        "invalid offers"
+      ]
+    },
+    {
+      "id": "coalition_value",
+      "component_kind": "solution",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 3,
+      "proposed_api": [
+        "ShapleyEstimator",
+        "CoreDiagnostic",
+        "RestrictedCoalitionValue"
+      ],
+      "source_ids": [
+        "myerson-1977-graphs",
+        "shapley-1952-value"
+      ],
+      "swarm_application": "Share rewards for joint artifacts",
+      "strategy_options": [
+        "coalition proposals",
+        "entry and exit"
+      ],
+      "assumptions_and_limits": "Original Shapley download blocked; scanned Myerson; implement after deeper primary review",
+      "metrics": [
+        "marginal contribution uncertainty",
+        "blocking gain"
+      ]
+    },
+    {
+      "id": "prediction_market",
+      "component_kind": "mechanism",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 3,
+      "proposed_api": [
+        "LMSRMarket"
+      ],
+      "source_ids": [
+        "hanson-market-scoring"
+      ],
+      "swarm_application": "Forecast independent verification outcomes",
+      "strategy_options": [
+        "belief bids",
+        "budget-limited trades"
+      ],
+      "assumptions_and_limits": "Outcome oracle, liquidity and subsidy required; strategic traders can influence prices",
+      "metrics": [
+        "proper score",
+        "calibration",
+        "market maker loss"
+      ]
+    },
+    {
+      "id": "external_regret",
+      "component_kind": "strategy",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 4,
+      "proposed_api": [
+        "ExternalRegretPolicy"
+      ],
+      "source_ids": [
+        "roughgarden-2013-agt"
+      ],
+      "swarm_application": "Adaptive bidding and routing",
+      "strategy_options": [
+        "Hedge",
+        "regret matching"
+      ],
+      "assumptions_and_limits": "Bounded payoff feedback; empirical CCE connection, not generic Nash",
+      "metrics": [
+        "external regret",
+        "empirical joint distribution"
+      ]
+    },
+    {
+      "id": "internal_regret",
+      "component_kind": "strategy",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 4,
+      "proposed_api": [
+        "InternalRegretPolicy"
+      ],
+      "source_ids": [
+        "hart-mas-colell-2000"
+      ],
+      "swarm_application": "Coordinated local recommendations",
+      "strategy_options": [
+        "internal regret",
+        "swap regret"
+      ],
+      "assumptions_and_limits": "Distinguish internal deviations from fixed action deviations",
+      "metrics": [
+        "swap regret",
+        "CE violation"
+      ]
+    },
+    {
+      "id": "cfr",
+      "component_kind": "solver_adapter",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 4,
+      "proposed_api": [
+        "OpenSpielCFR"
+      ],
+      "source_ids": [
+        "1908.09453"
+      ],
+      "swarm_application": "Small imperfect-information economic games",
+      "strategy_options": [
+        "CFR",
+        "sampling variants"
+      ],
+      "assumptions_and_limits": "Classical Nash guarantee for appropriate two-player zero-sum perfect-recall games",
+      "metrics": [
+        "exploitability",
+        "information leakage",
+        "runtime"
+      ]
+    },
+    {
+      "id": "psro",
+      "component_kind": "population_trainer",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 4,
+      "proposed_api": [
+        "PolicySpaceResponseOracles"
+      ],
+      "source_ids": [
+        "1711.00832"
+      ],
+      "swarm_application": "Maintain diverse strategic agents",
+      "strategy_options": [
+        "response search",
+        "mixed population sampling"
+      ],
+      "assumptions_and_limits": "Approximate LLM response oracle; restricted population equilibria",
+      "metrics": [
+        "cross play",
+        "restricted deviation gain",
+        "held-out partners"
+      ]
+    },
+    {
+      "id": "alpharank",
+      "component_kind": "evaluation",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 4,
+      "proposed_api": [
+        "AlphaRankEvaluator"
+      ],
+      "source_ids": [
+        "1903.01373"
+      ],
+      "swarm_application": "Evaluate cyclic strategy populations",
+      "strategy_options": [
+        "evolutionary ranking"
+      ],
+      "assumptions_and_limits": "Ranking is neither Nash certificate nor welfare optimization",
+      "metrics": [
+        "stationary mass",
+        "payoff uncertainty",
+        "cycles"
+      ]
+    },
+    {
+      "id": "opponent_shaping",
+      "component_kind": "strategy",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 5,
+      "proposed_api": [
+        "LOLAAdapter",
+        "POLAAdapter"
+      ],
+      "source_ids": [
+        "1709.04326",
+        "2210.10125"
+      ],
+      "swarm_application": "Learn reciprocal behavior",
+      "strategy_options": [
+        "learning-aware gradient policies"
+      ],
+      "assumptions_and_limits": "Requires learning model and gradient access for fidelity",
+      "metrics": [
+        "cross play",
+        "exploitation",
+        "parameterization sensitivity"
+      ]
+    },
+    {
+      "id": "mean_field",
+      "component_kind": "population_approximation",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 5,
+      "proposed_api": [
+        "MultiTypeMeanField"
+      ],
+      "source_ids": [
+        "1802.05438",
+        "2002.02513"
+      ],
+      "swarm_application": "Scale populations with roles",
+      "strategy_options": [
+        "mean-field Q",
+        "actor critic"
+      ],
+      "assumptions_and_limits": "Averages may erase sparse complementarities",
+      "metrics": [
+        "error versus exact small population",
+        "scalability"
+      ]
+    },
+    {
+      "id": "learned_auctions",
+      "component_kind": "mechanism_learning",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 5,
+      "proposed_api": [
+        "LearnedAuction"
+      ],
+      "source_ids": [
+        "1706.03459"
+      ],
+      "swarm_application": "Optimize allocation and payment",
+      "strategy_options": [
+        "RegretNet-style constrained learning"
+      ],
+      "assumptions_and_limits": "Empirical deviation search is not exact DSIC",
+      "metrics": [
+        "held-out regret",
+        "revenue",
+        "feasibility"
+      ]
+    },
+    {
+      "id": "learned_institutions",
+      "component_kind": "mechanism_learning",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 5,
+      "proposed_api": [
+        "TwoLevelInstitution"
+      ],
+      "source_ids": [
+        "2108.02755"
+      ],
+      "swarm_application": "Learn incentives while workers adapt",
+      "strategy_options": [
+        "planner and worker RL"
+      ],
+      "assumptions_and_limits": "Simulation-specific; changing rules changes the game",
+      "metrics": [
+        "welfare",
+        "inequality",
+        "distribution shift"
+      ]
+    },
+    {
+      "id": "other_regarding_q",
+      "component_kind": "strategy",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 4,
+      "proposed_api": [
+        "GroupHistoryQPolicy"
+      ],
+      "source_ids": [
+        "2410.10921"
+      ],
+      "swarm_application": "Condition cooperation on group history",
+      "strategy_options": [
+        "Q-learning with other-player action summaries"
+      ],
+      "assumptions_and_limits": "Other-regarding state is not necessarily altruistic utility",
+      "metrics": [
+        "cooperation",
+        "task utility",
+        "degree-normalized payoff"
+      ]
+    },
+    {
+      "id": "language_self_play",
+      "component_kind": "strategy_training",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 5,
+      "proposed_api": [
+        "NegotiationSelfPlay"
+      ],
+      "source_ids": [
+        "1706.05125",
+        "2406.18872"
+      ],
+      "swarm_application": "Improve structured language offers",
+      "strategy_options": [
+        "dialogue rollout",
+        "self play"
+      ],
+      "assumptions_and_limits": "Validate structured outcomes and hold out partners",
+      "metrics": [
+        "legal actions",
+        "surplus",
+        "cross play"
+      ]
+    },
+    {
+      "id": "information_design",
+      "component_kind": "information_policy",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 5,
+      "proposed_api": [
+        "FramingAndDisclosurePolicy"
+      ],
+      "source_ids": [
+        "2509.25565"
+      ],
+      "swarm_application": "Study evidence framing and disclosure",
+      "strategy_options": [
+        "fact-preserving framing search",
+        "signaling"
+      ],
+      "assumptions_and_limits": "Belief oracle is a modeling assumption; no general behavior guarantee",
+      "metrics": [
+        "accuracy",
+        "sender utility",
+        "recipient utility"
+      ]
+    },
+    {
+      "id": "leader_follower",
+      "component_kind": "game",
+      "implementation_status": "proposed_not_implemented",
+      "build_stage": 5,
+      "proposed_api": [
+        "StackelbergContractGame"
+      ],
+      "source_ids": [
+        "2108.02755"
+      ],
+      "swarm_application": "Model scheduler incentives and worker effort",
+      "strategy_options": [
+        "posted incentives",
+        "best-response workers"
+      ],
+      "assumptions_and_limits": "Tentative extension; full principal-agent literature not covered",
+      "metrics": [
+        "leader utility",
+        "worker participation",
+        "effort",
+        "model sensitivity"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "kind": "repositories",
+  "id": "pnnl__HyperNetX",
+  "title": "pnnl/HyperNetX",
+  "url": "https://github.com/pnnl/HyperNetX",
+  "topic": "hyperedge incidence and analysis",
+  "retrieved_at": "2026-09-10T22:39:50.917460+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/pnnl/HyperNetX/blob/cd2a4153896e780366bd688934646310f9568d18/README.md",
+      "resolved_url": "https://github.com/pnnl/HyperNetX/blob/cd2a4153896e780366bd688934646310f9568d18/README.md",
+      "path": "sources/economic-games/repositories/pnnl__HyperNetX/README.md",
+      "bytes": 17661,
+      "sha256": "c7816fb78411e2052d2a2e65f6b69ecf54dff1209b2d21ed5d6875cce69e2c58"
+    },
+    {
+      "url": "https://github.com/pnnl/HyperNetX/blob/cd2a4153896e780366bd688934646310f9568d18/LICENSE.rst",
+      "resolved_url": "https://github.com/pnnl/HyperNetX/blob/cd2a4153896e780366bd688934646310f9568d18/LICENSE.rst",
+      "path": "sources/economic-games/repositories/pnnl__HyperNetX/LICENSE.rst",
+      "bytes": 1531,
+      "sha256": "6c180c087a120e85189a7f81090da59246af45d2defb9540587bff0aee9abd5c"
+    }
+  ],
+  "status": "ok",
+  "commit": "cd2a4153896e780366bd688934646310f9568d18",
+  "commit_date": "2026-04-14T00:11:50Z",
+  "checkout": "sources/economic-games/repositories/pnnl__HyperNetX/checkout",
+  "experiments_reproduced": false,
+  "license_files": [
+    "LICENSE.rst"
+  ],
+  "audit": {
+    "anchor": "hypernetx/classes/hypergraph.py",
+    "finding": "Hypergraph class located; supplies structural representation, not economic settlement.",
+    "proposed_use": "Optional structure adapter",
+    "review_level": "selected code or README; not full audit"
+  }
+}

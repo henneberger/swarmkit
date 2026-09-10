@@ -1,0 +1,116 @@
+{
+  "kind": "papers",
+  "id": "2410.10921",
+  "title": "Cooperation in Public Goods Games: Leveraging Other-Regarding Reinforcement Learning on Hypergraphs",
+  "topic": "hypergraph reinforcement learning",
+  "page_url": "https://arxiv.org/abs/2410.10921",
+  "pdf_url": "https://arxiv.org/pdf/2410.10921",
+  "retrieved_at": "2026-09-10T22:39:39.888340+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2410.10921",
+      "resolved_url": "https://arxiv.org/abs/2410.10921",
+      "path": "sources/economic-games/papers/2410.10921/page.html",
+      "bytes": 44286,
+      "sha256": "dcda8ce637272bc66992c8cec825800de8008b887a7356b59fb5a9dd69b3d7ec"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2410.10921",
+      "resolved_url": "https://arxiv.org/pdf/2410.10921",
+      "path": "sources/economic-games/papers/2410.10921/paper.pdf",
+      "bytes": 5805744,
+      "sha256": "308a113afae4c9dbd566c7eb40218bdc7f0d722febbdd171eb3e440c4b5f6f48"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2410.10921: Cooperation in Public Goods Games: Leveraging Other-Regarding Reinforcement Learning on Hypergraphs"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Cooperation in Public Goods Games: Leveraging Other-Regarding Reinforcement Learning on Hypergraphs"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2410.10921v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Cooperation as a self-organized collective behavior plays a significant role in the evolution of ecosystems and human society. Reinforcement learning (RL) offers a new perspective, distinct from imitation learning in evolutionary games, for exploring the mechanisms underlying its emergence. However, most existing studies with the public good game (PGG) employ a self-regarding setup or are on pairwise interaction networks. Players in the real world, however, optimize their policies based not only on their histories but also on the histories of their co-players, and the game is played in a group manner. In the work, we investigate the evolution of cooperation in the PGG under the other-regarding reinforcement learning evolutionary game (OR-RLEG) on hypergraph by combining the Q-learning algorithm and evolutionary game framework, where other players' action history is incorporated and the game is played on hypergraphs. Our results show that as the synergy factor increases, the parameter interval is divided into three distinct regions, the absence of cooperation (AC), medium cooperation (MC), and high cooperation (HC), accompanied by two abrupt transitions in the cooperation level near two transition points, respectively. Interestingly, we identify regular and anti-coordinated chessboard structures in the spatial pattern that positively contribute to the first cooperation transition but adversely affect the second. Furthermore, we provide a theoretical treatment for the first transition with an approximated first transition point and reveal that players with a long-sighted perspective and low exploration rate are more likely to reciprocate kindness with each other, thus facilitating the emergence of cooperation. Our findings contribute to understanding the evolution of human cooperation, where other-regarding information and group interactions are commonplace."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Cooperation in Public Goods Games: Leveraging Other-Regarding..."
+    ],
+    "twitter:description": [
+      "Cooperation as a self-organized collective behavior plays a significant role in the evolution of ecosystems and human society. Reinforcement learning (RL) offers a new perspective, distinct from..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Cooperation in Public Goods Games: Leveraging Other-Regarding Reinforcement Learning on Hypergraphs"
+    ],
+    "citation_author": [
+      "Li, Bo-Ying",
+      "Zhang, Zhen-Na",
+      "Zheng, Guo-Zhong",
+      "Cai, Chao-Ran",
+      "Zhang, Ji-Qiang",
+      "Li, Chen"
+    ],
+    "citation_date": [
+      "2024/10/14"
+    ],
+    "citation_online_date": [
+      "2024/10/14"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2410.10921"
+    ],
+    "citation_arxiv_id": [
+      "2410.10921"
+    ],
+    "citation_abstract": [
+      "Cooperation as a self-organized collective behavior plays a significant role in the evolution of ecosystems and human society. Reinforcement learning (RL) offers a new perspective, distinct from imitation learning in evolutionary games, for exploring the mechanisms underlying its emergence. However, most existing studies with the public good game (PGG) employ a self-regarding setup or are on pairwise interaction networks. Players in the real world, however, optimize their policies based not only on their histories but also on the histories of their co-players, and the game is played in a group manner. In the work, we investigate the evolution of cooperation in the PGG under the other-regarding reinforcement learning evolutionary game (OR-RLEG) on hypergraph by combining the Q-learning algorithm and evolutionary game framework, where other players' action history is incorporated and the game is played on hypergraphs. Our results show that as the synergy factor increases, the parameter interval is divided into three distinct regions, the absence of cooperation (AC), medium cooperation (MC), and high cooperation (HC), accompanied by two abrupt transitions in the cooperation level near two transition points, respectively. Interestingly, we identify regular and anti-coordinated chessboard structures in the spatial pattern that positively contribute to the first cooperation transition but adversely affect the second. Furthermore, we provide a theoretical treatment for the first transition with an approximated first transition point and reveal that players with a long-sighted perspective and low exploration rate are more likely to reciprocate kindness with each other, thus facilitating the emergence of cooperation. Our findings contribute to understanding the evolution of human cooperation, where other-regarding information and group interactions are commonplace."
+    ]
+  },
+  "extracted_text_characters": 130990,
+  "text_searchable": true
+}

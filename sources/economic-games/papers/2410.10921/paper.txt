@@ -1,0 +1,1220 @@
+                                                    Cooperation in Public Goods Games: Leveraging Other-Regarding Reinforcement Learning on
+                                                                                         Hypergraphs
+                                                             Bo-Ying Li,1 Zhen-Na Zhang,1 Guo-Zhong Zheng,2 Chao-Ran Cai,3 Ji-Qiang Zhang,1, ∗ and Chen Li2, †
+                                                                                     1
+                                                                                      School of Physics, Ningxia University, Yinchuan, 750021, P. R. China
+                                                                   2
+                                                                       School of Physics and Information Technology, Shaanxi Normal University, Xi’an, 710062, P. R. China
+                                                                                      3
+                                                                                        School of Physics, Northwest University, Xi’an, 710127, P. R. China
+                                                                                                            (Dated: October 16, 2024)
+                                                                   Cooperation as a self-organized collective behavior plays a significant role in the evolution of ecosystems and
+                                                                human society. Reinforcement learning (RL) offers a new perspective, distinct from imitation learning in evo-
+                                                                lutionary games, for exploring the mechanisms underlying its emergence. However, most existing studies with
+                                                                the public good game (PGG) employ a self-regarding setup or are on pairwise interaction networks. Players in
+arXiv:2410.10921v1 [physics.soc-ph] 14 Oct 2024
+
+
+
+
+                                                                the real world, however, optimize their policies based not only on their histories but also on the histories of their
+                                                                co-players, and the game is played in a group manner. In the work, we investigate the evolution of cooperation
+                                                                in the PGG under the other-regarding reinforcement learning evolutionary game (OR-RLEG) on hypergraph by
+                                                                combining the Q-learning algorithm and evolutionary game framework, where other players’ action history is
+                                                                incorporated and the game is played on hypergraphs. Our results show that as the synergy factor r̂ increases, the
+                                                                parameter interval is divided into three distinct regions — the absence of cooperation (AC), medium cooperation
+                                                                (MC), and high cooperation (HC) — accompanied by two abrupt transitions in the cooperation level near r̂1∗
+                                                                and r̂2∗ , respectively. Interestingly, we identify regular and anti-coordinated chessboard structures in the spatial
+                                                                pattern that positively contribute to the first cooperation transition but adversely affect the second. Further-
+                                                                more,we provide a theoretical treatment for the first transition with an approximated r̂1∗ , and reveal that players
+                                                                with a long-sighted perspective and low exploration rate are more likely to reciprocate kindness with each other,
+                                                                thus facilitating the emergence of cooperation. Our findings contribute to understanding the evolution of human
+                                                                cooperation, where other-regarding information and group interactions are commonplace.
+
+
+                                                                          I.   INTRODUCTION                                  the conflict of interests between individuals and groups often
+                                                                                                                             leads to free-riding behaviors, which, if no countermeasure
+                                                     Cooperation is both ubiquitous and significant in the evolu-            is taken, ultimately results in full defection [7, 23, 25, 26].
+                                                  tion of human society and biological systems [1–4], from al-               As a paradigmatic model, PGG has been widely employed
+                                                  truistic pathogenic bacteria and ant fortress associations [3, 5]          to discuss many issues in society, such as resource manage-
+                                                  to community activities and civic participation in human so-               ment [27, 28], environmental protection [4, 29], and epidemic
+                                                  ciety [2, 4]. Deciphering the underlying mechanisms of how                 prevention and control [30, 31].
+                                                  cooperative behavior evolved is crucial for the development of                After decades of effort, scholars have discovered various
+                                                  society [6]. The challenge focuses on why cooperation can be               mechanisms that promote the emergence of cooperation in
+                                                  established and sustained in scenarios where there is a conflict           PGGs through both experimental and theoretical methods. In
+                                                  between self-interest and group interests, such as the tragedy             experiments, they have found that social reputation [4], infor-
+                                                  of commons [7].                                                            mation sharing [29], social diversity [32, 33], dynamical reci-
+                                                     The evolutionary game (EG) theory, introduced and devel-                procity [34], and team competition [35] can enhance coopera-
+                                                  oped over the past fifty years, primarily aims to study the                tion. From a theoretical perspective, mechanisms such as pun-
+                                                  mechanisms behind the emergence of collective behaviors in                 ishing free-riders and rewarding contributors [24, 36, 37], fos-
+                                                  ecosystems through natural selection [5, 8, 9]. By viewing                 tering competition [11, 38], network heterogeneity [39], repu-
+                                                  biological inheritance as akin to imitation learning (IL) in               tation [40], and introducing noise [41] also contribute to sup-
+                                                  society, researchers have employed this framework to inves-                pressing the prevalence of free-riding behavior. These works
+                                                  tigate self-organized, collective behaviors within human so-               provide significant insights into the mechanisms underlying
+                                                  cieties, such as cooperation [10–13], fairness [14–16], epi-               the emergence of cooperation. However, most findings are
+                                                  demic dynamics [17, 18], as well as urban eco-evolutionary                 based on IL with traditional pairwise interaction networks be-
+                                                  processes [19]. For the emergence of cooperation, the pris-                ing assumed. The limitations are obvious: IL primarily fo-
+                                                  oner’s dilemma game (PDG) model is often used, which il-                   cuses on observing others, neglecting individuals’ experiences
+                                                  lustrates the conflict between individual and collective inter-            in human society, and pairwise networks fail to capture the
+                                                  ests in pairwise interactions [13, 20–22]. To extend this in-              group interactions inherent in PGGs.
+                                                  teraction to scenarios involving multiple players, researchers                The advancement of reinforcement learning (RL) and hy-
+                                                  introduced the public goods game (PGG), which accommo-                     pergraph theory offers the opportunity to address the two lim-
+                                                  dates an arbitrary number of players [11, 23, 24]. In PGGs,                itations. RL enables agents to gather direct experiences from
+                                                                                                                             their environment and adjust their behaviors based on received
+                                                                                                                             rewards, aiming to maximize cumulative gains [42, 43]. Hy-
+                                                  ∗ zhangjq13@lzu.edu.cn
+                                                                                                                             pergraph allows interactions across the entire group, rather
+                                                  † chenl@snnu.edu.cn
+                                                                                                                             than just pairwise interactions [44, 45]. In the hypergraph, the
+                                                                                                                                             2
+
+researcher found that the cooperation is enhanced by the het-                                    II.   MODEL
+erogeneous investment [46] and higher-order structures [47]
+in the evolutionary game of PGGs. With the marriage of                 In this study, we first introduce our other-regarding re-
+RL and EGs, some new insights into the mechanism of co-             inforcement learning evolutionary game (OR-RLEG) model
+operation emergence for pairwise games have been provided,          within the framework of public goods games (PGGs), applied
+but primarily based on the PDG with two players [48–51].            to a hypergraph G = {N , E} generated from the von Neu-
+Only recently have a few studies begun to explore the evo-          mann lattice. Initially, we configure |N | agents on an L × L
+lution of multiplayer games within the RL framework using           von Neumann lattice with a periodic boundary. Following
+PGGs [52–56]. Ref. [52] studied the evolution of cooperation        this, each agent i ∈ N along with its nearest neighbors in
+in the PGG using traditional networks with empty nodes and          the von Neumann lattice, defines a set of nodes that forms a
+the Bush-Mosteller model, finding that an appropriate propor-       hyperedge ei ∈ E, as illustrated in Fig. 1 (a). The hyperde-
+tion of empty nodes can stimulate individual cooperative be-        gree of each agent is k = 5, which is equal to the order of its
+havior. Wang et al. incorporated self-regarding Q-learning          hyperedge, denoted as |e|. The hypergraph is abbreviated as a
+into evolutionary games to investigate the synergistic effects      von Neumann hypergraph.
+of learning rules and adaptive rewards on cooperation system-          At any step τ of the evolutionary dynamics, the update pro-
+atically [53]. Furthermore, Ref. [54] introduced loners into        tocol is divided into two processes: gaming and learning pro-
+voluntary PGGs and revealed that the number of contributors         cesses. During the gaming process, each agent i ∈ N serving
+becomes increasingly consistent under a large synergy fac-          as an initiator will initiate a PGG and play with all the other
+tor and adjustments to the multiplier for smaller loner pay-        agents (participants) in the hyperedge ei . In the game, the ini-
+offs. By further integrating both IL and RL, the researchers        tiator i and any participants j ∈ ei select their actions ai,i (τ )
+discovered a unique semi-stable checkerboard pattern formed         and aj,i (τ ) from the action set A = {1, 0}, where 1 and 0 de-
+by defectors and cooperators [55]. More recently, Ref. [56]         note cooperation and defection, respectively. The agents that
+explored the evolution of cooperation in both Public Goods          cooperate are referred to as “contributors”, while those that
+Games (PGGs) and voluntary PGGs using the Q-learning al-            defect are called “free-riders”.
+gorithm, leveraging environmental information. Compared to
+IL, their findings suggest cooperation is more likely to arise in
+RL operating through a distinct mechanism.                          TABLE I. The state set for agents. In the table, nc denotes the
+                                                                    number of contributors excluding the focal agent, and a represents
+   However, these existing studies primarily focus on either        the agent’s action, both in the last step. The current state s is deter-
+self-regarding reinforcement learning (SR-RL) on traditional        mined by the action information in the last step.
+networks. While SR-RL simplifies the model, it fails to align                    s(τ )        a(τ − 1)
+with our real-life gaming experiences, where decisions are in-                                                  0         1
+fluenced not only by our past actions but also by environmen-                    nc (τ − 1)
+tal cues, such as the historical actions of co-players. Tradi-                            0                 s0̃ /00    s0 /01
+tional networks, on the other hand, fail to capture the complex                           1                 s1̃ /10    s1 /11
+group interaction inherent in PGGs. Therefore, we are partic-                              ..                   ..        ..
+ularly interested in the following questions: Does the other-                               .                    .         .
+                                                                                          4                 s4̃ /40    s4 /41
+regarding reinforcement learning (OR-RL) on hypergraph re-
+sult in a distinct format of cooperation? If so, what are the
+underlying mechanisms behind this phenomenon? Addressing               During decision-making, agents use an RL algorithm
+these questions is crucial for understanding the emergence of       known as Q-learning, which relies on their state informa-
+cooperation in group interactions within human society from         tion from the previous game round and learned experiences to
+a reinforcement learning framework.                                 seek optimal actions. However, unlike the self-regarding re-
+   This paper is structured as follows: In Sec. II, we introduce    inforcement learning evolutionary games (SR-RLEGs) in pre-
+our other-regarding reinforcement learning evolutionary game        vious works [51, 55, 57, 58], the state in our model is other-
+(OR-RLEG) in PGGs on von Neumann hypergraphs, adopting              regarding. The state for any agent j ∈ ei can be expressed
+                                                                         j,i
+the Q-learning algorithm. In Sec. III, We demonstrate that the                 = nj,i
+                                                                    P s (τ ) k,i
+                                                                    as                          j,i                 j,i
+                                                                                    c (τ − 1)a (τ − 1), where nc (τ − 1) =
+average cooperation level, as a function of the synergy factor,        k∈ei  a   (τ − 1) is the number  of contributors other than
+                                                                           −j
+
+is divided into three distinct regions by two transition points,    j and aj,i (τ − 1) is j’s action in the previous step. Then,
+each exhibiting notable differences in the spatial patterns of      the state set for agents is S = {s0 , s1 , · · · , s4 , s0̃ , s1̃ , · · · ,
+local cooperation levels within or between these regions. In        s4̃ } = {01, 11, · · · , 41, 00, 10, · · · , 40} (see Tab. I). To
+Sec. IV A, we determine the first transition point, which dic-      simplify the notations, we employ sm and sm̃ here to differ-
+tates whether cooperation emerges, using an analytic method         entiate a contributor and a free-rider, while both have m other
+based on further simulation. In Sec. IV B, We focus on a dis-       contributors within the hyperedge ei at τ − 1. While experi-
+tinctive form of cooperation—a chessboard structure emerg-          ential cognition is characterized by the agent’s Q-table, where
+ing from temporal accumulation in spatial patterns—from the         each element Qs,a (τ ) as a map of S × A → R, represents the
+perspectives of local cooperation preferences and state transi-     action value for a at s in cognition (see Tab. II).
+tion modes. Our conclusions and discussions are presented in            Then, each agent j ∈ ei takes action based on its own Q-
+Sec. V.                                                             table and state sj,i at τ . The policy for action selection is as
+                                                                                                                                             3
+
+
+TABLE II. The Q-table for agents. In the table, Qsa denotes the
+action value for column-action a within the row-state s.
+                   Qsa a
+                                  0           1
+                   s
+                     s0         Qs0 ,0      Qs0 ,1
+                      ..          ..          ..
+                       .           .           .
+                     s4         Qs4 ,0      Qs4 ,1
+                     s0̃        Qs0̃ ,0     Qs0̃ ,1
+                       ..          ..          ..
+                        .           .           .
+                     s4̃        Qs4̃ ,0     Qs1̃ ,1
+
+
+follows
+   aj,i (τ ) = π sj,i (τ ), Qj (τ )
+                                   
+               (                                      ϵ
+                 1 − arg max     Qsj,i ,a′ (τ ),     |A| ,
+                             a′
+             =                                             ϵ   (1)
+                 arg max ′
+                            Qsj,i ,a′ (τ ),      1 − ϵ + |A| .
+                         a
+
+In other words, j selects 1 − arg maxa′ Qsj,i ,a′ (τ ) as its ac-
+tion, referred to as the exploration-action, with the probability
+  ϵ
+|A| , and otherwise chooses arg maxa Qs ,a (τ ) as its action,
+                                       ′    j,i ′
+
+referred to as the exploitation-action. Here, the exploration
+rate, 0 < ϵ ≪ 1, serves to adjust the trade-off between explo-        FIG. 1. (Color online) The hypergraph generated from von Neu-
+                                                                      mann network and state-action schematic with Q-learning. The
+ration and exploitation. The state-action schematic is shown
+                                                                      hypergraph generated from the von Neumann network in our model
+in Fig. 1.                                                            is illustrated in (a). The hyperedges are color-coded, with each one
+    After the decision-making, the initiator i within the hyper-      encompassing 5 agents represented by gray dots. To illustrate the
+edge ei receives its payoff at τ , which is determined based on       state-action schematic with Q-learning in this hypergraph, the states
+the actions taken by the agents within ei as follows                  of two agents i and j, within the hyperedges ei and ej at the τ th step,
+                        r X j,i                                       are shown in the top panel of (b). In each hyperedge, the initiator is
+            Πi (τ ) = i ·        a (τ ) − ai,i (τ ).          (2)     marked with a red circular edge. Agents i and j select actions based
+                       |e |    i                                      on their states in ei and ej at the τ th step and according to the policy
+                             j∈e
+                                                                      outlined in Eq. (1) within their Q-tables. In the Q-tables, the maxi-
+Here, r/|ei | = r̂, serving as the game parameter, represents         mum Q-value for each state is highlighted in red. The bottom panel
+the synergy factor that defines the benefit of mutual coopera-        of (b) shows the actions taken by i and j which partially determine
+tion among agents within ei .                                         their next states at τ + 1. The exploitation-action and exploration-
+   During the learning process, only the initiator i within           action are represented by solid and dashed lines, respectively.
+ei updates the action-value Qs,a based on new experiences,
+while the participants do not. The only difference between the        s′ = si,i (τ + 1). While at the end of the step, any agent
+initiator and participants reflects that each initiator is actively   j ∈ ei will update its state according to actions of the agents
+engaged in the game, seeking higher rewards and continu-              in ei as follows
+ously elevating its cognition through the Q-table. In contrast,
+the participants are only passively involved in the proposed                           sj,i (τ + 1) = nj,i    j,i
+                                                                                                       c (τ )a (τ ).                       (4)
+games, without the expectation of enhancing their cognition.
+Therefore, the update for Qis,a only utilizes state s = si,i and      Note that each agent, whether initiated the game or partici-
+                                                                      pated, has only one Q-table available to handle action selec-
+actions a = ai,i related to τ and τ + 1 steps. To simplify,
+                                                                      tion based on its state in the corresponding hyperedge.
+the following expression omits the hyperedge information and
+                                                                         In simulation, the two processes repeat until the system be-
+agent identifiers,
+                                                                      comes statistically stable or evolves for the desired time du-
+       Qis,a (τ + 1) = (1 − α) · Qis,a (τ ) + α ×                     ration. To summarize, the pseudo-code is provided in Al-
+                       h                                  i           gorithm 1. For easy reference, we display descriptions of
+                         Πi (τ ) + γ · max
+                                         ′
+                                            Q i
+                                              s ′ ,a′ (τ ) .   (3)    the mathematical notation used in the models, as detailed in
+                                           a
+                                                                      Tab. III in Sec. C. By default in this work, the combination of
+Here, α ∈ (0, 1] represents the learning rate, indicating the         learning parameters is (α, γ, ϵ) = (0.1, 0.9, 0.01) for OR-
+degree to which new experiences override old ones. While              RLEGs unless otherwise specified. The network used is the
+γ ∈ [0, 1) is the discounting factor that determines the im-          von Neumann hypergraph.
+portance of future rewards since maxa′ Qis′ ,a′ is the max-              To measure the local cooperation level within any hyper-
+imum action value that i can expect within the next state             edge ei at τ , we define fci (τ ) as the number of contributors in
+                                                                                                                                                                4
+
+       Algorithm 1: The Algorithm of OR-RLEG in the                           our OR-RLEG model. As a benchmark, we also include a
+                      Context of PGG                                          comparison with traditional evolutionary games (EGs). Sim-
+  Input: Learning parameters: α, γ, ϵ; Population:N                           ilar to EGs, the results exhibit that f¯c in our model increases
+1 Initialization;                                                             with synergy factor r̂ when r̂ is greater than a transition point
+2 for i in N do                                                               r̂1∗ . However, f¯c in the model consistently exceeds that in
+3      Create a Q-table with each item in the matrix near zero;               EGs as long as r̂ > r̂1∗ . In addition, r̂1∗ ≈ 0.534 for OR-
+4      for j in ei do                                                         RLEGs, which is much lower than r̂∗ ≈ 0.96 for EGs. Fur-
+5          Pick an action aj,i randomly from A;                               thermore, the results highlight another distinct difference be-
+6          Generate state:sj,i → nj,i j,i
+                                   c a ;                                      tween the two models: f¯c as the function of r̂ in our model
+                                                                              be delineated into three distinct regions - absence of cooper-
+7  repeat
+                                                                              ation (AC), medium cooperation (MC), and high cooperation
+ 8     Gaming process;
+ 9     for i in N do                                                          (HC). There is a sharp increase not only at r̂1∗ , the transition
+10          Initiate a public goods game for any agent in ei ;                point from the AC to the MC region, but also between the MC
+11          for j in ei do                                                    and HC region. This indicates there may be another transition
+12               Generate the action aj,i according to sj,i , Qj              point r̂2∗ between MC and HC.
+                   and Eq. (1);                                                    To approximately identify the location of r̂2∗ , we examine
+                                                                              how the system size |N | affects the transition points based on
+13           Get reward Πi according to Eq. (2);
+                                                                              the phase transition theory [59]. The result shows f¯c exhibits
+14       Learning process;                                                    a distinct crossing point at r̂ = 0.803 when comparing odd-
+15       for i in N do
+                                                                              and even-sized systems. In addition, for a given r̂ near the
+16            Update Q-table according to Eq. (3);
+                                                                              point, f¯c remains essentially constant with increasing |N | in
+17            for j in ei do
+                                                                              the case of even-sized |N |. However, for the odd-sized |N |,
+18                Update state sj,i according to Eq. (4);
+                                                                              f¯c is increased with |N | when r̂ is to the left of the point, while
+19   until the system becomes statistically stable or evolves for the         it decreases with an increase of |N | when r̂ is to the right of
+      desired time duration;                                                  the point. Therefore, it is reasonable to conjecture that the
+                                                                              crossing point corresponds to the second transition point r̂2∗ .
+
+ei ,                                                                                    1
+                                                                                      0.9
+                                                                                      0.8
+                                     X
+                      fci (τ ) =            aj,i (τ )/|ei |,            (5)           0.7
+                                     j∈ei                                             0.6
+                                                                                      0.5
+Then, the global cooperation level in all hyperedges at τ is                          0.4             0.8
+                                                                                                     0.75
+                            X                                                         0.3             0.7
+                 fc (τ ) :=    fci (τ )/|E|,                 (6)                      0.2            0.65
+                                                                                                      0.6
+                                   ei ∈E                                              0.1
+                                                                                                          0.76 0.78 0.8 0.82 0.84
+                                                                                        0
+                                                                                        0.4   0.5   0.6     0.7     0.8    0.9      1   1.1   1.2   1.3   1.4
+and average cooperation level fc (τ ) in global across the stable
+stage is
+                             t                                                FIG. 2. (Color online) The global average cooperation level as
+                                                                              a function of the game parameter. The global average coopera-
+                             X
+                    f¯c :=           fc (τ )/(t − t0 ).                 (7)
+                                                                              tion level f¯c as a function of synergy factor r̂ in OR-RLEGs, across
+                             τ =t0
+                                                                              various population scales |N | = L × L on hypergraph, is shown to
+Here, t0 represents any specific step when the system has                     investigate how |N | affect f¯c . The default learning parameters are
+reached stability. In addition, we also focus on the agent’s                  (α, γ, ϵ) = (0.1, 0.9, 0.01) in OR-RLRGs. The counting consists
+cooperation preference within all games that it is involved in,               of 106 steps after 1010 transient steps. For comparison, we also dis-
+                                                                              play f¯c as the function of r̂ in evolutionary games on hypergraphs.
+that defined as
+                                                                              Here, the selection intensity and mutation probability are β = 10
+                                                                              and µ = 0.01 under Fermi learning rule [see Sec. A].
+                          X
+              pic (τ ) :=         ai,j (τ )/k i .          (8)
+                              ej ∈{e|i∈e}
+                                                                                 To investigate f¯c from a local perspective, we examine the
+Here, {· · · } denotes the set that includes all hyperedges con-              averaged local cooperation level f¯ci within ei ∈ E over 106
+taining the agent i.                                                          steps during the stable stage, and illustrate it through spatial
+                                                                              patterns in Fig. 3. Within the AC, the results show that f¯ci
+                                                                              is only slightly higher within a few hyperedges compared to
+                   III.   SIMULATION RESULTS                                  the others, as shown in (a). While in the area between the
+                                                                              AC and MC regions, (b) shows different clusters emerge, and
+   In Fig. 2, we primarily exhibit the average global coop-                   the average cooperation level in each cluster differs from that
+eration level f¯c as the function of the game parameter r̂ in                 of its neighboring clusters. Furthermore, distinctly different
+                                                                                                                                                 5
+
+from previous works in EGs, each cluster here is composed of                p̄ic in spatial pattern as r̂ is within MC region. Much like the
+blurry chessboard structures rather than a homogeneous one,                 spatial pattern observed for f¯ci , the pattern for p̄ic also exhibits
+characterized by a regular alternation of high and low f¯ci .               distinct chessboard structures. This indicates that agents who
+   As r̂ enters the MC region, the clusters that appeared in                prefer to serve as contributors and those who prefer to be
+the area between the AC and MC merge into a single dom-                     free-riders are alternately arranged in space. But, p̄ic is neg-
+inant one, and the composed chessboard structure for it be-                 atively correlated with f¯ci in spatial pattern. In other words,
+comes clear [see Fig. 3 (c)]. In (d), the result displays f¯ci in           if f¯ci within the hyperedge ei is higher than that within the
+the area between MC and HC will further increase. However,                  neighboring hyperedges, then agent i’s cooperation prefer-
+similar to the area between the AC and HC regions, clusters                 ence p̄ic across all games will be lower than that of its neigh-
+reemerge, and the chessboard structure within these clusters                bors, and vice versa [see (f) and (c)]. This suggests that the
+becomes unclear once again. As r̂ enters the HC region, we                  anti-coordination seen in Snowdrift Games also appears in the
+observe that the chessboard structure almost disappears, and                context of PGGs in OR-RLEGs, but in the form of partial
+the local cooperation level in each hyperedge becomes very                  anti-coordination instead of complete anti-coordination.
+high.                                                                           Figure 3 also uncovers why the global level of cooperation
+                                                                            f¯c is influenced by the population scale when |N | is odd, but
+    (a)                          10-3 (b)                                   not when |N | is even [see Fig. 2]. Clearly, an odd-sized |N |
+                                                                  0.34      will hinder the system from forming a large chessboard pat-
+                                12                                          tern, particularly at a global level. Specifically, the smaller
+                                                                  0.32      odd-sized |N |, the more detrimental it is to the formation of
+                                10
+                                                                  0.3       such pattern [see Fig. B.12 (a, b)]. This is the reason that f¯c
+                                8                                           decreases with |N | when |N | is odd in the MC region, but
+                                                                  0.28      increases as |N | decreases in the HC region. Following this
+                                6                                           clue, we can infer that the anti-coordinated chessboard struc-
+                                                                  0.26
+    (c)                                 (d)                                 ture will enhance cooperation in global, when r̂1∗ < r̂ < r̂2∗ ,
+                                0.7                               0.8       but suppress it when r̂ > r̂2∗ .
+
+                                                                  0.75
+                                0.6
+
+                                                                  0.75
+                                0.5
+
+                                                                  0.7
+    (e)                                 (f)
+                                0.98
+                                                                  0.7
+
+                                0.975
+                                                                  0.6
+                                0.97
+                                                                  0.5
+                                0.965
+                                                                  0.4
+
+
+FIG. 3. (Color online) Spatial patterns for averaged cooperation
+levels locally and a spatial pattern for average cooperation pref-
+erences of agents. Panels (a - e) display the pattern of average lo-
+cal cooperation levels over time, denoted as f¯ci , across the hyper-
+graph for various game parameters [see the red arrows in Fig. 2 (a)]:
+in the absence of cooperation (AC), between AC and medium co-
+operation (MC), in MC, between MC and high cooperation (HC),
+and in HC regions, respectively. The game parameters in (a - e) are
+r̂ = 0.50, 0.54, 0.72, 0.84, and 1.00, respectively. In (f), we show
+the pattern of average cooperation preference of agents over time,          FIG. 4. (Color online) The time series of global cooperation level
+denoted as p̄ic , using the same game parameters as in (c). Under this      for different game parameters. Panels (a - f) exhibit the time series
+condition, both f¯ci and p̄ic exhibit a chessboard pattern with alternat-   of global cooperation levels, fc (τ ), under different game parameters:
+ing strengths and weaknesses, but are negatively correlated with each       in the AC, between AC and MC, in MC, between MC and HC, in HC,
+other. In (a - f), the scale of population size is |N | = 30 × 30. The      and at the second transition point r̂2∗ , respectively. The population
+average for fci (τ ) and pic (τ ) are computed over 108 steps, after 1010   size is |N | = 30 × 30, and other parameters are the same as Fig. 3.
+transient steps.
+                                                                              Furthermore, to examine global cooperation level through
+  To further investigate the cooperation preference for each                evolving dynamics, we present the time series of fc in Fig. 4.
+agent, Fig. 3 (f) displays the average cooperation preference               Similar to Fig. 3, we also select one r̂ in each of the different
+                                                                                                                                                  6
+
+regions and additionally include a specific one, which is at the           if it is not. Based on the initiator’s action in different states,
+second transition point r̂2∗ . For r̂ within the AC region, Fig. 4         we further define the cooperation preference of initiators in a
+(a) reveals that fc initially decreases slowly, then experiences           given state s ∈ S as follows,
+a rapid decline after τ ≈ 104 , and finally approaches 0. In
+                                                                                                 t
+contrast, for r̂ in between AC and MC regions or MC region,
+                                                                                                             1si,i (τ )=s,ai,i (τ )=1
+                                                                                                 P P
+increases rapidly after the rapid decline and stabilizes at a cer-                               τ =t0 i∈N
+tain value [see (b) and (c)]. When r̂ falls within between MC                         ϕ̄c|s :=           t
+                                                                                                                                        .       (10)
+                                                                                                                   1si,i (τ )=s
+                                                                                                        P    P
+and HC regions or the HC region, Fig. 4 (d) and (e) show that
+                                                                                                       τ =t0 i∈N
+fc initially experiences a slight decrease, followed by a rapid
+increase, and ultimately stabilizes. For r̂ at the transition point
+                                                                           Here, we appoint ϕ̄c|s to 0 in a special situation where the
+r̂2∗ , (f) shows fc that in the area between the MC and HC re-
+                                                                           denominator is 0.
+gions, where the rapid decrease of fc almost ceases.
+     Based on the time series shown in Fig. 4, we conjecture                 Finally, to determine the local state transition modes in
+that the first transition point r̂1∗ separates cases where fc either       the hyperedges, we also investigate Cohen’s kappa matrix
+rebounds after a rapid decline or does not. And, the second                [κ(s, s′ )]. In this matrix, the element κ(s, s′ ) represents Co-
+one r̂2∗ distinguishes between cases where fc will undergo a               hen’s kappa coefficient for the temporal correlations between
+rapid decline or not.                                                      consecutive states s and s′ , as defined below
+
+                                                                                                       f¯(s, s′ ) − f¯(s)f¯(s′ )
+                                                                                        κ(s, s′ ) :=                             .              (11)
+                 IV.     MECHANISM ANALYSIS                                                                1 − f¯(s)f¯(s′ )
+
+                                                                           Here,
+    A.    Transition Point for the Emergence of Cooperation
+                                                                                                 t−1
+                                                                                                             1si,i (τ )=s,si,i (τ +1)=s′
+                                                                                                 P      P
+                1.     Further Simulations for Analysis
+                                                                                                 τ =t0 i∈N
+                                                                                   f¯(s, s′ ) :=                                            .
+                                                                                                         |N |(t − t0 − 1)
+
+                                   (a)                          (c)        For state transitions, a self-loop mode can be reflected by a
+                                                                           positive diagonal element in the matrix, while a local cyclic
+                                                                           mode with a period-2 is indicated by pairs of positive symmet-
+                                                                           ric elements. Conversely, in the matrix, a positive κ(s, s) in-
+                                                                           dicates that the transition of s forms a local self-looped s ↔ s
+                                                                           mode. Furthermore, a pair of positive κ(s, s′ ) and κ(s′ , s),
+                                   (b)                          (d)        with κ(s, s′ ) ≈ κ(s′ , s), suggest that the transition between s
+                                                                           and s′ forms a cyclic s ↔ s′ mode.
+                                                                              For r̂ → r̂1∗− , Fig. 5 (a) shows that the state s0̃ = 00 be-
+                                                                           comes dominant because an initiator will not cooperate at τ
+                                                                           within a hyperedge, which is nearly independent of the state
+                                                                           at the previous step, as illustrated in (b). In contrast, for
+                                                                           r̂ → r̂1∗+ , Fig. 5 (c) shows that there are new states, s1̃ = 10
+                                                                           and s0 = 01, emerge although s0̃ = 00 still dominates. This
+FIG. 5. (Color online) The distribution of different states, the co-       occurs because a free-rider in the current step will reciprocate
+operation preferences for various given states near the first tran-
+                                                                           the kindness shown by contributors in the next step. Specif-
+sition point. Panels (a) and (b) show f¯s and ϕ̄c|s for any s ∈ S as
+                                                                           ically, an initiator will choose cooperation in the next step if
+defined in Eqs. (9) and (10) at r̂1∗− = 0.532, whereas (c) and (d)
+illustrate these quantities at r̂1∗+ = 0.534. In (a - d), the population
+                                                                           one of the participants serves as a contributor in the current
+size is |N | = 30 × 30, and other parameters are the same as Fig. 3.       step [see (d)]. Since our focus is on how cooperation emerges
+                                                                           from its absence as r̂ increases, we compare the differences in
+                                                                           ϕ̄c|s between these two scenarios with s0̃ = 00 and s0 = 01.
+   To investigate the transition point r̂1∗ in the emergence of
+                                                                           The results suggest there is a balance of competition between
+cooperation, we first analyze the distribution of states for ini-
+                                                                           the two-state transition modes at r̂1∗ : self-looped 00 ↔ 00
+tiators and their cooperation preferences across all states, es-
+                                                                           mode and cyclic 10 ↔ 01 mode.
+pecially around r̂1∗ . The probability that initiators in popula-
+                                                                              To verify the suggestion, we present the matrix of Cohen’s
+tion are in state s ∈ S is defined as follows
+                                                                           kappa coefficients for temporal correlations between consec-
+                            t
+                                                                           utive states at r̂1∗− = 0.532 and r̂1∗+ = 0.534, as shown
+                                         1si,i (τ )=s
+                            P P
+                      τ =t0 i∈N                                            in Fig. 6. At r̂1∗− = 0.532, (a) demonstrates that the ini-
+               f¯s :=                     ,                (9)             tiator’s state transitions from 00 to 01 or 10 by either itself
+                          |N |(t − t0 )
+                                                                           or the participant, and then quickly returns to state 00 again
+which meets normalization s∈S f¯s = 1. Here, 1predicate de-
+                             P
+                                                                           based on the actions determined by the Q-tables. In contrast
+notes the random variable that is 1 if predicate is true and 0             at r̂1∗+ = 0.534, a new cyclic 01 ↔ 10 mode emerge after
+                                                                                                                                       7
+                                                                                                         
+                                   10-4                                                           |e| − 1  ϵ 0      ϵ |e|−1
+     (a)                               (b)                      0.2      Q10,0 →Q10,0 (1 − α) +                    1−
+                                  2                                                                   0       2        2
+                                                                0.1                                             
+                                  1                                                                       |e| − 1 ϵ      ϵ |e|−2
+                                                                                   × α (Π00 + γQ00,0 ) +              1−
+                                  0                             0                                            1     2      2
+                                  -1                                                                      
+                                                                                                                   2
+                                  -2
+                                                                -0.1
+                                                                                   × α Π10 + γ max
+                                                                                                 ′
+                                                                                                     Q10,a′ + O(ϵ ).          (12b)
+                                                                                                    a
+                                  -3                            -0.2
+
+                                                                         Here, the second term on the right-hand side of the above
+                                                                         equations represents how corresponding updates to the Q-
+                                                                         table for the initiator affect the expectations of Q00,0 and of
+                                                                         Q10,0 , assuming no participant selects the exploration-actions
+                                                                         in their corresponding state. And, the third term illustrates
+                                                                         how these updates impact the expectations when only one
+                                                                         of the participants chooses its exploration-action. All other
+                                                                         cases, where more participants choose exploration-actions,
+FIG. 6. Cohen’s kappa coefficient matrices for temporal correla-
+tions near the first transition point and competing modes at the         are encompassed within O(ϵ2 ). By omitting O(ϵ) further, the
+transition point. Panels (a) and (b) show the matrices of Cohen’s        stable Q∗00,0 and Q∗10,0 in Eq. (12) meet
+kappa coefficients for temporal correlations at r̂1∗− = 0.532 and
+r̂1∗+ = 0.534. The element κ(s, s′ ) in [κ(s, s′ )] is the coefficient
+                                                                                                       ϵ |e|−1
+                                                                         Q∗00,0 ≈ (1 − α)Q∗00,0 + α 1 −          Π00 + γQ∗00,0 ,
+                                                                                                                              
+of correlation between consecutive states s and s′ . A positive diago-                                  2
+nal element κ(s, s) suggests the presence of a local self-loop s ↔ s                                                        (13a)
+mode in the hyperedges, while a pair of positive, symmetric non-                                       ϵ |e|−1
+diagonal elements κ(s, s′ ) and κ(s′ , s), with κ(s, s′ ) ≈ κ(s′ , s),   Q∗10,0 ≈ (1 − α)Q∗10,0 + α 1 −          Π00 + γQ∗00,0 .
+                                                                                                                              
+indicates the existence of a local cyclic s ↔ s′ mode. (c) illustrates                                  2
+the competing modes at the first transition point r̂1∗ ≈ 0.5332 in                                                          (13b)
+simulation, which are the self-looped mode 00 ↔ 00 and the cyclic
+mode 10 ↔ 01. The initiator in each hyperedge is marked with a           Then, we can get the stable expectation of Q00,0 and expecta-
+red circular edge. In (a) and (b), the averages are computed over 108    tion of Q10,0 in 00 ↔ 00 mode as follows
+steps, after 1010 transient steps.
+                                                                                                          (1 − 2ϵ )|e|−1 Π00
+                                                                                   Q∗00,0 = Q∗10,0 ≈                         .      (14)
+                                                                                                         1 − γ(1 − 2ϵ )|e|−1
+transitioning from 00 to 01 or 10 [see (b)]. The results con-
+firm the suggestion on competing modes from Fig. 5. Thus,                  Then, we pay attention to the expectation of Q10,1 in the
+00 ↔ 00 and 10 ↔ 01 modes exhibit competing action se-                   competing 01 ↔ 10 mode. In Eqs. (15a) and (15b), we give
+lections in the state 10, still defection or cooperation [see (c)].      evolutionary dynamics of Q10,1 and Q01,0 in 01 ↔ 10 mode
+In other words, our key question about competing temporal                under exploration as follows
+modes is whether a free-rider will reciprocate the kindness of                                               
+                                                                                                      |e| − 1  ϵ 0           ϵ
+another contributor or continue to free-ride when encounter-              Q10,1 →Q10,1 (1 − α) +                        (1 − )|e|−1
+ing such kindness.                                                                                       0          2         2
+                                                                                                                      
+                                                                                                               |e| − 1 ϵ         ϵ
+                                                                                    × α (Π01 + γQ01,0 ) +                  (1 − )|e|−2
+                                                                                                                    1    2       2
+                                                                                                                 
+       2.   Analysis of Transition Point via Competing Modes                        × α Π11 + γ max     Q  11,a′    + O(ϵ2 ),      (15a)
+                                                                                                    a′
+                                                                                                              
+                                                                                                      |e| − 1       ϵ 0        ϵ
+   Based on further simulations, our focus should be on the ex-           Q01,0 →Q01,0 (1 − α) +                        (1 − )|e|−1 ,
+                                                                                                         0          2         2
+pected values for defection and cooperation in state 10, specif-                                                      
+                                                                                                               |e| − 2 ϵ         ϵ
+ically Q10,0 in self-looped 00 ↔ 00 mode and Q10,1 in cyclic                        × α (Π10 + γQ10,1 ) +                  (1 − )|e|−2
+10 ↔ 01 mode. Here, we focus on the expectation of Q10,0 in                                                         1    2       2
+                                                                                                                  ϵ         ϵ
+self-looped 00 ↔ 00 mode firstly. The evolutionary dynamics                         × α Π20 + γ max     Q  20,a′    + (1 − )|e|−2
+of Q00,0 and Q10,0 in 00 ↔ 00 mode under exploration as                                 
+                                                                                                    a′
+                                                                                                                     2       2
+follows                                                                             × α Π00 + γ max     Q  00,a ′   + O(ϵ2 ).      (15b)
+                                                                                                     ′
+                                                                                                     a
+                              
+                        |e| − 1  ϵ 0      ϵ |e|−1
+Q00,0 →Q00,0 (1 − α) +                   1−                              Similar to Eqs. (12a) and (12b), the second term on the right-
+                           0        2        2                           hand side of Eqs. (15a) and (15b) show how corresponding
+                                      
+                                |e| − 1 ϵ      ϵ |e|−2                 updates to the Q-table for the initiator within this hyperedge
+       × α (Π00 + γQ00,0 ) +                1−
+                                   1     2      2                        respectively affect the expectations of Q10,1 and of Q01,0 , as-
+                                
+                                         2
+                                                                         suming no participant chooses the exploration-action in their
+       × α Π10 + γ max ′
+                          Q10,a′ + O(ϵ ),           (12a)                respective states. The rest terms except O(ϵ2 ), on the other
+                              a
+                                                                                                                                                                             8
+
+hand, show how these updates affect the expectations when                                                  agents occasionally exhibit kindness. This reciprocal kindness
+only one of the participants takes exploration-action. By omit-                                            facilitates the achievement of cooperation within the popu-
+ting O(ϵ) in Eq. (15), we learn the stable Q∗01,0 and Q∗10,1 meet                                          lation more readily. Furthermore, the analysis indicates that
+                                                                                                           the phase transition at r̂1∗ is continuous, demonstrating that
+       Q∗10,1                                     αγ(1 − 2ϵ )|e|−1
+                                                                
+                                     1−α                                                                   the emergence of cooperation occurs gradually rather than
+                       ≈                                              ·
+       Q∗01,0                   αγ(1 − 2ϵ )|e|−1       1−α                                                 abruptly as r̂ increases. Additionally, this conclusion is fur-
+                                ∗                       
+                                                   ϵ |e|−1 Π01
+                                                                                                          ther supported by the observed finite-size effects of simula-
+                                Q10,1
+                                        +   α(1  −   )               (.16)                                 tion, that is f¯c increases with the decrease of even-sized |N |
+                                Q∗01,0             2          Π10
+                                                                                                           as r̂ → r̂1∗+ [see Fig. 2].
+Then, we can get Q∗01,0 and Q∗01,1 that are
+                                                                                                                              B.      Chessboard Structure
+          (1 − 2ϵ )|e| Π10 (1 − 2ϵ ) + γ(1 − 2ϵ )|e| Π01
+                                                        
+ Q∗10,1 ≈                                                  , (17a)
+                    (1 − 2ϵ )2 − γ 2 (1 − 2ϵ )2|e|                                                             1.   State Distribution and Cooperation Preferences across
+          (1 − 2ϵ )|e| Π01 (1 − 2ϵ ) + γ(1 − 2ϵ )|e| Π10
+                                                        
+                                                                                                                                      Different States
+ Q∗01,0 ≈                                                  . (17b)
+                    (1 − 2ϵ )2 − γ 2 (1 − 2ϵ )2|e|
+                                                                                                               In this section, we will explore the chessboard structure of
+    In our PGG setting, we have Π01 = r̂ − 1, Π10 = r̂ and                                                 the spatial pattern based on further simulations. It is impor-
+Π00 = 0. Due to the competitive balance between Q10,0 and                                                  tant to clarify that this structure is a novel spatial phenomenon
+Q10,1 at the transition point r1∗ , we find that Q∗10,0 = Q∗10,1 at                                        that emerges through the accumulation of time [see Fig. 3 and
+r1∗ , i.e,                                                                                                 Fig. B.11]. This is distinct from previous works where such
+                                                                                                           patterns are observed at each step [55, 60, 61]. Therefore,
+                                            (1 − 2ϵ )                                                      as discussed in Sec. IV A, it is crucial to focus initially on
+                       r̂1∗ ≈                                 .                                     (18)
+                                    (1 − 2ϵ ) + γ(1 − 2ϵ )|e|                                              the distribution of states over time and the averaged coop-
+                                                                                                           eration preference for these states over time. However, the
+According to the above equation, one learns that when r̂ < r̂1∗ ,                                          emergence of the chessboard structure suggests that agents’
+the self-looped 00 ↔ 00 mode dominates over the cyclic                                                     behavior exhibits a spontaneous regular symmetry breaking
+01 ↔ 10 mode, resulting in the absence of cooperation. On                                                  in space, which is distinct from the behavior observed around
+the other hand, when r̂ ≳ r̂1∗ , 01 ↔ 10 mode takes over                                                   r̂1∗ in Sec. IV A.
+00 ↔ 00 mode, leading to the emergence of cooperation.                                                         The breaking of spatial symmetry indicates that the popula-
+To verify our analysis, we provide more simulated results ob-                                              tion contains two categories based on the average cooperation
+tained under various values of γ and ϵ in Fig. 7. The results                                              levels, Nh , where the cooperation level within their hyper-
+are consistent with our analysis, which validates the approach.                                            edges is higher than in their neighbors’ hyperedges, and Nl ,
+                                                                                                           where it is lower. The definitions for Nh and Nl are
+
+                                                                                                                                        1f¯i >f¯cj ,∀ej ∈{e|i∈e} i ,
+                                                                                                                                   X
+       1                                                1
+           (a)                                               (b)                                                           Nh :=                                        (19a)
+                                                                                                                                             c                   −e
+     0.8                                               0.8                                                                         i∈N
+
+                                                                                                                                         1f¯ci <f¯cj ,∀ej ∈{e|i∈e}−ei .
+                                                                                                                                   X
+     0.6                                               0.6                  0.5                                           Nl :=                                           (19b)
+                              0.5
+     0.4                                               0.4                 0.25                                                    i∈N
+                           0.25
+     0.2                                               0.2
+                               0
+                                                                               0
+                                                                               0.52       0.54    0.56     Here, {e|i ∈ e}−ei denotes the set of neighboring hyperedges
+                                    0.5   0.6    0.7
+       0
+       0.4       0.6    0.8          1     1.2
+                                                       0
+                                                   1.4 0.4         0.6   0.8          1     1.2     1.4    of ei . Then, we can further define the probability for a given
+                                                                                                           state s in Nh (Nl ) is
+                                                                                                                                      t
+FIG. 7. (Color online) The average global cooperation level as the                                                                                    1si,i (τ )=s
+                                                                                                                                      P          P
+function of the game parameter under different learning param-                                                                        τ =t0 i∈Nh(l)
+eters. Panel (a) shows the function f¯c (r̂) under different values of                                                   f¯sh(l) :=                                  ,     (20)
+discount factor γ, while (b) presents the function for different values                                                                  |Nh(l) |(t − t0 )
+of the exploration rate ϵ. The analysis results for the first transition
+                                                                                                           and the average cooperation preference for a given state s is
+point r̂1∗ from Eq. (18) are indicated by red arrows, which are consis-
+tent with the simulation results. The insets provide a close-up view                                                           t
+                                                                                                                                                 1
+                                                                                                                               P         P
+of the transition points for clearer observation of the analysis results.                                                                  si,i (τ )=s,ai,i (τ )=1
+The rest learning parameters in (a) are α = 0.1 and ϵ = 0.01, while                                                   h(l)   τ =t0 i∈Nh(l)
+in (b) are α = 0.1 and γ = 0.9. The scales of population in (a), (b)                                                ϕ̄c|s :=         t
+                                                                                                                                                                   .       (21)
+                                                                                                                                                      1si,i (τ )=s
+                                                                                                                                    P     P
+are |N | = 30 × 30.
+                                                                                                                                      τ =t0 i∈Nh(l)
+
+  Equation (18) from the analysis reveals that a population                                                Inspired by the inference from Sec. III, we select game pa-
+with a high γ, indicative of long-sightedness, and low ex-                                                 rameters based on the effect of the local chessboard struc-
+ploration is more likely to respond with kindness when other                                               ture on global cooperation. Specifically, in Case I and Case
+                                                                                                                                                          9
+
+II, r̂ = 0.72 is chosen from the range r̂1∗ < r̂ < r̂2∗ where              spatial symmetry breaking observed in the state distribution
+NhI ∪ NlI = N , and r̂ = 0.84 is chosen from the range r̂ > r̂2∗           for Case I weakens significantly in Case II.
+where NhII ∪ NlII ⊊ N .
+                                                                                          (a)                            (c)
+
+          (a)                            (c)
+
+
+
+
+                                                                                         (b)
+
+
+          (b)                            (d)
+
+
+
+
+                                                                           FIG. 9.      (Color online) Cooperation preferences of initiators
+                                                                           across various states within different categories. (a, b) and (c,
+                                                                           d) respectively show the cooperation preferences for initiators within
+                                                                                                   h(l)
+FIG. 8. (Color online) The distribution of states for initiators           Nh(l) , as denoted by ϕ̄c|s in Eq. (21), in Cases I and II. In (a - d),
+within different categories. Panels (a, b) and (c, d) show f¯sh and f¯sl   the scale of population size |N | = 30 × 30, and the other parameters
+for any s ∈ S within the categories Nh and Nl under the selected           are consistent with those in Fig. 3.
+game parameters in Cases I and II. (a, b) display there is a significant
+difference between the state distribution within Nh and Nl in Case                                                             h(l)
+                                                                              Next, Fig. 9 (a, b) and (c, d) display ϕ̄c|s defined in Eq. (21)
+I, while such difference gradually decreases in Case II as shown in
+(c, d). In (a - d), the population size |N | = 30 × 30, and other          for any s ∈ S under Cases I and II, respectively. In Case I,
+parameters are the same as Fig. 3.                                         there is a noticeable gap between ϕ̄hc|s and ϕ̄lc|s for any s ∈ S
+                                                                           [see (a, b)]. This gap indicates that initiators in NhI have a
+                                       h(l)
+   In Fig. 8 (a - d), we present f¯s of Eq. (20) within Nh                 lower preference for cooperation compared to those in NlI . In
+and Nl in the above cases. In the Case I, as shown in (a)                  other words, within a hyperedge, the cooperation preference
+and (b) forPNhI , the probability of initiators acting as con-             of each initiator is inversely related to that of the participants,
+                    h                                                      exhibiting anti-coordinated. In contrast, in Case II, the dif-
+tributors,     sm fsm = 0.362,        is lower compared to their
+probability as free-riders, sm̃ fshm̃ = 0.638. In contrast,
+                                 P                                         ference between ϕ̄hc|s and ϕ̄lc|s almost entirely vanishes [see
+in NlI , the probability of initiators acting as contributors,             (c, d)]. This observation suggests that the spatial symmetry
+P       l                                                                  breaking shown in Fig. 8 (a, b) is due to differences in coop-
+   sm fsm = 0.5835,       is higher than their probability of act-
+                      P         l                                          eration preferences among initiators in NhI and NlI . Further-
+ing as free-riders,       sm̃ fsP m̃
+                                     = 0.4165. Additionally, this          more, panels (a) and (c, d) reveal a noticeable gap between
+                       h
+observation, sm fsm < sm fslm , aligns with the conclu-
+               P
+                                                                             h(l)        h(l)
+                                                                           ϕ̄c|sm and ϕ̄c|sm̃ , whereas this gap is significantly reduced
+sion drawn from Fig. 3 (f). That is the initiators’ prefer-
+                                                                           in panel (b). This result suggests that the reliance on previ-
+ence for cooperation is negatively correlated with the local
+                                                                           ous personal actions in decision-making plays a crucial role
+cooperation level within their hyperedges. While in Case II,
+                                                                           in maintaining a high level of cooperation.
+(c)
+P andh(d) display      the negative correlation still holds, i.e.,
+                        l                    II
+                P
+   sm fsm ≲        sm fsm . However, in Nh , the probability of
+initiators acting as contributors P   becomes higher
+                                                 P than that of             2.   Cohen’s Kappa Coefficient Matrix for Temporal Correlations
+those acting as free-riders, i.e., sm fshm > sm̃ fshm̃ . This
+is a difference between Case I and Case II in the state distri-
+bution.                                                                       Finally, to determine the local state transition modes in
+   Additionally, for Case I in both NhI and NlI , the probabil-            the hyperedges, we also investigate Cohen’s kappa coefficient
+ity of observing a given state for the contributing initiators             matrix [κh(l) (s, s′ )] in Nh and Nl . In this matrix, the element
+varies non-monotonically with the number of contributors in                κh(l) (s, s′ ) is Cohen’s kappa coefficient for the temporal cor-
+that state. Specifically, both fshm and fslm first increases and           relations between consecutive states s and s′ in Nh and Nl , as
+then slightly decreases with the increase of m. However, for               defined in the following
+a state of a free-riding initiator, the non-monotonicity of fslm̃                                      f¯h(l) (s, s′ ) − f¯h(l) (s)f¯l(h) (s′ )
+with m persists, while fshm̃ changes to a monotonically in-                        κh(l) (s, s′ ) :=                                            .       (22)
+                                                                                                             1 − f¯h(l) (s)f¯h(l) (s′ )
+crease with m [see Fig. 8 (a, b)]. The results suggest the
+spatial symmetry breaking also emerges in state distribution               Here,
+for Case I, especially for the free-riding initiators. However,                                        t
+in Case II, fshm̃ and fslm̃ transition to non-monotonic behavior                                                     1si,i (τ )=s,si,i (τ +1)=s′
+                                                                                                       P      P
+with respect to m, whereas fshm and fslm increase monotoni-                      ¯h(l)          ′
+                                                                                                      t=t0 i∈Nh(l)
+                                                                                 f       (s, s ) :=                                                 .
+cally with m [see (c, d)]. Thus, it can be concluded that the                                                     |Nh(l) |(t − t0 )
+                                                                                                                                            10
+
+    (a)                         0.07 (c)                        0.04
+                                                                                        V.   DISCUSSION AND CONCLUSION
+                                0.035                           0.02
+
+                                0                               0              In this study, we propose a new model of the other-
+                                                                            regarding reinforcement learning evolutionary game and ap-
+                                -0.035                          -0.02       ply it to the PGG on von Neumann hyperedges. Interest-
+                                -0.07                           -0.04       ingly, unlike only one transition observed in traditional evo-
+    (b)                         0.07(d)                         0.04        lutionary games or the self-regarding reinforcement learning
+                                                                            case [53, 55], the average cooperation level in our model ex-
+                                0.035                           0.02
+                                                                            periences two sharp increases as the synergy factor is varied.
+                                0                               0           The interval of the synergy factor is divided into three distinct
+                                                                            regions (absence of cooperation, medium cooperation, and
+                                -0.035                          -0.02
+                                                                            high cooperation) connected by two transition points. Fur-
+                                -0.07                           -0.04       thermore, based on the spatial patterns observed in these re-
+                                                                            gions, we identify the regular and anti-coordinated chessboard
+                                                                            structures in the spatial pattern that positively contribute to the
+FIG. 10. Cohen’s kappa coefficient matrices for temporal corre-             first sharp increase in transition but adversely affect the sec-
+lations within different categories. Panels (a, b) show kappa coeffi-       ond one. Additionally, this structure develops through the ac-
+cients matrix [κh(l) (s, s′ )] for temporal correlations between consec-    cumulation of time rather than emerging at each step as in the
+utive states within Nh and Nl , as denoted by κh (s, s′ ) and κl (s, s′ )   previous works [55, 60, 61].
+in Case I. Panels (c, d) illustrate the corresponding coefficient matrix
+in Case II. In (a - d), the averages are computed over 108 steps, after
+                                                                               We further reveal that there is a competing balance between
+1010 transient steps.                                                       two state transition modes at the first transition point: whether
+                                                                            a free-rider will reciprocate the kindness of another contribu-
+                                                                            tor or continue to free-ride in response to such kindness. Fol-
+                                                                            lowing this clue, we give the theoretical transition point for
+                                                                            the emergence of cooperation, and reveal a population with
+                                                                            a long-sighted perspective and low exploration rate is more
+   In Fig. 10, we show [κl(h) (s, s′ )] in Case I and Case II.              likely to reciprocate kindness with each other, ultimately pro-
+The difference of [κl(h) (s, s′ )] in between (a) and (b) indicates         moting cooperation.
+that spatial symmetry breaking is also reflected in the tempo-                 Finally, for the chessboard structures, we investigate the
+ral correlation between consecutive states in Case I. In NhI ,              state distribution and transition modes for initiators within dif-
+self-loop transitions prevail in the hyperedges, with s4̃ ↔ s4̃             ferent categories classified by local symmetry breaking. The
+and s3̃ ↔ s3̃ modes being the most dominant [see (a) and                    state distribution illustrates that agents’ attention to their own
+Fig. B.16 (a2) ]. In these dominant modes, the initiators free-             historical information is essential for promoting cooperation
+ride on the contributions of participants. In contrast, in NlI ,            when making decisions to act. The transition modes indi-
+these free-riding modes disappear due to the emergence of                   cate the free-riding modes, in which the initiators free-ride
+various competing cyclic modes but the self-looped synergy                  on the contributions of participants, play a significant role in
+modes, such as s4 ↔ s4 and s3 ↔ s3 , still persist [see (b) and             the stability of the local chessboard structure. However, as the
+Fig. B.16 (b1 - b3)]. Additionally, a new anti-coordinated and              synergy factor increases, these modes are gradually replaced
+self-looped mode emerges, specifically s2 ↔ s2 .                            by the synergy modes due to the erosion of competing cyclic
+                                                                            modes.
+   In Case II, Fig. 10 (c, d) shows that the coefficient matrices              Although our model reveals new mechanisms for the emer-
+for NhII and NlII retain part of the features of the coefficient            gence of cooperation in the context of PGGs, several open
+matrices for NhI and NlI , respectively. However, the spatial               questions remain. One issue is whether the local regular sym-
+symmetry breaking observed in the coefficient matrix for Case               metry breaking and anti-coordination phenomena persist in
+I is also significantly reduced. Furthermore, both in NhII and              more complex hypergraphs. Furthermore, our theory provides
+NlII , the self-loop modes are still dominant, similar to NhI .             the conditions for the emergence of cooperation based on
+However, the most dominant self-loop modes are synergistic                  competition involving only two modes. However, developing
+cooperation modes rather than free-riding modes in NhI [see                 a comprehensive theory that considers competition involving
+(a), (c, d) and Fig. B.16 (c1)]. In addition, similar to those in           multiple modes, such as the second transition point, or hetero-
+NlI , a significant number of cyclic modes continue to persist in           geneous hypergraphs remains a challenge. Additionally, simi-
+both NhII and NlII [see (b), (c, d) and Fig. B.16 (c2)]. Based on           lar to our previous work [56, 60], the computational complex-
+these analyses, a plausible conjecture arises: the cyclic modes             ity of RLEGs complicates the identification of phase transi-
+may contribute to the destabilization of the free-riding modes,             tions and transition points [62–64], particularly the finite-size
+potentially leading the dominant modes to transition into the               scaling [59, 65]. Therefore, designing more efficient algo-
+synergy modes. Notably, this transformation appears to en-                  rithms remains a crucial challenge for simulating large-scale
+hance the level of global cooperation. However, it is crucial to            simulations. In conclusion, addressing these questions could
+recognize that this shift may also diminish the local coopera-              guide further research efforts and enhance our understanding
+tion of the cyclic modes within their hyperedges as a sacrifice.            of collective behaviors, particularly regarding the evolution of
+                                                                                                                                             11
+
+grouping cooperation within the framework of reinforcement                Algorithm 2: The Algorithm of Evolutionary Public
+learning.                                                                                  Goods Game
+                                                                        Input: Learning parameters: β, µ; Population:N
+                                                                      1 Initialization for i in N do
+                  ACKNOWLEDGEMENTS                                    2      Pick an action ai randomly from A for public games
+                                                                      3 repeat
+   We thank Weiran Cai, Shengfeng Deng, and Bin-Quan Li               4     Gaming process;
+for their constructive suggestions on this research. We are           5     for i in N do
+supported by the Natural Science Foundation of China under            6          Initiate a public good game consist of all agents in ei
+Grants No. 12165014 and 12075144, and the Key Research                             for j in ei do
+and Development Program of Ningxia Province in China un-                              Result: ActionTaking
+der Grant No. 2021BEB04032.                                           7               ran ← RandomNumber() ;
+                                                                      8               if ran < µ then
+                                                                      9                    Takes a random mutation action from A;
+        Appendix A: The Model for Evolutionary Game                  10               else
+                                                                     11                    Takes its own action ãj ;
+
+   Here, we introduce the traditional evolutionary games             12           Get reward Πi according to Eq. (A1);
+(EGs) in the context of PGGs, applied to hypergraph gener-           13       Learning process;
+ated from von Neumann lattices [see Sec. III]. Similar to OR-        14       for i in N do
+RLEGs, |N | agents are also positioned on an L × L hyper-            15            j ← RandomInitiator in the neighboring hyperedge ;
+graph, and each evolutionary step includes gaming and learn-         16            Update action ãi according to Eq. (A2)
+ing processes. In gaming process, any agent i will initiate
+                                                                     17   until the system becomes statistically stable or evolves for the
+a public goods game in a hyperedge ei and the other agents                 desired time duration;
+within ei will participate in it. However, unlike OR-RLEGs,
+in this model, each agent takes the same action ai across all
+the games it is involved in at each step. This action ai is either          (a)                             (b)
+its own action ãi , chosen with probability 1 − µ or a random                                        1                                1
+action from A, chosen with mutation probability µ. After the                                          0.8                              0.8
+action-takings, the initiator i within hyperedge ei receives its
+payoff at τ , which is determined based on the actions taken by                                       0.6                              0.6
+the agents within ei as follows                                                                       0.4                              0.4
+                         r X j
+              Πi (τ ) = i ·        a (τ ) − ai (τ ).         (A1)                                     0.2                              0.2
+                        |e |     i
+                             j∈e
+                                                                                                      0                                0
+   During the learning process, each initiator i randomly se-               (c)                             (d)
+                                                                                                      1                                1
+lects another initiator j in the neighboring hyperedge, as the
+model agent to update its own action according to Fermi                                               0.8                              0.8
+rule [66]. The details are as follows:
+                                                                                                     0.6                              0.6
+                  j                        1
+                    a (τ ) p =                                                                        0.4                              0.4
+   ãi (τ + 1) =                   1 + exp[β(Πi − Πj )] (A2)
+                  ãi (τ ) otherwise,
+                                                                                                      0.2                              0.2
+                                                                 i
+which denotes that the agent i either replaces its own action ã                                      0                                0
+with j’s action aj at current round or retains its original action
+ãi . Here, to maintain consistency with OR-RLEGs, we set the
+                                                                     FIG. B.11. Spatial patterns of local cooperation at a specific step.
+agents to focus only on the reward when they act as initiators
+                                                                     In the figure, we present the spatial pattern of fci for each hyperedge
+rather than as participants in the process of optimizing cog-        at τ = 109 on the von Neumann hypergraph. (a - d) display the
+nition. Furthermore, simulation takes a synchronous update           game parameters r̂ = 0.54, 0.72, 0.84, and 1.00, respectively, which
+rather than the traditional asynchronous update approach [40].       correspond to those in (b - e) of Fig. 3. The population size is |N | =
+     To summarize, the pseudo-code is provided in Algorithm 2.       30 × 30.
+
+
+Appendix B: Further Simulation for Local Cooperation Levels          Fig. B.11 shows the pattern of fci for each hyperedge ei ∈ E
+                                                                     at a specific step within the stable duration. Compared to the
+                    1.   The Spatial Pattern                         spatial pattern of the average local cooperation level over time
+                                                                     shown in Fig. 3, the chessboard structure becomes less pro-
+  Here, we firstly explore local cooperation level on the von        nounced for the local cooperation level at a specific step. Es-
+Neumann hypergraph from spatial patterns in more detail.             pecially in the case r̂ = 0.72, the chessboard structure is both
+                                                                                                                                                12
+
+regular and global in the spatial pattern for f¯ci [see Fig. 3(c)                1
+in Sec. III]. However, the feature of this structure completely           (a)
+disappears for fci at this specific step [see Fig. B.11 (b)]. In                0.5
+other words, the chessboard pattern is a spatial phenomenon
+that emerges through time accumulation rather than appearing                     0
+                                                                                 1
+at each step.                                                             (b)
+
+                                                                                0.5
+    (a)                                  (b)
+                                  0.7                           0.7
+
+                                  0.65                          0.65      (c)    1
+
+                                  0.6                           0.6             0.5
+                                  0.55                          0.55
+                                                                                 0
+                                  0.5                           0.5                   0   1   2   3    4     5    6     7    8     9    10
+                                                                                                                                            7
+                                                                                                                                       10
+                                  0.45                          0.45
+
+
+                                                                         FIG. B.13. Time series of the local cooperation levels across var-
+FIG. B.12. Spatial patterns of averaged cooperation level locally        ious sliding window scales. In the figure, (a - c) present the time
+in different odd-sized von Neumann hypergraphs. The figure dis-          series of f¯ci within two neighboring hyperedges across various slid-
+plays the spatial patterns of the average local cooperation preference   ing window scales, ∆t = 104 , 105 and 106 . To manage the large
+f¯ci in different odd-sized von Neumann hypergraphs. The scales of       number of data points, one data point is displayed for every thou-
+hypergraphs in (a) and (b) are |N | = 19 × 19 and 29 × 29, respec-       sand. In each panel, the red dots indicate a high f¯ci , while the blue
+tively. The average are computed over 108 steps, after 1010 transient    dots indicate a low f¯ci within the corresponding hyperedge over the
+steps.                                                                   entire period. The Pearson correlation coefficients of time series be-
+                                                                         tween the neighboring hyperedges in (a - c) are −0.136, −0.421,
+                                                                         and −0.838, respectively. The population scale is |N | = 30 × 30.
+   In Fig. B.12, we present the spatial pattern of the average
+local cooperation level on different odd-sized von Neumann
+hypergraphs. The figure illustrates that fragmented regions
+of the chessboard structure appear along the diagonal of the             hyperedges, where one has a low and the other has a high f¯ci
+network, and the proportion of these regions increases with              over the entire time duration.
+the decrease of |N |. This suggests that smaller odd-sized |N |             According to Fig. B.13 (a - b) with r̂ = 0.6, it is observed
+are more detrimental to the formation of a global chessboard             that the time series of fˆci exhibits disorder for small-scale time
+pattern. Consequently, the size of |N | affects the global coop-         windows. Whereas for larger time windows in (c), fˆci (τ ) ex-
+eration level f¯c in the MC regions or in the area between MC            hibits a noticeable gap between the neighboring hyperedges
+and HC regions when |N | is odd-sized [see Fig. 2].                      within each window. Furthermore, (a - c) shows a multiscale
+                                                                         negative correlation for fˆci between neighboring hyperedges
+                                                                         across time windows, demonstrating that the negative corre-
+     2.   Stability of Regular Symmetry Breaking in Local                lation increases with time window scale. As (c) shows, this
+                                                                         correlation at larger scales may reverse the gap in fˆci (τ ) be-
+   Given the spatial pattern that emerges over the accumula-             tween neighboring hyperedges, potentially destabilizing lo-
+tion of time, we further proceed to examine the time series of           cal symmetry breaking. Thus, the chessboard becomes blurry
+cooperation levels within distinct hyperedges. Our focus is to           in spatial pattern and clusters of checkerboard structures will
+discern whether there are notable temporal patterns that occur           emerge [see Fig. 3].
+within these hyperedges. To uncover these patterns, we define               With the increase of r̂ but still in Case I, Fig. B.14 (a - c)
+the cooperation levels within any hyperedge ei over a sliding            show fˆci (τ ) retains most features observed in Fig. B.13 for
+time window with a scale of ∆t as                                        both small-scale and larger time windows. However, different
+                                    τ
+                                                                         from Fig. B.13, the previously noted negative correlation is
+                                              fci (τ ′ )                 transformed into a positive correlation, which stabilizes local
+                                    P
+                                 τ ′ =τ −∆t                              symmetry breaking and extends its characteristic time. This
+                  fˆci (τ ) :=                             ,    (B1)
+                                         ∆t                              stability allows the chessboard structure to dominate the spa-
+                                                                         tial pattern [see Fig. 3 (c)]. As r̂ continues to increase and
+and investigate fˆci over the time series. According to the defi-        transitions into Case II, Fig. B.15 reveals that although the
+nitions provided in Sec. IV B, our game parameters are set as            positive correlation of fˆci between neighboring hyperedges
+r̂ = 0.6 and 0.72, falling within Case I with r̂1∗ < r̂ < r̂2∗ . Ad-     will further increase, the reduction of the gap still leads to
+ditionally, we set r̂ = 0.84, falling within Case II with r̂ > r̂2∗ .    a loss of stability in local symmetry breaking. Consequently,
+Furthermore, because of the spatial symmetry-breaking in pat-            clusters start to re-emerge and the chessboard structure be-
+tern, we display time series of fˆci for a pair of neighboring           comes blurry once again [see Fig. 3 (d)].
+                                                                                                                                             13
+
+         1                                                                 tion plays a main role in destabilizing local symmetry break-
+  (a)                                                                      ing, while for high r̂, the narrowing of the gap becomes the
+        0.5                                                                primary factor in this destabilization. Then, for the medium
+                                                                           r̂, the local symmetry breaking is stable, allowing the chess-
+         0                                                                 board structure to dominate the spatial pattern.
+         1
+  (b)
+        0.5
+                                                                                           3.   Local State Transition Modes
+         0
+         1                                                                     In the main text, we state that in Cohen’s coefficient matrix
+ (c)
+                                                                           [κ(s, s′ )], the positive κ(s, s) indicates that the transition of
+        0.5
+                                                                           s forms a local self-looped s ↔ s mode. And, the positive
+         0                                                                 κ(s, s′ ) and κ(s′ , s), with κ(s, s′ ) ≈ κ(s′ , s), suggest that the
+              0   1   2   3    4    5     6    7     8    9     10         transition between s and s′ forms a local cyclic s ↔ s′ mode
+                                                               107         [see Sec. IV A 1]. The statement means we can identify the
+                                                                           primary local state transition mode by the coefficient matrix.
+                                                                           To illustrate the validity of this statement, we present state
+FIG. B.14. Time series of the local cooperation level across vari-
+                                                                           transition modes for different initiators belonging to distinct
+ous sliding window scales. Panels (a - c) present the time series of
+f¯ci within two neighboring hyperedges across various sliding window
+                                                                           categories in Cases I and II, specifically those initiators are in
+                                                                              I            II
+scales. The Pearson correlation coefficients of time series between        Nh(l)   and Nh(l)   . The game parameters are set as r̂ = 0.72
+the neighboring hyperedges in (a - c) are 0.29, 0.312, and 0.253,          in Case I and 0.84 in Case II to maintain consistency with
+respectively. The settings and display methods in panels (a - c) are       Sec. IV B.
+consistent with those in Fig. B.13.                                            In Fig. B.16, we present the time series of configurations
+                                                                           that include all agents’ actions within different hyperedges.
+                                                                           The panels in the figure correspond to those in Fig. 10, e.g.,
+  (a) 1                                                                    the parameters and the affiliated categories of initiators in (a1
+        0.5                                                                - a3) are identical to those in panel (a) of Fig. 10. In panels
+                                                                           (a1 - a3), we can observe the emergence of the main self-loop
+         0                                                                 modes in NhI identified by [κl (s, s′ )] of Fig. 10 (a), such as
+ (b) 1                                                                     s4̃ ↔ s4̃ , s3̃ ↔ s3̃ and s4 ↔ s4 . In addition, based on (a1
+                                                                           - a2), it can be concluded that the period of the configura-
+        0.5                                                                tion transition mode will not be shorter than the period of the
+                                                                           state transition mode, as there may be multiple configurations
+         0
+                                                                           within a single state for the initiators. However, the period
+ (c) 1                                                                     of the configuration transition mode can also be reflected in
+        0.5                                                                the state transition period of at least one participant in this
+                                                                           hyperedge. For instance, the state transition period for both
+         0                                                                 the bottom and top participants is equal to the period of the
+              0   1   2   3    4    5     6    7     8     9     10        configuration transition period in (a2). This indicates that the
+                                                                    7
+                                                               10          state transition periods for agents within a specific hyperedge
+                                                                           may vary.
+FIG. B.15. Time series of cooperation levels across various slid-              In Fig. B.16 (b1 - b3), the main modes in NlI identified by
+ing window scales. Panels (a - c) present the time series of f¯ci within   [κ (s, s′ )] in Fig. 10 (b) are also observed. In NhI , the dom-
+                                                                              l
+
+two neighboring hyperedges across various sliding window scales.           inating self-loop modes in NlI disappear and are replaced by
+The Pearson correlation coefficients of the time series between the        shorter cyclic modes, such as s1 ↔ s2̃ and s1 ↔ s3̃ . Further-
+neighboring hyperedges in (a - c) are 0.631, 0.705, and 0.569, re-         more, a comparison of panels (b1 - b3) and (a1 - a3) shows that
+spectively. The settings and display methods in panels (a - c) are         the initiator is more willing to serve as a contributor, while the
+consistent with those in Fig. B.13.                                        participants are more likely to adopt the role of free-riders in
+                                                                           NlI . In contrast, the situation is reversed in NhI . These findings
+                                                                           are consistent with the results in Fig. 9. In Fig. B.16 (c1), we
+   In sum, one learns that the stability of local symmetry                 observe the main modes s3 ↔ s3 and s4 ↔ s4 in NlII , which
+breaking depends on both the gap in f¯ci between neighboring               are identified by Fig.10 (c). In contrast, in (c2) and (d1), we
+hyperedges and the correlation of fˆci between them, especially            see some long-period cyclic modes, which are not identified
+on a large scale. A small gap and a strong negative correla-               by [κh(l) (s, s′ )]. Here, we must point out that [κh(l) (s, s′ )]
+tion both destabilize local symmetry breaking and shorten its              is only able to identify period-2 cyclic modes and self-loop
+characteristic time. This length, in turn, influences the compo-           modes. The reason is that long modes are disordered and
+sition and size of clusters consisting of chessboard structures            cannot maintain stability over a long duration, which leads
+within the spatial patterns. For low r̂, the negative correla-             to a weakening of the correlation between consecutive states.
+                                                                                                                                                  14
+
+
+
+
+      (a1)                                          (a2)                                          (a3)
+
+
+
+
+      (b1)                                          (b2)                                          (b3)
+
+
+
+
+      (c1)                                          (c2)                                          (d1)
+
+
+
+
+FIG. B.16. Time series of local configuration transitions across different specific hyperedges. In (a1 - a3) and (b1 - b3), we present the
+time series of local configuration transitions within the hyperedges of initiators in NhI and NlI , respectively. (c1 - c3) and (d1) display the time
+series within the hyperedge of initiators in NhII and NlII . Here, the hyperedge in (a1 - a3) and (b1 - b3) are selected from the hyperedges of
+initiators in Fig. 10 (a) and (b), while that in (c1 - c3) and (d1) from the hyperedges of initiators in Fig. 10 (c) and (d). The main short modes
+of state transitions for the initiator in each time series are indicated below the corresponding panels. For each configuration in the panels,
+contributors are filled in black, while free-riders are in white.
+
+
+However, these long modes are also capable of destroying the                 IV. Tab. III outlines the notations used in the OR-RLEG and
+stability of some short modes while stabilizing others.                      traditional EG models, while Tab. IV presents the notations
+                                                                             specific to simulation and analysis.
+
+        Appendix C: Mathematical Notation Descriptions
+
+  For easy reference, we provide descriptions of the mathe-
+matical notations used in our work, as detailed in Tabs. III and
+
+
+
+
+ [1] Ashleigh S Griffin, Stuart A West, and Angus Buckling. Co-               [2] Mark Van Vugt and Mark Snyder. Introduction: Cooperation
+     operation and competition in pathogenic bacteria. Nature,                    in society: Fostering community action and civic participation,
+     430(7003):1024–1027, 2004.                                                   2002.
+                                                                                                                                              15
+
+
+                                      TABLE III. The descriptions for mathematical notations in models
+
+ symbol                            Description                                                                         Applied to
+ N                                 The set of all agents in the population                                             Both modes
+ E                                 The set consisting of all hyperedges                                                Both modes
+ ei                                The hyperedge consisting of agent i along with its nearest neighbors in the von     Both modes
+                                   Neumann lattice
+ r̂                                Synergy factor of public goods game                                                 Both modes
+ Πi (τ )                           The payoff for the initiator i at τ                                                 Both modes
+ S/A                               State/action set for agents                                                         OR-RLEG
+ si,j /ai,j                        The state/action of agent i in the hyperedge ej                                     OR-RLEG
+ ni,j
+    c                              The number of contributors other than i in the hyperedge ej                         OR-RLEG
+ sm /sm̃                           The state for a contributor/free-rider having m other contributors in the corre-    OR-RLEG
+                                   sponding hyperedge
+ α                                 Learning rate for agents                                                            OR-RLEG
+ γ                                 Discounting factor for agents                                                       OR-RLEG
+ ϵ                                 Exploration rate for agents                                                         OR-RLEG
+ β                                 Selection intensity                                                                 Traditional EG
+ µ                                 Mutation probability for agents’ action                                             Traditional EG
+ ãi (τ )                          The own action for agent i at τ                                                     Traditional EG
+ ai (τ )                           The action that agent i takes at τ                                                  Traditional EG
+
+
+
+                               TABLE IV. The descriptions for mathematical notations in simulation and analysis
+
+ symbol                            Description                                                                         Defined by or in
+ fci (τ )                          Local cooperation level in the hyperedge ei at step τ                               Eq. (5)
+ fc (τ )                           Global cooperation level in the population at step τ                                Eq. (6)
+ f¯c                               Average cooperation level in the global population across the stable stage          Eq. (7)
+ pic (τ )                          Cooperation preference for agent i at step τ                                        Eq. (8)
+ f¯s                               Probability that initiators in population are in state s                            Eq. (9)
+ ϕ̄c|s                             Cooperation preference for initiators in the given state s                          Eq. (10)
+ κ(s|s′ )                          Cohen’s kappa coefficient for the temporal correlation between consecutive          Eq. (11)
+                                   states s and s′
+ [κ(s|s′ )]                        Cohen’s coefficient matrix consists of kappa coefficients                           Sec. IV A 1
+ Nh /Nl                            Category of agents, the average cooperation levels within their hyperedge is        Eq. (19)
+                                   higher/lower than in their neighbors’ hyperedges
+ f¯sh /f¯sl                        Probability that initiators in Nh /Nl are in state s                                Eq. (20)
+ ϕ̄hc|s /ϕ̄lc|s                    Cooperation preference for initiators in Nh /Nl under the state s                   Eq. (21)
+ [κh (s, s′ )]/[κl (s, s′ )]       Cohen’s kappa coefficient matrix in Nh /Nl                                          Sec. IV B 2
+ fˆci                              Local cooperation levels within any hyperedge ei over a sliding time window         Eq. (B1)
+                                   with a specific scale
+
+
+
+[3] Giorgina Bernasconi and Joan E Strassmann. Cooperation                   [8] John Maynard Smith. Evolution and the theory of games. In
+    among unrelated individuals: the ant foundress case. Trends                  Did Darwin get it right? Essays on games, sex and evolution,
+    in Ecology & Evolution, 14(12):477–482, 1999.                                pages 202–215. Springer, 1982.
+[4] Manfred Milinski, Dirk Semmann, Hans-Jürgen Krambeck,                   [9] Melanie Ghoul and Sara Mitri. The ecology and evolution of
+    and Jochem Marotzke. Stabilizing the earth’s climate is not                  microbial competition. Trends in Microbiology, 24(10):833–
+    a losing game: Supporting evidence from public goods ex-                     845, 2016.
+    periments. Proceedings of the National Academy of Sciences,             [10] Damien Challet and Y-C Zhang. Emergence of cooperation and
+    103(11):3994–3998, 2006.                                                     organization in an evolutionary game. Physica A: Statistical
+[5] Glen D’Souza, Shraddha Shitut, Daniel Preussger, Ghada                       Mechanics and its Applications, 246(3-4):407–418, 1997.
+    Yousif, Silvio Waschina, and Christian Kost. Ecology and evo-           [11] Xiaojie Chen, Attila Szolnoki, and Matjaž Perc. Competi-
+    lution of metabolic cross-feeding interactions in bacteria. Nat-             tion and cooperation among different punishing strategies in the
+    ural Product Reports, 35(5):455–488, 2018.                                   spatial public goods game. Physical Review E, 92(1):012819,
+[6] Donald Kennedy and Colin Norman. What don’t we know?                         2015.
+    Science, 309(5731):75–75, 2005.                                         [12] Arne Traulsen, Christoph Hauert, Hannelore De Silva, Mar-
+[7] Garrett Hardin. The tragedy of the commons: the population                   tin A Nowak, and Karl Sigmund. Exploration dynamics in
+    problem has no technical solution; it requires a fundamental                 evolutionary games. Proceedings of the National Academy of
+    extension in morality. Science, 162(3859):1243–1248, 1968.                   Sciences, 106(3):709–712, 2009.
+                                                                                                                                            16
+
+[13] Joel L Sachs, Ulrich G Mueller, Thomas P Wilcox, and James J       [30] Timothy C Reluga. Game theory of social distancing in
+     Bull. The evolution of cooperation. The Quarterly Review of             response to an epidemic.         PLoS Computational Biology,
+     Biology, 79(2):135–160, 2004.                                           6(5):e1000793, 2010.
+[14] Stéphane Debove, Nicolas Baumard, and Jean-Baptiste André.       [31] Vilma G Carande-Kulis, Thomas E Getzen, and Stephen B
+     Models of the evolution of fairness in the ultimatum game:              Thacker. Public goods and externalities: a research agenda for
+     a review and classification. Evolution and Human Behavior,              public health economics. Journal of Public Health Manage-
+     37(3):245–254, 2016.                                                    ment and Practice, 13(2):227–232, 2007.
+[15] David G Rand, Corina E Tarnita, Hisashi Ohtsuki, and Mar-          [32] Robert Kurzban and Daniel Houser. Individual differences in
+     tin A Nowak. Evolution of fairness in the one-shot anonymous            cooperation in a circular public goods game. European Journal
+     ultimatum game. Proceedings of the National Academy of Sci-             of Personality, 15(S1):S37–S52, 2001.
+     ences, 110(7):2581–2586, 2013.                                     [33] C Bram Cadsby and Elizabeth Maynes. Gender and free rid-
+[16] Guozhong Zheng, Jiqiang Zhang, Zhenwei Ding, Lin Ma, and                ing in a threshold public goods game: Experimental evidence.
+     Li Chen. Pinning control of social fairness in the ultimatum            Journal of Economic Behavior & Organization, 34(4):603–620,
+     game. Journal of Statistical Mechanics: Theory and Experi-              1998.
+     ment, 2023(4):043404, 2023.                                        [34] Rizhou Liang, Qinqin Wang, Jiqiang Zhang, Guozhong Zheng,
+[17] Mary A Rogalski, Camden D Gowler, Clara L Shaw, Ruth A                  Lin Ma, and Li Chen. Dynamical reciprocity in interacting
+     Hufbauer, and Meghan A Duffy. Human drivers of ecological               games: Numerical results and mechanism analysis. Physical
+     and evolutionary dynamics in emerging and disappearing infec-           Review E, 105(5):054302, 2022.
+     tious disease systems. Philosophical Transactions of the Royal     [35] Jonathan HW Tan and Friedel Bolle. Team competition and the
+     Society B: Biological Sciences, 372(1712):20160043, 2017.               public goods game. Economics letters, 96(1):133–139, 2007.
+[18] Marco A Amaral, Marcelo M de Oliveira, and Marco A                 [36] Karl Sigmund, Christoph Hauert, and Martin A Nowak. Re-
+     Javarone. An epidemiological model with voluntary quarantine            ward and punishment. Proceedings of the National Academy of
+     strategies governed by evolutionary game dynamics. Chaos,               Sciences, 98(19):10757–10762, 2001.
+     Solitons & Fractals, 143:110616, 2021.                             [37] Attila Szolnoki and Matjaz Perc. Reward and cooperation in the
+[19] Marina Alberti, Eric P Palkovacs, Simone Des Roches, Luc De             spatial public goods game. Europhysics Letters, 92(3):38003,
+     Meester, Kristien I Brans, Lynn Govaert, Nancy B Grimm,                 2010.
+     Nyeema C Harris, Andrew P Hendry, Christopher J Schell,            [38] Attila Szolnoki, György Szabó, and Lilla Czakó. Competi-
+     et al. The complexity of urban eco-evolutionary dynamics. Bio-          tion of individual and institutional punishments in spatial public
+     Science, 70(9):772–793, 2020.                                           goods games. Physical Review E, 84(4):046106, 2011.
+[20] Michael Doebeli and Christoph Hauert. Models of cooperation        [39] Francisco C Santos, Marta D Santos, and Jorge M Pacheco. So-
+     based on the prisoner’s dilemma and the snowdrift game. Ecol-           cial diversity promotes the emergence of cooperation in public
+     ogy Letters, 8(7):748–766, 2005.                                        goods games. Nature, 454(7201):213–216, 2008.
+[21] Arotol Rapoport. Prisoner’s dilemma: a study in conflict and       [40] Christoph Hauert. Replicator dynamics of reward & reputa-
+     cooperation, 1965.                                                      tion in public goods games. Journal of Theoretical Biology,
+[22] Lu Wang, Danyang Jia, Long Zhang, Peican Zhu, Matjaž Perc,             267(1):22–28, 2010.
+     Lei Shi, and Zhen Wang. Lévy noise promotes cooperation           [41] Attila Szolnoki, Matjaž Perc, and György Szabó. Topology-
+     in the prisoner’s dilemma game with reinforcement learning.             independent impact of noise on cooperation in spatial public
+     Nonlinear Dynamics, 108(2):1837–1845, 2022.                             goods games. Physical Review E, 80(5):056109, 2009.
+[23] David G Rand and Martin A Nowak. The evolution of antisocial       [42] Richard S Sutton. Reinforcement learning: An introduction. A
+     punishment in optional public goods games. Nature Communi-              Bradford Book, 2018.
+     cations, 2(1):434, 2011.                                           [43] Vincent François-Lavet, Peter Henderson, Riashat Islam,
+[24] Dirk Helbing, Attila Szolnoki, Matjaž Perc, and György Szabó.        Marc G Bellemare, Joelle Pineau, et al. An introduction to deep
+     Punish, but not too hard: how costly punishment spreads                 reinforcement learning. Foundations and Trends® in Machine
+     in the spatial public goods game. New Journal of Physics,               Learning, 11(3-4):219–354, 2018.
+     12(8):083005, 2010.                                                [44] Federico Battiston, Giulia Cencetti, Iacopo Iacopini, Vito La-
+[25] Urs Fischbacher, Simon Gächter, and Ernst Fehr. Are people             tora, Maxime Lucas, Alice Patania, Jean-Gabriel Young, and
+     conditionally cooperative? evidence from a public goods ex-             Giovanni Petri. Networks beyond pairwise interactions: Struc-
+     periment. Economics letters, 71(3):397–404, 2001.                       ture and dynamics. Physics Reports, 874:1–92, 2020.
+[26] Ernst Fehr and Simon Gächter. Cooperation and punishment          [45] Ginestra Bianconi. Higher-order networks. Cambridge Univer-
+     in public goods experiments. American Economic Review,                  sity Press, 2021.
+     90(4):980–994, 2000.                                               [46] Jianchen Pan, Lan Zhang, Wenchen Han, and Changwei Huang.
+[27] Qiang Wang, Nanrong He, and Xiaojie Chen. Replicator dy-                Heterogeneous investment promotes cooperation in spatial pub-
+     namics for public goods game with resource allocation in large          lic goods game on hypergraphs. Physica A: Statistical Mechan-
+     populations. Applied Mathematics and Computation, 328:162–              ics and its Applications, 609:128400, 2023.
+     170, 2018.                                                         [47] Giulio Burgio, Joan T Matamalas, Sergio Gómez, and Alex
+[28] Sandro Meloni, Cheng-Yi Xia, and Yamir Moreno. Heteroge-                Arenas. Evolution of cooperation in the presence of higher-
+     neous resource allocation can change social hierarchy in public         order interactions: From networks to hypergraphs. Entropy,
+     goods games. Royal Society Open Science, 4(3):170092, 2017.             22(7):744, 2020.
+[29] Alessandro Tavoni, Astrid Dannenberg, Giorgos Kallis, and          [48] Zhen-Wei Ding, Guo-Zhong Zheng, Chao-Ran Cai, Wei-Ran
+     Andreas Löschel. Inequality, communication, and the avoid-             Cai, Li Chen, Ji-Qiang Zhang, and Xu-Ming Wang. Emergence
+     ance of disastrous climate change in a public goods game. Pro-          of cooperation in two-agent repeated games with reinforcement
+     ceedings of the National Academy of Sciences, 108(29):11825–            learning. Chaos, Solitons & Fractals, 175:114032, 2023.
+     11829, 2011.                                                       [49] Zhao Song, Hao Guo, Danyang Jia, Matjaž Perc, Xuelong Li,
+                                                                             and Zhen Wang. Reinforcement learning facilitates an op-
+                                                                                                                                         17
+
+     timal interaction intensity for cooperation. Neurocomputing,             2024.
+     513:104–113, 2022.                                                  [57] Si-Ping Zhang, Ji-Qiang Zhang, Li Chen, and Xu-Dong Liu.
+[50] Danyang Jia, Hao Guo, Zhao Song, Lei Shi, Xinyang Deng,                  Oscillatory evolution of collective behavior in evolutionary
+     Matjaž Perc, and Zhen Wang. Local and global stimuli in re-             games played with reinforcement learning. Nonlinear Dynam-
+     inforcement learning. New Journal of Physics, 23(8):083020,              ics, 99(4):3301–3312, 2020.
+     2021.                                                               [58] Kuan Zou and Changwei Huang. Incorporating reputation
+[51] Zhengzhi Yang, Lei Zheng, Matjaž Perc, and Yumeng Li. Inter-            into reinforcement learning can promote cooperation on hyper-
+     action state q-learning promotes cooperation in the spatial pris-        graphs. Chaos, Solitons & Fractals, 186:115203, 2024.
+     oner’s dilemma game. Applied Mathematics and Computation,           [59] Vladimir Privman. Finite size scaling and numerical simulation
+     463:128364, 2024.                                                        of statistical systems. World Scientific, 1990.
+[52] Danyang Jia, Tong Li, Yang Zhao, Xiaoqin Zhang, and Zhen            [60] Zhen-Wei Ding, Ji-Qiang Zhang, Guo-Zhong Zheng, Wei-Ran
+     Wang. Empty nodes affect conditional cooperation under re-               Cai, Chao-Ran Cai, Li Chen, and Xu-Ming Wang. Emergence
+     inforcement learning. Applied Mathematics and Computation,               of anti-coordinated patterns in snowdrift game by reinforce-
+     413:126658, 2022.                                                        ment learning. Chaos, Solitons & Fractals, 184:114971, 2024.
+[53] Lu Wang, Litong Fan, Long Zhang, Rongcheng Zou, and Zhen            [61] Wen-Xu Wang, Jie Ren, Guanrong Chen, and Bing-Hong
+     Wang. Synergistic effects of adaptive reward and reinforce-              Wang. Memory-based snowdrift game on networks. Physical
+     ment learning rules on cooperation. New Journal of Physics,              Review E, 74(5):056113, 2006.
+     25(7):073008, 2023.                                                 [62] Chenyang Zhao, Guozhong Zheng, Chun Zhang, Jiqiang
+[54] Huizhen Zhang, Tianbo An, Pingping Yan, Kaipeng Hu, Jin-                 Zhang, and Li Chen. Emergence of cooperation under pun-
+     jin An, Lijuan Shi, Jian Zhao, and Jingrui Wang. Exploring               ishment: A reinforcement learning perspective. Chaos: An In-
+     cooperative evolution with tunable payoff’s loners using rein-           terdisciplinary Journal of Nonlinear Science, 34:073123, 2024.
+     forcement learning. Chaos, Solitons & Fractals, 178:114358,         [63] Cyril Domb. Phase transitions and critical phenomena. Else-
+     2024.                                                                    vier, 2000.
+[55] Yong Shen, Yujie Ma, Hongwei Kang, Xingping Sun, and                [64] H Eugene Stanley. Phase transitions and critical phenomena,
+     Qingyi Chen. Learning and propagation: Evolutionary dynam-               volume 7. Clarendon Press, Oxford, 1971.
+     ics in spatial public goods games through combined q-learning       [65] E Brézin. An investigation of finite size scaling. Journal de
+     and fermi rule. Chaos, Solitons & Fractals, 187:115377, 2024.            Physique, 43(1):15–22, 1982.
+[56] Guozhong Zheng, Jiqiang Zhang, Shengfeng Deng, Weiran               [66] Jun Tanimoto. Fundamentals of evolutionary game theory and
+     Cai, and Li Chen. Evolution of cooperation in the public goods           its applications. Springer, 2015.
+     game with q-learning. Chaos, Solitons & Fractals, 188:115568,
+

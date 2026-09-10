@@ -1,0 +1,38 @@
+{
+  "kind": "repositories",
+  "id": "gambitproject__gambit",
+  "title": "gambitproject/gambit",
+  "url": "https://github.com/gambitproject/gambit",
+  "topic": "exact small game equilibria",
+  "retrieved_at": "2026-09-10T22:39:48.413141+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/gambitproject/gambit/blob/fe3ad810c87a861b4a93e1688522774d826d288c/README.md",
+      "resolved_url": "https://github.com/gambitproject/gambit/blob/fe3ad810c87a861b4a93e1688522774d826d288c/README.md",
+      "path": "sources/economic-games/repositories/gambitproject__gambit/README.md",
+      "bytes": 7853,
+      "sha256": "97c12abd3b21fd20001442b24a606d98c0a234c21976b860054a93813384259a"
+    },
+    {
+      "url": "https://github.com/gambitproject/gambit/blob/fe3ad810c87a861b4a93e1688522774d826d288c/COPYING",
+      "resolved_url": "https://github.com/gambitproject/gambit/blob/fe3ad810c87a861b4a93e1688522774d826d288c/COPYING",
+      "path": "sources/economic-games/repositories/gambitproject__gambit/COPYING",
+      "bytes": 17987,
+      "sha256": "ba9ed2269151ad63b922598f3c5c19ddf781b2bbb6cb843ed9f085ecd1679c5d"
+    }
+  ],
+  "status": "ok",
+  "commit": "fe3ad810c87a861b4a93e1688522774d826d288c",
+  "commit_date": "2026-09-10T19:22:35+01:00",
+  "checkout": "sources/economic-games/repositories/gambitproject__gambit/checkout",
+  "experiments_reproduced": false,
+  "license_files": [
+    "COPYING"
+  ],
+  "audit": {
+    "anchor": "src/pygambit/nash.py",
+    "finding": "Python entry points for pure and mixed equilibrium routines; this is not a NumPy-only core dependency.",
+    "proposed_use": "Optional small-game solver",
+    "review_level": "selected code or README; not full audit"
+  }
+}

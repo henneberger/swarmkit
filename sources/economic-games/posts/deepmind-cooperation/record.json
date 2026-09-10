@@ -1,0 +1,77 @@
+{
+  "kind": "posts",
+  "id": "deepmind-cooperation",
+  "title": "Understanding Agent Cooperation",
+  "page_url": "https://deepmind.google/blog/understanding-agent-cooperation/",
+  "retrieved_at": "2026-09-10T22:39:44.661631+00:00",
+  "artifacts": [
+    {
+      "url": "https://deepmind.google/blog/understanding-agent-cooperation/",
+      "resolved_url": "https://deepmind.google/blog/understanding-agent-cooperation/",
+      "path": "sources/economic-games/posts/deepmind-cooperation/page.html",
+      "bytes": 140781,
+      "sha256": "cdd699d8d961d47b08ce835828b844153c7444ae12b1781c2747540c8e062fc8"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "": [
+      "",
+      "ie=edge"
+    ],
+    "viewport": [
+      "width=device-width,initial-scale=1.0"
+    ],
+    "description": [
+      "We employ deep multi-agent reinforcement learning to model the emergence of cooperation. The new notion of sequential social dilemmas allows us to model how rational agents interact, and arrive at mo\u2026"
+    ],
+    "author": [
+      "Joel Leibo, Marc Lanctot, Thore Graepel, Vinicius Zambaldi, Janusz Marecki"
+    ],
+    "og:title": [
+      "Understanding Agent Cooperation"
+    ],
+    "og:description": [
+      "We employ deep multi-agent reinforcement learning to model the emergence of cooperation. The new notion of sequential social dilemmas allows us to model how rational agents interact, and arrive at more or less cooperative behaviours depending on the nature of the environment and the agents\u2019 cognitive capacity. The research may enable us to better understand and control the behaviour of complex multi-agent systems such as the economy, traffic, and environmental challenges."
+    ],
+    "og:image": [
+      "https://lh3.googleusercontent.com/C9xaunqL10nCln0mtKQbabi7LsTggeDoK9jE_FiqSWGL4EbNaj_cANBgywsbubVj9hF2k3igttz8BidATn-2oD0sJLdT0SmBuT8Rz0cMkf06Ab6cmf0=w1200-h630-n-nu-rw"
+    ],
+    "og:site_name": [
+      "Google DeepMind"
+    ],
+    "og:url": [
+      "https://deepmind.google/blog/understanding-agent-cooperation/"
+    ],
+    "og:type": [
+      "article"
+    ],
+    "article:author": [
+      "Joel Leibo, Marc Lanctot, Thore Graepel, Vinicius Zambaldi, Janusz Marecki"
+    ],
+    "article:published_time": [
+      "2017-02-02T00:00:00+00:00"
+    ],
+    "article:modified_time": [
+      "2026-07-03T13:45:03.834347+00:00"
+    ],
+    "article:section": [
+      "Research"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Understanding Agent Cooperation"
+    ],
+    "twitter:image": [
+      "https://lh3.googleusercontent.com/C9xaunqL10nCln0mtKQbabi7LsTggeDoK9jE_FiqSWGL4EbNaj_cANBgywsbubVj9hF2k3igttz8BidATn-2oD0sJLdT0SmBuT8Rz0cMkf06Ab6cmf0=w1200-h630-n-nu-rw"
+    ],
+    "twitter:description": [
+      "We employ deep multi-agent reinforcement learning to model the emergence of cooperation. The new notion of sequential social dilemmas allows us to model how rational agents interact, and arrive at more or less cooperative behaviours depending on the nature of the environment and the agents\u2019 cognitive capacity. The research may enable us to better understand and control the behaviour of complex multi-agent systems such as the economy, traffic, and environmental challenges."
+    ],
+    "twitter:site": [
+      "@GoogleDeepMind"
+    ]
+  }
+}

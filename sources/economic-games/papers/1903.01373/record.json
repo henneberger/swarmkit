@@ -1,0 +1,120 @@
+{
+  "kind": "papers",
+  "id": "1903.01373",
+  "title": "Alpha-Rank: Multi-Agent Evaluation by Evolution",
+  "topic": "nontransitive evaluation",
+  "page_url": "https://arxiv.org/abs/1903.01373",
+  "pdf_url": "https://arxiv.org/pdf/1903.01373",
+  "retrieved_at": "2026-09-10T22:39:39.888423+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/1903.01373",
+      "resolved_url": "https://arxiv.org/abs/1903.01373",
+      "path": "sources/economic-games/papers/1903.01373/page.html",
+      "bytes": 45796,
+      "sha256": "d5509368a7e0b25a67dc42b71040665f6dc009227d0efd8e000badb1e8089c1a"
+    },
+    {
+      "url": "https://arxiv.org/pdf/1903.01373",
+      "resolved_url": "https://arxiv.org/pdf/1903.01373",
+      "path": "sources/economic-games/papers/1903.01373/paper.pdf",
+      "bytes": 3016125,
+      "sha256": "0eb61a223aa591e2e4dce8cf34370e3c37cc65f2e64f46a5072a97f2515b7db9"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 1903.01373: $\u03b1$-Rank: Multi-Agent Evaluation by Evolution"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "$\u03b1$-Rank: Multi-Agent Evaluation by Evolution"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/1903.01373v4"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "We introduce $\u03b1$-Rank, a principled evolutionary dynamics methodology for the evaluation and ranking of agents in large-scale multi-agent interactions, grounded in a novel dynamical game-theoretic solution concept called Markov-Conley chains (MCCs). The approach leverages continuous- and discrete-time evolutionary dynamical systems applied to empirical games, and scales tractably in the number of agents, the type of interactions, and the type of empirical games (symmetric and asymmetric). Current models are fundamentally limited in one or more of these dimensions and are not guaranteed to converge to the desired game-theoretic solution concept (typically the Nash equilibrium). $\u03b1$-Rank provides a ranking over the set of agents under evaluation and provides insights into their strengths, weaknesses, and long-term dynamics. This is a consequence of the links we establish to the MCC solution concept when the underlying evolutionary model's ranking-intensity parameter, $\u03b1$, is chosen to be large, which exactly forms the basis of $\u03b1$-Rank. In contrast to the Nash equilibrium, which is a static concept based on fixed points, MCCs are a dynamical solution concept based on the Markov chain formalism, Conley's Fundamental Theorem of Dynamical Systems, and the core ingredients of dynamical systems: fixed points, recurrent sets, periodic orbits, and limit cycles. $\u03b1$-Rank runs in polynomial time with respect to the total number of pure strategy profiles, whereas computing a Nash equilibrium for a general-sum game is known to be intractable. We introduce proofs that not only provide a unifying perspective of existing continuous- and discrete-time evolutionary evaluation models, but also reveal the formal underpinnings of the $\u03b1$-Rank methodology. We empirically validate the method in several domains including AlphaGo, AlphaZero, MuJoCo Soccer, and Poker."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "$\u03b1$-Rank: Multi-Agent Evaluation by Evolution"
+    ],
+    "twitter:description": [
+      "We introduce $\u03b1$-Rank, a principled evolutionary dynamics methodology for the evaluation and ranking of agents in large-scale multi-agent interactions, grounded in a novel dynamical..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "$\\alpha$-Rank: Multi-Agent Evaluation by Evolution"
+    ],
+    "citation_author": [
+      "Omidshafiei, Shayegan",
+      "Papadimitriou, Christos",
+      "Piliouras, Georgios",
+      "Tuyls, Karl",
+      "Rowland, Mark",
+      "Lespiau, Jean-Baptiste",
+      "Czarnecki, Wojciech M.",
+      "Lanctot, Marc",
+      "Perolat, Julien",
+      "Munos, Remi"
+    ],
+    "citation_date": [
+      "2019/03/04"
+    ],
+    "citation_online_date": [
+      "2019/10/04"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/1903.01373"
+    ],
+    "citation_arxiv_id": [
+      "1903.01373"
+    ],
+    "citation_abstract": [
+      "We introduce $\\alpha$-Rank, a principled evolutionary dynamics methodology for the evaluation and ranking of agents in large-scale multi-agent interactions, grounded in a novel dynamical game-theoretic solution concept called Markov-Conley chains (MCCs). The approach leverages continuous- and discrete-time evolutionary dynamical systems applied to empirical games, and scales tractably in the number of agents, the type of interactions, and the type of empirical games (symmetric and asymmetric). Current models are fundamentally limited in one or more of these dimensions and are not guaranteed to converge to the desired game-theoretic solution concept (typically the Nash equilibrium). $\\alpha$-Rank provides a ranking over the set of agents under evaluation and provides insights into their strengths, weaknesses, and long-term dynamics. This is a consequence of the links we establish to the MCC solution concept when the underlying evolutionary model's ranking-intensity parameter, $\\alpha$, is chosen to be large, which exactly forms the basis of $\\alpha$-Rank. In contrast to the Nash equilibrium, which is a static concept based on fixed points, MCCs are a dynamical solution concept based on the Markov chain formalism, Conley's Fundamental Theorem of Dynamical Systems, and the core ingredients of dynamical systems: fixed points, recurrent sets, periodic orbits, and limit cycles. $\\alpha$-Rank runs in polynomial time with respect to the total number of pure strategy profiles, whereas computing a Nash equilibrium for a general-sum game is known to be intractable. We introduce proofs that not only provide a unifying perspective of existing continuous- and discrete-time evolutionary evaluation models, but also reveal the formal underpinnings of the $\\alpha$-Rank methodology. We empirically validate the method in several domains including AlphaGo, AlphaZero, MuJoCo Soccer, and Poker."
+    ]
+  },
+  "extracted_text_characters": 280147,
+  "text_searchable": true
+}

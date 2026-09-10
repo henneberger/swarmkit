@@ -1,0 +1,394 @@
+Melting Pot: an evaluation suite for multi-agent reinforcement learning — Google DeepMind
+Skip to main content
+
+Explore our next generation AI systems
+
+Explore models 
+
+Gemini
+
+Gemini
+Build intelligent agents  
+
+Gemini Omni
+Create anything from anything  
+
+Nano Banana
+Create and edit detailed images  
+
+Gemini Audio
+Talk, create and control audio 
+
+Specialized models
+
+Veo
+Generate cinematic video with audio  
+
+Imagen
+Generate high-quality images from text  
+
+Lyria
+Generate high fidelity music and audio 
+
+World models & physical AI
+
+Genie 3
+Generate and explore interactive worlds  
+
+Gemini Robotics
+Perceive, reason, use tools and interact 
+
+Open models
+
+Gemma
+Build responsible AI applications at scale 
+
+Our latest AI breakthroughs and updates from the lab
+
+Explore research 
+
+Breakthroughs
+
+SIMA 2
+An agent that plays, reasons, and learns with you  
+
+Genie 3
+Generate and explore interactive worlds  
+
+AlphaGo
+Mastering the game of Go  
+
+Gemini Robotics
+Perceive, reason, use tools and interact 
+
+Learn more
+
+Evals
+
+Publications
+
+Responsibility
+
+Frontier safety
+
+Unlocking a new era of discovery with AI
+
+Explore science 
+
+Breakthroughs
+
+AlphaFold
+Predict protein structures with high accuracy  
+
+AlphaGenome
+Using AI to understand the human genome  
+
+WeatherNext
+Fast and accurate AI weather forecasting  
+
+AlphaEarth
+Map our planet in unprecedented detail  
+
+AlphaEvolve
+Design advanced algorithms for math and applications in computing 
+
+Learn more
+
+Gemini for Science
+
+Experimental Tools
+
+Science Skills
+
+Our mission is to build AI responsibly to benefit humanity
+
+About Google DeepMind 
+
+Responsibility
+Ensuring AI safety through proactive security, even against evolving threats  
+
+News
+Discover our latest AI breakthroughs, projects, and updates  
+
+Careers
+We’re looking for people who want to make a real, positive impact on the world 
+
+Learn more
+
+Education
+
+Our National Partnerships for AI
+
+Accelerator programs
+
+The Podcast
+
+Models          
+
+Explore our next generation AI systems
+
+Explore models 
+
+Gemini
+
+Gemini
+Build intelligent agents  
+
+Gemini Omni
+Create anything from anything  
+
+Nano Banana
+Create and edit detailed images  
+
+Gemini Audio
+Talk, create and control audio 
+
+Specialized models
+
+Veo
+Generate cinematic video with audio  
+
+Imagen
+Generate high-quality images from text  
+
+Lyria
+Generate high fidelity music and audio 
+
+World models & physical AI
+
+Genie 3
+Generate and explore interactive worlds  
+
+Gemini Robotics
+Perceive, reason, use tools and interact 
+
+Open models
+
+Gemma
+Build responsible AI applications at scale 
+Research          
+
+Our latest AI breakthroughs and updates from the lab
+
+Explore research 
+
+Breakthroughs
+
+SIMA 2
+An agent that plays, reasons, and learns with you  
+
+Genie 3
+Generate and explore interactive worlds  
+
+AlphaGo
+Mastering the game of Go  
+
+Gemini Robotics
+Perceive, reason, use tools and interact 
+
+Learn more
+
+Evals
+
+Publications
+
+Responsibility
+
+Frontier safety
+
+Science          
+
+Unlocking a new era of discovery with AI
+
+Explore science 
+
+Breakthroughs
+
+AlphaFold
+Predict protein structures with high accuracy  
+
+AlphaGenome
+Using AI to understand the human genome  
+
+WeatherNext
+Fast and accurate AI weather forecasting  
+
+AlphaEarth
+Map our planet in unprecedented detail  
+
+AlphaEvolve
+Design advanced algorithms for math and applications in computing 
+
+Learn more
+
+Gemini for Science
+
+Experimental Tools
+
+Science Skills
+
+About          
+
+Our mission is to build AI responsibly to benefit humanity
+
+About Google DeepMind 
+
+Learn more
+
+Education
+
+Our National Partnerships for AI
+
+Accelerator programs
+
+The Podcast
+
+Responsibility
+Ensuring AI safety through proactive security, even against evolving threats  
+
+News
+Discover our latest AI breakthroughs, projects, and updates  
+
+Careers
+We’re looking for people who want to make a real, positive impact on the world 
+
+ Build with Gemini  Try Gemini          
+
+ Google DeepMind 
+
+Google AI 
+Learn about all our AI  
+Google DeepMind 
+Explore the frontier of AI  
+Google Labs 
+Try our AI experiments  
+Google Research 
+Explore our research 
+
+Products and apps 
+Gemini app 
+Chat with Gemini  
+Google AI Studio 
+Build with our next-gen AI models  
+Google Antigravity 
+Our agentic development platform 
+
+ Models 
+ Research 
+ Science 
+ About 
+
+ Build with Gemini  
+ Try Gemini  
+
+ July 14, 2021 Research
+Melting Pot: an evaluation suite for multi-agent reinforcement learning
+Joel Z. Leibo, Edgar Duéñez-Guzmán, Alexander Vezhnevets, John Agapiou, Peter Sunehag, Raphael Koster, Jayd Matyas, Charlie Beattie, Igor Mordatch *, Thore Graepel
+
+Share
+         Copied
+
+Technology deployed in the real world inevitably faces unforeseen challenges. These challenges arise because the environment where the technology was developed differs from the environment where it will be deployed. When a technology transfers successfully we say it generalises. In a multi-agent system, such as autonomous vehicle technology, there are two possible sources of generalisation difficulty: (1) physical-environment variation such as changes in weather or lighting, and (2) social-environment variation: changes in the behaviour of other interacting individuals. Handling social-environment variation is at least as important as handling physical-environment variation, however it has been much less studied.
+As an example of a social environment, consider how self-driving cars interact on the road with other cars. Each car has an incentive to transport its own passenger as quickly as possible. However, this competition can lead to poor coordination (road congestion) that negatively affects everyone. If cars work cooperatively, more passengers might get to their destination more quickly. This conflict is called a social dilemma.
+However, not all interactions are social dilemmas. For instance, there are synergistic interactions in open-source software, there are zero-sum interactions in sports, and coordination problems are at the core of supply chains. Navigating each of these situations requires a very different approach.
+Multi-agent reinforcement learning provides tools that allow us to explore how artificial agents may interact with one another and with unfamiliar individuals (such as human users). This class of algorithms is expected to perform better when tested for their social generalisation abilities than others. However, until now, there has been no systematic evaluation benchmark for assessing this.
+
+Blue: focal populations of trained agents, Red: background population of pre-trained bots
+
+Here we introduce Melting Pot, a scalable evaluation suite for multi-agent reinforcement learning. Melting Pot assesses generalization to novel social situations involving both familiar and unfamiliar individuals, and has been designed to test a broad range of social interactions such as: cooperation, competition, deception, reciprocation, trust, stubbornness and so on. Melting Pot offers researchers a set of 21 MARL “substrates” (multi-agent games) on which to train agents, and over 85 unique test scenarios on which to evaluate these trained agents. The performance of agents on these held-out test scenarios quantifies whether agents:
+Perform well across a range of social situations where individuals are interdependent,
+Interact effectively with unfamiliar individuals not seen during training,
+Pass a universalisation test: answering positively to the question "what if everyone behaved like that?''
+The resulting score can then be used to rank different multi-agent RL algorithms by their ability to generalise to novel social situations.
+
+We hope Melting Pot will become a standard benchmark for multi-agent reinforcement learning. We plan to maintain it, and will be extending it in the coming years to cover more social interactions and generalisation scenarios.
+Learn more from our GitHub page.
+
+Related posts
+
+Emergent Bartering Behaviour in Multi-Agent Reinforcement Learning
+May 2022Research
+
+Learn more 
+
+Reinforcement learning with unsupervised auxiliary tasks
+November 2016Research
+
+Learn more 
+
+Fast reinforcement learning through the composition of behaviours
+October 2020Research
+
+Learn more 
+
+Follow us
+
+Sign up for updates on our latest innovations
+
+I accept Google's Terms and Conditions and acknowledge that my information will be used in accordance with Google's Privacy Policy.
+
+Sign up
+
+Build AI responsibly to benefit humanity
+
+Models
+
+Gemini  
+
+Gemini Omni  
+
+Nano Banana  
+
+Gemini Audio  
+
+Gemma  
+
+Genie  
+
+Lyria  
+
+Veo 
+
+Research
+
+Gemini Robotics  
+Breakthroughs  
+Evals  
+Publications  
+Frontier safety  
+Responsibility 
+
+Science
+
+AlphaFold  
+
+AlphaGenome  
+
+WeatherNext  
+
+AlphaEarth  
+
+AlphaEvolve 
+
+Products
+
+Gemini app  
+
+Google AI Studio  
+
+Google Antigravity 
+
+Learn more
+
+About  
+News  
+Careers  
+National Partnerships for AI  
+Accelerator programs  
+The Podcast 
+
+ About Google 
+ Google products 
+ Privacy 
+ Terms 
+Cookies management controls

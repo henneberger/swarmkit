@@ -1,0 +1,115 @@
+{
+  "kind": "papers",
+  "id": "2310.05746",
+  "title": "Put Your Money Where Your Mouth Is: Evaluating Strategic Planning and Execution of LLM Agents in an Auction Arena",
+  "topic": "LLM auctions",
+  "page_url": "https://arxiv.org/abs/2310.05746",
+  "pdf_url": "https://arxiv.org/pdf/2310.05746",
+  "retrieved_at": "2026-09-10T22:39:41.931847+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2310.05746",
+      "resolved_url": "https://arxiv.org/abs/2310.05746",
+      "path": "sources/economic-games/papers/2310.05746/page.html",
+      "bytes": 42599,
+      "sha256": "db202e9299a4501baeb500c742d6ca3807839fe9532eed44e909145e6bc14abc"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2310.05746",
+      "resolved_url": "https://arxiv.org/pdf/2310.05746",
+      "path": "sources/economic-games/papers/2310.05746/paper.pdf",
+      "bytes": 1491123,
+      "sha256": "aab557ff175dac6bf0add943c7ba4e0a8a360f684268901ed04890ecbf1bbf21"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2310.05746: Put Your Money Where Your Mouth Is: Evaluating Strategic Planning and Execution of LLM Agents in an Auction Arena"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Put Your Money Where Your Mouth Is: Evaluating Strategic Planning and Execution of LLM Agents in an Auction Arena"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2310.05746v4"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Recent advancements in Large Language Models (LLMs) showcase advanced reasoning, yet NLP evaluations often depend on static benchmarks. Evaluating this necessitates environments that test strategic reasoning in dynamic, competitive scenarios requiring long-term planning. We introduce AucArena, a novel evaluation suite that simulates auctions, a setting chosen for being highly unpredictable and involving many skills related to resource and risk management, while also being easy to evaluate. We conduct controlled experiments using state-of-the-art LLMs to power bidding agents to benchmark their planning and execution skills. Our research demonstrates that LLMs, such as GPT-4, possess key skills for auction participation, such as budget management and goal adherence, which improve with adaptive strategies. This highlights LLMs' potential in modeling complex social interactions in competitive contexts. However, variability in LLM performance and occasional outperformance by simpler methods indicate opportunities for further advancements in LLM design and the value of our simulation environment for ongoing testing and refinement."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Put Your Money Where Your Mouth Is: Evaluating Strategic Planning..."
+    ],
+    "twitter:description": [
+      "Recent advancements in Large Language Models (LLMs) showcase advanced reasoning, yet NLP evaluations often depend on static benchmarks. Evaluating this necessitates environments that test..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Put Your Money Where Your Mouth Is: Evaluating Strategic Planning and Execution of LLM Agents in an Auction Arena"
+    ],
+    "citation_author": [
+      "Chen, Jiangjie",
+      "Yuan, Siyu",
+      "Ye, Rong",
+      "Majumder, Bodhisattwa Prasad",
+      "Richardson, Kyle"
+    ],
+    "citation_date": [
+      "2023/10/09"
+    ],
+    "citation_online_date": [
+      "2024/08/25"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2310.05746"
+    ],
+    "citation_arxiv_id": [
+      "2310.05746"
+    ],
+    "citation_abstract": [
+      "Recent advancements in Large Language Models (LLMs) showcase advanced reasoning, yet NLP evaluations often depend on static benchmarks. Evaluating this necessitates environments that test strategic reasoning in dynamic, competitive scenarios requiring long-term planning. We introduce AucArena, a novel evaluation suite that simulates auctions, a setting chosen for being highly unpredictable and involving many skills related to resource and risk management, while also being easy to evaluate. We conduct controlled experiments using state-of-the-art LLMs to power bidding agents to benchmark their planning and execution skills. Our research demonstrates that LLMs, such as GPT-4, possess key skills for auction participation, such as budget management and goal adherence, which improve with adaptive strategies. This highlights LLMs' potential in modeling complex social interactions in competitive contexts. However, variability in LLM performance and occasional outperformance by simpler methods indicate opportunities for further advancements in LLM design and the value of our simulation environment for ongoing testing and refinement."
+    ]
+  },
+  "extracted_text_characters": 113357,
+  "text_searchable": true
+}

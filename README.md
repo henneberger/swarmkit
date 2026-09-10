@@ -8,8 +8,10 @@ The library includes **49 registered methods**, a provider-neutral async runtime
 
 [Method catalog](docs/METHODS.md) · [API and composition guide](docs/API.md) · [Research background](SWARMS_REPORT.md) · [Attribution](THIRD_PARTY_NOTICES.md)
 
+[Economic games research](docs/ECONOMIC_GAMES_RESEARCH.md) maps classical and modern game theory to proposed hypergraph-agent mechanisms, strategies, and evaluation methods. Its [downloaded source archive](sources/economic-games/README.md) includes papers, blog posts, pinned repository checkouts, and 26 implementation candidates; these extensions are research proposals, not registered methods yet.
 
-**On this page:** [Goals](#goals-and-motivation) · [Feature tour](#feature-tour) · [Get started](#get-started) · [Knowledge management and context graphs](#knowledge-management-and-context-graphs) · [Extension points](#extending-swarmkit) · [Relevance](#why-it-is-relevant) · [Scope](#scope-and-research-fidelity) · [Development](#development-and-project-layout)
+
+**On this page:** [Goals](#goals-and-motivation) · [Feature tour](#feature-tour) · [Get started](#get-started) · [Knowledge management and context graphs](#knowledge-management-and-context-graphs) · [Economic games: when to use them](#economic-games-when-to-use-them) · [Extension points](#extending-swarmkit) · [Relevance](#why-it-is-relevant) · [Scope](#scope-and-research-fidelity) · [Development](#development-and-project-layout)
 
 ## Goals and motivation
 
@@ -490,6 +492,45 @@ The W3C PROV family supplies a reference vocabulary for provenance across entiti
 
 The communication graph and the context graph serve different purposes: the first controls which peers exchange information during execution; the second preserves relationships among evidence, decisions, and outcomes for later inspection and reuse. An application can use the latter to retrieve relevant precedents for a future swarm task. Retaining a stated rationale documents what an agent reported; external observations and checks are still needed to establish what happened and whether the decision worked.
 
+## Economic games: when to use them
+
+Use economic-game models when agents' choices depend on **scarce resources, different objectives, private information, or the behavior of other agents**. They let you study who should do a task, what information an agent chooses to share, how a team divides rewards, and whether a strategy remains effective against unfamiliar partners.
+
+**Status:** the [economic-games research guide](docs/ECONOMIC_GAMES_RESEARCH.md) describes proposed extensions. Its 26 candidates are not included in the library's 49 registered methods. SwarmKit already supplies agent records, group communication, execution, feedback, and artifact verification; economic game state, private valuations, contracts, and settlement still need implementation.
+
+### Choose a model for the problem
+
+The following are proposed applications and experiment starting points. The research guide records their sources, assumptions, and limits.
+
+| When your swarm needs to… | Models to explore | Strategies or controls to compare |
+|---|---|---|
+| Assign work among agents with different costs and capabilities | Contract Net, reverse auctions, stable matching | Fixed assignment, capability routing, cost bids, preference-based assignment |
+| Compete for limited tool calls, compute, or reviewer time | Auctions and congestion games | Truthful-reference bids, shaded bids, random legal bids, adaptive routing |
+| Complete a task requiring several complementary specialists | Threshold coalition games and combinatorial auctions | Individual assignments, team bids, conditional participation, coalition entry/exit |
+| Negotiate price, quality, deadlines, or disclosure | Bargaining and alternating-offer protocols | Fixed offers, deadline concessions, reciprocal concessions, structured LLM offers |
+| Sustain costly contributions to shared evidence or reusable artifacts | Public-goods and repeated games | Free riding, unconditional contribution, reciprocity, forgiveness, contribution thresholds |
+| Attribute the value of a joint result and share its reward | Coalition values, Shapley estimation, core diagnostics | Equal shares, marginal-contribution estimates, negotiated shares; check coalition stability separately |
+| Aggregate forecasts about later independently verified outcomes | Scoring rules and prediction markets | Independent forecasts, budget-limited trades, calibration and outcome-resolution controls |
+| Learn strategies that work against changing partners | Regret learning, PSRO, evolutionary evaluation | Fixed policies, adaptive policies, mixed populations, held-out partner cross-play |
+| Explore learned incentives or very large populations | Learned auctions, two-level institutions, multi-type mean-field learning | Exact small-game baselines, fixed incentive rules, explicit small populations |
+
+### When the hypergraph matters
+
+Use an economic hyperedge when a **whole group's joint choices** determine an outcome. For example, a research task may require a scout, an analyst, and a reviewer before its artifact has value. A team bid can represent that complementarity, while a shared effort budget prevents an agent from promising the same capacity to multiple teams.
+
+The current `HypergraphTopology` controls which peers can communicate through shared groups. The proposed economic layer would preserve each group's identity, roles, action rules, payoffs, and settlement history. Overlapping groups also require joint resource checks: two contracts cannot independently spend the same agent balance.
+
+For a first experiment, compare fixed assignment and capability routing with team procurement on a task that requires all three specialists. Verify the delivered artifact, account for actual execution costs, and measure team success and each participant's utility. Add negotiated reward sharing or learned bidding only after the basic allocation and settlement behavior is testable.
+
+If all agents share one objective and the question is simply who receives evidence or which task runs next, start with the existing topology, deliberation, and scheduling APIs. Introduce economic models when incentives or strategic responses are part of the question. A game-theoretic mechanism's guarantees depend on its assumptions; fluent negotiation or high simulated profit alone does not establish better task outcomes.
+
+### Research materials and implementation planning
+
+- [Research guide](docs/ECONOMIC_GAMES_RESEARCH.md): classical foundations, modern techniques, proposed Python interfaces, staged build order, and acceptance experiments.
+- [Source library](sources/economic-games/README.md): 25 downloaded PDFs, five blog posts, and 14 pinned Git checkouts, with download and extraction limitations recorded.
+- [Candidate catalog](sources/economic-games/method-candidates.json): 26 proposed components with strategies, assumptions, metrics, and source IDs.
+- [Repository audit](sources/economic-games/repository-audit.md): inspected code paths and suitability for optional adapters or research reference.
+
 ## Extending SwarmKit
 
 Start with the narrowest interface that matches your integration. Implementations remain ordinary Python code:
@@ -549,11 +590,19 @@ Tests use synthetic fixtures and fake provider transports; API credentials are n
 | `tests/` | Unit and integration tests |
 | `docs/` | Method catalog, API contracts, and application documentation |
 | `sources/`, `repositories/` | Research inventory and pinned upstream Git submodules |
+| `sources/economic-games/` | Economic-game papers, posts, provenance records, candidate catalog, and separate Git-ignored research checkouts |
 
 Research submodules are optional for library use. To fetch them for comparison:
 
 ```bash
 GIT_LFS_SKIP_SMUDGE=1 git submodule update --init --recursive --depth 1
+```
+
+The economic-games checkouts use their own collector rather than the submodule command. To download the collection or reconstruct missing checkouts at their recorded commits, run the following from the project root; collection requires network access and `pdftotext` for PDF extraction. The verification command checks local source hashes and repository commits.
+
+```bash
+python3 scripts/collect_economic_games.py
+python3 scripts/collect_economic_games.py --verify
 ```
 
 New project code is [MIT-licensed](LICENSE). Research documents and upstream projects retain their respective rights; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

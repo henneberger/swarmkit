@@ -1,0 +1,251 @@
+
+
+  [1706.03459] Optimal Auctions through Deep Learning: Advances in Differentiable Economics
+
+    Skip to main content
+
+      Search
+
+    Submit
+    Donate
+
+      Log in
+
+      Search arXiv
+
+      Press Enter to search · Advanced search
+
+Computer Science > Computer Science and Game Theory
+
+      arXiv:1706.03459 (cs)
+
+  [Submitted on 12 Jun 2017 (v1), last revised 14 Oct 2022 (this version, v6)]
+
+Title:Optimal Auctions through Deep Learning: Advances in Differentiable Economics
+
+Authors:Paul Dütting, Zhe Feng, Harikrishna Narasimhan, David C. Parkes, Sai Srivatsa Ravindranath            
+View a PDF of the paper titled Optimal Auctions through Deep Learning: Advances in Differentiable Economics, by Paul D\"utting and Zhe Feng and Harikrishna Narasimhan and David C. Parkes and Sai Srivatsa Ravindranath
+    View PDF
+    HTML (experimental)
+
+            Abstract:Designing an incentive compatible auction that maximizes expected revenue is an intricate task. The single-item case was resolved in a seminal piece of work by Myerson in 1981, but more than 40 years later a full analytical understanding of the optimal design still remains elusive for settings with two or more items. In this work, we initiate the exploration of the use of tools from deep learning for the automated design of optimal auctions. We model an auction as a multi-layer neural network, frame optimal auction design as a constrained learning problem, and show how it can be solved using standard machine learning pipelines. In addition to providing generalization bounds, we present extensive experimental results, recovering essentially all known solutions that come from the theoretical analysis of optimal auction design problems and obtaining novel mechanisms for settings in which the optimal mechanism is unknown.
+
+          Comments:
+          An extended abstract appeared in ICML'19, along with a short Research Highlight in the Communications of the ACM
+
+          Subjects:
+
+            Computer Science and Game Theory (cs.GT); Artificial Intelligence (cs.AI); Machine Learning (cs.LG)
+
+          Cite as:
+          arXiv:1706.03459 [cs.GT]
+
+          (or 
+              arXiv:1706.03459v6 [cs.GT] for this version)
+
+                        https://doi.org/10.48550/arXiv.1706.03459
+
+                Focus to learn more
+
+                                  arXiv-issued DOI via DataCite
+
+Submission history From: Zhe Feng [view email]      
+            [v1]
+        Mon, 12 Jun 2017 04:03:15 UTC (1,475 KB)
+
+            [v2]
+        Mon, 19 Mar 2018 17:56:32 UTC (1,913 KB)
+
+            [v3]
+        Mon, 1 Apr 2019 00:33:16 UTC (6,779 KB)
+
+            [v4]
+        Sat, 29 Feb 2020 23:54:43 UTC (7,455 KB)
+
+            [v5]
+        Fri, 21 Aug 2020 15:04:03 UTC (7,592 KB)
+
+    [v6]
+        Fri, 14 Oct 2022 05:49:10 UTC (7,897 KB)
+
+      Full-text links:
+
+Access Paper:
+
+View a PDF of the paper titled Optimal Auctions through Deep Learning: Advances in Differentiable Economics, by Paul D\"utting and Zhe Feng and Harikrishna Narasimhan and David C. Parkes and Sai Srivatsa Ravindranath
+View PDF
+HTML (experimental)
+TeX Source
+
+view license
+
+Current browse context:
+
+cs.GT
+
+      < prev
+
+      |      
+      next >
+
+    new
+     | 
+    recent
+     | 2017-06
+
+    Change to browse by:
+
+        cs
+
+        cs.AI
+
+        cs.LG
+
+References & Citations
+
+NASA ADS
+Google Scholar
+
+Semantic Scholar
+
+DBLP - CS Bibliography
+
+      listing | bibtex    
+
+Paul Dütting
+Zhe Feng
+Harikrishna Narasimhan
+David C. Parkes    
+
+    export BibTeX citation
+    Loading...
+
+BibTeX formatted citation
+            ×
+
+            loading...
+
+            Data provided by: 
+
+Bookmark
+
+    Bibliographic Tools
+
+Bibliographic and Citation Tools
+
+              Bibliographic Explorer Toggle
+
+            Bibliographic Explorer (What is the Explorer?)
+
+              Connected Papers Toggle
+
+            Connected Papers (What is Connected Papers?)
+
+              Litmaps Toggle
+
+            Litmaps (What is Litmaps?)
+
+              scite.ai Toggle
+
+            scite Smart Citations (What are Smart Citations?)
+
+    Code, Data, Media
+
+Code, Data and Media Associated with this Article
+
+              alphaXiv Toggle
+
+            alphaXiv (What is alphaXiv?)
+
+              Links to Code Toggle
+
+            CatalyzeX Code Finder for Papers (What is CatalyzeX?)
+
+              DagsHub Toggle
+
+            DagsHub (What is DagsHub?)
+
+              GotitPub Toggle
+
+            Gotit.pub (What is GotitPub?)
+
+              Huggingface Toggle
+
+            Hugging Face (What is Huggingface?)
+
+              ScienceCast Toggle
+
+            ScienceCast (What is ScienceCast?)
+
+      Demos
+
+Demos
+
+                Replicate Toggle
+
+              Replicate (What is Replicate?)
+
+                Spaces Toggle
+
+              Hugging Face Spaces (What is Spaces?)
+
+                Spaces Toggle
+
+              TXYZ.AI (What is TXYZ.AI?)
+
+      Related Papers
+
+Recommenders and Search Tools
+
+                Link to Influence Flower
+
+              Influence Flower (What are Influence Flowers?)
+
+                Core recommender toggle
+
+              CORE Recommender (What is CORE?)
+
+Author
+
+Venue
+
+Institution
+
+Topic
+
+        About arXivLabs
+
+arXivLabs: experimental projects with community collaborators
+
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+
+Have an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.
+
+    Which authors of this paper are endorsers? |
+    Disable MathJax (What is MathJax?)
+
+        We gratefully acknowledge support from
+        our major funders,
+        member institutions, ,
+        and all contributors.
+
+        About
+        ·
+        Help
+        ·
+        Contact
+        ·
+        Subscribe
+        ·
+        Copyright
+        ·
+        Privacy
+        ·
+        Accessibility
+        ·
+        Operational Status (opens in new tab)
+
+Major funding support from
+

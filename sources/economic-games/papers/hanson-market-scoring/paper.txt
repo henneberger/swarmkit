@@ -1,0 +1,587 @@
+                   Logarithmic Market Scoring Rules for
+               Modular Combinatorial Information Aggregation
+                                            Robin Hanson ∗
+                                        Department of Economics
+                                        George Mason University†
+
+                                                January 2002
+
+
+
+                                                   Abstract
+           In practice, scoring rules elicit good probability estimates from individuals, while betting
+       markets elicit good consensus estimates from groups. Market scoring rules combine these fea-
+       tures, eliciting estimates from individuals or groups, with groups costing no more than individ-
+       uals. Regarding a bet on one event given another event, only logarithmic versions preserve the
+       probability of the given event. Logarithmic versions also preserve the conditional probabilities
+       of other events, and so preserve conditional independence relations. Given logarithmic rules
+       that elicit relative probabilities of base event pairs, it costs no more to elicit estimates on all
+       combinations of these base events.
+
+Introduction
+In theory, probability elicitation is hard. For expected utility maximizers, choices are jointly de-
+termined by utilities and probabilities, and so without additional constraints on utilities or prob-
+abilities subjective probabilities cannot be separated from event-dependent utilities (Kadane &
+Winkler, 1988). Some sophisticated approaches can in theory overcome this problem (Jaﬀray &
+Karni, 1999; Hanson, 2002b). Yet in practice, less sophisticated uses of scoring rules and related
+methods are widely and successfully used to elicit informative event probabilities from individuals
+in weather forecasting (Murphy & Winkler, 1984), economic forecasting (O’Carroll, 1977), risk
+analysis (DeWispelare, Herren, & Clemen, 1995), and the engineering of intelligent computer sys-
+tems (Druzdzel & van der Gaag, 1995). Furthermore, simple conversational statements are often
+taken as reliable belief elicitations.
+    Given an ability to elicit probabilities, in theory it should be easy to induce individuals to
+aggregate their information into common estimates.1 Given a ﬁnite state space, Bayesians with
+a common prior who repeatedly state their beliefs, and who have common knowledge about pre-
+vious statements, must eventually achieve common knowledge of future statements (Geanakoplos
+& Polemarchakis, 1982), and thus common estimates (Aumann, 1976). Along the way, Bayesians
+  ∗
+     For their comments, I thank Chris Hibbert and David Pennock.
+   †
+     rhanson@gmu.edu http://hanson.gmu.edu 703-993-2326 FAX: 704-993-2323 MSN 1D3, Carow Hall, Fairfax VA
+22030
+   1
+     This can be true even if directly combining probability distributions is more diﬃcult (Genest & Zidek, 1986).
+
+
+                                                        1
+cannot even predict the direction in which others will disagree with them (Hanson, 2002a). Even if
+they are tempted to strategically lie along the way, repeatedly paying each Bayesian by a scoring
+rule should also eventually produce a Nash equilibrium of this game (Kalai & Lehrer, 1993), and
+thus common knowledge of future statements. Similar results apply when common knowledge is
+replaced by common belief (Monderer & Samet, 1989), and for “Bayesian wannabes” (Hanson,
+1997).
+    In practice, however, repeated exchanges of human opinion in conversation do not produce
+the degree of convergence that theory predicts for Bayesians (Cowen & Hanson, 2002). Even so,
+speculative markets, such as stock, commodities, and futures markets, seem to do a remarkable,
+if sometimes incomplete, job of aggregating available relevant information into market prices (Lo,
+1997). Betting markets, in particular, create good probability estimates (Hausch, Lo, & Ziemba,
+1994). And this seems to be true even though speculation in such markets seems to be irrational
+for most participants. For example, orange juice futures prices improve on government weather
+forecasts (Roll, 1984). Markets created within Hewlett-Packard Labs beat oﬃcial corporate sales
+forecasts 6 out of 8 times, and tied the other time (Plott, 2000). The Iowa Electronic Markets,
+which predict U.S. presidential elections, were more accurate than major opinion polls in 451 out
+of 591 comparisons (Berg, Nelson, & Rietz, 2001). Even play money markets have done well at
+forecasting movie returns and scientiﬁc progress (Pennock, Giles, & Nielsen, 2001).
+    Since theory has not been a completely reliable guide here, we might look to the empirical
+successes of scoring rules and betting markets, and try to combine the best of these approaches
+while avoiding their failings. Simple scoring rules do not induce diﬀerent individuals to form
+common estimates, while simple betting markets cannot create price estimates unless several people
+coordinate to bet on the same event, and it typically seems irrational to participate. Market scoring
+rules, in contrast, act like simple scoring rules when one person estimates an event once, yet can also
+act like a subsidized betting market with which many people can and rationally should repeatedly
+interact to produce a common estimate.
+    With a simple scoring rule, a person reports a probability for each event, and gets paid depending
+on that report and the actual event. Market scoring rules are scoring rules where anyone can change
+the current report, and be paid according to their new report, as long as he agrees to pay the last
+person reporting according to that person’s report. This in eﬀect lets anyone make any inﬁnitesimal
+fair bet at the odds in the last report, and make any integral of such bets through changing betting
+odds. The cost to create a market scoring rule depends only on the informativeness of the last
+report given it, realtive to its starting position, and does not otherwise depend on how often or
+how many people use it. In contrast with a standard betting market, rational agents should expect
+a positive proﬁt from participating, and do not need to ﬁnd another person willing to make a
+matching bet.
+    There are a vast number of events about which one might want probability estimates. There
+are not only many simple events, but there are far more possible combinations of these simple
+events. How does the cost of a market scoring rule depend on the number of events it covers? Also,
+how modular can making changes be? That is, if diﬀerent people specialize in estimating diﬀerent
+events, how easily can each person make changes to estimates where they think they have expertise,
+while minimizing unintended changes to other estimates?
+    These considerations reﬂect favorably on logarithmic versions of market scoring rules. Once
+one has paid to create a logarithmic rule on some base set of event pairs, there is no additional
+cost to having that rule apply to all possible combinations of those base events. Furthermore, if
+
+
+                                                  2
+someone makes a bet with a logarithmic rule on the conditional probability of one event given
+another, with a logarithmic rule the probability of the given event does not change, nor do the
+conditional probabilities of further events. Logarithmic rules thus only change the probabilities of
+events where the person betting took a risk. This supports the use of conditional independence
+relations, a popular mechanism humans use to manage the complexity of large probability spaces.
+With logarithmic rules, bets on some events do not change conditional independence relations
+between other events.
+    For example, given a logarithmic rule that induces an estimate of the chance of rain Monday,
+the chance of rain Tuesday, and the chance of rain Wednesday, it costs no more to also induce
+estimates such as whether it will rain Tuesday and Wednesday given that it rains Monday. And
+if someone bets that it will rain Tuesday given that it rains Monday, this bet will not change the
+estimated chance of rain Monday. If current estimates say that the chance of rain Wednesday is
+independent of Monday’s chance, given Tuesday’s chance, a bet on rain Tuesday given rain Monday
+also will not change this independence relation.
+    This paper will ﬁrst review scoring rules, and then discuss market scoring rules, their costs, and
+their modularity.
+
+
+Scoring Rules
+Consider an expected-utility maximizing agent with subjective beliefs pi regarding a complete set
+                               
+of I disjoint events i, where i pi = 1. This agent might be paid a cash amount x according to a
+proper scoring rule xi = si (r) (Savage, 1971). Here xi is the cash payment if i turns out to be the
+actual event, ri is the probability the agent reports for the event i, and r = {ri}i is the full report.
+When s = {si }i constitutes a proper2 scoring rule, an agent who sets his reports ri to maximize
+his expected monetary payoﬀ will honestly report ri = pi . That is,
+                                                                                  
+                          
+                          p = argmax r        pi xi =           pi si (r) given       ri = 1.
+                                           i             i                          i
+
+Expected monetary payoﬀ will be maximized by risk-neutral agents with event-independent utility.
+Other agents can also be induced to maximize an expected monetary payoﬀ.3 Scoring rules can
+also give agents incentives to acquire information they would not otherwise possess (Clemen, 2002).
+    First and second order conditions for this maximization are that for all events j,
+
+                                                    
+                                           λ =           pi j si (p)                                          (1)
+                                                     i
+                                                    
+                                           0 ≥           pi j j si (p)                                       (2)
+                                                     i
+
+where λ is a Lagrange multiplier, and j is a partial derivative operator with respect to component
+j. Diﬀerentiating this ﬁrst order condition with respect to pk , and applying k j = j k , gives
+   2
+    For a non-proper scoring rule, other reports also maximize an agent’s expected payoﬀ.
+   3
+    Agents paid in tickets for a lottery with extreme consequences should maximize expected payoﬀ if their utilities
+approach common lower and upper bounds, (Jaﬀray & Karni, 1999). Bayesians paid in lottery tickets after playing a
+certain insurance game should maximize their expected payoﬀ relative to their objective beliefs, which are what they
+would believe had they updated a known common prior with their further personal information (Hanson, 2002b).
+
+
+                                                             3
+j si = i sj , which implies si (r) = i g(r) for some function g(r) (Williamson, Crowell, & Trotter,
+1972). The function g( p) turns out to be the part of an agent’s equilibrium expected payoﬀ that
+depends on his report r (Savage, 1971).
+    Examples of proper scoring rules include
+
+                                                                 
+                            Quadratic     si = ai + bri − b            rj2 /2,
+                                                                   j
+                                                               
+                             Spherical    si = ai + b ri/(         rj2 )1/2,
+                                                               j
+                          Logarithmic     si = ai + b log(ri),
+                                                           ri                   
+                           Power Law      si = ai + bα           ρα−2
+                                                                  i   dρi − b        rjα
+                                                           0                     j
+
+Power law rules are proper scoring rules for α ≥ 1 (Selten, 1998), and both the quadratic (Brier,
+1950) and logarithmic rules (Good, 1952) are special cases of this, for α of 2 and 1 respectively.
+      The quadratic rule satisﬁes a number of desirable properties (Selten, 1998). The logarithmic
+rule also satisﬁes desirable properties (von Holstein, 1970). For example, it is the only rule satisfying
+the constraint j si = 1ij νi for some νi (where 1ij = 1 when i = j and 0 otherwise), which implies
+si (r) = si (ri), i.e., that an agent’s payoﬀ depends only on the probability he assigned to the actual
+event (Savage, 1971). This rule is thus the only one that can simultaneously reward agents and
+evaluate them via standard likelihood methods (Winkler, 1969).
+      It can be convenient to extend scoring rules si (r), deﬁned so far for normalized r satisfying
+                                                                                
+    i ri = 1, to cases where      i ri = 1. This can be doneby substituting ri / j rj for pi . For example,
+the extended logarithmic rule is si = ai + bi log(ri/ j rj ). An equivalent approach is to require,
+                                                                                   
+for all positive α, that s(αr) = s(r). This implies 0 ≤ i i g and 0 = i pi i j g, and that
+                                                                                                     
+λ = 0 in equation 1. For example, for the extended logarithmic rule, g(r) = b i ri log(ri/ j rj ).
+
+
+Market Scoring Rules
+In many existing markets, all trades are made with one or a few central actors called market makers.
+These actors always have public oﬀers to buy or to sell, and update these prices in response to trades.
+Human market makers have been found to do as well as the standard double auction market
+form at aggregating information (Krahnen & Weber, 1999). For the price of a modest subsidy,
+automated market makers can also play this role in supporting trade. For example, automated
+market makers have been used successfully by the Hollywood Stock Exchange (www.hsx.com) to
+promote speculation on the prospects of thousands of movies and movie stars.
+    It has long been known that in one dimension, allowing an agent to interact with a proper
+scoring rules is equivalent to allowing him to choose a quantity from a continuous oﬀer demand
+schedule (Savage, 1971). This paper shows how this equivalence also holds in higher dimensions.
+A simple scoring rule variation, the market scoring rule, acts like a continuous automatic market
+maker with which an arbitrary number of agents can have an arbitrary number of interactions, at
+no additional cost over that of the one last interaction.
+    For any scoring rule si (r), an agent should voluntarily agree to accept a payment of the form
+
+
+                                                     4
+                                        xi = Δsi (r, ρ) = si (r) − si (
+                                                                          ρ)
+
+for any value of ρ. After all, an agent can ensure himself no eﬀect (x = 0) by setting r = ρ, and
+expects a positive (and maximal) proﬁt if he sets r = p = ρ (all normalized). Thus if ρ is repeatedly
+set to the last report made, an arbitrary number of agents can be allowed an arbitrary number of
+interactions. That is, let agents make their reports rt one at a time to a market scoring rule, where
+each report is paid xit = Δsi (rt, rt−1), with r0 an initial reference report. The total cost to pay for
+T reports,
+                                T
+                                             T
+                                              
+                         xi =         xit =         (si (rt) − s(rt−1)) = si (rT ) − s(r0 ),
+                                t=1           t=1
+
+depends only on the initial and ﬁnal reports, and is thus the same as the cost for one ﬁnal report
+with the same ﬁnal values ri .
+   Not only can the total movement from r0 and rT be split at no additional cost into smaller
+movements from rt−1 to rt, each smaller movement can be thought of an integral of inﬁnitesimal
+movements dr along a line of changing reports r(t) as t varies continuously. If an agent changes his
+                                                                                           
+report at a rate of qi = dri/dt, the rate of change in his asset amounts are yi = dxi /dt = j qj j si .
+When this agent has beliefs  p, the rate of change in his expected payoﬀ is thus
+                d                                               
+                     pi xi =   pi yi =   pi   qj j si (r) =   qj (   pi j si (r)).
+                dt i         i         i    j                 j      i
+
+ When r =  p, this last term in parentheses is zero according to the ﬁrst order condition (equation 1).
+ Thus the ﬁrst order condition is really a local “fair bet” condition, saying that the assets exchanged
+ as one changes one’s report are locally a fair (i.e., zero expected value) bet at the current “market”
+ prices r. An agent pays assets of the form “Pays $1 if event i holds” in exchange for other assets
+ of the same form.
+     We can thus think of a market scoring rule as a continuous inventory-based automated market
+ maker. Such a market maker has a zero bid-ask spread, at least for inﬁnitesimal trades, has an
+ internal state described entirely by its inventory of assets x, and oﬀers an instantaneous price of
+                    
+       x), where i mi (x) = 1. That is, such a market maker will accept any “fair bet” inﬁnitesimal
+p = m(
+ trade dx = y dt, such that
+                                                    
+                                                          yi mi (x) = 0,                              (3)
+                                                      i
+and accept any ﬁnite trade that is an integral of such inﬁnitesimal trades.
+    The main task of any market maker is to extract the information implicit in the trades others
+make with it, in order to infer new rational prices (O’Hara, 1997). In response to an inﬁnitesimal
+trade, the “inference rule” of a market scoring rule is i mj , which determines fair price changes
+                   
+via dpi /dt = qi = j yj j mi . This inference rule should satisfy i mi < 0 to compensate for an
+expected adverse selection in trades. That is, people buying suggests that the market maker’s price
+is probably too low, and people selling suggests the price is too high.
+    Market scoring rules produce consensus estimates in the same way that betting markets produce
+consensus estimates. While each person is always free to change the current estimate, doing so
+
+                                                              5
+ requires taking on more risk, and eventually everyone reaches a limit where they do not want to
+ make further changes, at least not until they receive further information. At this point the market
+ can be said to be in equilibrium.
+    We can extend m(x) to all possible x by requiring that m(  x + α1) = m(
+                                                                               x) for all α, where
+1 = {1}i. This says that changing the cash reserves of a market maker does not change its prices.
+           
+ This and i mi = 1 imply
+
+                                            
+                                                 i mj   = 0                                           (4)
+                                             i
+                                            
+                                                 j mi = 0.                                            (5)
+                                             i
+
+The market maker m   that is equivalent to a particular proper scoring rule then satisﬁes  p =
+                
+ s(p)) when i pi = 1. The negative sign is because an agent’s gains are the market maker’s
+m(−
+losses. For example, a logarithmic scoring rule si = ai + b log(pi ) corresponds to an exponential
+market maker
+
+                                               exp((−ai − xi )/b)
+                                    mi (x) =                       ,                                 (6)
+                                                j exp((−aj − xj )/b)
+
+which is characterized by the diﬀerential equation
+
+                                       i mj = −mi (1ij − mj )/b.                                      (7)
+Note that an equivalence between these market makers and scoring rules ensures that such a market
+maker cannot be exploited for arbitrarily large proﬁts; traders can as a group only take what they
+could get by making some report r to the equivalent proper scoring rule.
+
+
+Costs of Market Scoring Rules
+The net assets given to all the agents who interact with a market scoring rule is xi = si (rT ) − s(r0 ),
+where rT is the last report made, and r0 is an initial reference report. A principal funding the
+scoring rule minimizes her expected payments by setting the initial report to her initial beliefs π,
+as in r0 = π.
+    In the extreme case where agents eventually become sure of the actual state i, the principal’s
+                       
+expected payment is i πi Δsi (1i , π), where 1i = {1ij }j . For the logarithmic scoring rule, this
+                                                   
+maximum expected payment is the entropy, −b i πi log(πi), of the initial distribution π. In less
+than extreme cases, if the principal accepts the probabilities estimates of the ﬁnal report, her
+expected payment is proportional to the diﬀerence between the entropies of the initial and ﬁnal
+                                                                                            
+distributions. (For the quadratic scoring rule, the maximum expected payment is b − b i πi2 .) Of
+course these cost calculations neglect costs to communicate current prices, to compute price and
+asset changes, and to implement transactions.
+    A space of possible events i might be constructed as the combinatorial product space of N
+                                                                                                  
+base variables n, each of which has Vn possible values v. In this case there would be I = n Vn
+possible events i, and events could be written as i = {vn }n , where vn is a particular value of base
+variable n. If agents reported only on the probability of base variable values, they would make
+
+                                                     6
+                      
+reports rnv such that v rnv = 1. These base-only reports would have a maximum expected cost of
+
+                pn), where pnv is a sum of pi over events i which satisfy vn = v. For the logarithmic
+   nv pnv s̃v (1v , 
+scoring rule, the maximum expected cost for the full combinatorial report r = {ri}i , which reports
+on the probability of all base variable value combinations, is no more than the cost for the base-only
+reports, at least when the parameter b is held constant. After all, the entropy of the full distribution
+is no more than the sum of the entropies of the marginal distributions.
+    While there is no direct additional ﬁnancial cost to funding combinatorial reports, it remains dif-
+ﬁcult to bound the computational cost of updating prices and assets. The computational complexity
+of such updates can be large, being worse than polynomial in the worst case (i.e., is NP-complete)
+(Cooper, 1990). It remains an open question how to devise market scoring rules that minimize such
+computational costs.
+
+
+Modularity of Market Scoring Rules
+There are a vast number of events, combinatorial and otherwise, for which one might want probabil-
+ity estimates. An important practical consideration for market scoring rules is thus how well they
+help people manage large event spaces, and help people change the estimates where they think they
+have relative expertise, while minimizing unintended and uninformed changes to other estimates.
+    These considerations can be formalized in terms of how well trade regarding some events pre-
+serves conditional independence relations regarding other events. Conditional independence is a
+central tool for managing complex probability distributions. For variables A, B, C, we say that in
+distribution P , variable A is independent of C given B, and write I(A, B, C), when
+
+                                       P (Ai |Bj Ck ) = P (Ai |Bj )
+
+for all values Ai of A, Bj of B, and Ck of C. (I(A, B, C) implies I(C, B, A)). Humans often
+ﬁnd it diﬃcult to state probability estimates, yet can typically express conditional independence
+relations quickly and conﬁdently. Humans also change probability estimates more often than they
+change estimated independence relations. Such relations typically determine a sparse graph of
+related events, producing a vast reduction in the dimensionality of the resulting probability space.
+Humans can also frequently locate their areas of relative expertise within such graphs (Pearl, 1988;
+Pennock & Wellman, 2000).
+    Consider the case of an agent who bets with a market scoring rule, and bets only on the event
+A given the event B. That is, this agent gains assets of the form “Pays $1 if A and B hold”, in
+trade for assets of the form “Pays $1 if B holds and A does not. Recall that yi = dxi /dt. If we
+describe these events A and B as sets of ﬁner events i, this implies yi = yj for all i, j ∈ A ∩ B,
+yi = yj for all i, j ∈ Ā ∩ B (where Ā denotes the complement of A), and yi = 0 for all i ∈ B̄. In
+general, depending on the particular market scoring rule, such a bet might change any probability
+                                                              
+estimate pi , and thus change any event probability p(C) = i∈C pi . It seems preferable, however,
+for this bet to change as little as possible besides p(A|B) (and of course p(Ā|B) = 1 − p(A|B)).
+    That is, the market maker’s inference rule should assume that a new bet on A given B in
+general gives it new information only about how the event A might depend on the event B, but
+no information on the probability of B, or on events unrelated to how A might depend on B. For
+such unrelated events, previous independence relations should be preserved.
+
+
+
+                                                    7
+    The logarithmic market scoring rule is local in this strong sense. Consider binary variables
+A, B, C, with values A, Ā for A, values B, B̄ for B, and values C, C̄ for C. We can prove the
+following (proofs in the Appendix).
+Theorem 1 Logarithmic rule bets on A given B preserve p(B), and for any event C preserve
+p(C|AB), p(C|ĀB), and p(C|B̄), and thus preserve I(A, B, C), and I(B, A, C).
+    When there are at least three events i, the inverse also holds; the logarithmic market scoring
+rule is the only local rule, even in the weak sense that a bet on A given B preserves p(B). Any rule
+that satisﬁes this constraint must do so in the simplest case of only two events. In this simple case,
+A = {j}, B = {j, k}, only dxj and dxk are non-zero, and only dpj and dpk should be non-zero. We
+can prove that only the logarithmic rule satisﬁes this constraint.
+Theorem 2 For I ≥ 3, if yi = 0 for i ∈ {j, k} implies qi = 0 for i ∈ {j, k}, the rule is logarithmic.
+
+
+    Thus the logarithmic market scoring rule is unique in having a local inference rule. When
+someone makes a bet on A conditional on B, and hence takes no risk regarding whether B is true,
+all other market scoring rules will sometimes change their estimate of the probability of B. The
+logarithmic rule, in contrast, not only preserves p(B), but also preserves p(C|AB), p(C|ĀB), and
+p(C|B̄) for all events C.
+
+
+Conclusion
+Simple scoring rules are regularly used to elicit probability estimates from individuals, and more
+sophisticated versions are available if needed to overcome risk-aversion and state-dependent utility.
+In theory, repeatedly eliciting and announcing individual estimates should be suﬃcient to induce
+common estimates, but in practice estimate diﬀerences remain. In practice, however, standard
+betting markets do elicit common estimates that seem to aggregate individual information well,
+even though participation seems irrational and requires a coordination of trading activity.
+    With a simple scoring rule, a person reports a probability for each event, and gets paid depending
+on that report and the actual event. Market scoring rules are scoring rules where anyone can change
+the oﬃcial report, and be paid according to that new report, as long as they are willing to pay the
+last person reporting according to their report. This in eﬀect lets anyone make any inﬁnitesimal
+fair bet at the odds in the last report, with no need to ﬁnd another person willing to make a
+matching bet, as in ordinary betting markets. Market scoring rules thus combine the advantages of
+both simple scoring rules and betting markets, inducing each individual to make an estimate and
+inducing common estimates.
+    Market scoring rules cost no more to implement than simple scoring rules. The cost does
+depend on the number of base events for which probability estimates are invited, but for logarithmic
+rules there is no additional cost to elicit estimates on all combinations of these base events. The
+logarithmic rule is also unique in making very local inferences from the trades it sees; regarding
+a bet on one event given another event, only a logarithmic rule preserves the probability of the
+given event. Logarithmic versions also preserve the conditional probabilities of further events, and
+so preserve conditional independence relations.
+    The computational costs of updating market scoring rules in combinatorial event spaces can be
+large, however, and it remains an open question how to best minimize and allocate such costs.
+
+                                                  8
+Appendix
+Proof of Theorem 1
+Logarithmic market scoring rules are exponential market makers which satisfy equation 7. For a
+bet on A given B, yi = dxi /dt = 0 for i ∈ B̄. Putting these together, for i ∈ B̄, we have
+                                                                             
+                      dpi /dt =       yj j mi = −mi          yj 1ij /b + mi       yj mj /b.
+                                  j                       j                    j
+
+The ﬁrst sum is zero because yi = 0, and the second sum is zero by the fair bet equation 3. Thus
+           
+the p(B̄) = i∈B̄ pi does not change, nor does p(B) = 1 − p(B̄).
+    According to equation 6, a transition from old prices pi to new prices pi due to asset changes
+Δxi satisﬁes pi = pi K exp(−Δxi /b), for some K(Δx). Thus
+                                                                            
+                 i∈A∩B∩C pi     i∈A∩B∩C pi K exp(−Δxi /b)   i∈A∩B∩C pi
+     p (C|AB) =            =                          =           = p(C|AB),
+                        p
+                   i∈A∩B i             p
+                                  i∈A∩B i K exp(−Δxi /b)      i∈A∩B pi
+
+since Δxi is the same everywhere within A ∩ B. Since Δxi is also the same everywhere within
+Ā ∩ B and within B̄, p (C|ĀB) = p(C|ĀB) and p (C|B̄) = p(C|B̄) as well. Thus the logarithmic
+rule preserves P (C|AB), P (C|ĀB), and P (C|B̄) for any C.
+    For a binary variable C, we can write P (A|BC) = P (A|B) as P (A|BC) = P (A|B C̄). For bi-
+nary variables, I(A, B, C) (equivalent to I(C, B, A)) requires p(C|AB) = p(C|ĀB) and p(C|AB̄) =
+p(C|ĀB̄), and similarly for C̄ instead of C. A logarithmic rule preserves p(C|AB) = p(C|ĀB) by
+preserving each side of this equation. A logarithmic rule also preserves both sides of p(C|AB̄) =
+p(C|ĀB̄) because, for example, p(C|AB̄) = p(CA|B̄)/P (A|B̄), and both numerator and denomi-
+nator here are of the form p(D|B̄) that is preserved. I(B, A, C) (equivalent to I(C, A, B)) requires
+p(C|AB) = p(C|AB̄) and p(C|ĀB) = p(C|ĀB̄), and similarly for C̄ instead of C. But all of these
+forms are similarly preserved by a logarithmic rule. QED.
+
+Proof of Theorem 2
+Let the events j, k be 1, 2. Since we’ve assumed yi = 0 for i ∈ {1, 2}, the fair bet equation (3)
+        
+requires i yi mi = y1 m1 +y2 m2 = 0. By assumption, when this is true we must have, for i ∈ {1, 2},
+0 = qi = y1 1 mi + y2 2 mi . These together imply
+                                               1 mi   2 mi
+                                                     =       .
+                                                m1      m2
+Since our choice of 1, 2 as the non-zero variables here was arbitrary, we can call the value of this
+equation hi (x). Thus for all i = j we have j mi = mj hi . For i = j we can deﬁne a residual
+μi from this expression, as in i mi = hi mi + mi μi (x). Substituting these last two equations into
+equation 4 gives hj = −μi mj , which implies that μi = μ, independent of i. This fact allows us to
+write, for all i, j,
+
+                                           i mj = μ mi (1ij − mj ).                             (8)
+
+
+
+
+                                                      9
+If we knew μ to be a constant function, this would be the same as the diﬀerential equation (7) that
+characterizes the logarithmic rule, and so we would be done. We can show that μ is constant by
+substituting equation 8 into this equation
+
+                                     k i mj = i k mj ,                                      (9)
+
+which must hold for all functions m. Considering the case i = j = k gives (k μ)/mk = (i μ)/mi,
+which implies i μ = mi η for some η(x). Substituting equation 8 into equation 9 and summing
+               
+over j, k gives k k μ = 0. These together imply ν = 0, which makes μ constant. QED.
+
+
+References
+Aumann, R. (1976). Agreeing to Disagree. The Annals of Statistics, 4 (6), 1236–1239.
+
+Berg, J., Nelson, F., & Rietz, T. (2001). Accuracy and Forecast Standard Error of Prediction
+     Markets. Tech. rep., University of Iowa, College of Business Administration.
+
+Brier, G. W. (1950). Veriﬁcation of Forecasts Expressed in Terms of Probability. Monthly Weather
+      Review, 78, 1–3.
+
+Clemen, R. T. (2002). Incentive Contracts and Strictly Proper Scoring Rules. Test, 11, 195–217.
+
+Cooper, G. F. (1990). The computational complexity of probabilistic inference using Bayes belief
+    networks. Artiﬁcial Intelligence, 42, 393–405.
+
+Cowen, T., & Hanson, R. (2002). Are Disagreements Honest?. Tech. rep., George Mason University
+    Economics.
+
+DeWispelare, A. R., Herren, L. T., & Clemen, R. T. (1995). The use of probability elicitation in
+    the high-level nuclear waste regulation program. International Journal of Forecasting, 11 (1),
+    5–24.
+
+Druzdzel, M. J., & van der Gaag, L. C. (1995). Elicitation of Probabilities for Belief Networks:
+     Combining Qualitative and Quantitative Information. In Uncertainty in Artiﬁcial Intelligence,
+     pp. 141–148.
+
+Geanakoplos, J., & Polemarchakis, H. (1982). We Can’t Disagree Forever. Journal of Economic
+    Theory, 28, 192–200.
+
+Genest, C., & Zidek, J. V. (1986). Combining Probability Distributions: A Critique and an Anno-
+     tated Bibliography. Statistical Science, 1 (1), 114–135.
+
+Good, I. J. (1952). Rational Decisions. Journal of the Royal Statistical Society. Series B (Method-
+    ological), 14 (1), 107–114.
+
+Hanson, R. (2002a). Disagreement is Unpredictable. Economics Letters, 77, 365–369.
+
+Hanson, R. (2002b). Eliciting Objective Probabilities via Lottery Insurance Games. Tech. rep.,
+     George Mason University Economics. http://hanson.gmu.edu/elicit.pdf.
+
+
+                                                10
+Hanson, R. D. (1997). Four Puzzles in Information and Politics: Product Bans, Informed Voters,
+     Social Insurance, and Persistent Disagreement. Ph.D. thesis, California Institute of Technol-
+     ogy.
+
+Hausch, D. B., Lo, V. S., & Ziemba, W. T. (1994). Eﬃciencey of Racetrack Betting Markets.
+     Academic Press, San Diego.
+
+Jaﬀray, J.-Y., & Karni, E. (1999). Elicitation of Subjective Probabilities When the Initial Endow-
+     ment is Unobservable. Journal of Risk and Uncertainty, 18 (1), 5–20.
+
+Kadane, J. B., & Winkler, R. L. (1988). Separating Probability Elicitation From Utilities. Journal
+    of the American Statistical Association, 83 (402), 357–363.
+
+Kalai, E., & Lehrer, E. (1993). Rational learning leads to Nash equilibrium. Econometrica, 61 (5),
+      1019–1045.
+
+Krahnen, J. P., & Weber, M. (1999). Does information aggregation depend on market structure?
+     Market makers vs. double auction. Zeitschrift fur Wirtschaftsund Sozialwissenschaften, 119,
+     1–22.
+
+Lo, A. W. (1997). Market eﬃciency: Stock market behaviour in theory and practice. Elgar, Lyme.
+
+Monderer, D., & Samet, D. (1989). Approximating Common Knowledge with Common Beliefs.
+    Games and Economic Behavior, 1, 170–190.
+
+Murphy, A. H., & Winkler, R. L. (1984). Probability Forecasting in Meterology. Journal of the
+    American Statistical Association, 79 (387), 489–500.
+
+O’Carroll, F. M. (1977). Subjective Probabilities and Short-Term Economic Forecasts: An Empir-
+     ical Investigation. Applied Statistics, 26 (3), 269–278.
+
+O’Hara, M. (1997). Market Microstructure Theory. Blackwell.
+
+Pearl, J. (1988). Probabilistic Reasoning in Intelligent Systems: Networks of Plausible Inference.
+      Morgan Kauﬀmann, San Mateo, California.
+
+Pennock, D. M., Giles, C. L., & Nielsen, F. A. (2001). The Real Power of Artiﬁcial Markets.
+     Science, 291, 987–988.
+
+Pennock, D. M., & Wellman, M. P. (2000).            Compact Secutiries Markets for Pareto
+     Optimal Reallocation of Risk.      In Proceedings of the Sixteenth Conference on Un-
+     certainty in Artiﬁcial Intelligence, pp. 481–488 San Francisco. Morgan Kaufmann.
+     http://rome.exp.sis.pitt.edu/UAI/Abstract.asp?articleID=56.
+
+Plott, C. R. (2000). Markets as Information Gathering Tools. Southern Economic Journal, 67 (1),
+      2–15.
+
+Roll, R. (1984). Orange Juice and Weather. American Economic Review, 74 (5), 861–880.
+
+Savage, L. J. (1971). Elicitation of Personal Probabilities and Expectations. Journal of the Amer-
+     ican Statistical Association, 66 (336), 783–801.
+
+                                               11
+Selten, R. (1998). Axiomatic Characterization of the Quadratic Scoring Rule. Experimental Eco-
+      nomics, 1 (1), 43–62.
+
+von Holstein, C.-A. S. S. (1970). Measurement of Subjective Probability. Acta Psychologica, 34,
+     146–159.
+
+Williamson, R., Crowell, R., & Trotter, H. (1972). Calculus of Vector Functions (Third edition).
+      Prentice-Hall, Englewood Cliﬀs, New Jersey.
+
+Winkler, R. L. (1969). Scoring Rules and the Evaluation of Probability Assessors. Journal of the
+    American Statistical Association, 64 (327), 1073–1078.
+
+
+
+
+                                              12
+

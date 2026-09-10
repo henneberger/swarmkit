@@ -1,0 +1,119 @@
+{
+  "kind": "papers",
+  "id": "2001.10313",
+  "title": "Evolutionary dynamics of higher-order interactions in social networks",
+  "topic": "hypergraph public goods",
+  "page_url": "https://arxiv.org/abs/2001.10313",
+  "pdf_url": "https://arxiv.org/pdf/2001.10313",
+  "retrieved_at": "2026-09-10T22:39:39.888069+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2001.10313",
+      "resolved_url": "https://arxiv.org/abs/2001.10313",
+      "path": "sources/economic-games/papers/2001.10313/page.html",
+      "bytes": 43964,
+      "sha256": "542d12e78176579b71355ea753d352fa63527c1ba19ad1910b393fd5593fa296"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2001.10313",
+      "resolved_url": "https://arxiv.org/pdf/2001.10313",
+      "path": "sources/economic-games/papers/2001.10313/paper.pdf",
+      "bytes": 6907117,
+      "sha256": "e2efbba7fa1ae09bf43b3a6b10ca51ef232e9ce6830828ea2ebcfc5686cecd24"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2001.10313: Evolutionary dynamics of higher-order interactions in social networks"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Evolutionary dynamics of higher-order interactions in social networks"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2001.10313v5"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "We live and cooperate in networks. However, links in networks only allow for pairwise interactions, thus making the framework suitable for dyadic games, but not for games that are played in groups of more than two players. Here, we study the evolutionary dynamics of a public goods game in social systems with higher-order interactions. First, we show that the game on uniform hypergraphs corresponds to the replicator dynamics in the well-mixed limit, providing a formal theoretical foundation to study cooperation in networked groups. Secondly, we unveil how the presence of hubs and the coexistence of interactions in groups of different sizes affects the evolution of cooperation. Finally, we apply the proposed framework to extract the actual dependence of the synergy factor on the size of a group from real-world collaboration data in science and technology. Our work provides a way to implement informed actions to boost cooperation in social groups."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Evolutionary dynamics of higher-order interactions in social networks"
+    ],
+    "twitter:description": [
+      "We live and cooperate in networks. However, links in networks only allow for pairwise interactions, thus making the framework suitable for dyadic games, but not for games that are played in groups..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Evolutionary dynamics of higher-order interactions in social networks"
+    ],
+    "citation_author": [
+      "Alvarez-Rodriguez, Unai",
+      "Battiston, Federico",
+      "de Arruda, Guilherme Ferraz",
+      "Moreno, Yamir",
+      "Perc, Matjaz",
+      "Latora, Vito"
+    ],
+    "citation_doi": [
+      "10.1038/s41562-020-01024-1"
+    ],
+    "citation_date": [
+      "2020/01/28"
+    ],
+    "citation_online_date": [
+      "2021/05/22"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2001.10313"
+    ],
+    "citation_arxiv_id": [
+      "2001.10313"
+    ],
+    "citation_abstract": [
+      "We live and cooperate in networks. However, links in networks only allow for pairwise interactions, thus making the framework suitable for dyadic games, but not for games that are played in groups of more than two players. Here, we study the evolutionary dynamics of a public goods game in social systems with higher-order interactions. First, we show that the game on uniform hypergraphs corresponds to the replicator dynamics in the well-mixed limit, providing a formal theoretical foundation to study cooperation in networked groups. Secondly, we unveil how the presence of hubs and the coexistence of interactions in groups of different sizes affects the evolution of cooperation. Finally, we apply the proposed framework to extract the actual dependence of the synergy factor on the size of a group from real-world collaboration data in science and technology. Our work provides a way to implement informed actions to boost cooperation in social groups."
+    ]
+  },
+  "extracted_text_characters": 107826,
+  "text_searchable": true
+}

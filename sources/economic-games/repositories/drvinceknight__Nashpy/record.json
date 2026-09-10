@@ -1,0 +1,38 @@
+{
+  "kind": "repositories",
+  "id": "drvinceknight__Nashpy",
+  "title": "drvinceknight/Nashpy",
+  "url": "https://github.com/drvinceknight/Nashpy",
+  "topic": "small normal form games",
+  "retrieved_at": "2026-09-10T22:39:45.266145+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/drvinceknight/Nashpy/blob/b80533daeec4e54a341b47a873efac96cf09a209/LICENSE",
+      "resolved_url": "https://github.com/drvinceknight/Nashpy/blob/b80533daeec4e54a341b47a873efac96cf09a209/LICENSE",
+      "path": "sources/economic-games/repositories/drvinceknight__Nashpy/LICENSE",
+      "bytes": 1069,
+      "sha256": "052df58fa5d8e7203147d8f1e91a15f4327e9df659c6f39868a66d24f30e886b"
+    },
+    {
+      "url": "https://github.com/drvinceknight/Nashpy/blob/b80533daeec4e54a341b47a873efac96cf09a209/README.md",
+      "resolved_url": "https://github.com/drvinceknight/Nashpy/blob/b80533daeec4e54a341b47a873efac96cf09a209/README.md",
+      "path": "sources/economic-games/repositories/drvinceknight__Nashpy/README.md",
+      "bytes": 5998,
+      "sha256": "e6bc928dd74b766b56653e9e003a5c324f0dca2c0cd31e34c0f9fe10d328012a"
+    }
+  ],
+  "status": "ok",
+  "commit": "b80533daeec4e54a341b47a873efac96cf09a209",
+  "commit_date": "2025-11-13T14:41:20Z",
+  "checkout": "sources/economic-games/repositories/drvinceknight__Nashpy/checkout",
+  "experiments_reproduced": false,
+  "license_files": [
+    "LICENSE"
+  ],
+  "audit": {
+    "anchor": "src/nashpy/algorithms/support_enumeration.py",
+    "finding": "Support enumeration and equilibrium checks located for small bimatrix controls.",
+    "proposed_use": "Optional small-game oracle",
+    "review_level": "selected code or README; not full audit"
+  }
+}

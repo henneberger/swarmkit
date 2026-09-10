@@ -1,0 +1,977 @@
+                                                               Multi Type Mean Field Reinforcement Learning
+                                                           Sriram Ganapathi Subramanian∗                                                                 Pascal Poupart
+                                                                       University of Waterloo                                                              Borealis AI
+                                                                         Waterloo, Ontario                                                              Waterloo, Ontario
+                                                                      s2ganapa@uwaterloo.ca                                                      pascal.poupart@borealisai.com
+
+                                                                       Matthew E. Taylor                                                                  Nidhi Hegde
+                                                                         Borealis AI                                                                       Borealis AI
+                                                                     Edmonton, Alberta                                                                 Edmonton, Alberta
+arXiv:2002.02513v7 [cs.MA] 21 Jun 2022
+
+
+
+
+                                                                matthew.taylor@borealisai.com                                                      nidhi.hegde@borealisai.com
+
+                                         ABSTRACT                                                                                   Yet, the current algorithms implemented for many agents require
+                                         Mean field theory provides an effective way of scaling multiagent                          some strong assumptions about the game environment to perform
+                                         reinforcement learning algorithms to environments with many                                adequately. The important mean field approximation reduces a
+                                         agents that can be abstracted by a virtual mean agent. In this paper,                      many agent problem into a simplified two agent problem where
+                                         we extend mean field multiagent algorithms to multiple types. The                          all the other participating agents are approximated as a single
+                                         types enable the relaxation of a core assumption in mean field re-                         mean field. This mean field approximation, however, would be
+                                         inforcement learning, which is that all agents in the environment                          valid only for scenarios where all the agents in the environment
+                                         are playing almost similar strategies and have the same goal. We                           can be considered similar to each other in objectives and abilities.
+                                         conduct experiments on three different testbeds for the field of                           Real world applications often have a set of agents that are diverse,
+                                         many agent reinforcement learning, based on the standard MA-                               and therefore it is virtually impossible to aggregate them into a
+                                         gents framework. We consider two different kinds of mean field                             single mean field.
+                                         environments: a) Games where agents belong to predefined types                                 In this paper, we introduce a concept of multiple types to model
+                                         that are known a priori and b) Games where the type of each agent is                       agent diversity in the mean field approximation for many agent
+                                         unknown and therefore must be learned based on observations. We                            reinforcement learning. The types are groupings applied to other
+                                         introduce new algorithms for each type of game and demonstrate                             agents in the environment in such a way that all members of a par-
+                                         their superior performance over state of the art algorithms that                           ticular type play approximately similar strategies and have similar
+                                         assume that all agents belong to the same type and other baseline                          overall goals. Now, the modelling agent can consider each type to
+                                         algorithms in the MAgent framework.                                                        be a distinct agent, which has to be modelled separately. Within
+                                                                                                                                    each type, the mean field approximation should still be reasonable
+                                         KEYWORDS                                                                                   as the agents within one particular type are more related to each
+                                                                                                                                    other than other agents from different types. Thus, the many agent
+                                         Mean Field Methods; Multiagent Systems; Reinforcement Learning;
+                                                                                                                                    interaction is effectively reduced to 𝑀 agent interactions where 𝑀
+                                         Many-Agent Learning
+                                                                                                                                    is the number of types. Note that this is more complex than the
+                                         ACM Reference Format:                                                                      simple two agent interaction considered by previous research and
+                                         Sriram Ganapathi Subramanian, Pascal Poupart, Matthew E. Taylor, and Nidhi
+                                                                                                                                    this can approximate a real world dynamic environment in a much
+                                         Hegde. 2020. Multi Type Mean Field Reinforcement Learning. In Proc. of the
+                                                                                                                                    better way. Most real world applications for many agent reinforce-
+                                         19th International Conference on Autonomous Agents and Multiagent Systems
+                                         (AAMAS 2020), Auckland, New Zealand, May 9–13, 2020, IFAAMAS, 13 pages.                    ment learning can be broadly classified into two categories. The
+                                                                                                                                    first category involves applications where we have predefined types
+                                                                                                                                    and the type of each agent is known a priori. Some common appli-
+                                         1     INTRODUCTION                                                                         cations include games with multiple teams (like quiz competitions),
+                                         Multiagent reinforcement learning (MARL) is a quickly growing                              multiple party elections with coalitions, airline price analysis with
+                                         field with lots of recent research pushing its boundaries [6, 14]. Yet,                    multiple airlines forming an alliance beforehand, etc. We call these
+                                         scaling the multiagent algorithms to environments with a large                             applications predefined known type scenarios. The other category
+                                         number of learning agents continues to be a problem [5]. Research                          are applications that involve a large number of agents that may
+                                         advances in the field of MARL [2, 4] deal with only a limited number                       have different policies due to differences in their rewards, actions
+                                         of agents and the proposed methods cannot be easily generalized to                         or observations. Common examples are demand and supply sce-
+                                         more complex scenarios with many agents. Some recent research                              narios, stock trading scenarios, etc., where one type of agent may
+                                         has used the concept of mean field theory for enabling the use                             be risk averse while another type may be risk seeking. We call
+                                         of MARL approaches to environments with many agents [12, 17].                              these applications pre-defined unknown type scenarios, since there
+                                         ∗ Sriram did this work while he was an intern at Borealis AI.                              are no true underlying types like the previous case and a suitable
+                                                                                                                                    type therefore must be assigned through observations. Another
+                                         Proc. of the 19th International Conference on Autonomous Agents and Multiagent Systems     important aspect in this paper will be the notion of neighbourhood
+                                         (AAMAS 2020), B. An, N. Yorke-Smith, A. El Fallah Seghrouchni, G. Sukthankar (eds.), May
+                                         9–13, 2020, Auckland, New Zealand. © 2020 International Foundation for Autonomous          since each individual agent may be impacted more by agents whose
+                                         Agents and Multiagent Systems (www.ifaamas.org). All rights reserved.
+states are “closer” (according to some distance measure) to the state             interactions:
+of an agent. For instance, in battle environments, nearby agents                                                           1        ∑︁
+pose a greater threat than far away agents.                                                                   𝑄 𝑗 (𝑠, a) = 𝑗                  𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎𝑘 ).               (1)
+                                                                                                                          𝑛
+                                                                                                                                  𝑘 ∈𝜂 ( 𝑗)
+   Using the open source test environment for many agent games —
+MAgents [18] — we consider three testbeds that involve many strate-               Here 𝑛 𝑗 is the number of neighbours of the agent 𝑗 and 𝜂 ( 𝑗) is
+gic agents in the environment. Two of these testbeds correspond to                the index set of neighbouring agents. Yang et al. [17] showed that
+the known type and the third one corresponds to the unknown type.                 this decomposition can be well approximated by the mean field 𝑄
+                                                                                                           𝑗
+We introduce two different algorithms for the known and unknown                   function 𝑄 𝑗 (𝑠, a) ≈ 𝑄 𝑀𝐹 (𝑠, 𝑎 𝑗 , 𝑎 𝑗 ) under certain conditions. The
+type scenarios. We demonstrate the superior performance of these                                  𝑗
+                                                                                  mean action 𝑎 on the neighbourhood 𝜂 ( 𝑗) of agent 𝑗 is expressed
+algorithms in comparison to previous algorithms that assume a
+                                                                                  as 𝑎 𝑗 = 𝑛1𝑗 𝑘 ∈𝜂 ( 𝑗) 𝑎𝑘 where 𝑎𝑘 is the action of each neighbour
+                                                                                                Í
+single type of agents in the testbeds.
+                                                                                  𝑘. In the case of discrete actions, 𝑎𝑘 is a one-hot vector encoding
+                                                                                  and 𝑎 𝑗 is a vector of fractions corresponding to the probability that
+2    BACKGROUND                                                                   each action may be executed by an agent at random.
+Reinforcement Learning: Single agent reinforcement learning                          The mean field 𝑄 function can be updated in a recurrent manner
+(RL) [15] is the most common form of reinforcement learning in                    as follows,
+the literature [1]. Here the problem is modelled in the framework                           𝑄𝑡 +1 (𝑠, 𝑎 𝑗 , 𝑎 𝑗 ) = (1 − 𝛼)𝑄𝑡 (𝑠, 𝑎 𝑗 , 𝑎 𝑗 ) + 𝛼 [𝑟 𝑗 + 𝛾 𝑣𝑡 (𝑠 ′ ) ]
+                                                                                              𝑗                                      𝑗                              𝑗
+                                                                                                                                                                                (2)
+of a Markov Decision Process (MDP) where the MDP is composed
+of ⟨S, 𝐴, 𝑃, 𝑅⟩, where S denotes the set of states that the agent can             where 𝑟 𝑗 is the reward obtained. The 𝑠, 𝑠 ′ are the old and new states
+                                                                                  respectively. 𝛼𝑡 is the learning rate. The value function 𝑣𝑡 (𝑠 ′ ) for
+                                                                                                                                                 𝑗
+move into, 𝐴 denotes the set of actions that the agent can take, 𝑃
+denotes the transition distribution (𝑃 (𝑠 ′ |𝑠, 𝑎)) and 𝑅 denotes the             agent 𝑗 at time 𝑡 is given by,
+                                                                                                                 ∑︁
+reward function (𝑅(𝑠, 𝑎)). The agents are allowed to explore the                                  𝑣𝑡 (𝑠 ′ ) =
+                                                                                                      𝑗
+                                                                                                                      𝜋𝑡 (𝑎 𝑗 |𝑠 ′, 𝑎 𝑗 ) E −𝑗
+                                                                                                                        𝑗                          𝑗 ′ 𝑗 𝑗
+                                                                                                                                              −𝑗 𝑄 𝑡 (𝑠 , 𝑎 , 𝑎 )           .   (3)
+                                                                                                                                         𝑎𝑖 ∼𝜋𝑖,𝑡
+environment during the process of training and collect experience                                                𝑎𝑗
+tuples ⟨𝑠, 𝑎, 𝑠 ′, 𝑟 ⟩. An agent learns a policy 𝜋 : S → 𝐴, which is a
+mapping from states to actions where the goal is to maximize the                  Here, the term 𝑎 𝑗 denotes the mean action of all the other agents
+                                   Í
+expected cumulative rewards 𝑡 𝛾 𝑡 𝑅(𝑠𝑡 , 𝑎𝑡 ), where 𝛾 ∈ [0, 1) is the            apart from 𝑗. The mean action for all the agents is first calculated
+                                                                                  using the relation, 𝑎 𝑗 = 𝑁1𝑗 𝑘 𝑎𝑘 , 𝑎𝑘 ∼ 𝜋𝑡𝑘 (·|𝑠, 𝑎𝑘− ), where 𝜋𝑡𝑘 is
+                                                                                                               Í
+discount factor. An optimal policy obtains the highest cumulative
+rewards among all possible policies.                                              the policy of the agent 𝑘 at time 𝑡, and 𝑎𝑘− represents the previous
+    In Multiagent reinforcement learning (MARL), there is a notion                mean action for the neighbours of the agent 𝑘. 𝑁 𝑗 denotes the total
+of stochastic games [3], where the state and action space are defined             number of agents in the neighbourhood of the agent 𝑗. Then, the
+as Cartesian products of individual states and actions of different               Boltzmann policy for each agent 𝑗 is calculated using 𝛽, which is
+agents in the environment. A stochastic game can be considered a                  the Boltzmann softmax parameter,
+special type of normal form game [9], where a particular iteration of                                                                            𝑗
+                                                                                                                                 𝑒𝑥𝑝 (−𝛽𝑄𝑡 (𝑠, 𝑎 𝑗 , 𝑎 𝑗 ))
+                                                                                                          𝑗
+the game depends on previous game(s) played and the experiences                                       𝜋𝑡 (𝑎 𝑗 |𝑠, 𝑎 𝑗 ) = Í                    𝑗        ′               .       (4)
+                                                                                                                                 ′
+                                                                                                                              𝑎 𝑗 ∈𝐴 𝑗
+                                                                                                                                       𝑒𝑥𝑝 (−𝛽𝑄𝑡 (𝑠, 𝑎 𝑗 , 𝑎 𝑗 ))
+of all the agents in the previous game(s). A stochastic game can
+be defined as a tuple ⟨S, 𝑁 , A, 𝑃, 𝑅⟩ where S is a finite set of states          3    MEAN FIELD MARL AND TYPES
+(assumed to be the same for all agents), 𝑁 is a finite set of 𝑛 agents,
+                                                                                  We consider environments where there are 𝑀 types that the neigh-
+A = 𝐴1 × · · · ×𝐴𝑛 where 𝐴 𝑗 denotes the set of actions of the agent 𝑗.
+                                                                                  bouring agents can be classified into. In this paper, we assume that
+𝑃 is the transition distribution 𝑃 (𝑠 ′ |𝑠, a) where a = (𝑎 1, . . . , 𝑎𝑛 ) and
+                                                                                  the 𝑄 function decomposes additively according to a partition of
+𝑅 𝑗 (𝑠, a) = 𝑟 𝑗 is the reward function with 𝑟 𝑗 denoting the reward
+                                                                                  the agents into 𝑋 𝑗 subsets that each include one agent of each type.
+received by agent 𝑗. Here each agent is trying to learn a policy that
+                                                                                  This decomposition can be viewed as a generalization of pairwise
+maximizes its return upon consideration of opponent behaviours.
+                                                                                  decompositions to multiple types since each term depends on a
+Agents are typically self interested and the combined system moves
+                                                                                  representative from each type.
+towards a Nash equilibrium [11]. Scalability in MARL environments
+                                                                                     Let the standard multi-agent 𝑄 function be 𝑄 𝑗 (𝑠, 𝒂), then,
+is often a bottleneck. Important research efforts are aimed at han-
+dling only up to a handful of agents and the solutions or algorithms                                                        𝑋𝑗
+                                                                                                        1 ∑︁ 𝑗
+considered become intractable in many agent scenarios.
+                                                                                                  𝑗
+                                                                                             𝑄 (𝑠, 𝒂) = 𝑗    [𝑄 (𝑠, 𝑎 𝑗 , 𝑎𝑘1𝑖 , 𝑎𝑘2𝑖 , . . . , 𝑎𝑘𝑀𝑖 )].                        (5)
+                                                                                                       𝑋 𝑖=1
+    Mean Field Reinforcement Learning: Mean field theory ap-
+proximates many agent interactions in a multiagent environment                    Here we have a total of 𝑀 types and 𝑎𝑚𝑘 denotes the action of agent
+into two agent interactions [10] where the second agent corre-                    𝑘 belonging to type 𝑚 in the neighbourhood of agent 𝑗. Notice that
+sponds to the mean effect of all the other agents. This allows                    this representation of the 𝑄 function includes the interaction with
+domains with many agents that were previously considered in-                      each one of the types and is not a simple pairwise interaction as
+tractable to be revisited and scalable approximate solutions to be                done by [17]. Let us assume that we have a scheme in which we
+devised [12, 17]. Mean field reinforcement learning applies mean                  can classify each agent into one of these subsets. Note that we do
+field approximation to stochastic games [17]. In the paper by Yang                not need each group to contain an equal number of agents as we
+et al. [17], the multi-agent 𝑄 function for stochastic games is de-               can always make a new subset that contains one agent of a type
+composed additively into local 𝑄 functions that capture pairwise                  and other agents to be placeholder agents (dead agents) of other
+types. We will relax this requirement of decomposition shortly and                                                       Similarly, 𝛼 1 and 𝛼 2 denote the errors induced by using a single
+in practice we do not need to make these subsets at all.                                                              type (instead of two types) in the mean field approximation.
+                                                                                                                                                    𝛼 1 = ||𝑎 1 − 𝑎|| 2 ; 𝛼 2 = ||𝑎 2 − 𝑎|| 2                               (8)
+3.1      Mean Field Approximation
+We also assume discrete action spaces and use a one hot represen-                                                        Furthermore, 𝑎𝑘1 denotes an action of an agent belonging to type
+tation of the actions as in Yang et al. [17]. The one hot action of                                                   1 and 𝑎𝑘2 denotes an action of an agent belonging to type 2. Here 𝑎
+each agent 𝑘 belonging to type 𝑚 in the neighbourhood of agent 𝑗                                                      denotes the mean field action of all the agents, 𝑎 1 denotes the mean
+is represented as 𝑎𝑚      𝑘𝑚          𝑗                            𝑗
+                               = 𝑎𝑚 + 𝛿ˆ 𝑗,𝑘𝑚 where 𝑎𝑚 is the mean action                                             action of all agents of type 1 and 𝑎 2 denotes the mean action of all
+of all agents in the neighbourhood of agent 𝑗 belonging to type 𝑚                                                     agents of type 2.
+and 𝛿ˆ 𝑗,𝑘𝑚 is the deviation between the action of an agent and the
+mean action of its type.                                                                                                Proof. Since we have considered every agent to belong to only
+                                                                                                                      one type, the deviation between the agent’s action and the overall
+   Let 𝛿 𝑗,𝑘𝑖 = [𝛿ˆ 𝑗,𝑘1 ; 𝛿ˆ 𝑗,𝑘2 ; · · · ; 𝛿ˆ 𝑗,𝑘𝑀 ] be a vector obtained by the
+                                                                                                                      mean action is the error estimate. Hence, we will have the following,
+concatenation of all such deviations of the agents in the neighbour-
+                                                                                                                                                         Í        ˆ              Í           𝑗
+                                                                                                                                                            𝑘 | |𝛿 𝑘 | | 2          𝑘 | |𝑎 −𝑎 | | 2
+hood of the agent 𝑗 belonging to each of the 𝑀 types (all agents                                                                                                                          𝑗
+                                                                                                                                                                 𝑁           =             𝑁
+of a single subset). Similar to [17], we apply Taylor’s theorem to
+                                                                                                                                   Í        ˆ
+expand the 𝑄 function in Equation 5 to get,                                                                                            𝑘 | |𝛿 𝑘 | | 2
+                                                                                                                                                      = 𝑁1 ( 𝑘1 ||𝑎𝑘1 − 𝑎|| + 𝑘2 ||𝑎𝑘2 − 𝑎||).
+                                                                                                                                                            Í                Í
+                                                                                                                                          𝑁
+                       Í𝑋 𝑗 𝑗
+    𝑄 𝑗 (𝑠, a) = 𝑋1𝑗 𝑖=1       𝑄 (𝑠, 𝑎 𝑗 , 𝑎𝑘1𝑖 , 𝑎𝑘2𝑖 , . . . , 𝑎𝑘𝑀𝑖 )                                                  The superscript (𝑗) and subscript (2) have been dropped for sim-
+                 𝑗
+              𝑋 [𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎 𝑗 , . . . , 𝑎 𝑗 )
+    = 𝑋1𝑗 𝑖=1
+            Í
+                                    1            𝑀                                                                    plicity.
+                                      𝑗           𝑗
+       +∇𝑎 𝑗 ,...,𝑎 𝑗 𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎 1, . . . , 𝑎𝑀 ) · 𝛿 𝑗,𝑘𝑖                                                             1 ∑︁                                     ∑︁
+                1     𝑀                                                                                                  =    (     | |𝑎𝑘1 − 𝑎 1 + 𝑎 1 − 𝑎 | | +         | |𝑎𝑘2 − 𝑎 2 + 𝑎 2 − 𝑎 | |)
+      + 21 𝛿 𝑗,𝑘𝑖 · ∇2 𝑗                     𝑗           𝑗 𝑗          𝑗          𝑗,𝑘𝑖 ]                                    𝑁
+                                        𝑗 𝑄 (𝑠, 𝑎 , 𝑎˜ 1 , . . . , 𝑎˜ 𝑀 ) · 𝛿                                                   𝑘1                                  𝑘2
+                           𝑎˜ 1 ,...,𝑎˜ 𝑀                                                                                   1   ∑︁                      ∑︁                    ∑︁                      ∑︁
+                         𝑗               𝑗                                                                               ≤    (      | |𝑎𝑘1 − 𝑎 1 | | +      | |𝑎 1 − 𝑎 | | +      | |𝑎𝑘2 − 𝑎 2 | | +     | |𝑎 2 − 𝑎 | |)
+   = 𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎 1, . . . , 𝑎𝑀 )                                                                                       𝑁
+                                                                                                                                 𝑘1                     𝑘1                    𝑘2                      𝑘2
+                                              𝑗 𝑗              𝑗              Í𝑋 𝑗 𝑗,𝑘𝑖
+      +∇𝑎 𝑗 ,...,𝑎 𝑗 𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎 1, 𝑎 2, . . . , 𝑎𝑀 ) · [ 𝑋1𝑗 𝑖=1                    𝛿 ]                               1    ∑︁                                           ∑︁
+                                                                                                                         =    (     | |𝑎𝑘1 − 𝑎 1 | | + 𝐾1 | |𝑎 1 − 𝑎 | | +      | |𝑎𝑘2 − 𝑎 2 | | + 𝐾2 | |𝑎 2 − 𝑎 | |)
+             1        𝑀
+                Í𝑋 𝑗 𝑗,𝑘𝑖                                                                                                  𝑁
+           1                                2                𝑗     𝑗    𝑗 𝑗                   𝑗        𝑗,𝑘𝑖 ]                   𝑘1                                           𝑘2
+      + 2𝑋 𝑗 𝑖=1 [𝛿                      ·∇ 𝑗            𝑗 𝑄 (𝑠, 𝑎 , 𝑎˜ 1 , 𝑎˜ 2 , . . . , 𝑎˜ 𝑀 ) · 𝛿                      𝐾1         𝐾2       𝐾1          𝐾2
+                                            𝑎˜ 1 ,...,𝑎˜ 𝑀                                                               ≤     𝜖1 +       𝜖2 +       𝛼1 +       𝛼2 .
+                                                    𝑋𝑗
+                                                                                                                           𝑁           𝑁       𝑁           𝑁
+                     𝑗             𝑗          1 ∑︁ 𝑗                                          𝑗         𝑗                                                                                                                   (9)
+   = 𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎 1 , . . . , 𝑎𝑀 ) +                   [𝑅   (𝑎𝑘𝑖 ) ] ≈ 𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎 1 , . . . , 𝑎𝑀 )
+                                           2𝑋 𝑖=1 𝑠,𝑎 𝑗
+                                                 𝑗
+                                                                                                                                                                                                                             □
+            𝑗                                                                𝑗    𝑗          𝑗
+where 𝑅𝑠,𝑎 𝑗 (𝑎𝑘 ) ≜ 𝛿 𝑗,𝑘 · ∇2 𝑗                        𝑗   𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎˜1, 𝑎˜2, . . . , 𝑎˜𝑀 ) · 𝛿 𝑗,𝑘               Theorem 3.2. When there are two types in the environment, and
+                                            𝑎˜ 1 ,...,𝑎˜ 𝑀
+which is the Taylor polynomial remainder. The summation term                                                          they have been considered to be different types, the average deviation
+     Í𝑋 𝑗 𝑗,𝑘𝑖                                                                                                        induced by the mean field approximation is bounded as follows,
+[ 𝑋1𝑗 𝑖=1 𝛿 ] sums out to 0. Finally, if we ignore the remainder
+           𝑗                                                                                                                              Í ˆ
+terms 𝑅𝑠,𝑎 𝑗 , we obtain the following approximation,                                                                                       𝑘 ||𝛿𝑘 || 2   𝐾1      𝐾2
+                                                                                                                                                        ≤    𝜖1 +    𝜖2 .               (10)
+                                                                                                                                              𝑁           𝑁       𝑁
+                                              𝑗                        𝑗          𝑗
+                        𝑄 𝑗 (𝑠, a) ≈ 𝑄 MTMF (𝑠, 𝑎 𝑗 , 𝑎 1, . . . , 𝑎𝑀 ).                                        (6)     The variables have the same meaning as in Theorem 3.1.
+     The magnitude of this approximation depends on the deviation
+                             𝑘𝑚                                    𝑗                                                    Proof. In this scenario we will have,
+𝛿ˆ 𝑗,𝑘𝑚 between each action 𝑎𝑚  and its mean field approximation 𝑎¯𝑚 .
+                                                                                                                             Í     ˆ
+More precisely, we can quantify the overall effect of the mean field                                                         𝑘 | |𝛿 𝑘 | | 2       1 ∑︁                      ∑︁
+                                           Í                                                                                                  =     (  | |𝑎𝑘1 − 𝑎 1 | | 2 +    | |𝑎𝑘2 − 𝑎 2 | | 2 )
+approximation by the average deviation 𝑘 ||𝛿ˆ𝑘 || 2 /𝑁 . Theorems                                                                𝑁                𝑁
+                                                                                                                                                       𝑘1                            𝑘2
+3.1 and 3.2 show that the average deviation is reduced as we increase                                                                                                                                                      (11)
+                                                                                                                                   Í                                    Í
+the number of types and Theorem 3.3 provides an explicit bound                                                              𝐾1         𝑘 1 | |𝑎𝑘 1 − 𝑎 1 | | 2     𝐾2        𝑘 2 | |𝑎𝑘 2 − 𝑎 2 | | 2     𝐾1      𝐾2
+                                                                                                                          =                                      +                                     ≤    𝜖1 +    𝜖2 .
+on the approximation in Eq. 6 based on the average deviation.                                                               𝑁                  𝐾1                  𝑁                 𝐾2                  𝑁       𝑁
+                                                                                                                                                                                                                             □
+   Theorem 3.1. When there are two types in the environment, but
+they have been considered to be the same type, the average deviation                                                     We presented Theorems 3.1 and 3.2 to demonstrate the reduction
+induced by the mean field approximation is bounded as follows,                                                        in the bound on the average deviation as we increase the number of
+            Í ˆ                                                                                                       types from 1 to 2. Similar derivations can be performed to demon-
+             𝑘 ||𝛿𝑘 || 2   𝐾1      𝐾2      𝐾1      𝐾2
+                         ≤    𝜖1 +    𝜖2 +    𝛼1 +    𝛼2          (7)                                                 strate that the bounds on the average deviation decrease as we
+                𝑁          𝑁       𝑁       𝑁       𝑁
+                                                                                                                      increase the number of types (regardless of the true number of
+where 𝑁 denotes the total number of agents in the environment; 𝐾1                                                     types).
+and 𝐾2 denote the total number of agents of types 1 and 2, respectively;                                                 Let 𝜖 be a bound on the average deviation achieved based on a
+𝜖1 and 𝜖2 are bounds on the average deviation for agents of types 1                                                                                      2
+                                                                                                                                                                   Í𝑋
+                                                                                                                                                                             | |𝛿𝑎 | |
+and 2 respectively.                                                                                                   certain number of types: 𝑘=1 𝑋       ≤ 𝜖. The following theorem
+                                                                                                                      bounds the error of the approximate mean field 𝑄 function as a
+       1 Í                                  1 Í
+       𝐾1 ( 𝑘 1 ||𝑎𝑘 1 − 𝑎 1 || 2 ) ≤ 𝜖 1 ; 𝐾2 ( 𝑘 2 ||𝑎𝑘 2 − 𝑎 2 || 2 ) ≤ 𝜖 2                                        function of 𝜖 and the smoothness 𝐿 of the exact 𝑄 function.
+                                                                                                                                           𝑗
+   Theorem 3.3. When the 𝑄 function is additively decomposable                                                  Here, the term 𝑎𝑖 denotes the mean action of all the other agents
+according to Equation 5, and it is 𝐿-smooth, then the Multi Type Mean                                           apart from 𝑗 belonging to type 𝑖. In all of our implementations, the
+Field 𝑄 function provides a good approximation bounded by                                                       mean action for all the types is first calculated using the relation
+                           𝑗                𝑗            𝑗     1                                                                       𝑗       1 ∑︁ 𝑘 𝑘
+           |𝑄 𝑗 (𝑠, a) − 𝑄 MTMF (𝑠, 𝑎 𝑗 , 𝑎¯1, . . . , 𝑎¯𝑀 )| ≤ 𝐿𝜖. (12)                                                              𝑎𝑖 =      𝑗
+                                                                                                                                                   𝑎𝑖 , 𝑎𝑖 ∼ 𝜋𝑡𝑘 ( · |𝑠, 𝑎𝑘1− , . . . , 𝑎𝑘𝑀− )               (22)
+                                                               2                                                                               𝑁𝑖      𝑘
+
+    Proof. We rewrite the expression for the 𝑄 function as 𝑄 (𝑎) ≜                                              where 𝜋𝑡𝑘 is the policy of agent 𝑘 (in 𝑗’s neighbourhood) and 𝑎𝑘𝑖−
+                𝑗 𝑗              𝑗
+𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎 1, 𝑎 2, · · · , 𝑎𝑀 ). Suppose that 𝑄 is 𝐿-smooth, where its                                     represents the previous mean action for the neighbours of agent 𝑘
+gradient ∇𝑄 is Lipschitz-continous with constant 𝐿 such that for                                                                       𝑗
+                                                                                                                belonging to type 𝑖. 𝑁𝑖 is the total number of agents of type 𝑖 in
+all 𝑎, 𝑎,                                                                                                       𝑗’s neighbourhood. Then, the Boltzmann policy for each agent 𝑗 is
+                            ||∇𝑄 (𝑎) − ∇𝑄 (𝑎)|| 2 ≤ 𝐿||𝑎 − 𝑎|| 2                                         (13)                                                                𝑗       𝑗         𝑗
+                                                                                                                                                              𝑒𝑥𝑝 (𝛽𝑄𝑡 (𝑠, 𝑎 𝑗 , 𝑎 1 , . . . , 𝑎𝑀 ))
+                                                                                                                       𝑗          𝑗            𝑗
+                                                                                                                     𝜋𝑡 (𝑎 𝑗 |𝑠, 𝑎 1 , . . . , 𝑎𝑀 ) = Í                             ′ 𝑗                      (23)
+where || · || 2 denotes the 𝑙 2 -norm. Note that all the eigenvalues                                                                                          ′
+                                                                                                                                                           𝑎 𝑗 ∈𝐴 𝑗
+                                                                                                                                                                           𝑗                          𝑗
+                                                                                                                                                                    𝑒𝑥𝑝 (𝛽𝑄𝑡 (𝑠, 𝑎 𝑗 , 𝑎 1 , . . . , 𝑎𝑀 ))
+of ∇2𝑄 can be bounded in the symmetric interval [−𝐿, 𝐿]. As the
+                                                                                                                where 𝛽 is the Boltzmann softmax parameter.
+Hessian matrix ∇2𝑄 is real symmetric and hence diagonalizable,
+                                                                                                                   By iterating through Equations 21, 22 and 23, the mean actions
+there exists an orthogonal matrix 𝑈 such that 𝑈 𝑇 [∇2𝑄]𝑈 = Λ ≜                                                  and respective policies of all agents keep improving. We prove in
+𝑑𝑖𝑎𝑔[𝜆1, . . . , 𝜆𝐷 ]. It then follows that,                                                                    Theorem 3.4 that this approach converges to a fixed point within a
+       𝛿𝑎 · ∇2𝑄 · 𝛿𝑎 = [𝑈 𝛿𝑎]𝑇 Λ[𝑈 𝛿𝑎] = 𝑖=1
+                                             Í𝐷
+                                                𝜆𝑖 [𝑈 𝛿𝑎]𝑖2      (14)                                           small bounded distance of the Nash equilibrium. In Appendix A,
+   with                                                                                                         we give a specific example for a case in which the Multi Type Mean
+                                              Í𝐷                                                                Field algorithm does better than the simple mean field method.
+                  −𝐿||𝑈 𝛿𝑎|| 2 ≤                             2
+                                               𝑖=1 𝜆𝑖 [𝑈 𝛿𝑎] 𝑖 ≤ 𝐿||𝑈 𝛿𝑎|| 2 .                           (15)      We first make three mild assumptions about the Multi Type Mean
+                 𝑗    𝑗
+   Let, 𝛿ˆ𝑚 𝑎 = 𝑎𝑚 − 𝑎𝑚 , consistent with the previous definition.                                              Field update and then state two lemmas before giving Theorem 3.4.
+                                                                                                                   Assumption 1: In the Multi Type Mean Field update, each
+Recall that the term 𝛿 is then 𝛿𝑎 = [𝛿ˆ1𝑎; 𝛿ˆ2𝑎; · · · ; 𝛿ˆ𝑀 𝑎], where 𝑎
+                                                                                                                action-value pair is visited infinitely often, and the reward is bounded
+is the one-hot encoding for 𝐷 actions, and 𝑎 is a 𝐷-dimensional
+                                                                                                                by some constant.
+categorical distribution. Then, it can be shown that,
+                                                                                                                   Assumption 2: The agent’s policies are Greedy in the Limit with
+                       ||𝑈 (𝛿𝑎)|| 2 = ||𝛿𝑎|| 2 .                     (16)                                       Infinite Exploration (GLIE). In the case of the Boltzmann policy,
+                       1  Í 𝑋 𝑅 𝑗 (𝑎𝑘 ). Since 𝐿 is the maximum                                                 the policy becomes greedy w.r.t. the 𝑄 function in the limit as the
+   Consider the term 2𝑋     𝑘=1 𝑠,𝑎 𝑗                                                                           temperature decays asymptotically to zero.
+eigenvalue, from Equation 14 (with a slight abuse of notation),
+                                         ∑︁                                                                        Assumption 3: For each stage game [𝑄𝑡1 (𝑠), . . . , 𝑄𝑡𝑁 (𝑠)] at time 𝑡
+ 𝑅 = 𝛿𝑎 · ∇2𝑄 · 𝛿𝑎 = [𝑈 𝛿𝑎]𝑇 Λ[𝑈 𝛿𝑎] =          𝜆𝑖 [𝑈 𝛿𝑎]𝑖2 ≤ 𝐿||𝑈 𝛿𝑎|| 2 .                                     and in state 𝑠 in training, for all 𝑡, 𝑠, 𝑗 ∈ {1, . . . , 𝑁 } the Nash equi-
+                                                                      𝑖                                         librium 𝜋∗ = [𝜋 ∗1, . . . , 𝜋 ∗𝑁 ] is recognized either as a global optimum
+                                                                                                         (17)   or a saddle point as expressed as:
+   Therefore, from Equation 16:
+                                                                                                                                  1. E𝜋∗ [𝑄𝑡 (𝑠) ] ≥ E𝜋 [𝑄𝑡 (𝑠) ], ∀𝜋 ∈ Ω (Π𝑘 A 𝑘 ) .
+                                                                                                                                                   𝑗                 𝑗
+                                                                                                                                                                                                             (24)
+                                    𝑅 ≤ 𝐿||𝑈 𝛿𝑎|| 2 = 𝐿||𝛿𝑎|| 2 .                                        (18)
+                                                                                                                           2. E𝜋∗ [𝑄𝑡 (𝑠) ] ≥ E𝜋 𝑗 E −𝑗 [𝑄𝑡 (𝑠) ], ∀𝜋 𝑗 ∈ Ω ( A 𝑗 ) , and
+                                                                                                                                           𝑗                             𝑗
+                                                                                                                                                              𝜋∗                                             (25)
+   Thus,
+                                             𝐿 ∑︁ | |𝛿𝑎 | | 2                                                               E𝜋∗ [𝑄𝑡 (𝑠) ] ≤ E 𝑗 E𝜋 −𝑗 [𝑄𝑡 (𝑠) ], ∀𝜋 −𝑗 ∈ Ω (Π𝑘≠𝑗 A 𝑘 )
+                                    1 ∑︁                        𝐿𝜖                                                                𝑗                     𝑗
+                                         𝑅 ≤                  ≤    .                                     (19)                                𝜋∗
+                                                                                                                                                                                                        .    (26)
+                                   2𝑋        2        𝑋          2
+                                          𝑘           𝑘
+                                                                                                           □        Lemma 1. Under Assumption 3, the Nash operator H 𝑁 𝑎𝑠ℎ forms
+                                                                                                                a contraction mapping under the complete metric space from Q to Q
+   Thus, in this paper, we modify the mean field 𝑄 function to in-                                              with the fixed point being the Nash 𝑄 value of the entire game (𝑸 ∗ ),
+clude a finite number of types that each have a corresponding mean                                              i.e., H 𝑁 𝑎𝑠ℎ 𝑸 ∗ = 𝑸 ∗ .
+field. The 𝑄 function then considers a finite number of interactions
+across types.                                                                                                      Proof. Refer to Theorem 17 in [7] for a detailed proof.                                     □
+
+3.2       Mean Field Update                                                                                       We define a new operator H 𝑀𝑇 𝑀𝐹 which is the Multi Type
+                               𝑗                                                                                Mean Field operator. We differentiate this from the Nash operator
+The mean action 𝑎𝑖 represents the mean action of the neighbours                                                 used above. This operator is defined as (where 𝑸 ≜ [𝑄 1, . . . , 𝑄 𝑁 ]),
+of agent 𝑗 belonging to type 𝑖. As in the paper by Yang et al. [17],
+the mean field 𝑄 function can be updated in a recurrent manner,                                                        H 𝑀𝑇 𝑀𝐹 𝑸 (𝑠, a) ≜ E𝑠 ′ ∼𝑝 [r(𝑠, a) + 𝛾v𝑀𝑇 𝑀𝐹 (𝑠 ′ )].                                (27)
+   𝑄𝑡 +1 (𝑠, 𝑎 𝑗 , 𝑎 1 , . . . , 𝑎𝑀 ) = (1 − 𝛼)𝑄𝑡 (𝑠, 𝑎 𝑗 , 𝑎 1 , . . . , 𝑎𝑀 ) + 𝛼 [𝑟 𝑗 + 𝛾 𝑣𝑡 (𝑠 ′ ) ]
+    𝑗                𝑗            𝑗             𝑗             𝑗            𝑗                 𝑗
+                                                                                                                   The Multi Type Mean Field value function can be defined as
+                                                                    (20)                                        v𝑀𝑇 𝑀𝐹 (𝑠) ≜ [𝑣 1 (𝑠), . . . , 𝑣 𝑁 (𝑠)]. This is the value function obtained
+where 𝑟 𝑗 is the reward obtained. The 𝑠 and 𝑠 ′ are the old and new                                             from Equation 21. Also, 𝒓 (𝑠, 𝒂) = [𝑟 1 (𝑠, 𝒂), . . . , 𝑟 𝑁 (𝑠, 𝒂)]. Now us-
+states respectively. 𝛼𝑡 is the learning rate. The value function 𝑣𝑡 (𝑠 ′ )
+                                                                  𝑗
+                                                                                                                ing the same principle of Lemma 1 on the Multi Type Mean Field
+for agent 𝑗 at time 𝑡 is given by,                                                                              operator, we can show that the Multi Type Mean Field operator also
+   𝑣𝑡 (𝑠 ′ ) =
+      𝑗
+                 ∑︁
+                      𝜋𝑡 (𝑎 𝑗 |𝑠 ′, 𝑎 1 , . . . , 𝑎𝑀 ) E −𝑗
+                        𝑗             𝑗         𝑗                     𝑗 ′ 𝑗 𝑗                    𝑗              forms a contraction mapping (additionally refer to Proposition 1 in
+                                                                −𝑗 [𝑄 𝑡 (𝑠 , 𝑎 , 𝑎 1 , . . . , 𝑎 𝑀 ) ]
+                                                      𝑎       ∼𝜋𝑡                                        (21)   Yang et al. [17]).
+                 𝑎𝑗
+   Lemma 2. The random process Δ𝑡 defined in R as                                       where 𝑥 ≜ (𝑠𝑡 , 𝒂𝑡 ) denotes the visited state-joint action pair at the
+                    Δ𝑡 +1 (𝑥) = (1 − 𝛼)Δ𝑡 (𝑥) + 𝛼𝐹𝑡 (𝑥)                          (28)   time 𝑡.
+                                                                                           In Theorem 3.3, we proved a bound for the actual 𝑄 function and
+converges to a constant 𝑆 with probability 1 (w.p.t 1) when                             the Multi Type Mean Field 𝑄 function. We apply that to Equation 34,
+                                                                                        to get the following equation for Δ,
+                                 Í           Í
+            1)        0 ≤ 𝛼 ≤ 1, 𝑡 𝛼 = ∞, 𝑡 𝛼 2 < ∞.                             (29)
+                                                    𝑥 ∈ X ; |X | < ∞                         Δ𝑡 (𝑥) = Q𝑡 (𝑠, 𝑎 𝑗 , 𝑎 1 , . . . , 𝑎𝑀 ) − Q∗ (𝑠, 𝒂)
+                                                                                                                         𝑗        𝑗
+              2)                                                                 (30)
+                                                                                             Δ𝑡 (𝑥) = Q𝑡 (𝑠, 𝑎 𝑗 , 𝑎 1 , . . . , 𝑎𝑀 ) + Q𝑡 (𝑠, 𝒂) − Q𝑡 (𝑠, 𝒂) − Q∗ (𝑠, 𝒂)
+                                                                                                                         𝑗        𝑗
+where X is the set of possible states,                                                                                                                                                       (35)
+                                                                                             Δ𝑡 (𝑥) ≤ | Q𝑡 (𝑠, 𝑎 , 𝑎 1 , . . . , 𝑎𝑀 ) − Q𝑡 (𝑠, 𝒂) | + Q𝑡 (𝑠, 𝒂) − Q∗ (𝑠, 𝒂)
+                                                                                                                     𝑗
+                                                                                                                     𝑗            𝑗
+
+              3)            || E[𝐹𝑡 (𝑥)|F𝑡 ]|| 𝑤 ≤ 𝛾 ||Δ𝑡 || 𝑤 + 𝐾               (31)        Δ𝑡 (𝑥) ≤ Q𝑡 (𝑠, 𝒂) − Q∗ (𝑠, 𝒂) + 𝐷
+where 𝛾 ∈ [0, 1) and K is finite.                                                       where 𝐷 = 21 𝐿𝜖.
+              4)           var[𝐹𝑡 (𝑥)|F𝑡 ] ≤ 𝐾2 (1 + ||Δ𝑡 || 2𝑤 )                (32)      The aim is to prove that the four conditions of Lemma 2 hold and
+                                                                                        that Δ in Equation 35 converges to a constant 𝑆 according to Lemma
+with constant 𝐾2 > 0 and finite.
+                                                                                        2 and thus the MTMF 𝑄 function in Equation 35 converges to a point
+   Here F𝑡 denotes the filtration of an increasing sequence of 𝜎-fields
+                                                                                        whose distance to the Nash Equilibrium is bounded. In Equation 28,
+including the history of processes; 𝛼𝑡 , Δ𝑡 , 𝐹𝑡 ∈ F𝑡 and || · || 𝑤 is a
+                                                                   𝜓𝐶 +𝛼 |𝐾 |           𝛼 (𝑡) refers to the learning rate and hence the first condition of
+weighted maximum norm. The value of this constant 𝑆 = 1𝛼𝛽                     ,         Lemma 2 is automatically satisfied. The second condition is also
+                                                                         0
+where 𝜓 ∈ (0, 1) and 𝐶 1 is the value with which the scale invariant                    true as we are dealing with finite state and action spaces.
+iterative process is bounded. 𝛽 0 is the scale factor applied to the original              Let F𝑡 be the 𝜎-field generated by all random variables in the his-
+process.                                                                                tory time 𝑡 - (𝑠𝑡 , 𝛼𝑡 , 𝑎𝑡 , 𝑟𝑡 −1, . . . , 𝑠 1, 𝛼 1, a1, Q0 ). Thus, Q𝑡 is a random
+   Proof. This lemma follows from Theorem 1 in [8]. We provide                          variable derived from the historical trajectory up to time 𝑡.
+the complete proof of this lemma in the Appendix C, highlighting                           To prove the third condition of Lemma 2, from Equation 34,
+the changes from the Theorem 1 in [8].                                                   𝑭𝑡 (𝑠𝑡 , 𝒂𝑡 ) = r𝑡 + 𝛾 v𝑡𝑀𝑇 𝑀𝐹 − Q∗ (𝑠𝑡 , 𝒂𝑡 )
+                                                               □                         = r𝑡 + 𝛾 v𝑡𝑁 𝑎𝑠ℎ (𝑠𝑡 +1 ) − Q∗ (𝑠𝑡 , 𝒂𝑡 ) + 𝛾 [ v𝑡𝑀𝑇 𝑀𝐹 (𝑠𝑡 +1 ) − v𝑡𝑁 𝑎𝑠ℎ (𝑠𝑡 +1 ) ]
+                                                              𝑗            𝑗             = ( r𝑡 + 𝛾 v𝑡𝑁 𝑎𝑠ℎ (𝑠𝑡 +1 ) − 𝑄 ∗ (𝑠𝑡 , 𝒂𝑡 )) + 𝐶𝑡 (𝑠𝑡 , 𝒂𝑡 ) ≜ 𝑭𝑡𝑁 𝑎𝑠ℎ (𝑠𝑡 , 𝒂𝑡 ) + 𝐶𝑡 (𝑠𝑡 , 𝒂𝑡 ) .
+   Theorem 3.4. When updating 𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯1, . . . , 𝑎¯𝑀 ) according to                                                                           (36)
+Equations 20, 21, 22 and 23, for all agents 𝑗, the multi-agent 𝑄 function
+                                                                                          From Lemma 1, 𝑭𝑡𝑁 𝑎𝑠ℎ forms a contraction mapping with the
+will converge to a bounded distance of the Nash 𝑄 function under the
+                                                                                        norm || · || ∞ being the maximum norm on 𝒂. Thus, from Equation 35
+Assumptions 1, 2 and 3, expressed as,
+                                                                                        we get,
+                        Q∗ (𝑠, 𝒂) − Q𝑡 (𝑠, 𝒂) ≤ 𝐷 − 𝑆.                                         | | E[𝑭𝑡𝑁 𝑎𝑠ℎ (𝑠𝑡 , 𝒂𝑡 ) | F𝑡 ] | | ∞ ≤ 𝛾 | |𝑸 ∗ − 𝑸𝑡 | | ∞ ≤ 𝛾 | |𝐷 − Δ𝑡 | | ∞ .             (37)
+          𝜓𝐶 1 +𝛼𝛾 |𝐷 |
+where 𝑆 =     𝛼 𝛽0      . Here 𝐷 = 12 𝐿𝜖, from Theorem 3.3. The joint                      Now, applying Equation 37 in Equation 36,
+                                                                   𝑗
+Nash 𝑄 function is denoted as 𝑸 ∗ = [𝑄 ∗1, . . . , 𝑄 ∗𝑁 ], where 𝑄 ∗ denotes                | | E[𝐹𝑡 (𝑠𝑡 , 𝒂𝑡 ) | F𝑡 ] | | ∞ = | |𝐹𝑡𝑁 𝑎𝑠ℎ (𝑠𝑡 , 𝒂𝑡 ) | F𝑡 | | ∞ + | |𝑪𝑡 (𝑠𝑡 , 𝒂𝑡 ) | F 𝑡 | | ∞
+the Nash Q-value of the agent 𝑗 (value received by the agent 𝑗 in a                         ≤ 𝛾 | |𝐷 − Δ𝑡 | | ∞ + | |𝑪𝑡 (𝑠𝑡 , 𝒂𝑡 ) | F 𝑡 | | ∞
+Nash equilibrium), and 𝑸𝑡 = [𝑄𝑡1, . . . , 𝑄𝑡𝑁 ].                                            ≤ 𝛾 | |Δ𝑡 | | ∞ + | |𝑪𝑡 (𝑠𝑡 , 𝒂𝑡 ) | F 𝑡 | | ∞ + 𝛾 | |𝐷 | | ∞ ≤ 𝛾 | |Δ𝑡 | | ∞ + 𝛾 |𝐷 | .
+                                                                                                                                                            (38)
+   Proof. The proof of convergence of this theorem is structurally
+                                                                                           Since we are taking the max norm, the last two terms in the right-
+similar to that discussed by the authors in [7] and [17]. We provide
+                                                                                        hand side of Equation 38 are both positive and finite. We can prove
+the proof here, with changes necessitated by the multiple type case.
+                                                                                        that the term ||𝐶𝑡 (𝑠𝑡 , 𝒂𝑡 )|| converges to 0 w.p.1. The proof involves
+   Note that in Assumption 3, Equation 24 corresponds to the global
+                                                                                        the use of Assumption 3 (refer to Theorem 1 in [17]). We use this
+optimum and Equations 25 and 26 correspond to the saddle point.
+                                                                                        fact in the last step of Equation 38. Hence, the third condition of
+These assumptions are the same as those considered in [7]. Also
+                                                                                        Lemma 2 is satisfied. The value of constant 𝐾 = 𝛾 |𝐷 | = 𝛾 | 21 𝐿𝜖 |.
+note that the authors in [7] and [17] mention that Assumption 3 is
+                                                                                           For the fourth condition we use the fact that the MTMF operator
+a strong assumption to impose, which is needed to show the theo-
+                                                                                        H 𝑀𝑇 𝑀𝐹 forms a contraction mapping. Hence, H 𝑀𝑇 𝑀𝐹 Q∗ = Q∗
+retical convergence, but this is not required to impose in practice.
+                                                                                        and it follows that,
+   From [7], we formally define the Nash operator H 𝑁 𝑎𝑠ℎ as,
+                                                                                               var [𝑭𝑡 (𝑠𝑡 , 𝒂𝑡 ) | F𝑡 ] = 𝐸 [ (𝑟𝑡 + 𝛾 v𝑡𝑀𝑇 𝑀𝐹 (𝑠𝑡 +1 ) − 𝑸 ∗ (𝑠𝑡 , 𝒂𝑡 )) 2 ]
+                H 𝑁 𝑎𝑠ℎ 𝑸 (𝑠, 𝒂) ≜ E𝑠 ′ ∼𝑝 [𝒓 (𝑠, 𝒂) + 𝛾 v𝑁 𝑎𝑠ℎ (𝑠 ′ ) ] .       (33)          = 𝐸 [ (𝒓𝑡 + 𝛾 v𝑡𝑀𝑇 𝑀𝐹 (𝑠𝑡 +1 ) − H 𝑀𝑇 𝑀𝐹 (𝑸 ∗ )) 2 ]                                          (39)
+where 𝑸 ≜ [𝑄 1, . . . , 𝑄 𝑁 ] and 𝒓 (𝑠, 𝒂) ≜ [𝑟 1 (𝑠, 𝒂), . . . , 𝑟 𝑁 (𝑠, 𝒂)].                 = var [𝒓𝑡 + 𝛾 v𝑡𝑀𝑇 𝑀𝐹 (𝑠𝑡 +1 ) | F𝑡 ] ≤ 𝐾2 (1 + | |Δ𝑡 | |𝑊
+                                                                                                                                                        2
+                                                                                                                                                          ).
+The Nash value function is v𝑁 𝑎𝑠ℎ (𝑠) ≜ [𝑣 𝝅1 ∗ (𝑠), . . . , 𝑣 𝝅𝑁∗ (𝑠)]. Here              In the last step, the left side of the equation contains the reward
+the joint Nash policy is represented as 𝝅∗ . The Nash value function                    and the value function as the variables. The reward is bounded
+is calculated with the assumption that all agents are following 𝝅∗                      by Assumption 1 and the value function is also bounded by being
+from the initial state 𝑠.                                                               updated recursively by Equation 21 (MTMF is a contraction opera-
+   We need to apply Lemma 2 to prove Theorem 3.4. By subtracting                        tor). So we can choose a positive, finite 𝐾2 such that the inequality
+𝑄 ∗ (𝑠, 𝒂) on both sides of Equation 20 and in relation to Equation 28,                 holds.
+                    Δ𝑡 (𝑥) = Q𝑡 (𝑠, 𝑎 𝑗 , 𝑎 1 , . . . , 𝑎𝑀 ) − Q∗ (𝑠, 𝒂)
+                                            𝑗         𝑗
+                                                                                           Finally, with all conditions met, it follows from Lemma 2 that
+                                                                                 (34)
+                    F𝑡 (𝑥) = r𝑡 + 𝛾 v𝑡𝑀𝑇 𝑀𝐹 (𝑠𝑡 +1 ) − Q∗ (𝑠𝑡 , 𝒂𝑡 )                    Δ𝑡 converges to constant 𝑆 w.p.1. The value of this constant is
+        𝜓𝐶 +𝛼𝛾 |𝐷 |
+𝑆 =    1
+        𝛼 𝛽0   from Lemma 2 and using the value of 𝐾 derived                                                   Algorithm 1 Multi Type Mean Field Q-learning for known types
+above. Therefore, from Equation 35 we get,                                                                         1: Initialize the number of types 𝑀 and total number of agents 𝑁 .
+
+                                                                     1
+                           Q∗ (𝑠, 𝒂) − Q𝑡 (𝑠, 𝒂) ≤ 𝐷 − 𝑆 ≤             𝐿𝜖 − 𝑆 .                         (40)       2: Initialize the 𝑄 functions (parameterized by weights) 𝑄 𝜙 𝑗 , 𝑄 𝜙 𝑗 ,
+                                                                     2                                                                                                                     _
+                                                                                                                   for all agents 𝑗.
+   Hence, the multi-agent 𝑄 function converges to a point within a                                                                                                      𝑗 𝑗        𝑗
+                                                                                                                3: Initialize the mean action for each type 𝑎 1 , 𝑎 2 , . . . , 𝑎 , for each
+bounded distance from the Nash equilibrium of the stochastic game.                                                                                                                 𝑀
+                                                                                                                   agent 𝑗 ∈ 1, . . . , 𝑁 .
+The distance is a function of the error in the type classification and                                          4: Initialize the total number of steps (T) and total number of
+the closeness of resemblance of each agent to its type.              □                                             episodes (E).
+                                                                                                                5: while Episode < E do
+4       IMPLEMENTATION                                                                                          6:    while Step < T do
+We propose two algorithms based on Q-learning to estimate the                                                   7:       For each agent 𝑗 choose action 𝑎 𝑗 from 𝑄𝜙 𝑗 according
+Multi Type Mean Field 𝑄 function for known and unknown types.                                                            to Eq. 23 with the current mean action for each type
+                                                                                                                           𝑗           𝑗
+The algorithms, denoted as MTMFQ (Multi Type Mean Field Q-                                                               𝑎 1, . . . , 𝑎𝑀 and the exploration rate 𝛽.
+learning), train an agent 𝑗 to minimize the loss function L (𝜙 𝑗 ) =                                            8:       For each agent j, compute the new mean action for each
+(𝑦 𝑗 − 𝑄𝜙 𝑗 (𝑠, 𝑎 𝑗 , 𝑎 1, . . . , 𝑎𝑀 )) 2 . Here 𝑦 𝑗 = 𝑟 𝑗 + 𝛾𝑣𝜙MTMF (𝑠 ′ ) (from
+                        𝑗           𝑗                                                                                               𝑗        𝑗
+                                                                  𝑗                                                      type 𝑎 1, . . . , 𝑎𝑀 according to Eq. 22.
+                                                                                    _
+Eq. 20) is the target value used to calculate the temporal difference                                           9:       Execute the joint action a = [𝑎 1, . . . , 𝑎 𝑁 ]. Observe the
+(T.D.) error using the weights 𝜙 _𝑗 . Now, the gradient is obtained as,                                                  rewards r = [𝑟 1, . . . , 𝑟 𝑁 ] and the next state 𝑠 ′ .
+                                                                                                               10:       Store ⟨𝑠, a, r, 𝑠 ′, a1, . . . , a𝑀 ⟩ in replay buffer 𝐷, where a𝑖 is
+                                          𝑗         𝑗                                     𝑗         𝑗
+    ∇𝜙 𝑗 L (𝜙 𝑗 ) = 2(𝑄𝜙 𝑗 (𝑠, 𝑎 𝑗 , 𝑎 1 , . . . , 𝑎𝑀 ) − 𝑦 𝑗 ) × ∇𝜙 𝑗 𝑄𝜙 𝑗 (𝑠, 𝑎 𝑗 , 𝑎 1 , . . . , 𝑎𝑀 ).                the mean action for type 𝑖 in the neighbourhood. The a
+                                                                  (41)                                                   captures all the 𝑁 agents.
+   Algorithm 1 describes the Multi Type Mean Field Q-learning                                                  11:    end while
+(MTMFQ) algorithm when agent types are known. In this algorithm,                                               12:    while 𝑗 = 1 to 𝑁 do
+different groups of agents in the environment are considered as                                                13:       Sample           a         minibatch       of     𝐾     experiences
+types. An agent models its relation to each type separately and                                                          ⟨𝑠, a, r, 𝑠 ′, a1, . . . , a𝑀 ⟩ from 𝐷.
+                                                                                                                                                                      𝑗      𝑗
+ultimately chooses the action that provides maximum benefit in the                                             14:       Sample action 𝑎 _𝑗 from 𝑄𝜙 _𝑗 with 𝑎𝑖_ ← 𝑎𝑖 for each type 𝑖.
+face of competition against the different types. This is referred to
+as version 1 of MTMFQ. This algorithm deals with multiple types                                                15:         Set 𝑦 𝑗 = 𝑟 𝑗 + 𝛾𝑣𝜙𝑀𝑇 𝑀𝐹 (𝑠 ′ ) according to Eq. 20.
+                                                                                                                                               𝑗
+                                                                                                                                              _
+in contrast to MFQ described in the paper by Yang et al. [17]. In
+                                                                                                               16:     Update the Q network by minimizing the loss 𝐿(𝜙 𝑗 ) =
+Line 8, each agent is chosen, and its neighbours are considered. The                                                    1 Í (𝑦 𝑗 − 𝑄 (𝑠 𝑗 , 𝑎 𝑗 , 𝑎 𝑗 , . . . , 𝑎 𝑗 )) 2 .
+neighbours are classified into different types and in each type a new                                                   𝐾           𝜙𝑗             1             𝑀
+mean action is calculated (Line 9). In Lines 14 – 19, the Q networks                                           17:   end while
+are updated as done in common practice [13] for all the agents in                                              18:   Update the parameters of the target network for each agent
+the environment. At Line 12, the current actions are added to a                                                      𝑗 with learning rate 𝜏; 𝜙 _𝑗 ← 𝜏𝜙 𝑗 + (1 − 𝜏)𝜙 _𝑗 .
+                                                                                                               19: end while
+buffer containing previous mean actions.
+   Version 2 of MTMFQ (see Algorithm 2) deals with the second
+type of scenario, where the type of each agent is unknown. An
+additional step doing K-means clustering is introduced to determine                                            5      EXPERIMENTS AND RESULTS
+the types. Once we recognize the type of each agent, the algorithm                                             We report results with three games designed within the MAgents
+is very similar to Algorithm 1. The clustering does not necessarily                                            framework: the Multi Team Battle, Battle-Gathering and the Preda-
+recognize the types correctly and the overall process is not as                                                tor Prey domains. In the first two games, Multi Team Battle and
+efficient as the known type case. But we will show that this way                                               the Battle-Gathering game, the conditions are such that the differ-
+of approximate type determination is still better than using only a                                            ent groups (or teams) are fully known upfront. In the third game,
+single mean field for all the agents. For the implementation we use                                            the conditions are such that the types of the agents are initially
+neural networks, but it can be done without neural networks too.                                               unknown. Hence, the agents must also learn the identity of the
+We only need a way to recursively update Equations 21, 22 and 23.                                              opponent agents during game play. Multi Team Battle and Gather-
+   Note that the total number of types in the environment is un-                                               ing are two separately existing MAgent games, which have been
+known, and the agent does not need to guess the correct num-                                                   combined to obtain the Battle-Gathering game used in this paper.
+ber of types. Generally, when more types are used, the approxi-                                                Predator Prey domain is also obtained from combining Multi Team
+mate multi-agent 𝑄 function will be closer to the exact Nash 𝑄                                                 Battle with another existing MAgent game (Pursuit). In preparation
+function as shown by the bounds in Theorems 3.1, 3.2, 3.3 and                                                  for each game, agents train for 2000 episodes of game play against
+3.4. There is no risk of overfitting when using more types. In                                                 different groups training using the same algorithm, which is re-
+the limit, when there is one type per agent, we recover the ex-                                                ferred to as the first stage. Next, in the second stage, they enter into
+act multi-agent 𝑄 function. The only drawback is an increase                                                   a faceoff against other agents trained by other algorithms where
+in computational complexity. The code repository will appear at                                                they fight each other for 1000 games. We report the results for both
+https://github.com/BorealisAI/mtmfrl.                                                                          stages. We repeat all experiments 50 times and report the averages.
+Algorithm 2 Multi Type Mean Field Q-learning for unknown types
+ 1: Initialize the number of types 𝑀 and total number of agents 𝑁 .
+
+
+ 2: Initialize the 𝑄 functions (parameterized by weights) 𝑄 𝜙 𝑗 , 𝑄 𝜙 𝑗 ,
+                                                                            _
+    for all agents 𝑗.
+                                                         𝑗 𝑗        𝑗
+ 3: Initialize the mean action for each type 𝑎 1 , 𝑎 2 , . . . , 𝑎 , for each
+                                                                    𝑀
+    agent 𝑗 ∈ 1, . . . , 𝑁 .
+ 4: Initialize the total number of steps (T) and total number of
+    episodes (E).                                                                  (a) Game Domain Multi Team Battle      (b) Multi Team Battle Training
+ 5: Initialize every agent to a type at random. Initialize an array 𝐴
+    containing the previous action of all agents.
+ 6: Maintain a buffer 𝐵 for storing the last 𝐶 actions of all agents.
+    𝐶 is determined by the conditions of the environment. Initialize
+    all values to 0.
+ 7: while Episode < E do
+ 8:    while steps < T do
+ 9:       For each agent 𝑗 choose action 𝑎 𝑗 from 𝑄𝜙 𝑗 according
+          to Eq. 23 with the current mean action for each type
+            𝑗           𝑗                                                            (c) Win rate for each algorithm   (d) Total rewards taken as an average
+          𝑎 1, . . . , 𝑎𝑀 and the exploration rate 𝛽.
+                                                                                                                       per episode
+10:       For each agent j, compute the new mean action for each
+                     𝑗        𝑗
+          type 𝑎 1, . . . , 𝑎𝑀 according to Eq. 22.
+                                                                                           Figure 1: Multi Team Battle Game Results.
+11:       Execute the joint action a = [𝑎 1, . . . , 𝑎 𝑁 ]. Observe the
+          rewards r = [𝑟 1, . . . , 𝑟 𝑁 ] and the next state 𝑠 ′ .
+12:       Store ⟨𝑠, a, r, 𝑠 ′, a1, . . . , a𝑀 ⟩ in replay buffer 𝐷, where a𝑖 is
+          the mean action for type 𝑖 in the neighbourhood. The a
+          captures all the 𝑁 agents.
+13:       Store each action [𝑎 1, . . . , 𝑎 𝑁 ] in the array 𝐴. Update the
+          Buffer 𝐵 with the last action taken by all agents.
+14:       Perform a K-means clustering on 𝐵 with the number of
+          clusters equal to the number of types 𝑀.
+15:       Reassign the agents to different types based on the cluster
+          in K-means.
+                                                                                    (a) Game Domain Battle-Gathering       (b) Battle-Gathering training
+16:    end while
+17:    while 𝑗 = 1 to 𝑁 do
+18:       Sample           a         minibatch       of     𝐾     experiences
+          ⟨𝑠, a, r, 𝑠 ′, a1, . . . , a𝑀 ⟩ from 𝐷.
+                                                       𝑗      𝑗
+19:       Sample action 𝑎 _𝑗 from 𝑄𝜙 _𝑗 with 𝑎𝑖_ ← 𝑎𝑖 for each type 𝑖.
+
+20:       Set 𝑦 𝑗 = 𝑟 𝑗 + 𝛾𝑣𝜙𝑀𝑇 𝑀𝐹 (𝑠 ′ ) according to Eq. 20.
+                              𝑗
+                              _
+21:     Update the Q network by minimizing the loss 𝐿(𝜙 𝑗 ) =
+         1 Í (𝑦 𝑗 − 𝑄 (𝑠 𝑗 , 𝑎 𝑗 , 𝑎 𝑗 , . . . , 𝑎 𝑗 )) 2 .
+         𝐾           𝜙𝑗             1             𝑀
+22:   end while                                                                      (c) Win rate for each algorithm   (d) Total Rewards taken as an average
+                                                                                                                       per episode.
+23:   Update the parameters of the target network for each agent
+      𝑗 with learning rate 𝜏; 𝜙 _𝑗 ← 𝜏𝜙 𝑗 + (1 − 𝜏)𝜙 _𝑗 .
+                                                                                            Figure 2: Battle-Gathering Game Results.
+24: end while
+
+
+                                                                                  three additional teams with slightly different rewards in order to
+As can be seen from the nature of the experiments, variances can                  induce different strategies. This is similar to self play. Each team
+be quite large across individual experimental runs.                               receives a reward equal to the sum of the local rewards attributed
+   In the first game (Multi Team Battle, see Figure 1(a)), there are              to each agent in the team. The reward function is defined in such a
+four teams (different colours in Figure 1(a)) fighting against each               way that it encourages local cooperation in killing opponents and
+other to win a battle. Here, agents belonging to one team are com-                discourages getting attacked and dying in the game. The reward
+peting against agents from other teams and cooperating with agents                function for different agent groups are also subtly different (refer
+of the same team. During the first stage, a team does not know how                to Appendix B for the details). Let us call each of these groups:
+the other teams will play during the faceoff — so it clones itself to             Group A, Group B, Group C, and Group D. We maintain a notion
+                                                                              MFAC algorithm is the worst overall. This is consistent with the
+                                                                              observation by Yang et al. [17], where the authors give particular
+                                                                              reasons for this bad performance, including the greedy in the limit
+                                                                              with infinite exploration (GLIE) assumption and a positive bias of
+                                                                              Q-learning algorithms. This algorithm is not able to earn an overall
+                                                                              positive reward upon the complete training. Figure 1(c) shows
+                                                                              the win rate of the teams trained by each algorithm (MTMFQ,
+                                                                              MFQ, MFAC, and IL) in a direct faceoff of 1000 episodes. In the
+                                                                              face off, each group is trained by a different algorithm and with a
+   (a) Game Domain Predator Prey           (b) Predator Prey Training
+                                                                              different reward function that induces different strategies. The only
+                                                                              algorithm that handles different strategies among the opponent
+                                                                              teams is MTMFQ, and therefore it dominates the other algorithms
+                                                                              with a win rate of 60%. Figure 1(d) reinforces this domination.
+                                                                                  The second domain is the Battle-Gathering game (Figure 2(a)). In
+                                                                              this game, all the agent groups compete for food resources that are
+                                                                              limited (red denotes food particles and other colours are competing
+                                                                              agents) in addition to killing its opponents as in the Multi Team
+                                                                              Battle game. Hence, this game is harder than the first one. All the
+                                                                              training and competition are similar to the first game.
+    (c) Win rate for each algorithm   (d) Total rewards taken as an average
+                                      per episode                                 Figure 2(b) reports the results of training in the Battle-Gathering
+                                                                              game. Like the Multi Team Battle game, we plot the rewards ob-
+             Figure 3: Predator Prey Game Results.                            tained by Group A while fighting other groups for each algorithm.
+                                                                              Again, MTMFQ shows the strongest performance in comparison
+                                                                              to the other three algorithms. The MFQ technique performs bet-
+of favourable opponents and each group gets slightly higher re-               ter than both MFAC and IL. In this game, MTMFQ converges in
+wards for killing the favourable opponents than the others. Four              around 1500 episodes, while the other algorithms take around 1800
+algorithms, namely MFQ [17], MFAC [17], Independent Q Learning                episodes to converge. The win rates shown in Figure 2(c) and the
+(IL) [16], and MTMFQ are trained separately where each of these               total rewards reported in Figure 2(d) also show the dominance of
+groups trains its own separate network using the same algorithm               MTMFQ.
+(all agents within a group train the same network). We start all the              The third domain is the multiagent Predator Prey (Figure 3(a)).
+battles with 72 agents of each group for training and testing. Group          Here we have two distinct types of agents — predator and prey, each
+A from MTMFQ, Group B from IL, Group C from MFQ, and Group                    having completely different characteristics. The prey are faster than
+D from MFAC enter the faceoff stage where they fight each other               the predators and their ultimate goal is to escape the predators. The
+for 1000 games. Each game (or episode) has a maximum of 5000                  predators are slower than the prey, but they have higher attacking
+steps and a game is considered to be won by the group/groups that             abilities than the prey. So the predators try to attack more and kill
+have the most number of agents alive at the end of the game.                  more prey. We model this game as an unknown type scenario where
+    The results of the first training stage are reported in Figure 1(a).      the types of the other agents in the competition are not known
+We report the cumulative rewards from all agents in Group A for               before hand (refer to Appendix B for more details). The MTMFQ
+each algorithm. These rewards are for Group A against the other               algorithm plays the version with unknown types (Algorithm 2).
+3 groups. Since the different groups are just clones of each other            Here we have four groups with the first two groups (Groups A and
+the reward curves for other groups are similar to that of Group A.            B) being predators and the other two groups (Groups C and D) being
+In the training stage, the teams trained by different algorithms did          prey. Each algorithm will train two kinds of predator agents and
+not play against each other, but simply against the cloned teams              two kinds of prey agents. All these agents are used in the playoff
+trained by the same algorithm. At the beginning of training, for              stage. In the playoff stage we have 800 games where we change the
+about 100 episodes the agents are still exploring, and their strategies       algorithm of predator and prey at every 200 games to maintain a
+are not well differentiated yet. As a result, MTMFQ’s performance             fair competition. For the first 200 games, MTMFQ plays Group A,
+is still comparable to the performance of other algorithms. At this           MFQ plays Group B, IL plays Group C, and MFAC plays Group D.
+stage, the assumption of a single type is fine. As training progresses,       In the next 200 games, MFAC plays Group A, MTMFQ plays Group
+each group begins to identify the favourable opponents and tries to           B, MFQ plays Group C and IL plays Group D, and so on. We start
+make a targeted approach in the battle. When such differences exist           all training and testing episodes with 90 prey and 45 predators for
+across a wide range of agents, the MTMFQ algorithm shows a better             each group. Winning a game in the playoff stage is defined in the
+performance than the other techniques as it explicitly considers the          same way as the previous two games. Notice that this makes it more
+presence of different types in the game. Overall, we observe that             fair, as predators have to kill a lot more prey to win the game (as
+MTMFQ has a faster convergence than all other algorithms, and it              we start with more prey than predators) and prey have to survive
+also produces higher rewards at the end of the complete training.             longer. In this setup, the highly different types of agents make type
+This shows that MTMFQ identifies favourable opponents early, but              identification easier for MTMFQ (as the types are initially unknown).
+the other algorithms struggle longer to learn this condition. The
+The prey execute more move actions while the predators execute                                   and Multi-Agent Systems 33, 6 (01 Nov 2019), 750–797. https://doi.org/10.1007/
+more attack actions. This can be well differentiated by clustering.                              s10458-019-09421-1
+                                                                                             [7] Junling Hu and Michael P Wellman. 2003. Nash Q-learning for general-sum
+   The results of the first training stage are reported in Figure 3(b).                          stochastic games. Journal of machine learning research 4, Nov (2003), 1039–1069.
+MTMFQ has comparable or even weaker performance than other                                   [8] Tommi Jaakkola, Michael I. Jordan, and Satinder P. Singh. 1994. On the Con-
+                                                                                                 vergence of Stochastic Iterative Dynamic Programming Algorithms. Neural
+algorithms in the first 600 episodes of the training and the rea-                                Computation 6, 6 (1994), 1185–1201. https://doi.org/10.1162/neco.1994.6.6.1185
+soning is similar to the reasoning in the Multi Team Battle game                             [9] James S Jordan. 1991. Bayesian learning in normal form games. Games and
+(the agent strategies are not sufficiently differentiated for multiple                           Economic Behavior 3, 1 (1991), 60–81.
+                                                                                            [10] Jean-Michel Lasry and Pierre-Louis Lions. 2007. Mean field games. Japanese
+types to be useful). Notice that for this game, MTMFQ takes many                                 journal of mathematics 2, 1 (2007), 229–260.
+more episodes than the earlier two games to start dominating. This                          [11] Eric Maskin. 1999. Nash equilibrium and welfare optimality. The Review of
+is because of the inherent hardness of this domain compared to                                   Economic Studies 66, 1 (1999), 23–38.
+                                                                                            [12] David Mguni, Joel Jennings, and Enrique Munoz de Cote. 2018. Decentralised
+the other domains (very different and unknown types). Similar to                                 learning in systems with many, many strategic agents. In Thirty-Second AAAI
+observations in the other domains, MTMFQ converges earlier (after                                Conference on Artificial Intelligence.
+                                                                                            [13] Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A Rusu, Joel Veness,
+around 1300 episodes as opposed to 1700 for the other algorithms).                               Marc G Bellemare, Alex Graves, Martin Riedmiller, Andreas K Fidjeland, Georg
+This shows its robustness to the different kinds of opponents in the                             Ostrovski, et al. 2015. Human-level control through deep reinforcement learning.
+environment. MTMFQ also gains higher cumulative rewards than                                     Nature 518, 7540 (2015), 529.
+                                                                                            [14] Thanh Thi Nguyen, Ngoc Duy Nguyen, and Saeid Nahavandi. 2018. Deep rein-
+the other algorithms. Win rates in Figure 3(c) show that MTMFQ                                   forcement learning for multi-agent systems: a review of challenges, solutions
+still wins more games than the other algorithms, but the overall                                 and applications. arXiv preprint arXiv:1812.11794 (2018).
+percentage of games won is less than the other domains. Thus, irre-                         [15] Richard S Sutton and Andrew G Barto. 1998. Introduction to reinforcement learning.
+                                                                                                 Vol. 135. MIT press Cambridge.
+spective of the difficulty of the challenge we can see that MTMFQ                           [16] Ming Tan. 1993. Multi-agent reinforcement learning: Independent vs. cooperative
+has an upper hand. The lead of MTMFQ is also observed in Fig-                                    agents. In Proceedings of the tenth international conference on machine learning.
+                                                                                                 330–337.
+ure 3(d).                                                                                   [17] Yaodong Yang, Rui Luo, Minne Li, Ming Zhou, Weinan Zhang, and Jun Wang.
+                                                                                                 2018. Mean Field Multi-Agent Reinforcement Learning. In Proceedings of the 35th
+                                                                                                 International Conference on Machine Learning (Proceedings of Machine Learning
+6    CONCLUSION                                                                                  Research), Jennifer Dy and Andreas Krause (Eds.), Vol. 80. PMLR, Stockholm,
+                                                                                                 Stockholm Sweden, 5571–5580. http://proceedings.mlr.press/v80/yang18d.html
+In this paper, we extended the notion of mean field theory to mul-                          [18] Lianmin Zheng, Jiacheng Yang, Han Cai, Ming Zhou, Weinan Zhang, Jun Wang,
+tiple types in MARL. We demonstrate that reducing many agent                                     and Yong Yu. 2018. Magent: A many-agent reinforcement learning platform for
+interactions to simple two agent interactions does not give very                                 artificial collective intelligence. In Thirty-Second AAAI Conference on Artificial
+                                                                                                 Intelligence.
+accurate solutions in environments where there are clearly different
+teams/types playing different strategies. We perform suitable ex-
+periments using MAgents and demonstrate superior performances
+using a type based approach. We hope that this paper will provide a
+different dimension to the mean field theory based MARL research.
+   One limitation of our approach is that it is computationally
+more expensive than the mean field reinforcement learning method
+without types. If we really have only one type in the environment,
+then our method would add more compute time and not necessarily
+produce a better result. As future work we would like to extend this
+work for completely heterogeneous agents with different action
+spaces as well. StarCraft is one example of such a domain. Our work
+would be well suited for this scenario as clustering would be even
+easier. Another approach would be to consider sub types, further
+dividing types.
+
+REFERENCES
+ [1] K. Arulkumaran, M. P. Deisenroth, M. Brundage, and A. A. Bharath. 2017. Deep
+     Reinforcement Learning: A Brief Survey. IEEE Signal Processing Magazine 34, 6
+     (Nov 2017), 26–38. https://doi.org/10.1109/MSP.2017.2743240
+ [2] Daan Bloembergen, Karl Tuyls, Daniel Hennes, and Michael Kaisers. 2015. Evo-
+     lutionary dynamics of multi-agent learning: A survey. Journal of Artificial Intelli-
+     gence Research 53 (2015), 659–697.
+ [3] Michael Bowling and Manuela Veloso. 2000. An analysis of stochastic game theory
+     for multiagent reinforcement learning. Technical Report. Carnegie-Mellon Univ
+     Pittsburgh Pa School of Computer Science.
+ [4] Lucian Bu, Robert Babu, Bart De Schutter, et al. 2008. A comprehensive survey
+     of multiagent reinforcement learning. IEEE Transactions on Systems, Man, and
+     Cybernetics, Part C (Applications and Reviews) 38, 2 (2008), 156–172.
+ [5] Lucian Busoniu, Robert Babuska, and Bart De Schutter. 2010. Multi-agent Re-
+     inforcement Learning: An Overview. Vol. 310. Delft University of Technology,
+     183–221. https://doi.org/10.1007/978-3-642-14435-6_7
+ [6] Pablo Hernandez-Leal, Bilal Kartal, and Matthew E. Taylor. 2019. A survey
+     and critique of multiagent deep reinforcement learning. Autonomous Agents
+APPENDIX A: ILLUSTRATIVE EXAMPLE
+This section provides an example of a simulated scenario where the
+Multi Type Mean Field algorithm is more useful than the simple
+mean field algorithm.
+   Consider a game in which the central agent has to decide the
+direction of spin. The domain is stateless. The spin direction is
+influenced by the direction of spin of its A,B,C and D neighbours
+(four neighbours in total). Here we denote A as the neighbour to
+the left of the agent, B as the neighbour to the top of the agent, C as
+                                                                                               (a) Grid A                           (b) Grid B
+the neighbour to the right of the agent, and D as the neighbour to
+the bottom of the agent. The neighbour agents spin in one direction
+                                                                          Figure 4: A counter example to show the failure of MFQ and
+at random. If the agent spins in the same direction as both of its C
+                                                                          success of MTMFQ.
+and D neighbours, the agent gets a reward of -2 regardless of what
+the A and B are doing. If the spin is in the same direction as both
+of its A and B neighbours, the agent gets a +2 reward unless the
+                                                                                       𝑗
+direction is not the same as the one used by both of its C and D                   𝑄 3 (↓, 𝑎 𝑗 = 2) = −0.38 + 0.1(2 + 0.38) = −0.142
+neighbours. All other scenarios result in a reward of 0. So the agent        Here again the agent will choose to make the spin up (wrong
+in Grid A in Figure 4 will get a -2 for the spin down (since the C        action).
+and D neighbours are spinning down) and a +2 for a spin up (since            Now coming to MTMFQ updates, for the first stage,
+the A and B neighbours are spinning up). In Grid B of Figure 4 the
+agent will get a -2 for spin up and a +2 for spin down. It is clear                        𝑗        𝑗               𝑗
+                                                                                       𝑄 1 (↑, 𝑎 1 = 2, 𝑎 2 = 0) = 0 + 0.1(2 − 0) = 0.2
+that the best action in Grid A is to spin up and the best action in
+Grid B is to spin down.                                                                𝑗        𝑗               𝑗
+                                                                                    𝑄 1 (↓, 𝑎 1 = 2, 𝑎 2 = 0) = 0 + 0.1(−2 − 0) = −0.2
+   Here we have a notion of multi stage game with many individual
+stages. In each stage of a multi stage game, one or more players             Here the agent will spin up (correct action).
+take one action each, simultaneously and obtain rewards.                     For the second stage,
+   Consider a sequence of stage games in which the agent gets Grid                                          𝑗           𝑗       𝑗
+A for every 2 consecutive stages and then the Grid B for the third                                  𝑄 2 (↑, 𝑎 1 = 2, 𝑎 2 = 0) = 0.38
+stage. The goal of the agent is to take the best possible action at
+                                                                                                        𝑗           𝑗       𝑗
+all stages. Let us assume that the agent continues to learn at all                            𝑄 2 (↓, 𝑎 1 = 2, 𝑎 2 = 0) = −0.38
+stages, and it starts with Q values of 0. We apply MFQ (Equation 2)          Again the agent will spin up (correct action).
+and MTMFQ (Equation 20) and show why MFQ fails, but MTMFQ                    For the third stage,
+succeeds in this situation. We are going to calculate the Q values
+                                                                                                        𝑗           𝑗       𝑗
+for the 3 stages using both the MFQ (from [17]) and the MTMFQ                                       𝑄 3 (↑, 𝑎 1 = 0, 𝑎 2 = 2) = −0.2
+update rules. We approximate the average action using the number
+of times the neighbourhood agents spin up. In the MTMFQ we use                                              𝑗           𝑗
+                                                                                               𝑄 3 (↓, 𝑎 1 = 0, 𝑎 2 = 2) = 0.2
+                                                                                                                                𝑗
+the A, B neighbours as the type 1 and the C, D neighbours as the
+                                                                             Now it can be seen that the agent will spin down in this case
+type 2.
+                                                                          (correct action).
+   Applying MFQ:
+                                                                             Thus, the MFQ agent will make one wrong move out of 3 moves
+   In the first stage,
+                                                                          whereas the MTMFQ agent will make the right move all the time.
+                       𝑗                                                  In situations like these, where the relationship of the agent with
+                  𝑄 1 (↑, 𝑎 𝑗 = 2) = 0 + 0.1(2 − 0) = 0.2
+                                                                          different neighbour agents is different, the MFQ algorithm would
+                                                                          fail. The differences would be captured by MTMFQ which would
+                   𝑗
+                 𝑄 1 (↓, 𝑎 𝑗 = 2) = 0 + 0.1(−2 − 0) = −0.2                take more efficient actions. This shows an example where MTMFQ
+   Thus, the agent will choose to spin up in the first stage (correct     outperforms MFQ.
+action).
+   For the second stage,                                                  APPENDIX B: EXPERIMENTAL DETAILS
+                                 𝑗                                        This section gives more details about the experimental conditions,
+                           𝑄 2 (↑, 𝑎 𝑗 = 2) = 0.38
+                                                                           especially the reward function.
+                                                                              For the Multi Team Battle domain, the agents in all of these
+                             𝑗
+                           𝑄 2 (↓, 𝑎 𝑗 = 2) = −0.38                        groups get a reward of -0.01 for each move action, and a reward of
+                                                                          -1 for dying. Attacking an empty grid has a reward of -0.1. Each of
+   Again the agent will choose to spin up in the second stage (cor-
+                                                                           these members has a power of 10 and a damage of 2. When an agent
+rect action).
+                                                                           loses all its powers, it dies. The power is like health that the agents
+   For the third stage,
+                                                                           maintain which gets depleted on being attacked. The agents can also
+             𝑗
+           𝑄 3 (↑, 𝑎 𝑗 = 2) = 0.38 + 0.1(−2 − 0.38) = 0.142                recover (regain health points) from the attack using a step recovery
+rate. This is set to be 0.1. The positive rewards for attacking another                         if 𝑝 = 1 :
+agent is cyclic in nature with each group preferring to attack and
+kill a particular opponent group more than others. Group A has a                               𝑦𝑛 = 𝑑𝑛 + 𝑎;
+positive reward of 0.2, 0.3, and 0.4 for attacking an agent of group                                                                       (43)
+B, C and D respectively, and it gets a reward of 80, 90, and 100 for                            if 𝑝 ≠ 1 :
+killing a member of group B, C, and D respectively. Here we will
+                                                                                                     𝑑 + (𝑎 − 𝑑 )𝑝 𝑛 ,
+                                                                                               𝑦𝑛 = 1−𝑝
+call Group D as the favourable opponent of Group A as A gets more                                            1−𝑝
+returns for fighting or killing D. The group B has a positive reward
+of 0.2, 0.3, and 0.4 for attacking a member of group C, D, and A          where 𝑦0 = 𝑎.
+respectively and a positive reward of 80, 90, and 100 for killing a
+member of Group C, D, and A respectively. Thus, Group A is the              Proof. Consider the expression,
+favourable opponent of Group B. Group C has a reward of 0.2, 0.3,
+and 0.4 for attacking Groups D, A, and B respectively. It gets a kill                               𝑦𝑛+1 − 𝑝𝑦𝑛 = 𝑑.                        (44)
+reward of 80, 90, and 100 for killing agents of Group D, A and B
+respectively. For Group D the order is Group A, B and C with a
+attack reward of 0.2, 0.3, and 0.4 and kill reward of 80, 90, and 100.       Z transforms will be applied to solve this expression. Z transform
+   For the Battle-Gathering game, the reward function is similar          is a generalized version of Discrete Time Fourier Transform that
+with an addition of each agent getting a +80 for collecting a food        transforms the variables into a new subspace where solving the
+resource. The food resources are stationary objects, but each food        equation is easier. Once we obtain a solution, we can apply inverse
+resource has a power similar to agents. This power has to be reduced      Z transforms to get the solution in terms of the original variables.
+by damage before the food can be captured. Capturing a food will                                                      𝑑𝑧
+constitute making repeated efforts to gain the food resource by                               𝑧𝑌 (𝑧) − 𝑧𝑦0 − 𝑝𝑌 (𝑧) = 𝑧−1
+attacking the grid containing food. The agents would get a +0.5 for                                          𝑑𝑧 + 𝑧𝑎
+making such an attack.                                                                        (𝑧 − 𝑝)𝑌 (𝑧) = 𝑧−1                           (45)
+   For the Predator Prey domain, the predators have a power of 10
+and a speed of 2 with an attack range of 2 (they can attack within a                          𝑌 (𝑧) = (𝑧−1)𝑑𝑧(𝑧−𝑝) + 𝑧−𝑝
+                                                                                                                      𝑎𝑧 .
+
+distance of 2 units) and they get a dead penalty of -0.1 and an attack
+penalty of -0.2. The step recovery rate is 0.1. The prey have a faster      Considering 𝑝 ≠ 1 we can rewrite the Equation 45 as
+speed of 2.5 and an attack range of 0. All agents get a reward of +5
+for killing agents belonging to other groups. Additionally, Group                     𝑌 (𝑧) = 𝑑𝑧 [ (1−𝑝)1(𝑧−1) − (1−𝑝)1(𝑧−𝑝) ] + 𝑧−𝑝
+                                                                                                                                  𝑎𝑧
+A gets a reward of +0.5 for attacking a member of Group B (since
+Group B is also a predator, Group A does not prefer to attack that),                           𝑑
+                                                                                      𝑌 (𝑧) = 1−𝑝   1 − 𝑑      1         𝑎
+                                                                                                  1−𝑧 −1 1−𝑝 1−𝑝𝑧 −1 + 1−𝑝𝑧 −1             (46)
++1 for attacking a member of Group C, +3 for attacking a member
+of Group D (though both Groups C and D are prey, A prefers D to                                𝑑    1 + (𝑎 − 𝑑 )( 1
+C). Group B gets 0.5 for attacking A, but gets +1 for attacking D                     𝑌 (𝑧) = 1−𝑝 1−𝑧 −1    1−𝑝 1−𝑝𝑧 −1 ).
+and +3 for attacking C. Group B prefers Group C to Group D. Every
+attack action entails a punishment for the (attack) receiver which          Now taking the inverse Z transform
+is equal in value to the reward for the attacker.
+                                                                                                     𝑑 + (𝑎 − 𝑑 )𝑝 𝑛 ].
+                                                                                             𝑦𝑛 = [ 1−𝑝      (1−𝑝)                         (47)
+
+APPENDIX C: PROOF OF LEMMA 2 USED IN
+THIS PAPER                                                                   The above result is for the case where 𝑝 ≠ 1. If 𝑝 = 1, see that
+                                                                          the Equation 42 forms an arithmetic progression whose general
+This section explains the changed Lemma used in this paper com-
+                                                                          term is 𝑎 + 𝑛𝑑.
+pared to Theorem 1 in [8].
+                                                                                                                                           □
+   We state and prove a general theorem for a stochastic process
+before we begin the proof.
+                                                                             Now from Theorem 6.1, notice that if we want a general stochas-
+                                                                          tic process of that form to converge we need the coefficient 𝑝 to be
+   Theorem 6.1. If we have a stochastic process of the form               a fraction (as we take a limit to ∞ in the solution only a 𝑝 which is
+                                                                          a fraction will give a converged result). Note that this result only
+                                                                          needs 𝑑 to be finite, and it can be any finite number. If we iterate
+                           𝑦𝑛+1 − 𝑝𝑦𝑛 = 𝑑                         (42)    to infinity then we can apply the limit to the solution which will
+                                                                          converge to 𝑦𝑛 = 1−𝑝 𝑑 .
+
+
+                                                                            Lemma 3. A random process
+ where 𝑛 goes from 0 to ∞, then the general solution of this process
+can be given by                                                                      𝑤𝑛+1 (𝑥) = (1 − 𝛼𝑛 (𝑥))𝑤𝑛 (𝑥) + 𝛽𝑛 (𝑥)𝑟𝑛 (𝑥)          (48)
+converges to zero w.p.1, if the following conditions are satisfied:          the scaling factor the convergence point of the original process is
+                                                                              𝐷                                                               □
+                                                                             𝛽 .
+                     Í                 Í
+         1)               𝛼 (𝑥) = ∞, 𝑛 𝛼𝑛2 (𝑥) < ∞,                           0
+                    Í𝑛 𝑛                   Í 2
+                       𝑛 𝛽𝑛 (𝑥) = ∞ and 𝑛 𝛽𝑛 (𝑥) < ∞                              Lemma 5. A stochastic process 𝑋𝑛 which is bounded by the relation
+          uniformly over x w.p.1                                                             |𝑋𝑛+1 (𝑥)| = (1 − 𝛼)|𝑋𝑛 (𝑥)| + 𝛾 𝛽𝐶 1 + 𝐾             (53)
+                                                                             converges to a constant 𝐷 w.p.1 provided
+          2)           E{𝑟𝑛 (𝑥)|𝑃𝑛 , 𝛽𝑛 } = 0                         (49)      1) 𝑥 ∈ 𝑆, where S is a finite set.
+                       and E{𝑟𝑛2 (𝑥)|𝑃𝑛 , 𝛽𝑛 } ≤ 𝐶                                 Í          Í              Í
+                                                                                2) 𝑛 𝛼 = ∞, 𝑛 𝛼 2 < ∞, 𝑛 𝛽 = ∞, 𝑛 𝛽 2 < ∞,
+                                                                                                                           Í
+                                                                             E{𝛽 |𝑃𝑛 } ≤ 𝐸{𝛼 |𝑃𝑛 }, uniformly over 𝑥 w.p.1,
+          w.p.1, where                                                       where
+          𝑃𝑛 = {𝑤𝑛 , 𝑤𝑛−1, . . . , 𝑟𝑛−1, 𝑟𝑛−1, . . . ,
+                                                                                           𝑃𝑛 = {𝑤𝑛 , 𝑤𝑛−1, . . . , 𝑟𝑛−1, 𝑟𝑛−1, . . . , 𝛼, 𝛽}
+          𝛼𝑛−1, 𝛼𝑛−2, . . . , 𝛽𝑛−1, 𝛽𝑛−2, . . .}
+                                                                             and 𝛼, 𝛽 and 𝛾 are assumed to be non negative.
+   All the random variables are allowed to depend on the past 𝑃𝑛 .             3) 𝐾 is finite.
+𝛼𝑛 (𝑥) and 𝛽𝑛 (𝑥) are assumed to be non-negative and mutually inde-            4) 𝛾 ∈ (0, 1)
+pendent given 𝑃𝑛 .                                                             5) The original process 𝑋𝑛 is scale invariant.
+   Proof. This is the same as Lemma 1 in [8]. The proof is based               The convergence point of the original process will then be 𝐷 =
+                                                                             𝐾+𝛾 𝛽𝐶 1
+on that fact that we can divide the process 𝑤𝑛+1 (both sides of                𝛼𝛽     , where 𝛽 0 is the scaling factor applied to the original process.
+                                                                                   0
+Equation 48) by a large value 𝑊 (𝑥) such that 𝑟𝑛 (𝑥) ≪ 𝑊 (𝑥). Now
+the Equation 48 is effectively reduced to                                       Proof. This is simply an application of Lemma 4.
+                                                                                According to condition 5, we have a process that is scale invariant.
+                    𝑤𝑛+1 (𝑥) = (1 − 𝛼𝑛 (𝑥))𝑤𝑛 (𝑥).                    (50)   Let us assume that we applied a scaling factor of 𝛽 0 to that process
+This is because of the conditions 1 and 2 which guarantees that 𝛽𝑛           to get the bound as in Equation 53. Now, let us consider the iterative
+is a fraction and that the variance of the process 𝑟𝑛 is finite.             process
+   Now if you consider Equation 50, the update is in such a way                              |𝑋𝑛+1 (𝑥)| = (1 − 𝛼)|𝑋𝑛 (𝑥)| + 𝛾 𝛽𝐶 1 + 𝐾 .           (54)
+that the process is equal to a fraction of its previous value. Thus,
+this process converges to 0 w.p.1.                                              Equation 54 is linear in |𝑋𝑛 (𝑥)| and will converge to a point by
+                                                                  □          Theorem 6.1 w.p.1, to some 𝑋 ∗ (𝑥), where ||𝑋 ∗ || ≤ 𝐸 1 , where 𝐸 1
+                                                                             is a finite arbitrary constant. From Theorem 6.1 we can see that
+   Lemma 4. Consider the stochastic iteration                                Equation 54 converges to a constant and hence, Lemma 4 can be
+                                                                                                                       𝐾+𝛾 𝛽𝐶 1
+                        𝑋𝑛+1 (𝑥) = 𝐺𝑛 (𝑋𝑛 , 𝑌𝑛 , 𝑥)                   (51)   applied. The convergence point will be       𝛼     from Theorem 6.1
+                                                                             for Equation 54. If we change the value of the bound 𝐶 1 then the
+where 𝐺𝑛 is a sequence of functions and 𝑌𝑛 is a random process. Let          convergence point will change accordingly. To get the convergence
+(Ω, F , P) be a probability space. If the following are satisfied:           point of the original process, we reapply the scaling factor. Thus,
+  1) The process is scale invariant. That is w.p.1 for all 𝜔 ∈ Ω                                      𝐾+𝛾 𝛽𝐶
+                                                                             we get that point to be 𝛼𝛽 1 .
+                                                                                                           0
+               𝐺 (𝛽𝑋𝑛 , 𝑌𝑛 (𝜔), 𝑥) = 𝛽𝐺 (𝑋𝑛 , 𝑌𝑛 (𝜔), 𝑥).             (52)                                                                      □
+    2) If we can keep ||𝑋𝑛 || bounded by scaling the process then 𝑋𝑛              Theorem 6.2. A random iterative process
+would converge to a constant 𝐷 w.p.1 under condition 1.
+    The original process will converge to a constant 𝐷 1 = 𝛽𝐷 where 𝛽 0                         Δ𝑛+1 (𝑥) = (1 − 𝛼)Δ𝑛 (𝑥) + 𝛽𝐹𝑛 (𝑥)
+                                                             0
+is the scaling factor that was applied to ||𝑋𝑛 ||.                           converges to a constant 𝐷 w.p.1 under the following conditions:
+                                                                                1) 𝑥 ∈ 𝑆 , where S is a finite set.
+   Proof. The intuition of the proof is that we have a process that                Í           Í
+                                                                                2) 𝑛 𝛼 = ∞, 𝑛 𝛼 2 < ∞, and
+starts at a value and its first difference reduces with time till the        Í           Í 2
+                                                                               𝑛 𝛽 = ∞, 𝑛 𝛽 < ∞, and
+value stabilizes at a point. Now, if this process is invariant to scaling,   E{𝛽 |𝑃𝑛 } ≤ 𝐸{𝛼 |𝑃𝑛 }, uniformly over 𝑥 w.p.1.
+we can start the process with a small value (after scaling by a small           3) || E{𝐹𝑛 (𝑥)|𝑃𝑛 , 𝛽}|| 𝑤 ≤ 𝛾 ||Δ𝑛 || 𝑤 + 𝐾, where 𝛾 ∈ (0, 1) and 𝐾 is
+fraction 𝛽 0 ) and then we can select a constant over which the ||𝑋𝑛 ||      finite.
+should not increase (we can scale the whole process if it goes above            4) var{𝐹𝑛 (𝑥)|𝑃𝑛 , 𝛽} ≤ 𝐶 (1 + ||Δ𝑛 ||𝑊 ) 2 , where C is some constant.
+that constant). Now according to the second condition the bounded            Here
+process should converge to a constant 𝐷. Here the relation is 𝐷 ≤ 𝐶.                          𝑃𝑛 = {𝑋𝑛 , 𝑋𝑛−1, . . . , 𝐹𝑛−1, . . . , 𝛼, 𝛽}
+To show that the net effect of the corrections must stay finite w.p.1,
+note that if ||𝑋𝑛 || converges then for any 𝜖 > 0 there exists 𝑀𝜖            stands for the past at step 𝑛. 𝐹𝑛 (𝑥) is allowed to depend on the past.
+such that ||𝑋𝑛 || ≤ 𝐷 ≤ 𝐶 for all 𝑛 > 𝑀𝜖 with probability at least           𝛼 and 𝛽 are assumed to be non negative. The notation ||.|| refers to
+1 − 𝜖. This implies that the norm of the original process does not go        some weighted maximum norm.
+                                                                                                                 𝜓𝐶 +𝛽 |𝐾 |
+above 𝐶 after 𝑀𝜖 . Thus, convergence of ||𝑋𝑛 || to constant 𝐷 would              The value of this constant 𝐷 = 1𝛼 𝛽        where 𝜓 ∈ (0, 1) and 𝐶 1
+                                                                                                                        0
+then imply that the scaled version of the original process converges         is the constant with which the iterative process is bounded. 𝛽 0 is the
+to the same constant 𝐷 w.p.1 under the bound. Now if we remove               scaling factor that was applied to the original process.
+   Proof. Be defining 𝑟𝑛 (𝑥) = 𝐹𝑛 (𝑥) − E{𝐹𝑛 (𝑥)|𝑃𝑛 , 𝛽} we can de-           Let us bound the norm by 𝐶 1 . Then we get the bound as
+compose the iterative process into two parallel processes given                             ′ | ≤ (1 − 𝛼)|𝛿 ′ (𝑥)| + 𝛾 𝛽𝐹𝐶 + 𝛽 |𝐾 |.
+                                                                                          |𝛿𝑛+1            𝑛              1                         (60)
+by
+            𝛿𝑛+1 (𝑥) = (1 − 𝛼)𝛿𝑛 (𝑥) + 𝛽 E{𝐹𝑛 (𝑥)|𝑃𝑛 , 𝛽}                      Let us assume that 𝛿𝑛 is scale invariant (we prove that below).
+                                                                    (55)   Now we can apply Lemma 5 as this satisfies all the conditions of
+            𝑤𝑛+1 (𝑥) = (1 − 𝛼)𝑤𝑛 (𝑥) + 𝛽𝑟𝑛 (𝑥)
+                                                                           Lemma 5. The original process converges to a constant 𝐷 w.p.1.
+where Δ𝑛 (𝑥) = 𝛿𝑛 (𝑥) + 𝑤𝑛 (𝑥). Dividing both the sides of Equa-                                                                          𝛾 𝛽𝐹𝐶 1 +𝛽 |𝐾 |
+tion 55 by 𝛽 0 for each 𝑥 and denoting 𝛿𝑛′ (𝑥) = 𝛿𝑛 (𝑥)/𝛽 0 , 𝑤𝑛′ (𝑥) =    Again according to Lemma 5 this constant value is 𝐷 =              𝛼 𝛽0
+𝑤𝑛 (𝑥)/𝛽 0 and 𝑟𝑛′ (𝑥) = 𝑟𝑛 (𝑥)/𝛽 0 we can bound the 𝛿𝑛′ process by        where 𝛽 0 is the factor with which the original process was scaled.
+condition 3.                                                               Let us denote a new fraction 𝜓 = 𝛾 𝛽𝐹 . Thus, the value of 𝐷 =
+                                                                           𝜓𝐶 1 +𝛽 |𝐾 |
+   Now we can rewrite the equation pair from condition 3 as                    𝛼𝛽 0     . Now, this guarantees w.p.1 convergence of the original
+         ′ | ≤ (1 − 𝛼)|𝛿 ′ (𝑥)| + 𝛾 𝛽 || |𝛿 ′ | + 𝑤 ′ || + 𝛽 |𝐾 |
+       |𝛿𝑛+1                                                               process under the boundedness assumption if that process is scale
+                         𝑛                         𝑛                (56)                                           𝛾 𝛽𝐹𝐶 1 +𝛽 |𝐾 |
+       𝑤𝑛+1 (𝑥) = (1 − 𝛼)𝑤𝑛′ (𝑥) + 𝛾 𝛽𝑟𝑛′ (𝑥).
+         ′                                                                 invariant. Let the constant 𝐷 1 =            𝛼          be the point Equa-
+  Let us assume that the Δ𝑛 process stays bounded. Then the                tion 60 converges to according to Theorem 6.1. Since, the value of
+variance of 𝑟𝑛′ (𝑥) is bounded by some constant 𝐶 and thereby 𝑤𝑛′          𝐷 1 is very small for a small 𝐾 (we will show that 𝐾 is small in the
+converges to zero w.p.1 according to Lemma 3. Hence, there exists          application) and a small 𝐶 1 (since 𝐶 1 is arbitrary, we can choose a
+𝑀 such that for all 𝑛 > 𝑚, ||𝑤𝑛′ || < 𝜖 with probability at least 1 − 𝜖.   small 𝐶 1 ), we can get |𝛿𝑛 | ≈ 𝛿𝑛 .
+This implies that the 𝛿𝑛′ process can be further bounded by                    Now we prove the scale invariance condition same as Jaakola et
+              ′ | ≤ (1 − 𝛼)|𝛿 ′ (𝑥)| + 𝛾 𝛽 ||𝛿 ′ − 𝜖 || + 𝛽 |𝐾 |
+                                                                           al. [8]. By Condition 4, 𝑟𝑛′ (𝑥) can be written as (1+ ||𝛿𝑛 +𝑤𝑛 ||)𝑠𝑛 (𝑥),
+            |𝛿𝑛+1            𝑛                𝑛                     (57)   where 𝐸{𝑠𝑛2 (𝑥)|𝑃𝑛 } ≤ 𝐶. Let us now decompose 𝑤𝑛 as 𝑢𝑛 + 𝑣𝑛 with
+with probability > 1 − 𝜖. If we choose 𝐶 such that 𝛾 (𝐶 + 1)/𝐶 ≤ 1
+                                                                                  𝑢𝑛+1 (𝑥) = (1 − 𝛼)𝑢𝑛 (𝑥) + 𝛾 𝛽 ||𝛿𝑛′ + 𝑢𝑛 + 𝑣𝑛 ||𝑠𝑛 (𝑥)
+then for ||𝛿𝑛′ || > 𝐶𝜖                                                                                                                              (61)
+                                                                                  𝑣𝑛+1 (𝑥) = (1 − 𝛼)𝑣𝑛 (𝑥) + 𝛾 𝛽𝑠𝑛 (𝑥)
+                    𝛾 ||𝛿𝑛′ + 𝜖 || ≤ 𝛾 (𝐶 + 1)/𝐶 ||𝛿𝑛′ ||.          (58)
+                                                                           and 𝑣𝑛 converges to zero w.p.1 by Lemma 3. Again by choosing 𝐶
+   Note that in the above relation we do not need the term 𝐶+1             such that 𝛾 (𝐶 + 1)/𝐶 < 1 we can bound the 𝛿𝑛′ and 𝑢𝑛 processes for
+                                                            𝐶
+to be less than 1. We only need the product of this term with 𝛾 to         ||𝛿𝑛′ + 𝑢𝑛 || > 𝐶𝜖. The pair (𝛿𝑛′ , 𝑢𝑛 ) is then a scale invariant process
+be less that one. Let us represent 𝐹 = (𝐶 + 1)/𝐶. Now rewriting            whose bounded version was proven earlier to converge to 𝐷 w.p.1.
+Equation 57 we get the following bound,                                    This proves the w.p.1 convergence of the triple 𝛿𝑛′ , 𝑢𝑛 , 𝑣𝑛 bounding
+               ′ | ≤ (1 − 𝛼)|𝛿 ′ (𝑥)| + 𝛾 𝛽𝐹 ||𝛿 ′ || + 𝛽 |𝐾 |.
+                                                                           the original process.
+             |𝛿𝑛+1            𝑛                 𝑛                   (59)                                                                           □
+

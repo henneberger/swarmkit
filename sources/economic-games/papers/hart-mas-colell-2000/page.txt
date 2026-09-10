@@ -1,0 +1,39 @@
+
+
+ Sergiu Hart / papers / A Simple Adaptive Procedure
+Leading to Correlated Equilibrium
+
+A Simple Adaptive Procedure
+Leading to Correlated Equilibrium
+
+                    Sergiu Hart  and  Andreu Mas-Colell
+
+(Acrobat PDF files)
+
+Abstract
+
+We propose a new and
+simple adaptive procedure for playing a game: "regret-matching."
+In this
+procedure,
+players may depart from their current play with probabilities that are
+proportional to measures of regret for not having used other
+strategies in the past.
+It is shown that our adaptive
+procedure
+guarantees that, with probability one, the empirical distributions of
+play
+converge to the set of correlated equilibria of the game.  
+
+Journal of Economic Literature Classification Numbers:  C72, D83
+
+Econometrica 68 (2000), 5, 1127-1150
+
+Simple Adaptive Strategies: From
+Regret-Matching to Uncoupled Dynamics, Sergiu Hart and
+Andreu Mas-Colell, World Scientific (2013),
+Chapter 2, 17-46
+
+2020
+ACM SIGecom Test of Time Award
+

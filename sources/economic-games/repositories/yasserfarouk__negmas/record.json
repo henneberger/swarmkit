@@ -1,0 +1,38 @@
+{
+  "kind": "repositories",
+  "id": "yasserfarouk__negmas",
+  "title": "yasserfarouk/negmas",
+  "url": "https://github.com/yasserfarouk/negmas",
+  "topic": "negotiation mechanisms and utility functions",
+  "retrieved_at": "2026-09-10T22:39:48.084956+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/yasserfarouk/negmas/blob/c0ccb5b9ecb67bd17d719cfe9cb0bc927ac61ec1/LICENSE",
+      "resolved_url": "https://github.com/yasserfarouk/negmas/blob/c0ccb5b9ecb67bd17d719cfe9cb0bc927ac61ec1/LICENSE",
+      "path": "sources/economic-games/repositories/yasserfarouk__negmas/LICENSE",
+      "bytes": 35257,
+      "sha256": "9ce574ce9ed9a127327fb96f72aebefdaed7c9895a2b44b732dc258afd32aa64"
+    },
+    {
+      "url": "https://github.com/yasserfarouk/negmas/blob/c0ccb5b9ecb67bd17d719cfe9cb0bc927ac61ec1/README.rst",
+      "resolved_url": "https://github.com/yasserfarouk/negmas/blob/c0ccb5b9ecb67bd17d719cfe9cb0bc927ac61ec1/README.rst",
+      "path": "sources/economic-games/repositories/yasserfarouk__negmas/README.rst",
+      "bytes": 21562,
+      "sha256": "056c2a9925a0feca4748eb795726b9ed11ed12354809275b270dd2e1bada3bfd"
+    }
+  ],
+  "status": "ok",
+  "commit": "c0ccb5b9ecb67bd17d719cfe9cb0bc927ac61ec1",
+  "commit_date": "2026-09-01T15:58:07+09:00",
+  "checkout": "sources/economic-games/repositories/yasserfarouk__negmas/checkout",
+  "experiments_reproduced": false,
+  "license_files": [
+    "LICENSE"
+  ],
+  "audit": {
+    "anchor": "src/negmas/sao/mechanism.py",
+    "finding": "Structured offers, response types, entry/exit, time limits and communication supported by SAOMechanism.",
+    "proposed_use": "Optional negotiation adapter",
+    "review_level": "selected code or README; not full audit"
+  }
+}

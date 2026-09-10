@@ -1,0 +1,29 @@
+{
+  "kind": "repositories",
+  "id": "lechmazur__pact",
+  "title": "lechmazur/pact",
+  "url": "https://github.com/lechmazur/pact",
+  "topic": "LLM bilateral bargaining benchmark",
+  "retrieved_at": "2026-09-10T22:39:53.323458+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/lechmazur/pact/blob/b90fb74e62cfb927525beef47960d355b2fcb352/README.md",
+      "resolved_url": "https://github.com/lechmazur/pact/blob/b90fb74e62cfb927525beef47960d355b2fcb352/README.md",
+      "path": "sources/economic-games/repositories/lechmazur__pact/README.md",
+      "bytes": 35530,
+      "sha256": "69603e30f0b054f389460335e89e88ef24662b2dd146ffef7f8f3d1e9d5e2822"
+    }
+  ],
+  "status": "ok",
+  "commit": "b90fb74e62cfb927525beef47960d355b2fcb352",
+  "commit_date": "2026-06-23T16:27:02-04:00",
+  "checkout": "sources/economic-games/repositories/lechmazur__pact/checkout",
+  "experiments_reproduced": false,
+  "license_files": [],
+  "audit": {
+    "anchor": "README.md",
+    "finding": "Checkout consists of README, dossiers, images, logs and prompts; no executable Python harness found.",
+    "proposed_use": "Benchmark protocol/transcript corpus",
+    "review_level": "selected code or README; not full audit"
+  }
+}

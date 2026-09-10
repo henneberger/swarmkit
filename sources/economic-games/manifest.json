@@ -1,0 +1,3246 @@
+{
+  "updated_at": "2026-09-10T22:40:40.222780+00:00",
+  "items": [
+    {
+      "kind": "papers",
+      "id": "2001.10313",
+      "title": "Evolutionary dynamics of higher-order interactions in social networks",
+      "topic": "hypergraph public goods",
+      "page_url": "https://arxiv.org/abs/2001.10313",
+      "pdf_url": "https://arxiv.org/pdf/2001.10313",
+      "retrieved_at": "2026-09-10T22:39:39.888069+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2001.10313",
+          "resolved_url": "https://arxiv.org/abs/2001.10313",
+          "path": "sources/economic-games/papers/2001.10313/page.html",
+          "bytes": 43964,
+          "sha256": "542d12e78176579b71355ea753d352fa63527c1ba19ad1910b393fd5593fa296"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2001.10313",
+          "resolved_url": "https://arxiv.org/pdf/2001.10313",
+          "path": "sources/economic-games/papers/2001.10313/paper.pdf",
+          "bytes": 6907117,
+          "sha256": "e2efbba7fa1ae09bf43b3a6b10ca51ef232e9ce6830828ea2ebcfc5686cecd24"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2001.10313: Evolutionary dynamics of higher-order interactions in social networks"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Evolutionary dynamics of higher-order interactions in social networks"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2001.10313v5"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "We live and cooperate in networks. However, links in networks only allow for pairwise interactions, thus making the framework suitable for dyadic games, but not for games that are played in groups of more than two players. Here, we study the evolutionary dynamics of a public goods game in social systems with higher-order interactions. First, we show that the game on uniform hypergraphs corresponds to the replicator dynamics in the well-mixed limit, providing a formal theoretical foundation to study cooperation in networked groups. Secondly, we unveil how the presence of hubs and the coexistence of interactions in groups of different sizes affects the evolution of cooperation. Finally, we apply the proposed framework to extract the actual dependence of the synergy factor on the size of a group from real-world collaboration data in science and technology. Our work provides a way to implement informed actions to boost cooperation in social groups."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Evolutionary dynamics of higher-order interactions in social networks"
+        ],
+        "twitter:description": [
+          "We live and cooperate in networks. However, links in networks only allow for pairwise interactions, thus making the framework suitable for dyadic games, but not for games that are played in groups..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Evolutionary dynamics of higher-order interactions in social networks"
+        ],
+        "citation_author": [
+          "Alvarez-Rodriguez, Unai",
+          "Battiston, Federico",
+          "de Arruda, Guilherme Ferraz",
+          "Moreno, Yamir",
+          "Perc, Matjaz",
+          "Latora, Vito"
+        ],
+        "citation_doi": [
+          "10.1038/s41562-020-01024-1"
+        ],
+        "citation_date": [
+          "2020/01/28"
+        ],
+        "citation_online_date": [
+          "2021/05/22"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2001.10313"
+        ],
+        "citation_arxiv_id": [
+          "2001.10313"
+        ],
+        "citation_abstract": [
+          "We live and cooperate in networks. However, links in networks only allow for pairwise interactions, thus making the framework suitable for dyadic games, but not for games that are played in groups of more than two players. Here, we study the evolutionary dynamics of a public goods game in social systems with higher-order interactions. First, we show that the game on uniform hypergraphs corresponds to the replicator dynamics in the well-mixed limit, providing a formal theoretical foundation to study cooperation in networked groups. Secondly, we unveil how the presence of hubs and the coexistence of interactions in groups of different sizes affects the evolution of cooperation. Finally, we apply the proposed framework to extract the actual dependence of the synergy factor on the size of a group from real-world collaboration data in science and technology. Our work provides a way to implement informed actions to boost cooperation in social groups."
+        ]
+      },
+      "extracted_text_characters": 107826,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2410.10921",
+      "title": "Cooperation in Public Goods Games: Leveraging Other-Regarding Reinforcement Learning on Hypergraphs",
+      "topic": "hypergraph reinforcement learning",
+      "page_url": "https://arxiv.org/abs/2410.10921",
+      "pdf_url": "https://arxiv.org/pdf/2410.10921",
+      "retrieved_at": "2026-09-10T22:39:39.888340+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2410.10921",
+          "resolved_url": "https://arxiv.org/abs/2410.10921",
+          "path": "sources/economic-games/papers/2410.10921/page.html",
+          "bytes": 44286,
+          "sha256": "dcda8ce637272bc66992c8cec825800de8008b887a7356b59fb5a9dd69b3d7ec"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2410.10921",
+          "resolved_url": "https://arxiv.org/pdf/2410.10921",
+          "path": "sources/economic-games/papers/2410.10921/paper.pdf",
+          "bytes": 5805744,
+          "sha256": "308a113afae4c9dbd566c7eb40218bdc7f0d722febbdd171eb3e440c4b5f6f48"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2410.10921: Cooperation in Public Goods Games: Leveraging Other-Regarding Reinforcement Learning on Hypergraphs"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Cooperation in Public Goods Games: Leveraging Other-Regarding Reinforcement Learning on Hypergraphs"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2410.10921v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Cooperation as a self-organized collective behavior plays a significant role in the evolution of ecosystems and human society. Reinforcement learning (RL) offers a new perspective, distinct from imitation learning in evolutionary games, for exploring the mechanisms underlying its emergence. However, most existing studies with the public good game (PGG) employ a self-regarding setup or are on pairwise interaction networks. Players in the real world, however, optimize their policies based not only on their histories but also on the histories of their co-players, and the game is played in a group manner. In the work, we investigate the evolution of cooperation in the PGG under the other-regarding reinforcement learning evolutionary game (OR-RLEG) on hypergraph by combining the Q-learning algorithm and evolutionary game framework, where other players' action history is incorporated and the game is played on hypergraphs. Our results show that as the synergy factor increases, the parameter interval is divided into three distinct regions, the absence of cooperation (AC), medium cooperation (MC), and high cooperation (HC), accompanied by two abrupt transitions in the cooperation level near two transition points, respectively. Interestingly, we identify regular and anti-coordinated chessboard structures in the spatial pattern that positively contribute to the first cooperation transition but adversely affect the second. Furthermore, we provide a theoretical treatment for the first transition with an approximated first transition point and reveal that players with a long-sighted perspective and low exploration rate are more likely to reciprocate kindness with each other, thus facilitating the emergence of cooperation. Our findings contribute to understanding the evolution of human cooperation, where other-regarding information and group interactions are commonplace."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Cooperation in Public Goods Games: Leveraging Other-Regarding..."
+        ],
+        "twitter:description": [
+          "Cooperation as a self-organized collective behavior plays a significant role in the evolution of ecosystems and human society. Reinforcement learning (RL) offers a new perspective, distinct from..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Cooperation in Public Goods Games: Leveraging Other-Regarding Reinforcement Learning on Hypergraphs"
+        ],
+        "citation_author": [
+          "Li, Bo-Ying",
+          "Zhang, Zhen-Na",
+          "Zheng, Guo-Zhong",
+          "Cai, Chao-Ran",
+          "Zhang, Ji-Qiang",
+          "Li, Chen"
+        ],
+        "citation_date": [
+          "2024/10/14"
+        ],
+        "citation_online_date": [
+          "2024/10/14"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2410.10921"
+        ],
+        "citation_arxiv_id": [
+          "2410.10921"
+        ],
+        "citation_abstract": [
+          "Cooperation as a self-organized collective behavior plays a significant role in the evolution of ecosystems and human society. Reinforcement learning (RL) offers a new perspective, distinct from imitation learning in evolutionary games, for exploring the mechanisms underlying its emergence. However, most existing studies with the public good game (PGG) employ a self-regarding setup or are on pairwise interaction networks. Players in the real world, however, optimize their policies based not only on their histories but also on the histories of their co-players, and the game is played in a group manner. In the work, we investigate the evolution of cooperation in the PGG under the other-regarding reinforcement learning evolutionary game (OR-RLEG) on hypergraph by combining the Q-learning algorithm and evolutionary game framework, where other players' action history is incorporated and the game is played on hypergraphs. Our results show that as the synergy factor increases, the parameter interval is divided into three distinct regions, the absence of cooperation (AC), medium cooperation (MC), and high cooperation (HC), accompanied by two abrupt transitions in the cooperation level near two transition points, respectively. Interestingly, we identify regular and anti-coordinated chessboard structures in the spatial pattern that positively contribute to the first cooperation transition but adversely affect the second. Furthermore, we provide a theoretical treatment for the first transition with an approximated first transition point and reveal that players with a long-sighted perspective and low exploration rate are more likely to reciprocate kindness with each other, thus facilitating the emergence of cooperation. Our findings contribute to understanding the evolution of human cooperation, where other-regarding information and group interactions are commonplace."
+        ]
+      },
+      "extracted_text_characters": 130990,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "1908.09453",
+      "title": "OpenSpiel: A Framework for Reinforcement Learning in Games",
+      "topic": "game interfaces and solvers",
+      "page_url": "https://arxiv.org/abs/1908.09453",
+      "pdf_url": "https://arxiv.org/pdf/1908.09453",
+      "retrieved_at": "2026-09-10T22:39:39.887885+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/1908.09453",
+          "resolved_url": "https://arxiv.org/abs/1908.09453",
+          "path": "sources/economic-games/papers/1908.09453/page.html",
+          "bytes": 46676,
+          "sha256": "5a037b8db297d8bbe3dc71a4dd6ea3b0d114862199d0bfb62abed976200997a5"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1908.09453",
+          "resolved_url": "https://arxiv.org/pdf/1908.09453",
+          "path": "sources/economic-games/papers/1908.09453/paper.pdf",
+          "bytes": 5003395,
+          "sha256": "503801fde0d598bd22c092e102b029878af857903da6688ac5861393c2428218"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 1908.09453: OpenSpiel: A Framework for Reinforcement Learning in Games"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "OpenSpiel: A Framework for Reinforcement Learning in Games"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/1908.09453v6"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "OpenSpiel is a collection of environments and algorithms for research in general reinforcement learning and search/planning in games. OpenSpiel supports n-player (single- and multi- agent) zero-sum, cooperative and general-sum, one-shot and sequential, strictly turn-taking and simultaneous-move, perfect and imperfect information games, as well as traditional multiagent environments such as (partially- and fully- observable) grid worlds and social dilemmas. OpenSpiel also includes tools to analyze learning dynamics and other common evaluation metrics. This document serves both as an overview of the code base and an introduction to the terminology, core concepts, and algorithms across the fields of reinforcement learning, computational game theory, and search."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "OpenSpiel: A Framework for Reinforcement Learning in Games"
+        ],
+        "twitter:description": [
+          "OpenSpiel is a collection of environments and algorithms for research in general reinforcement learning and search/planning in games. OpenSpiel supports n-player (single- and multi- agent)..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "OpenSpiel: A Framework for Reinforcement Learning in Games"
+        ],
+        "citation_author": [
+          "Lanctot, Marc",
+          "Lockhart, Edward",
+          "Lespiau, Jean-Baptiste",
+          "Zambaldi, Vinicius",
+          "Upadhyay, Satyaki",
+          "P\u00e9rolat, Julien",
+          "Srinivasan, Sriram",
+          "Timbers, Finbarr",
+          "Tuyls, Karl",
+          "Omidshafiei, Shayegan",
+          "Hennes, Daniel",
+          "Morrill, Dustin",
+          "Muller, Paul",
+          "Ewalds, Timo",
+          "Faulkner, Ryan",
+          "Kram\u00e1r, J\u00e1nos",
+          "De Vylder, Bart",
+          "Saeta, Brennan",
+          "Bradbury, James",
+          "Ding, David",
+          "Borgeaud, Sebastian",
+          "Lai, Matthew",
+          "Schrittwieser, Julian",
+          "Anthony, Thomas",
+          "Hughes, Edward",
+          "Danihelka, Ivo",
+          "Ryan-Davis, Jonah"
+        ],
+        "citation_date": [
+          "2019/08/26"
+        ],
+        "citation_online_date": [
+          "2020/09/26"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/1908.09453"
+        ],
+        "citation_arxiv_id": [
+          "1908.09453"
+        ],
+        "citation_abstract": [
+          "OpenSpiel is a collection of environments and algorithms for research in general reinforcement learning and search/planning in games. OpenSpiel supports n-player (single- and multi- agent) zero-sum, cooperative and general-sum, one-shot and sequential, strictly turn-taking and simultaneous-move, perfect and imperfect information games, as well as traditional multiagent environments such as (partially- and fully- observable) grid worlds and social dilemmas. OpenSpiel also includes tools to analyze learning dynamics and other common evaluation metrics. This document serves both as an overview of the code base and an introduction to the terminology, core concepts, and algorithms across the fields of reinforcement learning, computational game theory, and search."
+        ]
+      },
+      "extracted_text_characters": 104738,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "1711.00832",
+      "title": "A Unified Game-Theoretic Approach to Multiagent Reinforcement Learning",
+      "topic": "PSRO and population diversity",
+      "page_url": "https://arxiv.org/abs/1711.00832",
+      "pdf_url": "https://arxiv.org/pdf/1711.00832",
+      "retrieved_at": "2026-09-10T22:39:39.888202+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/1711.00832",
+          "resolved_url": "https://arxiv.org/abs/1711.00832",
+          "path": "sources/economic-games/papers/1711.00832/page.html",
+          "bytes": 43651,
+          "sha256": "3b2a59d3f2ec2aab1fa963c7ca87d8deef274db6098c9d310706fcc3cfbf0ae3"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1711.00832",
+          "resolved_url": "https://arxiv.org/pdf/1711.00832",
+          "path": "sources/economic-games/papers/1711.00832/paper.pdf",
+          "bytes": 793644,
+          "sha256": "2e2720935c297849aff281fef0b76ef36eba3d19e49359cd821c39b2e1c2deb3"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 1711.00832: A Unified Game-Theoretic Approach to Multiagent Reinforcement Learning"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "A Unified Game-Theoretic Approach to Multiagent Reinforcement Learning"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/1711.00832v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "To achieve general intelligence, agents must learn how to interact with others in a shared environment: this is the challenge of multiagent reinforcement learning (MARL). The simplest form is independent reinforcement learning (InRL), where each agent treats its experience as part of its (non-stationary) environment. In this paper, we first observe that policies learned using InRL can overfit to the other agents' policies during training, failing to sufficiently generalize during execution. We introduce a new metric, joint-policy correlation, to quantify this effect. We describe an algorithm for general MARL, based on approximate best responses to mixtures of policies generated using deep reinforcement learning, and empirical game-theoretic analysis to compute meta-strategies for policy selection. The algorithm generalizes previous ones such as InRL, iterated best response, double oracle, and fictitious play. Then, we present a scalable implementation which reduces the memory requirement using decoupled meta-solvers. Finally, we demonstrate the generality of the resulting policies in two partially observable settings: gridworld coordination games and poker."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "A Unified Game-Theoretic Approach to Multiagent Reinforcement Learning"
+        ],
+        "twitter:description": [
+          "To achieve general intelligence, agents must learn how to interact with others in a shared environment: this is the challenge of multiagent reinforcement learning (MARL). The simplest form is..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "A Unified Game-Theoretic Approach to Multiagent Reinforcement Learning"
+        ],
+        "citation_author": [
+          "Lanctot, Marc",
+          "Zambaldi, Vinicius",
+          "Gruslys, Audrunas",
+          "Lazaridou, Angeliki",
+          "Tuyls, Karl",
+          "Perolat, Julien",
+          "Silver, David",
+          "Graepel, Thore"
+        ],
+        "citation_date": [
+          "2017/11/02"
+        ],
+        "citation_online_date": [
+          "2017/11/07"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/1711.00832"
+        ],
+        "citation_arxiv_id": [
+          "1711.00832"
+        ],
+        "citation_abstract": [
+          "To achieve general intelligence, agents must learn how to interact with others in a shared environment: this is the challenge of multiagent reinforcement learning (MARL). The simplest form is independent reinforcement learning (InRL), where each agent treats its experience as part of its (non-stationary) environment. In this paper, we first observe that policies learned using InRL can overfit to the other agents' policies during training, failing to sufficiently generalize during execution. We introduce a new metric, joint-policy correlation, to quantify this effect. We describe an algorithm for general MARL, based on approximate best responses to mixtures of policies generated using deep reinforcement learning, and empirical game-theoretic analysis to compute meta-strategies for policy selection. The algorithm generalizes previous ones such as InRL, iterated best response, double oracle, and fictitious play. Then, we present a scalable implementation which reduces the memory requirement using decoupled meta-solvers. Finally, we demonstrate the generality of the resulting policies in two partially observable settings: gridworld coordination games and poker."
+        ]
+      },
+      "extracted_text_characters": 117194,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "1903.01373",
+      "title": "Alpha-Rank: Multi-Agent Evaluation by Evolution",
+      "topic": "nontransitive evaluation",
+      "page_url": "https://arxiv.org/abs/1903.01373",
+      "pdf_url": "https://arxiv.org/pdf/1903.01373",
+      "retrieved_at": "2026-09-10T22:39:39.888423+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/1903.01373",
+          "resolved_url": "https://arxiv.org/abs/1903.01373",
+          "path": "sources/economic-games/papers/1903.01373/page.html",
+          "bytes": 45796,
+          "sha256": "d5509368a7e0b25a67dc42b71040665f6dc009227d0efd8e000badb1e8089c1a"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1903.01373",
+          "resolved_url": "https://arxiv.org/pdf/1903.01373",
+          "path": "sources/economic-games/papers/1903.01373/paper.pdf",
+          "bytes": 3016125,
+          "sha256": "0eb61a223aa591e2e4dce8cf34370e3c37cc65f2e64f46a5072a97f2515b7db9"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 1903.01373: $\u03b1$-Rank: Multi-Agent Evaluation by Evolution"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "$\u03b1$-Rank: Multi-Agent Evaluation by Evolution"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/1903.01373v4"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "We introduce $\u03b1$-Rank, a principled evolutionary dynamics methodology for the evaluation and ranking of agents in large-scale multi-agent interactions, grounded in a novel dynamical game-theoretic solution concept called Markov-Conley chains (MCCs). The approach leverages continuous- and discrete-time evolutionary dynamical systems applied to empirical games, and scales tractably in the number of agents, the type of interactions, and the type of empirical games (symmetric and asymmetric). Current models are fundamentally limited in one or more of these dimensions and are not guaranteed to converge to the desired game-theoretic solution concept (typically the Nash equilibrium). $\u03b1$-Rank provides a ranking over the set of agents under evaluation and provides insights into their strengths, weaknesses, and long-term dynamics. This is a consequence of the links we establish to the MCC solution concept when the underlying evolutionary model's ranking-intensity parameter, $\u03b1$, is chosen to be large, which exactly forms the basis of $\u03b1$-Rank. In contrast to the Nash equilibrium, which is a static concept based on fixed points, MCCs are a dynamical solution concept based on the Markov chain formalism, Conley's Fundamental Theorem of Dynamical Systems, and the core ingredients of dynamical systems: fixed points, recurrent sets, periodic orbits, and limit cycles. $\u03b1$-Rank runs in polynomial time with respect to the total number of pure strategy profiles, whereas computing a Nash equilibrium for a general-sum game is known to be intractable. We introduce proofs that not only provide a unifying perspective of existing continuous- and discrete-time evolutionary evaluation models, but also reveal the formal underpinnings of the $\u03b1$-Rank methodology. We empirically validate the method in several domains including AlphaGo, AlphaZero, MuJoCo Soccer, and Poker."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "$\u03b1$-Rank: Multi-Agent Evaluation by Evolution"
+        ],
+        "twitter:description": [
+          "We introduce $\u03b1$-Rank, a principled evolutionary dynamics methodology for the evaluation and ranking of agents in large-scale multi-agent interactions, grounded in a novel dynamical..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "$\\alpha$-Rank: Multi-Agent Evaluation by Evolution"
+        ],
+        "citation_author": [
+          "Omidshafiei, Shayegan",
+          "Papadimitriou, Christos",
+          "Piliouras, Georgios",
+          "Tuyls, Karl",
+          "Rowland, Mark",
+          "Lespiau, Jean-Baptiste",
+          "Czarnecki, Wojciech M.",
+          "Lanctot, Marc",
+          "Perolat, Julien",
+          "Munos, Remi"
+        ],
+        "citation_date": [
+          "2019/03/04"
+        ],
+        "citation_online_date": [
+          "2019/10/04"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/1903.01373"
+        ],
+        "citation_arxiv_id": [
+          "1903.01373"
+        ],
+        "citation_abstract": [
+          "We introduce $\\alpha$-Rank, a principled evolutionary dynamics methodology for the evaluation and ranking of agents in large-scale multi-agent interactions, grounded in a novel dynamical game-theoretic solution concept called Markov-Conley chains (MCCs). The approach leverages continuous- and discrete-time evolutionary dynamical systems applied to empirical games, and scales tractably in the number of agents, the type of interactions, and the type of empirical games (symmetric and asymmetric). Current models are fundamentally limited in one or more of these dimensions and are not guaranteed to converge to the desired game-theoretic solution concept (typically the Nash equilibrium). $\\alpha$-Rank provides a ranking over the set of agents under evaluation and provides insights into their strengths, weaknesses, and long-term dynamics. This is a consequence of the links we establish to the MCC solution concept when the underlying evolutionary model's ranking-intensity parameter, $\\alpha$, is chosen to be large, which exactly forms the basis of $\\alpha$-Rank. In contrast to the Nash equilibrium, which is a static concept based on fixed points, MCCs are a dynamical solution concept based on the Markov chain formalism, Conley's Fundamental Theorem of Dynamical Systems, and the core ingredients of dynamical systems: fixed points, recurrent sets, periodic orbits, and limit cycles. $\\alpha$-Rank runs in polynomial time with respect to the total number of pure strategy profiles, whereas computing a Nash equilibrium for a general-sum game is known to be intractable. We introduce proofs that not only provide a unifying perspective of existing continuous- and discrete-time evolutionary evaluation models, but also reveal the formal underpinnings of the $\\alpha$-Rank methodology. We empirically validate the method in several domains including AlphaGo, AlphaZero, MuJoCo Soccer, and Poker."
+        ]
+      },
+      "extracted_text_characters": 280147,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "1709.04326",
+      "title": "Learning with Opponent-Learning Awareness",
+      "topic": "opponent shaping",
+      "page_url": "https://arxiv.org/abs/1709.04326",
+      "pdf_url": "https://arxiv.org/pdf/1709.04326",
+      "retrieved_at": "2026-09-10T22:39:40.319619+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/1709.04326",
+          "resolved_url": "https://arxiv.org/abs/1709.04326",
+          "path": "sources/economic-games/papers/1709.04326/page.html",
+          "bytes": 45128,
+          "sha256": "8e1d2740af40078f42e822af18b4f9ba8d3bc2715116db9c55aefcaf0700d2f0"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1709.04326",
+          "resolved_url": "https://arxiv.org/pdf/1709.04326",
+          "path": "sources/economic-games/papers/1709.04326/paper.pdf",
+          "bytes": 3154381,
+          "sha256": "aa91a4634e8d84bc3b83f6a165eafd53a873f7802a2093c5a60f7d781978f2e2"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 1709.04326: Learning with Opponent-Learning Awareness"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Learning with Opponent-Learning Awareness"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/1709.04326v4"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Multi-agent settings are quickly gathering importance in machine learning. This includes a plethora of recent work on deep multi-agent reinforcement learning, but also can be extended to hierarchical RL, generative adversarial networks and decentralised optimisation. In all these settings the presence of multiple learning agents renders the training problem non-stationary and often leads to unstable training or undesired final results. We present Learning with Opponent-Learning Awareness (LOLA), a method in which each agent shapes the anticipated learning of the other agents in the environment. The LOLA learning rule includes a term that accounts for the impact of one agent's policy on the anticipated parameter update of the other agents. Results show that the encounter of two LOLA agents leads to the emergence of tit-for-tat and therefore cooperation in the iterated prisoners' dilemma, while independent learning does not. In this domain, LOLA also receives higher payouts compared to a naive learner, and is robust against exploitation by higher order gradient-based methods. Applied to repeated matching pennies, LOLA agents converge to the Nash equilibrium. In a round robin tournament we show that LOLA agents successfully shape the learning of a range of multi-agent learning algorithms from literature, resulting in the highest average returns on the IPD. We also show that the LOLA update rule can be efficiently calculated using an extension of the policy gradient estimator, making the method suitable for model-free RL. The method thus scales to large parameter and input spaces and nonlinear function approximators. We apply LOLA to a grid world task with an embedded social dilemma using recurrent policies and opponent modelling. By explicitly considering the learning of the other agent, LOLA agents learn to cooperate out of self-interest. The code is at github.com/alshedivat/lola."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Learning with Opponent-Learning Awareness"
+        ],
+        "twitter:description": [
+          "Multi-agent settings are quickly gathering importance in machine learning. This includes a plethora of recent work on deep multi-agent reinforcement learning, but also can be extended to..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Learning with Opponent-Learning Awareness"
+        ],
+        "citation_author": [
+          "Foerster, Jakob N.",
+          "Chen, Richard Y.",
+          "Al-Shedivat, Maruan",
+          "Whiteson, Shimon",
+          "Abbeel, Pieter",
+          "Mordatch, Igor"
+        ],
+        "citation_date": [
+          "2017/09/13"
+        ],
+        "citation_online_date": [
+          "2018/09/19"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/1709.04326"
+        ],
+        "citation_arxiv_id": [
+          "1709.04326"
+        ],
+        "citation_abstract": [
+          "Multi-agent settings are quickly gathering importance in machine learning. This includes a plethora of recent work on deep multi-agent reinforcement learning, but also can be extended to hierarchical RL, generative adversarial networks and decentralised optimisation. In all these settings the presence of multiple learning agents renders the training problem non-stationary and often leads to unstable training or undesired final results. We present Learning with Opponent-Learning Awareness (LOLA), a method in which each agent shapes the anticipated learning of the other agents in the environment. The LOLA learning rule includes a term that accounts for the impact of one agent's policy on the anticipated parameter update of the other agents. Results show that the encounter of two LOLA agents leads to the emergence of tit-for-tat and therefore cooperation in the iterated prisoners' dilemma, while independent learning does not. In this domain, LOLA also receives higher payouts compared to a naive learner, and is robust against exploitation by higher order gradient-based methods. Applied to repeated matching pennies, LOLA agents converge to the Nash equilibrium. In a round robin tournament we show that LOLA agents successfully shape the learning of a range of multi-agent learning algorithms from literature, resulting in the highest average returns on the IPD. We also show that the LOLA update rule can be efficiently calculated using an extension of the policy gradient estimator, making the method suitable for model-free RL. The method thus scales to large parameter and input spaces and nonlinear function approximators. We apply LOLA to a grid world task with an embedded social dilemma using recurrent policies and opponent modelling. By explicitly considering the learning of the other agent, LOLA agents learn to cooperate out of self-interest. The code is at github.com/alshedivat/lola."
+        ]
+      },
+      "extracted_text_characters": 91939,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2210.10125",
+      "title": "Proximal Learning With Opponent-Learning Awareness",
+      "topic": "opponent shaping extensions",
+      "page_url": "https://arxiv.org/abs/2210.10125",
+      "pdf_url": "https://arxiv.org/pdf/2210.10125",
+      "retrieved_at": "2026-09-10T22:39:40.761236+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2210.10125",
+          "resolved_url": "https://arxiv.org/abs/2210.10125",
+          "path": "sources/economic-games/papers/2210.10125/page.html",
+          "bytes": 42690,
+          "sha256": "d2a08d05ede4f125e8e2fb255613cf85e2f0d5dd23e64b38390adf26e85eb027"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2210.10125",
+          "resolved_url": "https://arxiv.org/pdf/2210.10125",
+          "path": "sources/economic-games/papers/2210.10125/paper.pdf",
+          "bytes": 886600,
+          "sha256": "dadd11d461c02c11b0287c1a4f11e45d050c9adf95b9d29bade52ba9beb4e828"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2210.10125: Proximal Learning With Opponent-Learning Awareness"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Proximal Learning With Opponent-Learning Awareness"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2210.10125v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Learning With Opponent-Learning Awareness (LOLA) (Foerster et al. [2018a]) is a multi-agent reinforcement learning algorithm that typically learns reciprocity-based cooperation in partially competitive environments. However, LOLA often fails to learn such behaviour on more complex policy spaces parameterized by neural networks, partly because the update rule is sensitive to the policy parameterization. This problem is especially pronounced in the opponent modeling setting, where the opponent's policy is unknown and must be inferred from observations; in such settings, LOLA is ill-specified because behaviorally equivalent opponent policies can result in non-equivalent updates. To address this shortcoming, we reinterpret LOLA as approximating a proximal operator, and then derive a new algorithm, proximal LOLA (POLA), which uses the proximal formulation directly. Unlike LOLA, the POLA updates are parameterization invariant, in the sense that when the proximal objective has a unique optimum, behaviorally equivalent policies result in behaviorally equivalent updates. We then present practical approximations to the ideal POLA update, which we evaluate in several partially competitive environments with function approximation and opponent modeling. This empirically demonstrates that POLA achieves reciprocity-based cooperation more reliably than LOLA."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Proximal Learning With Opponent-Learning Awareness"
+        ],
+        "twitter:description": [
+          "Learning With Opponent-Learning Awareness (LOLA) (Foerster et al. [2018a]) is a multi-agent reinforcement learning algorithm that typically learns reciprocity-based cooperation in partially..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Proximal Learning With Opponent-Learning Awareness"
+        ],
+        "citation_author": [
+          "Zhao, Stephen",
+          "Lu, Chris",
+          "Grosse, Roger Baker",
+          "Foerster, Jakob Nicolaus"
+        ],
+        "citation_date": [
+          "2022/10/18"
+        ],
+        "citation_online_date": [
+          "2022/10/18"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2210.10125"
+        ],
+        "citation_arxiv_id": [
+          "2210.10125"
+        ],
+        "citation_abstract": [
+          "Learning With Opponent-Learning Awareness (LOLA) (Foerster et al. [2018a]) is a multi-agent reinforcement learning algorithm that typically learns reciprocity-based cooperation in partially competitive environments. However, LOLA often fails to learn such behaviour on more complex policy spaces parameterized by neural networks, partly because the update rule is sensitive to the policy parameterization. This problem is especially pronounced in the opponent modeling setting, where the opponent's policy is unknown and must be inferred from observations; in such settings, LOLA is ill-specified because behaviorally equivalent opponent policies can result in non-equivalent updates. To address this shortcoming, we reinterpret LOLA as approximating a proximal operator, and then derive a new algorithm, proximal LOLA (POLA), which uses the proximal formulation directly. Unlike LOLA, the POLA updates are parameterization invariant, in the sense that when the proximal objective has a unique optimum, behaviorally equivalent policies result in behaviorally equivalent updates. We then present practical approximations to the ideal POLA update, which we evaluate in several partially competitive environments with function approximation and opponent modeling. This empirically demonstrates that POLA achieves reciprocity-based cooperation more reliably than LOLA."
+        ]
+      },
+      "extracted_text_characters": 90481,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "1802.05438",
+      "title": "Mean Field Multi-Agent Reinforcement Learning",
+      "topic": "large populations",
+      "page_url": "https://arxiv.org/abs/1802.05438",
+      "pdf_url": "https://arxiv.org/pdf/1802.05438",
+      "retrieved_at": "2026-09-10T22:39:40.914787+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/1802.05438",
+          "resolved_url": "https://arxiv.org/abs/1802.05438",
+          "path": "sources/economic-games/papers/1802.05438/page.html",
+          "bytes": 43415,
+          "sha256": "3d6483f6262c17946410c595502b9b98d003b7b786b906af7b859f785dd31b96"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1802.05438",
+          "resolved_url": "https://arxiv.org/pdf/1802.05438",
+          "path": "sources/economic-games/papers/1802.05438/paper.pdf",
+          "bytes": 3630559,
+          "sha256": "ea8d96ab11f89f392e91d1a1e526e688e69ebf0128651eab3f69de5d705a19e5"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 1802.05438: Mean Field Multi-Agent Reinforcement Learning"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Mean Field Multi-Agent Reinforcement Learning"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/1802.05438v5"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Existing multi-agent reinforcement learning methods are limited typically to a small number of agents. When the agent number increases largely, the learning becomes intractable due to the curse of the dimensionality and the exponential growth of agent interactions. In this paper, we present \\emph{Mean Field Reinforcement Learning} where the interactions within the population of agents are approximated by those between a single agent and the average effect from the overall population or neighboring agents; the interplay between the two entities is mutually reinforced: the learning of the individual agent's optimal policy depends on the dynamics of the population, while the dynamics of the population change according to the collective patterns of the individual policies. We develop practical mean field Q-learning and mean field Actor-Critic algorithms and analyze the convergence of the solution to Nash equilibrium. Experiments on Gaussian squeeze, Ising model, and battle games justify the learning effectiveness of our mean field approaches. In addition, we report the first result to solve the Ising model via model-free reinforcement learning methods."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Mean Field Multi-Agent Reinforcement Learning"
+        ],
+        "twitter:description": [
+          "Existing multi-agent reinforcement learning methods are limited typically to a small number of agents. When the agent number increases largely, the learning becomes intractable due to the curse of..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Mean Field Multi-Agent Reinforcement Learning"
+        ],
+        "citation_author": [
+          "Yang, Yaodong",
+          "Luo, Rui",
+          "Li, Minne",
+          "Zhou, Ming",
+          "Zhang, Weinan",
+          "Wang, Jun"
+        ],
+        "citation_date": [
+          "2018/02/15"
+        ],
+        "citation_online_date": [
+          "2020/12/15"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/1802.05438"
+        ],
+        "citation_arxiv_id": [
+          "1802.05438"
+        ],
+        "citation_abstract": [
+          "Existing multi-agent reinforcement learning methods are limited typically to a small number of agents. When the agent number increases largely, the learning becomes intractable due to the curse of the dimensionality and the exponential growth of agent interactions. In this paper, we present \\emph{Mean Field Reinforcement Learning} where the interactions within the population of agents are approximated by those between a single agent and the average effect from the overall population or neighboring agents; the interplay between the two entities is mutually reinforced: the learning of the individual agent's optimal policy depends on the dynamics of the population, while the dynamics of the population change according to the collective patterns of the individual policies. We develop practical mean field Q-learning and mean field Actor-Critic algorithms and analyze the convergence of the solution to Nash equilibrium. Experiments on Gaussian squeeze, Ising model, and battle games justify the learning effectiveness of our mean field approaches. In addition, we report the first result to solve the Ising model via model-free reinforcement learning methods."
+        ]
+      },
+      "extracted_text_characters": 127415,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2002.02513",
+      "title": "Multi Type Mean Field Reinforcement Learning",
+      "topic": "heterogeneous populations",
+      "page_url": "https://arxiv.org/abs/2002.02513",
+      "pdf_url": "https://arxiv.org/pdf/2002.02513",
+      "retrieved_at": "2026-09-10T22:39:41.583739+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2002.02513",
+          "resolved_url": "https://arxiv.org/abs/2002.02513",
+          "path": "sources/economic-games/papers/2002.02513/page.html",
+          "bytes": 42816,
+          "sha256": "298cb5915c56068ce6f70b726453d2e184d3bb5e42b4cc906f413b519a2ccbba"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2002.02513",
+          "resolved_url": "https://arxiv.org/pdf/2002.02513",
+          "path": "sources/economic-games/papers/2002.02513/paper.pdf",
+          "bytes": 931227,
+          "sha256": "86311d8ab2135f883051a6b6b697b1c92ff4ac7cacb9676741d6fe17734096d1"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2002.02513: Multi Type Mean Field Reinforcement Learning"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Multi Type Mean Field Reinforcement Learning"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2002.02513v7"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Mean field theory provides an effective way of scaling multiagent reinforcement learning algorithms to environments with many agents that can be abstracted by a virtual mean agent. In this paper, we extend mean field multiagent algorithms to multiple types. The types enable the relaxation of a core assumption in mean field reinforcement learning, which is that all agents in the environment are playing almost similar strategies and have the same goal. We conduct experiments on three different testbeds for the field of many agent reinforcement learning, based on the standard MAgents framework. We consider two different kinds of mean field environments: a) Games where agents belong to predefined types that are known a priori and b) Games where the type of each agent is unknown and therefore must be learned based on observations. We introduce new algorithms for each type of game and demonstrate their superior performance over state of the art algorithms that assume that all agents belong to the same type and other baseline algorithms in the MAgent framework."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Multi Type Mean Field Reinforcement Learning"
+        ],
+        "twitter:description": [
+          "Mean field theory provides an effective way of scaling multiagent reinforcement learning algorithms to environments with many agents that can be abstracted by a virtual mean agent. In this paper,..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Multi Type Mean Field Reinforcement Learning"
+        ],
+        "citation_author": [
+          "Subramanian, Sriram Ganapathi",
+          "Poupart, Pascal",
+          "Taylor, Matthew E.",
+          "Hegde, Nidhi"
+        ],
+        "citation_date": [
+          "2020/02/06"
+        ],
+        "citation_online_date": [
+          "2022/06/21"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2002.02513"
+        ],
+        "citation_arxiv_id": [
+          "2002.02513"
+        ],
+        "citation_abstract": [
+          "Mean field theory provides an effective way of scaling multiagent reinforcement learning algorithms to environments with many agents that can be abstracted by a virtual mean agent. In this paper, we extend mean field multiagent algorithms to multiple types. The types enable the relaxation of a core assumption in mean field reinforcement learning, which is that all agents in the environment are playing almost similar strategies and have the same goal. We conduct experiments on three different testbeds for the field of many agent reinforcement learning, based on the standard MAgents framework. We consider two different kinds of mean field environments: a) Games where agents belong to predefined types that are known a priori and b) Games where the type of each agent is unknown and therefore must be learned based on observations. We introduce new algorithms for each type of game and demonstrate their superior performance over state of the art algorithms that assume that all agents belong to the same type and other baseline algorithms in the MAgent framework."
+        ]
+      },
+      "extracted_text_characters": 120570,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "1706.03459",
+      "title": "Optimal Auctions through Deep Learning: Advances in Differentiable Economics",
+      "topic": "learned mechanisms",
+      "page_url": "https://arxiv.org/abs/1706.03459",
+      "pdf_url": "https://arxiv.org/pdf/1706.03459",
+      "retrieved_at": "2026-09-10T22:39:41.597465+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/1706.03459",
+          "resolved_url": "https://arxiv.org/abs/1706.03459",
+          "path": "sources/economic-games/papers/1706.03459/page.html",
+          "bytes": 42932,
+          "sha256": "342ede352b47e7753495b5cee6590240e113fc0ea4f3b4b27e45bd02d5139163"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1706.03459",
+          "resolved_url": "https://arxiv.org/pdf/1706.03459",
+          "path": "sources/economic-games/papers/1706.03459/paper.pdf",
+          "bytes": 2408406,
+          "sha256": "c79d424f6dee28b7637fb2ac73079ed85b2b485e7b9dfc2857903f9f6f859a02"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 1706.03459: Optimal Auctions through Deep Learning: Advances in Differentiable Economics"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Optimal Auctions through Deep Learning: Advances in Differentiable Economics"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/1706.03459v6"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Designing an incentive compatible auction that maximizes expected revenue is an intricate task. The single-item case was resolved in a seminal piece of work by Myerson in 1981, but more than 40 years later a full analytical understanding of the optimal design still remains elusive for settings with two or more items. In this work, we initiate the exploration of the use of tools from deep learning for the automated design of optimal auctions. We model an auction as a multi-layer neural network, frame optimal auction design as a constrained learning problem, and show how it can be solved using standard machine learning pipelines. In addition to providing generalization bounds, we present extensive experimental results, recovering essentially all known solutions that come from the theoretical analysis of optimal auction design problems and obtaining novel mechanisms for settings in which the optimal mechanism is unknown."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Optimal Auctions through Deep Learning: Advances in Differentiable..."
+        ],
+        "twitter:description": [
+          "Designing an incentive compatible auction that maximizes expected revenue is an intricate task. The single-item case was resolved in a seminal piece of work by Myerson in 1981, but more than 40..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Optimal Auctions through Deep Learning: Advances in Differentiable Economics"
+        ],
+        "citation_author": [
+          "D\u00fctting, Paul",
+          "Feng, Zhe",
+          "Narasimhan, Harikrishna",
+          "Parkes, David C.",
+          "Ravindranath, Sai Srivatsa"
+        ],
+        "citation_date": [
+          "2017/06/12"
+        ],
+        "citation_online_date": [
+          "2022/10/14"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/1706.03459"
+        ],
+        "citation_arxiv_id": [
+          "1706.03459"
+        ],
+        "citation_abstract": [
+          "Designing an incentive compatible auction that maximizes expected revenue is an intricate task. The single-item case was resolved in a seminal piece of work by Myerson in 1981, but more than 40 years later a full analytical understanding of the optimal design still remains elusive for settings with two or more items. In this work, we initiate the exploration of the use of tools from deep learning for the automated design of optimal auctions. We model an auction as a multi-layer neural network, frame optimal auction design as a constrained learning problem, and show how it can be solved using standard machine learning pipelines. In addition to providing generalization bounds, we present extensive experimental results, recovering essentially all known solutions that come from the theoretical analysis of optimal auction design problems and obtaining novel mechanisms for settings in which the optimal mechanism is unknown."
+        ]
+      },
+      "extracted_text_characters": 252059,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2108.02755",
+      "title": "The AI Economist: Optimal Economic Policy Design via Two-level Deep Reinforcement Learning",
+      "topic": "learned institutions",
+      "page_url": "https://arxiv.org/abs/2108.02755",
+      "pdf_url": "https://arxiv.org/pdf/2108.02755",
+      "retrieved_at": "2026-09-10T22:39:41.811282+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2108.02755",
+          "resolved_url": "https://arxiv.org/abs/2108.02755",
+          "path": "sources/economic-games/papers/2108.02755/page.html",
+          "bytes": 45172,
+          "sha256": "cce2821470b746c1425557eae5266b425e5da1e28df6fc25410a03476f0add09"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2108.02755",
+          "resolved_url": "https://arxiv.org/pdf/2108.02755",
+          "path": "sources/economic-games/papers/2108.02755/paper.pdf",
+          "bytes": 7320395,
+          "sha256": "e41fb245982f24cdbb48c4ff3952034e679ec298efc55485ae142ce32079b483"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2108.02755: The AI Economist: Optimal Economic Policy Design via Two-level Deep Reinforcement Learning"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "The AI Economist: Optimal Economic Policy Design via Two-level Deep Reinforcement Learning"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2108.02755v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "AI and reinforcement learning (RL) have improved many areas, but are not yet widely adopted in economic policy design, mechanism design, or economics at large. At the same time, current economic methodology is limited by a lack of counterfactual data, simplistic behavioral models, and limited opportunities to experiment with policies and evaluate behavioral responses. Here we show that machine-learning-based economic simulation is a powerful policy and mechanism design framework to overcome these limitations. The AI Economist is a two-level, deep RL framework that trains both agents and a social planner who co-adapt, providing a tractable solution to the highly unstable and novel two-level RL challenge. From a simple specification of an economy, we learn rational agent behaviors that adapt to learned planner policies and vice versa. We demonstrate the efficacy of the AI Economist on the problem of optimal taxation. In simple one-step economies, the AI Economist recovers the optimal tax policy of economic theory. In complex, dynamic economies, the AI Economist substantially improves both utilitarian social welfare and the trade-off between equality and productivity over baselines. It does so despite emergent tax-gaming strategies, while accounting for agent interactions and behavioral change more accurately than economic theory. These results demonstrate for the first time that two-level, deep RL can be used for understanding and as a complement to theory for economic design, unlocking a new computational learning-based approach to understanding economic policy."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "The AI Economist: Optimal Economic Policy Design via Two-level..."
+        ],
+        "twitter:description": [
+          "AI and reinforcement learning (RL) have improved many areas, but are not yet widely adopted in economic policy design, mechanism design, or economics at large. At the same time, current economic..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "The AI Economist: Optimal Economic Policy Design via Two-level Deep Reinforcement Learning"
+        ],
+        "citation_author": [
+          "Zheng, Stephan",
+          "Trott, Alexander",
+          "Srinivasa, Sunil",
+          "Parkes, David C.",
+          "Socher, Richard"
+        ],
+        "citation_date": [
+          "2021/08/05"
+        ],
+        "citation_online_date": [
+          "2021/08/05"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2108.02755"
+        ],
+        "citation_arxiv_id": [
+          "2108.02755"
+        ],
+        "citation_abstract": [
+          "AI and reinforcement learning (RL) have improved many areas, but are not yet widely adopted in economic policy design, mechanism design, or economics at large. At the same time, current economic methodology is limited by a lack of counterfactual data, simplistic behavioral models, and limited opportunities to experiment with policies and evaluate behavioral responses. Here we show that machine-learning-based economic simulation is a powerful policy and mechanism design framework to overcome these limitations. The AI Economist is a two-level, deep RL framework that trains both agents and a social planner who co-adapt, providing a tractable solution to the highly unstable and novel two-level RL challenge. From a simple specification of an economy, we learn rational agent behaviors that adapt to learned planner policies and vice versa. We demonstrate the efficacy of the AI Economist on the problem of optimal taxation. In simple one-step economies, the AI Economist recovers the optimal tax policy of economic theory. In complex, dynamic economies, the AI Economist substantially improves both utilitarian social welfare and the trade-off between equality and productivity over baselines. It does so despite emergent tax-gaming strategies, while accounting for agent interactions and behavioral change more accurately than economic theory. These results demonstrate for the first time that two-level, deep RL can be used for understanding and as a complement to theory for economic design, unlocking a new computational learning-based approach to understanding economic policy."
+        ]
+      },
+      "extracted_text_characters": 94245,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2310.05746",
+      "title": "Put Your Money Where Your Mouth Is: Evaluating Strategic Planning and Execution of LLM Agents in an Auction Arena",
+      "topic": "LLM auctions",
+      "page_url": "https://arxiv.org/abs/2310.05746",
+      "pdf_url": "https://arxiv.org/pdf/2310.05746",
+      "retrieved_at": "2026-09-10T22:39:41.931847+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2310.05746",
+          "resolved_url": "https://arxiv.org/abs/2310.05746",
+          "path": "sources/economic-games/papers/2310.05746/page.html",
+          "bytes": 42599,
+          "sha256": "db202e9299a4501baeb500c742d6ca3807839fe9532eed44e909145e6bc14abc"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2310.05746",
+          "resolved_url": "https://arxiv.org/pdf/2310.05746",
+          "path": "sources/economic-games/papers/2310.05746/paper.pdf",
+          "bytes": 1491123,
+          "sha256": "aab557ff175dac6bf0add943c7ba4e0a8a360f684268901ed04890ecbf1bbf21"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2310.05746: Put Your Money Where Your Mouth Is: Evaluating Strategic Planning and Execution of LLM Agents in an Auction Arena"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Put Your Money Where Your Mouth Is: Evaluating Strategic Planning and Execution of LLM Agents in an Auction Arena"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2310.05746v4"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Recent advancements in Large Language Models (LLMs) showcase advanced reasoning, yet NLP evaluations often depend on static benchmarks. Evaluating this necessitates environments that test strategic reasoning in dynamic, competitive scenarios requiring long-term planning. We introduce AucArena, a novel evaluation suite that simulates auctions, a setting chosen for being highly unpredictable and involving many skills related to resource and risk management, while also being easy to evaluate. We conduct controlled experiments using state-of-the-art LLMs to power bidding agents to benchmark their planning and execution skills. Our research demonstrates that LLMs, such as GPT-4, possess key skills for auction participation, such as budget management and goal adherence, which improve with adaptive strategies. This highlights LLMs' potential in modeling complex social interactions in competitive contexts. However, variability in LLM performance and occasional outperformance by simpler methods indicate opportunities for further advancements in LLM design and the value of our simulation environment for ongoing testing and refinement."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Put Your Money Where Your Mouth Is: Evaluating Strategic Planning..."
+        ],
+        "twitter:description": [
+          "Recent advancements in Large Language Models (LLMs) showcase advanced reasoning, yet NLP evaluations often depend on static benchmarks. Evaluating this necessitates environments that test..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Put Your Money Where Your Mouth Is: Evaluating Strategic Planning and Execution of LLM Agents in an Auction Arena"
+        ],
+        "citation_author": [
+          "Chen, Jiangjie",
+          "Yuan, Siyu",
+          "Ye, Rong",
+          "Majumder, Bodhisattwa Prasad",
+          "Richardson, Kyle"
+        ],
+        "citation_date": [
+          "2023/10/09"
+        ],
+        "citation_online_date": [
+          "2024/08/25"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2310.05746"
+        ],
+        "citation_arxiv_id": [
+          "2310.05746"
+        ],
+        "citation_abstract": [
+          "Recent advancements in Large Language Models (LLMs) showcase advanced reasoning, yet NLP evaluations often depend on static benchmarks. Evaluating this necessitates environments that test strategic reasoning in dynamic, competitive scenarios requiring long-term planning. We introduce AucArena, a novel evaluation suite that simulates auctions, a setting chosen for being highly unpredictable and involving many skills related to resource and risk management, while also being easy to evaluate. We conduct controlled experiments using state-of-the-art LLMs to power bidding agents to benchmark their planning and execution skills. Our research demonstrates that LLMs, such as GPT-4, possess key skills for auction participation, such as budget management and goal adherence, which improve with adaptive strategies. This highlights LLMs' potential in modeling complex social interactions in competitive contexts. However, variability in LLM performance and occasional outperformance by simpler methods indicate opportunities for further advancements in LLM design and the value of our simulation environment for ongoing testing and refinement."
+        ]
+      },
+      "extracted_text_characters": 113357,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2609.02580",
+      "title": "Competitive Market Behavior of LLMs",
+      "topic": "recent LLM double auctions",
+      "page_url": "https://arxiv.org/abs/2609.02580",
+      "pdf_url": "https://arxiv.org/pdf/2609.02580",
+      "retrieved_at": "2026-09-10T22:39:42.209350+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2609.02580",
+          "resolved_url": "https://arxiv.org/abs/2609.02580",
+          "path": "sources/economic-games/papers/2609.02580/page.html",
+          "bytes": 41779,
+          "sha256": "5bc4fcf0a49458b76e8d445625c204ca766af6790e0be4b60c8e7aa71a8f1f9e"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2609.02580",
+          "resolved_url": "https://arxiv.org/pdf/2609.02580",
+          "path": "sources/economic-games/papers/2609.02580/paper.pdf",
+          "bytes": 613875,
+          "sha256": "b92657de9a957a06b3f17baf9370465408934a6ff2e5e6542b75177a0e8dbdb1"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2609.02580: Competitive Market Behavior of LLMs"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Competitive Market Behavior of LLMs"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2609.02580v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Large language models (LLMs) are increasingly deployed as economic agents, yet there is little evidence whether LLM agents are suited for participating in market mechanisms designed for humans, and whether these mechanisms deliver desired outcomes when faced with LLM agents. We address this question by replicating seminal economic experiments, replacing human subjects with LLM agents. We place agents in a double auction environment, which is a widely-used market mechanism. We check whether such a market is able to deliver an efficient allocation of resources, thereby testing a novel dimension of alignment of LLM agents -- their compatibility with a fundamental market mechanism. We find that markets populated by LLM agents exhibit slower or no convergence towards market equilibrium, thus providing less efficient allocations than markets populated by humans. We then analyze agents' individual trading decisions and find substantial heterogeneity both across model families and market roles. We also run a lexical analysis of Chain-of-Thought (CoT) traces generated by the agents. We find that the decision to execute a trade rather than continue incrementally adjusting prices is associated with a shift from strategic considerations toward urgency. We publicly release our testing framework, which can be used for future evaluations."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Competitive Market Behavior of LLMs"
+        ],
+        "twitter:description": [
+          "Large language models (LLMs) are increasingly deployed as economic agents, yet there is little evidence whether LLM agents are suited for participating in market mechanisms designed for humans,..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Competitive Market Behavior of LLMs"
+        ],
+        "citation_author": [
+          "Struski, Pawel",
+          "Swistak, Jakub",
+          "Okulska, Inez",
+          "Biecek, Przemyslaw"
+        ],
+        "citation_date": [
+          "2026/09/02"
+        ],
+        "citation_online_date": [
+          "2026/09/02"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2609.02580"
+        ],
+        "citation_arxiv_id": [
+          "2609.02580"
+        ],
+        "citation_abstract": [
+          "Large language models (LLMs) are increasingly deployed as economic agents, yet there is little evidence whether LLM agents are suited for participating in market mechanisms designed for humans, and whether these mechanisms deliver desired outcomes when faced with LLM agents. We address this question by replicating seminal economic experiments, replacing human subjects with LLM agents. We place agents in a double auction environment, which is a widely-used market mechanism. We check whether such a market is able to deliver an efficient allocation of resources, thereby testing a novel dimension of alignment of LLM agents -- their compatibility with a fundamental market mechanism. We find that markets populated by LLM agents exhibit slower or no convergence towards market equilibrium, thus providing less efficient allocations than markets populated by humans. We then analyze agents' individual trading decisions and find substantial heterogeneity both across model families and market roles. We also run a lexical analysis of Chain-of-Thought (CoT) traces generated by the agents. We find that the decision to execute a trade rather than continue incrementally adjusting prices is associated with a shift from strategic considerations toward urgency. We publicly release our testing framework, which can be used for future evaluations."
+        ]
+      },
+      "extracted_text_characters": 68495,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2509.25565",
+      "title": "Information Design With Large Language Models",
+      "topic": "strategic information",
+      "page_url": "https://arxiv.org/abs/2509.25565",
+      "pdf_url": "https://arxiv.org/pdf/2509.25565",
+      "retrieved_at": "2026-09-10T22:39:42.605654+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2509.25565",
+          "resolved_url": "https://arxiv.org/abs/2509.25565",
+          "path": "sources/economic-games/papers/2509.25565/page.html",
+          "bytes": 42251,
+          "sha256": "6a7243cbd0e317ef49a5bc1f1cd8e745af8317648fe3608d96bc4e1f260ade37"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2509.25565",
+          "resolved_url": "https://arxiv.org/pdf/2509.25565",
+          "path": "sources/economic-games/papers/2509.25565/paper.pdf",
+          "bytes": 1605189,
+          "sha256": "f30ad055356623241795a5c4cf58018b101881311c860b340b148f9440fb1d32"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2509.25565: Information Design With Large Language Models"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Information Design With Large Language Models"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2509.25565v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Information design is typically studied through the lens of Bayesian signaling, where signals shape beliefs purely based on their correlation with the true state of the world. However, behavioral economics and psychology emphasize that human decision-making is more complex and can depend on how information is framed. This paper formalizes a language-based notion of framing and bridges this to the popular Bayesian-persuasion model. We model framing as a possibly non-Bayesian, linguistic way to influence a receiver's prior belief, while a signaling/recommendation scheme can further refine this belief in the classic Bayesian way. A key challenge in systematically optimizing in this framework is the vast space of possible framings and the difficulty of predicting their effects on receivers. Based on growing evidence that Large Language Models (LLMs) can effectively serve as proxies for human behavior, we formulate a theoretical model based on access to a framing-to-belief mapping. This model then enables us to precisely characterize when solely optimizing framing or jointly optimizing framing and signaling is tractable. We substantiate our theoretical analysis with an empirical study that leverages LLMs to optimize over the natural-language framing space using an iterative prompt optimization method combined with analytical solvers for optimal signaling schemes."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Information Design With Large Language Models"
+        ],
+        "twitter:description": [
+          "Information design is typically studied through the lens of Bayesian signaling, where signals shape beliefs purely based on their correlation with the true state of the world. However, behavioral..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Information Design With Large Language Models"
+        ],
+        "citation_author": [
+          "Duetting, Paul",
+          "Hossain, Safwan",
+          "Lin, Tao",
+          "Leme, Renato Paes",
+          "Ravindranath, Sai Srivatsa",
+          "Xu, Haifeng",
+          "Zuo, Song"
+        ],
+        "citation_date": [
+          "2025/09/29"
+        ],
+        "citation_online_date": [
+          "2026/03/03"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2509.25565"
+        ],
+        "citation_arxiv_id": [
+          "2509.25565"
+        ],
+        "citation_abstract": [
+          "Information design is typically studied through the lens of Bayesian signaling, where signals shape beliefs purely based on their correlation with the true state of the world. However, behavioral economics and psychology emphasize that human decision-making is more complex and can depend on how information is framed. This paper formalizes a language-based notion of framing and bridges this to the popular Bayesian-persuasion model. We model framing as a possibly non-Bayesian, linguistic way to influence a receiver's prior belief, while a signaling/recommendation scheme can further refine this belief in the classic Bayesian way. A key challenge in systematically optimizing in this framework is the vast space of possible framings and the difficulty of predicting their effects on receivers. Based on growing evidence that Large Language Models (LLMs) can effectively serve as proxies for human behavior, we formulate a theoretical model based on access to a framing-to-belief mapping. This model then enables us to precisely characterize when solely optimizing framing or jointly optimizing framing and signaling is tractable. We substantiate our theoretical analysis with an empirical study that leverages LLMs to optimize over the natural-language framing space using an iterative prompt optimization method combined with analytical solvers for optimal signaling schemes."
+        ]
+      },
+      "extracted_text_characters": 149537,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "1706.05125",
+      "title": "Deal or No Deal? End-to-End Learning for Negotiation Dialogues",
+      "topic": "language negotiation",
+      "page_url": "https://arxiv.org/abs/1706.05125",
+      "pdf_url": "https://arxiv.org/pdf/1706.05125",
+      "retrieved_at": "2026-09-10T22:39:42.652763+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/1706.05125",
+          "resolved_url": "https://arxiv.org/abs/1706.05125",
+          "path": "sources/economic-games/papers/1706.05125/page.html",
+          "bytes": 42004,
+          "sha256": "7e918e1be3cdb64eff7ab0f20f2b209552f41ef4b2190b2e5843027c369018c8"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1706.05125",
+          "resolved_url": "https://arxiv.org/pdf/1706.05125",
+          "path": "sources/economic-games/papers/1706.05125/paper.pdf",
+          "bytes": 242077,
+          "sha256": "34ae1a8b29b0db85f2bcfda88b1b45525ba826e4b1bc388c0ac280b9b90488aa"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 1706.05125: Deal or No Deal? End-to-End Learning for Negotiation Dialogues"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Deal or No Deal? End-to-End Learning for Negotiation Dialogues"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/1706.05125v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Much of human dialogue occurs in semi-cooperative settings, where agents with different goals attempt to agree on common decisions. Negotiations require complex communication and reasoning skills, but success is easy to measure, making this an interesting task for AI. We gather a large dataset of human-human negotiations on a multi-issue bargaining task, where agents who cannot observe each other's reward functions must reach an agreement (or a deal) via natural language dialogue. For the first time, we show it is possible to train end-to-end models for negotiation, which must learn both linguistic and reasoning skills with no annotated dialogue states. We also introduce dialogue rollouts, in which the model plans ahead by simulating possible complete continuations of the conversation, and find that this technique dramatically improves performance. Our code and dataset are publicly available (https://github.com/facebookresearch/end-to-end-negotiator)."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Deal or No Deal? End-to-End Learning for Negotiation Dialogues"
+        ],
+        "twitter:description": [
+          "Much of human dialogue occurs in semi-cooperative settings, where agents with different goals attempt to agree on common decisions. Negotiations require complex communication and reasoning skills,..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Deal or No Deal? End-to-End Learning for Negotiation Dialogues"
+        ],
+        "citation_author": [
+          "Lewis, Mike",
+          "Yarats, Denis",
+          "Dauphin, Yann N.",
+          "Parikh, Devi",
+          "Batra, Dhruv"
+        ],
+        "citation_date": [
+          "2017/06/16"
+        ],
+        "citation_online_date": [
+          "2017/06/16"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/1706.05125"
+        ],
+        "citation_arxiv_id": [
+          "1706.05125"
+        ],
+        "citation_abstract": [
+          "Much of human dialogue occurs in semi-cooperative settings, where agents with different goals attempt to agree on common decisions. Negotiations require complex communication and reasoning skills, but success is easy to measure, making this an interesting task for AI. We gather a large dataset of human-human negotiations on a multi-issue bargaining task, where agents who cannot observe each other's reward functions must reach an agreement (or a deal) via natural language dialogue. For the first time, we show it is possible to train end-to-end models for negotiation, which must learn both linguistic and reasoning skills with no annotated dialogue states. We also introduce dialogue rollouts, in which the model plans ahead by simulating possible complete continuations of the conversation, and find that this technique dramatically improves performance. Our code and dataset are publicly available (https://github.com/facebookresearch/end-to-end-negotiator)."
+        ]
+      },
+      "extracted_text_characters": 59441,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2406.18872",
+      "title": "Efficacy of Language Model Self-Play in Non-Zero-Sum Games",
+      "topic": "language self play",
+      "page_url": "https://arxiv.org/abs/2406.18872",
+      "pdf_url": "https://arxiv.org/pdf/2406.18872",
+      "retrieved_at": "2026-09-10T22:39:42.801735+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2406.18872",
+          "resolved_url": "https://arxiv.org/abs/2406.18872",
+          "path": "sources/economic-games/papers/2406.18872/page.html",
+          "bytes": 41095,
+          "sha256": "63f184d50e3cf8b4608fc66b229811504caac2af669fb8405626327790edc4ef"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2406.18872",
+          "resolved_url": "https://arxiv.org/pdf/2406.18872",
+          "path": "sources/economic-games/papers/2406.18872/paper.pdf",
+          "bytes": 1706867,
+          "sha256": "604bcbad10079a5281803a8bbe408810fe607e29f93f6a0b22fd02992cea89d5"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2406.18872: Efficacy of Language Model Self-Play in Non-Zero-Sum Games"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Efficacy of Language Model Self-Play in Non-Zero-Sum Games"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2406.18872v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Game-playing agents like AlphaGo have achieved superhuman performance through self-play, which is theoretically guaranteed to yield optimal policies in competitive games. However, most language tasks are partially or fully cooperative, so it is an open question whether techniques like self-play can effectively be used to improve language models. We empirically investigate this question in a negotiation game setting known as Deal or No Deal (DoND). Crucially, the objective in DoND can be modified to produce a fully cooperative game, a strictly competitive one, or anything in between. We finetune language models in self-play over multiple rounds of filtered behavior cloning in DoND for each of these objectives and evaluate them in self-play and in collaboration with humans. We find that language models improve substantially in self-play, achieving 14-17x higher scores in task reward after finetuning. Further, the trained models generalize to both cooperation and competition with humans, scoring 2.5-6x higher than base models. We view these results as an early promising sign for language model self-play in cooperative settings, despite a lack of theoretical guarantees."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Efficacy of Language Model Self-Play in Non-Zero-Sum Games"
+        ],
+        "twitter:description": [
+          "Game-playing agents like AlphaGo have achieved superhuman performance through self-play, which is theoretically guaranteed to yield optimal policies in competitive games. However, most language..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Efficacy of Language Model Self-Play in Non-Zero-Sum Games"
+        ],
+        "citation_author": [
+          "Liao, Austen",
+          "Tomlin, Nicholas",
+          "Klein, Dan"
+        ],
+        "citation_date": [
+          "2024/06/27"
+        ],
+        "citation_online_date": [
+          "2024/12/09"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2406.18872"
+        ],
+        "citation_arxiv_id": [
+          "2406.18872"
+        ],
+        "citation_abstract": [
+          "Game-playing agents like AlphaGo have achieved superhuman performance through self-play, which is theoretically guaranteed to yield optimal policies in competitive games. However, most language tasks are partially or fully cooperative, so it is an open question whether techniques like self-play can effectively be used to improve language models. We empirically investigate this question in a negotiation game setting known as Deal or No Deal (DoND). Crucially, the objective in DoND can be modified to produce a fully cooperative game, a strictly competitive one, or anything in between. We finetune language models in self-play over multiple rounds of filtered behavior cloning in DoND for each of these objectives and evaluate them in self-play and in collaboration with humans. We find that language models improve substantially in self-play, achieving 14-17x higher scores in task reward after finetuning. Further, the trained models generalize to both cooperation and competition with humans, scoring 2.5-6x higher than base models. We view these results as an early promising sign for language model self-play in cooperative settings, despite a lack of theoretical guarantees."
+        ]
+      },
+      "extracted_text_characters": 84720,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "2406.06613",
+      "title": "GameBench: Evaluating Strategic Reasoning Abilities of LLM Agents",
+      "topic": "strategic benchmarks",
+      "page_url": "https://arxiv.org/abs/2406.06613",
+      "pdf_url": "https://arxiv.org/pdf/2406.06613",
+      "retrieved_at": "2026-09-10T22:39:42.875807+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/2406.06613",
+          "resolved_url": "https://arxiv.org/abs/2406.06613",
+          "path": "sources/economic-games/papers/2406.06613/page.html",
+          "bytes": 42195,
+          "sha256": "06961796475f94dd9a54d171d3a976730fbd3f83a702cd697feb0743f6310e05"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2406.06613",
+          "resolved_url": "https://arxiv.org/pdf/2406.06613",
+          "path": "sources/economic-games/papers/2406.06613/paper.pdf",
+          "bytes": 4568008,
+          "sha256": "6018a8d1ec590b26c3094452466ec1509d75c4bb1d45324f01527de983e5517e"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 2406.06613: GameBench: Evaluating Strategic Reasoning Abilities of LLM Agents"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "GameBench: Evaluating Strategic Reasoning Abilities of LLM Agents"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/2406.06613v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Large language models have demonstrated remarkable few-shot performance on many natural language understanding tasks. Despite several demonstrations of using large language models in complex, strategic scenarios, there lacks a comprehensive framework for evaluating agents' performance across various types of reasoning found in games. To address this gap, we introduce GameBench, a cross-domain benchmark for evaluating strategic reasoning abilities of LLM agents. We focus on 9 different game environments, where each covers at least one axis of key reasoning skill identified in strategy games, and select games for which strategy explanations are unlikely to form a significant portion of models' pretraining corpuses. Our evaluations use GPT-3 and GPT-4 in their base form along with two scaffolding frameworks designed to enhance strategic reasoning ability: Chain-of-Thought (CoT) prompting and Reasoning Via Planning (RAP). Our results show that none of the tested models match human performance, and at worst GPT-4 performs worse than random action. CoT and RAP both improve scores but not comparable to human levels."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "GameBench: Evaluating Strategic Reasoning Abilities of LLM Agents"
+        ],
+        "twitter:description": [
+          "Large language models have demonstrated remarkable few-shot performance on many natural language understanding tasks. Despite several demonstrations of using large language models in complex,..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "GameBench: Evaluating Strategic Reasoning Abilities of LLM Agents"
+        ],
+        "citation_author": [
+          "Costarelli, Anthony",
+          "Allen, Mat",
+          "Hauksson, Roman",
+          "Sodunke, Grace",
+          "Hariharan, Suhas",
+          "Cheng, Carlson",
+          "Li, Wenjie",
+          "Clymer, Joshua",
+          "Yadav, Arjun"
+        ],
+        "citation_date": [
+          "2024/06/07"
+        ],
+        "citation_online_date": [
+          "2024/07/22"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2406.06613"
+        ],
+        "citation_arxiv_id": [
+          "2406.06613"
+        ],
+        "citation_abstract": [
+          "Large language models have demonstrated remarkable few-shot performance on many natural language understanding tasks. Despite several demonstrations of using large language models in complex, strategic scenarios, there lacks a comprehensive framework for evaluating agents' performance across various types of reasoning found in games. To address this gap, we introduce GameBench, a cross-domain benchmark for evaluating strategic reasoning abilities of LLM agents. We focus on 9 different game environments, where each covers at least one axis of key reasoning skill identified in strategy games, and select games for which strategy explanations are unlikely to form a significant portion of models' pretraining corpuses. Our evaluations use GPT-3 and GPT-4 in their base form along with two scaffolding frameworks designed to enhance strategic reasoning ability: Chain-of-Thought (CoT) prompting and Reasoning Via Planning (RAP). Our results show that none of the tested models match human performance, and at worst GPT-4 performs worse than random action. CoT and RAP both improve scores but not comparable to human levels."
+        ]
+      },
+      "extracted_text_characters": 75241,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "1607.07684",
+      "title": "The Price of Anarchy in Auctions",
+      "topic": "efficiency guarantees",
+      "page_url": "https://arxiv.org/abs/1607.07684",
+      "pdf_url": "https://arxiv.org/pdf/1607.07684",
+      "retrieved_at": "2026-09-10T22:39:42.921191+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/1607.07684",
+          "resolved_url": "https://arxiv.org/abs/1607.07684",
+          "path": "sources/economic-games/papers/1607.07684/page.html",
+          "bytes": 40732,
+          "sha256": "cb1b0af189e019b06045a9c53a26e545f0459342f0616635aaf9fda9fdbdc913"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1607.07684",
+          "resolved_url": "https://arxiv.org/pdf/1607.07684",
+          "path": "sources/economic-games/papers/1607.07684/paper.pdf",
+          "bytes": 351414,
+          "sha256": "d3d8568540538c74302a86fe46b9155ecb35c033bf8e32b5a7181b094bd2a641"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 1607.07684: The Price of Anarchy in Auctions"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "The Price of Anarchy in Auctions"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/1607.07684v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "This survey outlines a general and modular theory for proving approximation guarantees for equilibria of auctions in complex settings. This theory complements traditional economic techniques, which generally focus on exact and optimal solutions and are accordingly limited to relatively stylized settings.\n  We highlight three user-friendly analytical tools: smoothness-type inequalities, which immediately yield approximation guarantees for many auction formats of interest in the special case of complete information and deterministic strategies; extension theorems, which extend such guarantees to randomized strategies, no-regret learning outcomes, and incomplete-information settings; and composition theorems, which extend such guarantees from simpler to more complex auctions. Combining these tools yields tight worst-case approximation guarantees for the equilibria of many widely-used auction formats."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "The Price of Anarchy in Auctions"
+        ],
+        "twitter:description": [
+          "This survey outlines a general and modular theory for proving approximation guarantees for equilibria of auctions in complex settings. This theory complements traditional economic techniques,..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "The Price of Anarchy in Auctions"
+        ],
+        "citation_author": [
+          "Roughgarden, Tim",
+          "Syrgkanis, Vasilis",
+          "Tardos, Eva"
+        ],
+        "citation_date": [
+          "2016/07/26"
+        ],
+        "citation_online_date": [
+          "2016/07/26"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/1607.07684"
+        ],
+        "citation_arxiv_id": [
+          "1607.07684"
+        ],
+        "citation_abstract": [
+          "This survey outlines a general and modular theory for proving approximation guarantees for equilibria of auctions in complex settings. This theory complements traditional economic techniques, which generally focus on exact and optimal solutions and are accordingly limited to relatively stylized settings. We highlight three user-friendly analytical tools: smoothness-type inequalities, which immediately yield approximation guarantees for many auction formats of interest in the special case of complete information and deterministic strategies; extension theorems, which extend such guarantees to randomized strategies, no-regret learning outcomes, and incomplete-information settings; and composition theorems, which extend such guarantees from simpler to more complex auctions. Combining these tools yields tight worst-case approximation guarantees for the equilibria of many widely-used auction formats."
+        ]
+      },
+      "extracted_text_characters": 143222,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "smith-1980-contract-net",
+      "title": "The Contract Net Protocol",
+      "topic": "distributed task contracts",
+      "page_url": null,
+      "pdf_url": "https://reidgsmith.com/The_Contract_Net_Protocol_Dec-1980.pdf",
+      "retrieved_at": "2026-09-10T22:39:42.936988+00:00",
+      "artifacts": [
+        {
+          "url": "https://reidgsmith.com/The_Contract_Net_Protocol_Dec-1980.pdf",
+          "resolved_url": "https://reidgsmith.com/The_Contract_Net_Protocol_Dec-1980.pdf",
+          "path": "sources/economic-games/papers/smith-1980-contract-net/paper.pdf",
+          "bytes": 227621,
+          "sha256": "0b098a438af2bfe720c548f810474108c1d95859f9a488190ba49fee837f64cc"
+        }
+      ],
+      "status": "ok",
+      "extracted_text_characters": 75924,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "gale-shapley-1962",
+      "title": "College Admissions and the Stability of Marriage",
+      "topic": "stable matching",
+      "page_url": null,
+      "pdf_url": "https://www.math.utoronto.ca/mccann/assignments/477/GaleShapley62.pdf",
+      "retrieved_at": "2026-09-10T22:39:43.148718+00:00",
+      "artifacts": [
+        {
+          "url": "https://www.math.utoronto.ca/mccann/assignments/477/GaleShapley62.pdf",
+          "resolved_url": "https://www.math.utoronto.ca/mccann/assignments/477/GaleShapley62.pdf",
+          "path": "sources/economic-games/papers/gale-shapley-1962/paper.pdf",
+          "bytes": 730126,
+          "sha256": "828c80ac9607df374c4f3e3b51af5db4e43952c60b2f5dba8dc7f3c6c568b21d"
+        }
+      ],
+      "status": "ok",
+      "extracted_text_characters": 21358,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "nash-1950-bargaining",
+      "title": "The Bargaining Problem",
+      "topic": "bargaining",
+      "page_url": null,
+      "pdf_url": "https://www.haverford.edu/sites/default/files/Nash1950.pdf",
+      "retrieved_at": "2026-09-10T22:39:43.293366+00:00",
+      "artifacts": [
+        {
+          "url": "https://www.haverford.edu/sites/default/files/Nash1950.pdf",
+          "resolved_url": "https://www.haverford.edu/sites/default/files/Nash1950.pdf",
+          "path": "sources/economic-games/papers/nash-1950-bargaining/paper.pdf",
+          "bytes": 388370,
+          "sha256": "6f6f054a717c025a1dd80a3612f1c24f7f2d251d214decfc2fcc9f689a261383"
+        }
+      ],
+      "status": "ok",
+      "extracted_text_characters": 19775,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "hart-mas-colell-2000",
+      "title": "A Simple Adaptive Procedure Leading to Correlated Equilibrium",
+      "topic": "regret matching",
+      "page_url": "https://ma.huji.ac.il/~hart/abs/adapt.html",
+      "pdf_url": "https://ma.huji.ac.il/~hart/papers/adapt.pdf",
+      "retrieved_at": "2026-09-10T22:40:36.395038+00:00",
+      "artifacts": [
+        {
+          "url": "https://ma.huji.ac.il/~hart/abs/adapt.html",
+          "resolved_url": "https://ma.huji.ac.il/~hart/abs/adapt.html",
+          "path": "sources/economic-games/papers/hart-mas-colell-2000/page.html",
+          "bytes": 2736,
+          "sha256": "f4424c0a7b43bf14d917115446ba57035e54c3744d16333f721441d85ba3592f"
+        },
+        {
+          "url": "https://ma.huji.ac.il/~hart/papers/adapt.pdf",
+          "resolved_url": "https://ma.huji.ac.il/~hart/papers/adapt.pdf",
+          "path": "sources/economic-games/papers/hart-mas-colell-2000/paper.pdf",
+          "bytes": 194809,
+          "sha256": "927c5f51cb6a76f5af723085970fa1028211d5080fabb36e3095ccba06b91889"
+        }
+      ],
+      "status": "ok",
+      "metadata": {},
+      "extracted_text_characters": 86220,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "hanson-market-scoring",
+      "title": "Logarithmic Market Scoring Rules for Modular Combinatorial Information Aggregation",
+      "topic": "prediction markets",
+      "page_url": null,
+      "pdf_url": "https://hanson.gmu.edu/mktscore.pdf",
+      "retrieved_at": "2026-09-10T22:39:43.457528+00:00",
+      "artifacts": [
+        {
+          "url": "https://hanson.gmu.edu/mktscore.pdf",
+          "resolved_url": "https://mason.gmu.edu/~rhanson/mktscore.pdf",
+          "path": "sources/economic-games/papers/hanson-market-scoring/paper.pdf",
+          "bytes": 152260,
+          "sha256": "fb1520ff080adaf8deff74d6789ca8d0b2d78a6979add1731468c0d1ceeb47b9"
+        }
+      ],
+      "status": "ok",
+      "extracted_text_characters": 38946,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "roughgarden-2013-agt",
+      "title": "CS364A Algorithmic Game Theory lecture notes",
+      "topic": "classical auctions congestion equilibrium",
+      "page_url": "https://theory.stanford.edu/~tim/f13/f13.html",
+      "pdf_url": "https://theory.stanford.edu/~tim/f13/l/f13.pdf",
+      "retrieved_at": "2026-09-10T22:39:43.765122+00:00",
+      "artifacts": [
+        {
+          "url": "https://theory.stanford.edu/~tim/f13/f13.html",
+          "resolved_url": "https://theory.stanford.edu/~tim/f13/f13.html",
+          "path": "sources/economic-games/papers/roughgarden-2013-agt/page.html",
+          "bytes": 24368,
+          "sha256": "4a48df3c50891ee897758cae4a3b0c7e324e59e801af444d65e9b9ace8bc751d"
+        },
+        {
+          "url": "https://theory.stanford.edu/~tim/f13/l/f13.pdf",
+          "resolved_url": "https://theory.stanford.edu/~tim/f13/l/f13.pdf",
+          "path": "sources/economic-games/papers/roughgarden-2013-agt/paper.pdf",
+          "bytes": 18549670,
+          "sha256": "b10258a0c142d7ae93502b5bdb14523a075bf4f9334a6298592c4b332f71e4be"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "": [
+          "0;URL=http://timroughgarden.org/f13/f13.html"
+        ]
+      },
+      "extracted_text_characters": 520274,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "myerson-1977-graphs",
+      "title": "Graphs and Cooperation in Games (working paper)",
+      "topic": "network coalition value",
+      "page_url": "https://pubsonline.informs.org/doi/10.1287/moor.2.3.225",
+      "pdf_url": "https://www.kellogg.northwestern.edu/research/math/papers/246.pdf",
+      "retrieved_at": "2026-09-10T22:40:36.395086+00:00",
+      "artifacts": [
+        {
+          "url": "https://www.kellogg.northwestern.edu/research/math/papers/246.pdf",
+          "resolved_url": "https://www.kellogg.northwestern.edu/research/math/papers/246.pdf",
+          "path": "sources/economic-games/papers/myerson-1977-graphs/paper.pdf",
+          "bytes": 373772,
+          "sha256": "72700f57c875b19d20703ddf532e362a01a02c48c1eb5a8189ef88658b6a6fd9"
+        }
+      ],
+      "status": "partial",
+      "errors": [
+        {
+          "url": "https://pubsonline.informs.org/doi/10.1287/moor.2.3.225",
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ],
+      "extracted_text_characters": 0,
+      "text_searchable": false
+    },
+    {
+      "kind": "papers",
+      "id": "shapley-1952-value",
+      "title": "A Value for n-Person Games (1952 RAND precursor to 1953 chapter)",
+      "topic": "coalition credit",
+      "page_url": "https://www.rand.org/pubs/papers/P295.html",
+      "pdf_url": "https://www.rand.org/content/dam/rand/pubs/papers/2021/P295.pdf",
+      "retrieved_at": "2026-09-10T22:40:36.395399+00:00",
+      "artifacts": [],
+      "status": "failed",
+      "errors": [
+        {
+          "url": "https://www.rand.org/pubs/papers/P295.html",
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "url": "https://www.rand.org/content/dam/rand/pubs/papers/2021/P295.pdf",
+          "error": "HTTP Error 403: Forbidden"
+        }
+      ],
+      "extracted_text_characters": 0,
+      "text_searchable": false
+    },
+    {
+      "kind": "posts",
+      "id": "deepmind-cooperation",
+      "title": "Understanding Agent Cooperation",
+      "page_url": "https://deepmind.google/blog/understanding-agent-cooperation/",
+      "retrieved_at": "2026-09-10T22:39:44.661631+00:00",
+      "artifacts": [
+        {
+          "url": "https://deepmind.google/blog/understanding-agent-cooperation/",
+          "resolved_url": "https://deepmind.google/blog/understanding-agent-cooperation/",
+          "path": "sources/economic-games/posts/deepmind-cooperation/page.html",
+          "bytes": 140781,
+          "sha256": "cdd699d8d961d47b08ce835828b844153c7444ae12b1781c2747540c8e062fc8"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "": [
+          "",
+          "ie=edge"
+        ],
+        "viewport": [
+          "width=device-width,initial-scale=1.0"
+        ],
+        "description": [
+          "We employ deep multi-agent reinforcement learning to model the emergence of cooperation. The new notion of sequential social dilemmas allows us to model how rational agents interact, and arrive at mo\u2026"
+        ],
+        "author": [
+          "Joel Leibo, Marc Lanctot, Thore Graepel, Vinicius Zambaldi, Janusz Marecki"
+        ],
+        "og:title": [
+          "Understanding Agent Cooperation"
+        ],
+        "og:description": [
+          "We employ deep multi-agent reinforcement learning to model the emergence of cooperation. The new notion of sequential social dilemmas allows us to model how rational agents interact, and arrive at more or less cooperative behaviours depending on the nature of the environment and the agents\u2019 cognitive capacity. The research may enable us to better understand and control the behaviour of complex multi-agent systems such as the economy, traffic, and environmental challenges."
+        ],
+        "og:image": [
+          "https://lh3.googleusercontent.com/C9xaunqL10nCln0mtKQbabi7LsTggeDoK9jE_FiqSWGL4EbNaj_cANBgywsbubVj9hF2k3igttz8BidATn-2oD0sJLdT0SmBuT8Rz0cMkf06Ab6cmf0=w1200-h630-n-nu-rw"
+        ],
+        "og:site_name": [
+          "Google DeepMind"
+        ],
+        "og:url": [
+          "https://deepmind.google/blog/understanding-agent-cooperation/"
+        ],
+        "og:type": [
+          "article"
+        ],
+        "article:author": [
+          "Joel Leibo, Marc Lanctot, Thore Graepel, Vinicius Zambaldi, Janusz Marecki"
+        ],
+        "article:published_time": [
+          "2017-02-02T00:00:00+00:00"
+        ],
+        "article:modified_time": [
+          "2026-07-03T13:45:03.834347+00:00"
+        ],
+        "article:section": [
+          "Research"
+        ],
+        "twitter:card": [
+          "summary_large_image"
+        ],
+        "twitter:title": [
+          "Understanding Agent Cooperation"
+        ],
+        "twitter:image": [
+          "https://lh3.googleusercontent.com/C9xaunqL10nCln0mtKQbabi7LsTggeDoK9jE_FiqSWGL4EbNaj_cANBgywsbubVj9hF2k3igttz8BidATn-2oD0sJLdT0SmBuT8Rz0cMkf06Ab6cmf0=w1200-h630-n-nu-rw"
+        ],
+        "twitter:description": [
+          "We employ deep multi-agent reinforcement learning to model the emergence of cooperation. The new notion of sequential social dilemmas allows us to model how rational agents interact, and arrive at more or less cooperative behaviours depending on the nature of the environment and the agents\u2019 cognitive capacity. The research may enable us to better understand and control the behaviour of complex multi-agent systems such as the economy, traffic, and environmental challenges."
+        ],
+        "twitter:site": [
+          "@GoogleDeepMind"
+        ]
+      }
+    },
+    {
+      "kind": "posts",
+      "id": "deepmind-melting-pot",
+      "title": "Melting Pot: an evaluation suite for multi-agent reinforcement learning",
+      "page_url": "https://deepmind.google/blog/melting-pot-an-evaluation-suite-for-multi-agent-reinforcement-learning/",
+      "retrieved_at": "2026-09-10T22:39:44.740997+00:00",
+      "artifacts": [
+        {
+          "url": "https://deepmind.google/blog/melting-pot-an-evaluation-suite-for-multi-agent-reinforcement-learning/",
+          "resolved_url": "https://deepmind.google/blog/melting-pot-an-evaluation-suite-for-multi-agent-reinforcement-learning/",
+          "path": "sources/economic-games/posts/deepmind-melting-pot/page.html",
+          "bytes": 145145,
+          "sha256": "0c94c359936b92813cfafb2b82d37f6294222f97e5dbc38882b4da173bab8fc0"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "": [
+          "",
+          "ie=edge"
+        ],
+        "viewport": [
+          "width=device-width,initial-scale=1.0"
+        ],
+        "description": [
+          "Here we introduce Melting Pot, a scalable evaluation suite for multi-agent reinforcement learning. Melting Pot assesses generalisation to novel social situations involving both familiar and unfamilia\u2026"
+        ],
+        "author": [
+          "Joel Z. Leibo, Edgar Du\u00e9\u00f1ez-Guzm\u00e1n, Alexander Vezhnevets, John Agapiou, Peter Sunehag, Raphael Koster, Jayd Matyas, Charlie Beattie, Igor Mordatch *, Thore Graepel"
+        ],
+        "og:title": [
+          "Melting Pot: an evaluation suite for multi-agent reinforcement learning"
+        ],
+        "og:description": [
+          "Here we introduce Melting Pot, a scalable evaluation suite for multi-agent reinforcement learning. Melting Pot assesses generalisation to novel social situations involving both familiar and unfamiliar individuals, and has been designed to test a broad range of social interactions such as: cooperation, competition, deception, reciprocation, trust, stubbornness and so on. Melting Pot offers researchers a set of 21 MARL \u201csubstrates\u201d (multi-agent games) on which to train agents, and over 85 unique test scenarios on which to evaluate these trained agents."
+        ],
+        "og:image": [
+          "https://lh3.googleusercontent.com/bMyZnMfsKGFUfUwlKMm5C7RhpZod5uICiS01C_2-Bnwpvf9iS6xXuk-ditsywmRqF_xEA-AHmqx4v8UR0Lg_CM0RU_20gYJiLPTSa-Zg--UHk8MILg=w1200-h630-n-nu-rw"
+        ],
+        "og:site_name": [
+          "Google DeepMind"
+        ],
+        "og:url": [
+          "https://deepmind.google/blog/melting-pot-an-evaluation-suite-for-multi-agent-reinforcement-learning/"
+        ],
+        "og:type": [
+          "article"
+        ],
+        "article:author": [
+          "Joel Z. Leibo, Edgar Du\u00e9\u00f1ez-Guzm\u00e1n, Alexander Vezhnevets, John Agapiou, Peter Sunehag, Raphael Koster, Jayd Matyas, Charlie Beattie, Igor Mordatch *, Thore Graepel"
+        ],
+        "article:published_time": [
+          "2021-07-14T00:00:00+00:00"
+        ],
+        "article:modified_time": [
+          "2026-07-06T11:57:49.021588+00:00"
+        ],
+        "article:section": [
+          "Research"
+        ],
+        "twitter:card": [
+          "summary_large_image"
+        ],
+        "twitter:title": [
+          "Melting Pot: an evaluation suite for multi-agent reinforcement learning"
+        ],
+        "twitter:image": [
+          "https://lh3.googleusercontent.com/bMyZnMfsKGFUfUwlKMm5C7RhpZod5uICiS01C_2-Bnwpvf9iS6xXuk-ditsywmRqF_xEA-AHmqx4v8UR0Lg_CM0RU_20gYJiLPTSa-Zg--UHk8MILg=w1200-h630-n-nu-rw"
+        ],
+        "twitter:description": [
+          "Here we introduce Melting Pot, a scalable evaluation suite for multi-agent reinforcement learning. Melting Pot assesses generalisation to novel social situations involving both familiar and unfamiliar individuals, and has been designed to test a broad range of social interactions such as: cooperation, competition, deception, reciprocation, trust, stubbornness and so on. Melting Pot offers researchers a set of 21 MARL \u201csubstrates\u201d (multi-agent games) on which to train agents, and over 85 unique test scenarios on which to evaluate these trained agents."
+        ],
+        "twitter:site": [
+          "@GoogleDeepMind"
+        ]
+      }
+    },
+    {
+      "kind": "posts",
+      "id": "deepmind-barter",
+      "title": "Emergent Bartering Behaviour in Multi-Agent Reinforcement Learning",
+      "page_url": "https://deepmind.google/blog/emergent-bartering-behaviour-in-multi-agent-reinforcement-learning/",
+      "retrieved_at": "2026-09-10T22:39:44.760567+00:00",
+      "artifacts": [
+        {
+          "url": "https://deepmind.google/blog/emergent-bartering-behaviour-in-multi-agent-reinforcement-learning/",
+          "resolved_url": "https://deepmind.google/blog/emergent-bartering-behaviour-in-multi-agent-reinforcement-learning/",
+          "path": "sources/economic-games/posts/deepmind-barter/page.html",
+          "bytes": 142224,
+          "sha256": "9f00e3418dfecf736b076aa5645d5e1e06ce080a567f69145f83ce19082bf56c"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "": [
+          "",
+          "ie=edge"
+        ],
+        "viewport": [
+          "width=device-width,initial-scale=1.0"
+        ],
+        "description": [
+          "In our recent paper, we explore how populations of deep reinforcement learning (deep RL) agents can learn microeconomic behaviours, such as production, consumption, and trading of goods. We find that\u2026"
+        ],
+        "author": [
+          "Mike Johanson, Edward Hughes, Finbarr Timbers, Joel Leibo"
+        ],
+        "og:title": [
+          "Emergent Bartering Behaviour in Multi-Agent Reinforcement Learning"
+        ],
+        "og:description": [
+          "In our recent paper, we explore how populations of deep reinforcement learning (deep RL) agents can learn microeconomic behaviours, such as production, consumption, and trading of goods. We find that artificial agents learn to make economically rational decisions about production, consumption, and prices, and react appropriately to supply and demand changes."
+        ],
+        "og:image": [
+          "https://lh3.googleusercontent.com/zC7H0heD4IBjHjI3_hd1vFVKrP4Jg7hY6RSXCViM1xhpZfmIdxZ5xQDxJchD574Fqr7JFVAZ9c1LMpoKGhsN9lxoEMPZsy0GYRNWOFwDqRlr4J5x6A=w1200-h630-n-nu-rw"
+        ],
+        "og:site_name": [
+          "Google DeepMind"
+        ],
+        "og:url": [
+          "https://deepmind.google/blog/emergent-bartering-behaviour-in-multi-agent-reinforcement-learning/"
+        ],
+        "og:type": [
+          "article"
+        ],
+        "article:author": [
+          "Mike Johanson, Edward Hughes, Finbarr Timbers, Joel Leibo"
+        ],
+        "article:published_time": [
+          "2022-05-16T00:00:00+00:00"
+        ],
+        "article:modified_time": [
+          "2026-07-07T08:54:03.823870+00:00"
+        ],
+        "article:section": [
+          "Research"
+        ],
+        "twitter:card": [
+          "summary_large_image"
+        ],
+        "twitter:title": [
+          "Emergent Bartering Behaviour in Multi-Agent Reinforcement Learning"
+        ],
+        "twitter:image": [
+          "https://lh3.googleusercontent.com/zC7H0heD4IBjHjI3_hd1vFVKrP4Jg7hY6RSXCViM1xhpZfmIdxZ5xQDxJchD574Fqr7JFVAZ9c1LMpoKGhsN9lxoEMPZsy0GYRNWOFwDqRlr4J5x6A=w1200-h630-n-nu-rw"
+        ],
+        "twitter:description": [
+          "In our recent paper, we explore how populations of deep reinforcement learning (deep RL) agents can learn microeconomic behaviours, such as production, consumption, and trading of goods. We find that artificial agents learn to make economically rational decisions about production, consumption, and prices, and react appropriately to supply and demand changes."
+        ],
+        "twitter:site": [
+          "@GoogleDeepMind"
+        ]
+      }
+    },
+    {
+      "kind": "posts",
+      "id": "salesforce-ai-economist",
+      "title": "The AI Economist: Improving Equality and Productivity with AI-Driven Tax Policies",
+      "page_url": "https://www.salesforce.com/blog/the-ai-economist/",
+      "retrieved_at": "2026-09-10T22:39:44.786603+00:00",
+      "artifacts": [
+        {
+          "url": "https://www.salesforce.com/blog/the-ai-economist/",
+          "resolved_url": "https://www.salesforce.com/blog/the-ai-economist/?bc=OTH",
+          "path": "sources/economic-games/posts/salesforce-ai-economist/page.html",
+          "bytes": 272546,
+          "sha256": "b0fbaa3ca6a9a873f01857d01b8283f14e2327fea8e701349c1f4f33da2d2e75"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "": [
+          ""
+        ],
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "theme-color": [
+          "#0D9DDA"
+        ],
+        "robots": [
+          "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        ],
+        "og:locale": [
+          "en_US"
+        ],
+        "og:type": [
+          "article"
+        ],
+        "og:title": [
+          "The AI Economist: Improving Equality and Productivity with AI-Driven Tax Policies"
+        ],
+        "og:description": [
+          "In this work, we focus on the opportunity to use AI to promote social welfare through the design of optimal tax policies in dynamic economies."
+        ],
+        "og:url": [
+          "https://www.salesforce.com/blog/the-ai-economist/"
+        ],
+        "og:site_name": [
+          "Salesforce"
+        ],
+        "article:publisher": [
+          "https://www.facebook.com/salesforce"
+        ],
+        "article:published_time": [
+          "2020-04-28T20:44:51+00:00"
+        ],
+        "article:modified_time": [
+          "2024-10-30T19:23:09+00:00"
+        ],
+        "og:image": [
+          "https://www.salesforce.com/blog/wp-content/uploads/sites/2/2020/04/1a-2-1.png"
+        ],
+        "og:image:width": [
+          "1858"
+        ],
+        "og:image:height": [
+          "764"
+        ],
+        "og:image:type": [
+          "image/png"
+        ],
+        "author": [
+          "Richard Socher, Alex Trott, Stephan Zheng, Sunil Srinivasa, Nikhil Naik, Melvin Gruesbeck, David Parkes"
+        ],
+        "twitter:card": [
+          "summary_large_image"
+        ],
+        "twitter:creator": [
+          "@salesforce"
+        ],
+        "twitter:site": [
+          "@salesforce"
+        ],
+        "twitter:label1": [
+          "Written by"
+        ],
+        "twitter:data1": [
+          "Richard Socher, Alex Trott, Stephan Zheng, Sunil Srinivasa, Nikhil Naik, Melvin Gruesbeck and David Parkes"
+        ],
+        "twitter:label2": [
+          "Est. reading time"
+        ],
+        "twitter:data2": [
+          "17 minutes"
+        ],
+        "msapplication-TileImage": [
+          "https://www.salesforce.com/blog/wp-content/uploads/sites/2/2020/10/cropped-salesforce-icon2-1.png?w=270"
+        ]
+      }
+    },
+    {
+      "kind": "posts",
+      "id": "salesforce-ai-economist-release",
+      "title": "The AI Economist: Join the Moonshot",
+      "page_url": "https://www.salesforce.com/blog/the-ai-economist-moonshot/",
+      "retrieved_at": "2026-09-10T22:39:45.210296+00:00",
+      "artifacts": [
+        {
+          "url": "https://www.salesforce.com/blog/the-ai-economist-moonshot/",
+          "resolved_url": "https://www.salesforce.com/blog/the-ai-economist-moonshot/?bc=OTH",
+          "path": "sources/economic-games/posts/salesforce-ai-economist-release/page.html",
+          "bytes": 211853,
+          "sha256": "2572d893afd4e7354bd4048cc2bd9290e6e30d3d5963b994a11e62c357d210d4"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "": [
+          ""
+        ],
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "theme-color": [
+          "#0D9DDA"
+        ],
+        "robots": [
+          "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        ],
+        "og:locale": [
+          "en_US"
+        ],
+        "og:type": [
+          "article"
+        ],
+        "og:title": [
+          "The AI Economist: Join the Moonshot"
+        ],
+        "og:description": [
+          "We are launching an open source collaborative project to build an AI Economist that can be used to guide policy making in the real world.  We invite you to join us in our mission to help improve the world with AI and economics."
+        ],
+        "og:url": [
+          "https://www.salesforce.com/blog/the-ai-economist-moonshot/"
+        ],
+        "og:site_name": [
+          "Salesforce"
+        ],
+        "article:publisher": [
+          "https://www.facebook.com/salesforce"
+        ],
+        "article:published_time": [
+          "2020-08-06T20:44:47+00:00"
+        ],
+        "article:modified_time": [
+          "2024-10-30T19:26:47+00:00"
+        ],
+        "og:image": [
+          "https://www.salesforce.com/blog/wp-content/uploads/sites/2/2020/08/02.jpg"
+        ],
+        "og:image:width": [
+          "1262"
+        ],
+        "og:image:height": [
+          "718"
+        ],
+        "og:image:type": [
+          "image/jpeg"
+        ],
+        "author": [
+          "Stephan Zheng"
+        ],
+        "twitter:card": [
+          "summary_large_image"
+        ],
+        "twitter:creator": [
+          "@salesforce"
+        ],
+        "twitter:site": [
+          "@salesforce"
+        ],
+        "twitter:label1": [
+          "Written by"
+        ],
+        "twitter:data1": [
+          "Stephan Zheng"
+        ],
+        "twitter:label2": [
+          "Est. reading time"
+        ],
+        "twitter:data2": [
+          "6 minutes"
+        ],
+        "msapplication-TileImage": [
+          "https://www.salesforce.com/blog/wp-content/uploads/sites/2/2020/10/cropped-salesforce-icon2-1.png?w=270"
+        ]
+      }
+    },
+    {
+      "kind": "repositories",
+      "id": "google-deepmind__open_spiel",
+      "title": "google-deepmind/open_spiel",
+      "url": "https://github.com/google-deepmind/open_spiel",
+      "topic": "game contracts CFR PSRO AlphaRank",
+      "retrieved_at": "2026-09-10T22:39:45.248539+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/google-deepmind/open_spiel/blob/48401890ee9857e611678302371378175a8e4c6b/LICENSE",
+          "resolved_url": "https://github.com/google-deepmind/open_spiel/blob/48401890ee9857e611678302371378175a8e4c6b/LICENSE",
+          "path": "sources/economic-games/repositories/google-deepmind__open_spiel/LICENSE",
+          "bytes": 11358,
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        {
+          "url": "https://github.com/google-deepmind/open_spiel/blob/48401890ee9857e611678302371378175a8e4c6b/README.md",
+          "resolved_url": "https://github.com/google-deepmind/open_spiel/blob/48401890ee9857e611678302371378175a8e4c6b/README.md",
+          "path": "sources/economic-games/repositories/google-deepmind__open_spiel/README.md",
+          "bytes": 4610,
+          "sha256": "57057c144957e606acd15315d4a0200832702ea8fb7aa3ec616bbd0a2f1f9ed1"
+        }
+      ],
+      "status": "ok",
+      "commit": "48401890ee9857e611678302371378175a8e4c6b",
+      "commit_date": "2026-08-31T20:31:36Z",
+      "checkout": "sources/economic-games/repositories/google-deepmind__open_spiel/checkout",
+      "experiments_reproduced": false,
+      "license_files": [
+        "LICENSE"
+      ],
+      "audit": {
+        "anchor": "open_spiel/python/algorithms/regret_matching.py",
+        "finding": "Action-regret vector update inspected; do not infer swap-regret guarantees from its name. CFR, PSRO and AlphaRank paths also located.",
+        "proposed_use": "Optional game and solver adapter",
+        "review_level": "selected code or README; not full audit"
+      }
+    },
+    {
+      "kind": "repositories",
+      "id": "drvinceknight__Nashpy",
+      "title": "drvinceknight/Nashpy",
+      "url": "https://github.com/drvinceknight/Nashpy",
+      "topic": "small normal form games",
+      "retrieved_at": "2026-09-10T22:39:45.266145+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/drvinceknight/Nashpy/blob/b80533daeec4e54a341b47a873efac96cf09a209/LICENSE",
+          "resolved_url": "https://github.com/drvinceknight/Nashpy/blob/b80533daeec4e54a341b47a873efac96cf09a209/LICENSE",
+          "path": "sources/economic-games/repositories/drvinceknight__Nashpy/LICENSE",
+          "bytes": 1069,
+          "sha256": "052df58fa5d8e7203147d8f1e91a15f4327e9df659c6f39868a66d24f30e886b"
+        },
+        {
+          "url": "https://github.com/drvinceknight/Nashpy/blob/b80533daeec4e54a341b47a873efac96cf09a209/README.md",
+          "resolved_url": "https://github.com/drvinceknight/Nashpy/blob/b80533daeec4e54a341b47a873efac96cf09a209/README.md",
+          "path": "sources/economic-games/repositories/drvinceknight__Nashpy/README.md",
+          "bytes": 5998,
+          "sha256": "e6bc928dd74b766b56653e9e003a5c324f0dca2c0cd31e34c0f9fe10d328012a"
+        }
+      ],
+      "status": "ok",
+      "commit": "b80533daeec4e54a341b47a873efac96cf09a209",
+      "commit_date": "2025-11-13T14:41:20Z",
+      "checkout": "sources/economic-games/repositories/drvinceknight__Nashpy/checkout",
+      "experiments_reproduced": false,
+      "license_files": [
+        "LICENSE"
+      ],
+      "audit": {
+        "anchor": "src/nashpy/algorithms/support_enumeration.py",
+        "finding": "Support enumeration and equilibrium checks located for small bimatrix controls.",
+        "proposed_use": "Optional small-game oracle",
+        "review_level": "selected code or README; not full audit"
+      }
+    },
+    {
+      "kind": "repositories",
+      "id": "Axelrod-Python__Axelrod",
+      "title": "Axelrod-Python/Axelrod",
+      "url": "https://github.com/Axelrod-Python/Axelrod",
+      "topic": "repeated game strategies and tournaments",
+      "retrieved_at": "2026-09-10T22:39:46.235666+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/Axelrod-Python/Axelrod/blob/153335cbac5b6324ca60175b730ed370496791b6/README.rst",
+          "resolved_url": "https://github.com/Axelrod-Python/Axelrod/blob/153335cbac5b6324ca60175b730ed370496791b6/README.rst",
+          "path": "sources/economic-games/repositories/Axelrod-Python__Axelrod/README.rst",
+          "bytes": 5640,
+          "sha256": "3a5d2df0eacb3d970f745a46aa5ca9ad79522ed92bd8865b2e196bff5196a7db"
+        },
+        {
+          "url": "https://github.com/Axelrod-Python/Axelrod/blob/153335cbac5b6324ca60175b730ed370496791b6/LICENSE.txt",
+          "resolved_url": "https://github.com/Axelrod-Python/Axelrod/blob/153335cbac5b6324ca60175b730ed370496791b6/LICENSE.txt",
+          "path": "sources/economic-games/repositories/Axelrod-Python__Axelrod/LICENSE.txt",
+          "bytes": 1178,
+          "sha256": "488dc57d24ebdb5e0be483b6663dc2cad1fe6152feec6df759fd4721341b722f"
+        }
+      ],
+      "status": "ok",
+      "commit": "153335cbac5b6324ca60175b730ed370496791b6",
+      "commit_date": "2026-08-05T13:49:59+09:00",
+      "checkout": "sources/economic-games/repositories/Axelrod-Python__Axelrod/checkout",
+      "experiments_reproduced": false,
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "audit": {
+        "anchor": "axelrod/strategies/titfortat.py",
+        "finding": "TitForTat and variants inspect opponent action history; a useful concrete strategy interface.",
+        "proposed_use": "Optional repeated-game strategies",
+        "review_level": "selected code or README; not full audit"
+      }
+    },
+    {
+      "kind": "repositories",
+      "id": "yasserfarouk__negmas",
+      "title": "yasserfarouk/negmas",
+      "url": "https://github.com/yasserfarouk/negmas",
+      "topic": "negotiation mechanisms and utility functions",
+      "retrieved_at": "2026-09-10T22:39:48.084956+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/yasserfarouk/negmas/blob/c0ccb5b9ecb67bd17d719cfe9cb0bc927ac61ec1/LICENSE",
+          "resolved_url": "https://github.com/yasserfarouk/negmas/blob/c0ccb5b9ecb67bd17d719cfe9cb0bc927ac61ec1/LICENSE",
+          "path": "sources/economic-games/repositories/yasserfarouk__negmas/LICENSE",
+          "bytes": 35257,
+          "sha256": "9ce574ce9ed9a127327fb96f72aebefdaed7c9895a2b44b732dc258afd32aa64"
+        },
+        {
+          "url": "https://github.com/yasserfarouk/negmas/blob/c0ccb5b9ecb67bd17d719cfe9cb0bc927ac61ec1/README.rst",
+          "resolved_url": "https://github.com/yasserfarouk/negmas/blob/c0ccb5b9ecb67bd17d719cfe9cb0bc927ac61ec1/README.rst",
+          "path": "sources/economic-games/repositories/yasserfarouk__negmas/README.rst",
+          "bytes": 21562,
+          "sha256": "056c2a9925a0feca4748eb795726b9ed11ed12354809275b270dd2e1bada3bfd"
+        }
+      ],
+      "status": "ok",
+      "commit": "c0ccb5b9ecb67bd17d719cfe9cb0bc927ac61ec1",
+      "commit_date": "2026-09-01T15:58:07+09:00",
+      "checkout": "sources/economic-games/repositories/yasserfarouk__negmas/checkout",
+      "experiments_reproduced": false,
+      "license_files": [
+        "LICENSE"
+      ],
+      "audit": {
+        "anchor": "src/negmas/sao/mechanism.py",
+        "finding": "Structured offers, response types, entry/exit, time limits and communication supported by SAOMechanism.",
+        "proposed_use": "Optional negotiation adapter",
+        "review_level": "selected code or README; not full audit"
+      }
+    },
+    {
+      "kind": "repositories",
+      "id": "gambitproject__gambit",
+      "title": "gambitproject/gambit",
+      "url": "https://github.com/gambitproject/gambit",
+      "topic": "exact small game equilibria",
+      "retrieved_at": "2026-09-10T22:39:48.413141+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/gambitproject/gambit/blob/fe3ad810c87a861b4a93e1688522774d826d288c/README.md",
+          "resolved_url": "https://github.com/gambitproject/gambit/blob/fe3ad810c87a861b4a93e1688522774d826d288c/README.md",
+          "path": "sources/economic-games/repositories/gambitproject__gambit/README.md",
+          "bytes": 7853,
+          "sha256": "97c12abd3b21fd20001442b24a606d98c0a234c21976b860054a93813384259a"
+        },
+        {
+          "url": "https://github.com/gambitproject/gambit/blob/fe3ad810c87a861b4a93e1688522774d826d288c/COPYING",
+          "resolved_url": "https://github.com/gambitproject/gambit/blob/fe3ad810c87a861b4a93e1688522774d826d288c/COPYING",
+          "path": "sources/economic-games/repositories/gambitproject__gambit/COPYING",
+          "bytes": 17987,
+          "sha256": "ba9ed2269151ad63b922598f3c5c19ddf781b2bbb6cb843ed9f085ecd1679c5d"
+        }
+      ],
+      "status": "ok",
+      "commit": "fe3ad810c87a861b4a93e1688522774d826d288c",
+      "commit_date": "2026-09-10T19:22:35+01:00",
+      "checkout": "sources/economic-games/repositories/gambitproject__gambit/checkout",
+      "experiments_reproduced": false,
+      "license_files": [
+        "COPYING"
+      ],
+      "audit": {
+        "anchor": "src/pygambit/nash.py",
+        "finding": "Python entry points for pure and mixed equilibrium routines; this is not a NumPy-only core dependency.",
+        "proposed_use": "Optional small-game solver",
+        "review_level": "selected code or README; not full audit"
+      }
+    },
+    {
+      "kind": "repositories",
+      "id": "salesforce__ai-economist",
+      "title": "salesforce/ai-economist",
+      "url": "https://github.com/salesforce/ai-economist",
+      "topic": "two level learned economic institutions",
+      "retrieved_at": "2026-09-10T22:39:48.720957+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/salesforce/ai-economist/blob/a84d5f3fdcabb207d9fde7754d34906903b3e184/README.md",
+          "resolved_url": "https://github.com/salesforce/ai-economist/blob/a84d5f3fdcabb207d9fde7754d34906903b3e184/README.md",
+          "path": "sources/economic-games/repositories/salesforce__ai-economist/README.md",
+          "bytes": 10003,
+          "sha256": "2939894d4ae4330735ea4858ef695651fca9226bab473555fd685ef25ba81f03"
+        },
+        {
+          "url": "https://github.com/salesforce/ai-economist/blob/a84d5f3fdcabb207d9fde7754d34906903b3e184/LICENSE.txt",
+          "resolved_url": "https://github.com/salesforce/ai-economist/blob/a84d5f3fdcabb207d9fde7754d34906903b3e184/LICENSE.txt",
+          "path": "sources/economic-games/repositories/salesforce__ai-economist/LICENSE.txt",
+          "bytes": 1482,
+          "sha256": "3360d12ecbe2fd87e7eddc6619daacfcb9132b2def5c3df6410941e1a2df6bfb"
+        }
+      ],
+      "status": "ok",
+      "commit": "a84d5f3fdcabb207d9fde7754d34906903b3e184",
+      "commit_date": "2022-05-09T14:28:55-07:00",
+      "checkout": "sources/economic-games/repositories/salesforce__ai-economist/checkout",
+      "experiments_reproduced": false,
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "audit": {
+        "anchor": "ai_economist/foundation/components/continuous_double_auction.py",
+        "finding": "Commodity bids, asks, inventory constraints and expiry represented in a market component.",
+        "proposed_use": "Environment/institution design reference",
+        "review_level": "selected code or README; not full audit"
+      }
+    },
+    {
+      "kind": "repositories",
+      "id": "saisrivatsan__deep-opt-auctions",
+      "title": "saisrivatsan/deep-opt-auctions",
+      "url": "https://github.com/saisrivatsan/deep-opt-auctions",
+      "topic": "RegretNet learned auction mechanisms",
+      "retrieved_at": "2026-09-10T22:39:48.835187+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/saisrivatsan/deep-opt-auctions/blob/466e154b123921c142ee811216d0e64415bf31a5/LICENSE",
+          "resolved_url": "https://github.com/saisrivatsan/deep-opt-auctions/blob/466e154b123921c142ee811216d0e64415bf31a5/LICENSE",
+          "path": "sources/economic-games/repositories/saisrivatsan__deep-opt-auctions/LICENSE",
+          "bytes": 1095,
+          "sha256": "56d88afaadcf3576b30b34a4fbbc6b06eb87f0305d3435db60a9ad992048ff00"
+        },
+        {
+          "url": "https://github.com/saisrivatsan/deep-opt-auctions/blob/466e154b123921c142ee811216d0e64415bf31a5/README.md",
+          "resolved_url": "https://github.com/saisrivatsan/deep-opt-auctions/blob/466e154b123921c142ee811216d0e64415bf31a5/README.md",
+          "path": "sources/economic-games/repositories/saisrivatsan__deep-opt-auctions/README.md",
+          "bytes": 6492,
+          "sha256": "cae3f56a72a1f5042a66efc3a864ec0791446ed22881ca37354f7d15a2068811"
+        }
+      ],
+      "status": "ok",
+      "commit": "466e154b123921c142ee811216d0e64415bf31a5",
+      "commit_date": "2019-11-24T17:06:14-05:00",
+      "checkout": "sources/economic-games/repositories/saisrivatsan__deep-opt-auctions/checkout",
+      "experiments_reproduced": false,
+      "license_files": [
+        "LICENSE"
+      ],
+      "audit": {
+        "anchor": "regretNet/trainer/trainer.py",
+        "finding": "Training implementation present; README specifies Python 2.7 and TensorFlow. Historical reference requiring porting.",
+        "proposed_use": "Research reference, not drop-in dependency",
+        "review_level": "selected code or README; not full audit"
+      }
+    },
+    {
+      "kind": "repositories",
+      "id": "jiangjiechen__auction-arena",
+      "title": "jiangjiechen/auction-arena",
+      "url": "https://github.com/jiangjiechen/auction-arena",
+      "topic": "LLM auction benchmark",
+      "retrieved_at": "2026-09-10T22:39:50.675171+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/jiangjiechen/auction-arena/blob/d0f3bc851eb376d4ea5e69ae5fe52ec5be987bb3/LICENSE",
+          "resolved_url": "https://github.com/jiangjiechen/auction-arena/blob/d0f3bc851eb376d4ea5e69ae5fe52ec5be987bb3/LICENSE",
+          "path": "sources/economic-games/repositories/jiangjiechen__auction-arena/LICENSE",
+          "bytes": 11357,
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        },
+        {
+          "url": "https://github.com/jiangjiechen/auction-arena/blob/d0f3bc851eb376d4ea5e69ae5fe52ec5be987bb3/README.md",
+          "resolved_url": "https://github.com/jiangjiechen/auction-arena/blob/d0f3bc851eb376d4ea5e69ae5fe52ec5be987bb3/README.md",
+          "path": "sources/economic-games/repositories/jiangjiechen__auction-arena/README.md",
+          "bytes": 2003,
+          "sha256": "74485755484b290f92c3144e345c139c42540b595c6b4c16a316121ed073b6d1"
+        }
+      ],
+      "status": "ok",
+      "commit": "d0f3bc851eb376d4ea5e69ae5fe52ec5be987bb3",
+      "commit_date": "2024-01-28T17:28:27+08:00",
+      "checkout": "sources/economic-games/repositories/jiangjiechen__auction-arena/checkout",
+      "experiments_reproduced": false,
+      "license_files": [
+        "LICENSE"
+      ],
+      "audit": {
+        "anchor": "src/auctioneer_base.py",
+        "finding": "Auctioneer model and separate bidder implementation present. Model calls require separate setup.",
+        "proposed_use": "LLM benchmark adapter candidate",
+        "review_level": "selected code or README; not full audit"
+      }
+    },
+    {
+      "kind": "repositories",
+      "id": "pnnl__HyperNetX",
+      "title": "pnnl/HyperNetX",
+      "url": "https://github.com/pnnl/HyperNetX",
+      "topic": "hyperedge incidence and analysis",
+      "retrieved_at": "2026-09-10T22:39:50.917460+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/pnnl/HyperNetX/blob/cd2a4153896e780366bd688934646310f9568d18/README.md",
+          "resolved_url": "https://github.com/pnnl/HyperNetX/blob/cd2a4153896e780366bd688934646310f9568d18/README.md",
+          "path": "sources/economic-games/repositories/pnnl__HyperNetX/README.md",
+          "bytes": 17661,
+          "sha256": "c7816fb78411e2052d2a2e65f6b69ecf54dff1209b2d21ed5d6875cce69e2c58"
+        },
+        {
+          "url": "https://github.com/pnnl/HyperNetX/blob/cd2a4153896e780366bd688934646310f9568d18/LICENSE.rst",
+          "resolved_url": "https://github.com/pnnl/HyperNetX/blob/cd2a4153896e780366bd688934646310f9568d18/LICENSE.rst",
+          "path": "sources/economic-games/repositories/pnnl__HyperNetX/LICENSE.rst",
+          "bytes": 1531,
+          "sha256": "6c180c087a120e85189a7f81090da59246af45d2defb9540587bff0aee9abd5c"
+        }
+      ],
+      "status": "ok",
+      "commit": "cd2a4153896e780366bd688934646310f9568d18",
+      "commit_date": "2026-04-14T00:11:50Z",
+      "checkout": "sources/economic-games/repositories/pnnl__HyperNetX/checkout",
+      "experiments_reproduced": false,
+      "license_files": [
+        "LICENSE.rst"
+      ],
+      "audit": {
+        "anchor": "hypernetx/classes/hypergraph.py",
+        "finding": "Hypergraph class located; supplies structural representation, not economic settlement.",
+        "proposed_use": "Optional structure adapter",
+        "review_level": "selected code or README; not full audit"
+      }
+    },
+    {
+      "kind": "repositories",
+      "id": "xgi-org__xgi",
+      "title": "xgi-org/xgi",
+      "url": "https://github.com/xgi-org/xgi",
+      "topic": "higher order group interactions",
+      "retrieved_at": "2026-09-10T22:39:53.196597+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/xgi-org/xgi/blob/93b95ed9bb8de9f47ff30ea60dd3694b36dae578/LICENSE.md",
+          "resolved_url": "https://github.com/xgi-org/xgi/blob/93b95ed9bb8de9f47ff30ea60dd3694b36dae578/LICENSE.md",
+          "path": "sources/economic-games/repositories/xgi-org__xgi/LICENSE.md",
+          "bytes": 3224,
+          "sha256": "d92eabdba9931bea4d332014eb9a517cf05621d3a6a9cd3157d0bd4da32f4485"
+        },
+        {
+          "url": "https://github.com/xgi-org/xgi/blob/93b95ed9bb8de9f47ff30ea60dd3694b36dae578/README.md",
+          "resolved_url": "https://github.com/xgi-org/xgi/blob/93b95ed9bb8de9f47ff30ea60dd3694b36dae578/README.md",
+          "path": "sources/economic-games/repositories/xgi-org__xgi/README.md",
+          "bytes": 7356,
+          "sha256": "e452dd0adf47586e53775d7f6cd34fba291c950daa165a7822d20c770f315c9b"
+        }
+      ],
+      "status": "ok",
+      "commit": "93b95ed9bb8de9f47ff30ea60dd3694b36dae578",
+      "commit_date": "2026-08-27T10:04:48+02:00",
+      "checkout": "sources/economic-games/repositories/xgi-org__xgi/checkout",
+      "experiments_reproduced": false,
+      "license_files": [
+        "LICENSE.md"
+      ],
+      "audit": {
+        "anchor": "xgi/core/hypergraph.py",
+        "finding": "Hypergraph and directed-hypergraph classes located; games still require separate semantics.",
+        "proposed_use": "Optional structure adapter",
+        "review_level": "selected code or README; not full audit"
+      }
+    },
+    {
+      "kind": "repositories",
+      "id": "lechmazur__pact",
+      "title": "lechmazur/pact",
+      "url": "https://github.com/lechmazur/pact",
+      "topic": "LLM bilateral bargaining benchmark",
+      "retrieved_at": "2026-09-10T22:39:53.323458+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/lechmazur/pact/blob/b90fb74e62cfb927525beef47960d355b2fcb352/README.md",
+          "resolved_url": "https://github.com/lechmazur/pact/blob/b90fb74e62cfb927525beef47960d355b2fcb352/README.md",
+          "path": "sources/economic-games/repositories/lechmazur__pact/README.md",
+          "bytes": 35530,
+          "sha256": "69603e30f0b054f389460335e89e88ef24662b2dd146ffef7f8f3d1e9d5e2822"
+        }
+      ],
+      "status": "ok",
+      "commit": "b90fb74e62cfb927525beef47960d355b2fcb352",
+      "commit_date": "2026-06-23T16:27:02-04:00",
+      "checkout": "sources/economic-games/repositories/lechmazur__pact/checkout",
+      "experiments_reproduced": false,
+      "license_files": [],
+      "audit": {
+        "anchor": "README.md",
+        "finding": "Checkout consists of README, dossiers, images, logs and prompts; no executable Python harness found.",
+        "proposed_use": "Benchmark protocol/transcript corpus",
+        "review_level": "selected code or README; not full audit"
+      }
+    },
+    {
+      "kind": "repositories",
+      "id": "lechmazur__bazaar",
+      "title": "lechmazur/bazaar",
+      "url": "https://github.com/lechmazur/bazaar",
+      "topic": "LLM markets and algorithmic trading baselines",
+      "retrieved_at": "2026-09-10T22:39:56.342578+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/lechmazur/bazaar/blob/799208efcd9074ff098cf8aaf08f65abed2ab858/README.md",
+          "resolved_url": "https://github.com/lechmazur/bazaar/blob/799208efcd9074ff098cf8aaf08f65abed2ab858/README.md",
+          "path": "sources/economic-games/repositories/lechmazur__bazaar/README.md",
+          "bytes": 18360,
+          "sha256": "8aab526fa4d535df372d886abdf1ec1d2ac971a3e91d020d091ee2afd93146ac"
+        }
+      ],
+      "status": "ok",
+      "commit": "799208efcd9074ff098cf8aaf08f65abed2ab858",
+      "commit_date": "2025-07-29T20:00:23-04:00",
+      "checkout": "sources/economic-games/repositories/lechmazur__bazaar/checkout",
+      "experiments_reproduced": false,
+      "license_files": [],
+      "audit": {
+        "anchor": "README.md",
+        "finding": "Checkout consists of README, images, logs and prompts; described algorithmic baselines are not supplied as executable Python.",
+        "proposed_use": "Benchmark protocol/transcript corpus",
+        "review_level": "selected code or README; not full audit"
+      }
+    },
+    {
+      "kind": "repositories",
+      "id": "google-deepmind__meltingpot",
+      "title": "google-deepmind/meltingpot",
+      "url": "https://github.com/google-deepmind/meltingpot",
+      "topic": "social dilemmas and cross play",
+      "retrieved_at": "2026-09-10T22:40:00.542814+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/google-deepmind/meltingpot/blob/817f8c1974863a91909c04c7a69dd33993199ec6/LICENSE",
+          "resolved_url": "https://github.com/google-deepmind/meltingpot/blob/817f8c1974863a91909c04c7a69dd33993199ec6/LICENSE",
+          "path": "sources/economic-games/repositories/google-deepmind__meltingpot/LICENSE",
+          "bytes": 11358,
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        {
+          "url": "https://github.com/google-deepmind/meltingpot/blob/817f8c1974863a91909c04c7a69dd33993199ec6/README.md",
+          "resolved_url": "https://github.com/google-deepmind/meltingpot/blob/817f8c1974863a91909c04c7a69dd33993199ec6/README.md",
+          "path": "sources/economic-games/repositories/google-deepmind__meltingpot/README.md",
+          "bytes": 6973,
+          "sha256": "8ebf8c19383c274823f617f48c74f88d786ff356b15db0704087a4e884d529ae"
+        }
+      ],
+      "status": "ok",
+      "commit": "817f8c1974863a91909c04c7a69dd33993199ec6",
+      "commit_date": "2026-09-10T10:24:09-07:00",
+      "checkout": "sources/economic-games/repositories/google-deepmind__meltingpot/checkout",
+      "experiments_reproduced": false,
+      "license_files": [
+        "LICENSE"
+      ],
+      "audit": {
+        "anchor": "meltingpot/configs/substrates/__init__.py",
+        "finding": "Substrate registry located; full environment stack is separate from SwarmKit.",
+        "proposed_use": "Social-game evaluation reference",
+        "review_level": "selected code or README; not full audit"
+      }
+    },
+    {
+      "kind": "repositories",
+      "id": "jswistak__competitive-market-simulation",
+      "title": "jswistak/competitive-market-simulation",
+      "url": "https://github.com/jswistak/competitive-market-simulation",
+      "topic": "September 2026 LLM double auction experiment; linked from paper 2609.02580",
+      "retrieved_at": "2026-09-10T22:40:36.399579+00:00",
+      "artifacts": [
+        {
+          "url": "https://github.com/jswistak/competitive-market-simulation/blob/af6f7925384efed3a8b84b55996e6b31d6014f7d/LICENSE",
+          "resolved_url": "https://github.com/jswistak/competitive-market-simulation/blob/af6f7925384efed3a8b84b55996e6b31d6014f7d/LICENSE",
+          "path": "sources/economic-games/repositories/jswistak__competitive-market-simulation/LICENSE",
+          "bytes": 1068,
+          "sha256": "9f1abe28a25b5f6f95c58a81a647de3fa72ff6388d228c59bddd079255709989"
+        },
+        {
+          "url": "https://github.com/jswistak/competitive-market-simulation/blob/af6f7925384efed3a8b84b55996e6b31d6014f7d/README.md",
+          "resolved_url": "https://github.com/jswistak/competitive-market-simulation/blob/af6f7925384efed3a8b84b55996e6b31d6014f7d/README.md",
+          "path": "sources/economic-games/repositories/jswistak__competitive-market-simulation/README.md",
+          "bytes": 26346,
+          "sha256": "da9aa82fcd922e050dcec27ddc2278967bdb75a24b2d542ec785f6e644bae4f3"
+        }
+      ],
+      "status": "ok",
+      "commit": "af6f7925384efed3a8b84b55996e6b31d6014f7d",
+      "commit_date": "2026-08-23T19:31:58+02:00",
+      "checkout": "sources/economic-games/repositories/jswistak__competitive-market-simulation/checkout",
+      "experiments_reproduced": false,
+      "license_files": [
+        "LICENSE"
+      ],
+      "audit": {
+        "anchor": "src/market_simulation/agents/zi.py",
+        "finding": "Constrained/unconstrained zero-intelligence functions emit the same response schemas as LLM decisions. Linked from 2609.02580.",
+        "proposed_use": "Recent market benchmark adapter candidate",
+        "review_level": "selected code or README; not full audit"
+      }
+    }
+  ]
+}

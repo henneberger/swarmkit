@@ -1,0 +1,38 @@
+{
+  "kind": "repositories",
+  "id": "google-deepmind__open_spiel",
+  "title": "google-deepmind/open_spiel",
+  "url": "https://github.com/google-deepmind/open_spiel",
+  "topic": "game contracts CFR PSRO AlphaRank",
+  "retrieved_at": "2026-09-10T22:39:45.248539+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/google-deepmind/open_spiel/blob/48401890ee9857e611678302371378175a8e4c6b/LICENSE",
+      "resolved_url": "https://github.com/google-deepmind/open_spiel/blob/48401890ee9857e611678302371378175a8e4c6b/LICENSE",
+      "path": "sources/economic-games/repositories/google-deepmind__open_spiel/LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "url": "https://github.com/google-deepmind/open_spiel/blob/48401890ee9857e611678302371378175a8e4c6b/README.md",
+      "resolved_url": "https://github.com/google-deepmind/open_spiel/blob/48401890ee9857e611678302371378175a8e4c6b/README.md",
+      "path": "sources/economic-games/repositories/google-deepmind__open_spiel/README.md",
+      "bytes": 4610,
+      "sha256": "57057c144957e606acd15315d4a0200832702ea8fb7aa3ec616bbd0a2f1f9ed1"
+    }
+  ],
+  "status": "ok",
+  "commit": "48401890ee9857e611678302371378175a8e4c6b",
+  "commit_date": "2026-08-31T20:31:36Z",
+  "checkout": "sources/economic-games/repositories/google-deepmind__open_spiel/checkout",
+  "experiments_reproduced": false,
+  "license_files": [
+    "LICENSE"
+  ],
+  "audit": {
+    "anchor": "open_spiel/python/algorithms/regret_matching.py",
+    "finding": "Action-regret vector update inspected; do not infer swap-regret guarantees from its name. CFR, PSRO and AlphaRank paths also located.",
+    "proposed_use": "Optional game and solver adapter",
+    "review_level": "selected code or README; not full audit"
+  }
+}

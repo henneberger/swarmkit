@@ -1,0 +1,38 @@
+{
+  "kind": "repositories",
+  "id": "saisrivatsan__deep-opt-auctions",
+  "title": "saisrivatsan/deep-opt-auctions",
+  "url": "https://github.com/saisrivatsan/deep-opt-auctions",
+  "topic": "RegretNet learned auction mechanisms",
+  "retrieved_at": "2026-09-10T22:39:48.835187+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/saisrivatsan/deep-opt-auctions/blob/466e154b123921c142ee811216d0e64415bf31a5/LICENSE",
+      "resolved_url": "https://github.com/saisrivatsan/deep-opt-auctions/blob/466e154b123921c142ee811216d0e64415bf31a5/LICENSE",
+      "path": "sources/economic-games/repositories/saisrivatsan__deep-opt-auctions/LICENSE",
+      "bytes": 1095,
+      "sha256": "56d88afaadcf3576b30b34a4fbbc6b06eb87f0305d3435db60a9ad992048ff00"
+    },
+    {
+      "url": "https://github.com/saisrivatsan/deep-opt-auctions/blob/466e154b123921c142ee811216d0e64415bf31a5/README.md",
+      "resolved_url": "https://github.com/saisrivatsan/deep-opt-auctions/blob/466e154b123921c142ee811216d0e64415bf31a5/README.md",
+      "path": "sources/economic-games/repositories/saisrivatsan__deep-opt-auctions/README.md",
+      "bytes": 6492,
+      "sha256": "cae3f56a72a1f5042a66efc3a864ec0791446ed22881ca37354f7d15a2068811"
+    }
+  ],
+  "status": "ok",
+  "commit": "466e154b123921c142ee811216d0e64415bf31a5",
+  "commit_date": "2019-11-24T17:06:14-05:00",
+  "checkout": "sources/economic-games/repositories/saisrivatsan__deep-opt-auctions/checkout",
+  "experiments_reproduced": false,
+  "license_files": [
+    "LICENSE"
+  ],
+  "audit": {
+    "anchor": "regretNet/trainer/trainer.py",
+    "finding": "Training implementation present; README specifies Python 2.7 and TensorFlow. Historical reference requiring porting.",
+    "proposed_use": "Research reference, not drop-in dependency",
+    "review_level": "selected code or README; not full audit"
+  }
+}

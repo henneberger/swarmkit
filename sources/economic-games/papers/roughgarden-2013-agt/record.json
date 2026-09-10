@@ -1,0 +1,33 @@
+{
+  "kind": "papers",
+  "id": "roughgarden-2013-agt",
+  "title": "CS364A Algorithmic Game Theory lecture notes",
+  "topic": "classical auctions congestion equilibrium",
+  "page_url": "https://theory.stanford.edu/~tim/f13/f13.html",
+  "pdf_url": "https://theory.stanford.edu/~tim/f13/l/f13.pdf",
+  "retrieved_at": "2026-09-10T22:39:43.765122+00:00",
+  "artifacts": [
+    {
+      "url": "https://theory.stanford.edu/~tim/f13/f13.html",
+      "resolved_url": "https://theory.stanford.edu/~tim/f13/f13.html",
+      "path": "sources/economic-games/papers/roughgarden-2013-agt/page.html",
+      "bytes": 24368,
+      "sha256": "4a48df3c50891ee897758cae4a3b0c7e324e59e801af444d65e9b9ace8bc751d"
+    },
+    {
+      "url": "https://theory.stanford.edu/~tim/f13/l/f13.pdf",
+      "resolved_url": "https://theory.stanford.edu/~tim/f13/l/f13.pdf",
+      "path": "sources/economic-games/papers/roughgarden-2013-agt/paper.pdf",
+      "bytes": 18549670,
+      "sha256": "b10258a0c142d7ae93502b5bdb14523a075bf4f9334a6298592c4b332f71e4be"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "": [
+      "0;URL=http://timroughgarden.org/f13/f13.html"
+    ]
+  },
+  "extracted_text_characters": 520274,
+  "text_searchable": true
+}

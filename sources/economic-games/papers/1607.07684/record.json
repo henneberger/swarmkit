@@ -1,0 +1,113 @@
+{
+  "kind": "papers",
+  "id": "1607.07684",
+  "title": "The Price of Anarchy in Auctions",
+  "topic": "efficiency guarantees",
+  "page_url": "https://arxiv.org/abs/1607.07684",
+  "pdf_url": "https://arxiv.org/pdf/1607.07684",
+  "retrieved_at": "2026-09-10T22:39:42.921191+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/1607.07684",
+      "resolved_url": "https://arxiv.org/abs/1607.07684",
+      "path": "sources/economic-games/papers/1607.07684/page.html",
+      "bytes": 40732,
+      "sha256": "cb1b0af189e019b06045a9c53a26e545f0459342f0616635aaf9fda9fdbdc913"
+    },
+    {
+      "url": "https://arxiv.org/pdf/1607.07684",
+      "resolved_url": "https://arxiv.org/pdf/1607.07684",
+      "path": "sources/economic-games/papers/1607.07684/paper.pdf",
+      "bytes": 351414,
+      "sha256": "d3d8568540538c74302a86fe46b9155ecb35c033bf8e32b5a7181b094bd2a641"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 1607.07684: The Price of Anarchy in Auctions"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "The Price of Anarchy in Auctions"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/1607.07684v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "This survey outlines a general and modular theory for proving approximation guarantees for equilibria of auctions in complex settings. This theory complements traditional economic techniques, which generally focus on exact and optimal solutions and are accordingly limited to relatively stylized settings.\n  We highlight three user-friendly analytical tools: smoothness-type inequalities, which immediately yield approximation guarantees for many auction formats of interest in the special case of complete information and deterministic strategies; extension theorems, which extend such guarantees to randomized strategies, no-regret learning outcomes, and incomplete-information settings; and composition theorems, which extend such guarantees from simpler to more complex auctions. Combining these tools yields tight worst-case approximation guarantees for the equilibria of many widely-used auction formats."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "The Price of Anarchy in Auctions"
+    ],
+    "twitter:description": [
+      "This survey outlines a general and modular theory for proving approximation guarantees for equilibria of auctions in complex settings. This theory complements traditional economic techniques,..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "The Price of Anarchy in Auctions"
+    ],
+    "citation_author": [
+      "Roughgarden, Tim",
+      "Syrgkanis, Vasilis",
+      "Tardos, Eva"
+    ],
+    "citation_date": [
+      "2016/07/26"
+    ],
+    "citation_online_date": [
+      "2016/07/26"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/1607.07684"
+    ],
+    "citation_arxiv_id": [
+      "1607.07684"
+    ],
+    "citation_abstract": [
+      "This survey outlines a general and modular theory for proving approximation guarantees for equilibria of auctions in complex settings. This theory complements traditional economic techniques, which generally focus on exact and optimal solutions and are accordingly limited to relatively stylized settings. We highlight three user-friendly analytical tools: smoothness-type inequalities, which immediately yield approximation guarantees for many auction formats of interest in the special case of complete information and deterministic strategies; extension theorems, which extend such guarantees to randomized strategies, no-regret learning outcomes, and incomplete-information settings; and composition theorems, which extend such guarantees from simpler to more complex auctions. Combining these tools yields tight worst-case approximation guarantees for the equilibria of many widely-used auction formats."
+    ]
+  },
+  "extracted_text_characters": 143222,
+  "text_searchable": true
+}

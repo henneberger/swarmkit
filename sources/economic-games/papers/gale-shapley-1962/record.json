@@ -1,0 +1,21 @@
+{
+  "kind": "papers",
+  "id": "gale-shapley-1962",
+  "title": "College Admissions and the Stability of Marriage",
+  "topic": "stable matching",
+  "page_url": null,
+  "pdf_url": "https://www.math.utoronto.ca/mccann/assignments/477/GaleShapley62.pdf",
+  "retrieved_at": "2026-09-10T22:39:43.148718+00:00",
+  "artifacts": [
+    {
+      "url": "https://www.math.utoronto.ca/mccann/assignments/477/GaleShapley62.pdf",
+      "resolved_url": "https://www.math.utoronto.ca/mccann/assignments/477/GaleShapley62.pdf",
+      "path": "sources/economic-games/papers/gale-shapley-1962/paper.pdf",
+      "bytes": 730126,
+      "sha256": "828c80ac9607df374c4f3e3b51af5db4e43952c60b2f5dba8dc7f3c6c568b21d"
+    }
+  ],
+  "status": "ok",
+  "extracted_text_characters": 21358,
+  "text_searchable": true
+}

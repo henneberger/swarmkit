@@ -1,0 +1,38 @@
+{
+  "kind": "repositories",
+  "id": "xgi-org__xgi",
+  "title": "xgi-org/xgi",
+  "url": "https://github.com/xgi-org/xgi",
+  "topic": "higher order group interactions",
+  "retrieved_at": "2026-09-10T22:39:53.196597+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/xgi-org/xgi/blob/93b95ed9bb8de9f47ff30ea60dd3694b36dae578/LICENSE.md",
+      "resolved_url": "https://github.com/xgi-org/xgi/blob/93b95ed9bb8de9f47ff30ea60dd3694b36dae578/LICENSE.md",
+      "path": "sources/economic-games/repositories/xgi-org__xgi/LICENSE.md",
+      "bytes": 3224,
+      "sha256": "d92eabdba9931bea4d332014eb9a517cf05621d3a6a9cd3157d0bd4da32f4485"
+    },
+    {
+      "url": "https://github.com/xgi-org/xgi/blob/93b95ed9bb8de9f47ff30ea60dd3694b36dae578/README.md",
+      "resolved_url": "https://github.com/xgi-org/xgi/blob/93b95ed9bb8de9f47ff30ea60dd3694b36dae578/README.md",
+      "path": "sources/economic-games/repositories/xgi-org__xgi/README.md",
+      "bytes": 7356,
+      "sha256": "e452dd0adf47586e53775d7f6cd34fba291c950daa165a7822d20c770f315c9b"
+    }
+  ],
+  "status": "ok",
+  "commit": "93b95ed9bb8de9f47ff30ea60dd3694b36dae578",
+  "commit_date": "2026-08-27T10:04:48+02:00",
+  "checkout": "sources/economic-games/repositories/xgi-org__xgi/checkout",
+  "experiments_reproduced": false,
+  "license_files": [
+    "LICENSE.md"
+  ],
+  "audit": {
+    "anchor": "xgi/core/hypergraph.py",
+    "finding": "Hypergraph and directed-hypergraph classes located; games still require separate semantics.",
+    "proposed_use": "Optional structure adapter",
+    "review_level": "selected code or README; not full audit"
+  }
+}

@@ -1,0 +1,224 @@
+
+
+  [2410.10921] Cooperation in Public Goods Games: Leveraging Other-Regarding Reinforcement Learning on Hypergraphs
+
+    Skip to main content
+
+      Search
+
+    Submit
+    Donate
+
+      Log in
+
+      Search arXiv
+
+      Press Enter to search · Advanced search
+
+Physics > Physics and Society
+
+      arXiv:2410.10921 (physics)
+
+  [Submitted on 14 Oct 2024]
+
+Title:Cooperation in Public Goods Games: Leveraging Other-Regarding Reinforcement Learning on Hypergraphs
+
+Authors:Bo-Ying Li, Zhen-Na Zhang, Guo-Zhong Zheng, Chao-Ran Cai, Ji-Qiang Zhang, Chen Li            
+View a PDF of the paper titled Cooperation in Public Goods Games: Leveraging Other-Regarding Reinforcement Learning on Hypergraphs, by Bo-Ying Li and 5 other authors
+    View PDF
+    HTML (experimental)
+
+            Abstract:Cooperation as a self-organized collective behavior plays a significant role in the evolution of ecosystems and human society. Reinforcement learning (RL) offers a new perspective, distinct from imitation learning in evolutionary games, for exploring the mechanisms underlying its emergence. However, most existing studies with the public good game (PGG) employ a self-regarding setup or are on pairwise interaction networks. Players in the real world, however, optimize their policies based not only on their histories but also on the histories of their co-players, and the game is played in a group manner. In the work, we investigate the evolution of cooperation in the PGG under the other-regarding reinforcement learning evolutionary game (OR-RLEG) on hypergraph by combining the Q-learning algorithm and evolutionary game framework, where other players' action history is incorporated and the game is played on hypergraphs. Our results show that as the synergy factor increases, the parameter interval is divided into three distinct regions, the absence of cooperation (AC), medium cooperation (MC), and high cooperation (HC), accompanied by two abrupt transitions in the cooperation level near two transition points, respectively. Interestingly, we identify regular and anti-coordinated chessboard structures in the spatial pattern that positively contribute to the first cooperation transition but adversely affect the second. Furthermore, we provide a theoretical treatment for the first transition with an approximated first transition point and reveal that players with a long-sighted perspective and low exploration rate are more likely to reciprocate kindness with each other, thus facilitating the emergence of cooperation. Our findings contribute to understanding the evolution of human cooperation, where other-regarding information and group interactions are commonplace.
+
+          Subjects:
+
+            Physics and Society (physics.soc-ph); Adaptation and Self-Organizing Systems (nlin.AO)
+
+          Cite as:
+          arXiv:2410.10921 [physics.soc-ph]
+
+          (or 
+              arXiv:2410.10921v1 [physics.soc-ph] for this version)
+
+                        https://doi.org/10.48550/arXiv.2410.10921
+
+                Focus to learn more
+
+                                  arXiv-issued DOI via DataCite
+
+Submission history From: Ji-Qiang Zhang [view email]      
+    [v1]
+        Mon, 14 Oct 2024 11:57:45 UTC (5,405 KB)
+
+      Full-text links:
+
+Access Paper:
+
+View a PDF of the paper titled Cooperation in Public Goods Games: Leveraging Other-Regarding Reinforcement Learning on Hypergraphs, by Bo-Ying Li and 5 other authors
+View PDF
+HTML (experimental)
+TeX Source
+
+          view license
+
+Current browse context:
+
+physics.soc-ph
+
+      < prev
+
+      |      
+      next >
+
+    new
+     | 
+    recent
+     | 2024-10
+
+    Change to browse by:
+
+        nlin
+
+        nlin.AO
+
+        physics
+
+References & Citations
+
+NASA ADS
+Google Scholar
+
+Semantic Scholar
+
+    export BibTeX citation
+    Loading...
+
+BibTeX formatted citation
+            ×
+
+            loading...
+
+            Data provided by: 
+
+Bookmark
+
+    Bibliographic Tools
+
+Bibliographic and Citation Tools
+
+              Bibliographic Explorer Toggle
+
+            Bibliographic Explorer (What is the Explorer?)
+
+              Connected Papers Toggle
+
+            Connected Papers (What is Connected Papers?)
+
+              Litmaps Toggle
+
+            Litmaps (What is Litmaps?)
+
+              scite.ai Toggle
+
+            scite Smart Citations (What are Smart Citations?)
+
+    Code, Data, Media
+
+Code, Data and Media Associated with this Article
+
+              alphaXiv Toggle
+
+            alphaXiv (What is alphaXiv?)
+
+              Links to Code Toggle
+
+            CatalyzeX Code Finder for Papers (What is CatalyzeX?)
+
+              DagsHub Toggle
+
+            DagsHub (What is DagsHub?)
+
+              GotitPub Toggle
+
+            Gotit.pub (What is GotitPub?)
+
+              Huggingface Toggle
+
+            Hugging Face (What is Huggingface?)
+
+              ScienceCast Toggle
+
+            ScienceCast (What is ScienceCast?)
+
+      Demos
+
+Demos
+
+                Replicate Toggle
+
+              Replicate (What is Replicate?)
+
+                Spaces Toggle
+
+              Hugging Face Spaces (What is Spaces?)
+
+                Spaces Toggle
+
+              TXYZ.AI (What is TXYZ.AI?)
+
+      Related Papers
+
+Recommenders and Search Tools
+
+                Link to Influence Flower
+
+              Influence Flower (What are Influence Flowers?)
+
+                Core recommender toggle
+
+              CORE Recommender (What is CORE?)
+
+Author
+
+Venue
+
+Institution
+
+Topic
+
+        About arXivLabs
+
+arXivLabs: experimental projects with community collaborators
+
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+
+Have an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.
+
+    Which authors of this paper are endorsers? |
+    Disable MathJax (What is MathJax?)
+
+        We gratefully acknowledge support from
+        our major funders,
+        member institutions, ,
+        and all contributors.
+
+        About
+        ·
+        Help
+        ·
+        Contact
+        ·
+        Subscribe
+        ·
+        Copyright
+        ·
+        Privacy
+        ·
+        Accessibility
+        ·
+        Operational Status (opens in new tab)
+
+Major funding support from
+

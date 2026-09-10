@@ -1,0 +1,676 @@
+ 1104                                                            IEEE TRANSACTIONS ON COMPUTERS, VOL. C-29, NO. 12, DECEMBER 1980
+
+
+
+
+       The Contract Net Protocol: High-Level
+     Communication and Control in a Distributed
+                  Problem Solver
+                                                        REID G. SMITH, MEMBER, IEEE
+
+
+
+
+    Abstract — The contract net protocol has been developed to specify      sidered in such applications as traffic-light control [5], dis-
+problem-solving communication and control for nodes in a distributed        tributed sensing [7], and heuristic search [10].
+problem solver. Task distribution is affected by a negotiation process,       In this paper, we present the contract net protocol, a high-
+a discussion carried on between nodes with tasks to be executed and         level protocol for communication among the nodes in a dis-
+nodes that may be able to execute those tasks.
+    We present the specification of the protocol and demonstrate its use
+                                                                            tributed problem solver. It facilitates distributed control of
+in the solution of a problem in distributed sensing.                        cooperative task execution (which we call task-sharing [9])
+    The utility of negotiation as an interaction mechanism is discussed.    with efficient internode communication.
+It can be used to achieve different goals, such as distributing control       The role of a high-level protocol in a network such as the
+and data to avoid bottlenecks and enabling a finer degree of control        ARPANET has been discussed in previous papers (see, for
+in making resource allocation and focus decisions than is possible with     example [11]). Traditional communication protocols form a
+traditional mechanisms.                                                     low-level base for problem-solving communication. They en-
+   Index Terms—Artificial Intelligence (AI), connection, cooperation,       able reliable and efficient transmission of bit streams between
+distributed problem solving, focus, high-level protocols, negotiation,      nodes, but do not consider the semantics of the information
+resource allocation, task-sharing.                                          being passed. A high-level protocol assigns interpretations to
+                                                                            the bit streams. It offers a structure that assists the system
+                            I. INTRODUCTION                                 designer in deciding what the nodes should say to each other,
+                                                                            rather than how to say it.
+D ISlution
+     TRIBUTED problem solving is the cooperative so-
+           of problems by a decentralized and loosely cou-                    We are not primarily concerned with the physical archi-
+pled collection of knowledge-sources (KS's) (procedures, sets               tecture of the problem solver. It is assumed to be a network of
+of production rules, etc.), located in a number of distinct pro-            loosely coupled, asynchronous nodes. Each node contains a
+cessor nodes. The KS's cooperate in the sense that no one of                number of distinct KS 's. The nodes are interconnected so that
+them has sufficient information to solve the entire problem;                each node can communicate with every other node by sending
+mutual sharing of information is necessary to allow the group,              messages. No memory is shared by the nodes. We also assume
+as a whole, to produce an answer. By decentralized we mean                  the existence of a low-level communication protocol to support
+that both control and data are logically and often geographi-               reliable and efficient communication of bit streams between
+cally distributed; there is neither global control nor global data          nodes. A functional model of a node is shown in Appendix A.
+storage. Loosely coupled means that individual KS's spend
+most of their time in computation rather than communication.                     II. CONNECTION AND CONTRACT NEGOTIATION
+   Such problem solvers offer the promise of speed, reliability,
+                                                                              The key issue to be resolved in task-sharing is how tasks are
+extensibility, and the potential for increased tolerance to un-
+                                                                            to be distributed among the processor nodes. There must be a
+certain data and knowledge, as well as the ability to handle
+                                                                            means whereby nodes with tasks to be executed can find the
+applications with a natural spatial distribution. There has been
+                                                                            most appropriate idle nodes to execute those tasks. We call this
+much recent interest in this type of problem solving in the
+                                                                            the connection problem. Solving the connection problem is
+Artificial Intelligence (AI) community. Its use has been con-
+                                                                            crucial to high performance in a distributed problem solver. It
+                                                                            has two aspects: 1) resource allocation and 2) focus. Ef-
+   Manuscript received March 4, 1980; revised May 9, 1980. This work was
+supported in part by the Advanced Research Projects Agency under Contract   fective resource allocation is achieved by balancing the com-
+MDA 903-77-C-0322, the National Science Foundation under Contract MCS       putational load among the nodes. It is essential if the maximum
+77-02712, and the National Institutes of Health under Grant RR-00785 on     speedup possible from applying multiple nodes to a single
+the SUMEX-AIM Computer Facility at Stanford University, Stanford, CA
+and by the Defence Research Establishment Atlantic of the Department of     overall problem is to be obtained.
+National Defence, Research and Development Branch, Dartmouth, N.S.            Focus is achieved by effective selection of tasks for allocation
+Canada.
+   The author is with the Defence Research Establishment Atlantic, Dart-    to nodes and by effective selection of KS's for execution of
+mouth, N.S., Canada.                                                        tasks. It is essential for problems that do not have well-defined
+
+
+                                                            © 1980 Canadian Crown Copyright
+SMITH: CONTRACT NET PROTOCOL: COMMUNICATION AND CONTROL                                                                           1105
+
+
+
+algorithms for their solutions (i.e., problems of the type most        Throughout the paper, reference is made to an experimental
+often considered in AI). For such problems, many tasks are           contract net system called CNET. It is a system of
+typically generated during the search for solutions; and the         INTERLISP [12] functions that enables a user to simulate
+execution of many of these tasks will not lead to a solution. In     the solution of problems with a distributed processor.
+addition, the most appropriate KS to invoke for the execution
+of any given task generally cannot be identified a priori. The                              III. E XAMPLE
+combination of many tasks and many applicable KS's can lead            This example is taken from a CNET simulation of a dis-
+to a combinatorial explosion. A problem solver must therefore        tributed sensing system (DSS) [7]. A DSS is a network of
+maintain focus to achieve high performance in practical ap-          sensor and processor nodes spread throughout a relatively large
+plications.                                                          geographic area. It attempts to construct and maintain a dy-
+   The connection problem can also be viewed from the per-           namic map of vehicle traffic in the area. Construction and
+spective of an idle node. It must find another node with an          maintenance of such a map requires the interpretation and
+appropriate task that is available for execution. In our ap-         integration of a large quantity of sensory information received
+proach, both nodes with tasks to be executed and nodes ready         by the collection of sensor elements.
+to execute tasks proceed simultaneously. They engage each              Use of the contract net protocol in a DSS makes it possible
+other in discussions that resemble contract negotiation to solve     for the sensor system to be configured dynamically, taking into
+the connection problem. It is this process that is the basis for     account such factors as the number of sensor and processor
+the contract net protocol.                                           nodes available, their locations, and the ease with which
+   For our purposes, negotiation has four important compo-           communication can be established.
+nents: 1) it is a local process that does not involve centralized      We will examine the negotiation for one particular task,
+control, 2) there is a two-way exchange of information, 3) each      called the signal task, that arises during the initialization phase
+party to the negotiation evaluates the information from its own      of DSS operation. The task involves gathering of sensed data
+perspective, and 4) final agreement is achieved by mutual se-        and extraction of signal features. The managers for this task
+lection.                                                             are nodes that do not have sensing capabilities, but do have
+   The collection of nodes is referred to as a contract net and      extensive processing capabilities. They attempt to find a set
+the execution of a task is dealt with as a contract between two      of sensor nodes to provide them with signal features. The sensor
+nodes. Each node in the net takes on one of two roles related to     nodes, on the other hand, have limited processing capabilities
+the execution of an individual task: manager or contractor. A        and attempt to find managers that can further process the
+manager is responsible for monitoring the execution of a task        signal features they extract from the raw sensed data.
+and processing the results of its execution. A contractor is re-       Recall that we view node interaction as an agreement be-
+sponsible for the actual execution of the task. Individual nodes     tween a node with a task to be performed and a node capable
+are not designated a priori as managers or contractors; these        of performing that task. Sometimes the perspective/on the ideal
+are only roles, and any node can take on either role dynamically     character of that agreement differs depending on the point of
+during the course of problem solving. Typically, a node will         view of the participant. For example, from the perspective of
+take on both roles, often simultaneously for different contracts.    the signal task managers, the best set of contractors has an
+As a result, nodes are not statically tied to a control hierarchy.   adequate spatial distribution about the surrounding area and
+This also leads to more efficient utilization of nodes, as com-      an adequate distribution of sensor types. From the point of view
+pared, for example, to schemes that do not allow nodes that          of the signal task contractors, on the other hand, the best
+have contracted out tasks to take on other tasks while they are      managers are those closest to them in order to minimize po-
+waiting for results.                                                 tential communication problems. The ability to express and
+   A contract is established by a process of local mutual se-        deal with such disparate viewpoints is one advantage of the
+lection based on a two-way transfer of information. In brief,        contract net protocol. To see how the appropriate resolution
+available contractors evaluate task announcements made by            is accomplished, consider the messages exchanged between
+several managers and submit bids on those for which they are         the signal managers and potential signal contractors. Each
+suited. The managers evaluate the bids and award contracts           signal manager announces its own signal task, using a message
+to the nodes they determine to be most appropriate. The ne-          of the sort shown in Fig. 1. Each message in the contract net
+gotiation process may then recur. A contractor may further           protocol has a set of slots for the task-specific information in
+partition a task and award contracts to other nodes. It is then      the message. The four slots of the task announcement are
+the manager for those contracts. This leads to the hierarchical      shown in the figure. The information that fills the slots is en-
+control structure that is typical of task-sharing. Control is        coded in a simple language common to all nodes.
+distributed because processing and communication are not               The task abstraction is the type of task and the position of
+focused at particular nodes, but rather every node is capable        the manager making the announcement. The position enables
+of accepting and assigning tasks.                                    a potential contractor to determine the manager to which it
+   The basic idea of contracting is not new. A rudimentary           should respond. The eligibility specification indicates that the
+bidding scheme, for example, was used for resource allocation        only nodes that should bid on this task are those which 1) have
+in the distributed computing system (DCS) [2], [3]. We will          sensing capabilities and 2) are located in the same area as the
+note the similarities and differences between that scheme and        manager that announced the task. This helps to reduce ex-
+the contract net protocol as we proceed.                             traneous message traffic and bid processing. The bid specifi
+1106                                                           IEEE TRANSACTIONS ON COMPUTERS, VOL. C-29, NO. 12, DECEMBER 1980
+
+
+
+                To: * indicates a broadcast message.                                       To: 25
+                From: 25                                                                   From: 42
+                Type: TASK ANNOUNCEMENT                                                    Type: BID
+                Contract: 22-3-1                                                           Contract: 22-3-1
+                Task Abstraction:                                                          Node Abstraction:
+                  TASK TYPE SIGNAL                                                           POSITION LAT 62N LONG 9W
+                  POSITION LAT 47N LONG 17E                                                  SENSOR NAME SI TYPE S
+                Eligibility Specification:                                                   SENSOR NAME S2 TYPE S
+                  MUST-HAVE SENSOR                                                           SENSOR NAME Tl TYPE T
+                  MUST-HAVE POSITION AREA A                                                       Fig. 2. Signal task bid.
+                Bid Specification:
+                  POSITION LAT LONG
+                  EVERY SENSOR NAME TYPE                                                          To: 42
+                Expiration Time:                                                                  From: 25
+                  28 1730Z FEB 1979                                                               Type: AWARD
+                                                                                                  Contract: 22-3-1
+                    Fig. 1. Signal task announcement.                                             Task Specification:
+                                                                                                    SENSOR NAME S1
+cation indicates the information that a manager needs to select                                     SENSOR NAME S2
+a suitable set of sensor nodes–the position of the bidder and the                                 Fig. 3. Signal task award.
+name and type of each of its sensors. Finally, the expiration
+time is a deadline for receiving bids.                               duces message traffic by pruning nodes whose bids would be
+   Each potential contractor listens to the task announcements       clearly unacceptable. In a sense, it is an extension to the ad-
+made by signal managers. It ranks each announcement relative         dressee slot. Focused addressing can be used to restrict the
+to the others thus far received, according to the distance to the    possible respondents only when the manager knows the names
+manager. Just before the deadline for the task announcement          of appropriate nodes. The eligibility specification slot is used
+associated with the perceived nearest manager, the node sub-         to further restrict the possible respondents when the manager
+mits a bid (Fig. 2). The bid message supplies the position of        is not certain of the names of appropriate nodes, but can write
+the bidder and a description of its sensors. A manager uses this     a description of such nodes.1,2
+information to select a set of bidders that covers its area of         The task abstraction is a brief description of the task to be
+responsibility with a suitable variety of sensors, and then          executed. It enables a node to rank the task relative to other
+awards a signal contract on this basis (Fig. 3). The award           announced tasks. An abstraction is used rather than a complete
+message specifies the sensors that a contractor must use to          description in order to reduce the length of the message.3
+provide signal-feature data to its manager.                            The bid specification is a description of the expected form
+                                                                     of a bid. It enables the manager to specify the kind of infor-
+            IV. THE CONTRACT N ET PROTOCOL                           mation that it considers important about a node that wants to
+   We now describe the messages of the protocol and the en- execute the task. This provides a common basis for comparison
+coding of information in their slots. We also describe the of bids and enables a node to include in a bid only the infor-
+processing of each message. The BNF specification of the mation about its capabilities that is relevant to the task, rather
+protocol is presented in Appendix B. The reader may find it than a complete description. This both simplifies the task of
+helpful to refer to the specification while reading the following the manager in evaluating bids and further reduces message
+sections.                                                            traffic.
+                                                                       The expiration time is a deadline for receiving bids. We
+A. The Basic Messages                                                assume global synchronization among the nodes. However,
+   1) Task Announcements                                             time is not critical in the negotiation process. For example, bids
+   A node that generates a task normally initiates contract received after the expiration time of a task announcement are
+negotiation by advertising existence of that task to the other not catastrophic: at worst, they may result in a suboptimum
+nodes with a task announcement message. It then acts as the selection of contractors.
+manager of the task. A task announcement can be addressed              a) The Common Internode Language
+to all nodes in the net (general broadcast), to a subset of nodes      It is useful to encode slot information in a single high-level
+(limited broadcast), or to a single node (point-to-point). The       language     understandable to all nodes We call this a common
+latter two modes of addressing, which we call focused ad- internode language. Such a language, along with a high-level
+dressing, reduce message processing overhead by allowing programming language (for transfer of procedures between
+nonaddressed nodes to ignore task announcements after ex- nodes), forms a common basis for communicating slot infor-
+amining only the addressee slot. The saving is small, but is mation among the nodes.
+useful because it allows a node's communication processor              1
+                                                                         Note that focused addressing is typically a heuristic process, since the
+alone to decide whether the rest of the message should be ex-        information  upon which it is based may not be exact (e.g., it may be inferred
+amined and further processed. It is also useful for reducing         from  prior responses  to task announcements).
+                                                                       2
+                                                                         We will see that all messages in the protocol that can be addressed to more
+message traffic when the nodes of the problem solver are not than one node have an addressee slot and an eligibility specification slot to
+interconnected with broadcast communication channels.                accommodate addressing by name and by description.
+                                                                       3
+   As shown in the example, a task announcement has four                 A numerical priority measure is not, in general, sufficient to allow po-
+                                                                     tential contractors to rank announced tasks. It assumes first, that all nodes
+main slots. The eligibility specification is a list of criteria that agree on what constitutes an important task, and second, that the importance
+a node must meet to be eligible to submit a bid. This slot re- of a task can be captured in a one-dimensional quantity.
+SMITH: CONTRACT NET PROTOCOL: COMMUNICATION AND CONTROL                                                                             1107
+
+
+
+   While the contract net protocol offers a framework that             them. The current version of CNET selects the most recently
+specifies the type of information that is to fill a message slot, it   received task (older tasks are more likely to have been already
+remains the difficult task of the user to specify the actual           awarded).
+content of the slot for any particular problem domain. In this.           An idle node can submit a bid on the most attractive task
+sense, the protocol is similar to AI problem-solving languages         when either of the following events occur: 1) the node receives
+like PLANNER [4], which supply a framework for problem                 a new task announcement or 2) the expiration time is reached
+solving (e.g., the notions of goal specifications and theorem          for any task announcement that the node has received. At each
+patterns), but leave to the user the task of specifying the con-       opportunity, the node makes a (task-specific) decision whether
+tent of that framework for any given problem.                          to submit a bid or wait for further task announcements. (In the
+   CNET does, however, offer the user some additional assis-           signal task, a potential contractor waits for further an-
+tance. It provides a very simple language, based on an object,         nouncements in an attempt to find the closest manager.)
+attribute, value representation. The language includes a simple           The node abstraction slot of a bid is filled with a brief
+grammar, predefined for each slot, and a number of predefined          specification of the capabilities of the node that are relevant
+domain-independent terms (e.g., TASK, TYPE, PROCEDURE,                 to the announced task. It is written in the form indicated by
+and NAME). The representation, the grammars, and the do-               the bid specification of the corresponding task announce-
+main-independent terms are offered to the user to help him             ment.
+organize and specify the slot information. He must augment                The node abstraction slot can also include a number of
+the language with domain-specific terms (e.g., SENSOR) as              REQUIRE statements (e.g., REQUIRE PROCEDURE NAME
+needed for the application at hand.                                    FFT). Statements of this form are used by a bidder to indicate
+   A message that does not have to be understood by many               that it needs additional information if it is awarded the task.
+nodes (e.g., messages exchanged by a manager and contractor            REQUIRE statements can be made if two conditions are met:
+during execution of a contract) can be usefully encoded in a           1) the required objects were not preceded by MUST-HAVE
+private language. This can reduce both the length of the               terms in the eligibility specification of the task announcement
+messages and the overhead required to process them. In                 and 2) the objects are transferable; that is, they can be trans-
+CNET, such “private” information is preceded by an “escape”            ferred by message. (A procedure falls into this class, but a
+character; this allows private information to be inserted in any       hardware device does not.)
+message, even one that includes some public information en-               The task template is helpful here. If a node receives an an-
+coded in the normal manner.                                            nouncement for a type of task with which it is not familiar (i.e.,
+   2) Task Announcement Processing                                     does not have the template), then it can request the template
+   In CNET, all tasks are typed. For each type of task, a node         as a convenient shorthand for the entire set of procedures as-
+maintains a rank-ordered list of announcements that have been          sociated with that type of task.
+received and have not yet expired. Each node checks the eli-              4) Bid Processing
+gibility specifications of all task announcements that it re-             Contracts are queued locally by the manager that generated
+ceives. This involves ensuring that the conditions expressed in        them until they can be awarded. The manager also maintains
+the specification are met by the node (e.g., MUST-HAVE                 a rank-ordered list of bids that have been received for the task.
+SENSOR). If it is eligible to bid on a task, then the node ranks       When a bid is received, the manager ranks the bid relative to
+that task relative to others under consideration.                      others under consideration. If, as a result, any of the bids are
+   Ranking a task announcement is, in general, a task-specific         determined to be satisfactory, then the contract is awarded
+operation. Many of the operations involved in processing other         immediately to the associated bidder. (The definition of sat-
+messages are similarly task-specific. CNET defines a task              isfactory is task-specific.) Otherwise, the manager waits for
+template for each type of task. This template enables a user to        further bids.
+specify the procedures required to process that type of task. In          Because a manager is not forced to always wait until the
+Appendix E we describe the roles of the required procedures,           expiration time before awarding a contract, the average ne-
+together with the default actions taken by CNET when the               gotiation time for contracts is reduced over that of DCS
+user chooses to omit a procedure. In the following sections,           [2].
+whenever reference is made to task-specific actions, the reader           If the expiration time is reached and the contract has not
+may refer to Appendix E for further details.                           yet been awarded, several actions are possible. The appropriate
+                                                                       action is task-specific, but the possibilities include: awarding
+   3) Bidding
+                                                                       the contract to the most acceptable bidder(s); transmitting
+   This announcement-ranking activity proceeds concurrently            another task announcement (if no bids have been received);
+with task processing in a node until the task processor (see           or waiting for a time interval before transmitting another task
+Appendix A) completes processing of its current task and be-           announcement (if no acceptable bids have been received). This
+comes available for processing another task. At this point, the        is in contrast to the traditional view of task allocation where
+contract processor is enabled to submit bids on announced              the most appropriate node available at the time would be se-
+tasks. It checks its list of task announcements and selects a task     lected.
+on which to submit a bid. If there is only one type of task, the          Successful bidders are informed that they are now con-
+procedure is straightforward. If, on the other hand, there are         tractors for a task through an announced award message. The
+a number of task types available, the node must select one of          task specification slot contains a specification of the data
+1108                                                      IEEE TRANSACTIONS ON COMPUTERS, VOL. C-29, NO. 12, DECEMBER 1980
+
+
+
+needed to begin execution of the task, together with any ad-          bidders per task. In addition, it would only lower the delay for
+ditional information requested by the bidder.                         contracts that were awarded before the expiration times of
+   5) Contract Processing, Reporting Results, and Termi-              their task announcements were reached.
+nation                                                                    We have allowed a node to bid at intervals related to the
+   Once a contract has been awarded to a node, it follows the         receipt of task announcements rather than at fixed intervals. It
+state transition diagram shown in Appendix C. The data                is intuitively appealing, offers a reasonable compromise
+structures shown in Appendix D form a local context for               between message traffic and delay in allocating tasks, and has
+communication between the contractor and manager (and other           exhibited good performance in experience to date with CNET.
+nodes) about the task being performed.                                    We have chosen to allow a node to submit, at most, a single
+   The information message is used for general communication          bid at each opportunity. This reduces message traffic and the
+ between manager and contractor during the processing of a            possibility that a single node could bid on far more tasks than
+ contract. (See Section IV-B.3 for further discussion of this         it could process. For the same reasons, we allow only idle nodes
+ message.)                                                            to submit bids. Because of these choices, contracts are not-
+   The report is used by a contractor to inform the manager           centrally notarized as they were in DCS [2]. This further re-
+ (and other report recipients, if any) that a task has been par-      duces message traffic and maintains the distributed nature of
+ tially executed (an interim report) or completed (a final report).   the negotiation process.
+ The result description slot contains the results of the execution.       The current version of CNET uses a nonpreemptive
+ Final reports are the normal method of result communication.         scheduler in each node. It would appear to be useful, however;
+ Interim reports, however, are useful when generator-style            to allow preemptive scheduling instead of simply queueing
+ control is desired. A contractor can be set to work on a task and    contracts in order of receipt. This would help avoid the situa-
+ instructed to issue interim reports whenever the next result is      tion where time-critical tasks are not executed soon enough
+ ready. It then suspends the task until it is instructed by the       because less important tasks are queued ahead of them. The
+ manager to continue (with an information message) and                difficult question here is determining the criteria for
+ produce another result.                                              preemption and providing a place for them in the common
+   The manager can also terminate contracts with a termina-           internode language. We are currently exploring this issue.
+ tion message. The contractor receiving such a message ter-
+ minates execution of the contract indicated in the message and
+ all of its outstanding subcontracts.                                 B. Complications and Extensions
+   6) Negotiation Tradeoffs                                              In the following sections we consider some problems with
+   In this section, we discuss choices made in the CNET im-           the basic negotiation mechanism and present extensions to
+ plementation of the negotiation process. In the main, our            solve these problems. The extensions are evolving as we gain
+ concern has been with problem solving. We have been more             more experience with using the protocol in practical applica-
+ interested in the types of information that must be passed be-       tions.
+ tween nodes than with these aspects of the negotiation process.         1) Immediate Response Bids
+ As a result, the choices are only tentative and warrant further         We have, thus far, discussed the negotiation process under
+ detailed analysis.                                                   the assumption that a node cannot submit a bid until it goes
+   Because bids are binding and a node is allowed to have more        idle and is actually ready to process a new contract. This
+ than one bid outstanding at a time, a node may receive multiple      strategy can, however, lead to difficulty. For instance, a node
+ awards. These are queued for processing in order of receipt.         that issues a task announcement may not receive any bids for
+ The cost is potentially slower overall system performance (the       one of several reasons: 1) there are no idle nodes; 2) some node
+ load may be less evenly balanced) than would be the case if          is both idle and eligible, but ranks the task too low; or 3) no
+ multiple awards were prevented.                                      node is capable of working on the task even if it were idle (as
+   If nodes could refuse awards (as in DCS [3]), multiple             may happen if the eligibility specification is too stringent or
+ awards could be prevented. However, the cost is at least one         no node has the data necessary for executing the task). In the
+ additional acknowledgment message per transaction. In some           first two cases, the task announcement may be usefully reissued
+ cases, it may be many additional messages (if an award is re-        until a bid is obtained from an idle node; in the third case it
+ fused by several bidders).                                           would be pointless. Therefore, a node requires a way of de-
+   Similarly, if a node could only have a single bid outstanding,     termining what caused the lack of response.
+ multiple awards could be prevented. However, the cost would             A class of bids we call immediate response bids offers a
+ be significant delay. Nodes would be forced to remain idle until     mechanism for doing this. Three such bids have been identified,
+ a task announcement had expired to find that their bids had          allowing a node to indicate that it is eligible but BUSY, that it
+ been rejected, and have to start the process again. This could       is INELIGIBLE, or that it gave the task a LOW RANKING. A
+ lower overall system performance.                                    manager can specify that nodes are to respond in any of these
+   The above delay could be reduced in some instances by ex-          cases or to respond in a subset of the cases (e.g., respond if
+ plicitly informing unsuccessful bidders that their bids had been     eligible, but busy).
+ refused. The cost, however, would likely be a very large in-            A node receiving a task announcement whose.bid specifi-
+ crease in message traffic, assuming that there are several           cation asks for an immediate response bid does not deal with
+SMITH: CONTRACT NET PROTOCOL: COMMUNICATION AND CONTROL                                                                                 1109
+
+
+
+the announcement in the usual way (ranking it immediately,              If a node that receives an information message meets the
+but waiting until it is idle to submit a bid), but instead responds   eligibility specification, then the action it takes is task-specific.
+immediately with either a standard bid or the appropriate             If the contract named in the message is one that the node is
+special form.                                                         processing, then the appropriate action is determined by a
+   The immediate response mechanism permits a manager to              procedure associated with that contract. Otherwise, the node
+take a more appropriate course of action if a task announce-          takes a default action. (The latter possibility arises in result-
+ment elicits no bids. The normal procedure is to simply reissue       sharing because nodes communicate partial results to other
+the task announcement. If this continues to elicit no bids, then      nodes without being requested to do so, and without being
+the manager can specify an immediate response bid. If the             explicitly linked by a contract.)
+response is uniformly BUSY , then the manager can wait and               4) Node Available Messages
+reissue the task announcement later. If all nodes are INELI-            The protocol has been designed to allow a reversal of the
+GIBLE , then the manager may loosen the eligibility specifi-          normal negotiation process. When the processing load on a net
+cation. If all nodes gave the task a LOW RANKING , the man-           is high, most task announcements will not be answered with
+ager can wait and reissue, in the hope that the more interesting      bids because all nodes will be busy. Hence, the protocol in-
+tasks currently occupying the nodes will soon be done. The            cludes a node available message. A node that transmits such
+manager may also decide to execute the task itself when it            a message is idle and searching for a task to execute. In this
+becomes idle.                                                         case, the eligibility specification is a list of criteria that the node
+   2) Directed Contracts                                              will look for in a task. The node abstraction is a brief specifi-
+   The normal contract negotiation process can be simplified          cation of the capabilities of the node and the expiration time is
+in some instances, with a resulting enhancement in the effi-          a deadline for receiving an award.
+ciency of the protocol. If a manager knows exactly which node           When a node receives a node available message, it tries to
+is appropriate for execution of a task, a directed contract can       determine if it can match the node with a task that it has an-
+be awarded. No task announcement is made and no bids are              nounced, but not yet awarded. First, it tries to match the eli-
+submitted. Instead, a directed award message is sent to the           gibility specification in the node available message against the
+selected node without negotiation.                                    task abstractions of the tasks that it has waiting. A task for
+   In addition to the low-level acknowledgment used by an             which this match succeeds is of interest to the volunteering
+underlying communication protocol to ensure reliable com-             node. The manager then tries to match the eligibility specifi-
+munication, the contract net protocol uses a further high-level       cation of the task against the node abstraction of the node
+acknowledgment message for directed award messages. This              available message. If this match succeeds, then the node is the
+allows a refusal or negative acknowledgment of the form, I            sort which is required for the task. Hence, even in this case we
+can't execute this contract because . . ., in addition to the low-    have the mutual selection aspect, as the volunteering node
+level negative acknowledgment of the form, I didn't receive           selects a task and the task specifies the criteria necessary in a
+your message correctly.                                               volunteer. If the two matches are successful, the manager sends
+   If the node that receives a directed award either does not         a directed award message to the volunteer. If a node has several
+meet the eligibility specification or does not have a template        tasks for which both matches succeed, then CNET selects the
+for the task, then it transmits a refusal to the manager. Oth-        oldest task (it is least likely to be awarded in the normal
+erwise, the node uses task-specific criteria to determine             way).
+whether to transmit an acceptance or refusal to the manager.            In CNET, a node maintains a list of unexpired node avail-
+The refusal message contains a refusal justification slot that        able messages. Before it announces a new task, a node first tries
+specifies the reasons for the refusal (e.g., INELIGIBLE or NO         to find a suitable volunteer in the list. If several volunteers are
+TEMPLATE ).                                                           suitable, the newest volunteer is selected (it is least likely to
+   The action taken by a manager upon receipt of a refusal is         have received an award).
+also task-specific, in general.                                         A node can thus acquire a contract in one of two ways: it can
+   3) Request and Information Messages                                wait for a suitable task announcement and submit a bid; or it
+   If a simple transfer of information is required, then a re-        can transmit a node available message and wait for a directed
+quest–response sequence can be used without further embel-            award. The decision as to which method to use is net-load de-
+lishment. The request message is used to encode straightfor-          pendent. If the net is not heavily loaded, then the use of the task
+ward requests for information. The information message is             announcement is warranted in all cases, since the availability
+used to respond to a request, and for manager/contractor              of a task to be executed is the event of primary importance. If
+communication during the execution of a contract (Section IV-         the net is heavily loaded, then unlimited use of task an-
+A.5). This message is also used in result-sharing [9], a style of     nouncements serves only to saturate the available communi-
+distributed problem solving in which nodes cooperate by               cation channels. In this case, the availability of an idle node is
+sharing partial results.                                              the event of primary importance and the use of node avail-
+   If a node that receives a request message meets the eligibility    able messages is preferred.
+specification and has the necessary information, then it re-            In CNET, a node selects one of the two modes based on
+sponds with an information message. No task-specific decisions        experience with its own task announcements. The scheme is
+need to be made.                                                      rudimentary, however, and warrants further analysis.
+1110                                                       IEEE TRANSACTIONS ON COMPUTERS, VOL. C-29, NO. 12, DECEMBER 1980
+
+
+
+                                                                       quest for quotation) contains only the name of the process to
+       V. DYNAMIC DISTRIBUTION OF INFORMATION
+                                                                       be executed and the amount of memory required. A bid is a
+    The contract net protocol enables dynamic distribution of          measure of the excess memory available in a node. Note,
+information (i.e., procedures and data) via three methods.             however, that this is only one of the possible dimensions along
+First, a node can transmit a request directly to another node          which tasks and nodes can be evaluated. In general, such
+for the transfer of the required information. The response is          evaluation is task-dependent (as we saw in Section III) and
+the information requested (e.g., the code for a procedure).            may require a different form of information for each task.
+Second, a node can broadcast a task announcement in which              Recognizing this, the contract net protocol takes a wider per-
+the task is a transfer of information. A bid on the task indicates     spective and allows a range of descriptions to be passed be-
+that the bidder has the information and is willing to transmit         tween the manager and bidders. In more general terms, since
+it. Finally, a node can note, in its bid on a task, that it requires   our concern is with problem solving, more attention is paid to
+particular information in order to execute the task. The               the type of information that must be transferred between nodes
+manager can then send the required information in the award            to solve the connection problem. The connection that is effected
+message if the bid is accepted.                                        with the contract net protocol is an extension to the pattern-
+    Dynamic distribution enables effective use of available            directed invocation used in many AI programming languages
+computational resources: a node that is standing idle because          (see [8] for a more in-depth discussion).
+it lacks information required to execute a previously announced          There are several reasons for adopting a distributed ap-
+task can acquire that information as indicated above. This also        proach to problem solving. These include speed, reliability,
+means that nodes do not have to be preloaded with extensive            extensibility, and the ability to handle applications that have
+amounts of information which may or may not prove useful.              a natural spatial distribution. The design of the contract net
+Dynamic distribution also facilitates the addition of a new node       protocol attempts to ensure that these potential benefits are
+to an existing net; the node can dynamically acquire the pro-          indeed realized.
+cedures and data necessary to allow it to participate in the             In order to achieve high speed we wish to avoid bottlenecks.
+operation of the net. This is especially useful in the distributed     Such bottlenecks can arise in two primary ways: by concen-
+sensing application.                                                   trating disproportionate amounts of computation or commu-
+    Dynamic distribution works, first, because all nodes know          nication at central resources and by saturating available
+the syntax of the contract net protocol, which enables them to         communication channels so that nodes must remain idle while
+identify the slots that contain task-dependent information (e.g.,      messages are transmitted.
+the eligibility specification of a task announcement); second,           To avoid bottlenecks we distribute control, data, and KS's.
+because they know how to parse the common internode lan-               Control is distributed through the use of negotiation to achieve
+guage, which enables them to identify the information in the           connections for task distribution. Every node is capable of
+slots that they do not possess; and third, because a negotiation       assigning and accepting tasks, and managers and contractors
+process is used to effect task distribution, which makes it            simultaneously seek each other out. Data and KS's are also
+possible for a new node to begin participating in the operation        distributed dynamically as part of the negotiation process or
+of the net by listening to the messages being exchanged (spe-          with a request-response mechanism.
+cifically, task announcements) and submitting bids. This may             The contract net protocol includes several elements aimed
+be contrasted with more traditional task allocation schemes            at avoiding communication channel saturation. First, the in-
+that explicitly assign tasks to nodes. In such schemes, new            formation in task announcements (like eligibility specifica-
+nodes must be explicitly linked to other nodes in the net-             tions) helps eliminate extraneous message traffic. Similarly,
+work.                                                                  bid messages can be kept short and “to the point” through the
+                                                                       use of the bid specification mechanism. Second, specialized
+                        VI. DISCUSSION                                 interactions, like directed contracts and requests, reduce
+   We have presented a high-level protocol for distributed             communication for transactions that do not require the com-
+problem solving. The protocol facilitates distributed control          plexity of negotiation. Third, the protocol enables dynamic
+of cooperative task execution with efficient internode com-            distribution of information on an as-required basis. Finally, it
+munication. It has been designed to provide a more powerful            provides a very general form of guidance in determining
+mechanism for connection than is available in current prob-            appropriate partitioning of problems: the notion of tasks exe-
+lem-solving systems. The message types have been selected to           cuted under contracts suggests relatively large task sizes. This
+capture the types of interactions that arise in a task-sharing         is important if the speedup obtained from distribution is not
+approach to distributed problem solving. The message slots             to be outweighed by the effort required to effect that distri-
+have been selected to capture the types of information that            bution.
+must be passed between nodes to make these interactions ef-              Distribution of control also enhances reliability and permits
+fective.                                                               graceful degradation of performance in the case of individual
+   The connection of nodes with tasks to be executed and nodes         node failures. There are no nodes whose failure can completely
+that can execute those tasks is more general than load bal-            block the contract negotiation process. In addition, recovery
+ancing. The difference can be illustrated by comparing the             from the failure of a node is aided by the presence of explicit
+information placed in the slots of the task announcement with          links between managers and their contractors. The failure of
+that used in DCS. In that system, a task announcement (re-             any contractor, for example, can be detected by its manager;
+SMITH: CONTRACT NET PROTOCOL: COMMUNICATION AND CONTROL                                                                             1111
+
+
+
+the contract for which it was responsible can then be rean-
+nounced and awarded to another node.
+   The use of a negotiation process for allocation of nodes to
+tasks facilitates the extension of an existing net to include new
+nodes. Such nodes can begin to participate in the operation of
+the net without first explicitly informing the other nodes of
+their presence. New node entry is also facilitated by the com-
+mon internode language and dynamic distribution of infor-
+mation.
+   The ability to handle applications with a natural spatial                        Fig. 4. Contract node architecture.
+distribution is facilitated by the local nature of negotiation.
+A net is able to configure itself dynamically according to the
+positions of the nodes and the ease with which they can es-         <message> ⇒ <header> <addressee> <originator> <text> <trailer>
+                                                                    <header> ⇒ [line-header] [identifier] [time] [acknowledge]
+tablish communication.                                              <trailer> ⇒ [error-control] [line-trailer]
+   The protocol is best suited to problems in which it is ap-       <addressee> ⇒ [net-address] | [subnet-address] | [node-address]
+propriate to define a hierarchy of tasks (e.g., heuristic search)   <originator> ⇒ [node-address]
+and a hierarchy of levels of data abstraction (e.g., audio or       <text> ⇒ [cctext] | <pstext>
+                                                                    <pstext> ⇒ <task-announcement> | <bid> | <announced-award> |
+video signal interpretation). Such problems lend themselves                      <directed-award> | <acknowledgment> | <report> |
+to decomposition into a set of relatively independent subtasks                   <termination> | <node-available-message> |
+with little need for global information or synchronization.                      <request-message> | <information-message>
+                                                                    <task-announcement> ⇒ TASK-ANNOUNCEMENT [name]
+Individual subtasks can be assigned to separate processor                                    {task-abstraction} {eligibility-specification}
+nodes; these nodes can then execute the subtasks with little                                 {bid-specification} [expiration-time]
+need for communication with other nodes.                            <bid> ⇒ BID [name] {node-abstraction}
+                                                                    <announced-award> ⇒ ANNOUNCED-AWARD [name] {task-specification}
+                                                                    <directed-award> ⇒ DIRECTED-AWARD [name] {task-abstraction}*
+                                                                                         {eligibility-specification} {task-specification}
+                      VII. CONCLUSION                               <acknowledgment> ⇒ ACCEPTANCE [name]*
+   The main contribution of the contract net protocol is the                            ⇒ REFUSAL [name] {refusal-justification}
+                                                                    <report> ⇒ INTERIM-REPORT [name] {result-description}
+mechanism it offers for structuring high-level interactions                      FINAL-REPORT [name] {result-description}
+between nodes for cooperative task execution. It stresses the       <termination> ⇒ TERMINATION [name]*
+utility of negotiation as an interaction mechanism. Negotiation     <node-available-message> ⇒ NODE-AVAILABLE {eligibility-specification}*
+can be used at different levels of complexity. At one extreme,                                      {node-abstraction} [expiration-time]
+                                                                    <request-message> ⇒ REQUEST [name] {eligibility-specification}*
+it is a means of achieving task distribution with distributed                               {request-specification}
+control and shared responsibility for tasks to maintain reli-       <information-message> ⇒ INFORMATION [name] {eligibility-specification}*
+ability and avoid bottlenecks. At the other extreme, the two-                                    {information-specification}
+way transfer of information and mutual selection attributes                         Fig. 5. Contract net protocol specification.
+of negotiation make possible a finer degree of control in making
+resource allocation and focus decisions than is possible with       are enclosed by “[ ].” Slots that are to be filled with infor-
+traditional mechanisms.                                             mation encoded in the common internode language are en-
+                                                                    closed in “{ }.” Message types that need not be included in
+                                                                    a basic implementation are followed by “*.”
+                         APPENDIX A                                   One possible set of low-level message slots is shown for
+             CONTRACT NODE ARCHITECTURE                             completeness. Other variations may be dictated by the specific
+                                                                    communication architecture for which the protocol is imple-
+   We view a node as having four major functional components
+                                                                    mented. Briefly: line-header delimits the beginning of a mes-
+(Fig. 4): a local database, a communication processor that
+                                                                    sage; identifier is a unique identifier for the message; time
+handles low-level message traffic with other nodes, a task
+                                                                    specifies the time at which the message is transmitted; ac-
+processor that carries out the computation associated with user
+                                                                    knowledge is set only if acknowledgment of receipt of the
+tasks, and a contract processor that processes high-level pro-
+                                                                    message is required (this slot is included because delivery of
+tocol messages and manages node resources. It is assumed that
+                                                                    some messages is not essential to the operation of the protocol
+the functions of the three processors are carried out concur-
+                                                                    (e.g., broadcast task announcements) and acknowledgments
+rently.
+                                                                    for such messages might greatly increase message traffic);
+                                                                    error-control is used by an addressee to determine that the
+                         APPENDIX B                                 message has been correctly received; and line-trailer delimits
+        CONTRACT NET PROTOCOL SPECIFICATION                         the end of the message. Three forms of addressee slot are
+                                                                    shown. These are used for general broadcast, limited broad-
+   The BNF specification of the contract net protocol is shown      cast, and point-to-point messages, respectively.
+in Fig. 5. Nonterminal symbols are enclosed by “( ),” ter-            There are two forms of text slot. cctext (communication
+minal symbols are written without delimiters, and nontermi-         control text) indicates that the message is for checking net
+nals whose specific expansion is not germane to the discussion      integrity, acknowledging receipt of messages, maintaining
+1112                                                          IEEE TRANSACTIONS ON COMPUTERS, VOL. C-29, NO. 12, DECEMBER 1980
+
+
+basic net communication data, such as routing tables, and so
+on. Messages of the form Hello and I heard you, exchanged
+periodically by IMP’s in the ARPANET as status checks, fall
+into this category.
+   pstext (problem-solving text) indicates that the message is
+for high-level problem solving (see Section IV).
+
+                           APPENDIX C
+               CONTRACT PROCESSING STATES
+   Contracts are processed according to the state transition
+diagram shown in Fig. 6, which uses the terminology of oper-                            Fig. 6. Contract processing states.
+ating systems [1]. The contract processor of a node (Appendix                          <contract> ⇒ [name]
+A) is responsible for moving a contract through the states of                                          [manager]
+the diagram. The standard progression through the states is                                            [report-recipients]
+shown by solid lines. Optional progressions are shown by                                               [related-contractors]
+                                                                                                       <task>
+dashed lines.                                                                                          [results]
+   When a contract is awarded to a node (IN), it is placed in                                          <subcontract-list>
+the READY state where it waits until the task processor is                                   Fig. 7. Contract structure.
+available. At that time, the contract is placed in the EXE-
+CUTING state and its processing is started. If subcontracts are node   an  explicit   indication    of other nodes in the net with which it
+generated, they are placed in the ANNOUNCED state. A sub-       may   be   useful    to  communicate        (e.g., to enable use of focused
+contract may either be awarded to another node (OUT) or to      addressing     in  task  announcements)          and help to reduce message
+this node (READY).                                              traffic.   Messages      from    one   related    contractor to another, for
+   If execution cannot continue on the contract until some      example,     can  be   addressed     directly   and   therefore do not have to
+event occurs (e.g., receipt of a subcontract report), then the  follow   the  communication        paths   of  the  control  hierarchy.
+contract is placed in the SUSPENDED state; and another con-        task   is filled   with  a structure    of the   form  shown   in Fig. 8. The
+tract in the READY state is selected for processing. When the   structure    lists   the  type   of  the   task,   its specification,   and the
+awaited event occurs, the contract is transferred back to the procedures that are required to handle the task in a contract
+READY state where it awaits further processing.                 net. These procedures are described in Appendix E.
+   When processing of the contract has been completed, it is       results are the outcome of executing a task. They are
+placed in the TERMINATED state; and another contract in the     transmitted      to the report recipients of the contract. subcon-
+READY state is selected for processing. Recently completed      tract-list   is the   collection of subtasks generated from the initial
+contracts are held in the TERMINATED state in order to fa-      contract.    This   slot  is filled with a list of structures of the form
+cilitate recovery from the failure of a manager.                shown     in  Fig.  9.  Such    structures contain the information held
+   If a contract in the EXECUTING state is moved to either the  by  a manager       for  a subtask.
+SUSPENDED or TERMINATED state and if there are no con-             name is a unique identifier for the subcontract. contractor
+tracts in the READY state, then the node attempts to acquire a  is the  name of the node responsible for its processing. task is
+new contract—either by making a bid on a recent task an-        the task   structure (Fig. 8). results are the outcome of executing
+nouncement or by transmitting a node available message          the  subtask.     predecessors are the names of subcontracts that
+(Section IV).                                                   are  preconditions        for the subcontract and successors are the
+   The scheduler used by a contract processor in the current    names     of  subcontracts      for which the subcontract is a precon-
+version of CNET is nonpreemptive and gives priority to a        dition.  Predecessors       and   successors are necessary for tasks that
+contract whose execution can continue (e.g., due to receipt of  must    be   performed      in   a particular order, such as those that
+a report) over a contract whose execution has not yet been occur in planning applications [6]. A subcontract will not be
+started.                                                        announced (Section IV-A.1) until its predecessors have been
+                                                                completed.
+                           APPENDIX D
+                                                                                                     APPENDIX E
+                  CONTRACT SPECIFICATION
+                                                                                        TASK PROCESSING PROCEDURES
+   A node maintains a structure of the form shown in Fig. 7 for
+each task for which it is the contractor. Such a structure forms            In this appendix, we discuss the task-specific procedures,
+a local context for the execution of a task.                             the roles they play, and the default actions taken in CNET
+   name is a unique identifier for the contract. manager is the          when no procedure is provided by the user. In the terms of the
+node that generated the task. report recipients are the nodes            functional model of a node presented in Appendix A, the ex-
+to which reports for the contract are to be sent. The default            ecution procedure runs in the task processor. The rest of the
+report recipient is the manager. related contractors are the             procedures run in the contract processor.
+nodes that are working on related contracts (e.g., subcontracts             Announcement Procedure: Called each time a subtask is
+of the same contract).                                                   generated. Its role is to determine whether the task should be
+   The report recipients and related contractors slots facilitate        announced or awarded directly. In either case, it must deter-
+more flexible communication and cooperation. They give IN                mine the addressee. It must also compute the information re-
+SMITH: CONTRACT NET PROTOCOL: COMMUNICATION AND CONTROL                                                                                        1113
+
+
+                <task> ⇒ [name]                                            (CNET maintains a list of the recently terminated contracts
+                         [type]                                            [Appendix C].) Its role is to take any specialized action that is
+                         [specification]
+                         [announcement-procedure]                          required before the contract is deleted (e.g., storing contract
+                         [announcement-ranking-procedure]                  slot information in the local database). No default action is
+                         [bid-procedure]                                   taken.
+                         [bid-ranking-procedure]                              Information Acceptance Procedure: Called when an infor-
+                         [award-procedure]
+                         [acknowledgment-procedure]                        mation message is received. Its role is to determine what to do
+                         [refusal-processing-procedure]                    with the contents of the information specification slot. The
+                         [report-acceptance-procedure]                     default is to store the information in the local database.
+                         [termination-procedure]                              Execution Procedure: Called when processing is started on
+                         [information-acceptance-procedure]
+                         [execution-procedure]                             the contract. Its role is to perform the computation required to
+                         Fig. 8. Task structure.                           execute the task.
+
+                     <subcontract> ⇒ [name]
+                                       [contractor]                                               ACKNOWLEDGMENT
+                                       <task>
+                                       [results]                      Some aspects of this work are being pursued in collaboration
+                                       [predecessors]              with R. Davis at the Artificial Intelligence Laboratory of the
+                                       [successors]
+                       Fig. 9. Subcontract structure.              Massachusetts Institute of Technology, Cambridge. The
+                                                                   contributions of B. Buchanan and G. Wiederhold are also
+quired to fill the slots of a task announcement or directed gratefully acknowledged.
+award and indicate the names of any predecessor subcontracts.
+The default is to announce the task to all nodes with a task                                      REFERENCES
+abstraction that states the task type and a default expiration
+time.                                                               [1] P. Brinch Hansen, Operating System Principles. Englewood Cliffs,
+                                                                         NJ: Prentice-Hall, 1973.
+   Announcement Ranking Procedure: Called when a task [2] D.                 J. Farber and K. C. Larson, “The structure of the distributed com-
+announcement is received. Its role is to rank the new an-                puting system—Software,” in Proc. Symp. on Comput.-Commun.
+nouncement relative to others under consideration. The default           Networks and Teletraffic, J. Fox, Ed. Brooklyn, NY: Polytechnic
+                                                                         Press, Polytechnic Inst. of Brooklyn, Apr. 1972, pp. 539-545.
+is to give the most recently received task announcement the [3] D. J. Farber, J. Feldman, F. R. Heinrich, M. D. Hopwood, K. C. Larson,
+highest ranking.                                                         C. Loomis, and L. A. Rowe, “The distributed computing system,”
+   Bid Procedure: Called when a node has an opportunity to               IEEE COMPCON Spring, 1973, pp. 31-34.
+                                                                    [4] C. Hewitt, “Description and theoretical analysis (using schemata) of
+submit a bid. Its role is to decide whether or not to submit a bid       PLANNER: A language for proving theorems and manipulating models
+and to add any common internode language statements to                   in a robot,” Mass. Inst. Technol., Cambridge, MA, AI TR 258, Apr.
+                                                                         1972.
+those called for in the bid specification of the associated task [5] V.      R. Lesser, “Cooperative distributed processing,” Dep. Comput. In-
+announcement. No default action is taken.                                form. Sci., Univ. of Massachusetts, Amherst, MA, COINS TR 78-7,
+   Bid Ranking Procedure: Called when a bid is received. Its             May 1978.
+                                                                    [6] E.D. Sacerdoti, “A structure for plans and behavior,” SRI Int., Menlo
+role is to rank the new bid relative to others under consideration       Park, CA, AIC TN 109, Aug. 1975.
+and determine whether the contract should be awarded to any [7] R. G. Smith and R. Davis, “Applications of the contract net framework:
+of the current bidders. The default is to insert the new bid into        Distributed sensing,” in Proc. ARPA Distributed Sensor Net Symp.,
+                                                                         Pittsburgh, PA, Dec. 1978, pp. 12-20.
+the list of bids so that bids that REQUIRE the least information [8] R. G. Smith, “A framework for problem solving in a distributed pro-
+(Section IV-A.3) are ranked highest.                                     cessing environment,” Dep. Comput. Sci., Stanford, CA, STAN-CS-78-
+   Award Procedure: Called when the expiration time for a task [9] R.    700 (HPP-78-28), Dec. 1978.
+                                                                            G. Smith and R. Davis, “Cooperation in distributed problem solving,”
+announcement is reached and the contract has not yet been                in Proc. /979 Int. Conf Cybern. Soc., Oct. 1979, pp. 366-371.
+awarded. Its role is to decide what action is to be taken. The [10] R. G. Smith, “Applications of the contract net framework: Search,” in
+                                                                         Proc. 1980 Nat. Conf. Canadian Soc. for Computational Studies of
+default is to award the contract to the bidder that REQUIRE’ s           Intell., May 1980, pp. 232-239.
+the least additional information (or the first bidder in case of a [11] R. F. Sproul and D. Cohen, “High-level protocols,” Proc. IEEE, vol. 66,
+tie) or to transmit another task announcement if no bids have            pp. 1371-1386, Nov. 1978.
+                                                                    [12] W. Teitelman, INTERLISP Reference Manual. Palo Alto, CA: Xerox
+been received.                                                           Palo Alto Research Center, Dec. 1975.
+   Acknowledgment Procedure: Called when a node receives
+a directed contract for which it is eligible and has a task tem-
+plate. Its role is to decide whether to accept or reject the con-
+tract. The default is to accept.
+                                                                                                Reid G. Smith (S’67-M’69-S’75-M’78) was born
+   Refusal Processing Procedure: Called when a refusal mes-                                     in Toronto, Ont., Canada, on October 4, 1946. He
+sage is received. Its role is to determine what action is to be                                 received the B.Eng. and M. Eng. degrees in electri-
+taken. The default is to transmit a task announcement.                                          cal engineering from Carleton University, Ottawa,
+   Report Acceptance Procedure: Called when a report mes-                                       Ont., Canada in 1968 and 1969, respectively, and the
+                                                                                                Ph.D. degree in electrical engineering from
+sage is received. Its role is to determine what to do with the                                  Stanford University, Stanford, CA in 1979.
+contents of the result description slot. The default is to add the                                He has been associated with the Defence Re-
+contents of the slot to the results slot of the contract.                                       search Establishment Atlantic in Dartmouth,
+                                                                                                N.S., Canada since 1969. He is currently engaged
+   Termination Procedure: Called when a contract that has                                       in research in artificial intelligence and distri-
+been terminated is about to be deleted from the local database.                                 buted problem solving.
+

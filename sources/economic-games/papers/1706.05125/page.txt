@@ -1,0 +1,234 @@
+
+
+  [1706.05125] Deal or No Deal? End-to-End Learning for Negotiation Dialogues
+
+    Skip to main content
+
+      Search
+
+    Submit
+    Donate
+
+      Log in
+
+      Search arXiv
+
+      Press Enter to search · Advanced search
+
+Computer Science > Artificial Intelligence
+
+      arXiv:1706.05125 (cs)
+
+  [Submitted on 16 Jun 2017]
+
+Title:Deal or No Deal? End-to-End Learning for Negotiation Dialogues
+
+Authors:Mike Lewis, Denis Yarats, Yann N. Dauphin, Devi Parikh, Dhruv Batra            
+View a PDF of the paper titled Deal or No Deal? End-to-End Learning for Negotiation Dialogues, by Mike Lewis and 3 other authors
+    View PDF
+    HTML (experimental)
+
+            Abstract:Much of human dialogue occurs in semi-cooperative settings, where agents with different goals attempt to agree on common decisions. Negotiations require complex communication and reasoning skills, but success is easy to measure, making this an interesting task for AI. We gather a large dataset of human-human negotiations on a multi-issue bargaining task, where agents who cannot observe each other's reward functions must reach an agreement (or a deal) via natural language dialogue. For the first time, we show it is possible to train end-to-end models for negotiation, which must learn both linguistic and reasoning skills with no annotated dialogue states. We also introduce dialogue rollouts, in which the model plans ahead by simulating possible complete continuations of the conversation, and find that this technique dramatically improves performance. Our code and dataset are publicly available (this https URL).
+
+          Subjects:
+
+            Artificial Intelligence (cs.AI); Computation and Language (cs.CL)
+
+          Cite as:
+          arXiv:1706.05125 [cs.AI]
+
+          (or 
+              arXiv:1706.05125v1 [cs.AI] for this version)
+
+                        https://doi.org/10.48550/arXiv.1706.05125
+
+                Focus to learn more
+
+                                  arXiv-issued DOI via DataCite
+
+Submission history From: Yann Dauphin [view email]      
+    [v1]
+        Fri, 16 Jun 2017 01:26:09 UTC (174 KB)
+
+      Full-text links:
+
+Access Paper:
+
+View a PDF of the paper titled Deal or No Deal? End-to-End Learning for Negotiation Dialogues, by Mike Lewis and 3 other authors
+View PDF
+HTML (experimental)
+TeX Source
+
+view license
+
+Current browse context:
+
+cs.AI
+
+      < prev
+
+      |      
+      next >
+
+    new
+     | 
+    recent
+     | 2017-06
+
+    Change to browse by:
+
+        cs
+
+        cs.CL
+
+References & Citations
+
+NASA ADS
+Google Scholar
+
+Semantic Scholar
+
+ 1 blog link (what is this?)
+
+DBLP - CS Bibliography
+
+      listing | bibtex    
+
+Mike Lewis
+Denis Yarats
+Yann N. Dauphin
+Devi Parikh
+Dhruv Batra    
+
+    export BibTeX citation
+    Loading...
+
+BibTeX formatted citation
+            ×
+
+            loading...
+
+            Data provided by: 
+
+Bookmark
+
+    Bibliographic Tools
+
+Bibliographic and Citation Tools
+
+              Bibliographic Explorer Toggle
+
+            Bibliographic Explorer (What is the Explorer?)
+
+              Connected Papers Toggle
+
+            Connected Papers (What is Connected Papers?)
+
+              Litmaps Toggle
+
+            Litmaps (What is Litmaps?)
+
+              scite.ai Toggle
+
+            scite Smart Citations (What are Smart Citations?)
+
+    Code, Data, Media
+
+Code, Data and Media Associated with this Article
+
+              alphaXiv Toggle
+
+            alphaXiv (What is alphaXiv?)
+
+              Links to Code Toggle
+
+            CatalyzeX Code Finder for Papers (What is CatalyzeX?)
+
+              DagsHub Toggle
+
+            DagsHub (What is DagsHub?)
+
+              GotitPub Toggle
+
+            Gotit.pub (What is GotitPub?)
+
+              Huggingface Toggle
+
+            Hugging Face (What is Huggingface?)
+
+              ScienceCast Toggle
+
+            ScienceCast (What is ScienceCast?)
+
+      Demos
+
+Demos
+
+                Replicate Toggle
+
+              Replicate (What is Replicate?)
+
+                Spaces Toggle
+
+              Hugging Face Spaces (What is Spaces?)
+
+                Spaces Toggle
+
+              TXYZ.AI (What is TXYZ.AI?)
+
+      Related Papers
+
+Recommenders and Search Tools
+
+                Link to Influence Flower
+
+              Influence Flower (What are Influence Flowers?)
+
+                Core recommender toggle
+
+              CORE Recommender (What is CORE?)
+
+Author
+
+Venue
+
+Institution
+
+Topic
+
+        About arXivLabs
+
+arXivLabs: experimental projects with community collaborators
+
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+
+Have an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.
+
+    Which authors of this paper are endorsers? |
+    Disable MathJax (What is MathJax?)
+
+        We gratefully acknowledge support from
+        our major funders,
+        member institutions, ,
+        and all contributors.
+
+        About
+        ·
+        Help
+        ·
+        Contact
+        ·
+        Subscribe
+        ·
+        Copyright
+        ·
+        Privacy
+        ·
+        Accessibility
+        ·
+        Operational Status (opens in new tab)
+
+Major funding support from
+

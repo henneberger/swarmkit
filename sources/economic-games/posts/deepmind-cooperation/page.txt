@@ -1,0 +1,381 @@
+Understanding Agent Cooperation — Google DeepMind
+Skip to main content
+
+Explore our next generation AI systems
+
+Explore models 
+
+Gemini
+
+Gemini
+Build intelligent agents  
+
+Gemini Omni
+Create anything from anything  
+
+Nano Banana
+Create and edit detailed images  
+
+Gemini Audio
+Talk, create and control audio 
+
+Specialized models
+
+Veo
+Generate cinematic video with audio  
+
+Imagen
+Generate high-quality images from text  
+
+Lyria
+Generate high fidelity music and audio 
+
+World models & physical AI
+
+Genie 3
+Generate and explore interactive worlds  
+
+Gemini Robotics
+Perceive, reason, use tools and interact 
+
+Open models
+
+Gemma
+Build responsible AI applications at scale 
+
+Our latest AI breakthroughs and updates from the lab
+
+Explore research 
+
+Breakthroughs
+
+SIMA 2
+An agent that plays, reasons, and learns with you  
+
+Genie 3
+Generate and explore interactive worlds  
+
+AlphaGo
+Mastering the game of Go  
+
+Gemini Robotics
+Perceive, reason, use tools and interact 
+
+Learn more
+
+Evals
+
+Publications
+
+Responsibility
+
+Frontier safety
+
+Unlocking a new era of discovery with AI
+
+Explore science 
+
+Breakthroughs
+
+AlphaFold
+Predict protein structures with high accuracy  
+
+AlphaGenome
+Using AI to understand the human genome  
+
+WeatherNext
+Fast and accurate AI weather forecasting  
+
+AlphaEarth
+Map our planet in unprecedented detail  
+
+AlphaEvolve
+Design advanced algorithms for math and applications in computing 
+
+Learn more
+
+Gemini for Science
+
+Experimental Tools
+
+Science Skills
+
+Our mission is to build AI responsibly to benefit humanity
+
+About Google DeepMind 
+
+Responsibility
+Ensuring AI safety through proactive security, even against evolving threats  
+
+News
+Discover our latest AI breakthroughs, projects, and updates  
+
+Careers
+We’re looking for people who want to make a real, positive impact on the world 
+
+Learn more
+
+Education
+
+Our National Partnerships for AI
+
+Accelerator programs
+
+The Podcast
+
+Models          
+
+Explore our next generation AI systems
+
+Explore models 
+
+Gemini
+
+Gemini
+Build intelligent agents  
+
+Gemini Omni
+Create anything from anything  
+
+Nano Banana
+Create and edit detailed images  
+
+Gemini Audio
+Talk, create and control audio 
+
+Specialized models
+
+Veo
+Generate cinematic video with audio  
+
+Imagen
+Generate high-quality images from text  
+
+Lyria
+Generate high fidelity music and audio 
+
+World models & physical AI
+
+Genie 3
+Generate and explore interactive worlds  
+
+Gemini Robotics
+Perceive, reason, use tools and interact 
+
+Open models
+
+Gemma
+Build responsible AI applications at scale 
+Research          
+
+Our latest AI breakthroughs and updates from the lab
+
+Explore research 
+
+Breakthroughs
+
+SIMA 2
+An agent that plays, reasons, and learns with you  
+
+Genie 3
+Generate and explore interactive worlds  
+
+AlphaGo
+Mastering the game of Go  
+
+Gemini Robotics
+Perceive, reason, use tools and interact 
+
+Learn more
+
+Evals
+
+Publications
+
+Responsibility
+
+Frontier safety
+
+Science          
+
+Unlocking a new era of discovery with AI
+
+Explore science 
+
+Breakthroughs
+
+AlphaFold
+Predict protein structures with high accuracy  
+
+AlphaGenome
+Using AI to understand the human genome  
+
+WeatherNext
+Fast and accurate AI weather forecasting  
+
+AlphaEarth
+Map our planet in unprecedented detail  
+
+AlphaEvolve
+Design advanced algorithms for math and applications in computing 
+
+Learn more
+
+Gemini for Science
+
+Experimental Tools
+
+Science Skills
+
+About          
+
+Our mission is to build AI responsibly to benefit humanity
+
+About Google DeepMind 
+
+Learn more
+
+Education
+
+Our National Partnerships for AI
+
+Accelerator programs
+
+The Podcast
+
+Responsibility
+Ensuring AI safety through proactive security, even against evolving threats  
+
+News
+Discover our latest AI breakthroughs, projects, and updates  
+
+Careers
+We’re looking for people who want to make a real, positive impact on the world 
+
+ Build with Gemini  Try Gemini          
+
+ Google DeepMind 
+
+Google AI 
+Learn about all our AI  
+Google DeepMind 
+Explore the frontier of AI  
+Google Labs 
+Try our AI experiments  
+Google Research 
+Explore our research 
+
+Products and apps 
+Gemini app 
+Chat with Gemini  
+Google AI Studio 
+Build with our next-gen AI models  
+Google Antigravity 
+Our agentic development platform 
+
+ Models 
+ Research 
+ Science 
+ About 
+
+ Build with Gemini  
+ Try Gemini  
+
+ February 2, 2017 Research
+Understanding Agent Cooperation
+Joel Leibo, Marc Lanctot, Thore Graepel, Vinicius Zambaldi, Janusz Marecki
+
+Share
+         Copied
+
+We employ deep multi-agent reinforcement learning to model the emergence of cooperation. The new notion of sequential social dilemmas allows us to model how rational agents interact, and arrive at more or less cooperative behaviours depending on the nature of the environment and the agents’ cognitive capacity. The research may enable us to better understand and control the behaviour of complex multi-agent systems such as the economy, traffic, and environmental challenges.
+Self-interested people often work together to achieve great things. Why should this be the case, when it is in their best interest to just care about their own wellbeing and disregard that of others?
+The question of how and under what circumstances selfish agents cooperate is one of the fundamental question in the social sciences. One of the simplest and most elegant models to describe this phenomenon is the well-known game of Prisoner’s Dilemma from game theory.
+Two suspects are arrested and put into solitary confinement. Without confessions the police do not have sufficient evidence to convict the two suspects on the main charge, but have good prospects to achieve one year prison sentences for both. In order to entice the prisoners to confess, they offer them simultaneously the following deal: If you testify against the other prisoner (“defect”) you will be released, but the other prisoner will serve three years in prison. If both prisoners testify against each other (“defect”), they will both serve two years.
+It turns out, that rational agents - in the sense of game theory - should always defect in this game, because no matter what the other prisoner chooses to do, they will be better off defecting. Yet, paradoxically, if both prisoners reason in this way, they will each have to serve two years in prison - one year more than if they had cooperated and remained silent. This paradox is what we refer to as a social dilemma.
+Recent progress in artificial intelligence and specifically deep reinforcement learning provides us with the tools to look at the problem of social dilemmas through a new lens. Traditional game theorists model social dilemmas in terms of a simple binary choice between cooperate and defect for each agent. In real life, both cooperating and defecting may require complex behaviours, involving difficult sequences of actions that agents need to learn to execute. We refer to this new setting as sequential social dilemmas, and use artificial agents trained by deep multi-agent reinforcement learning to study it.
+As an example, consider the following Gathering game: Two agents, Red and Blue, roam a shared world and collect apples to receive positive rewards. They may also direct a beam at the other agent, “tagging them”, to temporarily remove them from the game, but this action does not trigger a reward. A visualisation of agents playing the gathering game can be seen below.
+
+We let the agents play this game many thousands of times and let them learn how to behave rationally using deep multi-agent reinforcement learning. Rather naturally, when there are enough apples in the environment, the agents learn to peacefully coexist and collect as many apples as they can. However, as the number of apples is reduced, the agents learn that it may be better for them to tag the other agent to give themselves time on their own to collect the scarce apples.
+It turns out that this Gathering game shares many characteristics of the original Prisoner’s Dilemma, but allows us to study the more interesting case in which agents need to learn to implement their desired behaviour: Either to cooperate and collect apples, or to defect and try to tag the other agent.
+In these sequential social dilemmas, we can now study what factors contribute to agents’ cooperation. For example, the following plot shows that in the Gathering game greater scarcity of apples leads to more “tagging” behaviour of agents. Furthermore, agents with the capacity to implement more complex strategies try to tag the other agent more frequently, i.e. behave less cooperatively - no matter how we vary the scarcity of apples.
+
+Interestingly, in another game called Wolfpack (see gameplay video below), which requires close coordination to successfully cooperate, we find that greater capacity to implement complex strategies leads to more cooperation between agents, the opposite of the finding with Gathering. So, depending on the situation, having a greater capacity to implement complex strategies may yield either more or less cooperation. The new framework of sequential social dilemmas allows us to take into account not only the outcome of the interaction (as in the Prisoner’s dilemma), but also the difficulty of learning to implement a given strategy.
+
+In summary, we showed that we can apply the modern AI technique of deep multi-agent reinforcement learning to age-old questions in social science such as the mystery of the emergence of cooperation. We can think of the trained AI agents as an approximation to economics’ rational agent model “homo economicus”. Hence, such models give us the unique ability to test policies and interventions into simulated systems of interacting agents - both human and artificial.
+As a consequence, we may be able to better understand and control complex multi-agent systems such as the economy, traffic systems, or the ecological health of our planet - all of which depend on our continued cooperation.
+
+Notes
+Read the paper: Multi-agent Reinforcement Learning in Sequential Social Dilemmas
+
+Follow us
+
+Sign up for updates on our latest innovations
+
+I accept Google's Terms and Conditions and acknowledge that my information will be used in accordance with Google's Privacy Policy.
+
+Sign up
+
+Build AI responsibly to benefit humanity
+
+Models
+
+Gemini  
+
+Gemini Omni  
+
+Nano Banana  
+
+Gemini Audio  
+
+Gemma  
+
+Genie  
+
+Lyria  
+
+Veo 
+
+Research
+
+Gemini Robotics  
+Breakthroughs  
+Evals  
+Publications  
+Frontier safety  
+Responsibility 
+
+Science
+
+AlphaFold  
+
+AlphaGenome  
+
+WeatherNext  
+
+AlphaEarth  
+
+AlphaEvolve 
+
+Products
+
+Gemini app  
+
+Google AI Studio  
+
+Google Antigravity 
+
+Learn more
+
+About  
+News  
+Careers  
+National Partnerships for AI  
+Accelerator programs  
+The Podcast 
+
+ About Google 
+ Google products 
+ Privacy 
+ Terms 
+Cookies management controls

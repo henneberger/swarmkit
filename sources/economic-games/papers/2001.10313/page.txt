@@ -1,0 +1,254 @@
+
+
+  [2001.10313] Evolutionary dynamics of higher-order interactions in social networks
+
+    Skip to main content
+
+      Search
+
+    Submit
+    Donate
+
+      Log in
+
+      Search arXiv
+
+      Press Enter to search · Advanced search
+
+Physics > Physics and Society
+
+      arXiv:2001.10313 (physics)
+
+  [Submitted on 28 Jan 2020 (v1), last revised 22 May 2021 (this version, v5)]
+
+Title:Evolutionary dynamics of higher-order interactions in social networks
+
+Authors:Unai Alvarez-Rodriguez, Federico Battiston, Guilherme Ferraz de Arruda, Yamir Moreno, Matjaz Perc, Vito Latora            
+View a PDF of the paper titled Evolutionary dynamics of higher-order interactions in social networks, by Unai Alvarez-Rodriguez and 5 other authors
+    View PDF
+    HTML (experimental)
+
+            Abstract:We live and cooperate in networks. However, links in networks only allow for pairwise interactions, thus making the framework suitable for dyadic games, but not for games that are played in groups of more than two players. Here, we study the evolutionary dynamics of a public goods game in social systems with higher-order interactions. First, we show that the game on uniform hypergraphs corresponds to the replicator dynamics in the well-mixed limit, providing a formal theoretical foundation to study cooperation in networked groups. Secondly, we unveil how the presence of hubs and the coexistence of interactions in groups of different sizes affects the evolution of cooperation. Finally, we apply the proposed framework to extract the actual dependence of the synergy factor on the size of a group from real-world collaboration data in science and technology. Our work provides a way to implement informed actions to boost cooperation in social groups.
+
+          Comments:
+          25 pages, 5 figures, supplementary information; published in Nature Human Behaviour
+
+          Subjects:
+
+            Physics and Society (physics.soc-ph); Social and Information Networks (cs.SI); Populations and Evolution (q-bio.PE)
+
+          Cite as:
+          arXiv:2001.10313 [physics.soc-ph]
+
+          (or 
+              arXiv:2001.10313v5 [physics.soc-ph] for this version)
+
+                        https://doi.org/10.48550/arXiv.2001.10313
+
+                Focus to learn more
+
+                                  arXiv-issued DOI via DataCite
+
+          Journal reference:
+          Nat. Hum. Behav. 5, 586-595 (2021)
+
+            Related DOI:
+
+          https://doi.org/10.1038/s41562-020-01024-1
+
+                Focus to learn more
+
+                DOI(s) linking to related resources
+
+Submission history From: Matjaz Perc [view email]      
+            [v1]
+        Tue, 28 Jan 2020 13:32:16 UTC (953 KB)
+
+            [v2]
+        Thu, 7 May 2020 17:01:25 UTC (1,559 KB)
+
+            [v3]
+        Fri, 3 Jul 2020 15:24:14 UTC (6,132 KB)
+
+            [v4]
+        Fri, 29 Jan 2021 14:07:56 UTC (6,135 KB)
+
+    [v5]
+        Sat, 22 May 2021 19:23:03 UTC (6,135 KB)
+
+      Full-text links:
+
+Access Paper:
+
+View a PDF of the paper titled Evolutionary dynamics of higher-order interactions in social networks, by Unai Alvarez-Rodriguez and 5 other authors
+View PDF
+HTML (experimental)
+TeX Source
+
+view license
+
+Current browse context:
+
+physics.soc-ph
+
+      < prev
+
+      |      
+      next >
+
+    new
+     | 
+    recent
+     | 2020-01
+
+    Change to browse by:
+
+        cs
+
+        cs.SI
+
+        physics
+
+        q-bio
+
+        q-bio.PE
+
+References & Citations
+
+NASA ADS
+Google Scholar
+
+Semantic Scholar
+
+    export BibTeX citation
+    Loading...
+
+BibTeX formatted citation
+            ×
+
+            loading...
+
+            Data provided by: 
+
+Bookmark
+
+    Bibliographic Tools
+
+Bibliographic and Citation Tools
+
+              Bibliographic Explorer Toggle
+
+            Bibliographic Explorer (What is the Explorer?)
+
+              Connected Papers Toggle
+
+            Connected Papers (What is Connected Papers?)
+
+              Litmaps Toggle
+
+            Litmaps (What is Litmaps?)
+
+              scite.ai Toggle
+
+            scite Smart Citations (What are Smart Citations?)
+
+    Code, Data, Media
+
+Code, Data and Media Associated with this Article
+
+              alphaXiv Toggle
+
+            alphaXiv (What is alphaXiv?)
+
+              Links to Code Toggle
+
+            CatalyzeX Code Finder for Papers (What is CatalyzeX?)
+
+              DagsHub Toggle
+
+            DagsHub (What is DagsHub?)
+
+              GotitPub Toggle
+
+            Gotit.pub (What is GotitPub?)
+
+              Huggingface Toggle
+
+            Hugging Face (What is Huggingface?)
+
+              ScienceCast Toggle
+
+            ScienceCast (What is ScienceCast?)
+
+      Demos
+
+Demos
+
+                Replicate Toggle
+
+              Replicate (What is Replicate?)
+
+                Spaces Toggle
+
+              Hugging Face Spaces (What is Spaces?)
+
+                Spaces Toggle
+
+              TXYZ.AI (What is TXYZ.AI?)
+
+      Related Papers
+
+Recommenders and Search Tools
+
+                Link to Influence Flower
+
+              Influence Flower (What are Influence Flowers?)
+
+                Core recommender toggle
+
+              CORE Recommender (What is CORE?)
+
+Author
+
+Venue
+
+Institution
+
+Topic
+
+        About arXivLabs
+
+arXivLabs: experimental projects with community collaborators
+
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+
+Have an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.
+
+    Which authors of this paper are endorsers? |
+    Disable MathJax (What is MathJax?)
+
+        We gratefully acknowledge support from
+        our major funders,
+        member institutions, ,
+        and all contributors.
+
+        About
+        ·
+        Help
+        ·
+        Contact
+        ·
+        Subscribe
+        ·
+        Copyright
+        ·
+        Privacy
+        ·
+        Accessibility
+        ·
+        Operational Status (opens in new tab)
+
+Major funding support from
+

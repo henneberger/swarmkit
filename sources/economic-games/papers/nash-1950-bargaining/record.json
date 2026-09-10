@@ -1,0 +1,21 @@
+{
+  "kind": "papers",
+  "id": "nash-1950-bargaining",
+  "title": "The Bargaining Problem",
+  "topic": "bargaining",
+  "page_url": null,
+  "pdf_url": "https://www.haverford.edu/sites/default/files/Nash1950.pdf",
+  "retrieved_at": "2026-09-10T22:39:43.293366+00:00",
+  "artifacts": [
+    {
+      "url": "https://www.haverford.edu/sites/default/files/Nash1950.pdf",
+      "resolved_url": "https://www.haverford.edu/sites/default/files/Nash1950.pdf",
+      "path": "sources/economic-games/papers/nash-1950-bargaining/paper.pdf",
+      "bytes": 388370,
+      "sha256": "6f6f054a717c025a1dd80a3612f1c24f7f2d251d214decfc2fcc9f689a261383"
+    }
+  ],
+  "status": "ok",
+  "extracted_text_characters": 19775,
+  "text_searchable": true
+}

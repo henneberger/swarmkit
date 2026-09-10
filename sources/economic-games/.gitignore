@@ -1,0 +1,2 @@
+# Keep provenance and README/license snapshots trackable; reconstruct full clones using the collector.
+/repositories/*/checkout/

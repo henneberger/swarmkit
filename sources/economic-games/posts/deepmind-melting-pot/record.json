@@ -1,0 +1,77 @@
+{
+  "kind": "posts",
+  "id": "deepmind-melting-pot",
+  "title": "Melting Pot: an evaluation suite for multi-agent reinforcement learning",
+  "page_url": "https://deepmind.google/blog/melting-pot-an-evaluation-suite-for-multi-agent-reinforcement-learning/",
+  "retrieved_at": "2026-09-10T22:39:44.740997+00:00",
+  "artifacts": [
+    {
+      "url": "https://deepmind.google/blog/melting-pot-an-evaluation-suite-for-multi-agent-reinforcement-learning/",
+      "resolved_url": "https://deepmind.google/blog/melting-pot-an-evaluation-suite-for-multi-agent-reinforcement-learning/",
+      "path": "sources/economic-games/posts/deepmind-melting-pot/page.html",
+      "bytes": 145145,
+      "sha256": "0c94c359936b92813cfafb2b82d37f6294222f97e5dbc38882b4da173bab8fc0"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "": [
+      "",
+      "ie=edge"
+    ],
+    "viewport": [
+      "width=device-width,initial-scale=1.0"
+    ],
+    "description": [
+      "Here we introduce Melting Pot, a scalable evaluation suite for multi-agent reinforcement learning. Melting Pot assesses generalisation to novel social situations involving both familiar and unfamilia\u2026"
+    ],
+    "author": [
+      "Joel Z. Leibo, Edgar Du\u00e9\u00f1ez-Guzm\u00e1n, Alexander Vezhnevets, John Agapiou, Peter Sunehag, Raphael Koster, Jayd Matyas, Charlie Beattie, Igor Mordatch *, Thore Graepel"
+    ],
+    "og:title": [
+      "Melting Pot: an evaluation suite for multi-agent reinforcement learning"
+    ],
+    "og:description": [
+      "Here we introduce Melting Pot, a scalable evaluation suite for multi-agent reinforcement learning. Melting Pot assesses generalisation to novel social situations involving both familiar and unfamiliar individuals, and has been designed to test a broad range of social interactions such as: cooperation, competition, deception, reciprocation, trust, stubbornness and so on. Melting Pot offers researchers a set of 21 MARL \u201csubstrates\u201d (multi-agent games) on which to train agents, and over 85 unique test scenarios on which to evaluate these trained agents."
+    ],
+    "og:image": [
+      "https://lh3.googleusercontent.com/bMyZnMfsKGFUfUwlKMm5C7RhpZod5uICiS01C_2-Bnwpvf9iS6xXuk-ditsywmRqF_xEA-AHmqx4v8UR0Lg_CM0RU_20gYJiLPTSa-Zg--UHk8MILg=w1200-h630-n-nu-rw"
+    ],
+    "og:site_name": [
+      "Google DeepMind"
+    ],
+    "og:url": [
+      "https://deepmind.google/blog/melting-pot-an-evaluation-suite-for-multi-agent-reinforcement-learning/"
+    ],
+    "og:type": [
+      "article"
+    ],
+    "article:author": [
+      "Joel Z. Leibo, Edgar Du\u00e9\u00f1ez-Guzm\u00e1n, Alexander Vezhnevets, John Agapiou, Peter Sunehag, Raphael Koster, Jayd Matyas, Charlie Beattie, Igor Mordatch *, Thore Graepel"
+    ],
+    "article:published_time": [
+      "2021-07-14T00:00:00+00:00"
+    ],
+    "article:modified_time": [
+      "2026-07-06T11:57:49.021588+00:00"
+    ],
+    "article:section": [
+      "Research"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Melting Pot: an evaluation suite for multi-agent reinforcement learning"
+    ],
+    "twitter:image": [
+      "https://lh3.googleusercontent.com/bMyZnMfsKGFUfUwlKMm5C7RhpZod5uICiS01C_2-Bnwpvf9iS6xXuk-ditsywmRqF_xEA-AHmqx4v8UR0Lg_CM0RU_20gYJiLPTSa-Zg--UHk8MILg=w1200-h630-n-nu-rw"
+    ],
+    "twitter:description": [
+      "Here we introduce Melting Pot, a scalable evaluation suite for multi-agent reinforcement learning. Melting Pot assesses generalisation to novel social situations involving both familiar and unfamiliar individuals, and has been designed to test a broad range of social interactions such as: cooperation, competition, deception, reciprocation, trust, stubbornness and so on. Melting Pot offers researchers a set of 21 MARL \u201csubstrates\u201d (multi-agent games) on which to train agents, and over 85 unique test scenarios on which to evaluate these trained agents."
+    ],
+    "twitter:site": [
+      "@GoogleDeepMind"
+    ]
+  }
+}

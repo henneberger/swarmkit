@@ -1,0 +1,29 @@
+{
+  "kind": "papers",
+  "id": "hart-mas-colell-2000",
+  "title": "A Simple Adaptive Procedure Leading to Correlated Equilibrium",
+  "topic": "regret matching",
+  "page_url": "https://ma.huji.ac.il/~hart/abs/adapt.html",
+  "pdf_url": "https://ma.huji.ac.il/~hart/papers/adapt.pdf",
+  "retrieved_at": "2026-09-10T22:40:36.395038+00:00",
+  "artifacts": [
+    {
+      "url": "https://ma.huji.ac.il/~hart/abs/adapt.html",
+      "resolved_url": "https://ma.huji.ac.il/~hart/abs/adapt.html",
+      "path": "sources/economic-games/papers/hart-mas-colell-2000/page.html",
+      "bytes": 2736,
+      "sha256": "f4424c0a7b43bf14d917115446ba57035e54c3744d16333f721441d85ba3592f"
+    },
+    {
+      "url": "https://ma.huji.ac.il/~hart/papers/adapt.pdf",
+      "resolved_url": "https://ma.huji.ac.il/~hart/papers/adapt.pdf",
+      "path": "sources/economic-games/papers/hart-mas-colell-2000/paper.pdf",
+      "bytes": 194809,
+      "sha256": "927c5f51cb6a76f5af723085970fa1028211d5080fabb36e3095ccba06b91889"
+    }
+  ],
+  "status": "ok",
+  "metadata": {},
+  "extracted_text_characters": 86220,
+  "text_searchable": true
+}

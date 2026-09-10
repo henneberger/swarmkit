@@ -1,0 +1,115 @@
+{
+  "kind": "papers",
+  "id": "2108.02755",
+  "title": "The AI Economist: Optimal Economic Policy Design via Two-level Deep Reinforcement Learning",
+  "topic": "learned institutions",
+  "page_url": "https://arxiv.org/abs/2108.02755",
+  "pdf_url": "https://arxiv.org/pdf/2108.02755",
+  "retrieved_at": "2026-09-10T22:39:41.811282+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2108.02755",
+      "resolved_url": "https://arxiv.org/abs/2108.02755",
+      "path": "sources/economic-games/papers/2108.02755/page.html",
+      "bytes": 45172,
+      "sha256": "cce2821470b746c1425557eae5266b425e5da1e28df6fc25410a03476f0add09"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2108.02755",
+      "resolved_url": "https://arxiv.org/pdf/2108.02755",
+      "path": "sources/economic-games/papers/2108.02755/paper.pdf",
+      "bytes": 7320395,
+      "sha256": "e41fb245982f24cdbb48c4ff3952034e679ec298efc55485ae142ce32079b483"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2108.02755: The AI Economist: Optimal Economic Policy Design via Two-level Deep Reinforcement Learning"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "The AI Economist: Optimal Economic Policy Design via Two-level Deep Reinforcement Learning"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2108.02755v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "AI and reinforcement learning (RL) have improved many areas, but are not yet widely adopted in economic policy design, mechanism design, or economics at large. At the same time, current economic methodology is limited by a lack of counterfactual data, simplistic behavioral models, and limited opportunities to experiment with policies and evaluate behavioral responses. Here we show that machine-learning-based economic simulation is a powerful policy and mechanism design framework to overcome these limitations. The AI Economist is a two-level, deep RL framework that trains both agents and a social planner who co-adapt, providing a tractable solution to the highly unstable and novel two-level RL challenge. From a simple specification of an economy, we learn rational agent behaviors that adapt to learned planner policies and vice versa. We demonstrate the efficacy of the AI Economist on the problem of optimal taxation. In simple one-step economies, the AI Economist recovers the optimal tax policy of economic theory. In complex, dynamic economies, the AI Economist substantially improves both utilitarian social welfare and the trade-off between equality and productivity over baselines. It does so despite emergent tax-gaming strategies, while accounting for agent interactions and behavioral change more accurately than economic theory. These results demonstrate for the first time that two-level, deep RL can be used for understanding and as a complement to theory for economic design, unlocking a new computational learning-based approach to understanding economic policy."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "The AI Economist: Optimal Economic Policy Design via Two-level..."
+    ],
+    "twitter:description": [
+      "AI and reinforcement learning (RL) have improved many areas, but are not yet widely adopted in economic policy design, mechanism design, or economics at large. At the same time, current economic..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "The AI Economist: Optimal Economic Policy Design via Two-level Deep Reinforcement Learning"
+    ],
+    "citation_author": [
+      "Zheng, Stephan",
+      "Trott, Alexander",
+      "Srinivasa, Sunil",
+      "Parkes, David C.",
+      "Socher, Richard"
+    ],
+    "citation_date": [
+      "2021/08/05"
+    ],
+    "citation_online_date": [
+      "2021/08/05"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2108.02755"
+    ],
+    "citation_arxiv_id": [
+      "2108.02755"
+    ],
+    "citation_abstract": [
+      "AI and reinforcement learning (RL) have improved many areas, but are not yet widely adopted in economic policy design, mechanism design, or economics at large. At the same time, current economic methodology is limited by a lack of counterfactual data, simplistic behavioral models, and limited opportunities to experiment with policies and evaluate behavioral responses. Here we show that machine-learning-based economic simulation is a powerful policy and mechanism design framework to overcome these limitations. The AI Economist is a two-level, deep RL framework that trains both agents and a social planner who co-adapt, providing a tractable solution to the highly unstable and novel two-level RL challenge. From a simple specification of an economy, we learn rational agent behaviors that adapt to learned planner policies and vice versa. We demonstrate the efficacy of the AI Economist on the problem of optimal taxation. In simple one-step economies, the AI Economist recovers the optimal tax policy of economic theory. In complex, dynamic economies, the AI Economist substantially improves both utilitarian social welfare and the trade-off between equality and productivity over baselines. It does so despite emergent tax-gaming strategies, while accounting for agent interactions and behavioral change more accurately than economic theory. These results demonstrate for the first time that two-level, deep RL can be used for understanding and as a complement to theory for economic design, unlocking a new computational learning-based approach to understanding economic policy."
+    ]
+  },
+  "extracted_text_characters": 94245,
+  "text_searchable": true
+}

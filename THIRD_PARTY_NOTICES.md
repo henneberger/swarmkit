@@ -7,3 +7,5 @@ NumPy is a runtime dependency distributed under its own license. Development dep
 The material under `repositories/` and `sources/` is a research collection, **not covered by this project's MIT license**. Each upstream repository, paper, post, SDK and dataset retains its original rights and terms. The source catalog records repository commits and discovered license files; absence of a detected license file does not grant reuse rights. Research archives and upstream code are not included in the package distribution.
 
 Method names identify the literature informing an implementation. They do not imply affiliation, upstream endorsement, model checkpoint availability, or reproduction of published performance.
+
+The [economic-games supplement](sources/economic-games/README.md) has its own [manifest](sources/economic-games/manifest.json), including source hashes, repository commits, license-file inventories, and unavailable downloads. Its proposed mechanisms are not part of the implemented method catalog. Full research checkouts are locally available and Git-ignored; root README/license snapshots and commit records support reconstruction.

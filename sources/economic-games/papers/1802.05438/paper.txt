@@ -1,0 +1,1227 @@
+                                                                Mean Field Multi-Agent Reinforcement Learning
+
+
+                                                          Yaodong Yang 1 Rui Luo 1 Minne Li 1 Ming Zhou 2 Weinan Zhang 2 Jun Wang 1
+
+
+                                                                 Abstract                                Instead, accounting for the extra information from conjec-
+                                                                                                         turing the policies of other agents is beneficial to each single
+                                              Existing multi-agent reinforcement learning meth-
+                                                                                                         learner (Foerster et al., 2017; Lowe et al., 2017a). Studies
+arXiv:1802.05438v5 [cs.MA] 15 Dec 2020
+
+
+
+
+                                              ods are limited typically to a small number of
+                                                                                                         show that an agent who learns the effect of joint actions has
+                                              agents. When the agent number increases largely,
+                                                                                                         better performance than those who do not in many scenarios,
+                                              the learning becomes intractable due to the curse
+                                                                                                         including cooperative games (Panait & Luke, 2005), zero-
+                                              of the dimensionality and the exponential growth
+                                                                                                         sum stochastic games (Littman, 1994), and general-sum
+                                              of agent interactions. In this paper, we present
+                                                                                                         stochastic games (Littman, 2001; Hu & Wellman, 2003).
+                                              Mean Field Reinforcement Learning where the
+                                              interactions within the population of agents are           The existing equilibrium-solving approaches, although prin-
+                                              approximated by those between a single agent               cipled, are only capable of solving a handful of agents (Hu
+                                              and the average effect from the overall population         & Wellman, 2003; Bowling & Veloso, 2002). The compu-
+                                              or neighboring agents; the interplay between the           tational complexity of directly solving (Nash) equilibrium
+                                              two entities is mutually reinforced: the learning          would prevent them from applying to the situations with a
+                                              of the individual agent’s optimal policy depends           large group or even a population of agents. Yet, in practice,
+                                              on the dynamics of the population, while the dy-           many cases do require strategic interactions among a large
+                                              namics of the population change according to the           number of agents, such as the gaming bots in Massively
+                                              collective patterns of the individual policies. We         Multiplayer Online Role-Playing Game (Jeong et al., 2015),
+                                              develop practical mean field Q-learning and mean           the trading agents in stock markets (Troy, 1997), or the
+                                              field Actor-Critic algorithms and analyze the con-         online advertising bidding agents (Wang et al., 2017).
+                                              vergence of the solution to Nash equilibrium. Ex-
+                                                                                                         In this paper, we tackle MARL when a large number of
+                                              periments on Gaussian squeeze, Ising model, and
+                                                                                                         agents co-exist. We consider a setting where each agent is
+                                              battle games justify the learning effectiveness of
+                                                                                                         directly interacting with a finite set of other agents; through
+                                              our mean field approaches. In addition, we re-
+                                                                                                         a chain of direct interactions, any pair of agents is intercon-
+                                              port the first result to solve the Ising model via
+                                                                                                         nected globally (Blume, 1993). The scalability is solved by
+                                              model-free reinforcement learning methods.
+                                                                                                         employing Mean Field Theory (Stanley, 1971) – the interac-
+                                                                                                         tions within the population of agents are approximated by
+                                                                                                         that of a single agent played with the average effect from
+                                         1. Introduction                                                 the overall (local) population. The learning is mutually rein-
+                                         Multi-agent reinforcement learning (MARL) is concerned          forced between two entities rather than many entities: the
+                                         with a set of autonomous agents that share a common en-         learning of the individual agent’s optimal policy is based
+                                         vironment (Busoniu et al., 2008). Learning in MARL is           on the dynamics of the agent population, meanwhile, the
+                                         fundamentally difficult since agents not only interact with     dynamics of the population is updated according to the in-
+                                         the environment but also with each other. Independent 𝑄-        dividual policies. Based on such formulation, we develop
+                                         learning (Tan, 1993) that considers other agents as a part of   practical mean field 𝑄-learning and mean field Actor-Critic
+                                         the environment often fails as the multi-agent setting breaks   algorithms, and discuss the convergence of our solution
+                                         the theoretical convergence guarantee and makes the learn-      under certain assumptions. Our experiment on a simple
+                                         ing unstable: changes in the policy of one agent will affect    multi-agent resource allocation shows that our mean field
+                                         that of the others, and vice versa (Matignon et al., 2012).     MARL is capable of learning over many-agent interactions
+                                                                                                         when others fail. We also demonstrate that with temporal-
+                                             1
+                                              University College London, London, U.K. 2 Shanghai         difference learning, mean field MARL manages to learn and
+                                         Jiao Tong University, Shanghai, China.   Correspondence         solve the Ising model without even explicitly knowing the
+                                         to: Yaodong Yang <yaodong.yang@cs.ucl.ac.uk>, Jun Wang
+                                         <j.wang@cs.ucl.ac.uk>.
+                                                                                                         energy function. At last, in a mixed cooperative-competitive
+                                                                                                         battle game, we show that the mean field MARL achieves
+                                         Proceedings of the 35 𝑡 ℎ International Conference on Machine   high winning rates against other baselines previously re-
+                                         Learning, Stockholm, Sweden, PMLR 80, 2018. Copyright 2018      ported for many agent systems.
+                                         by the author(s).
+                                               Mean Field Multi-Agent Reinforcement Learning
+
+2. Preliminary                                                             2.2. Nash 𝑄-learning
+MARL intersects between reinforcement learning and game                    In MARL, the objective of each agent is to learn an optimal
+theory. The marriage of the two gives rise to the general                  policy to maximize its value function. Optimizing the 𝑣 𝝅𝑗
+framework of stochastic game (Shapley, 1953).                              for agent 𝑗 depends on the joint policy 𝝅 of all agents, the
+                                                                           concept of Nash equilibrium in stochastic games is therefore
+2.1. Stochastic Game                                                       of great importance (Hu & Wellman, 2003). It is represented
+                                                                           by a particular joint policy 𝝅∗ , [𝜋∗1 , . . . , 𝜋∗𝑁 ] such that for
+An 𝑁-agent (or, 𝑁-player) stochastic game 𝛤 is formalized                 all 𝑠 ∈ S, 𝑗 ∈ {1, . . . , 𝑁} and all valid 𝜋 𝑗 , it satisfies
+by the tuple 𝛤 , S, A1 , . . . , A𝑁 , 𝑟 1 , . . . , 𝑟 𝑁 , 𝑝, 𝛾 , where
+Sdenotes the state space, and A𝑗 is the action space of agent                      𝑣 𝑗 (𝑠; 𝝅∗ ) = 𝑣 𝑗 (𝑠; 𝜋∗𝑗 , 𝝅∗− 𝑗 ) ≥ 𝑣 𝑗 (𝑠; 𝜋 𝑗 , 𝝅∗− 𝑗 ).
+𝑗 ∈ {1, . . . , 𝑁}. The reward function for agent 𝑗 is defined             Here we adopt a compact notation for the joint policy of all
+as 𝑟 𝑗 : S× A1 × · · · × A𝑁 → R, determining the immediate                 agents except 𝑗 as 𝝅∗− 𝑗 , [𝜋∗1 , . . . , 𝜋∗𝑗−1 , 𝜋∗𝑗+1 , . . . , 𝜋∗𝑁 ].
+reward. The transition probability 𝑝 : S× A1 ×· · ·× A𝑁 →
+𝛺(S) characterizes the stochastic evolution of states in time,             In a Nash equilibrium, each agent acts with the best response
+with 𝛺(S) being the collection of probability distributions                𝜋∗𝑗 to others, provided that all other agents follow the policy
+over the state space S. The constant 𝛾 ∈ [0, 1) represents the             𝝅∗− 𝑗 . It has been shown that, for a 𝑁-agent stochastic game,
+reward discount factor across time. At time step 𝑡, all agents             there is at least one Nash equilibrium with stationary policies
+take actions simultaneously, each receives the immediate                   (Fink et al., 1964). Given a Nash policy 𝝅∗ , the Nash value
+reward 𝑟 𝑡𝑗 as a consequence of taking the previous actions.               function 𝒗 Nash (𝑠) , [𝑣 𝝅1∗ (𝑠), . . . , 𝑣 𝝅𝑁∗ (𝑠)] is calculated with
+                                                                           all agents following 𝝅∗ from the initial state 𝑠 onward.
+The agents choose actions according to their policies, also
+known as strategies. For agent 𝑗, the corresponding policy is              Nash 𝑄-learning (Hu & Wellman, 2003) defines an iterative
+defined as 𝜋 𝑗 : S → 𝛺(A𝑗 ), where 𝛺(A𝑗 ) is the collection                procedure with two alternating steps for computing the Nash
+of probability distributions over agent 𝑗’s action space A𝑗 .              policy: 1) solving the Nash equilibrium of the current stage
+Let 𝝅 , [𝜋 1 , . . . , 𝜋 𝑁 ] denote the joint policy of all agents;        game defined by {𝑸 𝑡 } using the Lemke-Howson algorithm
+we assume, as one usually does, 𝝅 to be time-independent,                  (Lemke & Howson, 1964), 2) improving the estimation of
+which is referred to be stationary. Provided an initial state              the 𝑄-function with the new Nash equilibrium value. It can
+𝑠, the value function of agent 𝑗 under the joint policy 𝝅 is               be proved that under certain assumptions, the Nash operator
+written as the expected cumulative discounted future reward:               HNash defined by the following expression
+                                                                                HNash 𝑸(𝑠, 𝒂) = E𝑠0 ∼ 𝑝 𝒓(𝑠, 𝒂) + 𝛾𝒗 Nash (𝑠0 )
+                                                                                                                               
+                                 ∞
+                                 X                                                                                                (4)
+       𝑣 𝝅𝑗 (𝑠) = 𝑣 𝑗 (𝑠; 𝝅) =         𝛾 𝑡 E𝝅, 𝑝 𝑟 𝑡𝑗 |𝑠0 = 𝑠, 𝝅 .   (1)
+                                 𝑡=0                                       forms a contraction mapping, where 𝑸 , [𝑄 1 , . . . , 𝑄 𝑁 ],
+The 𝑄-function (or, the action-value function) can then be                 and 𝒓(𝑠, 𝒂) , [𝑟 1 (𝑠, 𝒂), . . . , 𝑟 𝑁 (𝑠, 𝒂)]. The 𝑄-function will
+defined within the framework of 𝑁-agent game based on the                  eventually converge to the value received in a Nash equilib-
+Bellman equation given the value function in Eq. (1) such                  rium of the game, referred to as the Nash 𝑄-value.
+that the 𝑄-function 𝑄 𝝅𝑗 : S× A1 × · · · × A𝑁 → R of agent
+𝑗 under the joint policy 𝝅 can be formulated as                            3. Mean Field MARL
+           𝑄 𝝅𝑗 (𝑠, 𝒂) = 𝑟 𝑗 (𝑠, 𝒂) + 𝛾E𝑠0 ∼ 𝑝 [𝑣 𝝅𝑗 (𝑠0 )] ,        (2)   The dimension of joint action 𝒂 grows proportionally w.r.t.
+                                                                           the number of agents 𝑁. As all agents act strategically and
+where 𝑠0 is the state at the next time step. The value function            evaluate simultaneously their value functions based on the
+𝑣 𝝅𝑗 can be expressed in terms of the 𝑄-function in Eq. (2) as             joint actions, it becomes infeasible to learn the standard
+                                                                         𝑄-function 𝑄 𝑗 (𝑠, 𝒂). To address this issue, we factorize the
+                  𝑣 𝝅𝑗 (𝑠) = E𝒂∼𝝅 𝑄 𝝅𝑗 (𝑠, 𝒂) .             (3)            𝑄-function using only the pairwise local interactions:
+The 𝑄-function for 𝑁-agent game in Eq. (2) extends the                                              1 X
+                                                                                      𝑄 𝑗 (𝑠, 𝒂) = 𝑗          𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎 𝑘 ) ,   (5)
+formulation for single-agent game by considering the joint                                         𝑁
+                                                                                                             𝑘∈N( 𝑗)
+action taken by all agents 𝒂 , [𝑎 1 , . . . , 𝑎 𝑁 ], and by taking
+                                                                           where N( 𝑗) is the index set of the neighboring agents of
+the expectation over the joint action in Eq. (3).
+                                                                           agent 𝑗 with the size 𝑁 𝑗 = |N( 𝑗)| determined by the set-
+We formulate MARL by the stochastic game with a discrete-                  tings of different applications. It is worth noting that the
+time non-cooperative setting, i.e. no explicit coalitions are              pairwise approximation of the agent and its neighbors, while
+considered. The game is assumed to be incomplete but to                    significantly reducing the complexity of the interactions
+have perfect information (Littman, 1994), i.e. each agent                  among agents, still preserves global interactions between
+knows neither the game dynamics nor the reward functions                   any pair of agents implicitly (Blume, 1993). Similar ap-
+of others, but it is able to observe and react to the previous             proaches can be found in factorization machine (Rendle,
+actions and the resulting immediate rewards of other agents.               2012) and learning to rank (Cao et al., 2007).
+                                                      Mean Field Multi-Agent Reinforcement Learning
+
+3.1. Mean Field Approximation                                                                                                         Figure 1: Mean field approx-
+                                                                                                                                      imation. Each agent is repre-
+The pairwise interaction 𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎 𝑘 ) as in Eq. (5) can be                                                                     sented as a node in the grid,
+approximated using the mean field theory (Stanley, 1971).                                                                             which is only affected by the
+Here we consider discrete action spaces, where the action                                                                             mean effect from its neigh-
+𝑎 𝑗 of agent 𝑗 is a discrete categorical variable represented as                                                                      bors (the blue area). Many-
+the one-hot encoding with each component indicating one of                                                                            agent interactions are effec-
+the 𝐷 possible actions: 𝑎 𝑗 , [𝑎 1𝑗 , . . . , 𝑎 𝐷𝑗 ]. We calculate the                                                                tively converted into two-
+mean action 𝑎¯ 𝑗 based on the neighborhood N( 𝑗) of agent                                                                             agent interactions.
+𝑗, and express the one-hot action 𝑎 𝑘 of each neighbor 𝑘 in
+terms of the sum of 𝑎¯ 𝑗 and a small fluctuation 𝛿𝑎 𝑗,𝑘 as                               𝑗’s neighborhood. The interaction is thus simplified and
+                                                     1 X 𝑘                               expressed by the mean field 𝑄-function 𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 ) in
+        𝑎 𝑘 = 𝑎¯ 𝑗 + 𝛿𝑎 𝑗,𝑘 ,   where 𝑎¯ 𝑗 = 𝑗              𝑎 , (6)                      Eq. (8). During the learning     phase, given an experience
+                                                    𝑁
+                                                                                         𝑒 = 𝑠, {𝑎 𝑘 }, {𝑟 𝑗 }, 𝑠0 , the mean field 𝑄-function is up-
+                                                                   𝑘
+                                                                                                                  
+              𝑎 1𝑗 , . . . , 𝑎¯𝐷𝑗 ] can be interpreted as the empirical
+where 𝑎¯ 𝑗 , [¯                                                                          dated in a recurrent manner as
+distribution of the actions taken by agent 𝑗’s neighbors. By
+Taylor’s theorem, the pairwise 𝑄-function 𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎 𝑘 ), if                            𝑗
+                                                                                           𝑄 𝑡+1 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 ) = (1 − 𝛼)𝑄 𝑡𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 ) + 𝛼[𝑟 𝑗 + 𝛾𝑣 𝑡𝑗 (𝑠0 )] ,
+twice-differentiable w.r.t. the action 𝑎 𝑘 taken by neighbor 𝑘,                                                                                                         (9)
+can be expended and expressed as
+                                                                                         where 𝛼𝑡 denotes the learning rate, and 𝑎¯ 𝑗 is the mean action
+                 1 X 𝑗                                                                   of all neighbors of agent 𝑗 as defined in Eq. (6). The mean
+ 𝑄 𝑗 (𝑠, 𝒂) = 𝑗            𝑄 (𝑠, 𝑎 𝑗 , 𝑎 𝑘 )
+               𝑁 𝑘                                                                       field value function 𝑣 𝑡𝑗 (𝑠0 ) for agent 𝑗 at time 𝑡 in Eq. (9) is
+               
+        1 X
+  = 𝑗             𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 ) + ∇𝑎¯ 𝑗 𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 ) · 𝛿𝑎 𝑗,𝑘                               X                                         h                    i
+                                                                                            𝑣 𝑡𝑗 (𝑠0 ) =        𝜋𝑡𝑗 𝑎 𝑗 |𝑠0 , 𝑎¯ 𝑗 E𝑎¯ 𝑗 (𝒂− 𝑗 )∼𝝅− 𝑗 𝑄 𝑡𝑗 𝑠0 , 𝑎 𝑗 , 𝑎¯ 𝑗 ,
+                                                                                                                                  
+       𝑁 𝑘                                                                                                                                       𝑡
+                                                                                                          𝑎𝑗
+              1                                                                                                                                                           (10)
+           +       𝛿𝑎 𝑗,𝑘 · ∇2𝑎˜ 𝑗,𝑘 𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎˜ 𝑗,𝑘 ) · 𝛿𝑎 𝑗,𝑘
+              2                                                                          As shown in Eqs. (9) and (10), with the mean field approxi-
+                                                                            
+                                                           1 X 𝑗,𝑘                       mation, the MARL problem is converted into that of solving
+  = 𝑄 (𝑠, 𝑎 , 𝑎¯ 𝑗 ) + ∇𝑎¯ 𝑗 𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 ) ·
+         𝑗    𝑗
+                                                                      𝛿𝑎
+                                                          𝑁𝑗 𝑘                           for the central agent 𝑗’s best response 𝜋𝑡𝑗 w.r.t. the mean
+                 1 X
+                           
+                                   𝑗,𝑘    2         𝑗       𝑗     𝑗,𝑘        𝑗,𝑘
+                                                                                        action 𝑎¯ 𝑗 of all 𝑗’s neighbors, which represents the action
+           +                  𝛿𝑎 · ∇𝑎˜ 𝑗,𝑘 𝑄 (𝑠, 𝑎 , 𝑎˜ ) · 𝛿𝑎                     (7)   distribution of all neighboring agents of the central agent 𝑗.
+             2𝑁 𝑗 𝑘
+                              1 X 𝑗                                                      We introduce an iterative procedure in computing the best
+  = 𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 ) +               𝑅 𝑗 (𝑎 𝑘 ) ≈ 𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 ) , (8)
+                           2𝑁 𝑗 𝑘 𝑠,𝑎                                                    response 𝜋𝑡𝑗 of each agent 𝑗. In the stage game {𝑸 𝑡 }, the
+                                                                                         mean action 𝑎¯ 𝑗 of all 𝑗’s neighbors is first calculated by
+where 𝑅𝑠,𝑎   𝑗
+                  𝑗 (𝑎 ) , 𝛿𝑎
+                        𝑘            𝑗,𝑘
+                                         · ∇2𝑎˜ 𝑗,𝑘 𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎˜ 𝑗,𝑘 ) · 𝛿𝑎 𝑗,𝑘      averaging the actions 𝑎 𝑘 taken by 𝑗’s 𝑁 𝑗 neighbors from
+denotes the Taylor polynomial’s remainder P                        with 𝑎˜ 𝑗,𝑘 =         the policies 𝜋𝑡𝑘 parametrized by their previous mean actions
+𝑎¯ 𝑗 + 𝜖 𝑗,𝑘 𝛿𝑎 𝑗,𝑘 and 𝜖 𝑗,𝑘 ∈ [0, 1]. In Eq. (7), 𝑘 𝛿𝑎 𝑘 = 0                           𝑎¯−
+                                                                                           𝑘
+by Eq. (6) such that the first-order term is dropped. From
+                                                                                                             1 X 𝑘 𝑘
+the perspective of agent 𝑗, the action 𝑎 𝑘 in the second-order                                       𝑎¯ 𝑗 = 𝑗      𝑎 , 𝑎 ∼ 𝜋𝑡𝑘 (·|𝑠, 𝑎¯−
+                                                                                                                                       𝑘
+                                                                                                                                         ),      (11)
+                      𝑗                                                                                     𝑁
+remainders 𝑅𝑠,𝑎            𝑗 (𝑎 ) is chosen based on the external ac-
+                                𝑘
+                                                                                                                          𝑘
+tion distribution of agent 𝑘, 𝑅𝑠,𝑎          𝑗
+                                                𝑗 (𝑎 ) is thus essentially
+                                                     𝑘                                   With each 𝑎¯ 𝑗 calculated as in Eq. (11), the policy 𝜋𝑡𝑗 changes
+a random variable. In fact, one can further prove that the                               consequently due to the dependence on the current 𝑎¯ 𝑗 . The
+remainder 𝑅𝑠,𝑎      𝑗
+                         𝑗 (𝑎 ) is bounded within a symmetric inter-
+                              𝑘                                                          new Boltzmann policy is then determined for each 𝑗 that
+val [−2𝑀, 2𝑀] under the mild condition of the 𝑄-function
+                                                                                                                                               
+                                                                                              𝑗                     exp 𝛽𝑄 𝑡𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 )
+𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎 𝑘 ) being 𝑀-smooth (e.g. the linear function); as                           𝜋𝑡 (𝑎 |𝑠, 𝑎¯ ) = P
+                                                                                                 𝑗      𝑗
+                                                                                                                                                     . (12)
+                                                                                                                                  𝑗          𝑗0 ¯𝑗 )
+                𝑗                                                                                                 𝑗0   𝑗 exp 𝛽𝑄 𝑡 (𝑠, 𝑎 , 𝑎
+a result, 𝑅𝑠,𝑎      𝑗 (𝑎 ) acts as a small fluctuation near zero. To
+                           𝑘                                                                                     𝑎 ∈A
+stay self-contained, the derivation of the bound is put in                               By iterating Eqs. (11) and (12), the mean actions 𝑎¯ 𝑗 and the
+the Appendix B. With the assumptions of homogeneity and                                  corresponding policies 𝜋𝑡𝑗 for all agents improves alterna-
+locality on all agents within the neighborhood, the remain-                              tively. In spite of lacking an intuitive impression of being
+ders tend to cancel each other, leading to the left term of                              stationary, in the following subsections, we will show that
+𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 ) in Eq. (8).                                                         the mean action 𝑎¯ 𝑗 will be equilibrated at an unique point
+                                                                                         after several iterations, and hence the policy 𝜋𝑡𝑗 converges.
+As illustrated in Fig. 1, with the mean field approxima-
+tion, the pairwise interactions 𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎 𝑘 ) between agent                        To distinguish from the Nash value function 𝒗 Nash (𝑠) in
+𝑗 and each neighboring agent 𝑘 are simplified as that be-                                Eq. (4), we denote the mean field value function in Eq. (10)
+tween 𝑗, the central agent, and the virtual mean agent, that                             as 𝒗 MF (𝑠) , [𝑣 1 (𝑠), . . . , 𝑣 𝑁 (𝑠)]. With 𝒗 MF assembled, we
+is abstracted by the mean effect of all neighbors within                                 now define the mean field operator HMF in the form of
+                                                   Mean Field Multi-Agent Reinforcement Learning
+                                                                                                                                                     j
+                                                                                                                                                 a
+                                                                                                                                           4xā
+                                                                                                                                             0           0.82   -0.29
+                                                                                                                                             1           0.69   -0.56 Q
+                                                                                                                                             2           0.00   0.00   t
+                                                                                                                                             3           0.00   0.00
+                                        𝒓(𝑠, 𝒂) + 𝛾𝒗 MF (𝑠0 ) .
+                                                            
+      HMF 𝑸(𝑠, 𝒂) = E𝑠0 ∼ 𝑝                                                   (13)                                                           4
+                                                                                                                                                     j
+                                                                                                                                                         0.00   0.00
+                                                                                                                                                 a
+                                                                                                                                           4xā
+In fact, we can prove that HMF forms a contraction mapping;                                                                                  0
+                                                                                                                                             1
+                                                                                                                                                         0.93
+                                                                                                                                                         0.69
+                                                                                                                                                                -0.29 Q
+                                                                                                                                                                -0.56  t+1
+                                                                                                                                             2           0.00   0.00
+that is, one updates 𝑸 by iteratively applying the mean field                                                                                3
+                                                                                                                                             4
+                                                                                                                                                         0.00
+                                                                                                                                                         0.00
+                                                                                                                                                                0.00
+                                                                                                                                                                0.00
+                                                                                                                                                 j
+                                                                                                                                                 a
+operator HMF , the mean field 𝑄-function will eventually                                                                                   4xā
+                                                                                                                                             0           2.00   -0.29
+converge to the Nash 𝑄-value under certain assumptions.                                                                                      1           0.75   -0.38 QEnd
+
+                                                                                                t             t+1     ...      End
+                                                                                                                                             2
+                                                                                                                                             3
+                                                                                                                                             4
+                                                                                                                                                         0.00
+                                                                                                                                                         0.00
+                                                                                                                                                         0.00
+                                                                                                                                                                0.00
+                                                                                                                                                                0.00
+                                                                                                                                                                0.00
+
+3.2. Implementation                                                                  Figure 2: MF-𝑄 iterations on a 3 × 3 stateless toy example.
+                                                                                     The goal is to coordinate the agents to an agreed direction.
+We can implement the mean field 𝑄-function in Eq. (8) by                             Each agent has two choices of actions: up ↑ or down ↓.
+universal function approximators such as neural networks,                            The reward of each agent’s staying in the same direction
+where the 𝑄-function is parameterized with the weights 𝜙.                            as its [0, 1, 2, 3, 4] neighbors are [−2.0, −1.0, 0.0, 1.0, 2.0],
+The update rule in Eq. (9) can be reformulated as weights ad-                        respectively. The neighbors are specified by the four direc-
+justment. For off-policy learning, we exploit either standard                        tions on the grid with cyclic structure on all directions, e.g.
+𝑄-learning (Watkins & Dayan, 1992) for discrete action                               the first row and the third row are adjacent. The reward for
+spaces or DPG (Silver et al., 2014) for continuous action                            the highlighted agent 𝑗 on the bottom left at time 𝑡 + 1 is
+spaces. Here we focus on the former, which we call MF-𝑄.                             2.0, as all neighboring agents stay down in the same time.
+In MF-𝑄, agent 𝑗 is trained by minimizing the loss function                          We listed the Q-tables for agent 𝑗 at three time steps where
+                                                 2                                  𝑎¯ 𝑗 is the percentage of neighboring ups. Following Eq. 9,
+           L(𝜙 𝑗 ) = 𝑦 𝑗 − 𝑄 𝜙 𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 ) ,                                  we have 𝑄 𝑡+1 𝑗
+                                                                                                       (↑, 𝑎¯ 𝑗 = 0) = 𝑄 𝑡𝑗 (↑, 𝑎¯ 𝑗 = 0) + 𝛼[𝑟 𝑗 − 𝑄 𝑡𝑗 (↑
+where 𝑦 𝑗 = 𝑟 𝑗 + 𝛾 𝑣 MF (𝑠0 ) is the target mean field value                        , 𝑎¯ = 0)] = 0.82 + 0.1 × (2.0 − 0.82) = 0.93. The right-
+                                                                                          𝑗
+                      𝜙𝑗
+                             𝑗
+                              −
+                                                                                     most plot shows the convergent scenario where the 𝑄-value
+calculated with the weights 𝜙− . Differentiating L(𝜙 𝑗 ) gives                       of staying down is 2.0, which is the largest reward in the
+                                            
+ ∇ 𝜙 𝑗 L(𝜙 𝑗 ) = 𝑦 𝑗 − 𝑄 𝜙 𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 ) ∇ 𝜙 𝑗 𝑄 𝜙 𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 ) , (14)    environment.
+which enables the gradient-based optimizers for training.                            Assumption 3. For each stage game [𝑄 1𝑡 (𝑠), ..., 𝑄 𝑡𝑁 (𝑠)] at
+                                                                                     time 𝑡 and in state 𝑠 in training, for all 𝑡, 𝑠, 𝑗 ∈ {1, . . . , 𝑁},
+Instead of setting up Boltzmann policy using the 𝑄-function
+                                                                                     the Nash equilibrium 𝝅∗ = [𝜋∗1 , . . . , 𝜋∗𝑁 ] is recognized ei-
+as in MF-𝑄, we can explicitly model the policy by neural
+                                                                                     ther as 1) the global optimum or 2) a saddle point expressed
+networks with the weights 𝜃, which leads to the on-policy
+                                                                                     as:
+actor-critic method (Konda & Tsitsiklis, 2000) that we call                                                                           Q 𝑘
+MF-AC. The policy network 𝜋 𝜃 𝑗 , i.e. the actor, of MF-AC                           1. E𝝅∗ [𝑄 𝑡𝑗 (𝑠)] ≥ E𝝅 [𝑄 𝑡𝑗 (𝑠)], ∀𝝅 ∈ 𝛺           𝑘 A ;
+is trained by the sampled policy gradient:                                                                                                     
+                                                                                     2. E𝝅∗ [𝑄 𝑡𝑗 (𝑠)] ≥ E 𝜋 𝑗 E𝝅∗− 𝑗 [𝑄 𝑡𝑗 (𝑠)], ∀𝜋 𝑗 ∈ 𝛺 A𝑗 and
+   ∇ 𝜃 𝑗 J(𝜃 𝑗 ) ≈ ∇ 𝜃 𝑗 log 𝜋 𝜃 𝑗 (𝑠)𝑄 𝜙 𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 )                  .         E𝝅∗ [𝑄 𝑡𝑗 (𝑠)] ≤ E 𝜋∗𝑗 E𝝅 − 𝑗 [𝑄 𝑡𝑗 (𝑠)], ∀𝝅 − 𝑗 ∈ 𝛺
+                                                                                                                                              Q           
+                                                                                                                                                 𝑘6= 𝑗 A .
+                                                                                                                                                        𝑘
+                                                               𝑎= 𝜋 𝜃 𝑗 (𝑠)
+The critic of MF-AC follows the same setting for MF-𝑄
+with Eq. (14). During the training of MF-AC, one needs to                            Note that Assumption 3 imposes a strong constraint on every
+alternatively update 𝜙 and 𝜃 until convergence. We illustrate                        single stage game encountered in training. In practice, how-
+the MF-𝑄 iterations in Fig. 2, and present the pesudocode                            ever, we find this constraint appears not to be a necessary
+for both MF-𝑄 and MF-AC in Appendix A.                                               condition for the learning algorithm to converge. This is in
+                                                                                     line with the empirical findings in Hu & Wellman (2003).
+3.3. Proof of Convergence                                                            Our proof is also built upon the two lemmas as follows:
+We now prove the convergence of 𝑸 𝑡 , [𝑄 1𝑡 , . . . , 𝑄 𝑡𝑁 ] to                      Lemma 1. Under Assumption 3, the Nash operator HNash
+the Nash 𝑄-value 𝑸 ∗ = [𝑄 1∗ , . . . , 𝑄 ∗𝑁 ] as the iterations of                   in Eq. (4) forms a contraction mapping on the complete
+MF-𝑄 is applied. The proof is presented by showing that                              metric space from Q to Q with the fixed point being the
+the mean field operator HMF in Eq. (13) forms a contrac-                             Nash 𝑄-value of the entire game, i.e. H𝑡Nash 𝑸 ∗ = 𝑸 ∗ .
+tion mapping with the fixed point at 𝑸 ∗ under the main
+assumptions. We start from introducing the assumptions:                              Proof. See Theorem 17 in Hu & Wellman (2003).
+Assumption 1. Each action-value pair is visited infinitely                           Lemma 2. The random process {𝛥𝑡 } defined in R as
+often, and the reward is bounded by some constant 𝐾.
+Assumption 2. Agent’s policy is Greedy in the Limit with                                    𝛥𝑡+1 (𝑥) = (1 − 𝛼𝑡 (𝑥))𝛥𝑡 (𝑥) + 𝛼𝑡 (𝑥)𝐹𝑡 (𝑥)                            (15)
+Infinite Exploration (GLIE). In the case with the Boltzmann
+                                                                                     converges to zero with probability 1 (w.p.1) when
+policy, the policy becomes greedy w.r.t. the 𝑄-function in
+                                                                                     1. 0 ≤ 𝛼𝑡 (𝑥) ≤ 1, 𝑡 𝛼𝑡 (𝑥) = ∞, 𝑡 𝛼𝑡2 (𝑥) < ∞;
+                                                                                                       P                P
+the limit as the temperature decays asymptotically to zero.
+                                                 Mean Field Multi-Agent Reinforcement Learning
+
+2. 𝑥 ∈ X, the set of possible states, and |X| < ∞;                                Note the fact that 𝑭𝑡Nash in Eq. (17) is essentially the 𝑭𝑡 in
+3. kE[𝐹𝑡 (𝑥)|F𝑡 ]k𝑊 ≤ 𝛾k𝛥𝑡 k𝑊 + 𝑐 𝑡 , where 𝛾 ∈ [0, 1) and                        Lemma 2 in proving the convergence of the Nash 𝑄-learning
+   𝑐 𝑡 converges to zero w.p.1;                                                   algorithm. From Lemma 1, it is straightforward to show that
+                                                                                  𝑭𝑡Nash forms a contraction mapping with the norm k · k∞
+4. var[𝐹𝑡 (𝑥)|F𝑡 ] ≤ 𝐾(1 + k𝛥𝑡 k2𝑊 ) with constant 𝐾 > 0.
+                                                                                  being the maximum norm on 𝒂. We thus have for all 𝑡 that
+Here F𝑡 denotes the filtration of an increasing sequence of
+ 𝜎-fields including the history of processes; 𝛼𝑡 , 𝛥𝑡 , 𝐹𝑡 ∈ F𝑡                     kE[𝑭𝑡Nash (𝑠𝑡 , 𝒂 𝑡 )|F𝑡 ]k∞ ≤ 𝛾k𝑸 𝑡 − 𝑸 ∗ k∞ = 𝛾k𝜟𝑡 k∞ .
+and k · k𝑊 is a weighted maximum norm (Bertsekas, 2012).
+                                                                                  In meeting the third condition, we obtain from Eq. (17) that
+Proof. See Theorem 1 in Jaakkola et al. (1994) and Corol-
+                                                                                  kE[𝑭𝑡 (𝑠𝑡 , 𝒂 𝑡 )|F𝑡 ]k∞ ≤ k𝑭𝑡Nash (𝑠𝑡 , 𝒂 𝑡 )|F𝑡 k∞ + k𝑪𝑡 (𝑠𝑡 , 𝒂 𝑡 )|F𝑡 k∞
+lary 5 Szepesvári & Littman (1999) for detailed derivation.
+We include it here to stay self-contained.                                                                 ≤ 𝛾k𝜟𝑡 k∞ + k𝑪𝑡 (𝑠𝑡 , 𝒂 𝑡 )|F𝑡 k∞ .           (18)
+
+By subtracting 𝑸 ∗ (𝑠, 𝒂) on both sides of Eq. (9), we present                    We are left to prove that 𝑐 𝑡 = k𝑪𝑡 (𝑠𝑡 , 𝒂 𝑡 )|F𝑡 k converges to
+the relation from the comparison with Eq. (15) such that                          zero w.p.1. With Assumption 3, for each stage game, all the
+           𝜟𝑡 (𝑥) = 𝑸 𝑡 (𝑠, 𝒂) − 𝑸 ∗ (𝑠, 𝒂),                                      globally optimal equilibrium(s) share the same Nash value,
+                                                                                  so does the saddle-point equilibrium(s). Each of the two
+            𝑭𝑡 (𝑥) = 𝒓 𝑡 + 𝛾𝒗 MF
+                               𝑡 (𝑠 𝑡+1 ) − 𝑸 ∗ (𝑠 𝑡 , 𝒂 𝑡 ),      (16)
+                                                                                  following results is essentially associated with one of the
+where 𝑥 , (𝑠𝑡 , 𝒂 𝑡 ) denotes the visited state-action pair                       two mutually exclusive scenarios in Assumption 3:
+at time 𝑡. In Eq. (15), 𝛼(𝑡) is interpreted as the learning
+rate with 𝛼𝑡 (𝑠0 , 𝒂 0 ) = 0 for any (𝑠0 , 𝒂 0 ) 6= (𝑠𝑡 , 𝒂 𝑡 ); this is          1. For globally optimal equilibriums, all players obtain the
+because that each agent only updates the 𝑄-function with the                         joint maximum values that are unique and identical for
+state 𝑠𝑡 and actions 𝒂 𝑡 visited at time 𝑡. Lemma 2 suggests                         all equilibriums according to the definition;
+𝛥𝑡 (𝑥)’s convergence to zero, which means, if it holds, the                       2. Suppose that the stage game {𝑸 𝑡 } has two saddle-point
+sequence of 𝑄’s will asymptotically tend to the Nash 𝑄-                              equilibriums, 𝝅 and 𝝆. It holds for agent 𝑗 that
+value 𝑸 ∗ .                                                                                      E 𝜋 𝑗 E𝝅 − 𝑗 [𝑄 𝑡𝑗 (𝑠)] ≥ E𝜌 𝑗 E𝝅 − 𝑗 [𝑄 𝑡𝑗 (𝑠)],
+One last piece to establish the main theorem is the below:                                   E𝜌 𝑗 E𝝆− 𝑗 [𝑄 𝑡𝑗 (𝑠)] ≤ E𝜌 𝑗 E𝝅 − 𝑗 [𝑄 𝑡𝑗 (𝑠)].
+Proposition 1.PLet the metric space be R 𝑁 and the metric                            By combing the above inequalities, we obtain
+be 𝑑(𝒂, 𝒃) =      𝑗 |𝑎 − 𝑏 |, for 𝒂 = [𝑎 ]1 , 𝒃 = [𝑏 ]1 . If
+                      𝑗    𝑗                 𝑗 𝑁         𝑗 𝑁
+                                                                                                E 𝜋 𝑗 E𝝅 − 𝑗 [𝑄 𝑡𝑗 (𝑠)] ≥ E𝜌 𝑗 E𝝆− 𝑗 [𝑄 𝑡𝑗 (𝑠)].
+the 𝑄-function is 𝐾-Lipschitz continuous w.r.t. 𝑎 , then𝑗
+
+the operator B(𝑎 𝑗 ) , 𝜋 𝑗 (𝑎 𝑗 |𝑠, 𝑎¯ 𝑗 ) in Eq. (12) forms a                       By the definition of saddle points, the above inequality
+contraction mapping under sufficiently low temperature 𝛽.                            still holds by reversing the order of 𝝅 and 𝝆; hence, the
+                                                                                     equilibriums for agent 𝑖 at both saddle points are the same
+Proof. See details in Appendix D due to the space limit.                             such that E 𝜋 𝑗 E𝝅 − 𝑗 [𝑄 𝑡𝑗 (𝑠)] = E𝜌 𝑗 E𝝆− 𝑗 [𝑄 𝑡𝑗 (𝑠)].
+
+Theorem 1. In a finite-state stochastic game, the 𝑸 𝑡 values                      Given Proposition 1 that the policy based on the mean field
+computed by the update rule of MF-𝑄 in Eq. (9) converges                          𝑄-function forms a contraction mapping, and that all opti-
+to the Nash 𝑄-value 𝑸 ∗ = [𝑄 1∗ , . . . , 𝑄 ∗𝑁 ], if Assumptions 1,               mal/saddle points share the same Nash value in each stage
+2 & 3, and Lemma 2’s first and second conditions are met.                         game, with the homogeneity of agents, 𝒗 MF will asymptoti-
+                                                                                  cally converges to 𝒗 Nash , the third condition is thus satisfied.
+Proof. Let F𝑡 denote the 𝜎-field generated by all random
+variables in the history of the stochastic game up to time                        For the fourth condition, we exploit the conclusion that is
+𝑡: (𝑠𝑡 , 𝛼𝑡 , 𝒂 𝑡 , 𝑟 𝑡−1 , ..., 𝑠1 , 𝛼1 , 𝒂 1 , 𝑸 0 ). Note that 𝑸 𝑡 is a ran-   proved above that HMF forms a contraction mapping, i.e.
+dom variable derived from the historical trajectory up to time                    HMF 𝑸 ∗ = 𝑸 ∗ , and it follows that
+                                                                                                                                                       2
+𝑡. Given the fact that all 𝑸 𝜏 with 𝜏 < 𝑡 are F𝑡 -measurable,                      var[𝑭𝑡 (𝑠𝑡 , 𝒂 𝑡 )|F𝑡 ] = E[(𝒓 𝑡 + 𝛾𝒗 MF
+                                                                                                                         𝑡 (𝑠 𝑡+1 ) − 𝑸 ∗ (𝑠 𝑡 , 𝒂 𝑡 )) ]
+both 𝜟𝑡 and 𝑭𝑡−1 are therefore also F𝑡 -measurable, which                                                                   2
+                                                                                        = E[(𝒓 𝑡 + 𝛾𝒗 MF            MF
+                                                                                                      𝑡 (𝑠 𝑡+1 ) − H (𝑸 ∗ )) ]
+satisfies the measurability condition of Lemma 2.
+                                                                                        = var[𝒓 𝑡 + 𝛾𝒗 MF
+                                                                                                       𝑡 (𝑠 𝑡+1 )|F𝑡 ]
+To apply Lemma 2, we need to show that the mean field
+operator HMF meets Lemma 2’s third and fourth conditions.                               ≤ 𝐾(1 + k𝜟𝑡 k2𝑊 ).                                             (19)
+For Lemma 2’s third condition, we begin with Eq. (16) that                        In the last step of Eq. (19), we employ Assumption 1 that the
+𝑭𝑡 (𝑠𝑡 , 𝒂 𝑡 ) = 𝒓 𝑡 + 𝛾𝒗 MF                                                      reward 𝒓 𝑡 is always bounded by some constant. Finally, with
+                          𝑡 (𝑠 𝑡+1 ) − 𝑸 ∗ (𝑠 𝑡 , 𝒂 𝑡 )
+                                                                                  all conditions met, it follows Lemma 2 that 𝜟𝑡 converges to
+              = 𝒓 𝑡 + 𝛾𝒗 Nash
+                         𝑡    (𝑠𝑡+1 ) − 𝑸 ∗ (𝑠𝑡 , 𝒂 𝑡 )                           zero w.p.1, i.e. 𝑸 𝑡 converges to 𝑸 ∗ w.p.1.
+               + 𝛾[𝒗 MF             Nash
+                     𝑡 (𝑠 𝑡+1 ) − 𝒗 𝑡    (𝑠𝑡+1 )]
+                        Nash
+                                                                                 Apart from being convergent to the Nash 𝑄-value, MF-𝑄 is
+              = 𝒓 𝑡 + 𝛾𝒗 𝑡 (𝑠𝑡+1 ) − 𝑸 ∗ (𝑠𝑡 , 𝒂 𝑡 ) + 𝐶𝑡 (𝑠𝑡 , 𝒂 𝑡 )             also Rational (Bowling & Veloso, 2001; 2002). We leave
+              = 𝑭𝑡Nash (𝑠𝑡 , 𝒂 𝑡 ) + 𝑪𝑡 (𝑠𝑡 , 𝒂 𝑡 ).                    (17)      the corresponding discussion in Appendix D for details.
+                                                          Mean Field Multi-Agent Reinforcement Learning
+               1.0                                                           1.0       IL                                                  1.0       IL
+                                                                                       FMQ                                                           FMQ
+               0.8                                                           0.8                                                           0.8
+ Performance
+
+
+
+
+                                                               Performance
+
+
+
+
+                                                                                                                             Performance
+                                                                                       Rec-FMQ                                                       Rec-FMQ
+                                                                                       MF-Q                                                          MF-Q
+               0.6                                                           0.6       MAAC                                                0.6       MAAC
+                                                    IL
+                                                                                       MF-AC                                                         MF-AC
+                                                    FMQ
+               0.4                                                           0.4                                                           0.4
+                                                    Rec-FMQ
+                                                    MF-Q
+               0.2                                                           0.2                                                           0.2
+                                                    MAAC
+                                                    MF-AC
+               0.0                                                           0.0                                                           0.0
+                     0   200      400   600   800       1000                       0      200      400    600   800   1000                       0      200    400   600   800   1000
+                                  Timestep                                                         Timestep                                                    Timestep
+                               (a) 𝑁 = 100                                                      (b) 𝑁 = 500                                               (c) 𝑁 = 1000
+                                  Figure 3: Learning with 𝑁 agents in the GS environment with 𝜇 = 400 and 𝜎 = 200.
+4. Related Work                                                                                          distribution of the neighboring agents). This would effec-
+                                                                                                         tively alleviate the problem of the exploratory noise (Colby
+We continue our discussion on related work from Intro-                                                   et al., 2015) caused by many other agents, and allow each
+duction and make comparisons with existing techniques in                                                 agent to determine which actions are beneficial to itself.
+a greater scope. Our work follows the same direction as
+Littman (1994); Hu & Wellman (2003); Bowling & Veloso                                                    Our work is also closely related to the recent development
+(2002) on adapting a Stochastic Game (van der Wal et al.,                                                of mean field games (MFG) (Lasry & Lions, 2007; Huang
+1981) into the MARL formulation. Specifically, Littman                                                   et al., 2006; Weintraub et al., 2006). MFG studies popula-
+(1994) addressed two-player zero-sum stochastic games by                                                 tion behaviors resulting from the aggregations of decisions
+introducing a “minimax” operator in 𝑄-learning, whereas                                                  taken from individuals. Mathematically, the dynamics are
+Hu & Wellman (2003) extended it to the general-sum case                                                  governed by a set of two stochastic differential equations
+by learning a Nash equilibrium in each stage game and con-                                               that model the backward dynamics of individual’s value
+sidering a mixed strategy. Nash-Q learning is guaranteed to                                              function, and the forward dynamics of the aggregate dis-
+converge to Nash strategies under the (strong) assumption                                                tribution of agent population. Despite that the backward
+that there exists an equilibrium for every stage game. In the                                            equation equivalently describes what Bellman equation in-
+situation where agents can be identified as either "friends"                                             dicates in the MDP, the primarily goal for MFG is rather for
+or "foes" (Littman, 2001), one can simply solve it by al-                                                a model-based planning and to infer the movements of the
+ternating between fully cooperative and zero-sum learning.                                               individual density through time. The mean field approxima-
+Considering the convergence speed, Littman & Stone (2005)                                                tion (Stanley, 1971) in also employed in physics, but our
+and de Cote & Littman (2008) draw on the folk theorem and                                                work is different in that we focus on a model-free solution of
+acquired a polynomial-time Nash equilibrium algorithm for                                                learning optimal actions when the dynamics of the system
+repeated stochastic games, while Bowling & Veloso (2002)                                                 and the reward function are unknown. Very recently, Yang
+tried varying the learning rate to improve the convergence.                                              et al. (2017) built a connection between MFG and reinforce-
+                                                                                                         ment learning. Their focus is, however, on the inverse RL
+The recent treatment of MARL was using deep neural net-                                                  in order to learn both the reward function and the forward
+works as the function approximator. In addressing the non-                                               dynamics of the MFG from the policy data, whereas our
+stationary issue in MARL, various solutions have been pro-                                               goal is to form a computable 𝑄-learning algorithm under
+posed including neural-based opponent modeling (He &                                                     the framework of temporal difference learning.
+Boyd-Graber, 2016), policy parameters sharing (Gupta et al.,
+2017), etc. Researchers have also adopted the paradigm of
+centralized training with decentralized execution for multi-                                             5. Experiments
+agent policy-gradient learning: BICNET (Peng et al., 2017),                                              We analyze and evaluate our algorithms in three different
+COMA (Foerster et al., 2018) and MADDPG (Lowe et al.,                                                    scenarios, including two stage games: the Gaussian Squeeze
+2017a), which allows the centralized critic 𝑄-function to                                                and the Ising Model, and the mixed cooperative-competitive
+be trained with the actions of other agents, while the actor                                             battle game.
+needs only local observation to optimize agent’s policy.
+The above MARL approaches limit their studies mostly to                                                  5.1. Gaussian Squeeze
+tens of agents. As the number of agents grows larger, not
+only the input space of 𝑄 grows exponentially, but most                                                  Environment. In the Gaussian Squeeze (GS) task (Holmes-
+critically, the accumulated noises by the exploratory actions                                            Parker et al., 2014), 𝑁 homogeneous agents determine their
+of other agents make the 𝑄-function learning no longer fea-                                              individual action 𝑎 𝑗 to jointly optimize the most appropri-
+                                                                                                                                P𝑁
+sible. Our work addresses the issue by employing the mean                                                ate summation 𝑥 =         𝑗=1 𝑎 . Each agent has 10 action
+                                                                                                                                         𝑗
+
+field approximation (Stanley, 1971) over the joint action                                                choices – integers 0 to 9. The system objective is defined
+                                                                                                                        −(𝑥−𝜇)2
+space. The parameters of the 𝑄-function is independent of                                                as 𝐺(𝑥) = 𝑥𝑒 𝜎2 , where 𝜇 and 𝜎 are the pre-defined
+the number of agents as it transforms multiple agents inter-                                             mean and variance of the system. In the scenario of traffic
+actions into two entities interactions (single agent v.s. the                                            congestion, each agent is one traffic controller trying to send
+                                                                                                                                 Mean Field Multi-Agent Reinforcement Learning
+                                                                                                                                                                                                         τ < τ C : τ = 0 .9            τ ~ τ C : τ = 1 .2            τ > τ C : τ = 2 .0
+                                              1.0                                                                                                                                                0                            0                              0
+                                                                                                                                               MCMC
+
+
+
+                            Order Parameter
+                                                                                                                                               MF-Q                                              5                            5                              5
+                                              0.8
+                                                                                                                                                                                                10                            10                            10
+                                              0.6
+                                                                                                                                                                                                15                            15                            15
+                                              0.4
+                                                                                                                                                                                                     0     5     10     15         0     5     10     15         0     5     10     15
+                                              0.2                                                                                                                                                                                      (a) MF-𝑄
+                                              0.0                                                                                                                                                        τ < τ C : τ = 0 .9            τ ~ τ C : τ = 1 .2            τ > τ C : τ = 2 .0
+                                                 0.0         0.5             1.0                              1.5                2.0        2.5                                                  0                            0                              0
+
+                                                                              Temperature                                                                                                        5                            5                              5
+
+Figure 4: The order parameter at equilibrium v.s. tempera-                                                                                                                                      10                            10                            10
+
+ture in the Ising model with 20 × 20 grid.                                                                                                                                                      15                            15                            15
+                                                                                Mean Squared Error
+
+
+
+
+                                                                                                                                                                        Mean Squared Error
+                  1.0                                                         1.0                                      1.0                                            1.0
+                                                                                                                                                                                                     0     5     10     15         0     5     10     15         0     5     10     15
+Order Parameter
+
+
+
+
+                                                                                                     Order Parameter
+
+
+
+                                                                    MSE                                                                                     MSE
+                  0.8                                                         0.8                                      0.8                                            0.8
+                                                                    OP                                                                                      OP                                                                     (b) MCMC
+                  0.6                                                         0.6                                      0.6                                            0.6
+
+                  0.4                                                         0.4                                      0.4                                            0.4                    Figure 6: The spins of the Ising model at equilibrium under
+                  0.2                                                         0.2                                      0.2                                            0.2                    different temperatures.
+                  0.0                                                         0.0                                      0.0                                            0.0
+                        0      5000                 10000   15000        20000                                               0    5000     10000    15000        20000
+                                               Timestep                                                                                  Timestep                                            such mechanism keeps the interactions among agents man-
+                                   (a) 𝜏 = 0.8                                                                                     (b) 𝜏 = 1.2                                               ageable while reducing the noisy effect of the exploratory
+Figure 5: Training performance of MF-𝑄 in the Ising model                                                                                                                                    behaviors from the other agents. Between MF-𝑄 and MF-
+with 20 × 20 grid.                                                                                                                                                                           AC, MF-𝑄 converges faster. Both FMQ and Rec-FMQ fail
+                                                                                                                                                                                             to reach pleasant performance, it might be because agents
+𝑎 𝑗 vehicles into the main road. Controllers are expected to                                                                                                                                 are essentially unable to distinguish the rewards received for
+coordinate with each other to make the full use of the main                                                                                                                                  the same actions, and are thus unable to update their own
+route while avoiding congestions. The goal of each agent                                                                                                                                     𝑄-values w.r.t. the actual contributions. It is worth noting
+is to learn to allocate system resources efficiently, avoiding                                                                                                                               that MAAC is surprisingly inefficient in learning when the
+either over-use or under-use. The GS problem here sits                                                                                                                                       number of agents becomes large; it simply fails to handle
+ideally as an ablation study on the impact of multi-agent                                                                                                                                    the non-aggregated noises due to the agents’ explorations.
+exploratory noises toward the learning (Colby et al., 2015).
+Model Settings. We implement MF-𝑄 and MF-AC follow-                                                                                                                                          5.2. Model-free MARL for Ising Model
+ing the framework of centralized training (shared critic) with                                                                                                                               Environment. In statistical mechanics, the Ising model
+decentralized execution (independent actor). We compare                                                                                                                                      is a mathematical framework to describe ferromagnetism
+against 4 baseline models: (1) Independent Learner (IL),                                                                                                                                     (Ising, 1925). It also has wide applications in sociophysics
+a traditional 𝑄-Learning algorithm that does not consider                                                                                                                                    (Galam & Walliser, 2010). With the energy function explic-
+the actions performed by other agents; (2) Frequency Max-                                                                                                                                    itly defined, mean field approximation (Stanley, 1971) is a
+imum 𝑄-value (FMQ) (Kapetanakis & Kudenko, 2002), a                                                                                                                                          typical way
+modified IL which increases the 𝑄-values of actions that                                                                                                                                              P to solve the Ising model for every spin 𝑗, i.e.
+                                                                                                                                                                                             h𝑎 𝑗 i = 𝑎 𝑎 𝑗 𝑃(𝑎). See the Appendix C.2 for more details.
+frequently produced good rewards in the past; (3) Recursive
+Frequency Maximum 𝑄-value (Rec-FMQ) (Matignon et al.,                                                                                                                                        To fit into the MARL setting, we transform the Ising model
+2012), an improved version of FMQ that recursively com-                                                                                                                                      into a stage game where the  Preward for each spin/agent is
+putes the occurrence frequency to evaluate and then choose                                                                                                                                   defined by 𝑟 𝑗 = ℎ 𝑗 𝑎 𝑗 + 𝜆2 𝑘∈N( 𝑗) 𝑎 𝑗 𝑎 𝑘 ; here N( 𝑗) is the
+actions; (4) Multi-agent Actor-Critic (MAAC), a variant of                                                                                                                                   set of nearest neighbors of spin 𝑗, ℎ 𝑗 ∈ R is the external
+MADDPG architecture for the discrete action space (see                                                                                                                                       field affecting the spin 𝑗, and 𝜆 ∈ R is an interaction coef-
+Eq. (4) in Lowe et al. (2017b)). All models use the multi-                                                                                                                                   ficient that determines how much the spins are motivated
+layer perception as the function approximator. The detailed                                                                                                                                  to stay aligned. Unlike the typical setting in physics, here
+settings of the implementation are in the Appendix C.1.                                                                                                                                      each spin does not know the energy function, but aims to
+                                                                                                                                                                                             understand the environment, and to maximize its reward by
+Results. Figure. 3 illustrates the results for the GS envi-
+                                                                                                                                                                                             learning the optimal policy of choosing the spin state: up or
+ronment of 𝜇 = 400 and 𝜎 = 200 with three different
+                                                                                                                                                                                             down.
+numbers of agents (𝑁 = 100, 500, 1000) that stand for 3
+levels of congestions. In the smallest GS setting of Fig. 3a,                                                                                                                                In addition to the reward, the order parameter (OP) (Stanley,
+all models show excellent performance. As the agent num-                                                                                                                                     1971) is a traditional measure of purity for the Ising model.
+ber increases, Figs. 3b and 3c show MF-𝑄 and MF-AC’s                                                                                                                                                                  |𝑁 −𝑁 |
+                                                                                                                                                                                             OP is defined as 𝜉 = ↑ 𝑁 ↓ , where 𝑁↑ represents the
+capabilities of learning the optimal allocation effectively                                                                                                                                  number of up spins, and 𝑁↓ for the down spins. The closer
+after a few iterations, whereas all four baselines fail to learn                                                                                                                             the OP is to 1, the more orderly the system is.
+at all. We believe this advantage is due to the awareness
+of other agents’ actions under the mean field framework;                                                                                                                                     Model Settings. To validate the correctness of the MF-
+                                                                                                                                                                                             𝑄 learning, we implement MCMC methods (Binder et al.,
+                                                       Mean Field Multi-Agent Reinforcement Learning
+                                                                                                                                                       400
+                                                                                                  1.4          vs IL       vs MF-AC                               vs IL        vs MF-AC
+                                                                                                                                                       350
+                                                                                                  1.2          vs MF-Q     vs AC                                  vs MF-Q      vs AC
+                                      200                                                                                                              300
+                                                                                                  1.0
+
+
+
+
+                                                                                                                                        Total-Reward
+                                        0                                                                                                              250
+
+
+
+
+                                                                                       Win-Rate
+                                                                                                  0.8                                                  200
+
+
+
+
+                            Reward
+                                     −200                                                         0.6                                                  150
+                                     −400                                                         0.4                                                  100
+      Start                                                                                       0.2                                                   50
+                                     −600
+                                                                                                  0.0                                                    0
+                                     −800
+                                                                               MFAC                       AC      IL     MF-Q   MF-AC                        AC      IL     MF-Q    MF-AC
+                                                                               MFQ
+
+                                            0   250 500 750 1000 1250 1500 1750 2000                    (a) Average wining rate.                         (b) Average total reward.
+                                                            Epoch
+
+  (a) Battle game scene.                        (b) Learning curve.                               Figure 8: Performance comparisons in the battle game.
+              Figure 7: The battle game: 64 v.s. 64.                                   skills such as chasing to hunt after training. We adopt the
+1993) to simulate the same Ising model and provide the                                 default reward setting: −0.005 for every move, 0.2 for at-
+ground truth for comparison. The full settings of MCMC                                 tacking an enemy, 5 for killing an enemy, −0.1 for attacking
+and MF-𝑄 for Ising model are provided in the Appendix                                  an empty grid, and −0.1 for being attacked or killed.
+C.2. One of the learning goals is to obtain the accurate
+                                                                                       Model Settings. Our MF-𝑄 and MF-AC are compared
+approximation of h𝑎 𝑗 i. Notice that agents here do not know
+                                                                                       against the baselines that are proved successful on the MA-
+exactly the energy function, but rather use the temporal
+                                                                                       gent platform. We focus on the battles between mean field
+difference learning to approximate h𝑎 𝑗 i during the learning
+                                                                                       methods (MF-𝑄, MF-AC) and their non-mean field counter-
+procedure. Once this is accurately approximated, the Ising
+                                                                                       parts, independent 𝑄-learning (IL) and advantageous actor
+model as a whole should be able to converge to the same
+                                                                                       critic (AC). We exclude MADDPG/MAAC as baselines,
+simulation result suggested by MCMC.
+                                                                                       as the framework of centralized critic cannot deal with the
+Correctness of MF-𝑄. Figure. 4 illustrates the relationship                            varying number of agents for the battle (simply because
+between the order parameter at equilibrium under different                             agents could die in the battle). Also, as we demonstrated
+system temperatures. MF-𝑄 converges nearly to the exact                                in the previous experiment of Fig. 3, MAAC tends to scale
+same plot as MCMC, this justifies the correctness of our                               poorly and fail when the agent number is in hundreds.
+algorithms. Critically, MF-𝑄 finds a similar Curie tempera-
+                                                                                       Results and Discussion. We train all four models by 2000
+ture (the phase change point) as MCMC that is 𝜏 = 1.2. As
+                                                                                       rounds self-plays, and then use them for comparative battles.
+far as we know, this is the first work that manages to solve
+                                                                                       During the training, agents can quickly pick up the skills
+the Ising model via model-free reinforcement learning meth-
+                                                                                       of chasing and cooperation to kill in Fig. 7a. The Fig. 8
+ods. Figure. 5 illustrates the mean squared error between the
+                                                                                       shows the result of winning rate and the total reward over
+learned 𝑄-value and the reward target. MF-𝑄 is shown in
+                                                                                       2000 rounds cross-comparative experiments. It is evident
+Fig. 5a to be able to learn the target well under low temper-
+                                                                                       that on all the metrics mean field methods, MF-𝑄 largely
+ature settings. When it comes to the Curie temperature, the
+                                                                                       outperforms the corresponding baselines, i.e. IL and AC re-
+environment enters into the phase change when the stochas-
+                                                                                       spectively, which shows the effectiveness of the mean field
+ticity dominates, resulting in a lower OP and higher MSE
+                                                                                       MARL algorithms. Interestingly, IL performs far better
+observed in Fig. 5b. We visualize the equilibrium in Fig. 6.
+                                                                                       than AC and MF-AC (2nd block from the left in Fig. 8a),
+The equilibrium points from MF-𝑄 in fact match MCMC’s
+                                                                                       although it is worse than the mean field counterpart MF-𝑄.
+results under three types of temperatures. The spins tend
+                                                                                       This might imply the effectiveness of off-policy learning
+to stay aligned under a low temperature (𝜏 = 0.9). As the
+                                                                                       with shuffled buffer replay in many-agent RL towards a
+temperature rises (𝜏 = 1.2), some spins become volatile
+                                                                                       more stable learning process. Also, the 𝑄-learning family
+and patches start to form as spontaneous magnetization.
+                                                                                       tends to introduce a positive bias (Hasselt, 2010) by using
+This phenomenon is mostly observed around the Curie tem-
+                                                                                       the maximum action value as an approximation for the max-
+perature. After passing the Curie temperature, the system
+                                                                                       imum expected action value, and such overestimation can
+becomes unstable and disordered due to the large thermal
+                                                                                       be beneficial for each single agent to find the best response
+fluctuations, resulting in random spinning patterns.
+                                                                                       to others even though the environment itself is still changing.
+                                                                                       On the other hand, On-policy methods need to comply with
+5.3. Mixed Cooperative-Competitive Battle Game                                         the GLIE assumption (Assumption 2 in Sec 3.3) so as to
+Environment. The Battle game in the Open-source MA-                                    converge properly to the optimal value (Singh et al., 2000),
+gent system (Zheng et al., 2018) is a Mixed Cooperative-                               which is in the end a greedy policy as off-policy methods.
+Competitive scenario with two armies fighting against each                             Figure. 7b further shows the self-play learning curves of
+other in a grid world, each empowered by a different RL                                MF-AC and MF-𝑄. MF-𝑄 presents a faster convergence
+algorithm. In the setting of Fig. 7a, each army consists of                            speed than MF-AC, which is consistent with the findings in
+64 homogeneous agents. The goal of each army is to get                                 the Gaussian Squeeze task (see Fig. 3b & 3c). Apart from
+more rewards by collaborating with teammates to destroy                                64, we further test the scenarios when the agent size is 8,
+all the opponents. Agent can takes actions to either move to                           144, 256, the comparative results keep the same relativity as
+or attack nearby grids. Ideally, the agents army should learn                          Fig. 8; we omit the presentations for clarity.
+                                       Mean Field Multi-Agent Reinforcement Learning
+
+6. Conclusions                                                    de Cote, E. M. and Littman, M. L. A polynomial-time nash
+                                                                    equilibrium algorithm for repeated stochastic games. In
+In this paper, we developed mean field reinforcement learn-         McAllester, D. A. and Myllymäki, P. (eds.), UAI 2008,
+ing methods to model the dynamics of interactions in the            pp. 419–426. AUAI Press, 2008. ISBN 0-9749039-4-9.
+multi-agent systems. MF-𝑄 iteratively learns each agent’s
+best response to the mean effect from its neighbors; this ef-     Fink, A. M. et al. Equilibrium in a stochastic 𝑛-person game.
+fectively transform the many-body problem into a two-body           Journal of science of the hiroshima university, series ai
+problem. Theoretical analysis on the convergence of the MF-         (mathematics), 28(1):89–93, 1964.
+𝑄 algorithm to Nash 𝑄-value was provided. Three types of
+tasks have justified the effectiveness of our approaches. In      Foerster, J. N., Chen, R. Y., Al-Shedivat, M., Whiteson, S.,
+particular, we report the first result to solve the Ising model     Abbeel, P., and Mordatch, I. Learning with opponent-
+using model-free reinforcement learning methods.                    learning awareness. CoRR, abs/1709.04326, 2017.
+                                                                  Foerster, J. N., Farquhar, G., Afouras, T., Nardelli, N., and
+Acknowledgement                                                     Whiteson, S. Counterfactual multi-agent policy gradients.
+                                                                    In McIlraith & Weinberger (2018).
+We sincerely thank Ms. Yi Qu for her generous help on the
+graphic design.                                                   Galam, S. and Walliser, B. Ising model versus normal
+                                                                    form game. Physica A: Statistical Mechanics and its
+References                                                         Applications, 389(3):481–489, 2010.
+
+Bertsekas, D. P. Weighted sup-norm contractions in dynamic        Gupta, J. K., Egorov, M., and Kochenderfer, M. Cooperative
+  programming: A review and some new applications. Dept.            multi-agent control using deep reinforcement learning. In
+  Elect. Eng. Comput. Sci., Massachusetts Inst. Technol.,          AAMAS, pp. 66–83. Springer, 2017.
+  Cambridge, MA, USA, Tech. Rep. LIDS-P-2884, 2012.
+                                                                  Hasselt, H. V. Double q-learning. In NIPS, pp. 2613–2621,
+Binder, K., Heermann, D., Roelofs, L., Mallinckrodt, A. J.,         2010.
+  and McKay, S. Monte carlo simulation in statistical
+                                                                  He, H. and Boyd-Graber, J. L. Opponent modeling in
+  physics. Computers in Physics, 7(2):156–157, 1993.
+                                                                    deep reinforcement learning. In Balcan, M. and Wein-
+Blume, L. E. The statistical mechanics of strategic inter-          berger, K. Q. (eds.), ICML, volume 48, pp. 1804–1813.
+  action. Games and economic behavior, 5(3):387–424,                JMLR.org, 2016.
+  1993.                                                           HolmesParker, C., Taylor, M., Zhan, Y., and Tumer, K.
+Bowling, M. and Veloso, M. Rational and convergent learn-           Exploiting structure and agent-centric rewards to promote
+  ing in stochastic games. In International joint confer-           coordination in large multiagent systems. In Adaptive
+  ence on artificial intelligence, volume 17, pp. 1021–1026.        and Learning Agents Workshop, 2014.
+  Lawrence Erlbaum Associates Ltd, 2001.                          Hu, J. and Wellman, M. P. Nash q-learning for general-sum
+                                                                    stochastic games. Journal of machine learning research,
+Bowling, M. and Veloso, M. Multiagent learning using
+                                                                    4(Nov):1039–1069, 2003.
+  a variable learning rate. Artificial Intelligence, 136(2):
+  215–250, 2002.                                                  Huang, M., Malhamé, R. P., Caines, P. E., et al. Large pop-
+                                                                    ulation stochastic dynamic games: closed-loop mckean-
+Busoniu, L., Babuska, R., and De Schutter, B. A com-
+                                                                    vlasov systems and the nash certainty equivalence prin-
+  prehensive survey of multiagent reinforcement learning.
+                                                                    ciple. Communications in Information & Systems, 6(3):
+  IEEE Trans. Systems, Man, and Cybernetics, Part C, 38
+                                                                    221–252, 2006.
+  (2):156–172, 2008.
+                                                                  Ising, E. Beitrag zur theorie des ferromagnetismus.
+Cao, Z., Qin, T., Liu, T.-Y., Tsai, M.-F., and Li, H. Learning       Zeitschrift für Physik, 31(1):253–258, 1925.
+  to rank: from pairwise approach to listwise approach.
+  In Proceedings of the 24th international conference on          Jaakkola, T., Jordan, M. I., and Singh, S. P. Convergence of
+  Machine learning, pp. 129–136. ACM, 2007.                         stochastic iterative dynamic programming algorithms. In
+                                                                    NIPS, pp. 703–710, 1994.
+Colby, M. K., Kharaghani, S., HolmesParker, C., and Tumer,
+  K. Counterfactual exploration for improving multiagent          Jeong, S. H., Kang, A. R., and Kim, H. K. Analysis of
+  learning. In Proceedings of the 2015 International Con-           game bot’s behavioral characteristics in social interaction
+  ference on Autonomous Agents and Multiagent Systems,              networks of mmorpg. In ACM SIGCOMM Computer
+  pp. 171–179. International Foundation for Autonomous              Communication Review, volume 45, pp. 99–100. ACM,
+  Agents and Multiagent Systems, 2015.                              2015.
+                                       Mean Field Multi-Agent Reinforcement Learning
+
+Kapetanakis, S. and Kudenko, D. Reinforcement learning           Peng, P., Yuan, Q., Wen, Y., Yang, Y., Tang, Z., Long,
+  of coordination in cooperative multi-agent systems. In           H., and Wang, J. Multiagent bidirectionally-coordinated
+  NCAI, pp. 326–331, Menlo Park, CA, USA, 2002. ISBN               nets for learning to play starcraft combat games. CoRR,
+  0-262-51129-0.                                                   abs/1703.10069, 2017.
+Konda, V. R. and Tsitsiklis, J. N. Actor-critic algorithms. In   Rendle, S. Factorization machines with libfm. ACM Trans-
+  Solla, S. A., Leen, T. K., and Müller, K. (eds.), Advances       actions on Intelligent Systems and Technology (TIST), 3
+  in Neural Information Processing Systems 12, pp. 1008–           (3):57, 2012.
+  1014. MIT Press, 2000.
+                                                                 Shapley, L. S. Stochastic games. Proceedings of the national
+Kreyszig, E. Introductory functional analysis with applica-        academy of sciences, 39(10):1095–1100, 1953.
+  tions, volume 1. wiley New York, 1978.
+                                                                 Silver, D., Lever, G., Heess, N., Degris, T., Wierstra, D., and
+Lasry, J.-M. and Lions, P.-L. Mean field games. Japanese            Riedmiller, M. Deterministic policy gradient algorithms.
+  journal of mathematics, 2(1):229–260, 2007.                       In ICML, pp. 387–395, 2014.
+Lemke, C. E. and Howson, Jr, J. T. Equilibrium points of         Singh, S., Jaakkola, T., Littman, M. L., and Szepesvári,
+  bimatrix games. Journal of the Society for Industrial and        C.    Convergence results for single-step on-policy
+  Applied Mathematics, 12(2):413–423, 1964.                        reinforcement-learning algorithms. Machine learning,
+Littman, M. L. Markov games as a framework for multi-              38(3):287–308, 2000.
+  agent reinforcement learning. In ICML, volume 157, pp.         Stanley, H. E. Phase transitions and critical phenomena.
+  157–163, 1994.                                                   Clarendon, Oxford, 9, 1971.
+Littman, M. L. Friend-or-foe q-learning in general-sum
+                                                                 Szepesvári, C. and Littman, M. L. A unified analysis of
+  games. In ICML, volume 1, pp. 322–328, 2001.
+                                                                   value-function-based reinforcement-learning algorithms.
+Littman, M. L. and Stone, P. A polynomial-time nash equi-          Neural computation, 11(8):2017–2060, 1999.
+  librium algorithm for repeated games. Decision Support
+                                                                 Tan, M. Multi-agent reinforcement learning: Independent
+  Systems, 39(1):55–66, 2005.
+                                                                   vs. cooperative agents. In Proceedings of the tenth inter-
+Lowe, R., Wu, Y., Tamar, A., Harb, J., Abbeel, O. P.,              national conference on machine learning, pp. 330–337,
+  and Mordatch, I. Multi-agent actor-critic for mixed              1993.
+  cooperative-competitive environments. In NIPS, pp. 6382–
+  6393, 2017a.                                                   Troy, C. A. Envisioning stock trading where the brokers are
+                                                                   bots. New York Times, 16, 1997.
+Lowe, R., Wu, Y., Tamar, A., Harb, J., Abbeel, P., and Mor-
+  datch, I. Multi-agent actor-critic for mixed cooperative-      van der Wal, J., van der Wal, J., van der Wal, J., Math-
+  competitive environments. In Guyon, I., von Luxburg, U.,         ématicien, P.-B., van der Wal, J., and Mathematician,
+  Bengio, S., Wallach, H. M., Fergus, R., Vishwanathan,            N. Stochastic Dynamic Programming: successive ap-
+  S. V. N., and Garnett, R. (eds.), NIPS, pp. 6382–6393,           proximations and nearly optimal strategies for Markov
+  2017b.                                                           decision processes and Markov games. Mathematisch
+                                                                   centrum, 1981.
+Matignon, L., Laurent, G. J., and Le Fort-Piat, N. Inde-
+ pendent reinforcement learners in cooperative markov            Wang, J., Zhang, W., Yuan, S., et al. Display advertising
+ games: a survey regarding coordination problems. The             with real-time bidding (rtb) and behavioural targeting.
+ Knowledge Engineering Review, 27(1):1–31, 2012.                  Foundations and Trends® in Information Retrieval, 11
+                                                                  (4-5):297–435, 2017.
+McIlraith, S. A. and Weinberger, K. Q. (eds.). Proceedings
+ of the Thirty-Second AAAI Conference on Artificial In-          Watkins, C. J. and Dayan, P. Q-learning. Machine learning,
+ telligence, New Orleans, Louisiana, USA, February 2-7,           8(3-4):279–292, 1992.
+ 2018, 2018. AAAI Press.
+                                                                 Weintraub, G. Y., Benkard, L., and Van Roy, B. Oblivious
+Melo, F. S., Meyn, S. P., and Ribeiro, M. I. An analysis          equilibrium: A mean field approximation for large-scale
+ of reinforcement learning with function approximation.           dynamic games. In Advances in neural information pro-
+ In Proceedings of the 25th international conference on           cessing systems, pp. 1489–1496, 2006.
+ Machine learning, pp. 664–671. ACM, 2008.
+                                                                 Yang, J., Ye, X., Trivedi, R., Xu, H., and Zha, H. Deep
+Panait, L. and Luke, S. Cooperative multi-agent learning:          mean field games for learning optimal behavior policy of
+  The state of the art. AAMAS, 11(3):387–434, 2005.                large populations. CoRR, abs/1711.03156, 2017.
+                                       Mean Field Multi-Agent Reinforcement Learning
+
+Zheng, L., Yang, J., Cai, H., Zhou, M., Zhang, W., Wang, J.,
+  and Yu, Y. Magent: A many-agent reinforcement learning
+  platform for artificial collective intelligence. In McIlraith
+  & Weinberger (2018).
+                                          Mean Field Multi-Agent Reinforcement Learning
+
+A. Detailed mean field reinforcement learning algorithms
+We published the code at https://github.com/mlii/mfrl.
+Algorithm 1 Mean Field 𝑄-learning (MF-𝑄)
+  Initialise 𝑄 𝜙 𝑗 , 𝑄 𝜙 𝑗 , and 𝑎¯ 𝑗 for all 𝑗 ∈ {1, . . . , 𝑁}
+                        −
+  while training not finished do
+     for 𝑚 = 1, ..., 𝑀 do
+        For each agent 𝑗, sample action 𝑎 𝑗 from 𝑄 𝜙 𝑗 by Eq. (12), with the current mean action 𝑎¯ 𝑗 and the exploration rate 𝛽
+        For each agent 𝑗, compute the new mean action 𝑎¯ 𝑗 by Eq. (11)
+     Take the joint action 𝒂 = [𝑎 1 , . . . , 𝑎 𝑁 ] and observe the reward 𝒓 = [𝑟 1 , . . . , 𝑟 𝑁 ] and the next state 𝑠0
+     Store h𝑠, 𝒂, 𝒓, 𝑠0 , 𝒂¯i in replay buffer D, where 𝒂¯ = [¯  𝑎 1 , . . . , 𝑎¯𝑁 ]
+     for 𝑗 = 1 to 𝑁 do
+        Sample a minibatch of 𝐾 experiences h𝑠, 𝒂, 𝒓, 𝑠0 , 𝒂¯i from D
+                              𝑗                     𝑗
+        Sample action 𝑎 −       from 𝑄 𝜙 𝑗 with 𝑎¯−    ← 𝑎¯ 𝑗
+                                      −
+       Set 𝑦 𝑗 = 𝑟 𝑗 + 𝛾 𝑣 MF
+                           𝜙𝑗
+                              (𝑠0 ) by Eq. (10)
+                        −
+                                                                                                  2
+      Update the 𝑄-network by minimizing the loss L(𝜙 𝑗 ) = 𝐾1
+                                                                 P 𝑗
+                                                                     𝑦 − 𝑄 𝜙 𝑗 (𝑠 𝑗 , 𝑎 𝑗 , 𝑎¯ 𝑗 )
+    Update the parameters of the target network for each agent 𝑗 with learning rate 𝜏:
+                                                          𝑗                  𝑗
+                                                         𝜙− ← 𝜏𝜙 𝑗 + (1 − 𝜏)𝜙−
+
+
+Algorithm 2 Mean Field Actor-Critic (MF-AC)
+  Initialize 𝑄 𝜙 𝑗 , 𝑄 𝜙 𝑗 , 𝜋 𝜃 𝑗 , 𝜋 𝜃 𝑗 , and 𝑎¯ 𝑗 for all 𝑗 ∈ {1, . . . , 𝑁}
+                        −               −
+  while training not finished do
+     For each agent 𝑗, sample action 𝑎 𝑗 = 𝜋 𝜃 𝑗 (𝑠); compute the new mean action 𝒂¯ = [¯     𝑎 1 , . . . , 𝑎¯𝑁 ]
+     Take the joint action 𝒂 = [𝑎 , . . . , 𝑎 ] and observe the reward 𝒓 = [𝑟 , . . . , 𝑟 ] and the next state 𝑠0
+                                            1         𝑁                          1       𝑁
+
+     Store h𝑠, 𝒂, 𝒓, 𝑠0 , 𝒂¯i in replay buffer D
+     for 𝑗 = 1 to 𝑁 do
+        Sample a minibatch of 𝐾 experiences h𝑠, 𝒂, 𝒓, 𝑠0 , 𝒂¯i from D
+       Set 𝑦 𝑗 = 𝑟 𝑗 + 𝛾 𝑣 MF
+                           𝜙𝑗
+                              (𝑠0 ) by Eq. (10)
+                          −
+                                                                                               2
+       Update the critic by minimizing the loss L(𝜙 𝑗 ) = 𝐾1
+                                                             P 𝑗
+                                                                    𝑦 − 𝑄 𝜙 𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 )
+       Update the actor using the sampled policy gradient:
+                                                1 X
+                                ∇ 𝜃 𝑗 J(𝜃 𝑗 ) ≈     ∇ 𝜃 𝑗 log 𝜋 𝜃 𝑗 (𝑠0 )𝑄 𝜙 𝑗 (𝑠0 , 𝑎 −
+                                                                                       𝑗     𝑗
+                                                                                         , 𝑎¯− ) 𝑗
+                                                𝐾                           −                   𝑎− = 𝜋 𝑗 (𝑠 0 )
+                                                                                                      𝜃
+                                                                                                         −
+
+    Update the parameters of the target networks for each agent 𝑗 with learning rates 𝜏𝜙 and 𝜏𝜃 :
+                                                         𝑗                      𝑗
+                                                        𝜙− ← 𝜏𝜙 𝜙 𝑗 + (1 − 𝜏𝜙 )𝜙−
+                                                         𝑗                       𝑗
+                                                        𝜃− ← 𝜏𝜃 𝜃 𝑗 + (1 − 𝜏𝜃 )𝜃 −
+                                         Mean Field Multi-Agent Reinforcement Learning
+
+B. Proof of the bound for the remainder term in Eq. 7
+Recall Eq. (8) that we approximate the action 𝑎 𝑘 taken by the neighboring agent 𝑘 with the mean action 𝑎¯ calculated from
+the neighborhood N( 𝑗). The state 𝑠 and the action 𝑎 𝑗 of the central agent 𝑗 can be considered as fixed parameters; the
+indices 𝑗, 𝑘 of agents are essentially irrelevant to the derivation. With those omitted for simplicity, We rewrite the expression
+of the pairwise 𝑄-function as 𝑄(𝑎) , 𝑄 𝑗 (𝑠, 𝑎 𝑗 , 𝑎 𝑘 ).
+Suppose that 𝑄 is 𝑀-smooth, where its gradient ∇𝑄 is Lipschitz-continuous with constant 𝑀 such that for all 𝑎, 𝑎¯
+
+                                              k∇𝑄(𝑎) − ∇𝑄(¯
+                                                          𝑎 )k2 ≤ 𝑀k𝑎 − 𝑎¯k2 ,                                              (20)
+
+where k · k2 indicates the ℓ2 -norm.
+With the Lagrange’s mean value theorem, we have
+
+     ∇𝑄(𝑎) − ∇𝑄(¯
+                𝑎 ) = ∇𝑄(¯                      𝑎 ) = ∇2 𝑄(¯
+                         𝑎 + 1 · (𝑎 − 𝑎¯)) − ∇𝑄(¯          𝑎 + 𝜖 · (𝑎 − 𝑎¯)) · (𝑎 − 𝑎¯),               where 𝜖 ∈ [0, 1].    (21)
+
+Take the ℓ2 -norm on the both sides of the above equation, it follows from the smoothness condition that
+
+                                      𝑎 )k2 = k∇2 𝑄(¯
+                          k∇𝑄(𝑎) − ∇𝑄(¯             𝑎 + 𝜏 · (𝑎 − 𝑎¯)) · (𝑎 − 𝑎¯)k2 ≤ 𝑀k𝑎 − 𝑎¯k2 .                           (22)
+
+Define 𝛿𝑎 , 𝑎 − 𝑎¯ and the normalized vector 𝛿 𝑎ˆ , 𝑎−𝑎¯/k𝑎−𝑎¯k2 with k𝛿 𝑎ˆk2 = 1, it follows from the above inequality
+
+                                                 k∇2 𝑄(𝑎 + 𝜏 · 𝛿𝑎) · 𝛿 𝑎ˆk2 ≤ 𝑀.                                            (23)
+
+By arbitrary choice of (the unnormalized vector) 𝛿𝑎 such that the magnitude k𝛿𝑎k2 → 0, it follows from above that
+
+                                                        k∇2 𝑄(𝑎) · 𝛿 𝑎ˆk2 ≤ 𝑀.                                              (24)
+
+By aligning (the normalized vector) 𝛿 𝑎ˆ in the direction of the eigenvectors of the Hessian matrix ∇2 𝑄, we can obtain for
+any eigenvalue 𝜆 of ∇2 𝑄 that
+
+                                        k∇2 𝑄(𝑎) · 𝛿 𝑎ˆk2 = k𝜆 · 𝛿 𝑎ˆk2 = |𝜆| · k𝛿 𝑎ˆk2 ≤ 𝑀,                                (25)
+
+which indicates that all eigenvalues of ∇2 𝑄 can be bounded in the symmetric interval [−𝑀, 𝑀].
+As the Hessian matrix ∇2 𝑄 is real symmetric and hence diagonalizable, there exist an orthogonal matrix 𝑈 such that
+𝑈 > [∇2 𝑄]𝑈 = 𝛬 , diag[𝜆1 , . . . , 𝜆 𝐷 ]. It then follows that
+                                                  𝐷
+                                                  X                                         𝐷
+                                                                                            X
+                 2                  >
+          𝛿𝑎 · ∇ 𝑄 · 𝛿𝑎 = [𝑈𝛿𝑎] 𝛬[𝑈𝛿𝑎] =                𝜆𝑖 [𝑈𝛿𝑎]2𝑖 ,   with − 𝑀k𝑈𝛿𝑎k2 ≤           𝜆𝑖 [𝑈𝛿𝑎]2𝑖 ≤ 𝑀k𝑈𝛿𝑎k2      (26)
+                                                  𝑖=1                                       𝑖=1
+
+Recall the definition 𝛿𝑎 = 𝑎 − 𝑎¯ in Eq. (6), where 𝑎 is the one-hot encoding for 𝐷 actions, and 𝑎¯ is a 𝐷-dimensional
+multinomial distribution. It can be shown that
+
+                     k𝑈𝛿𝑎k2 = k𝛿𝑎k2 = (𝑎 − 𝑎¯)> (𝑎 − 𝑎¯) = 𝑎 > 𝑎 + 𝑎¯> 𝑎¯ − 𝑎¯> 𝑎 − 𝑎 > 𝑎¯ = 2(1 − 𝑎¯𝑖 ) ≤ 2,               (27)
+
+where 𝑖 represents the specific action 𝑎 has represented such that 𝑎 𝑖0 = 0 for 𝑖 0 6= 𝑖.
+                                                                             𝑗
+With all elements assembled, we have proved that each single remainder term 𝑅𝑠,𝑎 𝑗 (𝑎 ) in Eq. (8) is bounded in [−2𝑀, 2𝑀].
+                                                                                     𝑘
+                                       Mean Field Multi-Agent Reinforcement Learning
+
+C. Experiment details
+C.1. Gaussian Squeeze
+IL, FMQ, Rec-FMQ and MF-𝑄 all use a three-layer MLP to approximate 𝑄-value. All agents share the same 𝑄-network
+for each experiment. The shared 𝑄-network takes an agent embedding as input and computes 𝑄-value for each candidate
+action. For MF-𝑄, we also feed in the action approximation 𝑎¯. We use the Adam optimizer with a learning rate of
+0.00001 and 𝜖-greedy exploration unless otherwise specified. For FMQ, we set the exponential decay rate 𝑠 = 0.006, start
+temperature max_temp=1000 and FMQ heuristic 𝑐 = 5. For Rec-FMQ, we set the frequency learning rate 𝛼 𝑓 = 0.01.
+MAAC and MF-AC use the Adam optimizer with a learning rate of 0.001 and 0.0001 for Critics and Actors respectively,
+and 𝜏 = 0.01 for updating the target networks. We share the Critic among all agents in each experiment and feed in an agent
+embedding as extra input. Actors are kept separate. The discounted factor 𝛾 is set to be 0.95 and the mini-batch size is set to
+be 200. The size of the replay buffer is 106 and we update the network parameters after every 500 samples added to the
+replay buffer.
+For all models, we use the performance of the joint-policy learned up to that point if learning and exploration were turned
+off (i.e., take the greedy action w.r.t. the learned policy) to compare our method with the above baseline models.
+
+C.2. Ising Model
+An Ising model is defined as a stateless system with 𝑁 homogeneous sites on a finite square lattice. Each site determines
+their individual spin 𝑎 𝑗 to interact with each other and aims to minimize the system energy for a more stable environment.
+The system energy is defined as
+                                                              X                  𝜆 X 𝑗 𝑘
+                                           𝐸(𝑎, ℎ) = −              (ℎ 𝑗 𝑎 𝑗 +       𝑎 𝑎 )                                   (28)
+                                                                𝑗
+                                                                                 2
+                                                                                   𝑘∈N( 𝑗)
+
+
+where N( 𝑗) is the set of nearest neighbors of site 𝑗, ℎ 𝑗 ∈ R is the external field affecting site 𝑗, and 𝜆 ∈ R is an interaction
+term determines how much the sites tend to align in the same direction. The system is said to reach an equilibrium point
+when the system energy is minimized, with the probability
+
+                                                          exp (−𝐸(𝑎, ℎ)/𝜏)
+                                                  𝑃(𝑎) = P                   ,                                               (29)
+                                                           𝑎 exp(−𝐸(𝑎, ℎ)/𝜏)
+
+where 𝜏 is the system temperature. When the temperature rises beyond a certain point (the Curie temperature), the system
+can no longer keep a stable form and a phase transition happens. As the ground-truth is known, we would be able to evaluate
+the correctness of the 𝑄-function learning when there is a large body of agents interacted.
+                                                                     P
+The mean field theory provides an approximate solution to h𝑎 𝑗 i = 𝑎 𝑎 𝑗 𝑃(𝑎) through a set of self-consistent mean field
+equations
+                                                                 P                 
+                                                exp −[ℎ 𝑗 𝑎 𝑗 + 𝜆 𝑘∈N( 𝑗) h𝑎 𝑘 i]/𝜏
+                                     h𝑎 𝑗 i =                     P                  .                               (30)
+                                              1 + exp −[ℎ 𝑗 𝑎 𝑗 + 𝜆 𝑘∈N( 𝑗) h𝑎 𝑘 i]/𝜏
+
+which can be solved iteratively by
+                                                                                         
+                                                  exp −[ℎ 𝑗 𝑎 𝑗 + 𝜆 𝑘∈N( 𝑗) h𝑎 𝑘 i(𝑡) ]/𝜏
+                                                                   P
+                                  h𝑎 𝑗 i(𝑡+1) =                     P                      ,                               (31)
+                                                1 + exp −[ℎ 𝑗 𝑎 𝑗 + 𝜆 𝑘∈N( 𝑗) h𝑎 𝑘 i(𝑡) ]/𝜏
+
+where 𝑡 represents the number of iterations.
+To learn an optimal joint policy 𝝅 ∗ for Ising model, we use the stateless 𝑄-learning with mean field approximation (MF-𝑄),
+defined as
+
+                                       𝑄 𝑗 (𝑎 𝑗 , 𝑎¯ 𝑗 ) ← 𝑄 𝑗 (𝑎 𝑗 , 𝑎¯ 𝑗 ) + 𝛼[𝑟 𝑗 − 𝑄 𝑗 (𝑎 𝑗 , 𝑎¯ 𝑗 )],                   (32)
+                                             Mean Field Multi-Agent Reinforcement Learning
+
+Algorithm 3 MCMC in Ising Model
+  initialize spin state 𝒂 ∈ {−1, 1} 𝑁 for 𝑁 sites
+  while training not finished do
+     randomly choose site 𝑗 ∈ N( 𝑗)
+                                       𝑗
+     flip the spin state for site 𝑗: 𝑎 − ← −𝑎 𝑗
+                                                P       P                                𝑗
+     compute neighbor energy 𝐸(𝑎, ℎ) = − 𝑗 (ℎ 𝑗 𝑎 𝑗 + 𝜆2 𝑘∈N( 𝑗) 𝑎 𝑗 𝑎 𝑘 ) for 𝑎 𝑗 and 𝑎 −
+     randomly choose 𝜖 ∼ 𝑈(0, 1)
+                                𝑗
+     if exp((𝐸(𝑎 𝑗 , ℎ) − 𝐸(𝑎 −   , ℎ))/𝜏) > 𝜖 then
+                 𝑗
+        𝑎 ← 𝑎−
+          𝑗
+
+
+
+where the mean 𝑎¯ 𝑗 is given as the mean h𝑎 𝑗 i from the last time step, and the individual reward is
+
+                                                                      𝜆 X 𝑗 𝑘
+                                                       𝑟 𝑗 = ℎ𝑗𝑎𝑗 +       𝑎 𝑎 .                                               (33)
+                                                                      2
+                                                                       𝑘∈N( 𝑗)
+
+To balance the trade-off between exploration and exploitation under low temperature settings, we use a policy with Boltzmann
+exploration and a decayed exploring temperature. The temperature for Boltzmann exploration of MF-𝑄 is multiplied by a
+decay factor exponentially through out the training process.
+Without lost of generality, we assume 𝜆 > 0, thus neighboring sites with the same action result in lower energy (observe
+higher reward) and are more stable. Each site should also align with the sign of external field ℎ 𝑗 to reduce the system energy.
+For simplification, we eliminate the effect of external fields and assume the model to be discrete, i.e., ∀ 𝑗 ∈ 𝑁, ℎ 𝑗 = 0, 𝑎 𝑗 ∈
+{−1, 1}.
+We simulate the Ising model using Metropolis Monte Carlo methods (MCMC). After initialization, we randomly change a
+site’s spin state and calculate the energy change, select a random number between 0 and 1, and accept the state change only
+                                      𝑗
+                               (𝐸 𝑗 −𝐸 )
+                                      −
+if the number is less than 𝑒        𝜏      . This is called the Metropolis technique, which saves computation time by selecting the
+more probable spin states.
+
+C.3. Battle Game
+IL and MF-𝑄 have almost the same hyper-parameters settings. The learning rate is 𝛼 = 10−4 , and with a dynamic
+exploration rate linearly decays from 𝛾 = 1.0 to 𝛾 = 0.05 during the 2000 rounds training. The discounted factor 𝛾 is set to
+be 0.95 and the mini-batch size is 128. The size of replay buffer is 5 × 105 .
+AC and MF-AC also have almost the same hyper-parameters settings. The learning rate is 𝛼 = 10−4 , the temperature of
+soft-max layer in 𝑎𝑐𝑡𝑜𝑟 is 𝜏 = 0.1. And the coefficient of entropy in the total loss is 0.08, the coefficient of value in the total
+loss is 0.1.
+                                           Mean Field Multi-Agent Reinforcement Learning
+
+D. Further details towards the theoretical guarantee of MF-𝑄
+                                                                            P
+Proposition 1. Let the metric space be R 𝑁 and the metric be 𝑑(𝒂, 𝒃) = 𝑗 |𝑎 𝑗 − 𝑏 𝑗 |, for 𝒂 = [𝑎 𝑗 ]1𝑁 , 𝒃 = [𝑏 𝑗 ]1𝑁 . If the
+𝑄-function is 𝐾-Lipschitz continuous w.r.t. 𝑎 𝑗 , then the operator B(𝑎 𝑗 ) , 𝜋 𝑗 (𝑎 𝑗 |𝑠, 𝑎¯ 𝑗 ) in Eq. (12) forms a contraction
+mapping under sufficiently low temperature 𝛽.
+
+Proof. Following the contraction mapping theorem (Kreyszig, 1978), in order to be a contraction, the operator has to satisfy:
+
+                                                  𝑑(B(𝒂), B(𝒃)) ≤ 𝛼𝑑(𝒂, 𝒃), ∀𝒂, 𝒃
+
+where 0 ≤ 𝛼 < 1 and B(𝒂) , [B(𝑎 1 ), . . . , B(𝑎 𝑁 )].
+Here we start from binomial case and then adapt to the multinomial case in general. We first rewrite B(𝑎 𝑗 ) as
+                                                                                          
+                                                             exp − 𝛽𝑄 𝑡𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 )
+                     B(𝑎 ) = 𝜋 (𝑎 |𝑠, 𝑎¯ ) =
+                         𝑗       𝑗  𝑗    𝑗
+                                                                                                         
+                                             exp − 𝛽𝑄 𝑡𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 ) + exp − 𝛽𝑄 𝑡𝑗 (𝑠, ¬𝑎 𝑗 , 𝑎¯ 𝑗 )
+                                                            1
+                                           =                                  ,                                                  (34)
+                                             1 + exp (−𝛽 · 𝛥𝑄(𝑠, 𝑎 𝑗 , 𝑎¯))
+
+where 𝛥𝑄(𝑠, 𝑎 𝑗 , 𝑎¯) = 𝑄(𝑠, 𝑎 ¬ 𝑗 , 𝑎¯) − 𝑄(𝑠, 𝑎 𝑗 , 𝑎¯).
+Then we have
+                                                        1                            1
+                       |B(𝑎 𝑗 ) − B(𝑏 𝑗 )| =                           −
+                                               1 + 𝑒 −𝛽·𝛥𝑄(𝑠,𝑎 𝑗 , 𝑎¯)   1 + 𝑒 −𝛽·𝛥𝑄(𝑠,𝑏 𝑗 , 𝑎¯)
+                                                  𝛽𝑒 −𝛽𝛥𝑄0
+                                            =                        𝛥𝑄(𝑠, 𝑎 𝑗 , 𝑎¯) − 𝛥𝑄(𝑠, 𝑏 𝑗 , 𝑎¯)
+                                               (1 + 𝑒 −𝛽𝛥𝑄0 )2
+                                               1
+                                            ≤    · 𝑄(𝑠, 𝑎 ¬ 𝑗 , 𝑎¯) − 𝑄(𝑠, 𝑏 ¬ 𝑗 , 𝑎¯) + 𝑄(𝑠, 𝑏 𝑗 , 𝑎¯) − 𝑄(𝑠, 𝑎 𝑗 , 𝑎¯)
+                                              4𝑇
+                                               1                                                      
+                                            ≤    · 𝐾 · 1 − 𝑎 𝑗 − (1 − 𝑏 𝑗 ) + 𝐾 · 𝑎 𝑗 − 𝑏 𝑗
+                                              4𝑇
+                                               1        X
+                                            ≤    · 2𝐾 ·       𝑎𝑗 − 𝑏𝑗 .                                                          (35)
+                                              4𝑇          𝑗
+
+In the second equation, we apply the mean value theorem in calculus: ∃𝑥 0 ∈ [𝑥1 , 𝑥2 ], s.t., 𝑓 (𝑥1 ) − 𝑓 (𝑥2 ) = 𝑓 0 (𝑥0 )(𝑥 1 − 𝑥2 ).
+In the third equation we use the maximum value for 𝑒 −𝛽𝛥𝑄0 /(1 + 𝑒 −𝛽𝛥𝑄0 )2 = 1/4 when 𝑄 0 = 0. In the last equation we
+apply the Lipschitz constraint in the assumption where constant 𝐾 ≥ 0. Finally, we have:
+                                                                      1        X
+                                              𝑑(B(𝒂), B(𝒃)) ≤           · 2𝐾 ·   𝑎𝑗 − 𝑏𝑗
+                                                                     4𝑇        𝑗
+                                                                     𝐾
+                                                                 =      𝑑(𝒂, 𝒃)                                                  (36)
+                                                                     2𝑇
+In order for the contraction to hold, 𝑇 > 𝐾2 . In other words, when the action space is binary for each agent, and the
+temperature is sufficiently large, the mean field procedure converges.
+This proposition can be easily extended to multinomial case by replacing binary variable 𝑎 𝑗 by a multi-dimensional binary
+indicator vector 𝒂 𝑗 , on each dimension, the rest of the derivations would remain essentially the same.
+
+D.1. Discussion on Rationality
+In line with (Bowling & Veloso, 2001; 2002), we argue that to better evaluate a multi-agent learning algorithm, on top of the
+convergence guarantee, discussion on property of Rationality is also needed.
+Property 1. (also see (Bowling & Veloso, 2001; 2002)) In an 𝑁-agent stochastic game defined in this paper, given all
+agents converge to stationary policies, if the learning algorithm converges to a policy that is a best response to the other
+agents’ policies, then the algorithm is Rationale.
+                                        Mean Field Multi-Agent Reinforcement Learning
+
+Our mean field 𝑄-learning is rational in that Eq. (5) converts many agents interactions into two-body interactions between a
+single agent and the distribution of other agents actions. When all agents follow stationary policies, their policy distribution
+would be stationary too. As such the two-body stochastic game becomes an MDP, and the agent would choose a policy
+(based on Assumption 2) which is the best response to the distribution of other stationary policies. As agents are symmetric
+in our case, they all show the best response to the distributions, and are therefore rational.
+
+E. Proof of Mean Field Reinforcement Learning with Function Approximation
+Previous convergence results in Theorem.1 has shown that the Mean Field Q-learning algorithm will converge when the Q
+function is in a tabular case. We now move onto the proof that the MF-Q algorithm will converge when the Q function is
+represented by some functional approximations.
+                                                                                                                        
+An 𝑁-agent (or, 𝑁-player) stochastic game 𝛤 is formalized by the tuple 𝛤 , S, A1 , . . . , A𝑁 , 𝑟 1 , . . . , 𝑟 𝑁 , 𝑝, 𝛾 . The
+state-space S is finite. Let (S, 𝑝 𝝅 ) be the Markov chain induced by the joint policy 𝝅, and we assume it to be uniformly
+ergodic.
+Let Q = {𝑸 𝜃 } be a family of real-valued functions defined on S × A × Ā, where Ā is the action space for the mean
+actions computed from the neighbors. Assuming that the function class is linearly parameterized, for each agent 𝑗, Q can be
+expressed as the linear span of a fixed set of 𝑃 linearly independent functions 𝜔 𝑝𝑗 : S× A× Ā → R. Given the parameter
+vector 𝜙 𝑗 ∈ R 𝑃 , for each agent, the function 𝑄 𝜙 𝑗 is thus defined as
+                                                          𝑃
+                                                          X
+                               𝑄 𝜙 𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 ) =         𝜔 𝑝𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 )𝜙 𝑗 (𝑝) = 𝜔 𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 )> 𝜙 𝑗   (37)
+                                                          𝑝=1
+
+
+In the functional approximation setting, we can apply the update rules:
+                                                 𝑗
+                                                𝜙𝑡+1 = 𝜙𝑡𝑗 + 𝛼𝑡 𝛥𝑡 ∇ 𝜙 𝑗 𝑄 𝜙 𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 )
+                                                          = 𝜙𝑡𝑗 + 𝛼𝑡 𝛥𝑡 𝜔 𝑗 (𝑠, 𝑎 𝑡𝑗 , 𝑎¯𝑡𝑗 )                              (38)
+
+In the above, 𝛥𝑡 is the temporal difference at time 𝑡.
+                                                         0
+                                    𝛥𝑡 = 𝑟 𝑗 + 𝛾 𝑣 MF
+                                                   𝜙 𝑗 (𝑠 ) − 𝑄 𝜙 𝑗 (𝑠, 𝑎 , 𝑎
+                                                                           𝑗
+                                                                               ¯𝑗 )                                        (39)
+                                       = 𝑟 𝑗 + 𝛾 E𝒂∼𝝅 MF 𝑄 𝜙 𝑗 (𝑠0 , 𝑎 𝑗 , 𝑎¯ 𝑗 ) − 𝑄 𝜙 𝑗 (𝑠, 𝑎 𝑗 , 𝑎¯ 𝑗 ).
+                                                                                
+                                                                                                                           (40)
+
+And the goal is to derive the parameter vector 𝝓 = {𝜙 𝑗 } such that 𝝎> 𝝓 approximates the (local) Nash Q-values. At each
+time step, the learning policy 𝝅 𝜙𝑡 is the Botlzmann policy with respect to 𝝎> 𝝓. Give the Proposition 1, we know that the
+policy 𝝅 𝜙𝑡 is 2𝑇
+               𝐾
+                  Lipschitz continuous with respect to 𝜙𝑡 .
+Similar to the framework used in the convergence proof of Q-learning with function approximation (Melo et al., 2008), we
+establish convergence of Eq. (38) by adopting an ordinary differentiable equation (ODE) with a globally asymptotically
+stable equilibrium point where the trajectories closely follow.
+Theorem 2. Given the MDP 𝛤, 𝝅 𝜙𝑡 , {𝝎 𝑝 , 𝑝 = 1, ..., 𝑃}, and the learning policy 𝝅 𝜙𝑡 that is 2𝑇
+                                                                                                𝐾
+                                                                                                   Lipschitz continuous with
+respect to 𝜙𝑡 , if the Assumptions 1, 2 & 3, and Lemma 2’s first and second conditions are met, then there exists 𝐶0 such that
+                                               𝐾
+the algorithm in Eq. (38) converges w.p.1 if 2𝑇   < 𝐶0 .
+
+Proof. We first re-write the Eq. (38) as on ODE:
+                                    𝑑𝝓
+                                       = E𝝓 𝝎>           0       >        >
+                                                                             
+                                             𝑠 𝒓(𝑠, 𝑎, 𝑠 ) + 𝛾𝝎 𝑠 0 𝝓 − 𝝎 𝑠 𝝓
+                                    𝑑𝑡
+                                       = E𝝓 𝝎>     >       >
+                                                                      >          0
+                                                                                        
+                                             𝑠 (𝛾𝝎 𝑠 0 − 𝝎 𝑠 ) 𝝓 + E𝝓 𝝎 𝑠 (𝒓(𝑠, 𝑎, 𝑠 ))
+                                         = 𝑨𝜙 𝝓 + 𝒃 𝜙                                                                      (41)
+
+Notice that we use a vector for considering the updating rule for the Q function of each agent. We can easily know that
+necessity condition of the equilibrium is that it must follow 𝝓∗ = 𝑨−1
+                                                                    𝜙 ∗ 𝒃 𝜙 ∗ . The existence of the such equilibrium has been
+restricted in the scenario that meets Assumption 3. In the proof of Theorem 1 we have already pointed out that under the
+                                     Mean Field Multi-Agent Reinforcement Learning
+
+Assumption 3, the existing equilibrium, either in the form of global equilibrium or in the form of saddle-point equilibrium,
+is unique.
+Let 𝝓˜ = 𝝓𝑡 − 𝝓∗ , we have:
+                           𝑑 ˜              𝑑𝝓           𝑑𝝓
+                              ||𝝓||2 = 2𝝓 ·     − 2𝝓∗ ·
+                           𝑑𝑡                𝑑𝑡          𝑑𝑡
+                                         ˜>
+                                     = 2𝝓 (𝑨 𝜙 𝝓 + 𝒃 𝜙 − 𝑨 𝜙∗ 𝝓∗ − 𝒃 𝜙∗ )
+                                     = 2𝝓˜> (𝑨 𝜙∗ 𝝓 − 𝑨 𝜙∗ 𝝓 + 𝑨 𝜙 𝝓 + 𝒃 𝜙 − 𝑨 𝜙∗ 𝝓∗ − 𝒃 𝜙∗ )
+                                   = 2𝝓˜> 𝑨 𝜙∗ 𝝓˜ + 2𝝓˜> (𝑨 𝜙 − 𝑨 𝜙∗ )𝝓 + 2𝝓˜> (𝒃 𝜙 − 𝒃 𝜙∗ )
+                                                                                ||𝒃 𝜙 − 𝒃 ∗𝜙 ||2
+                                                                                                
+                                       ˜>
+                                   ≤ 2𝝓     𝑨 𝜙 + sup ||𝑨 𝜙 − 𝑨 𝜙 ||2 + sup
+                                                ∗                   ∗                              𝝓˜                  (42)
+                                                      𝝓                     𝝓    ||𝝓 − 𝝓∗ ||2
+
+As we know that the policy 𝝅 𝜙𝑡 is Lipschitz w.r.t 𝜙𝑡 , this implies that 𝑨 𝜙 and 𝒗 𝜙 are also Lipschitz continu-
+ous w.r.t to 𝜙. In other words, if 2𝑇       𝐾
+                                                 ≤ 𝐶0 is sufficiently small and close to zero, then the norm term of
+                                         ∗
+                                ||𝒃 𝜙 − 𝒃 𝜙 ||2
+                                               
+  sup𝝓 ||𝑨 𝜙 − 𝑨 𝜙∗ ||2 + sup𝝓                    goes to zero. Considering near the equilibrium point 𝜙∗ , 𝑨 𝜙∗ is a nega-
+                                 ||𝝓 − 𝝓∗ ||2
+tive definite matrix, the Eq. (42) tends to be negative definite as well, so the ODE in Eq.(41) is globally asymptotically
+stable and the conclusion of the theorem follows.
+

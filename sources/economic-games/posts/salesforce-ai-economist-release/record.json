@@ -1,0 +1,97 @@
+{
+  "kind": "posts",
+  "id": "salesforce-ai-economist-release",
+  "title": "The AI Economist: Join the Moonshot",
+  "page_url": "https://www.salesforce.com/blog/the-ai-economist-moonshot/",
+  "retrieved_at": "2026-09-10T22:39:45.210296+00:00",
+  "artifacts": [
+    {
+      "url": "https://www.salesforce.com/blog/the-ai-economist-moonshot/",
+      "resolved_url": "https://www.salesforce.com/blog/the-ai-economist-moonshot/?bc=OTH",
+      "path": "sources/economic-games/posts/salesforce-ai-economist-release/page.html",
+      "bytes": 211853,
+      "sha256": "2572d893afd4e7354bd4048cc2bd9290e6e30d3d5963b994a11e62c357d210d4"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "": [
+      ""
+    ],
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "theme-color": [
+      "#0D9DDA"
+    ],
+    "robots": [
+      "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:type": [
+      "article"
+    ],
+    "og:title": [
+      "The AI Economist: Join the Moonshot"
+    ],
+    "og:description": [
+      "We are launching an open source collaborative project to build an AI Economist that can be used to guide policy making in the real world.  We invite you to join us in our mission to help improve the world with AI and economics."
+    ],
+    "og:url": [
+      "https://www.salesforce.com/blog/the-ai-economist-moonshot/"
+    ],
+    "og:site_name": [
+      "Salesforce"
+    ],
+    "article:publisher": [
+      "https://www.facebook.com/salesforce"
+    ],
+    "article:published_time": [
+      "2020-08-06T20:44:47+00:00"
+    ],
+    "article:modified_time": [
+      "2024-10-30T19:26:47+00:00"
+    ],
+    "og:image": [
+      "https://www.salesforce.com/blog/wp-content/uploads/sites/2/2020/08/02.jpg"
+    ],
+    "og:image:width": [
+      "1262"
+    ],
+    "og:image:height": [
+      "718"
+    ],
+    "og:image:type": [
+      "image/jpeg"
+    ],
+    "author": [
+      "Stephan Zheng"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:creator": [
+      "@salesforce"
+    ],
+    "twitter:site": [
+      "@salesforce"
+    ],
+    "twitter:label1": [
+      "Written by"
+    ],
+    "twitter:data1": [
+      "Stephan Zheng"
+    ],
+    "twitter:label2": [
+      "Est. reading time"
+    ],
+    "twitter:data2": [
+      "6 minutes"
+    ],
+    "msapplication-TileImage": [
+      "https://www.salesforce.com/blog/wp-content/uploads/sites/2/2020/10/cropped-salesforce-icon2-1.png?w=270"
+    ]
+  }
+}

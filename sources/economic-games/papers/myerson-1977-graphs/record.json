@@ -1,0 +1,27 @@
+{
+  "kind": "papers",
+  "id": "myerson-1977-graphs",
+  "title": "Graphs and Cooperation in Games (working paper)",
+  "topic": "network coalition value",
+  "page_url": "https://pubsonline.informs.org/doi/10.1287/moor.2.3.225",
+  "pdf_url": "https://www.kellogg.northwestern.edu/research/math/papers/246.pdf",
+  "retrieved_at": "2026-09-10T22:40:36.395086+00:00",
+  "artifacts": [
+    {
+      "url": "https://www.kellogg.northwestern.edu/research/math/papers/246.pdf",
+      "resolved_url": "https://www.kellogg.northwestern.edu/research/math/papers/246.pdf",
+      "path": "sources/economic-games/papers/myerson-1977-graphs/paper.pdf",
+      "bytes": 373772,
+      "sha256": "72700f57c875b19d20703ddf532e362a01a02c48c1eb5a8189ef88658b6a6fd9"
+    }
+  ],
+  "status": "partial",
+  "errors": [
+    {
+      "url": "https://pubsonline.informs.org/doi/10.1287/moor.2.3.225",
+      "error": "HTTP Error 403: Forbidden"
+    }
+  ],
+  "extracted_text_characters": 0,
+  "text_searchable": false
+}

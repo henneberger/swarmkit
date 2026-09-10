@@ -1,0 +1,116 @@
+{
+  "kind": "papers",
+  "id": "1802.05438",
+  "title": "Mean Field Multi-Agent Reinforcement Learning",
+  "topic": "large populations",
+  "page_url": "https://arxiv.org/abs/1802.05438",
+  "pdf_url": "https://arxiv.org/pdf/1802.05438",
+  "retrieved_at": "2026-09-10T22:39:40.914787+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/1802.05438",
+      "resolved_url": "https://arxiv.org/abs/1802.05438",
+      "path": "sources/economic-games/papers/1802.05438/page.html",
+      "bytes": 43415,
+      "sha256": "3d6483f6262c17946410c595502b9b98d003b7b786b906af7b859f785dd31b96"
+    },
+    {
+      "url": "https://arxiv.org/pdf/1802.05438",
+      "resolved_url": "https://arxiv.org/pdf/1802.05438",
+      "path": "sources/economic-games/papers/1802.05438/paper.pdf",
+      "bytes": 3630559,
+      "sha256": "ea8d96ab11f89f392e91d1a1e526e688e69ebf0128651eab3f69de5d705a19e5"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 1802.05438: Mean Field Multi-Agent Reinforcement Learning"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Mean Field Multi-Agent Reinforcement Learning"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/1802.05438v5"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Existing multi-agent reinforcement learning methods are limited typically to a small number of agents. When the agent number increases largely, the learning becomes intractable due to the curse of the dimensionality and the exponential growth of agent interactions. In this paper, we present \\emph{Mean Field Reinforcement Learning} where the interactions within the population of agents are approximated by those between a single agent and the average effect from the overall population or neighboring agents; the interplay between the two entities is mutually reinforced: the learning of the individual agent's optimal policy depends on the dynamics of the population, while the dynamics of the population change according to the collective patterns of the individual policies. We develop practical mean field Q-learning and mean field Actor-Critic algorithms and analyze the convergence of the solution to Nash equilibrium. Experiments on Gaussian squeeze, Ising model, and battle games justify the learning effectiveness of our mean field approaches. In addition, we report the first result to solve the Ising model via model-free reinforcement learning methods."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Mean Field Multi-Agent Reinforcement Learning"
+    ],
+    "twitter:description": [
+      "Existing multi-agent reinforcement learning methods are limited typically to a small number of agents. When the agent number increases largely, the learning becomes intractable due to the curse of..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Mean Field Multi-Agent Reinforcement Learning"
+    ],
+    "citation_author": [
+      "Yang, Yaodong",
+      "Luo, Rui",
+      "Li, Minne",
+      "Zhou, Ming",
+      "Zhang, Weinan",
+      "Wang, Jun"
+    ],
+    "citation_date": [
+      "2018/02/15"
+    ],
+    "citation_online_date": [
+      "2020/12/15"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/1802.05438"
+    ],
+    "citation_arxiv_id": [
+      "1802.05438"
+    ],
+    "citation_abstract": [
+      "Existing multi-agent reinforcement learning methods are limited typically to a small number of agents. When the agent number increases largely, the learning becomes intractable due to the curse of the dimensionality and the exponential growth of agent interactions. In this paper, we present \\emph{Mean Field Reinforcement Learning} where the interactions within the population of agents are approximated by those between a single agent and the average effect from the overall population or neighboring agents; the interplay between the two entities is mutually reinforced: the learning of the individual agent's optimal policy depends on the dynamics of the population, while the dynamics of the population change according to the collective patterns of the individual policies. We develop practical mean field Q-learning and mean field Actor-Critic algorithms and analyze the convergence of the solution to Nash equilibrium. Experiments on Gaussian squeeze, Ising model, and battle games justify the learning effectiveness of our mean field approaches. In addition, we report the first result to solve the Ising model via model-free reinforcement learning methods."
+    ]
+  },
+  "extracted_text_characters": 127415,
+  "text_searchable": true
+}

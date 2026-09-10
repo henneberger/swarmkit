@@ -1,0 +1,38 @@
+{
+  "kind": "repositories",
+  "id": "salesforce__ai-economist",
+  "title": "salesforce/ai-economist",
+  "url": "https://github.com/salesforce/ai-economist",
+  "topic": "two level learned economic institutions",
+  "retrieved_at": "2026-09-10T22:39:48.720957+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/salesforce/ai-economist/blob/a84d5f3fdcabb207d9fde7754d34906903b3e184/README.md",
+      "resolved_url": "https://github.com/salesforce/ai-economist/blob/a84d5f3fdcabb207d9fde7754d34906903b3e184/README.md",
+      "path": "sources/economic-games/repositories/salesforce__ai-economist/README.md",
+      "bytes": 10003,
+      "sha256": "2939894d4ae4330735ea4858ef695651fca9226bab473555fd685ef25ba81f03"
+    },
+    {
+      "url": "https://github.com/salesforce/ai-economist/blob/a84d5f3fdcabb207d9fde7754d34906903b3e184/LICENSE.txt",
+      "resolved_url": "https://github.com/salesforce/ai-economist/blob/a84d5f3fdcabb207d9fde7754d34906903b3e184/LICENSE.txt",
+      "path": "sources/economic-games/repositories/salesforce__ai-economist/LICENSE.txt",
+      "bytes": 1482,
+      "sha256": "3360d12ecbe2fd87e7eddc6619daacfcb9132b2def5c3df6410941e1a2df6bfb"
+    }
+  ],
+  "status": "ok",
+  "commit": "a84d5f3fdcabb207d9fde7754d34906903b3e184",
+  "commit_date": "2022-05-09T14:28:55-07:00",
+  "checkout": "sources/economic-games/repositories/salesforce__ai-economist/checkout",
+  "experiments_reproduced": false,
+  "license_files": [
+    "LICENSE.txt"
+  ],
+  "audit": {
+    "anchor": "ai_economist/foundation/components/continuous_double_auction.py",
+    "finding": "Commodity bids, asks, inventory constraints and expiry represented in a market component.",
+    "proposed_use": "Environment/institution design reference",
+    "review_level": "selected code or README; not full audit"
+  }
+}

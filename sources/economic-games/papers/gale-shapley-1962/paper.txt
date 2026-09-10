@@ -1,0 +1,334 @@
+College Admissions and the Stability of Marriage
+Author(s): D. Gale and L. S. Shapley
+Reviewed work(s):
+Source: The American Mathematical Monthly, Vol. 69, No. 1 (Jan., 1962), pp. 9-15
+Published by: Mathematical Association of America
+Stable URL: http://www.jstor.org/stable/2312726 .
+Accessed: 12/04/2012 19:32
+
+Your use of the JSTOR archive indicates your acceptance of the Terms & Conditions of Use, available at .
+http://www.jstor.org/page/info/about/policies/terms.jsp
+
+JSTOR is a not-for-profit service that helps scholars, researchers, and students discover, use, and build upon a wide range of
+content in a trusted digital archive. We use information technology and tools to increase productivity and facilitate new forms
+of scholarship. For more information about JSTOR, please contact support@jstor.org.
+
+
+
+
+                Mathematical Association of America is collaborating with JSTOR to digitize, preserve and extend access to
+                The American Mathematical Monthly.
+
+
+
+
+http://www.jstor.org
+   COLLEGE      ADMISSIONS      AND THE STABILITY          OF MARRIAGE
+     D. GALE*AND L. S. SHAPLEY,BrownUniversity
+                                            andtheRAND Corporation
+    1. Introduction.The problem with which we shall be concerned relates to
+the followingtypical situation: A college is consideringa set of n applicants of
+which it can admit a quota of only q. Having evaluated theirqualifications,the
+admissions officemust decide which ones to admit. The procedure of offering
+admission only to the q best-qualifiedapplicants will not generallybe satisfac-
+tory, for it cannot be assumed that all who are offeredadmission will accept.
+Accordingly,in orderfora college to receiveq acceptances, it willgenerallyhave
+to offerto admit morethan q applicants. The problemof determininghow many
+and which ones to admit requires some ratherinvolved guesswork.It may not
+be known (a) whethera given applicant has also applied elsewhere; if this is
+known it may not be known (b) how he ranks the colleges to which he has
+applied; even ifthis is knownit will not be known (c) whichof the othercolleges
+will offerto admit him. A result of all this uncertaintyis that colleges can ex-
+pect only that the enteringclass will come reasonably close in numbersto the
+desired quota, and be reasonably close to the attainable optimumin quality.
+    The usual admissions procedurepresentsproblemsforthe applicants as well
+as the colleges. An applicant who is asked to list in his application all other
+colleges applied forin orderof preferencemay feel,perhaps not withoutreason,
+that by tellinga college it is, say, his thirdchoice he will be hurtinghis chances
+of being admitted.
+    One elaboration is the introductionof the "waiting list," wherebyan appli-
+cant can be informedthat he is not admitted but may be admitted later if a
+vacancy occurs.This introducesnew problems.Suppose an applicant is accepted
+by one college and placed on the waiting list of another that he prefers.Should
+he play safe by accepting the firstor take a chance that the second will admit
+him later? Is it ethical to accept the firstwithout informingthe second and
+then withdrawhis acceptance if the second later admits him?
+    We contend that the difficulties  here describedcan be avoided. We shall de-
+scribe a procedureforassigningapplicants to collegeswhich should be satisfac-
+tory to both groups,whichremovesall uncertaintiesand which,assuming there
+are enough applicants, assigns to each college preciselyits quota.
+    2. The assignmentcriteria.A set of n applicants is to be assigned among m
+colleges,whereqi is the quota of the ith college. Each applicant ranksthe colleges
+in the orderof his preference,omittingonly those collegeswhich he would never
+accept under any circumstances.For conveniencewe assume there are no ties;
+                                   between two or more colleges he is neverthe-
+thus, if an applicant is indifferent
+less requiredto list themin some order.Each college similarlyranksthe students
+who have applied to it in orderof preference,having firsteliminatedthose appli-
+  * The workofthefirst                                   ofNaval ResearchunderTask
+                     authorwas supportedin partbytheOffice
+NRO47-018.
+                                       9
+10            COLLEGE ADMISSIONS AND STABILITY OF MARRIAGE            [January
+
+cants whom it would not admit under any circumstanceseven if it meant not
+fillingits quota. From these data, consistingof the quotas of the colleges and
+the two sets of orderings,we wish to determinean assignmentof applicants to
+colleges in accordance with some agreed-uponcriterionof fairness.
+    Stated in this way and looked at superficially,the solution may at first
+appear obvious. One merelymakes the assignments "in accordance with" the
+given preferences.A little reflectionshows that complications may arise. An
+example is the simplecase of two colleges,A and B, and two applicants,a and $,
+in which a prefersA and , prefersB, but A prefers, and B prefersa. Here, no
+assignmentcan satisfyall preferences.One must decide what to do about this
+sort of situation. On the philosophy that the colleges exist for the students
+rather than the other way around, it would be fittingto assign a to A and ,3
+to B. This suggeststhe followingadmittedlyvague principle:otherthingsbeing
+equal, students should receive consideration over colleges. This remark is of
+little help in itself,but we will returnto it later after taking up another more
+explicit matter.
+    The key idea in what followsis the assertion that-whatever assignmentis
+finallydecided on-it is clearly desirable that the situation described in the
+followingdefinitionshould notoccur:
+   DEFINITION. An assignment  ofapplicantstocolleges
+                                                   willbecalledunstableif
+thereare twoapplicantsa and ,Bwhoare assignedtocolleges
+                                                      A andB, respectively,
+although        A toB and A prefers: toa.
+        ,3prefers
+    Suppose the situation described above did occur. Applicant ,3 could in-
+dicate to college A that he would like to transferto it, and A could respond
+by admitting,B,lettinga go to remain within its quota. Both A and f3would
+consider the change an improvement.The original assignment is therefore
+"unstable" in the sense that it can be upset by a college and applicant acting
+togetherin a mannerwhich benefitsboth.
+    Our firstrequirementon an assignment is that it not exhibit instability.
+This immediatelyraises the mathematical question: will it always be possible
+to findsuch an assignment?An affirmative   answer to this question will be given
+in the next section,and while the proofis not difficult,
+                                                       the result seems not en-
+tirelyobvious, as some examples will indicate.
+    Assuming for the moment that stable assignmentsdo exist, we must still
+decide which among possibly many stable solutionsis to be preferred.We now
+return to the philosophical principle mentioned earlier and give it a precise
+formulation.
+   DEFINITION. A stableassignment                      applicantis at least
+                                is calledoptimalif every
+as welloffunderit as underanyotherstableassignment.
+   Even grantingthe existence of stable assignmentsit is far fromclear that
+there are optimal assignments. However, one thing that is clear is that the
+1962]          COLLEGE ADMISSIONS AND STABILITY OF MARRIAGE                  11
+
+optimal assignment,ifit exists,is unique. Indeed, if therewere two such assign-
+ments, then, at least one applicant (by our "no tie" rule) would be better off
+under one than under the other; hence one of the assignmentswould not be
+optimal afterall. Thus the principlesof stabilityand optimalitywill, when the
+existencequestionsare settled,lead us to a unique "best" methodof assignment.
+   3. Stable assignments and a marriage problem. In trying to settle the
+question of the existence of stable assignmentswe were led to look firstat a
+special case, in whichthereare the same numberof applicants as colleges and all
+quotas are unity. This situation is, of course, highlyunnatural in the context
+of college admissions, but there is another "story" into which it fits quite
+readily.
+   A certain communityconsists of n men and n women. Each person ranks
+those of the opposite sex in accordance with his or her preferencesfora marriage
+partner.We seek a satisfactoryway of marryingoffall membersof the com-
+munity.Imitatingour earlierdefinition,we call a set of marriagesunstable(and
+here the suitabilityof the termis quite clear) if under it thereare a man and a
+woman who are not marriedto each other but prefereach other to theiractual
+mates.
+   QUESTION:   For any patternof preferences
+                                           is it possible tofind a stableset of
+marriages?
+   Before givingthe answer let us look at some examples.
+   Example 1. The followingis the "rankingmatrix"of threemen,a, ,3,and 7,
+and threewomen,A, B, and C.
+                               A       B       C
+                         a     1,3    2,2     3,1
+                         p    3,1     1,3     2,2
+                         y    2,2     3,1     1,3
+
+The firstnumberof each pair in the matrixgives the rankingof women by the
+men, the second number is the ranking of the men by the women. Thus, a
+ranks A first,B second, C third,while A ranks, first,y second, and a third,etc.
+   There are six possible sets of marriages; of these, three are stable. One of
+these is realized by givingeach man his firstchoice, thus a marriesA, A marries
+B, and y marries C. Note that although each woman gets her last choice, the
+arrangementis neverthelessstable. Alternativelyone may let the women have
+their firstchoices and marrya to C, ,Bto A, and y to B. The third stable ar-
+rangementis to give everyonehis or her second choice and have a marryB,
+f marryC, and y marryA. The reader will easily verifythat all otherarrange-
+ments are unstable.
+12             COLLEGE ADMISSIONS AND STABILITY OF MARRIAGE             [January
+
+     Example 2. The rankingmatrixis the following.
+
+                              A      B       C      D
+                          a   113   2)3     @)      4,3
+                        83 1,.4     4, 1    3,3     )~
+                       r 2          1,4     3,4     4,1
+                      a       4,1   ci2) 3),1       1,4
+    There is only the one stable set of marriagesindicated by the circled entries
+in the matrix.Note that in this situation no one can get his or her firstchoice if
+stabilityis to be achieved.
+    Example 3. A problem similar to the marriage problem is the "problem of
+the roommates."An even numberof boys wish to divide up into pairs of room-
+mates. A set of pairingsis called stableif underit thereare no two boys who are
+not roommatesand who prefereach other to theiractual roommates.An easy
+example shows that therecan be situations in which thereexists no stable pair-
+ing. Namely, considerboys a, ,B,y and 3, where a ranks:3 first,Branks 'y first,
+,yranks a first,and a, 3 and y all rank a last. Then regardlessof S's preferences
+there can be no stable pairing, for whoever has to room with a will want to
+move out, and one of the othertwo will be willingto take him in.
+    The above examples would indicate that the solutionto the stabilityproblem
+is not immediatelyevident. Nevertheless,
+     THEOREM 1. Therealwaysexistsa stablesetofmarriages.
+    Proof.We shall prove existenceby givingan iterativeprocedureforactually
+findinga stable set of marriages.
+    To start, let each boy propose to his favoritegirl. Each girl who receives
+more than one proposal rejects all but her favoritefromamong those who have
+proposedto her. However,she does not accept himyet,but keeps himon a string
+to allow forthe possibilitythat someone better may come along later.
+    We are now ready forthe second stage. Those boys who were rejected now
+propose to theirsecond choices. Each girlreceivingproposalschooses herfavorite
+fromthe groupconsistingof the new proposersand the boy on her string,ifany.
+She rejects all the rest and again keeps the favoritein suspense.
+    We proceed in the same manner.Those who are rejected at the second stage
+propose to theirnext choices,and the girlsagain reject all but the best proposal
+they have had so far.
+    Eventually (in fact,in at mostn2- 2n+2 stages) everygirlwill have received
+a proposal, foras long as any girl has not been proposed to there will be rejec-
+tionsand new proposals,but since no boy can proposeto the same girlmorethan
+once, every girl is sure to get a proposal in due time. As soon as the last girl
+1962]         COLLEGE ADMISSIONS AND STABILITY OF MARRIAGE                  13
+
+gets her proposal the "courtship"is declared over, and each girlis now required
+to accept the boy on her string.
+    We assert that this set of marriagesis stable. Namely, suppose John and
+Mary are not marriedto each other but John prefersMary to his own wife.
+Then John must have proposed to Mary at some stage and subsequentlybeen
+rejected in favorof someone that Mary liked better. It is now clear that Mary
+must preferher husband to Johnand thereis no instability.
+    The reader may amuse himselfby applying the procedure of the proof to
+solve the problemsof Examples 1 and 2, or the followingexample whichrequires
+ten iterations:
+                            A      B       C       D
+                     a     1, 3    2, 2   3, 1    4, 3
+                      3    1,4     2,3    3,2     4,4
+                      y    3,1     1,4    2,3     4,2
+                     5     2,2     3,1     1,4    4,1
+
+    The conditionthat therebe the same numberof boys and girlsis not essen-
+tial. If thereare b boys and g girlswith b <g, then the procedureterminatesas
+soon as b girls have been proposed to. If b>g the procedureends when every
+boy is either on some girl's stringor has been rejected by all of the girls. In
+eithercase the set of marriagesthat resultsis stable.
+    It is clear that thereis an entirelysymmetricalprocedure,with girlspropos-
+ing to boys, whichmust also lead to a stable set of marriages.The two solutions
+are not generallythe same as shown by Example 1; indeed, we shall see in a
+moment that when the boys propose, the result is optimal for the boys, and
+when the girls propose it is optimal forthe girls.The solutionsby the two pro-
+cedures will be the same only when thereis a unique stable set of marriageo.
+    4. Stable assignments and the admissions problem. The extension of our
+"deferred-acceptance"procedureto the problemofcollegeadmissionsis straight-
+forward.For conveniencewe will assume that ifa college is not willingto accept
+a student underany circumstances,as describedin Section 2, then that student
+will not even be permittedto apply to the college. With this understandingthe
+procedure follows: First, all students apply to the college of their firstchoice.
+A college with a quota of q then places on its waiting list the q applicants who
+rank highest,or all applicants if there are fewerthan q, and rejects the rest.
+Rejected applicants then apply to their second choice and again each college
+selects the top q fromamong the new applicants and those on its waiting list,
+puts these on its new waitinglist,and rejects the rest.The procedureterminates
+when every applicant is either on a waiting list or has been rejected by every
+college to which he is willingand permittedto apply. At this point each college
+14             COLLEGE ADMISSIONS AND STABILITY OF MARRIAGE              [January
+
+admits everyoneon its waitinglist and the stable assignmenthas been achieved.
+The proofthat the assignmentis stable is entirelyanalogous to the proofgiven
+forthe marriageproblemand is leftto the reader.
+   5. Optimality.We now show that the "deferredacceptance" procedurejust
+described yields not only a stable but an optimal assignment of applicants.
+That is,
+   THEOREM 2. Everyapplicant is at least as well offundertheassignmentgiven
+by thedeferredacceptanceprocedureas he would be underany otherstableassign-
+ment.
+    Proof. Let us call a college "possible" fora particularapplicant if there is a
+stable assignmentthat sends him there.The proofis by induction.Assume that
+up to a given point in the procedure no applicant has yet been turned away
+froma college that is possible for him. At this point suppose that college A,
+having received applications from a full quota of better-qualifiedapplicants
+pi, * * *, 3, rejects applicant a. We must show that A is impossible fora. We
+know that each j3ipreferscollege A to all the others,except forthose that have
+previously rejected him, and hence (by assumption) are impossible for him.
+Consider a hypotheticalassignment that sends a to A and everyone else to
+colleges that are possible forthem.At least one of the fPiwill have to go to a less
+desirable place than A. But this arrangementis unstable, since j3 and A could
+upset it to the benefitof both. Hence the hypotheticalassignmentis unstable
+and A is impossible for a. The conclusion is that our procedure only rejects
+applicants fromcolleges which they could not possibly be admitted to in any
+stable assignment.The resultingassignmentis thereforeoptimal.
+    Parentheticallywe may remark that even though we no longer have the
+symmetryof the marriageproblem,we can still invertour admissionsprocedure
+to obtain the unique "college optimal" assignment.The invertedmethod bears
+some resemblanceto a fraternity"rushweek"; it startswitheach college making
+bids to those applicants it considers most desirable, up to its quota limit,and
+then the bid-forstudents reject all but the most attractive offer,and so on.
+    6. Concludingremarks. The reader who has followedus this far has doubt-
+less noticed a certain trendin our discussion.In makingthe special assumptions
+needed in order to analyze our problemmathematically,we necessarilymoved
+furtheraway fromthe originalcollege admissionquestion,and eventuallyin dis-
+cussing the marriageproblem,we abandoned realityaltogetherand enteredthe
+world of mathematical make-believe. The practical-mindedreader may right-
+fullyask whetherany contributionhas been made toward an actual solution of
+the originalproblem.Even a roughanswer to this question would requiregoing
+into matterswhich are nonmathematical,and such discussion would be out of
+place in a journal of mathematics.It is our opinion,however,that some of the
+ideas introducedhere mightusefullybe applied to certain phases of the admis-
+sions problem.
+1962]           GRADUATED INTEREST RATES IN SMALL LOANS                      15
+
+
+    Finally, we call attentionto one additional aspect of the precedinganalysis
+which may be of interestto teachers of mathematics.This is the fact that our
+result provides a handy counterexampleto some of the stereotypeswhich non-
+mathematiciansbelieve mathematicsto be concernedwith.
+    Most mathematiciansat one time or another have probably found them-
+selves in the position of tryingto refutethe notion that they are people with
+"a head forfigures,"or that they "know a lot of formulas."At such timesit may
+be convenientto have an illustrationat hand to show that mathematicsneed
+not be concernedwith figures,eithernumericalor geometrical.For this purpose
+we recommendthe statement and proof of our Theorem 1. The argument is
+carried out not in mathematicalsymbolsbut in ordinaryEnglish; there are no
+obscure or technical terms. Knowledge of calculus is not presupposed. In fact,
+one hardlyneeds to knowhow to count. Yet any mathematicianwillimmediately
+recognize the argument as mathematical, while people without mathematical
+trainingwill probably finddifficulty  in followingthe argument,though not be-
+cause of unfamiliaritywith the subject matter.
+    What, then, to raise the old question once more, is mathematics? The
+answer, it appears, is that any argumentwhich is carried out with sufficient
+precision is mathematical,and the reason that your friendsand ours cannot
+understandmathematicsis not because they have no head forfigures,but be-
+cause they are unable to achieve the degree of concentrationrequiredto follow
+a moderatelyinvolved sequence of inferences.This observation will hardly be
+news to those engaged in the teaching of mathematics,but it may not be so
+readilyaccepted by people outside of the profession.For themthe foregoingmay
+serve as a usefulillustration.
+
+
+
+
+          GRADUATED INTEREST RATES IN SMALL LOANS
+                  HUGH E. STELSON, MichiganState University
+    Many small loan companies charge a graduated interestrate in accordance
+withvarious state laws. For example, 3% per monthis chargedon the first$150
+of a loan, and 2% on the portionof the loan in excess of $150. Rates may be
+graduated in two, threeor more brackets.A three-bracketloan mightbe at the
+rate of 2'% on that part of the loan or loan balance whichis $100 or less, at the
+rate of 2% on that part of a loan which is in excess of $100 but less than $200,
+and at the rate of 1% on that part of a loan which is in excess of $200. Such a
+graduated rate is written:21%/2%/1%/$100/$200.
+    The main problem considered in this paper is that of findingthe level
+monthlyrentpaymentwhichwill amortizea loan in a given time at a graduated
+rate.
+

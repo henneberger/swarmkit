@@ -1,0 +1,38 @@
+{
+  "kind": "repositories",
+  "id": "jswistak__competitive-market-simulation",
+  "title": "jswistak/competitive-market-simulation",
+  "url": "https://github.com/jswistak/competitive-market-simulation",
+  "topic": "September 2026 LLM double auction experiment; linked from paper 2609.02580",
+  "retrieved_at": "2026-09-10T22:40:36.399579+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/jswistak/competitive-market-simulation/blob/af6f7925384efed3a8b84b55996e6b31d6014f7d/LICENSE",
+      "resolved_url": "https://github.com/jswistak/competitive-market-simulation/blob/af6f7925384efed3a8b84b55996e6b31d6014f7d/LICENSE",
+      "path": "sources/economic-games/repositories/jswistak__competitive-market-simulation/LICENSE",
+      "bytes": 1068,
+      "sha256": "9f1abe28a25b5f6f95c58a81a647de3fa72ff6388d228c59bddd079255709989"
+    },
+    {
+      "url": "https://github.com/jswistak/competitive-market-simulation/blob/af6f7925384efed3a8b84b55996e6b31d6014f7d/README.md",
+      "resolved_url": "https://github.com/jswistak/competitive-market-simulation/blob/af6f7925384efed3a8b84b55996e6b31d6014f7d/README.md",
+      "path": "sources/economic-games/repositories/jswistak__competitive-market-simulation/README.md",
+      "bytes": 26346,
+      "sha256": "da9aa82fcd922e050dcec27ddc2278967bdb75a24b2d542ec785f6e644bae4f3"
+    }
+  ],
+  "status": "ok",
+  "commit": "af6f7925384efed3a8b84b55996e6b31d6014f7d",
+  "commit_date": "2026-08-23T19:31:58+02:00",
+  "checkout": "sources/economic-games/repositories/jswistak__competitive-market-simulation/checkout",
+  "experiments_reproduced": false,
+  "license_files": [
+    "LICENSE"
+  ],
+  "audit": {
+    "anchor": "src/market_simulation/agents/zi.py",
+    "finding": "Constrained/unconstrained zero-intelligence functions emit the same response schemas as LLM decisions. Linked from 2609.02580.",
+    "proposed_use": "Recent market benchmark adapter candidate",
+    "review_level": "selected code or README; not full audit"
+  }
+}

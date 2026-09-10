@@ -1,0 +1,341 @@
+{
+  "scope": "Economic games for SwarmKit hypergraph agents; classical foundations and modern learning. Selective research collection as of 2026-09-10.",
+  "items": [
+    {
+      "kind": "papers",
+      "id": "2001.10313",
+      "title": "Evolutionary dynamics of higher-order interactions in social networks",
+      "topic": "hypergraph public goods",
+      "page_url": "https://arxiv.org/abs/2001.10313",
+      "pdf_url": "https://arxiv.org/pdf/2001.10313"
+    },
+    {
+      "kind": "papers",
+      "id": "2410.10921",
+      "title": "Cooperation in Public Goods Games: Leveraging Other-Regarding Reinforcement Learning on Hypergraphs",
+      "topic": "hypergraph reinforcement learning",
+      "page_url": "https://arxiv.org/abs/2410.10921",
+      "pdf_url": "https://arxiv.org/pdf/2410.10921"
+    },
+    {
+      "kind": "papers",
+      "id": "1908.09453",
+      "title": "OpenSpiel: A Framework for Reinforcement Learning in Games",
+      "topic": "game interfaces and solvers",
+      "page_url": "https://arxiv.org/abs/1908.09453",
+      "pdf_url": "https://arxiv.org/pdf/1908.09453"
+    },
+    {
+      "kind": "papers",
+      "id": "1711.00832",
+      "title": "A Unified Game-Theoretic Approach to Multiagent Reinforcement Learning",
+      "topic": "PSRO and population diversity",
+      "page_url": "https://arxiv.org/abs/1711.00832",
+      "pdf_url": "https://arxiv.org/pdf/1711.00832"
+    },
+    {
+      "kind": "papers",
+      "id": "1903.01373",
+      "title": "Alpha-Rank: Multi-Agent Evaluation by Evolution",
+      "topic": "nontransitive evaluation",
+      "page_url": "https://arxiv.org/abs/1903.01373",
+      "pdf_url": "https://arxiv.org/pdf/1903.01373"
+    },
+    {
+      "kind": "papers",
+      "id": "1709.04326",
+      "title": "Learning with Opponent-Learning Awareness",
+      "topic": "opponent shaping",
+      "page_url": "https://arxiv.org/abs/1709.04326",
+      "pdf_url": "https://arxiv.org/pdf/1709.04326"
+    },
+    {
+      "kind": "papers",
+      "id": "2210.10125",
+      "title": "Proximal Learning With Opponent-Learning Awareness",
+      "topic": "opponent shaping extensions",
+      "page_url": "https://arxiv.org/abs/2210.10125",
+      "pdf_url": "https://arxiv.org/pdf/2210.10125"
+    },
+    {
+      "kind": "papers",
+      "id": "1802.05438",
+      "title": "Mean Field Multi-Agent Reinforcement Learning",
+      "topic": "large populations",
+      "page_url": "https://arxiv.org/abs/1802.05438",
+      "pdf_url": "https://arxiv.org/pdf/1802.05438"
+    },
+    {
+      "kind": "papers",
+      "id": "2002.02513",
+      "title": "Multi Type Mean Field Reinforcement Learning",
+      "topic": "heterogeneous populations",
+      "page_url": "https://arxiv.org/abs/2002.02513",
+      "pdf_url": "https://arxiv.org/pdf/2002.02513"
+    },
+    {
+      "kind": "papers",
+      "id": "1706.03459",
+      "title": "Optimal Auctions through Deep Learning: Advances in Differentiable Economics",
+      "topic": "learned mechanisms",
+      "page_url": "https://arxiv.org/abs/1706.03459",
+      "pdf_url": "https://arxiv.org/pdf/1706.03459"
+    },
+    {
+      "kind": "papers",
+      "id": "2108.02755",
+      "title": "The AI Economist: Optimal Economic Policy Design via Two-level Deep Reinforcement Learning",
+      "topic": "learned institutions",
+      "page_url": "https://arxiv.org/abs/2108.02755",
+      "pdf_url": "https://arxiv.org/pdf/2108.02755"
+    },
+    {
+      "kind": "papers",
+      "id": "2310.05746",
+      "title": "Put Your Money Where Your Mouth Is: Evaluating Strategic Planning and Execution of LLM Agents in an Auction Arena",
+      "topic": "LLM auctions",
+      "page_url": "https://arxiv.org/abs/2310.05746",
+      "pdf_url": "https://arxiv.org/pdf/2310.05746"
+    },
+    {
+      "kind": "papers",
+      "id": "2609.02580",
+      "title": "Competitive Market Behavior of LLMs",
+      "topic": "recent LLM double auctions",
+      "page_url": "https://arxiv.org/abs/2609.02580",
+      "pdf_url": "https://arxiv.org/pdf/2609.02580"
+    },
+    {
+      "kind": "papers",
+      "id": "2509.25565",
+      "title": "Information Design With Large Language Models",
+      "topic": "strategic information",
+      "page_url": "https://arxiv.org/abs/2509.25565",
+      "pdf_url": "https://arxiv.org/pdf/2509.25565"
+    },
+    {
+      "kind": "papers",
+      "id": "1706.05125",
+      "title": "Deal or No Deal? End-to-End Learning for Negotiation Dialogues",
+      "topic": "language negotiation",
+      "page_url": "https://arxiv.org/abs/1706.05125",
+      "pdf_url": "https://arxiv.org/pdf/1706.05125"
+    },
+    {
+      "kind": "papers",
+      "id": "2406.18872",
+      "title": "Efficacy of Language Model Self-Play in Non-Zero-Sum Games",
+      "topic": "language self play",
+      "page_url": "https://arxiv.org/abs/2406.18872",
+      "pdf_url": "https://arxiv.org/pdf/2406.18872"
+    },
+    {
+      "kind": "papers",
+      "id": "2406.06613",
+      "title": "GameBench: Evaluating Strategic Reasoning Abilities of LLM Agents",
+      "topic": "strategic benchmarks",
+      "page_url": "https://arxiv.org/abs/2406.06613",
+      "pdf_url": "https://arxiv.org/pdf/2406.06613"
+    },
+    {
+      "kind": "papers",
+      "id": "1607.07684",
+      "title": "The Price of Anarchy in Auctions",
+      "topic": "efficiency guarantees",
+      "page_url": "https://arxiv.org/abs/1607.07684",
+      "pdf_url": "https://arxiv.org/pdf/1607.07684"
+    },
+    {
+      "kind": "papers",
+      "id": "smith-1980-contract-net",
+      "title": "The Contract Net Protocol",
+      "topic": "distributed task contracts",
+      "page_url": null,
+      "pdf_url": "https://reidgsmith.com/The_Contract_Net_Protocol_Dec-1980.pdf"
+    },
+    {
+      "kind": "papers",
+      "id": "gale-shapley-1962",
+      "title": "College Admissions and the Stability of Marriage",
+      "topic": "stable matching",
+      "page_url": null,
+      "pdf_url": "https://www.math.utoronto.ca/mccann/assignments/477/GaleShapley62.pdf"
+    },
+    {
+      "kind": "papers",
+      "id": "nash-1950-bargaining",
+      "title": "The Bargaining Problem",
+      "topic": "bargaining",
+      "page_url": null,
+      "pdf_url": "https://www.haverford.edu/sites/default/files/Nash1950.pdf"
+    },
+    {
+      "kind": "papers",
+      "id": "hart-mas-colell-2000",
+      "title": "A Simple Adaptive Procedure Leading to Correlated Equilibrium",
+      "topic": "regret matching",
+      "page_url": "https://ma.huji.ac.il/~hart/abs/adapt.html",
+      "pdf_url": "https://ma.huji.ac.il/~hart/papers/adapt.pdf"
+    },
+    {
+      "kind": "papers",
+      "id": "hanson-market-scoring",
+      "title": "Logarithmic Market Scoring Rules for Modular Combinatorial Information Aggregation",
+      "topic": "prediction markets",
+      "page_url": null,
+      "pdf_url": "https://hanson.gmu.edu/mktscore.pdf"
+    },
+    {
+      "kind": "papers",
+      "id": "roughgarden-2013-agt",
+      "title": "CS364A Algorithmic Game Theory lecture notes",
+      "topic": "classical auctions congestion equilibrium",
+      "page_url": "https://theory.stanford.edu/~tim/f13/f13.html",
+      "pdf_url": "https://theory.stanford.edu/~tim/f13/l/f13.pdf"
+    },
+    {
+      "kind": "papers",
+      "id": "myerson-1977-graphs",
+      "title": "Graphs and Cooperation in Games (working paper)",
+      "topic": "network coalition value",
+      "page_url": "https://pubsonline.informs.org/doi/10.1287/moor.2.3.225",
+      "pdf_url": "https://www.kellogg.northwestern.edu/research/math/papers/246.pdf"
+    },
+    {
+      "kind": "papers",
+      "id": "shapley-1952-value",
+      "title": "A Value for n-Person Games (1952 RAND precursor to 1953 chapter)",
+      "topic": "coalition credit",
+      "page_url": "https://www.rand.org/pubs/papers/P295.html",
+      "pdf_url": "https://www.rand.org/content/dam/rand/pubs/papers/2021/P295.pdf"
+    },
+    {
+      "kind": "posts",
+      "id": "deepmind-cooperation",
+      "title": "Understanding Agent Cooperation",
+      "page_url": "https://deepmind.google/blog/understanding-agent-cooperation/"
+    },
+    {
+      "kind": "posts",
+      "id": "deepmind-melting-pot",
+      "title": "Melting Pot: an evaluation suite for multi-agent reinforcement learning",
+      "page_url": "https://deepmind.google/blog/melting-pot-an-evaluation-suite-for-multi-agent-reinforcement-learning/"
+    },
+    {
+      "kind": "posts",
+      "id": "deepmind-barter",
+      "title": "Emergent Bartering Behaviour in Multi-Agent Reinforcement Learning",
+      "page_url": "https://deepmind.google/blog/emergent-bartering-behaviour-in-multi-agent-reinforcement-learning/"
+    },
+    {
+      "kind": "posts",
+      "id": "salesforce-ai-economist",
+      "title": "The AI Economist: Improving Equality and Productivity with AI-Driven Tax Policies",
+      "page_url": "https://www.salesforce.com/blog/the-ai-economist/"
+    },
+    {
+      "kind": "posts",
+      "id": "salesforce-ai-economist-release",
+      "title": "The AI Economist: Join the Moonshot",
+      "page_url": "https://www.salesforce.com/blog/the-ai-economist-moonshot/"
+    },
+    {
+      "kind": "repositories",
+      "id": "google-deepmind__open_spiel",
+      "title": "google-deepmind/open_spiel",
+      "url": "https://github.com/google-deepmind/open_spiel",
+      "topic": "game contracts CFR PSRO AlphaRank"
+    },
+    {
+      "kind": "repositories",
+      "id": "drvinceknight__Nashpy",
+      "title": "drvinceknight/Nashpy",
+      "url": "https://github.com/drvinceknight/Nashpy",
+      "topic": "small normal form games"
+    },
+    {
+      "kind": "repositories",
+      "id": "Axelrod-Python__Axelrod",
+      "title": "Axelrod-Python/Axelrod",
+      "url": "https://github.com/Axelrod-Python/Axelrod",
+      "topic": "repeated game strategies and tournaments"
+    },
+    {
+      "kind": "repositories",
+      "id": "yasserfarouk__negmas",
+      "title": "yasserfarouk/negmas",
+      "url": "https://github.com/yasserfarouk/negmas",
+      "topic": "negotiation mechanisms and utility functions"
+    },
+    {
+      "kind": "repositories",
+      "id": "gambitproject__gambit",
+      "title": "gambitproject/gambit",
+      "url": "https://github.com/gambitproject/gambit",
+      "topic": "exact small game equilibria"
+    },
+    {
+      "kind": "repositories",
+      "id": "salesforce__ai-economist",
+      "title": "salesforce/ai-economist",
+      "url": "https://github.com/salesforce/ai-economist",
+      "topic": "two level learned economic institutions"
+    },
+    {
+      "kind": "repositories",
+      "id": "saisrivatsan__deep-opt-auctions",
+      "title": "saisrivatsan/deep-opt-auctions",
+      "url": "https://github.com/saisrivatsan/deep-opt-auctions",
+      "topic": "RegretNet learned auction mechanisms"
+    },
+    {
+      "kind": "repositories",
+      "id": "jiangjiechen__auction-arena",
+      "title": "jiangjiechen/auction-arena",
+      "url": "https://github.com/jiangjiechen/auction-arena",
+      "topic": "LLM auction benchmark"
+    },
+    {
+      "kind": "repositories",
+      "id": "pnnl__HyperNetX",
+      "title": "pnnl/HyperNetX",
+      "url": "https://github.com/pnnl/HyperNetX",
+      "topic": "hyperedge incidence and analysis"
+    },
+    {
+      "kind": "repositories",
+      "id": "xgi-org__xgi",
+      "title": "xgi-org/xgi",
+      "url": "https://github.com/xgi-org/xgi",
+      "topic": "higher order group interactions"
+    },
+    {
+      "kind": "repositories",
+      "id": "lechmazur__pact",
+      "title": "lechmazur/pact",
+      "url": "https://github.com/lechmazur/pact",
+      "topic": "LLM bilateral bargaining benchmark"
+    },
+    {
+      "kind": "repositories",
+      "id": "lechmazur__bazaar",
+      "title": "lechmazur/bazaar",
+      "url": "https://github.com/lechmazur/bazaar",
+      "topic": "LLM markets and algorithmic trading baselines"
+    },
+    {
+      "kind": "repositories",
+      "id": "google-deepmind__meltingpot",
+      "title": "google-deepmind/meltingpot",
+      "url": "https://github.com/google-deepmind/meltingpot",
+      "topic": "social dilemmas and cross play"
+    },
+    {
+      "kind": "repositories",
+      "id": "jswistak__competitive-market-simulation",
+      "title": "jswistak/competitive-market-simulation",
+      "url": "https://github.com/jswistak/competitive-market-simulation",
+      "topic": "September 2026 LLM double auction experiment; linked from paper 2609.02580"
+    }
+  ]
+}

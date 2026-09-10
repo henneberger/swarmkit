@@ -1,0 +1,29 @@
+{
+  "kind": "repositories",
+  "id": "lechmazur__bazaar",
+  "title": "lechmazur/bazaar",
+  "url": "https://github.com/lechmazur/bazaar",
+  "topic": "LLM markets and algorithmic trading baselines",
+  "retrieved_at": "2026-09-10T22:39:56.342578+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/lechmazur/bazaar/blob/799208efcd9074ff098cf8aaf08f65abed2ab858/README.md",
+      "resolved_url": "https://github.com/lechmazur/bazaar/blob/799208efcd9074ff098cf8aaf08f65abed2ab858/README.md",
+      "path": "sources/economic-games/repositories/lechmazur__bazaar/README.md",
+      "bytes": 18360,
+      "sha256": "8aab526fa4d535df372d886abdf1ec1d2ac971a3e91d020d091ee2afd93146ac"
+    }
+  ],
+  "status": "ok",
+  "commit": "799208efcd9074ff098cf8aaf08f65abed2ab858",
+  "commit_date": "2025-07-29T20:00:23-04:00",
+  "checkout": "sources/economic-games/repositories/lechmazur__bazaar/checkout",
+  "experiments_reproduced": false,
+  "license_files": [],
+  "audit": {
+    "anchor": "README.md",
+    "finding": "Checkout consists of README, images, logs and prompts; described algorithmic baselines are not supplied as executable Python.",
+    "proposed_use": "Benchmark protocol/transcript corpus",
+    "review_level": "selected code or README; not full audit"
+  }
+}

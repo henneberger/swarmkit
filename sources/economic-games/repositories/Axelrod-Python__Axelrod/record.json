@@ -1,0 +1,38 @@
+{
+  "kind": "repositories",
+  "id": "Axelrod-Python__Axelrod",
+  "title": "Axelrod-Python/Axelrod",
+  "url": "https://github.com/Axelrod-Python/Axelrod",
+  "topic": "repeated game strategies and tournaments",
+  "retrieved_at": "2026-09-10T22:39:46.235666+00:00",
+  "artifacts": [
+    {
+      "url": "https://github.com/Axelrod-Python/Axelrod/blob/153335cbac5b6324ca60175b730ed370496791b6/README.rst",
+      "resolved_url": "https://github.com/Axelrod-Python/Axelrod/blob/153335cbac5b6324ca60175b730ed370496791b6/README.rst",
+      "path": "sources/economic-games/repositories/Axelrod-Python__Axelrod/README.rst",
+      "bytes": 5640,
+      "sha256": "3a5d2df0eacb3d970f745a46aa5ca9ad79522ed92bd8865b2e196bff5196a7db"
+    },
+    {
+      "url": "https://github.com/Axelrod-Python/Axelrod/blob/153335cbac5b6324ca60175b730ed370496791b6/LICENSE.txt",
+      "resolved_url": "https://github.com/Axelrod-Python/Axelrod/blob/153335cbac5b6324ca60175b730ed370496791b6/LICENSE.txt",
+      "path": "sources/economic-games/repositories/Axelrod-Python__Axelrod/LICENSE.txt",
+      "bytes": 1178,
+      "sha256": "488dc57d24ebdb5e0be483b6663dc2cad1fe6152feec6df759fd4721341b722f"
+    }
+  ],
+  "status": "ok",
+  "commit": "153335cbac5b6324ca60175b730ed370496791b6",
+  "commit_date": "2026-08-05T13:49:59+09:00",
+  "checkout": "sources/economic-games/repositories/Axelrod-Python__Axelrod/checkout",
+  "experiments_reproduced": false,
+  "license_files": [
+    "LICENSE.txt"
+  ],
+  "audit": {
+    "anchor": "axelrod/strategies/titfortat.py",
+    "finding": "TitForTat and variants inspect opponent action history; a useful concrete strategy interface.",
+    "proposed_use": "Optional repeated-game strategies",
+    "review_level": "selected code or README; not full audit"
+  }
+}

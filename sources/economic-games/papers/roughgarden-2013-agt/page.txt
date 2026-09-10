@@ -1,0 +1,500 @@
+
+
+Algorithmic Game Theory (CS364A), Fall 2013
+
+ CS364A: Algorithmic Game Theory (Fall 2013)
+
+Instructor: Tim
+Roughgarden (Office hours: Mondays and Wednesdays after class.)
+
+Teaching Assistants: 
+
+Kostas Kollias
+(Office hours: Thursdays 9 AM-Noon, in Gates B24A.
+Email: kkollias "at" stanford.edu)
+
+Okke Schrijvers 
+(Office hours: Tuesdays 1-4 PM, in Gates 463A.
+Email: okkes "at" stanford.edu)
+
+Time/location:
+2:15-3:30 PM on Mondays and Wednesdays in Littlefield 103.
+
+Piazza site: here
+
+Course description:
+Broad survey of topics at the interface of theoretical computer science
+and economics.  Introduction to auction and mechanism design, 
+with an emphasis on computational efficiency and robustness.  
+Introduction to the "price of anarchy", with applications to networks.
+Algorithms and complexity theory for learning and computing Nash and
+market equilibria.
+Case studies
+in Web search auctions, wireless spectrum auctions, matching markets,
+network routing, and security applications.
+
+Prerequisites: basic algorithms and complexity (154N and 161, or equivalent).  No prior knowledge of economics or game theory is required.
+
+Course requirements: 
+All students are required to complete weekly exercise sets, which fill
+in details from lecture.
+Students taking the course for a letter grade are also required to
+complete biweekly problem sets, which supplement the material covered
+in lecture.  
+Students are encouraged to form groups (up to three students) to
+complete the problem sets.
+There will also be occasional extra credit problems and opportunities.
+No late assignments accepted.
+
+A LaTeX template that you can use to 
+type up solutions.  Here 
+and here are good
+introductions to LaTeX.
+
+All lecture notes and exercise sets in one PDF.
+
+Lecture videos and notes (beta versions)
+
+Lecture 1 (Introduction): 
+
+Video
+
+Notes 
+
+Lecture 2 (Mechanism Design Basics):
+
+Video
+
+Notes 
+
+Lecture 3 (Myerson's Lemma):
+
+Video
+
+Notes 
+
+Lecture 4 (Algorithmic Mechanism Design):
+
+Video
+
+Notes 
+
+Lecture 5 (Revenue-Maximizing Auctions):
+
+Video
+
+Notes 
+
+Lecture 6 (Simple Near-Optimal Auctions):
+
+Video
+
+Notes 
+
+Lecture 7 (VCG Mechanism):
+
+Video
+
+Notes 
+
+Lecture 8 (Spectrum Auctions):
+
+Video
+
+Notes 
+
+Lecture 9 (Beyond Quasi-Linearity):
+
+Video
+
+Notes 
+
+Lecture 10 (Kidney Exchange, Stable Matching):
+
+Video
+
+Notes 
+
+Lecture 11 (Selfish Routing and the POA):
+
+Video
+
+Notes 
+
+Lecture 12 (Network Over-Provisioning):
+
+Video
+
+Notes 
+
+Lecture 13 (Hierarchy of Equilibrium Concepts):
+
+Video
+
+Notes 
+
+Lecture 14 (Smooth Games):
+
+Video
+
+Notes 
+
+Lecture 15 (Best-Case and Strong Nash Equilibria):
+
+Video
+
+Notes 
+
+Lecture 16 (Best-Response Dynamics):
+
+Video
+
+Notes 
+
+Lecture 17 (No-Regret Dynamics):
+
+Video
+
+Notes 
+
+Lecture 18 (Swap Regret; Minimax):
+
+Video
+
+Notes 
+
+Lecture 19 (Pure NE and PLS-Completeness):
+
+Video
+
+Notes 
+
+Lecture 20 (Mixed NE and PPAD-Completeness):
+
+Video
+
+Notes 
+
+The CS364A Top 10 List
+
+Exercise and problem sets: 
+
+Exercise Set #1 (Out Wed 9/25, due by class Wed 10/2.)
+
+Exercise Set #2 (Out Wed 10/2, due by class Wed 10/9.)
+
+Exercise Set #3 (Out Wed 10/9, due by class Wed 10/16.)
+
+Exercise Set #4 (Out Wed 10/16, due by class Wed 10/23.)
+
+Exercise Set #5 (Out Wed 10/23, due by class Wed 10/30.)
+
+Exercise Set #6 (Out Wed 10/30, due by class Wed 11/6.)
+
+Exercise Set #7 (Out Wed 11/6, due by class Wed 11/13.)
+
+Exercise Set #8 (Out Wed 11/13, due by class Wed 11/20.)
+
+Exercise Set #9 (Out Fri 11/22, due by noon Fri 12/6.)
+
+Problem Set #1 (Out Wed 9/25, due by noon Fri 10/11.)
+
+Problem Set #2 (Out Wed 10/9, due by noon Fri 10/25.)
+
+Problem Set #3 (Out Wed 10/23, due by noon Fri 11/8.)
+
+Problem Set #4 (Out Wed 11/6, due by noon Fri 11/22.)
+
+Take-Home Final (Out Wed 11/20, due by noon Fri 12/13.)
+
+Primary references: 
+
+Nisan/Roughgarden/Tardos/Vazirani (eds),
+Algorithmic Game Theory,
+Cambridge University, 2007.
+
+Also available free on the Web, see here.
+
+To get a sense for the course in a nutshell:
+
+T. Roughgarden, 
+Algorithmic Game Theory (CACM July 2010);
+
+T. Roughgarden, 
+An Algorithmic Game Theory Primer (an earlier and longer version).
+
+For the first four weeks, most of what we cover is also covered in Hartline's book draft.  
+(Feedback is solicited here.)
+
+Another excellent textbook that covers several of the
+course's topics is Shoham and Leyton-Brown, Multiagent 
+Systems, Cambridge, 2008.
+
+Detailed schedule and references:
+
+Lecture 1 (Mon 9/23): Introduction.
+The 2012 Olympic badminton scandal. 
+Selfish routing and Braess's Paradox.
+Can strategic players learn a Nash equilibrium?
+
+Readings:
+
+J. Hartline and R. Kleinberg,
+Badminton and the Science of Rule Making, Huffington Post, 2012.
+
+Video of the
+first controversial badminton match.
+
+Braess's Paradox: Chapter 1 of T. Roughgarden,
+Selfish Routing and the Price of Anarchy (MIT Press, 2005),
+available here
+via the "Sample Chapter" link.
+
+Physical demonstrations of Braess's Paradox, by alumni of CS364A:
+#1
+#2
+#3
+
+Basic games and equilibrium notions: AGT book, Sections 1.1.1--1.3.4.
+
+Lecture 2 (Wed 9/25): 
+Mechanism design basics.
+How would you bid in a first-price auction?
+The Vickrey auction and dominant-strategy implementations.
+Case study: sponsored search auctions.
+
+Readings:
+
+The Vickrey auction: AGT book, Section 9.3.1, 9.3.2, and 9.3.5;
+and/or Section 1 or these old CS364B notes.
+
+Pages 1-8 of Hartline's book.
+
+Optional sponsored search readings: AGT book, Sections 28.1-28.3.1.
+See also this CS364B course for
+tons of subtopics and references on sponsored search auctions (circa
+late 2007).
+
+Lecture 3 (Mon 9/30): Characterization of single-parameter DSIC
+mechanisms (Myerson's Lemma).  
+Readings:
+
+AGT book, Sections 9.4.1--9.4.2 and 9.5.4--9.5.6.  Optionally, see also Section 4
+in this FOCS '01 paper by Archer and Tardos.
+
+Sections 2.6 and 3.1 of Hartline's book.
+
+Lecture 4 (Wed 10/2): DSIC sponsored search auctions.
+Knapsack auctions and algorithmic mechanism design.  
+Revelation Principle.
+Readings:
+
+See Lecture 2 for sponsored search readings.
+
+AGT book, Sections 9.4.3 (Revelation Principle) and 12.1
+(introduction to algorithmic mechanism design).
+
+Sections 2.10 and 3.2 of Hartline's book.
+
+Knapsack review videos: 
+Dynamic programming solutions part 1
+part
+2 part
+3; greedy 0.5-approximation algorithm and analysis part
+1
+part
+2
+part
+3; (1-epsilon)-approximation algorithm 
+part
+1
+part 2
+
+Optional: How To Think About
+Algorithmic Mechanism Design, a 90-minute tutorial by your
+instructor at FOCS '10.  Video 
+
+The latest results on black-box reductions for single-parameter
+problems are due to Chawla/Immorlica/Lucier, STOC '12.
+
+Lecture 5 (Mon 10/7): 
+The challenge of revenue maximization.  Bayesian optimal auctions.
+Readings:
+
+AGT book, Sections 13.1-13.2.
+
+Sections 3.3.1-3.3.3 of Hartline's book.
+
+Lecture 6 (Wed 10/9): 
+The Prophet Inequality.  Simple near-optimal auctions.
+Prior-independent auctions and the Bulow-Klemperer theorem.
+Readings:
+
+Sections 4.2, 5.1, 5.2.1 of Hartline's book.
+
+Lecture 7 (Mon 10/14): 
+Case study: reserve prices in Yahoo! keyword auctions.
+Multi-parameter mechanism design and the VCG mechanism.
+Introduction to combinatorial auctions.
+Readings:
+
+Ostrovsky/Schwarz, Reserve Prices in Internet Advertising Auctions:
+A Field Experiment, 2009.
+
+AGT book, Sections 9.3.3-9.3.4 and 11.1.
+
+See also these
+old CS364B notes on combinatorial auctions and the VCG mechanism.
+
+Cramton/Schwartz, Collusive Bidding in the FCC Spectrum Auctions, 1999.
+
+Lecture 8 (Wed 10/16): 
+Case study: wireless spectrum auctions.  Readings:
+
+Cramton/Shoham/Steinberg (eds.), Combinatorial Auctions,
+MIT Press, 2006.
+
+Chapter 4 (Cramton) covers simultaneous ascending auctions.
+
+Chapter 5 (Ausubel/Cramton/Milgrom) discusses how to add a final
+"proxy" round with package bidding.
+
+Milgrom, Chapter 1 of Putting Auction Theory to Work, Cambridge, 2004.
+
+Goeree/Holt, Hierarchical Package Bidding, about bidding only on predefined packages.
+
+Milgrom/Segal, Deferred-Acceptance Heuristic Auctions, 2013.
+Describes the proposed format for the reverse auction in the upcoming FCC double auction.
+
+Lecture 9 (Mon 10/21): 
+Beyond quasi-linearity.  The clinching auction for bidders with
+budgets.  The top trading cycle algorithm for housing allocation.
+
+Dobzinski/Lavi/Nisan, Multi-unit
+Auctions with Budget Limits, FOCS '08.
+
+AGT book, Section 10.3.
+
+Lecture 10 (Wed 10/23): 
+Case study: kidney exchange.  Stable matching.
+
+Roth/Sönmez/Ünver, Kidney
+Exchange, QJE '04.
+
+Roth/Sönmez/Ünver, Pairwise
+Kidney Exchange, JET '05.
+
+Ashlagi/Fischer/Kash/Procaccia, Mix and
+Match: A Strategyproof Mechanism for
+Multi-Hospital Kidney Exchange, EC '10.
+
+AGT book, Section 10.4.
+
+Lecture 11 (Mon 10/28): 
+Nonatomic selfish routing and the price of anarchy: examples, preliminaries,
+and tight bounds for all classes of cost functions.
+Readings:
+
+AGT book, Sections 17.1-17.2.1 and 18.1-18.3.1, 18.4.1.
+
+For much more on this topic, see the book
+on Selfish
+Routing and the Price of Anarchy, MIT Press, 2005, or the
+"reader's digest" version here.
+
+Lecture 12 (Wed 10/30): 
+Case study: network over-provisioning.  A bicriteria bound
+for nonatomic routing networks.  POA bounds for atomic routing networks.
+Readings:
+
+AGT book, Sections 18.3.2, 18.4.2, and 18.5.2.
+
+Lecture 13 (Mon 11/4): 
+Potential functions and the existence of pure Nash equilibria.
+A hierarchy of equilibrium concepts: mixed-strategy Nash, correlated, and coarse correalted equilibria.
+Readings:
+
+AGT book, Sections 1.3.4, 1.3.6, 19.3.1, 19.3.2.
+
+T. Roughgarden,
+Intrinsic Robustness of the Price of Anarchy, STOC '09,
+Sections 1.1 and 3.1.
+
+Lecture 14 (Wed 11/6): Vetta's location games.
+Smooth games.  POA bounds for coarse correlated equilibria and approximate Nash equilibria.
+
+AGT book, Section 19.4.
+
+T. Roughgarden,
+Intrinsic Robustness of the Price of Anarchy, STOC '09,
+Sections 2.1, 2.2, 2.3, 3.1, and 4.1.
+
+Lecture 15 (Mon 11/11): 
+Positive externalities and network cost-sharing games.
+The price of stability.  Strong Nash equilibria and their inefficiency.
+
+AGT book, Sections 17.2.2 and 19.3.
+
+A. Epstein, M. Feldman, and Y. Mansour,
+
+Strong Equilibrium in Cost Sharing Connection Games,
+EC '07.
+
+Lecture 16 (Wed 11/13): 
+Best-response dynamics in potential games.  Fast convergence to
+approximate Nash equilibria in symmetric routing games. 
+Fast convergence to near-optimal solutions in smooth potential games.
+
+AGT book, Section 19.3.
+
+Chien/Sinclair, Convergence to
+approximate Nash equilibria in congestion games, SODA '07.
+
+T. Roughgarden,
+Intrinsic Robustness of the Price of Anarchy, STOC '09,
+Section 4.3.
+
+Lecture 17 (Mon 11/18): 
+Regret minimization.  The multiplicative weights (or randomized weighted
+majority) algorithm.  Connection to learning coarse correlated equilbria.
+
+AGT book, Sections 4.1-4.3.
+
+Lecture
+notes by Bobby Kleinberg. 
+
+Lecture 18 (Wed 11/20): 
+Black-box reduction from swap regret minimization to external
+regret minimization.  Connection to learning correlated equilbria.
+The minimax theorem for two-player zero sum games.
+
+AGT book, Sections 4.4-4.5.
+
+Lecture 19 (Mon 12/2): 
+PLS-completeness and negative convergence results for pure Nash equilibria in routing and congestion games.  Primary reference:
+
+Section 3 of Roughgarden, Computing Equilibria: A
+Computational Complexity Perspective.
+
+Further good surveys:
+
+Voecking, Congestion
+Games: Optimization in Competition (Survey Paper), ACiD '06.
+
+Yannakakis, Chapter 2 in Local Search in
+Combinatorial Optimization (Wiley, 1997; and Princeton, 2003).
+
+Lec 20 (Wed 12/4):
+PPAD-completeness of computing mixed-strategy Nash equilibria of
+bimatrix games.  Primary references:
+
+Section 4 of Roughgarden, Computing Equilibria: A
+Computational Complexity Perspective.
+
+AGT book, Sections 2.1-2.6.
+
+Johnson, Finding Needles in Haystacks, ACM
+Transacations on Algorithms, 2007.
+
+Yannakakis, Equilibria, Fixed Points, and Complexity Classes, survey in STACS '08.
+

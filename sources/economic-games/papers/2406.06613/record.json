@@ -1,0 +1,119 @@
+{
+  "kind": "papers",
+  "id": "2406.06613",
+  "title": "GameBench: Evaluating Strategic Reasoning Abilities of LLM Agents",
+  "topic": "strategic benchmarks",
+  "page_url": "https://arxiv.org/abs/2406.06613",
+  "pdf_url": "https://arxiv.org/pdf/2406.06613",
+  "retrieved_at": "2026-09-10T22:39:42.875807+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/2406.06613",
+      "resolved_url": "https://arxiv.org/abs/2406.06613",
+      "path": "sources/economic-games/papers/2406.06613/page.html",
+      "bytes": 42195,
+      "sha256": "06961796475f94dd9a54d171d3a976730fbd3f83a702cd697feb0743f6310e05"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2406.06613",
+      "resolved_url": "https://arxiv.org/pdf/2406.06613",
+      "path": "sources/economic-games/papers/2406.06613/paper.pdf",
+      "bytes": 4568008,
+      "sha256": "6018a8d1ec590b26c3094452466ec1509d75c4bb1d45324f01527de983e5517e"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 2406.06613: GameBench: Evaluating Strategic Reasoning Abilities of LLM Agents"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "GameBench: Evaluating Strategic Reasoning Abilities of LLM Agents"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/2406.06613v2"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Large language models have demonstrated remarkable few-shot performance on many natural language understanding tasks. Despite several demonstrations of using large language models in complex, strategic scenarios, there lacks a comprehensive framework for evaluating agents' performance across various types of reasoning found in games. To address this gap, we introduce GameBench, a cross-domain benchmark for evaluating strategic reasoning abilities of LLM agents. We focus on 9 different game environments, where each covers at least one axis of key reasoning skill identified in strategy games, and select games for which strategy explanations are unlikely to form a significant portion of models' pretraining corpuses. Our evaluations use GPT-3 and GPT-4 in their base form along with two scaffolding frameworks designed to enhance strategic reasoning ability: Chain-of-Thought (CoT) prompting and Reasoning Via Planning (RAP). Our results show that none of the tested models match human performance, and at worst GPT-4 performs worse than random action. CoT and RAP both improve scores but not comparable to human levels."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "GameBench: Evaluating Strategic Reasoning Abilities of LLM Agents"
+    ],
+    "twitter:description": [
+      "Large language models have demonstrated remarkable few-shot performance on many natural language understanding tasks. Despite several demonstrations of using large language models in complex,..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "GameBench: Evaluating Strategic Reasoning Abilities of LLM Agents"
+    ],
+    "citation_author": [
+      "Costarelli, Anthony",
+      "Allen, Mat",
+      "Hauksson, Roman",
+      "Sodunke, Grace",
+      "Hariharan, Suhas",
+      "Cheng, Carlson",
+      "Li, Wenjie",
+      "Clymer, Joshua",
+      "Yadav, Arjun"
+    ],
+    "citation_date": [
+      "2024/06/07"
+    ],
+    "citation_online_date": [
+      "2024/07/22"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/2406.06613"
+    ],
+    "citation_arxiv_id": [
+      "2406.06613"
+    ],
+    "citation_abstract": [
+      "Large language models have demonstrated remarkable few-shot performance on many natural language understanding tasks. Despite several demonstrations of using large language models in complex, strategic scenarios, there lacks a comprehensive framework for evaluating agents' performance across various types of reasoning found in games. To address this gap, we introduce GameBench, a cross-domain benchmark for evaluating strategic reasoning abilities of LLM agents. We focus on 9 different game environments, where each covers at least one axis of key reasoning skill identified in strategy games, and select games for which strategy explanations are unlikely to form a significant portion of models' pretraining corpuses. Our evaluations use GPT-3 and GPT-4 in their base form along with two scaffolding frameworks designed to enhance strategic reasoning ability: Chain-of-Thought (CoT) prompting and Reasoning Via Planning (RAP). Our results show that none of the tested models match human performance, and at worst GPT-4 performs worse than random action. CoT and RAP both improve scores but not comparable to human levels."
+    ]
+  },
+  "extracted_text_characters": 75241,
+  "text_searchable": true
+}
