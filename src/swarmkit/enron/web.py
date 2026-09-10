@@ -22,6 +22,42 @@ _FILES = {
 }
 
 
+def monitor_view(value: dict[str, Any] | None, *, summary: bool = False) -> dict[str, Any] | None:
+    """Project browser snapshots without copying resumable agent state.
+
+    Histories are recent windows, not complete audit exports. Counts retain any
+    upstream truncation so a SQL-limited callback cannot masquerade as complete.
+    """
+    if value is None:
+        return None
+    if summary:
+        return {key: value[key] for key in ("id", "status", "mode", "created_at", "updated_at") if key in value}
+    result = {key: item for key, item in value.items()
+              if key not in {"state_snapshot", "resume_state", "agenda"}}
+    agenda = value.get("agenda") or {}
+    if isinstance(agenda, dict):
+        for key in ("pending", "running"):
+            if isinstance(agenda.get(key), list):
+                result.setdefault(key + "_count", len(agenda[key]))
+    counts = {key: dict(item) for key, item in (value.get("monitor_truncation") or {}).items()}
+    for key, limit in (("posts", 200), ("events", 300), ("history", 300),
+                       ("inquiries", 100), ("wiki", 200), ("cases", 200),
+                       ("windows", 100), ("errors", 50), ("agent_errors", 50),
+                       ("pending", 100), ("running", 100)):
+        items = result.get(key)
+        if isinstance(items, list):
+            total = max(len(items), counts.get(key, {}).get("total", 0))
+            if key == "inquiries":
+                result["active_inquiry_count"] = value.get("active_inquiry_count", sum(
+                    row.get("status") not in {"closed", "resolved", "abandoned", "retired"}
+                    for row in items))
+            result[key] = items[-limit:]
+            counts[key] = {"total": total, "shown": len(result[key])}
+    if counts:
+        result["monitor_truncation"] = counts
+    return result
+
+
 def create_server(
     *,
     status: Callable[[], dict[str, Any]],
@@ -104,15 +140,15 @@ def create_server(
                     return
                 query = parse_qs(parsed.query)
                 if path == "/api/status":
-                    value = status()
+                    value = monitor_view(status())
                 elif path == "/api/runs":
-                    value = runs()
+                    value = [monitor_view(item, summary=True) for item in runs()[:100]]
                 elif path.startswith("/api/runs/"):
                     identifier = unquote(path[len("/api/runs/"):])
                     if not identifier or len(identifier) > 512 or "/" in identifier:
                         self._json(400, {"error": "invalid run identifier"})
                         return
-                    value = run(identifier)
+                    value = monitor_view(run(identifier))
                 elif path == "/api/document":
                     identifier = query.get("id", [""])[0]
                     if not identifier or len(identifier) > 1024:

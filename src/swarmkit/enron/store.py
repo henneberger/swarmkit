@@ -46,6 +46,37 @@ class InvestigationStore:
         with self.connect() as db:
             return [json.loads(row[0]) for row in db.execute('SELECT data FROM runs ORDER BY rowid DESC')]
 
+    def monitor_runs(self) -> list[dict[str, Any]]:
+        """Small dashboard summaries; canonical snapshots stay in the database."""
+        with self.connect() as db:
+            return [json.loads(row[0]) for row in db.execute(
+                "SELECT json_remove(data, '$.state_snapshot', '$.resume_state', "
+                "'$.agenda', '$.history', '$.inquiries', '$.wiki') "
+                "FROM runs ORDER BY rowid DESC LIMIT 100"
+            )]
+
+    def monitor_run(self, run_id: str) -> dict[str, Any] | None:
+        """Recent activity for the UI without decoding private state archives."""
+        with self.connect() as db:
+            row = db.execute(
+                "SELECT json_remove(data, '$.state_snapshot', '$.resume_state') "
+                "FROM runs WHERE id=?", (run_id,),
+            ).fetchone()
+            if not row:
+                return None
+            data = json.loads(row[0])
+            data['monitor_truncation'] = {}
+            for table, limit in (('posts', 200), ('events', 300)):
+                # Table names are fixed literals above; user input is parameterized.
+                total = db.execute(f'SELECT count(*) FROM {table} WHERE run_id=?', (run_id,)).fetchone()[0]
+                rows = db.execute(
+                    f'SELECT data FROM {table} WHERE run_id=? ORDER BY id DESC LIMIT ?',
+                    (run_id, limit),
+                ).fetchall()
+                data[table] = [json.loads(r[0]) for r in reversed(rows)]
+                data['monitor_truncation'][table] = {'total': total, 'shown': len(rows)}
+            return data
+
     def run(self, run_id: str) -> dict[str, Any] | None:
         with self.connect() as db:
             row = db.execute('SELECT data FROM runs WHERE id=?', (run_id,)).fetchone()

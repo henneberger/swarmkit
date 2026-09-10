@@ -134,6 +134,8 @@ def parser():
     inquiry.add_argument("--resume-run", help="Resume stored inquiry state without resetting ledger or membership")
     inquiry.add_argument("--recover-peer-requests", action="store_true",
                          help="On resume, deliver recorded factual peer requests rejected by the older host")
+    inquiry.add_argument("--recheck-peer-retrieval", action="store_true",
+                         help="On resume, recheck prior peer questions using repaired private source retrieval")
     inquiry.add_argument("--start", default="1999-01-01")
     inquiry.add_argument("--end", default="2002-12-31")
     inquiry.add_argument("--batch-size", type=int, default=20)
@@ -205,7 +207,7 @@ def main(argv=None):
 
     ledger = args.ledger
     if args.command == "inquire":
-        if args.recover_peer_requests and not args.resume_run:
+        if (args.recover_peer_requests or args.recheck_peer_retrieval) and not args.resume_run:
             raise SystemExit("Request recovery requires --resume-run.")
         from .inquiry_experiment import InquiryExperiment, InquiryExperimentConfig
         from .replay import ReplayCorpus
@@ -230,6 +232,9 @@ def main(argv=None):
             if args.recover_peer_requests:
                 from .inquiry_recovery import recover_peer_requests
                 print(f"Recovered peer requests: {recover_peer_requests(engine)}", flush=True)
+            if args.recheck_peer_retrieval:
+                from .inquiry_recovery import recheck_peer_retrieval
+                print(f"Retrieval rechecks: {recheck_peer_retrieval(engine)}", flush=True)
             print(f"Inquiry swarm {engine.id}; arrival state {args.replay_id}", flush=True)
             result = asyncio.run(engine.run())
         if args.export:
@@ -336,7 +341,7 @@ def main(argv=None):
     def status():
         current_gate = gate or (SQLiteCallGate(ledger) if ledger.exists() else None)
         state = current_gate.status() if current_gate else {"enabled": False, "paused": False, "calls": 0}
-        runs = store.runs()
+        runs = store.monitor_runs()
         state["budget"] = dict(state)
         state["budget"]["limit"] = state.get("limits", {}).get("max_tokens")
         state["pause_enabled"] = current_gate is not None
@@ -352,7 +357,7 @@ def main(argv=None):
         return state
 
     if args.command == "status":
-        print(json.dumps({"gate": status(), "runs": store.runs()}, indent=2))
+        print(json.dumps({"gate": status(), "runs": store.monitor_runs()}, indent=2))
         return
     from .web import create_server
 
@@ -384,8 +389,8 @@ def main(argv=None):
         host="127.0.0.1",
         port=args.port,
         status=status,
-        runs=store.runs,
-        run=store.run,
+        runs=store.monitor_runs,
+        run=store.monitor_run,
         document=document,
         search=search,
         set_paused=set_paused,

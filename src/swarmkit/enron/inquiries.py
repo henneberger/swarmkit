@@ -122,64 +122,110 @@ class InquiryAgenda:
         if iid is not None:
             if not isinstance(iid, str) or iid not in data["inquiries"]:
                 raise ValueError("unknown inquiry")
-            if data["inquiries"][iid]["status"] == "closed":
-                raise ValueError("inquiry closed; open a new linked inquiry")
         recipient = action.get("recipient")
         if action["kind"] == "request_peer":
             if recipient is None:
-                recipient = self.router.route(deepcopy(self.state), agent_id,
-                    frozenset(action.get("capabilities", ())), visited=(agent_id,))
+                recipient = self.router.route(
+                    deepcopy(self.state),
+                    agent_id,
+                    frozenset(action.get("capabilities", ())),
+                    visited=(agent_id,),
+                )
             if recipient is None or recipient == agent_id:
                 raise ValueError("no eligible peer")
             self._agent(recipient)
-            request = self._text(action.get("question") or action.get("request")
-                or action.get("unresolved_premise"), "request")
-            key = hashlib.sha256(repr((agent_id, recipient, iid,
-                " ".join(request.casefold().split()),
-                tuple(sorted(self._span(e).__repr__() for e in evidence)))).encode()).hexdigest()
+            request = self._text(
+                action.get("question") or action.get("request") or action.get("unresolved_premise"), "request"
+            )
+            key = hashlib.sha256(
+                repr(
+                    (
+                        agent_id,
+                        recipient,
+                        iid,
+                        " ".join(request.casefold().split()),
+                        tuple(sorted(self._span(e).__repr__() for e in evidence)),
+                    )
+                ).encode()
+            ).hexdigest()
             prior = next((r for r in requests.values() if r["key"] == key), None)
             if prior:
-                return AlgorithmResult(metadata={"inquiry_id": iid,
-                    "request_id": prior["request_id"], "deduplicated": True})
+                return AlgorithmResult(
+                    metadata={"inquiry_id": iid, "request_id": prior["request_id"], "deduplicated": True}
+                )
             if len(requests) >= self.config.max_actions:
                 raise ValueError("peer request budget exhausted")
             request_id = new_id("msg")
-            record = dict(request_id=request_id, key=key, sender=agent_id,
-                recipient=recipient, inquiry_id=iid, request=request, replied=False)
+            record = dict(
+                request_id=request_id,
+                key=key,
+                sender=agent_id,
+                recipient=recipient,
+                inquiry_id=iid,
+                request=request,
+                replied=False,
+            )
             payload = {"request": request, "request_id": request_id, "requester": agent_id}
             self._queue(data, iid, recipient, "peer_review", payload)
             requests[request_id] = record
-            message = Message(agent_id, request, recipients=(recipient,),
-                kind=MessageKind.QUESTION, evidence=evidence, id=request_id,
-                step=self.state.step, metadata={"inquiry_id": iid,
-                    "action": "request_peer", "request_id": request_id})
+            message = Message(
+                agent_id,
+                request,
+                recipients=(recipient,),
+                kind=MessageKind.QUESTION,
+                evidence=evidence,
+                id=request_id,
+                step=self.state.step,
+                metadata={"inquiry_id": iid, "action": "request_peer", "request_id": request_id},
+            )
         else:
             self._agent(recipient)
             if recipient == agent_id:
                 raise ValueError("reply requires a distinct recipient")
             request_id = action.get("request_id")
-            candidates = [r for r in requests.values()
-                if r["recipient"] == agent_id and r["sender"] == recipient
-                and not r["replied"] and (iid is None or r["inquiry_id"] == iid)
-                and (request_id is None or r["request_id"] == request_id)]
+            candidates = [
+                r
+                for r in requests.values()
+                if r["recipient"] == agent_id
+                and r["sender"] == recipient
+                and not r["replied"]
+                and (iid is None or r["inquiry_id"] == iid)
+                and (request_id is None or r["request_id"] == request_id)
+            ]
             if len(candidates) != 1:
                 raise ValueError("reply needs one known unanswered request; supply request_id")
             record = candidates[0]
             iid, request_id = record["inquiry_id"], record["request_id"]
-            if iid is not None and data["inquiries"][iid]["status"] == "closed":
-                raise ValueError("inquiry closed")
             answer = self._text(action.get("answer"), "answer")
-            self._queue(data, iid, recipient, "react", {"request_id": request_id,
-                "sender": agent_id, "answer": answer, "evidence": evidence})
+            self._queue(
+                data,
+                iid,
+                recipient,
+                "react",
+                {"request_id": request_id, "sender": agent_id, "answer": answer, "evidence": evidence},
+            )
             record["replied"] = True
-            message = Message(agent_id, answer, recipients=(recipient,),
-                kind=MessageKind.RESULT, evidence=evidence, parents=(request_id,),
-                step=self.state.step, metadata={"inquiry_id": iid, "action": "reply",
-                    "request_id": request_id, "semantic_validation": False,
-                    "source_backed": bool(evidence)})
+            message = Message(
+                agent_id,
+                answer,
+                recipients=(recipient,),
+                kind=MessageKind.RESULT,
+                evidence=evidence,
+                parents=(request_id,),
+                step=self.state.step,
+                metadata={
+                    "inquiry_id": iid,
+                    "action": "reply",
+                    "request_id": request_id,
+                    "semantic_validation": False,
+                    "source_backed": bool(evidence),
+                },
+            )
         self.state.data[self.KEY] = data
-        return AlgorithmResult(messages=(message,), metadata={"inquiry_id": iid,
-            "request_id": request_id, "source_acquisition": True})
+        return AlgorithmResult(
+            messages=(message,),
+            metadata={"inquiry_id": iid, "request_id": request_id, "source_acquisition": True},
+        )
 
     def apply(self, agent_id: str, action: dict) -> AlgorithmResult:
         """Apply one authenticated proposal atomically; rejected proposals mutate nothing.
@@ -192,7 +238,17 @@ class InquiryAgenda:
         """
         self._agent(agent_id)
         kind = action.get("kind")
-        if kind not in {"open", "join", "request_peer", "reply", "search", "read", "watch", "revise", "close"}:
+        if kind not in {
+            "open",
+            "join",
+            "request_peer",
+            "reply",
+            "search",
+            "read",
+            "watch",
+            "revise",
+            "close",
+        }:
             raise ValueError("unknown inquiry action")
         evidence = tuple(action.get("evidence", ()))
         if any(
@@ -220,10 +276,13 @@ class InquiryAgenda:
             data = deepcopy(self.data)
             self._queue(data, iid, agent_id, kind, payload)
             self.state.data[self.KEY] = data
-            return AlgorithmResult(metadata={
-                "inquiry_id": iid, "standalone_retrieval": iid is None,
-                "source_acquisition": True,
-            })
+            return AlgorithmResult(
+                metadata={
+                    "inquiry_id": iid,
+                    "standalone_retrieval": iid is None,
+                    "source_acquisition": True,
+                }
+            )
         if not premise and kind == "watch" and iid in self.data["inquiries"]:
             premise = self.data["inquiries"][iid].get("unresolved_premise", "")
         if not evidence and not premise:

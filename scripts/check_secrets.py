@@ -8,6 +8,7 @@ Only file names and detector names are printed, never matched secret text.
 from __future__ import annotations
 
 import os
+import gzip
 import re
 import subprocess
 from pathlib import Path
@@ -19,7 +20,7 @@ def main() -> int:
         if path.exists():
             for line in path.read_text().splitlines():
                 name, sep, value = line.partition('=')
-                if sep and name.strip() == 'DEEPSEEK_API_KEY':
+                if sep and name.strip() in {'DEEPSEEK_API_KEY', 'DEEPSEEK_API'}:
                     secrets.add(value.strip().strip('\"\''))
     secret_bytes = [key.encode() for key in secrets if len(key) >= 8]
     rules = {
@@ -42,6 +43,11 @@ def main() -> int:
         if (name.startswith('.env') and name != '.env.example') or name.endswith(('.pem', '.key')):
             failures.append((path, 'credential file name'))
         blob = subprocess.check_output(['git', 'cat-file', 'blob', oid])
+        if name.endswith('.gz'):
+            try:
+                blob = gzip.decompress(blob)
+            except (OSError, EOFError):
+                failures.append((path, 'invalid gzip artifact'))
         count += 1
         if any(key in blob for key in secret_bytes):
             failures.append((path, 'configured DeepSeek key'))

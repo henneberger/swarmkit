@@ -29,17 +29,17 @@ Timeline order uses replay virtual time and arrival sequence, never dates inside
     "arrived": 389,
     "allocated": 199,
     "exposed": 200,
-    "scheduled_calls": 138,
-    "model_calls": 137,
-    "tokens": 1179629,
-    "cost": 0.5652015600000002,
-    "action_rejections": 28,
-    "reasoning_rejections": 13
+    "scheduled_calls": 149,
+    "model_calls": 148,
+    "tokens": 1282107,
+    "cost": 0.6117878800000003,
+    "action_rejections": 31,
+    "reasoning_rejections": 14
   },
   "shared_ledger_delta": {
-    "calls": 137,
-    "tokens": 1179629,
-    "cost_usd": 0.5652015600000002
+    "calls": 148,
+    "tokens": 1282107,
+    "cost_usd": 0.6117878800000001
   },
   "shared_ledger_delta_scope": "Sum of recorded execution-interval shared-ledger deltas plus any labeled legacy aggregate; includes concurrent callers and charged failures during those intervals, excludes between-session activity. Segments missing a terminal checkpoint are explicitly incomplete and are not silently estimated.",
   "coverage_limitations": "Bounded sender-partition samples and agent-selected arrived-history retrieval; no exhaustive reading or validated discovery.",
@@ -7676,20 +7676,877 @@ Source offsets and attribution claims (complete metadata in audit JSON):
 
 **Recorded content:** No new inquiry opened\. I reviewed the Duke Energy International thread and the PG&amp;E Financial Power deal context\. The Duke matter appears resolved per investigator\-4's result\. The PG&amp;E inquiry remains open but no new evidence arrived\. I will wait for further developments\.
 
+**Audit event**
+
+**Agent:** investigator\-2
+
+**Action:** request\_peer
+
+**Occurrence order:** 481
+
+**Recorded exchange trace** (visibility and addressing are not inferred):
+
+```json
+{
+  "sender": "investigator-2",
+  "recipients": [
+    "investigator-1"
+  ],
+  "visibility": "addressed",
+  "message_id": "msg-288ab328b59446cbada280ce25a54b45"
+}
+```
+
+**Recorded content:** Recheck your retained source archive for this earlier question: Do you have any coverage of Richard Sanders or the Washington County, OH complaint that could indicate whether the complaint was forwarded or contains details about ECT's payment mechanism? Provide the relevant exact source, or say none is available\.
+
+**Audit event**
+
+**Agent:** investigator\-3
+
+**Action:** request\_peer
+
+**Occurrence order:** 482
+
+**Recorded exchange trace** (visibility and addressing are not inferred):
+
+```json
+{
+  "sender": "investigator-3",
+  "recipients": [
+    "investigator-4"
+  ],
+  "visibility": "addressed",
+  "message_id": "msg-447b5cf1ac174c55802265ddced52fde"
+}
+```
+
+**Recorded content:** Recheck your retained source archive for this earlier question: Did the OMnet Agreement signature page get faxed to Susan Gill on May 13 or May 14, 1999? Provide the relevant exact source, or say none is available\.
+
+**Audit event**
+
+**Agent:** investigator\-1
+
+**Action:** request\_peer
+
+**Occurrence order:** 483
+
+**Recorded exchange trace** (visibility and addressing are not inferred):
+
+```json
+{
+  "sender": "investigator-1",
+  "recipients": [
+    "investigator-3"
+  ],
+  "visibility": "addressed",
+  "message_id": "msg-a666b995c2084e44aeb7fd29ecaf44d0"
+}
+```
+
+**Recorded content:** Recheck your retained source archive for this earlier question: Do you have any context on whether the PG&amp;E Financial Power deal \(EW9838\) was originated by London traders or involved similar booking issues as the DAPSA/Sempra transactions Sara Shackleton described? Provide the relevant exact source, or say none is available\.
+
+**Audit event**
+
+**Agent:** investigator\-2
+
+**Action:** request\_peer
+
+**Occurrence order:** 484
+
+**Recorded exchange trace** (visibility and addressing are not inferred):
+
+```json
+{
+  "sender": "investigator-2",
+  "recipients": [
+    "investigator-1"
+  ],
+  "visibility": "addressed",
+  "message_id": "msg-6b91400493274e3490ec7f72a796cc67"
+}
+```
+
+**Recorded content:** Recheck your retained source archive for this earlier question: Do you have any additional context on the Nicaragua fuel agreements, particularly regarding Glencore's signing status or any unresolved indemnity/put issues? Provide the relevant exact source, or say none is available\.
+
+**Audit event**
+
+**Agent:** investigator\-1
+
+**Action:** request\_peer
+
+**Occurrence order:** 485
+
+**Recorded exchange trace** (visibility and addressing are not inferred):
+
+```json
+{
+  "sender": "investigator-1",
+  "recipients": [
+    "investigator-4"
+  ],
+  "visibility": "addressed",
+  "message_id": "msg-85cb2f6eb36a46baaefcdb739d404533"
+}
+```
+
+**Recorded content:** Recheck your retained source archive for this earlier question: Your inquiry\-106 on Duke Energy International Argentina was closed\. Does it relate to Sara's 'Duke issue' in mail\-b53b4993ac0fc873385b9df0ceb35e7ae85807416fbf0041566f0f42c1092ceb, which mentions ECT consent to Duke Energy Trading releasing a master to an affiliate and credit assessment of two Duke entities? Provide the relevant exact source, or say none is available\.
+
+**Audit event**
+
+**Agent:** investigator\-1
+
+**Action:** request\_peer
+
+**Occurrence order:** 486
+
+**Recorded exchange trace** (visibility and addressing are not inferred):
+
+```json
+{
+  "sender": "investigator-1",
+  "recipients": [
+    "investigator-4"
+  ],
+  "visibility": "addressed",
+  "message_id": "msg-b0516ca59f8b48f3b4d3e056a6497f6b"
+}
+```
+
+**Recorded content:** Recheck your retained source archive for this earlier question: In your closed inquiry\-106 about Duke Energy International Argentina, did you determine who was responsible for the Duke issue and whether it involved ECT's consent to Duke releasing the master to its affiliate, credit's assessment of trading with two Duke entities, and Argentina power trading issues? Sara Shackleton's 5/21 email \(v01904aa636eed4eb\) lists these three issues and asks who is in charge\. Provide the relevant exact source, or say none is available\.
+
+**Source document:** mail\-b53b4993ac0fc873385b9df0ceb35e7ae85807416fbf0041566f0f42c1092ceb
+
+**Evidence ID:** mail\-b53b4993ac0fc873385b9df0ceb35e7ae85807416fbf0041566f0f42c1092ceb:0:532:836d309747b519d8
+
+**Source family:** enron\-authored:873260591d0db4902ecc591da6926332d24ecbb66e199fe01d05efde0ef91101
+
+Source-text check: passed; no human review recorded. This does not validate the associated explanation.
+
+**Associated claim:** Sheer volume\! \(has kept me from being up to date\)\.  It's at the top of the 
+list and I promise it by next week\.
+
+I do need to speak with you about this Duke issue which has apparently 
+created some confusion over here\.  Seems to me there are three issues here:  
+\(1\) ECT's consent toDuke Energy Trading and Marketing LLC releasing the 
+master to its affiliate, \(2\)  credit's assessment of trading with two Duke 
+entities and \(3\) issues particular to trading power in Argentina \(if any\)\.  
+Who is in charge of addressing Duke?  SS
+
+
+
+
+> Sheer volume\! \(has kept me from being up to date\)\.  It's at the top of the 
+> list and I promise it by next week\.
+> 
+> I do need to speak with you about this Duke issue which has apparently 
+> created some confusion over here\.  Seems to me there are three issues here:  
+> \(1\) ECT's consent toDuke Energy Trading and Marketing LLC releasing the 
+> master to its affiliate, \(2\)  credit's assessment of trading with two Duke 
+> entities and \(3\) issues particular to trading power in Argentina \(if any\)\.  
+> Who is in charge of addressing Duke?  SS
+> 
+> 
+> 
+
+Source offsets and attribution claims (complete metadata in audit JSON):
+
+```json
+{
+  "start": 0,
+  "end": 532,
+  "offset_basis": "decoded-body-v1",
+  "segment_id": "mail-b53b4993ac0fc873385b9df0ceb35e7ae85807416fbf0041566f0f42c1092ceb:segment:0:532",
+  "segment_kind": "authored",
+  "claimed_sender": "sara.shackleton@enron.com",
+  "claimed_date": "Fri, 21 May 1999 02:59:00 -0700",
+  "attribution_status": "unverified_header_claim",
+  "raw_sha256": "b53b4993ac0fc873385b9df0ceb35e7ae85807416fbf0041566f0f42c1092ceb",
+  "quote_fingerprint": "5bd405fa2a6f53f9ad28d1c7f3045a75e1ed329b3cb6ab756104cb2ca34fcabd"
+}
+```
+
+**Audit event**
+
+**Agent:** investigator\-1
+
+**Action:** reply
+
+**Occurrence order:** 489
+
+**Recorded exchange trace** (visibility and addressing are not inferred):
+
+```json
+{
+  "sender": "investigator-1",
+  "recipients": [
+    "investigator-2"
+  ],
+  "visibility": "addressed",
+  "message_id": "msg-893aab64cbe04d4bb2056a179891138d"
+}
+```
+
+**Recorded content:** No relevant evidence in my current context\.
+
+**Post**
+
+**Agent:** investigator\-1
+
+**Action:** reply
+
+**Occurrence order:** 490
+
+**Recorded content:** I have reviewed the Washington County, OH complaint emails and found no evidence indicating whether the complaint was forwarded or detailing ECT's payment mechanism\. The available sources only show internal inquiries about the case\.
+
+**Audit event**
+
+**Agent:** investigator\-4
+
+**Action:** reply
+
+**Occurrence order:** 493
+
+**Recorded exchange trace** (visibility and addressing are not inferred):
+
+```json
+{
+  "sender": "investigator-4",
+  "recipients": [
+    "investigator-3"
+  ],
+  "visibility": "addressed",
+  "message_id": "msg-7a20ea745496413a86c85a0a3f932e79"
+}
+```
+
+**Recorded content:** No relevant evidence in my current context\.
+
+**Post**
+
+**Agent:** investigator\-4
+
+**Action:** reply
+
+**Occurrence order:** 494
+
+**Recorded content:** I have no evidence in my current context about whether the OMnet Agreement signature page was faxed to Susan Gill on May 13 or May 14, 1999\. My sources show Tana Jones faxed the OMnet Agreement on May 13 and asked for the address for originals, but do not confirm receipt by Susan Gill or the exact date of the signature page fax\.
+
+**Audit event**
+
+**Agent:** investigator\-3
+
+**Action:** reply
+
+**Occurrence order:** 497
+
+**Recorded exchange trace** (visibility and addressing are not inferred):
+
+```json
+{
+  "sender": "investigator-3",
+  "recipients": [
+    "investigator-1"
+  ],
+  "visibility": "addressed",
+  "message_id": "msg-f8530de2a90e4373afbd734bac4154c6"
+}
+```
+
+**Recorded content:** No relevant evidence in my current context\.
+
+**Post**
+
+**Agent:** investigator\-3
+
+**Action:** reply
+
+**Occurrence order:** 498
+
+**Recorded content:** I have no evidence in my current context about the PG&amp;E Financial Power deal being originated by London traders or involving booking issues similar to DAPSA/Sempra\. My sources only show the forwarded notification of the trade and a query about the prohibition\.
+
+**Audit event**
+
+**Agent:** investigator\-1
+
+**Action:** reply
+
+**Occurrence order:** 501
+
+**Recorded exchange trace** (visibility and addressing are not inferred):
+
+```json
+{
+  "sender": "investigator-1",
+  "recipients": [
+    "investigator-2"
+  ],
+  "visibility": "addressed",
+  "message_id": "msg-7a911ce0b9cc4838a9db949531dac26d"
+}
+```
+
+**Recorded content:** No relevant evidence in my current context regarding Glencore's signing status or unresolved indemnity/put issues in the Nicaragua fuel agreements\.
+
+**Post**
+
+**Agent:** investigator\-1
+
+**Action:** reply
+
+**Occurrence order:** 502
+
+**Recorded content:** I have no additional context on the Nicaragua fuel agreements beyond the Option Agreement email chain from Doug Leach and Dan Hyvl\. That chain concerns EFI's requested changes to the Option Agreement, not Glencore's signing status or indemnity/put issues\. No evidence in my archive addresses those specific points\.
+
+**Audit event**
+
+**Agent:** investigator\-4
+
+**Action:** reply
+
+**Occurrence order:** 505
+
+**Recorded exchange trace** (visibility and addressing are not inferred):
+
+```json
+{
+  "sender": "investigator-4",
+  "recipients": [
+    "investigator-1"
+  ],
+  "visibility": "addressed",
+  "message_id": "msg-6d619012c8ae4043bacb3447487a7825"
+}
+```
+
+**Recorded content:** Yes, inquiry\-106 relates to Sara's 'Duke issue'\. Relevant sources: mail\-8bea83471cef592aec0a24c07dd180131274e885a94bc44547bda46ceb058b8f \(Tana Jones asking to track down dealmaker\), mail\-0112e56169e774d57e04064d3b22fc7ed82c2216c7f8b0d6a862c6ac9c9f1e57 \(Tana Jones explaining waiver need\), mail\-365c8f72275fbb6ff59bdf5f2e6e97c9e43f9bfceb67740a96130849a15e15ab \(Brent Hendry identifying Federico Cerisoli as dealmaker\)\.
+
+**Source document:** mail\-b53b4993ac0fc873385b9df0ceb35e7ae85807416fbf0041566f0f42c1092ceb
+
+**Evidence ID:** mail\-b53b4993ac0fc873385b9df0ceb35e7ae85807416fbf0041566f0f42c1092ceb:0:532:836d309747b519d8
+
+**Source family:** enron\-authored:873260591d0db4902ecc591da6926332d24ecbb66e199fe01d05efde0ef91101
+
+Source-text check: passed; no human review recorded. This does not validate the associated explanation.
+
+**Associated claim:** Sheer volume\! \(has kept me from being up to date\)\.  It's at the top of the 
+list and I promise it by next week\.
+
+I do need to speak with you about this Duke issue which has apparently 
+created some confusion over here\.  Seems to me there are three issues here:  
+\(1\) ECT's consent toDuke Energy Trading and Marketing LLC releasing the 
+master to its affiliate, \(2\)  credit's assessment of trading with two Duke 
+entities and \(3\) issues particular to trading power in Argentina \(if any\)\.  
+Who is in charge of addressing Duke?  SS
+
+
+
+
+> Sheer volume\! \(has kept me from being up to date\)\.  It's at the top of the 
+> list and I promise it by next week\.
+> 
+> I do need to speak with you about this Duke issue which has apparently 
+> created some confusion over here\.  Seems to me there are three issues here:  
+> \(1\) ECT's consent toDuke Energy Trading and Marketing LLC releasing the 
+> master to its affiliate, \(2\)  credit's assessment of trading with two Duke 
+> entities and \(3\) issues particular to trading power in Argentina \(if any\)\.  
+> Who is in charge of addressing Duke?  SS
+> 
+> 
+> 
+
+Source offsets and attribution claims (complete metadata in audit JSON):
+
+```json
+{
+  "start": 0,
+  "end": 532,
+  "offset_basis": "decoded-body-v1",
+  "segment_id": "mail-b53b4993ac0fc873385b9df0ceb35e7ae85807416fbf0041566f0f42c1092ceb:segment:0:532",
+  "segment_kind": "authored",
+  "claimed_sender": "sara.shackleton@enron.com",
+  "claimed_date": "Fri, 21 May 1999 02:59:00 -0700",
+  "attribution_status": "unverified_header_claim",
+  "raw_sha256": "b53b4993ac0fc873385b9df0ceb35e7ae85807416fbf0041566f0f42c1092ceb",
+  "quote_fingerprint": "5bd405fa2a6f53f9ad28d1c7f3045a75e1ed329b3cb6ab756104cb2ca34fcabd"
+}
+```
+
+**Source document:** mail\-0112e56169e774d57e04064d3b22fc7ed82c2216c7f8b0d6a862c6ac9c9f1e57
+
+**Evidence ID:** mail\-0112e56169e774d57e04064d3b22fc7ed82c2216c7f8b0d6a862c6ac9c9f1e57:0:596:836d309747b519d8
+
+**Source family:** enron\-authored:89108f87dad50935e8cb7234f69c9705a911a5b5b7546d445748574eab0aeea6
+
+Source-text check: passed; no human review recorded. This does not validate the associated explanation.
+
+**Associated claim:** In response to your email, yes, our confidentiality language was so limited 
+that it did not allow us to provide the agreement to affiliates of either 
+party without consent\.  We revised the form about 9 months ago to broaden the 
+langage to include affiliates, but Duke is an old master so they need our 
+consent so they can provide it to their affiliate\.  Unless Federico has any 
+reason not to waive the language, I think we can go ahead &amp; draft a waiver up 
+here and send it to Duke\.  Can you talk to Federico asap and run that by him 
+and let me know so I can get this over to Duke\.  Thanks\!
+
+> In response to your email, yes, our confidentiality language was so limited 
+> that it did not allow us to provide the agreement to affiliates of either 
+> party without consent\.  We revised the form about 9 months ago to broaden the 
+> langage to include affiliates, but Duke is an old master so they need our 
+> consent so they can provide it to their affiliate\.  Unless Federico has any 
+> reason not to waive the language, I think we can go ahead &amp; draft a waiver up 
+> here and send it to Duke\.  Can you talk to Federico asap and run that by him 
+> and let me know so I can get this over to Duke\.  Thanks\!
+
+Source offsets and attribution claims (complete metadata in audit JSON):
+
+```json
+{
+  "start": 0,
+  "end": 596,
+  "offset_basis": "decoded-body-v1",
+  "segment_id": "mail-0112e56169e774d57e04064d3b22fc7ed82c2216c7f8b0d6a862c6ac9c9f1e57:segment:0:596",
+  "segment_kind": "authored",
+  "claimed_sender": "tana.jones@enron.com",
+  "claimed_date": "Thu, 20 May 1999 02:22:00 -0700",
+  "attribution_status": "unverified_header_claim",
+  "raw_sha256": "0112e56169e774d57e04064d3b22fc7ed82c2216c7f8b0d6a862c6ac9c9f1e57",
+  "quote_fingerprint": "959b8917c01f20aae16aaf9415cd6004fd5b7c12fce1584de8f7d68644bdd0a6"
+}
+```
+
+**Source document:** mail\-8bea83471cef592aec0a24c07dd180131274e885a94bc44547bda46ceb058b8f
+
+**Evidence ID:** mail\-8bea83471cef592aec0a24c07dd180131274e885a94bc44547bda46ceb058b8f:0:560:836d309747b519d8
+
+**Source family:** enron\-authored:91333ed6b208b1d4043dfc0d90ac680c39c7d9a08055275f1d89df376bd45c66
+
+Source-text check: passed; no human review recorded. This does not validate the associated explanation.
+
+**Associated claim:** Brent,
+
+I am trying to track down the dealmaker on a deal in Argentina with Duke 
+Energy International\.  All I know is that Duke is trying to get a waiver from 
+us on the confidentiality provision in the master swap agreement so they can 
+use it on the Argentina deal\.  Credit doesn't appear to know anything about 
+the deal\.  I'm don't even know if it is an EI or an ECT deal\.  It may be EI 
+because he mentioned the financing of a generator\.  I don't want to waive 
+anything until I track the business guy down\.  Can you ask around and let me 
+know\.  Thanks\!
+
+> Brent,
+> 
+> I am trying to track down the dealmaker on a deal in Argentina with Duke 
+> Energy International\.  All I know is that Duke is trying to get a waiver from 
+> us on the confidentiality provision in the master swap agreement so they can 
+> use it on the Argentina deal\.  Credit doesn't appear to know anything about 
+> the deal\.  I'm don't even know if it is an EI or an ECT deal\.  It may be EI 
+> because he mentioned the financing of a generator\.  I don't want to waive 
+> anything until I track the business guy down\.  Can you ask around and let me 
+> know\.  Thanks\!
+
+Source offsets and attribution claims (complete metadata in audit JSON):
+
+```json
+{
+  "start": 0,
+  "end": 560,
+  "offset_basis": "decoded-body-v1",
+  "segment_id": "mail-8bea83471cef592aec0a24c07dd180131274e885a94bc44547bda46ceb058b8f:segment:0:560",
+  "segment_kind": "authored",
+  "claimed_sender": "tana.jones@enron.com",
+  "claimed_date": "Tue, 18 May 1999 02:07:00 -0700",
+  "attribution_status": "unverified_header_claim",
+  "raw_sha256": "8bea83471cef592aec0a24c07dd180131274e885a94bc44547bda46ceb058b8f",
+  "quote_fingerprint": "ccfba69ca607c6dc94b739677256d18e38150768a585d92c782584d4577f9697"
+}
+```
+
+**Source document:** mail\-365c8f72275fbb6ff59bdf5f2e6e97c9e43f9bfceb67740a96130849a15e15ab
+
+**Evidence ID:** mail\-365c8f72275fbb6ff59bdf5f2e6e97c9e43f9bfceb67740a96130849a15e15ab:458:1158:836d309747b519d8
+
+**Source family:** enron\-authored:84d835946985ae15af7a74c548ed5ecf30726b2497ccbe6df4cf6471e7abfe8c
+
+Source-text check: passed; no human review recorded. This does not validate the associated explanation.
+
+**Associated claim:** 
+Federico Cerisoli is in discussions with Duke's Argentina office about doing 
+a power swap\.  Why they need a waiver for this I can not guess since the deal 
+will still be between a Duke entity and ECT\(since EI does not have a swap 
+entity yet\)\.  Is the confidentiality provision so narrow that they cannot 
+show the master to affiliates?  Do they want to show it to a non\-affiliated 
+entity?  Any questions on the structure of the proposed deal can be forwarded 
+to Federico\.  Let me know if this helps\.
+
+
+To: Brent Hendry/ENRON\_DEVELOPMENT@ENRON\_DEVELOPMENT @ ECT
+cc:  
+Subject: Duke Energy International
+
+Brent,
+
+I am trying to track down the dealmaker on a deal in Argentina with Duke 
+Energy Int
+
+> 
+> Federico Cerisoli is in discussions with Duke's Argentina office about doing 
+> a power swap\.  Why they need a waiver for this I can not guess since the deal 
+> will still be between a Duke entity and ECT\(since EI does not have a swap 
+> entity yet\)\.  Is the confidentiality provision so narrow that they cannot 
+> show the master to affiliates?  Do they want to show it to a non\-affiliated 
+> entity?  Any questions on the structure of the proposed deal can be forwarded 
+> to Federico\.  Let me know if this helps\.
+> 
+> 
+> To: Brent Hendry/ENRON\_DEVELOPMENT@ENRON\_DEVELOPMENT @ ECT
+> cc:  
+> Subject: Duke Energy International
+> 
+> Brent,
+> 
+> I am trying to track down the dealmaker on a deal in Argentina with Duke 
+> Energy Int
+
+Source offsets and attribution claims (complete metadata in audit JSON):
+
+```json
+{
+  "start": 458,
+  "end": 1158,
+  "offset_basis": "decoded-body-v1",
+  "segment_id": "mail-365c8f72275fbb6ff59bdf5f2e6e97c9e43f9bfceb67740a96130849a15e15ab:segment:458:1630",
+  "segment_kind": "forwarded",
+  "claimed_sender": "Brent Hendry@ENRON_DEVELOPMENT",
+  "claimed_date": "05/18/99 04:12 PM",
+  "attribution_status": "unverified_header_claim",
+  "raw_sha256": "365c8f72275fbb6ff59bdf5f2e6e97c9e43f9bfceb67740a96130849a15e15ab",
+  "quote_fingerprint": "00e2cfaab3157a4e83aa200f19ea2208faf9927eee11791a802ad088d3de6f7b"
+}
+```
+
+**Post**
+
+**Agent:** investigator\-4
+
+**Action:** reply
+
+**Occurrence order:** 506
+
+**Recorded content:** I have no retained source archive for inquiry\-106 beyond the evidence already cited in its closure\. The Duke issue in Sara Shackleton's mail\-b53b4993ac0fc873385b9df0ceb35e7ae85807416fbf0041566f0f42c1092ceb appears to be the same matter: ECT consent for Duke to release the master to an affiliate, credit assessment of two Duke entities, and Argentina trading\. My evidence includes Tana Jones's waiver request and Brent Hendry's identification of Federico Cerisoli as dealmaker\.
+
+**Source document:** mail\-b53b4993ac0fc873385b9df0ceb35e7ae85807416fbf0041566f0f42c1092ceb
+
+**Evidence ID:** mail\-b53b4993ac0fc873385b9df0ceb35e7ae85807416fbf0041566f0f42c1092ceb:0:532:836d309747b519d8
+
+**Source family:** enron\-authored:873260591d0db4902ecc591da6926332d24ecbb66e199fe01d05efde0ef91101
+
+Source-text check: passed; no human review recorded. This does not validate the associated explanation.
+
+**Associated claim:** Sheer volume\! \(has kept me from being up to date\)\.  It's at the top of the 
+list and I promise it by next week\.
+
+I do need to speak with you about this Duke issue which has apparently 
+created some confusion over here\.  Seems to me there are three issues here:  
+\(1\) ECT's consent toDuke Energy Trading and Marketing LLC releasing the 
+master to its affiliate, \(2\)  credit's assessment of trading with two Duke 
+entities and \(3\) issues particular to trading power in Argentina \(if any\)\.  
+Who is in charge of addressing Duke?  SS
+
+
+
+
+> Sheer volume\! \(has kept me from being up to date\)\.  It's at the top of the 
+> list and I promise it by next week\.
+> 
+> I do need to speak with you about this Duke issue which has apparently 
+> created some confusion over here\.  Seems to me there are three issues here:  
+> \(1\) ECT's consent toDuke Energy Trading and Marketing LLC releasing the 
+> master to its affiliate, \(2\)  credit's assessment of trading with two Duke 
+> entities and \(3\) issues particular to trading power in Argentina \(if any\)\.  
+> Who is in charge of addressing Duke?  SS
+> 
+> 
+> 
+
+Source offsets and attribution claims (complete metadata in audit JSON):
+
+```json
+{
+  "start": 0,
+  "end": 532,
+  "offset_basis": "decoded-body-v1",
+  "segment_id": "mail-b53b4993ac0fc873385b9df0ceb35e7ae85807416fbf0041566f0f42c1092ceb:segment:0:532",
+  "segment_kind": "authored",
+  "claimed_sender": "sara.shackleton@enron.com",
+  "claimed_date": "Fri, 21 May 1999 02:59:00 -0700",
+  "attribution_status": "unverified_header_claim",
+  "raw_sha256": "b53b4993ac0fc873385b9df0ceb35e7ae85807416fbf0041566f0f42c1092ceb",
+  "quote_fingerprint": "5bd405fa2a6f53f9ad28d1c7f3045a75e1ed329b3cb6ab756104cb2ca34fcabd"
+}
+```
+
+**Source document:** mail\-0112e56169e774d57e04064d3b22fc7ed82c2216c7f8b0d6a862c6ac9c9f1e57
+
+**Evidence ID:** mail\-0112e56169e774d57e04064d3b22fc7ed82c2216c7f8b0d6a862c6ac9c9f1e57:0:596:836d309747b519d8
+
+**Source family:** enron\-authored:89108f87dad50935e8cb7234f69c9705a911a5b5b7546d445748574eab0aeea6
+
+Source-text check: passed; no human review recorded. This does not validate the associated explanation.
+
+**Associated claim:** In response to your email, yes, our confidentiality language was so limited 
+that it did not allow us to provide the agreement to affiliates of either 
+party without consent\.  We revised the form about 9 months ago to broaden the 
+langage to include affiliates, but Duke is an old master so they need our 
+consent so they can provide it to their affiliate\.  Unless Federico has any 
+reason not to waive the language, I think we can go ahead &amp; draft a waiver up 
+here and send it to Duke\.  Can you talk to Federico asap and run that by him 
+and let me know so I can get this over to Duke\.  Thanks\!
+
+> In response to your email, yes, our confidentiality language was so limited 
+> that it did not allow us to provide the agreement to affiliates of either 
+> party without consent\.  We revised the form about 9 months ago to broaden the 
+> langage to include affiliates, but Duke is an old master so they need our 
+> consent so they can provide it to their affiliate\.  Unless Federico has any 
+> reason not to waive the language, I think we can go ahead &amp; draft a waiver up 
+> here and send it to Duke\.  Can you talk to Federico asap and run that by him 
+> and let me know so I can get this over to Duke\.  Thanks\!
+
+Source offsets and attribution claims (complete metadata in audit JSON):
+
+```json
+{
+  "start": 0,
+  "end": 596,
+  "offset_basis": "decoded-body-v1",
+  "segment_id": "mail-0112e56169e774d57e04064d3b22fc7ed82c2216c7f8b0d6a862c6ac9c9f1e57:segment:0:596",
+  "segment_kind": "authored",
+  "claimed_sender": "tana.jones@enron.com",
+  "claimed_date": "Thu, 20 May 1999 02:22:00 -0700",
+  "attribution_status": "unverified_header_claim",
+  "raw_sha256": "0112e56169e774d57e04064d3b22fc7ed82c2216c7f8b0d6a862c6ac9c9f1e57",
+  "quote_fingerprint": "959b8917c01f20aae16aaf9415cd6004fd5b7c12fce1584de8f7d68644bdd0a6"
+}
+```
+
+**Source document:** mail\-8bea83471cef592aec0a24c07dd180131274e885a94bc44547bda46ceb058b8f
+
+**Evidence ID:** mail\-8bea83471cef592aec0a24c07dd180131274e885a94bc44547bda46ceb058b8f:0:560:836d309747b519d8
+
+**Source family:** enron\-authored:91333ed6b208b1d4043dfc0d90ac680c39c7d9a08055275f1d89df376bd45c66
+
+Source-text check: passed; no human review recorded. This does not validate the associated explanation.
+
+**Associated claim:** Brent,
+
+I am trying to track down the dealmaker on a deal in Argentina with Duke 
+Energy International\.  All I know is that Duke is trying to get a waiver from 
+us on the confidentiality provision in the master swap agreement so they can 
+use it on the Argentina deal\.  Credit doesn't appear to know anything about 
+the deal\.  I'm don't even know if it is an EI or an ECT deal\.  It may be EI 
+because he mentioned the financing of a generator\.  I don't want to waive 
+anything until I track the business guy down\.  Can you ask around and let me 
+know\.  Thanks\!
+
+> Brent,
+> 
+> I am trying to track down the dealmaker on a deal in Argentina with Duke 
+> Energy International\.  All I know is that Duke is trying to get a waiver from 
+> us on the confidentiality provision in the master swap agreement so they can 
+> use it on the Argentina deal\.  Credit doesn't appear to know anything about 
+> the deal\.  I'm don't even know if it is an EI or an ECT deal\.  It may be EI 
+> because he mentioned the financing of a generator\.  I don't want to waive 
+> anything until I track the business guy down\.  Can you ask around and let me 
+> know\.  Thanks\!
+
+Source offsets and attribution claims (complete metadata in audit JSON):
+
+```json
+{
+  "start": 0,
+  "end": 560,
+  "offset_basis": "decoded-body-v1",
+  "segment_id": "mail-8bea83471cef592aec0a24c07dd180131274e885a94bc44547bda46ceb058b8f:segment:0:560",
+  "segment_kind": "authored",
+  "claimed_sender": "tana.jones@enron.com",
+  "claimed_date": "Tue, 18 May 1999 02:07:00 -0700",
+  "attribution_status": "unverified_header_claim",
+  "raw_sha256": "8bea83471cef592aec0a24c07dd180131274e885a94bc44547bda46ceb058b8f",
+  "quote_fingerprint": "ccfba69ca607c6dc94b739677256d18e38150768a585d92c782584d4577f9697"
+}
+```
+
+**Source document:** mail\-365c8f72275fbb6ff59bdf5f2e6e97c9e43f9bfceb67740a96130849a15e15ab
+
+**Evidence ID:** mail\-365c8f72275fbb6ff59bdf5f2e6e97c9e43f9bfceb67740a96130849a15e15ab:458:1158:836d309747b519d8
+
+**Source family:** enron\-authored:84d835946985ae15af7a74c548ed5ecf30726b2497ccbe6df4cf6471e7abfe8c
+
+Source-text check: passed; no human review recorded. This does not validate the associated explanation.
+
+**Associated claim:** 
+Federico Cerisoli is in discussions with Duke's Argentina office about doing 
+a power swap\.  Why they need a waiver for this I can not guess since the deal 
+will still be between a Duke entity and ECT\(since EI does not have a swap 
+entity yet\)\.  Is the confidentiality provision so narrow that they cannot 
+show the master to affiliates?  Do they want to show it to a non\-affiliated 
+entity?  Any questions on the structure of the proposed deal can be forwarded 
+to Federico\.  Let me know if this helps\.
+
+
+To: Brent Hendry/ENRON\_DEVELOPMENT@ENRON\_DEVELOPMENT @ ECT
+cc:  
+Subject: Duke Energy International
+
+Brent,
+
+I am trying to track down the dealmaker on a deal in Argentina with Duke 
+Energy Int
+
+> 
+> Federico Cerisoli is in discussions with Duke's Argentina office about doing 
+> a power swap\.  Why they need a waiver for this I can not guess since the deal 
+> will still be between a Duke entity and ECT\(since EI does not have a swap 
+> entity yet\)\.  Is the confidentiality provision so narrow that they cannot 
+> show the master to affiliates?  Do they want to show it to a non\-affiliated 
+> entity?  Any questions on the structure of the proposed deal can be forwarded 
+> to Federico\.  Let me know if this helps\.
+> 
+> 
+> To: Brent Hendry/ENRON\_DEVELOPMENT@ENRON\_DEVELOPMENT @ ECT
+> cc:  
+> Subject: Duke Energy International
+> 
+> Brent,
+> 
+> I am trying to track down the dealmaker on a deal in Argentina with Duke 
+> Energy Int
+
+Source offsets and attribution claims (complete metadata in audit JSON):
+
+```json
+{
+  "start": 458,
+  "end": 1158,
+  "offset_basis": "decoded-body-v1",
+  "segment_id": "mail-365c8f72275fbb6ff59bdf5f2e6e97c9e43f9bfceb67740a96130849a15e15ab:segment:458:1630",
+  "segment_kind": "forwarded",
+  "claimed_sender": "Brent Hendry@ENRON_DEVELOPMENT",
+  "claimed_date": "05/18/99 04:12 PM",
+  "attribution_status": "unverified_header_claim",
+  "raw_sha256": "365c8f72275fbb6ff59bdf5f2e6e97c9e43f9bfceb67740a96130849a15e15ab",
+  "quote_fingerprint": "00e2cfaab3157a4e83aa200f19ea2208faf9927eee11791a802ad088d3de6f7b"
+}
+```
+
+**Post**
+
+**Agent:** investigator\-4
+
+**Action:** wait
+
+**Occurrence order:** 508
+
+**Recorded content:** Model output rejected; no inquiry action taken\.
+
+**Reasoning rejection:** True
+
+**Audit event**
+
+**Action:** action\_rejected
+
+**Occurrence order:** 511
+
+**Recorded content:** reply needs one known unanswered request; supply request\_id
+
+**Post**
+
+**Agent:** investigator\-2
+
+**Action:** reply
+
+**Occurrence order:** 512
+
+**Recorded content:** I have no relevant evidence to answer the question about Glencore's signing status or unresolved indemnity/put issues in the Nicaragua fuel agreements\.
+
+**Reasoning rejection:** True
+
+**Post**
+
+**Agent:** investigator\-3
+
+**Action:** wait
+
+**Occurrence order:** 514
+
+**Recorded content:** I have reviewed the Guam letter approval thread and the PG&amp;E Financial Power deal context\. The Guam inquiry is already being watched, and the PG&amp;E inquiry is active\. No new evidence in my current context changes these situations\. I will wait for further developments\.
+
+**Audit event**
+
+**Action:** action\_rejected
+
+**Occurrence order:** 517
+
+**Recorded content:** change needs source evidence or a specific unresolved premise
+
+**Post**
+
+**Agent:** investigator\-1
+
+**Action:** watch
+
+**Inquiry ID:** inquiry\-106
+
+**Occurrence order:** 518
+
+**Recorded content:** Investigator\-4 reports inquiry\-106 is closed, identifying Federico Cerisoli as the Duke Argentina dealmaker\. Sara Shackleton's email lists three Duke issues and asks who is in charge\. I will watch for further Duke\-related messages to see if the waiver is granted and who addresses the issues\.
+
+**Reasoning rejection:** True
+
+**Audit event**
+
+**Action:** action\_rejected
+
+**Occurrence order:** 521
+
+**Recorded content:** reply needs one known unanswered request; supply request\_id
+
+**Post**
+
+**Agent:** investigator\-2
+
+**Action:** reply
+
+**Occurrence order:** 522
+
+**Recorded content:** I have no relevant evidence to answer the question about Glencore's signing status or unresolved indemnity/put issues in the Nicaragua fuel agreements\.
+
+**Reasoning rejection:** True
+
+**Post**
+
+**Agent:** investigator\-1
+
+**Action:** wait
+
+**Occurrence order:** 524
+
+**Recorded content:** Acknowledged investigator\-4's confirmation that inquiry\-106 is closed and that the Duke issue is resolved\. No new action needed on that front\.
+
 ## Technical audit summary
 
 Telemetry stays in the complete JSON companion; these counts do not imply successful reasoning or private knowledge unless explicitly recorded.
 
 ```json
 {
-  "action_rejected": 28,
+  "action_rejected": 31,
   "historical_read": 31,
   "historical_retrieval": 25,
   "lost_assignment": 1,
-  "peer_message": 9,
-  "prompt_exposure": 138,
+  "peer_message": 20,
+  "private_source_archive_recovered": 4,
+  "prompt_exposure": 149,
   "request_recovered": 6,
-  "resume": 2
+  "resume": 3
 }
 ```
 
@@ -7697,7 +8554,7 @@ Unique document IDs in recorded prompt exposures, by agent:
 
 ```json
 {
-  "investigator-1": 81,
+  "investigator-1": 83,
   "investigator-2": 32,
   "investigator-3": 58,
   "investigator-4": 58

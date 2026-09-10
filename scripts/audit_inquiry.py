@@ -59,7 +59,7 @@ def audit(run, corpus_path, replay_path):
         elif (
             actual.sender != event.get("sender")
             or list(actual.recipients) != event.get("recipients")
-            or [evidence_view(e) for e in actual.evidence] != event["evidence"]
+            or json.loads(json.dumps([evidence_view(e) for e in actual.evidence], allow_nan=False)) != event["evidence"]
         ):
             failures.append({"category": "peer_messages", "index": i, "reason": "message_snapshot_mismatch"})
     seen_artifacts = set()

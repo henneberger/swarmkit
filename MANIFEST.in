@@ -16,3 +16,6 @@ include CHRONOLOGICAL_EXPERIMENT.md scripts/audit_replay.py
 include scripts/run_chronological_experiment.py
 
 include SWARM_REASSESSMENT.md
+
+include scripts/audit_inquiry.py scripts/run_full_corpus_inquiry.py
+include scripts/diagnose_inquiry.py

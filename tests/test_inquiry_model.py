@@ -226,3 +226,37 @@ async def test_source_memory_preserves_subject_and_scopes_narrative(arrived):
     )
     await InquiryReasoner(arrived, client).act(agent, Task("v", "Explore another context"))
     assert client.prompts[2]["private_memory"] == ""
+
+
+@pytest.mark.asyncio
+async def test_reply_keeps_partial_context_in_addressed_answer(arrived):
+    client = Client(
+        lambda _: json.dumps(
+            {
+                "update": "A source mentions the earlier refresh, but not its outcome.",
+                "action": {"kind": "reply", "recipient": "two", "answer": "The outcome is not established."},
+            }
+        )
+    )
+    result = await InquiryReasoner(arrived, client).act(AgentState("one"), Task("t", "Answer the peer"))
+    answer = result.messages[0].metadata["action"]["answer"]
+    assert "outcome is not established" in answer
+    assert "earlier refresh" in answer
+    assert not result.messages[
+        0
+    ].evidence  # Context remains an unverified report, not invented source support.
+
+
+@pytest.mark.asyncio
+async def test_nontext_reply_parameter_does_not_crash_adapter(arrived):
+    client = Client(
+        lambda _: json.dumps(
+            {
+                "update": "A response.",
+                "action": {"kind": "reply", "recipient": "two", "answer": {"unexpected": "object"}},
+            }
+        )
+    )
+    result = await InquiryReasoner(arrived, client).act(AgentState("one"), Task("t", "Answer"))
+    assert result.usage.calls == 1
+    assert result.messages[0].metadata["action"]["answer"] == {"unexpected": "object"}

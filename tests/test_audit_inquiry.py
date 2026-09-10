@@ -86,3 +86,23 @@ def test_visibility_uses_recorded_sequence_even_after_admission(sample):
     result = module.audit(bad, master, arrived)
     assert not result["passed"]
     assert any(f["reason"] == "not_arrived_at_event_sequence" for f in result["failures"])
+
+
+def test_peer_evidence_tuple_metadata_matches_json_wire_but_tampering_fails(sample):
+    import json
+    from dataclasses import replace
+    from swarmkit.serialization import from_data
+    run,master,arrived,_,_=sample
+    run=deepcopy(run)
+    state=from_data(run['state_snapshot'])
+    original=state.messages[0]
+    evidence=replace(original.evidence[0],metadata={**original.evidence[0].metadata,
+        'outer_recipients':('one@example.test','two@example.test'),
+        'ambiguities':('claimed attribution only',)})
+    state.messages[0]=replace(original,evidence=(evidence,))
+    run['state_snapshot']=to_data(state)
+    run['events'][0]['evidence']=json.loads(json.dumps([evidence_view(evidence)]))
+    result=module.audit(run,master,arrived)
+    assert result['passed'],result['failures']
+    run['events'][0]['evidence'][0]['metadata']['outer_recipients'][0]='tampered@example.test'
+    assert any(f['reason']=='message_snapshot_mismatch' for f in module.audit(run,master,arrived)['failures'])

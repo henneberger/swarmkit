@@ -389,6 +389,17 @@ def test_browser_inquiry_portfolio_and_temporary_team_history(monitor):
             page.locator("#action-filter").select_option("request_peer")
             assert page.locator(".post").count() == 1
             assert "Recruit challenger" in page.locator(".post-text").inner_text()
+            page.evaluate("""() => renderRun({id:'long-inquiry',mode:'inquiry_swarm',
+                metrics:{arrived:12000,eligible:60000,model_calls:20,scheduled_calls:21,exposed:191,allocated:192,tokens:274041,cost:0.12},
+                pending_count:5,running_count:1,inquiries:[],posts:[{text:'Recent post'}],
+                monitor_truncation:{posts:{total:12000,shown:1},history:{total:500,shown:300}}})""")
+            assert "12,000 / 60,000 messages admitted (20.0%)" in page.locator("#inquiry-progress").inner_text()
+            assert "not evidence that every message was read" in page.locator("#inquiry-progress").inner_text()
+            assert page.locator("#arrival-progress").evaluate("el => el.value") == 0.2
+            assert "1 of 12,000 posts" in page.locator("#monitor-window").inner_text()
+            assert "Filters apply to these displayed records" in page.locator("#monitor-window").inner_text()
+            assert "Documents exposed to prompts" in page.locator("#inquiry-metrics").inner_text()
+            assert page.locator("#post-count").inner_text() == "1 / 12000 posts"
             page.evaluate("() => renderRun({id:'empty-inquiry',mode:'inquiry_swarm',inquiries:[],posts:[]})")
             assert "No investigations opened yet" in page.locator("#inquiry-cards").inner_text()
             assert page.locator("#inquiry-metrics strong").all_text_contents()[:2] == ["—", "—"]
@@ -399,3 +410,31 @@ def test_browser_inquiry_portfolio_and_temporary_team_history(monitor):
             assert errors == []
         finally:
             browser.close()
+
+
+def test_monitor_projection_bounds_history_and_preserves_upstream_totals():
+    from swarmkit.enron.web import monitor_view
+
+    data = {
+        "id": "long", "status": "running", "mode": "inquiry_swarm",
+        "state_snapshot": {"private": "x" * 1_000_000},
+        "resume_state": {"exposed": list(range(10_000))},
+        "agenda": {"pending": [{"id": index} for index in range(500)]},
+        "posts": [{"id": index} for index in range(250)],
+        "events": [{"id": index} for index in range(400)],
+        "history": [{"version": index} for index in range(1000)],
+        "inquiries": [{"id": index, "status": "open"} for index in range(150)],
+        "monitor_truncation": {"posts": {"total": 12_000, "shown": 250}},
+    }
+    projected = monitor_view(data)
+    assert not {"state_snapshot", "resume_state", "agenda"} & projected.keys()
+    assert projected["posts"][0]["id"] == 50
+    assert projected["monitor_truncation"]["posts"] == {"total": 12_000, "shown": 200}
+    assert projected["monitor_truncation"]["history"] == {"total": 1000, "shown": 300}
+    assert len(projected["inquiries"]) == 100
+    assert projected["active_inquiry_count"] == 150
+    assert projected["pending_count"] == 500
+    assert len(json.dumps(projected)) < 25_000
+    assert len(data["posts"]) == 250 and len(data["inquiries"]) == 150
+    assert monitor_view(data, summary=True) == {"id": "long", "status": "running", "mode": "inquiry_swarm"}
+    assert monitor_view(None) is None

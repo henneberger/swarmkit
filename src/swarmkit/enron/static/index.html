@@ -21,11 +21,12 @@
     <div id="notice" class="notice" role="status" hidden></div>
     <section class="overview" aria-label="Run overview">
       <div><span class="label">CURRENT RUN</span><strong id="run-name">No active run</strong><span id="run-state" class="muted">Waiting for a research run</span></div>
-      <div><span class="label">BUDGET USED</span><strong id="budget-value">—</strong><progress id="budget-bar" max="1" value="0" aria-label="Budget used"></progress><span id="budget-detail" class="muted">Usage appears when available</span></div>
+      <div><span class="label">WORKSPACE BUDGET USED</span><strong id="budget-value">—</strong><progress id="budget-bar" max="1" value="0" aria-label="Budget used"></progress><span id="budget-detail" class="muted">Usage appears when available</span></div>
       <div><span class="label">EXECUTION GATE</span><button id="pause" class="button" disabled>Pause new work</button><span id="pause-detail" class="muted">In-flight work may finish after pausing</span></div>
     </section>
     <section id="inquiry-portfolio" class="panel inquiry-portfolio" aria-label="Open investigations" hidden>
       <div class="section-head"><div><p class="eyebrow">FOLLOW THE EXPLANATION</p><h2>Open investigations</h2></div><span id="inquiry-count" class="count"></span></div>
+      <p id="inquiry-progress" class="portfolio-context" aria-live="polite"></p><progress id="arrival-progress" max="1" aria-label="Corpus arrivals"></progress><p id="monitor-window" class="portfolio-context" hidden></p>
       <p id="inquiry-clock" class="portfolio-context"></p><div id="inquiry-metrics" class="quality-counts"></div>
       <p class="portfolio-context">Questions worth resolving, not established findings. Read the rivals, the evidence that changed the account, and what could distinguish the explanations next.</p>
       <div id="inquiry-cards" class="inquiry-cards"></div>

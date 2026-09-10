@@ -200,13 +200,25 @@ function renderInquiries(run) {
   $("forum-title").textContent = "Investigation activity";
   const inquiries = list(run.inquiries);
   const state = run.metrics || run.replay || {};
-  $("inquiry-count").textContent = quantity(inquiries.length, "investigation");
+  $("inquiry-count").textContent = quantity(run.monitor_truncation?.inquiries?.total ?? inquiries.length, "investigation");
   $("inquiry-clock").textContent = `Evidence available through ${string(state.virtual_time || run.virtual_time, "unreported virtual time")}. Arrival time follows the replay cursor; it does not establish when people knew something.`;
-  const metrics = [["Arrived messages", state.arrived ?? run.arrived], ["Scheduled model calls", state.scheduled_calls ?? run.scheduled_calls], ["Active investigations", inquiries.filter((item) => !["resolved", "abandoned", "closed", "retired"].includes(item.status)).length]];
+  const arrived = state.arrived ?? run.arrived;
+  const eligible = state.eligible ?? run.replay?.eligible ?? run.population?.eligible ?? run.replay_bounds?.eligible;
+  const hasTotal = Number.isFinite(eligible) && eligible > 0 && Number.isFinite(arrived);
+  $("arrival-progress").hidden = !hasTotal;
+  if (hasTotal) $("arrival-progress").value = Math.max(0, Math.min(1, arrived / eligible));
+  $("inquiry-progress").textContent = `${formatNumber(arrived)}${hasTotal ? " / " + formatNumber(eligible) : ""} messages admitted${hasTotal ? " (" + (100 * arrived / eligible).toFixed(1) + "%)" : ""}. Admission is chronological availability, not evidence that every message was read by a model.`;
+  const clipped = Object.entries(run.monitor_truncation || {}).filter(([, count]) => count.total > count.shown);
+  $("monitor-window").hidden = !clipped.length;
+  $("monitor-window").textContent = "Recent monitor window: " + clipped.map(([key, count]) => `${count.shown} of ${formatNumber(count.total)} ${key}`).join(" · ") + ". Filters apply to these displayed records. Complete audit history remains in the run store and exports.";
+  const metrics = [["Arrived messages", arrived], ["Scheduled model calls", state.scheduled_calls ?? run.scheduled_calls], ["Active investigations", run.active_inquiry_count ?? inquiries.filter((item) => !["resolved", "abandoned", "closed", "retired"].includes(item.status)).length]];
+  for (const [label, key] of [["Model calls", "model_calls"], ["Documents exposed to prompts", "exposed"], ["Allocated messages", "allocated"], ["Tokens", "tokens"], ["Run cost (USD)", "cost"]]) {
+    if (state[key] != null) metrics.push([label, state[key]]);
+  }
   const pending = run.pending ?? run.agenda?.pending;
   const running = run.running ?? run.agenda?.running;
-  if (Array.isArray(pending)) metrics.push(["Queued assignments", pending.length]);
-  if (Array.isArray(running)) metrics.push(["Running assignments", running.length]);
+  if (run.pending_count != null || Array.isArray(pending)) metrics.push(["Queued assignments", run.pending_count ?? pending.length]);
+  if (run.running_count != null || Array.isArray(running)) metrics.push(["Running assignments", run.running_count ?? running.length]);
   $("inquiry-metrics").replaceChildren(...metrics.map(([label, value]) => {
     const metric = node("div");
     metric.append(node("strong", formatNumber(value)), node("span", label));
@@ -239,7 +251,7 @@ function renderInquiries(run) {
     const people = list(item.participants).map((person) => typeof person === "object" ? person.agent_id || person.id || readable(person) : person);
     article.append(node("p", `Owner: ${string(item.owner, "not recorded")} · Temporary team: ${people.length ? people.join(", ") : "No participants recorded"}`, "inquiry-team"));
     const history = Array.isArray(item.history) ? item.history : list(run.history).filter((entry) => entry.inquiry_id === id);
-    const events = list(run.events).filter((event) => event.inquiry_id === id && /recruit|team|join|leave|request_peer/.test(event.kind || event.action || ""));
+    const events = list(run.events).filter((event) => event.inquiry_id === id && /recruit|team|join|leave|request_peer|peer_message/.test(`${event.kind || ""} ${event.action || ""}`));
     const requests = list(run.posts).filter((post) => post.inquiry_id === id && actionName(post) === "request_peer");
     const trail = node("details", null, "inquiry-history");
     const teamHistory = events.length ? events : requests;
@@ -273,7 +285,7 @@ function renderTimeline(run) {
   const inquiry = run?.mode === "inquiry_swarm";
   const replay = run?.mode === "chronological_replay" || inquiry;
   let posts = list(run?.posts);
-  const total = posts.length;
+  const total = run?.monitor_truncation?.posts?.total ?? posts.length;
   if (replay) {
     posts = [...posts].sort((left, right) => {
       const a = Date.parse(left.virtual_time);
@@ -313,7 +325,7 @@ function renderQuality(run) {
   const checks = run.quote_checks || {};
   const rejected = Number(checks.rejected || 0);
   const errors = run.agent_errors ?? run.errors;
-  const errorCount = Array.isArray(errors) ? errors.length : Number(errors || 0);
+  const errorCount = Array.isArray(errors) ? (run.monitor_truncation?.[run.agent_errors != null ? "agent_errors" : "errors"]?.total ?? errors.length) : Number(errors || 0);
   const rejectedTurns = run.reasoning_rejections ?? run.metrics?.reasoning_rejections;
   const reasoningRejections = Number(rejectedTurns || 0);
   const actionRejections = Number(run.metrics?.action_rejections || 0);

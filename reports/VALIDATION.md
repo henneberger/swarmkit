@@ -74,3 +74,14 @@ The new `inquire` path composes canonical runtime/types, addressed capability ro
 The full offline suite passed 252 tests before the final status-endpoint regression; the subsequently changed model/runner modules passed their focused tests, including the real CLI status shape. The actual loopback server on port 8767 returned a successful status response, and Chromium loaded the inquiry portfolio with no browser errors. [UI screenshot](../docs/images/inquiry-diagnostic.png) shows a diagnostic run, not a validated discovery.
 
 Three bounded live smoke runs made 44 calls costing $0.07764416 combined. They exposed acquisition/schema issues and failed to demonstrate peer-mediated discovery. See [INQUIRY_SMOKE_FINDINGS.md](INQUIRY_SMOKE_FINDINGS.md). Afterward the persistent shared ledger recorded 387 calls and $2.27024512, paused with zero active or unknown calls. No counters were reset. Larger execution is deferred pending an operational missing-fact exchange and a meaningful control.
+
+
+## Full-corpus execution and repaired inquiry path
+
+The full-corpus experiment now covers all 517,401 parsed-date records rather than a selected two-week interval. See [the protocol](../docs/INQUIRY_FULL_CORPUS_PROTOCOL.md) for chronological admission, anomalous dates, sampling, and shared spending limits. Its live run is `inquiry-run-23e0700d8dc045979be55004fb5ea135`; final results will be reported separately from intermediate checkpoints.
+
+The implementation checkpoint passed 334 offline tests. Subsequent targeted checks passed 25 tests covering the source-memory adapter, inquiry engine, and bounded monitor storage. The real browser monitor was also checked: its run-list payload dropped from approximately 5 MB to 2.7 KB while retaining full canonical snapshots for resumption and export.
+
+Repairs include retained private source archives with relevance retrieval, scope-preserving source metadata, standalone factual peer requests and replies, full partial-answer forwarding, assigned-request binding, duplicate-read prevention, watch prefiltering and per-subscription coalescing, explicit inquiry membership permissions, and resumable ledger accounting. A controlled checkpoint restart loads live fixes without resetting the corpus prefix or spending. The full run is therefore an evolving-system experiment, not a clean fixed-version comparison.
+
+The terminal two-week diagnostic cost $0.61178788 for 148 paid calls. Its corrected audit checked 256 quotations and 205 exposure events with zero source-integrity failures. The [chronological review](INQUIRY_TWO_WEEKS_FINDINGS.md) documents interpretation errors despite valid quotations. These checks do not establish semantic accuracy or collective advantage.
