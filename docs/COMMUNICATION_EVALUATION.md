@@ -1,6 +1,6 @@
 # Evaluating swarm communication strategies
 
-Research note, **10 September 2026**. The purpose is to help experiment with communication in the existing library. This note adds no benchmark implementation. It narrows the broader [evaluation research](BENCHMARK_RESEARCH.md) to a practical question: **which messages, delivered to which agents at which times, improve externally verified outcomes for their cost?**
+Research note, **10 September 2026**. The purpose is to help experiment with communication in the existing library. The focused evaluator and original diagnostic fixtures are now implemented; see [running communication experiments](COMMUNICATION_EVAL_USAGE.md). This note records the research rationale. It narrows the broader [evaluation research](BENCHMARK_RESEARCH.md) to a practical question: **which messages, delivered to which agents at which times, improve externally verified outcomes for their cost?**
 
 ## What the research says to measure
 
@@ -88,7 +88,7 @@ Reasoning-token budgets alone may omit prompt processing, final output and commu
 | [`counterfactual_message_credit`](../src/swarmkit/learning.py) | Deterministic leave-one-message-out utility differences | It calls the supplied evaluator; it does not itself replay model/environment trajectories. Static rescoring is not an end-to-end causal experiment |
 | [`matched_independent_control`](../src/swarmkit/evaluation.py) | Paired interacting/isolated callbacks | Declared budgets are passed to callbacks, not enforced inside opaque model calls. Initial inboxes also remain part of each isolated input |
 
-These are research constraints on interpretation, not fixes made in this task. Before experimenting, draw the actual information paths—messages, internal boards, artifacts, memory and tool effects—and identify which path each ablation changes.
+These remain constraints on using the original algorithms. The new communication evaluator uses private contexts and explicit receipt tracking, without changing those algorithms. Before experimenting, draw the actual information paths—messages, internal boards, artifacts, memory and tool effects—and identify which path each ablation changes.
 
 ## A manageable first study
 

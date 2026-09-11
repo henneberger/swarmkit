@@ -7,7 +7,7 @@ root = Path(__file__).resolve().parents[1]
 rows = [
     '# Algorithm and method catalog', '',
     'This table is generated from `swarmkit.catalog.methods()`. All listed targets are importable implementations. Runtime protocols and shared records are described in [API.md](API.md).', '',
-    'Fidelity labels: **primitive** is general infrastructure; **mechanism** implements the stated local operation; **component** supplies one part of a larger method; **adaptation** changes the published method for a common API; **baseline** is a deliberately simpler comparator; **design** is an explicit synthesis; **metric** measures a limited property. None claims to reproduce a paper’s full experimental results.', '',
+    'Fidelity labels: **primitive** is general infrastructure; **mechanism** implements the stated local operation; **component** supplies one part of a larger method; **adaptation** changes the published method for a common API; **baseline** is a deliberately simpler comparator; **design** is an explicit synthesis; **metric** measures a limited property. **implemented_core** is a self-contained economic component; **numpy_adaptation** is a small numerical research adaptation; **callback_training** executes caller-supplied learning; **optional_adapter** invokes an external solver. None claims to reproduce a paper’s full experimental results.', '',
     f'There are **{len(methods())} registered entries**. Some entries expose several operations (for example graph sampling, learning and pruning).', '',
 ]
 for family in dict.fromkeys(item.family for item in methods()):

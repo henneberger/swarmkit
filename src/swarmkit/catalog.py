@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from importlib import import_module
 
+from .economics.catalog import ECONOMIC_METHODS
 from .types import MethodInfo
 
 
@@ -411,6 +412,19 @@ _ENTRIES = (
         "Compare shared interaction with matched independent agent budgets.",
         "Callbacks are responsible for honoring supplied work budgets.",
     ),
+)
+
+
+
+_ENTRIES += tuple(
+    _entry(name, "economics", "economics."+api, source, fidelity, description, limits)
+    for name, api, source, fidelity, description, limits in ECONOMIC_METHODS
+)
+_ENTRIES += (
+    _entry("communication_evaluation", "evaluation", "benchmarks.CommunicationEvaluator",
+           "https://arxiv.org/abs/1903.05168", "design",
+           "Private-channel experiments, actual receipts and checkpoint interventions.",
+           "Original diagnostic tasks; external model/tool determinism is caller-owned."),
 )
 
 

@@ -1,6 +1,6 @@
 # Economic games for hypergraph agent swarms
 
-Research date: **10 September 2026**. This is a design and source review for SwarmKit's Python library. Proposed APIs below are **not implemented**. Downloaded repositories were statically inspected; their experiments were not reproduced.
+Research date: **10 September 2026**. This is a design and source review for SwarmKit's Python library. The APIs proposed in this review are **now implemented** in `swarmkit.economics`; see [implementation scope and usage](ECONOMICS_USAGE.md) for exact components, numerical adaptations, optional solvers and caller-supplied training requirements. The architecture discussion below records the original design rationale. Downloaded repositories were statically inspected; their experiments were not reproduced.
 
 The most useful extension is a **game layer attached to persistent hyperedges**, with separate mechanisms, strategies, and evaluators. This would let the same swarm bargain over task assignments, compete for compute, fund shared evidence, form coalitions, and learn against a changing population. A hyperedge must retain its own participants, information rules, action timing, resource constraints, payoff function, and settlement history.
 
@@ -98,7 +98,7 @@ The archived primary blogs explain [social dilemmas](https://deepmind.google/blo
 
 ## Proposed Python architecture
 
-Keep the current NumPy-only core; put external solvers, hypergraph packages, and neural training behind optional adapters. The following names describe a proposed API, not current imports.
+Keep the current NumPy-only core; put external solvers, hypergraph packages, and neural training behind optional adapters. The original architecture below informed the implementation. Concrete current imports and callback boundaries are documented in the [usage guide](ECONOMICS_USAGE.md).
 
 | Proposed record/protocol | Required responsibility |
 |---|---|

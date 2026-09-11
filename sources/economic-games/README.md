@@ -8,7 +8,7 @@ The archive occupies approximately 1.5 GB including full shallow checkouts. No u
 
 - [Collection plan](collection-plan.json): selected sources and their purposes.
 - [Manifest](manifest.json): retrieval times, source URLs, hashes, repository commits, text availability and failures.
-- [Candidate methods](method-candidates.json): 26 proposed components with applications, assumptions, strategies and metrics.
+- [Candidate methods](method-candidates.json): 26 implemented components with fidelity, API names, applications, assumptions, strategies and metrics. See the [usage guide](../../docs/ECONOMICS_USAGE.md).
 - [Repository audit](repository-audit.md): inspected paths and integration judgments.
 - [BibTeX](references.bib): source metadata, including explicit retrieval status.
 

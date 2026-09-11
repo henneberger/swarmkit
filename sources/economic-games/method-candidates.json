@@ -1,10 +1,10 @@
 {
-  "scope": "Proposed economic game extensions; not the existing SwarmKit runtime catalog",
+  "scope": "Implemented economic extensions; fidelity and dependencies recorded per candidate",
   "candidates": [
     {
       "id": "normal_form",
       "component_kind": "game",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "implemented_core",
       "build_stage": 1,
       "proposed_api": [
         "NormalFormGame"
@@ -23,12 +23,20 @@
       "metrics": [
         "unilateral deviation gain",
         "welfare"
+      ],
+      "implemented_api": [
+        "NormalFormGame"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "repeated_games",
       "component_kind": "game_and_strategies",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "implemented_core",
       "build_stage": 1,
       "proposed_api": [
         "RepeatedGame"
@@ -48,12 +56,20 @@
         "cross play",
         "cooperation",
         "worst partner utility"
+      ],
+      "implemented_api": [
+        "RepeatedGame"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "public_goods",
       "component_kind": "game",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "implemented_core",
       "build_stage": 1,
       "proposed_api": [
         "HypergraphPublicGoods"
@@ -73,12 +89,20 @@
         "welfare",
         "cooperation",
         "degree bias"
+      ],
+      "implemented_api": [
+        "HypergraphPublicGoods"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "threshold_coalitions",
       "component_kind": "game",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "numpy_adaptation",
       "build_stage": 3,
       "proposed_api": [
         "ThresholdTeamGame"
@@ -96,12 +120,20 @@
       "metrics": [
         "task success",
         "blocking coalitions"
+      ],
+      "implemented_api": [
+        "ThresholdTeamGame"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "contract_net",
       "component_kind": "mechanism",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "implemented_core",
       "build_stage": 2,
       "proposed_api": [
         "ContractNet"
@@ -120,12 +152,20 @@
         "completion",
         "allocation cost",
         "failed delivery"
+      ],
+      "implemented_api": [
+        "ContractNet"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "single_item_auctions",
       "component_kind": "mechanism",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "implemented_core",
       "build_stage": 2,
       "proposed_api": [
         "FirstPriceAuction",
@@ -146,12 +186,22 @@
         "allocation efficiency",
         "payment correctness",
         "misreport gain"
+      ],
+      "implemented_api": [
+        "FirstPriceAuction",
+        "SecondPriceAuction",
+        "ReverseAuction"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "combinatorial_vcg",
       "component_kind": "mechanism",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "implemented_core",
       "build_stage": 3,
       "proposed_api": [
         "CombinatorialAuction",
@@ -171,12 +221,21 @@
         "oracle welfare",
         "deviation gain",
         "solver cost"
+      ],
+      "implemented_api": [
+        "CombinatorialAuction",
+        "VCGPayments"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "double_auction",
       "component_kind": "mechanism",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "implemented_core",
       "build_stage": 2,
       "proposed_api": [
         "DoubleAuction"
@@ -195,12 +254,20 @@
         "gains from trade",
         "price dispersion",
         "role surplus"
+      ],
+      "implemented_api": [
+        "DoubleAuction"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "congestion",
       "component_kind": "game",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "implemented_core",
       "build_stage": 2,
       "proposed_api": [
         "CongestionGame"
@@ -218,12 +285,20 @@
         "load",
         "latency",
         "empirical efficiency"
+      ],
+      "implemented_api": [
+        "CongestionGame"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "stable_matching",
       "component_kind": "mechanism",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "implemented_core",
       "build_stage": 2,
       "proposed_api": [
         "DeferredAcceptance"
@@ -241,12 +316,20 @@
         "blocking pairs",
         "participation",
         "task fit"
+      ],
+      "implemented_api": [
+        "DeferredAcceptance"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "bargaining",
       "component_kind": "game_and_solution",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "implemented_core",
       "build_stage": 3,
       "proposed_api": [
         "AlternatingOffers",
@@ -267,12 +350,21 @@
         "agreement surplus",
         "fairness",
         "invalid offers"
+      ],
+      "implemented_api": [
+        "AlternatingOffers",
+        "NashBargaining"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "coalition_value",
       "component_kind": "solution",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "implemented_core",
       "build_stage": 3,
       "proposed_api": [
         "ShapleyEstimator",
@@ -288,16 +380,26 @@
         "coalition proposals",
         "entry and exit"
       ],
-      "assumptions_and_limits": "Original Shapley download blocked; scanned Myerson; implement after deeper primary review",
+      "assumptions_and_limits": "Normalized characteristic value; exact permutation limit 9; sampled estimates include standard errors; graph restriction extends to fully contained hyperedges",
       "metrics": [
         "marginal contribution uncertainty",
         "blocking gain"
+      ],
+      "implemented_api": [
+        "ShapleyEstimator",
+        "CoreDiagnostic",
+        "RestrictedCoalitionValue"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "prediction_market",
       "component_kind": "mechanism",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "implemented_core",
       "build_stage": 3,
       "proposed_api": [
         "LMSRMarket"
@@ -315,12 +417,20 @@
         "proper score",
         "calibration",
         "market maker loss"
+      ],
+      "implemented_api": [
+        "LMSRMarket"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "external_regret",
       "component_kind": "strategy",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "implemented_core",
       "build_stage": 4,
       "proposed_api": [
         "ExternalRegretPolicy"
@@ -337,12 +447,20 @@
       "metrics": [
         "external regret",
         "empirical joint distribution"
+      ],
+      "implemented_api": [
+        "ExternalRegretPolicy"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "internal_regret",
       "component_kind": "strategy",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "implemented_core",
       "build_stage": 4,
       "proposed_api": [
         "InternalRegretPolicy"
@@ -359,12 +477,20 @@
       "metrics": [
         "swap regret",
         "CE violation"
+      ],
+      "implemented_api": [
+        "InternalRegretPolicy"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "cfr",
       "component_kind": "solver_adapter",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "optional_adapter",
       "build_stage": 4,
       "proposed_api": [
         "OpenSpielCFR"
@@ -382,12 +508,20 @@
         "exploitability",
         "information leakage",
         "runtime"
+      ],
+      "implemented_api": [
+        "OpenSpielCFR"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "psro",
       "component_kind": "population_trainer",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "numpy_adaptation",
       "build_stage": 4,
       "proposed_api": [
         "PolicySpaceResponseOracles"
@@ -405,12 +539,20 @@
         "cross play",
         "restricted deviation gain",
         "held-out partners"
+      ],
+      "implemented_api": [
+        "PolicySpaceResponseOracles"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "alpharank",
       "component_kind": "evaluation",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "implemented_core",
       "build_stage": 4,
       "proposed_api": [
         "AlphaRankEvaluator"
@@ -427,12 +569,20 @@
         "stationary mass",
         "payoff uncertainty",
         "cycles"
+      ],
+      "implemented_api": [
+        "AlphaRankEvaluator"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "opponent_shaping",
       "component_kind": "strategy",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "numpy_adaptation",
       "build_stage": 5,
       "proposed_api": [
         "LOLAAdapter",
@@ -451,12 +601,21 @@
         "cross play",
         "exploitation",
         "parameterization sensitivity"
+      ],
+      "implemented_api": [
+        "LOLAAdapter",
+        "POLAAdapter"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "mean_field",
       "component_kind": "population_approximation",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "numpy_adaptation",
       "build_stage": 5,
       "proposed_api": [
         "MultiTypeMeanField"
@@ -474,12 +633,20 @@
       "metrics": [
         "error versus exact small population",
         "scalability"
+      ],
+      "implemented_api": [
+        "MultiTypeMeanField"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "learned_auctions",
       "component_kind": "mechanism_learning",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "numpy_adaptation",
       "build_stage": 5,
       "proposed_api": [
         "LearnedAuction"
@@ -496,12 +663,20 @@
         "held-out regret",
         "revenue",
         "feasibility"
+      ],
+      "implemented_api": [
+        "LearnedAuction"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "learned_institutions",
       "component_kind": "mechanism_learning",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "callback_training",
       "build_stage": 5,
       "proposed_api": [
         "TwoLevelInstitution"
@@ -518,12 +693,20 @@
         "welfare",
         "inequality",
         "distribution shift"
+      ],
+      "implemented_api": [
+        "TwoLevelInstitution"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "other_regarding_q",
       "component_kind": "strategy",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "numpy_adaptation",
       "build_stage": 4,
       "proposed_api": [
         "GroupHistoryQPolicy"
@@ -540,12 +723,20 @@
         "cooperation",
         "task utility",
         "degree-normalized payoff"
+      ],
+      "implemented_api": [
+        "GroupHistoryQPolicy"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "language_self_play",
       "component_kind": "strategy_training",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "callback_training",
       "build_stage": 5,
       "proposed_api": [
         "NegotiationSelfPlay"
@@ -564,12 +755,20 @@
         "legal actions",
         "surplus",
         "cross play"
+      ],
+      "implemented_api": [
+        "NegotiationSelfPlay"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "information_design",
       "component_kind": "information_policy",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "numpy_adaptation",
       "build_stage": 5,
       "proposed_api": [
         "FramingAndDisclosurePolicy"
@@ -587,12 +786,20 @@
         "accuracy",
         "sender utility",
         "recipient utility"
+      ],
+      "implemented_api": [
+        "FramingAndDisclosurePolicy"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     },
     {
       "id": "leader_follower",
       "component_kind": "game",
-      "implementation_status": "proposed_not_implemented",
+      "implementation_status": "numpy_adaptation",
       "build_stage": 5,
       "proposed_api": [
         "StackelbergContractGame"
@@ -611,6 +818,14 @@
         "worker participation",
         "effort",
         "model sensitivity"
+      ],
+      "implemented_api": [
+        "StackelbergContractGame"
+      ],
+      "module": "swarmkit.economics",
+      "usage_guide": "docs/ECONOMICS_USAGE.md",
+      "tests": [
+        "tests/test_economics.py"
       ]
     }
   ]

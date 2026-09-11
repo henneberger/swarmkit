@@ -4,11 +4,11 @@
 
 SwarmKit is a Python library for building populations of agents that explore independently, exchange evidence, challenge conclusions, and reuse discoveries. It brings communication, deliberation, learning, and evaluation into one shared type system, so you can combine mechanisms and test what each contributes.
 
-The library includes **49 registered methods**, a provider-neutral async runtime, deterministic offline examples, and an optional DeepSeek client with persistent spending controls. Python **3.10+** is required; **NumPy is the only required third-party runtime dependency**.
+The library includes **76 registered methods**, a provider-neutral async runtime, deterministic offline examples, and an optional DeepSeek client with persistent spending controls. Python **3.10+** is required; **NumPy is the only required third-party runtime dependency**.
 
 [Method catalog](docs/METHODS.md) · [API and composition guide](docs/API.md) · [Research background](SWARMS_REPORT.md) · [Attribution](THIRD_PARTY_NOTICES.md)
 
-[Economic games research](docs/ECONOMIC_GAMES_RESEARCH.md) maps classical and modern game theory to proposed hypergraph-agent mechanisms, strategies, and evaluation methods. Its [downloaded source archive](sources/economic-games/README.md) includes papers, blog posts, pinned repository checkouts, and 26 implementation candidates; these extensions are research proposals, not registered methods yet.
+[Economic games](docs/ECONOMICS_USAGE.md) implements all 26 research-catalog entries as exact small-game components, numerical adaptations, callback-based trainers, and optional solvers. The [research guide](docs/ECONOMIC_GAMES_RESEARCH.md) and [source archive](sources/economic-games/README.md) record the underlying papers, repositories, assumptions, and limits.
 
 
 **On this page:** [Goals](#goals-and-motivation) · [Feature tour](#feature-tour) · [Get started](#get-started) · [Knowledge management and context graphs](#knowledge-management-and-context-graphs) · [Benchmarks and evaluations](#swarm-benchmarks-and-evaluations) · [Economic games: when to use them](#economic-games-when-to-use-them) · [Extension points](#extending-swarmkit) · [Relevance](#why-it-is-relevant) · [Scope](#scope-and-research-fidelity) · [Development](#development-and-project-layout)
@@ -31,7 +31,7 @@ You supply the agents, tools, task-specific evaluators, and environment. SwarmKi
 
 ## Feature tour
 
-The tour covers all 49 registered entries, plus runtime, persistence, and provider integration. Each section describes the usable API, the problem it addresses, and its extension points. Paper and project references identify mechanisms or motivations; the [full catalog](docs/METHODS.md) records per-method fidelity and limitations.
+The tour covers the core families, with dedicated guides for communication experiments and economics, plus runtime, persistence, and provider integration. Each section describes the usable API, the problem it addresses, and its extension points. Paper and project references identify mechanisms or motivations; the [full catalog](docs/METHODS.md) records per-method fidelity and limitations.
 
 ### 1. Shared records make algorithms interchangeable
 
@@ -494,7 +494,14 @@ The communication graph and the context graph serve different purposes: the firs
 
 ## Swarm benchmarks and evaluations
 
-**To experiment with communication strategies, start with [Evaluating swarm communication](docs/COMMUNICATION_EVALUATION.md).** It covers routing, timing, message contents and compression; controls that separate communication gains from extra computation; outcome and cost measurements; and existing shared-state paths that affect experiments. It includes a small proposed pilot and [downloaded foundational papers](sources/communication-evaluation/README.md). This is research guidance, not a new benchmark implementation.
+**To experiment with communication strategies, use the [executable evaluation guide](docs/COMMUNICATION_EVAL_USAGE.md).** It covers private observations, routing, timing, compression, measured delivery/cost, paired controls, and message-removal replay. The [research note](docs/COMMUNICATION_EVALUATION.md) explains the design.
+
+```sh
+python -m swarmkit.benchmarks --cases 30 --agents 4 --budgets 4 16 --output evidence-results.json
+python -m swarmkit.benchmarks --task schedule --cases 30 --output schedule-results.json
+```
+
+These original diagnostic tasks compare no messages, broadcast, request/disclosure, targeted and gated exchange. Replace the reference `EvidenceAgent` with canonical `Agent` callbacks to evaluate your models. Use distributed evidence to inspect information delivery/use and joint scheduling to measure coordination failures. Reports include outcomes, receipts, quality/cost summaries and paired intervals; unknown model usage stays unknown.
 
 Use the [benchmark research review](docs/BENCHMARK_RESEARCH.md) and [evaluation suite specification](docs/BENCHMARK_SUITE.md) when designing experiments to determine **whether a collective mechanism improves useful outcomes at a known cost**. The review covers current multi-agent benchmarks, realistic workflow and coding tasks, decentralized coordination, strategic interaction, and continual learning. It includes code-level grading limitations that matter when interpreting published results.
 
@@ -513,7 +520,7 @@ The suite specifies eight primary tracks:
 
 Each specification defines a scenario, scaling axes, verifier, controls, failure modes and integration path. Compare task success, resource use and robustness separately. A no-message condition still permits indirect communication if agents share files or environment state; a full-information single-agent condition changes access and must be labeled accordingly. Puzzles are optional microdiagnostics rather than the organizing principle of the suite.
 
-**Status:** this is completed research and a proposed evaluation specification. Runnable environment adapters and generators are not implemented or registered. Existing utilities in [`swarmkit.evaluation`](src/swarmkit/evaluation.py) remain available for paired controls, evidence recovery and transfer measurements.
+**Status:** the broad eight-track suite remains a specification. The focused communication evaluator and two diagnostic generators are implemented in [`swarmkit.benchmarks`](src/swarmkit/benchmarks/). They are not reproductions of upstream benchmark environments. Existing utilities in [`swarmkit.evaluation`](src/swarmkit/evaluation.py) remain available.
 
 The [source archive](sources/benchmarks/README.md) contains 16 paper downloads, seven pinned Git checkouts, a [repository audit](sources/benchmarks/repository-audit.md), and [machine-readable specifications](sources/benchmarks/suite-spec.json). Read the research review for distinctions between published claims, inspected code, and our proposed adaptations.
 
@@ -521,11 +528,29 @@ The [source archive](sources/benchmarks/README.md) contains 16 paper downloads, 
 
 Use economic-game models when agents' choices depend on **scarce resources, different objectives, private information, or the behavior of other agents**. They let you study who should do a task, what information an agent chooses to share, how a team divides rewards, and whether a strategy remains effective against unfamiliar partners.
 
-**Status:** the [economic-games research guide](docs/ECONOMIC_GAMES_RESEARCH.md) describes proposed extensions. Its 26 candidates are not included in the library's 49 registered methods. SwarmKit already supplies agent records, group communication, execution, feedback, and artifact verification; economic game state, private valuations, contracts, and settlement still need implementation.
+**Status:** all 26 economic candidates now have public implementations and registry entries. See the [implementation/usage guide](docs/ECONOMICS_USAGE.md) for exact domains, numerical adaptations, callback requirements and optional dependencies. Persistent economic edges, private views, simultaneous clearing, escrow and atomic settlement are included.
+
+```sh
+python -m swarmkit list --family economics
+python examples/economic_games.py
+# Optional upstream solver and hypergraph integrations:
+pip install -e '.[economics-solvers,hypergraphs]'
+```
+
+```python
+from swarmkit.economics import CombinatorialAuction, VCGPayments
+auction = VCGPayments(CombinatorialAuction(["gpu", "dataset"]))
+result = auction.clear({
+    "team": {("gpu", "dataset"): 10},
+    "gpu-only": {("gpu",): 4},
+    "data-only": {("dataset",): 5},
+})
+assert result["payments"]["team"] == 9
+```
 
 ### Choose a model for the problem
 
-The following are proposed applications and experiment starting points. The research guide records their sources, assumptions, and limits.
+The following are applications and experiment starting points; specific implemented domains are listed in the usage guide. The research guide records their sources, assumptions, and limits.
 
 | When your swarm needs to… | Models to explore | Strategies or controls to compare |
 |---|---|---|
@@ -543,7 +568,7 @@ The following are proposed applications and experiment starting points. The rese
 
 Use an economic hyperedge when a **whole group's joint choices** determine an outcome. For example, a research task may require a scout, an analyst, and a reviewer before its artifact has value. A team bid can represent that complementarity, while a shared effort budget prevents an agent from promising the same capacity to multiple teams.
 
-The current `HypergraphTopology` controls which peers can communicate through shared groups. The proposed economic layer would preserve each group's identity, roles, action rules, payoffs, and settlement history. Overlapping groups also require joint resource checks: two contracts cannot independently spend the same agent balance.
+`HypergraphTopology` controls communication neighborhoods. `EconomicHyperedge` and `EconomicArena` preserve group identity, roles, private views and settlement history. Overlapping groups share a `Ledger`; reservations prevent two contracts from spending the same available balance. Clearing is explicitly ordered across groups.
 
 For a first experiment, compare fixed assignment and capability routing with team procurement on a task that requires all three specialists. Verify the delivered artifact, account for actual execution costs, and measure team success and each participant's utility. Add negotiated reward sharing or learned bidding only after the basic allocation and settlement behavior is testable.
 
@@ -553,7 +578,7 @@ If all agents share one objective and the question is simply who receives eviden
 
 - [Research guide](docs/ECONOMIC_GAMES_RESEARCH.md): classical foundations, modern techniques, proposed Python interfaces, staged build order, and acceptance experiments.
 - [Source library](sources/economic-games/README.md): 25 downloaded PDFs, five blog posts, and 14 pinned Git checkouts, with download and extraction limitations recorded.
-- [Candidate catalog](sources/economic-games/method-candidates.json): 26 proposed components with strategies, assumptions, metrics, and source IDs.
+- [Candidate catalog](sources/economic-games/method-candidates.json): 26 implemented components with fidelity, API names, strategies, assumptions, metrics, and source IDs.
 - [Repository audit](sources/economic-games/repository-audit.md): inspected code paths and suitability for optional adapters or research reference.
 
 ## Extending SwarmKit
@@ -614,6 +639,8 @@ Tests use synthetic fixtures and fake provider transports; API credentials are n
 | `examples/` | Offline library compositions |
 | `tests/` | Unit and integration tests |
 | `docs/` | Method catalog, API contracts, and application documentation |
+| `src/swarmkit/economics/` | Economic models, mechanisms, strategies, settlement, training and optional adapters |
+| `src/swarmkit/benchmarks/` | Communication experiments, exact diagnostic tasks, offline pilot CLI |
 | `sources/`, `repositories/` | Research inventory and pinned upstream Git submodules |
 | `sources/economic-games/` | Economic-game papers, posts, provenance records, candidate catalog, and separate Git-ignored research checkouts |
 | `sources/benchmarks/` | Benchmark research, source provenance, repository audits and eight evaluation specifications |
