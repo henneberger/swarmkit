@@ -1,0 +1,247 @@
+
+
+  [1903.05168] On the Pitfalls of Measuring Emergent Communication
+
+    Skip to main content
+
+      Search
+
+    Submit
+    Donate
+
+      Log in
+
+      Search arXiv
+
+      Press Enter to search · Advanced search
+
+Computer Science > Machine Learning
+
+      arXiv:1903.05168 (cs)
+
+  [Submitted on 12 Mar 2019]
+
+Title:On the Pitfalls of Measuring Emergent Communication
+
+Authors:Ryan Lowe, Jakob Foerster, Y-Lan Boureau, Joelle Pineau, Yann Dauphin            
+View a PDF of the paper titled On the Pitfalls of Measuring Emergent Communication, by Ryan Lowe and Jakob Foerster and Y-Lan Boureau and Joelle Pineau and Yann Dauphin
+    View PDF
+    HTML (experimental)
+
+            Abstract:How do we know if communication is emerging in a multi-agent system? The vast majority of recent papers on emergent communication show that adding a communication channel leads to an increase in reward or task success. This is a useful indicator, but provides only a coarse measure of the agent's learned communication abilities. As we move towards more complex environments, it becomes imperative to have a set of finer tools that allow qualitative and quantitative insights into the emergence of communication. This may be especially useful to allow humans to monitor agents' behaviour, whether for fault detection, assessing performance, or even building trust. In this paper, we examine a few intuitive existing metrics for measuring communication, and show that they can be misleading. Specifically, by training deep reinforcement learning agents to play simple matrix games augmented with a communication channel, we find a scenario where agents appear to communicate (their messages provide information about their subsequent action), and yet the messages do not impact the environment or other agent in any way. We explain this phenomenon using ablation studies and by visualizing the representations of the learned policies. We also survey some commonly used metrics for measuring emergent communication, and provide recommendations as to when these metrics should be used.
+
+          Comments:
+          AAMAS 2019. 13 pages
+
+          Subjects:
+
+            Machine Learning (cs.LG); Artificial Intelligence (cs.AI); Computation and Language (cs.CL); Machine Learning (stat.ML)
+
+          Cite as:
+          arXiv:1903.05168 [cs.LG]
+
+          (or 
+              arXiv:1903.05168v1 [cs.LG] for this version)
+
+                        https://doi.org/10.48550/arXiv.1903.05168
+
+                Focus to learn more
+
+                                  arXiv-issued DOI via DataCite
+
+Submission history From: Ryan Lowe T. [view email]      
+    [v1]
+        Tue, 12 Mar 2019 19:33:49 UTC (3,164 KB)
+
+      Full-text links:
+
+Access Paper:
+
+View a PDF of the paper titled On the Pitfalls of Measuring Emergent Communication, by Ryan Lowe and Jakob Foerster and Y-Lan Boureau and Joelle Pineau and Yann Dauphin
+View PDF
+HTML (experimental)
+TeX Source
+
+view license
+
+Current browse context:
+
+cs.LG
+
+      < prev
+
+      |      
+      next >
+
+    new
+     | 
+    recent
+     | 2019-03
+
+    Change to browse by:
+
+        cs
+
+        cs.AI
+
+        cs.CL
+
+        stat
+
+        stat.ML
+
+References & Citations
+
+NASA ADS
+Google Scholar
+
+Semantic Scholar
+
+DBLP - CS Bibliography
+
+      listing | bibtex    
+
+Ryan Lowe
+Jakob N. Foerster
+Jakob Foerster
+Y-Lan Boureau
+Y.-Lan Boureau      
+…
+
+    export BibTeX citation
+    Loading...
+
+BibTeX formatted citation
+            ×
+
+            loading...
+
+            Data provided by: 
+
+Bookmark
+
+    Bibliographic Tools
+
+Bibliographic and Citation Tools
+
+              Bibliographic Explorer Toggle
+
+            Bibliographic Explorer (What is the Explorer?)
+
+              Connected Papers Toggle
+
+            Connected Papers (What is Connected Papers?)
+
+              Litmaps Toggle
+
+            Litmaps (What is Litmaps?)
+
+              scite.ai Toggle
+
+            scite Smart Citations (What are Smart Citations?)
+
+    Code, Data, Media
+
+Code, Data and Media Associated with this Article
+
+              alphaXiv Toggle
+
+            alphaXiv (What is alphaXiv?)
+
+              Links to Code Toggle
+
+            CatalyzeX Code Finder for Papers (What is CatalyzeX?)
+
+              DagsHub Toggle
+
+            DagsHub (What is DagsHub?)
+
+              GotitPub Toggle
+
+            Gotit.pub (What is GotitPub?)
+
+              Huggingface Toggle
+
+            Hugging Face (What is Huggingface?)
+
+              ScienceCast Toggle
+
+            ScienceCast (What is ScienceCast?)
+
+      Demos
+
+Demos
+
+                Replicate Toggle
+
+              Replicate (What is Replicate?)
+
+                Spaces Toggle
+
+              Hugging Face Spaces (What is Spaces?)
+
+                Spaces Toggle
+
+              TXYZ.AI (What is TXYZ.AI?)
+
+      Related Papers
+
+Recommenders and Search Tools
+
+                Link to Influence Flower
+
+              Influence Flower (What are Influence Flowers?)
+
+                Core recommender toggle
+
+              CORE Recommender (What is CORE?)
+
+                IArxiv recommender toggle
+
+              IArxiv Recommender
+              (What is IArxiv?)
+
+Author
+
+Venue
+
+Institution
+
+Topic
+
+        About arXivLabs
+
+arXivLabs: experimental projects with community collaborators
+
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+
+Have an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.
+
+    Which authors of this paper are endorsers? |
+    Disable MathJax (What is MathJax?)
+
+        We gratefully acknowledge support from
+        our major funders,
+        member institutions, ,
+        and all contributors.
+
+        About
+        ·
+        Help
+        ·
+        Contact
+        ·
+        Subscribe
+        ·
+        Copyright
+        ·
+        Privacy
+        ·
+        Accessibility
+        ·
+        Operational Status (opens in new tab)
+
+Major funding support from
+

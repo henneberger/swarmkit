@@ -1,0 +1,112 @@
+{
+  "kind": "papers",
+  "id": "1812.09755",
+  "title": "Learning when to Communicate at Scale in Multiagent Cooperative and Competitive Tasks",
+  "page_url": "https://arxiv.org/abs/1812.09755",
+  "pdf_url": "https://arxiv.org/pdf/1812.09755",
+  "retrieved_at": "2026-09-10T23:58:16.491512+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/1812.09755",
+      "resolved_url": "https://arxiv.org/abs/1812.09755",
+      "path": "sources/communication-evaluation/papers/1812.09755/page.html",
+      "bytes": 42832,
+      "sha256": "11dd72e7f2d23eda1a2f57116de69b2a7737aae82d786675ce52943410522f71"
+    },
+    {
+      "url": "https://arxiv.org/pdf/1812.09755",
+      "resolved_url": "https://arxiv.org/pdf/1812.09755",
+      "path": "sources/communication-evaluation/papers/1812.09755/paper.pdf",
+      "bytes": 1666929,
+      "sha256": "ce68b412be766ff61aa6d75cf04a74836af505b23ac8b96d14f6e906889daed1"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 1812.09755: Learning when to Communicate at Scale in Multiagent Cooperative and Competitive Tasks"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "Learning when to Communicate at Scale in Multiagent Cooperative and Competitive Tasks"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/1812.09755v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "Learning when to communicate and doing that effectively is essential in multi-agent tasks. Recent works show that continuous communication allows efficient training with back-propagation in multi-agent scenarios, but have been restricted to fully-cooperative tasks. In this paper, we present Individualized Controlled Continuous Communication Model (IC3Net) which has better training efficiency than simple continuous communication model, and can be applied to semi-cooperative and competitive settings along with the cooperative settings. IC3Net controls continuous communication with a gating mechanism and uses individualized rewards foreach agent to gain better performance and scalability while fixing credit assignment issues. Using variety of tasks including StarCraft BroodWars explore and combat scenarios, we show that our network yields improved performance and convergence rates than the baselines as the scale increases. Our results convey that IC3Net agents learn when to communicate based on the scenario and profitability."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "Learning when to Communicate at Scale in Multiagent Cooperative..."
+    ],
+    "twitter:description": [
+      "Learning when to communicate and doing that effectively is essential in multi-agent tasks. Recent works show that continuous communication allows efficient training with back-propagation in..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "Learning when to Communicate at Scale in Multiagent Cooperative and Competitive Tasks"
+    ],
+    "citation_author": [
+      "Singh, Amanpreet",
+      "Jain, Tushar",
+      "Sukhbaatar, Sainbayar"
+    ],
+    "citation_date": [
+      "2018/12/23"
+    ],
+    "citation_online_date": [
+      "2018/12/23"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/1812.09755"
+    ],
+    "citation_arxiv_id": [
+      "1812.09755"
+    ],
+    "citation_abstract": [
+      "Learning when to communicate and doing that effectively is essential in multi-agent tasks. Recent works show that continuous communication allows efficient training with back-propagation in multi-agent scenarios, but have been restricted to fully-cooperative tasks. In this paper, we present Individualized Controlled Continuous Communication Model (IC3Net) which has better training efficiency than simple continuous communication model, and can be applied to semi-cooperative and competitive settings along with the cooperative settings. IC3Net controls continuous communication with a gating mechanism and uses individualized rewards foreach agent to gain better performance and scalability while fixing credit assignment issues. Using variety of tasks including StarCraft BroodWars explore and combat scenarios, we show that our network yields improved performance and convergence rates than the baselines as the scale increases. Our results convey that IC3Net agents learn when to communicate based on the scenario and profitability."
+    ]
+  },
+  "extracted_text_characters": 60978,
+  "text_searchable": true
+}

@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "kind": "papers",
+      "id": "1903.05168",
+      "title": "On the Pitfalls of Measuring Emergent Communication",
+      "page_url": "https://arxiv.org/abs/1903.05168",
+      "pdf_url": "https://arxiv.org/pdf/1903.05168"
+    },
+    {
+      "kind": "papers",
+      "id": "1810.08647",
+      "title": "Social Influence as Intrinsic Motivation for Multi-Agent Deep Reinforcement Learning",
+      "page_url": "https://arxiv.org/abs/1810.08647",
+      "pdf_url": "https://arxiv.org/pdf/1810.08647"
+    },
+    {
+      "kind": "papers",
+      "id": "1810.11187",
+      "title": "TarMAC: Targeted Multi-Agent Communication",
+      "page_url": "https://arxiv.org/abs/1810.11187",
+      "pdf_url": "https://arxiv.org/pdf/1810.11187"
+    },
+    {
+      "kind": "papers",
+      "id": "1812.09755",
+      "title": "Learning when to Communicate at Scale in Multiagent Cooperative and Competitive Tasks",
+      "page_url": "https://arxiv.org/abs/1812.09755",
+      "pdf_url": "https://arxiv.org/pdf/1812.09755"
+    }
+  ]
+}

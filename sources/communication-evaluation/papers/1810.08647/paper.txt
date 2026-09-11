@@ -1,0 +1,1599 @@
+                                                                         Social Influence as Intrinsic Motivation
+                                                                     for Multi-Agent Deep Reinforcement Learning
+
+
+                                           Natasha Jaques 1 2 Angeliki Lazaridou 2 Edward Hughes 2 Caglar Gulcehre 2 Pedro A. Ortega 2 DJ Strouse 3
+                                                                                Joel Z. Leibo 2 Nando de Freitas 2
+
+
+                                                                   Abstract                               across a variety of tasks and environments, sometimes in
+arXiv:1810.08647v4 [cs.LG] 18 Jun 2019
+
+
+
+
+                                                We propose a unified mechanism for achieving              the absence of environmental reward (Singh et al., 2004).
+                                                coordination and communication in Multi-Agent             Previous approaches to intrinsic motivation often focus on
+                                                Reinforcement Learning (MARL), through                    curiosity (e.g. Pathak et al. (2017); Schmidhuber (2010)),
+                                                rewarding agents for having causal influence              or empowerment (e.g. Klyubin et al. (2005); Mohamed &
+                                                over other agents’ actions. Causal influence is           Rezende (2015)). Here, we consider the problem of deriving
+                                                assessed using counterfactual reasoning. At each          intrinsic social motivation from other agents in multi-agent
+                                                timestep, an agent simulates alternate actions that       RL (MARL). Social learning is incredibly important for
+                                                it could have taken, and computes their effect on         humans, and has been linked to our ability to achieve
+                                                the behavior of other agents. Actions that lead to        unprecedented progress and coordination on a massive scale
+                                                bigger changes in other agents’ behavior are con-         (Henrich, 2015; Harari, 2014; Laland, 2017; van Schaik &
+                                                sidered influential and are rewarded. We show that        Burkart, 2011; Herrmann et al., 2007). While some previous
+                                                this is equivalent to rewarding agents for having         work has investigated intrinsic social motivation for RL (e.g.
+                                                high mutual information between their actions.            Sequeira et al. (2011); Hughes et al. (2018); Peysakhovich &
+                                                Empirical results demonstrate that influence leads        Lerer (2018)), these approaches rely on hand-crafted rewards
+                                                to enhanced coordination and communication                specific to the environment, or allowing agents to view the
+                                                in challenging social dilemma environments,               rewards obtained by other agents. Such assumptions make it
+                                                dramatically increasing the learning curves of the        impossible to achieve independent training of MARL agents
+                                                deep RL agents, and leading to more meaningful            across multiple environments.
+                                                learned communication protocols. The influence            Achieving coordination among agents in MARL still remains
+                                                rewards for all agents can be computed in a               a difficult problem. Prior work in this domain (e.g., Foerster
+                                                decentralized way by enabling agents to learn a           et al. (2017; 2016)), often resorts to centralized training to
+                                                model of other agents using deep neural networks.         ensure that agents learn to coordinate. While communication
+                                                In contrast, key previous works on emergent               among agents could help with coordination, training emer-
+                                                communication in the MARL setting were unable             gent communication protocols also remains a challenging
+                                                to learn diverse policies in a decentralized manner       problem; recent empirical results underscore the difficulty
+                                                and had to resort to centralized training. Conse-         of learning meaningful emergent communication protocols,
+                                                quently, the influence reward opens up a window           even when relying on centralized training (e.g., Lazaridou
+                                                of new opportunities for research in this area.           et al. (2018); Cao et al. (2018); Foerster et al. (2016)).
+                                                                                                          We propose a unified method for achieving both coordination
+                                         1. Introduction                                                  and communication in MARL by giving agents an intrinsic
+                                                                                                          reward for having a causal influence on other agents’ actions.
+                                         Intrinsic Motivation for Reinforcement Learning (RL) refers      Causal influence is assessed using counterfactual reasoning;
+                                         to reward functions that allow agents to learn useful behavior   at each timestep, an agent simulates alternate, counterfactual
+                                            1
+                                              Media Lab, Massachusetts Institute of Technology, Cam-      actions that it could have taken, and assesses their effect
+                                         bridge, USA 2 Google DeepMind, London, UK 3 Princeton            on another agent’s behavior. Actions that lead to relatively
+                                         University, Princeton, USA. Correspondence to: Natasha           higher change in the other agent’s behavior are considered
+                                         Jaques <jaquesn@mit.edu>, Angeliki Lazaridou <ange-              to be highly influential and are rewarded. We show how
+                                         liki@google.com>.
+                                                                                                          this reward is related to maximizing the mutual information
+                                         Proceedings of the 35 th International Conference on Machine     between agents’ actions, and hypothesize that this inductive
+                                         Learning, Stockholm, Sweden, PMLR 80, 2018. Copyright 2018       bias will drive agents to learn coordinated behavior. Maximiz-
+                                         by the author(s).
+                                Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+ing mutual information as a form of intrinsic motivation has      and results that empirically demonstrate the efficacy of
+been studied in the literature on empowerment (e.g. Klyubin       the social influence reward. Related work is presented in
+et al. (2005); Mohamed & Rezende (2015)). Social influence        Section 7. Finally, more details about the causal inference
+can be seen as a novel, social form of empowerment.               procedure are given in Section 8.
+To study our influence reward, we adopt the Sequential So-
+cial Dilemma (SSD) multi-agent environments of Leibo et al.       2. Sequential Social Dilemmas
+(2017). Through a series of three experiments, we show that
+                                                                  Sequential Social Dilemmas (SSDs) (Leibo et al., 2017)
+the proposed social influence reward allows agents to learn to
+                                                                  are partially observable, spatially and temporally extended
+coordinate and communicate more effectively in these SSDs.
+                                                                  multi-agent games with a game-theoretic payoff structure.
+We train recurrent neural network policies directly from pix-
+                                                                  An individual agent can obtain higher reward in the
+els, and show in the first experiment that deep RL agents
+                                                                  short-term by engaging in defecting, non-cooperative
+trained with the proposed social influence reward learn ef-
+                                                                  behavior (and thus is greedily motivated to defect), but the
+fectively and attain higher collective reward than powerful
+                                                                  total payoff per agent will be higher if all agents cooperate.
+baseline deep RL agents, which often completely fail to learn.
+                                                                  Thus, the collective reward obtained by a group of agents
+In the second experiment, the influence reward is used to di-     in these SSDs gives a clear signal about how well the agents
+rectly train agents to use an explicit communication channel.     learned to cooperate (Hughes et al., 2018).
+We demonstrate that the communication protocols trained
+                                                                  We experiment with two SSDs in this work, a public
+with the influence reward are more meaningful and effective
+                                                                  goods game Cleanup, and a public pool resource game
+for obtaining better collective outcomes. Further, we find
+                                                                  Harvest. In both games apples (green tiles) provide the
+a significant correlation between being influenced through
+                                                                  rewards, but are a limited resource. Agents must coordinate
+communication messages and obtaining higher individual re-
+                                                                  harvesting apples with the behavior of other agents in order
+ward, suggesting that influential communication is beneficial
+                                                                  to achieve cooperation (for further details see Section 2 of
+to the agents that receive it. By examining the learning curves
+                                                                  the Supplementary Material). For reproducibility, the code
+in this second experiment, we again find that the influence
+                                                                  for these games has been made available in open-source.1
+reward is essential to allow agents to learn to coordinate.
+                                                                  As the Schelling diagrams in Figure 10 of the Supplementary
+Finally, we show that influence agents can be trained
+                                                                  Material reveal, all agents would benefit from learning to
+independently, when each agent is equipped with an internal
+                                                                  cooperate in these games, because even agents that are being
+neural network Model of Other Agents (MOA), which has
+                                                                  exploited get higher reward than in the regime where more
+been trained to predict the actions of every other agent. The
+                                                                  agents defect. However, traditional RL agents struggle to
+agent can then simulate counterfactual actions and use its
+                                                                  learn to coordinate or cooperate to solve these tasks effec-
+own internal MOA to predict how these will affect other
+                                                                  tively (Hughes et al., 2018). Thus, these SSDs represent chal-
+agents, thereby computing its own intrinsic influence reward.
+                                                                  lenging benchmark tasks for the social influence reward. Not
+Influence agents can thus learn socially, only through
+                                                                  only must influence agents learn to coordinate their behavior
+observing other agents’ actions, and without requiring a
+                                                                  to obtain high reward, they must also learn to cooperate.
+centralized controller or access to another agent’s reward
+function. Therefore, the influence reward offers us a simple,
+general and effective way of overcoming long-standing             3. Multi-Agent RL for SSDs
+unrealistic assumptions and limitations in this field of
+                                                                  We consider a MARL Markov game defined by the tuple
+research, including centralized training and the sharing of
+                                                                  hS,T,A,ri, in which multiple agents are trained to indepen-
+reward functions or policy parameters. Moreover, both
+                                                                  dently maximize their own individual reward; agents do
+the influence rewards as well as the agents’ policies can be
+                                                                  not share weights. The environment state is given by s ∈ S.
+learned directly from pixels using expressive deep recurrent
+                                                                  At each timestep t, each agent k chooses an action akt ∈ A.
+neural networks. In this third experiment, the learning curves
+                                                                  The actions of all N agents are combined to form a joint
+once again show that the influence reward is essential for
+                                                                  action at = [a0t ,...aN
+                                                                                        t ], which produces a transition in the
+learning to coordinate in these complex domains.
+                                                                  environment T (st+1 |at ,st ), according to the state transition
+The paper is structured as follows. We describe the envi-         distribution T . Each agent then receives its own reward
+ronments in Section 2, and the MARL setting in Section 3.         rk (at ,st ), which may depend on the actions of other agents.
+Section 4 introduces the basic formulation of the influence       A history of these variables over time is termed a trajectory,
+                                                                                     T
+reward, Section 5 extends it with the inclusion of explicit       τ = {st ,at ,rt }t=0 . We consider a partially observable
+communication protocols, and Section 6 advances it by                1
+including models of other agents to achieve independent              https://github.com/eugenevinitsky/
+                                                                  sequential_social_dilemma_games
+training. Each of these three sections presents experiments
+                                        Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+setting in which the kth agent can only view a portion of                          The reward in Eq. 4 is related to the mutual information (MI)
+the true state, skt . Each agent seeks to maximize
+                                               P∞ its own                          between the actions of agents k and j, I(ak ;aj |s). As the
+total expected discounted future reward, Rk = i=0 γ i rt+i
+                                                       k
+                                                           ,                       reward is computed over many trajectories sampled inde-
+where γ is the discount factor. A distributed asynchronous                         pendently from the environment, we obtain a Monte-Carlo
+advantage actor-critic (A3C) approach (Mnih et al., 2016)                          estimate of I(ak ;aj |s). In expectation, the influence reward
+is used to train each agent’s policy π k .                                         incentivizes agents to maximize the mutual information
+                                                                                   between their actions. The proof is given in Section 10.1
+Our neural networks consist of a convolutional layer, fully
+                                                                                   of the Supplementary Material. Intuitively, training agents
+connected layers, a Long Short Term Memory (LSTM)
+                                                                                   to maximize the MI between their actions results in more
+recurrent layer (Gers et al., 1999), and linear layers. All
+                                                                                   coordinated behavior.
+networks take images as input and output both the policy π k
+and the value function V πk (s), but some network variants                         Moreover, the variance of policy gradient updates increases
+consume additional inputs and output either communication                          as the number of agents in the environment grows (Lowe et al.,
+policies or models of other agents’ behavior. We will refer to                     2017). This issue can hinder convergence to equilibrium for
+the internal LSTM state of the kth agent at timestep t as ukt .                    large-scale MARL tasks. Social influence can reduce the
+                                                                                   variance of policy gradients by introducing explicit depen-
+4. Basic Social Influence                                                          dencies across the actions of each agent. This is because the
+                                                                                   conditional variance of the gradients an agent is receiving
+Social influence intrinsic motivation gives an agent addi-                         will be less than or equal to the marginalized variance.
+tional reward for having a causal influence on another agent’s
+                                                                                   Note that for the basic influence model we make two assump-
+actions. Specifically, it modifies an agent’s immediate reward
+                                                                                   tions: 1) we use centralized training to compute ckt directly
+so that it becomes rtk = αekt +βckt , where ekt is the extrinsic or
+                                                                                   from the policy of agent j, and 2) we assume that influence is
+environmental reward, and ckt is the causal influence reward.
+                                                                                   unidirectional: agents trained with the influence reward can
+To compute the causal influence of one agent on another,                           only influence agents that are not trained with the influence
+suppose there are two agents, k and j, and that agent j is                         reward (the sets of influencers and influencees are disjoint,
+able to condition its policy on agent k’s action at time t, akt .                  and the number of influencers is in [1,N −1]). Both of these
+Thus, agent j computes the probability of its next action                          assumptions are relaxed in later sections. Further details, as
+as p(ajt |akt ,sjt ). We can then intervene on akt by replacing                    well as further explanation of the causal inference procedure
+it with a counterfactual action, ãkt . This counterfactual                        (including causal diagrams) are available in Section 8.
+action is used to compute a new distribution over j’s next
+action, p(ajt |ãkt ,sjt ). Essentially, agent k asks a retrospective              4.1. Experiment I: Basic Influence
+question: “How would j’s action change if I had acted
+differently in this situation?”.                                                   Figure 1 shows the results of testing agents trained with the
+                                                                                   basic influence reward against standard A3C agents, and an
+By sampling several counterfactual actions, and av-                                ablated version of the model in which agents do not receive
+eraging the resulting policy distribution of j in                                  the influence reward, but are able to condition their policy
+each case, Pwe obtain the marginal policy of j,                                    on the actions of other agents (even when the other agents
+p(ajt |sjt ) =    ãk p(ajt |ãkt , sjt )p(ãkt |sjt ) —in other words,            are not within the agent’s partially observed view of the
+                    t
+j’s policy if it did not consider agent k. The discrepancy                         environment). We term this ablated model the visible actions
+between the marginal policy of j and the conditional policy                        baseline. In this and all other results figures, we measure
+of j given k’s action is a measure of the causal influence                         the total collective reward obtained using the best hyper-
+of k on j; it gives the degree to which j changes its planned                      parameter setting tested with 5 random seeds each. Error
+action distribution because of k’s action. Thus, the causal                        bars show a 99.5% confidence interval (CI) over the random
+influence reward for agent k is:                                                   seeds, computed within a sliding window of 200 agent steps.
+                                                                                   We use a curriculum learning approach which gradually
+          N
+          X h                                X j                               i   increases the weight of the social influence reward over C
+ckt =              DKL [p(ajt | akt ,sjt )    p(at | ãkt ,sjt )p(ãkt | sjt )]    steps (C ∈ [0.2−3.5]×108 ); this sometimes leads to a slight
+        j=0,j6=k                             ãk
+                                               t                                   delay before the influence models’ performance improves.
+          N
+          X h                                            i
+   =               DKL [p(ajt | akt ,sjt ) p(ajt | sjt )] .               (1)      As is evident in Figures 1a and 1b, introducing an awareness
+        j=0,j6=k
+                                                                                   of other agents’ actions helps, but having the social influence
+                                                                                   reward eventually leads to significantly higher collective
+Note that it is possible to use a divergence metric other than                     reward in both games. Due to the structure of the SSD games,
+KL; we have found empirically that the influence reward is                         we can infer that agents that obtain higher collective reward
+robust to the choice of metric.                                                    learned to cooperate more effectively. In the Harvest MARL
+                                Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+setting, it is clear that the influence reward is essential to        Harvest. This type of action-based communication could be
+achieve any reasonable learning.                                      likened to the bee waggle dance discovered by von Frisch
+                                                                      (1969). Evidently, the influence reward gave rise not only to
+                                                                      cooperative behavior, but to emergent communication.
+                                                                      It is important to consider the limitations of the influence
+                                                                      reward. Whether it will always give rise to cooperative be-
+                                                                      havior may depend on the specifics of the environment and
+                                                                      task, and tuning the trade-off between environmental and
+                                                                      influence reward. Although influence is arguably necessary
+          (a) Cleanup                    (b) Harvest                  for coordination (e.g. two agents coordinating to manipulate
+                                                                      an object must have a high degree of influence between their
+Figure 1: Total collective reward obtained in Experiment 1.           actions), it may be possible to influence another agent in a
+Agents trained with influence (red) significantly outperform          non-cooperative way. The results provided here show that the
+the baseline and ablated agents. In Harvest, the influence            influence reward did lead to increased cooperation, in spite of
+reward is essential to achieve any meaningful learning.               cooperation being difficult to achieve in these environments.
+
+To understand how social influence helps agents achieve
+cooperative behavior, we investigated the trajectories
+                                                                      5. Influential Communication
+produced by high scoring models in both Cleanup and                   Given the above results, we next experiment with using the
+Harvest; the analysis revealed interesting behavior.                  influence reward to train agents to use an explicit commu-
+As an example, in the Cleanup video available here:                   nication channel. We take some inspiration from research
+https://youtu.be/iH_V5WKQxmo a single agent                           drawing a connection between influence and communication
+(shown in purple) was trained with the social influence               in human learning. According to Melis & Semmann (2010),
+reward. Unlike the other agents, which continue to move               human children rapidly learn to use communication to influ-
+and explore randomly while waiting for apples to spawn,               ence the behavior of others when engaging in cooperative
+the influencer only traverses the map when it is pursuing an          activities. They explain that “this ability to influence the
+apple, then stops. The rest of the time it stays still.               partner via communication has been interpreted as evidence
+                             Figure 2 shows a moment of               for a capacity to form shared goals with others”, and that this
+                             high influence between the in-           capacity may be “what allows humans to engage in a wide
+                             fluencer and the yellow influ-           range of cooperative activities”.
+                             encee. The influencer has cho-           Thus, we equip agents with an explicit communication chan-
+                             sen to move towards an ap-               nel, similar to the approach used by Foerster et al. (2016).
+                             ple that is outside of the ego-          At each timestep, each agent k chooses a discrete commu-
+                             centric field-of-view of the yel-        nication symbol mkt ; these symbols are concatenated into
+                             low agent. Because the influ-            a combined message vector mt = [m0t ,m1t ...mN     t ], for N
+                             encer only moves when apples             agents. This message vector mt is then given as input to
+                             are available, this signals to the       every other agent in the next timestep. Note that previous
+                             yellow agent that an apple must          work has shown that self-interested agents do not learn to use
+                             be present above it which it             this type of ungrounded, cheap talk communication chan-
+                             cannot see. This changes the             nel effectively (Crawford & Sobel, 1982; Cao et al., 2018;
+Figure 2: A moment           yellow agent’s distribution over         Foerster et al., 2016; Lazaridou et al., 2018).
+of high influence when       its planned action, p(ajt |akt ,sjt ),
+the purple influencer sig-   and allows the purple agent to           To train the agents to communicate, we augment our initial
+nals the presence of         gain influence. A similar mo-            network with an additional A3C output head, that learns a
+an apple (green tiles)       ment occurs when the influ-              communication policy πm and value function Vm to deter-
+outside the yellow in-       encer signals to an agent that has       mine which symbol to emit (see Figure 3). The normal policy
+fluencee’s field-of-view     been cleaning the river that no          and value function used for acting in the environment, πe and
+(yellow outlined box).       apples have appeared by staying          Ve , are trained only with environmental reward e. We use
+                             still (see Figure 14 in the Sup-         the influence reward as an additional incentive for training
+plementary Material).                                                 the communication policy, πm , such that r = αe+βc. Coun-
+                                                                      terfactuals are employed to assess how much influence an
+In this case study, the influencer agent learned to use its own       agent’s communication message from the previous timestep,
+actions as a binary code which signals the presence or absence
+of apples in the environment. We observe a similar effect in
+                                     Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+
+
+
+                                                                                   (a) Cleanup                   (b) Harvest
+Figure 3: The communication model has two heads, which
+learn the environment policy, πe , and a policy for emitting             Figure 4: Total collective reward for deep RL agents with
+communication symbols, πm . Other agents’ communication                  communication channels. Once again, the influence reward
+messages mt−1 are input to the LSTM.                                     is essential to improve or achieve any learning.
+
+
+mkt−1 , has on another agent’s action, ajt , where:                      p(mk |ak ) to determine how consistently a speaker agent
+                                                                         emits a particular symbol when it takes a particular action,
+              N
+              X h                                              i         and vice versa (the formula is given in the Supplementary
+    ckt =              DKL [p(ajt | mkt−1 ,sjt ) p(ajt | sjt )]    (2)   Material Section 10.4.4). We expect this measure to be
+            j=0,j6=k
+                                                                         high if, for example, the speaker always emits the same
+                                                                         symbol when it is cleaning the river. We also introduce
+Importantly, rewarding influence through a communication                 two measures of instantaneous coordination (IC), which
+channel does not suffer from the limitation mentioned in the             are both measures of mutual information (MI): (1) sym-
+previous section, i.e. that it may be possible to influence              bol/action IC = I(mkt ;ajt+1 ) measures the MI between the in-
+another agent in a non-cooperative way. We can see this                  fluencer/speaker’s symbol and the influencee/listener’s next
+for two reasons. First, there is nothing that compels agent              action, and (2) action/action IC = I(akt ;ajt+1 ) measures the
+j to act based on agent k’s communication message; if mkt                MI between the influencer’s action and the influencee’s next
+does not contain valuable information, j is free to ignore it.           action. To compute these measures we first average over all
+Second, because j’s action policy πe is trained only with en-            trajectory steps, then take the maximum value between any
+vironmental reward, j will only change its intended action as            two agents, to determine if any pair of agents are coordinat-
+a result of observing mkt (i.e. be influenced by mkt ) if it con-        ing. Note that these measures are all instantaneous, as they
+tains information that helps j to obtain environmental reward.           consider only short-term dependencies across two consecu-
+Therefore, we hypothesize that influential communication                 tive timesteps, and cannot capture if an agent communicates
+must provide useful information to the listener.                         influential compositional messages, i.e. information that re-
+                                                                         quires several consecutive symbols to transmit and only then
+5.1. Experiment II: Influential Communication                            affects the other agents behavior.
+Figure 4 shows the collective reward obtained when training
+the agents to use an explicit communication channel. Here,
+the ablated model has the same structure as in Figure 3, but
+the communication policy πm is trained only with environ-
+mental reward. We observe that the agents incentivized to
+communicate via the social influence reward learn faster, and
+achieve significantly higher collective reward for the majority
+of training in both games. In fact, in the case of Cleanup, we           Figure 5: Metrics describing the quality of learned com-
+found that α = 0 in the optimal hyperparameter setting, mean-            munication protocols. The models trained with influence
+ing that it was most effective to train the communication head           reward exhibit more consistent communication and more
+with zero extrinsic reward (see Table 2 in the Supplementary             coordination, especially in moments where influence is high.
+Material). This suggests that influence alone can be a suf-
+                                                                         Figure 5 presents the results. The speaker consistencies
+ficient mechanism for training an effective communication
+                                                                         metric reveals that influence agents more unambiguously
+policy. In Harvest, once again influence is critical to allow
+                                                                         communicate about their own actions than baseline agents,
+agents to learn coordinated policies and attain high reward.
+                                                                         indicating that the emergent communication is more mean-
+To analyze the communication behaviour learned by the                    ingful. The IC metrics demonstrate that baseline agents
+agents, we introduce three metrics, partially inspired by                show almost no signs of co-ordinating behavior with com-
+(Bogin et al., 2018). Speaker consistency, is a normalized               munication, i.e. speakers saying A and listeners doing B
+score ∈ [0,1] which assesses the entropy of p(ak |mk ) and               consistently. This result is aligned with both theoretical re-
+                                Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+sults in cheap-talk literature (Crawford & Sobel, 1982), and       could access other agents’ policy networks. While using a
+recent empirical results in MARL (e.g. Foerster et al. (2016);     centralized training framework is common in MARL (e.g.
+Lazaridou et al. (2018); Cao et al. (2018)).                       Foerster et al. (2017; 2016)), it is less realistic than a scenario
+                                                                   in which each agent is trained independently. We can relax
+In contrast, we do see high IC between influence agents,
+                                                                   this assumption and achieve independent training by equip-
+but only when we limit the analysis to timesteps on which
+                                                                   ping each agent with its own internal Model of Other Agents
+influence was greater than or equal to the mean influence
+                                                                   (MOA). The MOA consists of a second set of fully-connected
+(cf. influential moments in Figure 5). Inspecting the results
+                                                                   and LSTM layers connected to the agent’s convolutional layer
+reveals a common pattern: influence is sparse in time. An
+                                                                   (see Figure 6), and is trained to predict all other agents’ next
+agent’s influence is only greater than its mean influence in
+                                                                   actions given their previous actions, and the agent’s egocen-
+less than 10% of timesteps. Because the listener agent is
+                                                                   tric view of the state: p(at+1 |at ,skt ). The MOA is trained
+not compelled to listen to any given speaker, listeners se-
+                                                                   using observed action trajectories and cross-entropy loss.
+lectively listen to a speaker only when it is beneficial, and
+influence cannot occur all the time. Only when the listener
+decides to change its action based on the speaker’s message
+does influence occur, and in these moments we observe high
+I(mkt ;ajt+1 ). It appears the influencers have learned a strat-
+egy of communicating meaningful information about their
+own actions, and gaining influence when this becomes rele-
+vant enough for the listener to act on it.
+Examining the relationship between the degree to which
+agents were influenced by communication and the reward
+they obtained gives a compelling result: agents that are the
+most influenced also achieve higher individual environmental
+reward. We sampled 100 different experimental conditions           Figure 6: The Model of Other Agents (MOA) architecture
+(i.e., hyper-parameters and random seeds) for both games,          learns both an RL policy πe , and a supervised model that
+and normalized and correlated the influence and individual         predicts the actions of other agents, at+1 . The supervised
+rewards. We found that agents who are more often influenced        model is used for internally computing the influence reward.
+tend to achieve higher task reward in both Cleanup, ρ = .67,
+                                                                   A trained MOA can be used to compute the social influence
+p<0.001, and Harvest, ρ = .34, p<0.001. This supports
+                                                                   reward in the following way. Each agent can “imagine” coun-
+the hypothesis that in order to influence another agent via
+                                                                   terfactual actions that it could have taken at each timestep,
+communication, the communication message should contain
+                                                                   and use its internal MOA to predict the effect on other agents.
+information that helps the listener maximize its own environ-
+                                                                   It can then give itself reward for taking actions that it esti-
+mental reward. Since better listeners/influencees are more
+                                                                   mates were the most influential. This has an intuitive appeal,
+successful in terms of task reward, we have evidence that
+                                                                   because it resembles how humans reason about their effect
+useful information was transmitted to them.
+                                                                   on others (Ferguson et al., 2010). We often find ourselves
+This result is promising, but may depend on the specific ex-       asking counterfactual questions of the form, “How would she
+perimental approach taken here, in which agents interact           have acted if I had done something else in that situation?”,
+with each other repeatedly. In this case, there is no advantage    which we answer using our internal model of others.
+to the speaker for communicating unreliable information
+                                                                   Learning a model of p(ajt+1 |akt ,skt ) requires implicitly mod-
+(i.e. lying), because it would lose influence with the listener
+                                                                   eling both other agents’ internal states and behavior, as well
+over time. This may not be guaranteed in one-shot interac-
+                                                                   as the environment transition function. If the model is inaccu-
+tions. However, given repeated interactions, the above results
+                                                                   rate, this would lead to noisy estimates of the causal influence
+provide empirical evidence that social influence as intrinsic
+                                                                   reward. To compensate for this, We only give the influence
+motivation allows agents to learn meaningful communication
+                                                                   reward to an agent (k) when the agent it is attempting to influ-
+protocols when this is otherwise not possible.
+                                                                   ence (j) is within its field-of-view, because the estimates of
+                                                                   p(ajt+1 |akt ,skt ) are more accurate when j is visible to k.2 This
+6. Modeling Other Agents                                           constraint could have the side-effect of encouraging agents to
+                                                                   stay in closer proximity. However, an intrinsic social reward
+Computing the causal influence reward as introduced in Sec-
+                                                                   encouraging proximity is reasonable given that humans seek
+tion 4 requires knowing the probability of another agent’s
+                                                                   affiliation and to spend time near other people (Tomasello,
+action given a counterfactual, which we previously solved
+by using a centralized training approach in which agents              2
+                                                                        This contrasts with our previous models in which the influence
+                                                                   reward was obtained even from non-visible agents.
+                                  Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+2009).                                                                sify each action as cooperative or non-cooperative (Yu et al.,
+                                                                      2013). This is untenable in complex settings with long-term
+6.1. Experiment III: Modeling Other Agents                            strategies, such as the SSDs under investigation here.
+As before, we allow the policy LSTM of each agent to condi-           Some approaches allow agents to view each others’ rewards
+tion on the actions of other agents in the last timestep (actions     in order to optimize for collective reward. Peysakhovich &
+are visible). We compare against an ablated version of the            Lerer (2018) show that if even a single agent is trained to op-
+architecture shown in Figure 6, which does not use the output         timize for others’ rewards, it can significantly help the group.
+of the MOA to compute a reward; rather, the MOA can be                Hughes et al. (2018) introduced an inequity aversion moti-
+thought of as an unsupervised auxiliary task that may help the        vation, which penalized agents if their rewards differed too
+model to learn a better shared embedding layer, encouraging           much from those of the group. Liu et al. (2014) train agents
+it to encode information relevant to predicting other agents’         to learn their own optimal reward function in a cooperative,
+behavior. Figure 7 shows the collective reward obtained for           multi-agent setting with known group reward. However, the
+agents trained with a MOA module. While we see that the               assumption that agents can view and optimize for each oth-
+auxiliary task does help to improve reward over the A3C base-         ers’ rewards may be unrealistic. Thus, recent work explores
+line, the influence agent gets consistently higher collective         training agents that learn when to cooperate based solely on
+reward. These results demonstrate that the influence reward           their own past rewards (Peysakhovich & Lerer, 2017).
+can be effectively computed using an internal MOA, and thus           Training agents to learn emergent communication protocols
+agents can learn socially but independently, optimizing for a         has been explored (Foerster et al., 2016; Cao et al., 2018; Choi
+social reward without a centralized controller.                       et al., 2018; Lazaridou et al., 2018; Bogin et al., 2018), with
+                                                                      many authors finding that selfish agents do not learn to use an
+                                                                      ungrounded, cheap talk communication channel effectively.
+                                                                      Crawford & Sobel (1982) find that in theory, the information
+                                                                      communicated is proportional to the amount of common
+                                                                      interest; thus, as agents’ interests diverge, no communication
+                                                                      is to be expected. And while communication can emerge
+                                                                      when agents are prosocial (Foerster et al., 2016; Lazaridou
+           (a) Cleanup                      (b) Harvest               et al., 2018), curious (Oudeyer & Kaplan, 2006; Oudeyer &
+Figure 7: Total collective reward for MOA models. Again,              Smith, 2016; Forestier & Oudeyer, 2017), or hand-crafted
+intrinsic influence consistently improves learning, with the          (Crandall et al., 2017), self-interested agents do not to learn
+powerful A3C agent baselines not being able to learn.                 to communicate (Cao et al., 2018). We have shown that
+                                                                      the social influence reward can encourage agents to learn to
+Agents with influence achieve higher collective reward than           communicate more effectively in complex environments.
+the previous state-of-the-art for these environments (275 for
+                                                                      Our MOA is related to work on machine theory of mind
+Cleanup and 750 for Harvest) (Hughes et al., 2018). This is
+                                                                      (Rabinowitz et al., 2018), which demonstrated that a model
+compelling, given that previous work relied on the assump-
+                                                                      trained to predict agents’ actions can model false beliefs.
+tion that agents could view one another’s rewards; we make
+                                                                      LOLA agents model the impact of their policy on the param-
+no such assumption, instead relying only on agents viewing
+                                                                      eter updates of other agents, and directly incorporate this into
+each other’s actions. Table 4 of the Supplementary Material
+                                                                      the agent’s own learning rule (Foerster et al., 2018).
+gives the final collective reward obtained in previous work,
+and by each influence model for all three experiments.                Barton et al. (2018) propose causal influence as a way to mea-
+                                                                      sure coordination between agents, specifically using Con-
+7. Related work                                                       vergence Cross Mapping (CCM) to analyze the degree of
+                                                                      dependence between two agents’ policies. The limitation
+Several attempts have been made to develop intrinsic social           if CCM is that estimates of causality are known to degrade
+rewards.3 Sequeira et al. (2011) developed hand-crafted re-           in the presence of stochastic effects (Tajima et al., 2015).
+wards for a foraging environment, in which agents were pun-           Counterfactual reasoning has also been used in a multi-agent
+ished for eating more than their fair share of food. Another          setting, to marginalize out the effect of one agent on a pre-
+approach gave agents an emotional intrinsic reward based              dicted global value function estimating collective reward, and
+on their perception of their neighbours’ cooperativeness in           thus obtain an improved baseline for computing each agent’s
+a networked version of the iterated prisoner’s dilemma, but           advantage function (Foerster et al., 2017). A similar paper
+is limited to scenarios in which it is possible to directly clas-     shows that counterfactuals can be used with potential-based
+   3                                                                  reward shaping to improve credit assignment for training a
+     Note that intrinsic is not a synonym of internal; other people
+can be intrinsically motivating (Stavropoulos & Carver, 2013).        joint policy in multi-agent RL (Devlin et al., 2014). However,
+                                       Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+once again these approaches rely on a centralized controller.                  actions in the same timestep, the diagram is much simpler.
+                                                                               However, to avoid circular dependencies in the graph, it re-
+Mutual information (MI) has been explored as a tool for de-
+                                                                               quires that agent k choose its action before j, and therefore
+signing social rewards. Strouse et al. (2018) train agents to
+                                                                               k can influence j but j cannot influence k. If there are more
+optimize the MI between their actions and a categorical goal,
+                                                                               than two agents, we assume a disjoint set of influencer and
+as a way to signal or hide the agent’s intentions. However, this
+                                                                               influencee agents, and all influencers must act first.
+approach depends on agents pursuing a known, categorical
+goal. Guckelsberger et al. (2018), in pursuit of the ultimate
+video game adversary, develop an agent that maximizes its
+empowerment, minimizes the player’s empowerment, and
+maximizes its empowerment over the player’s next state.
+This third goal, termed transfer empowerment, is obtained
+by maximizing the MI between the agent’s actions and the
+player’s future state. While a social form of empowerment,
+the authors find that agents trained with transfer empower-
+ment simply tend to stay near the player. Further, the agents
+are not trained with RL, but rather analytically compute these                         (a) Basic                   (b) MOA
+measures in simple grid-world environments. As such, the
+                                                                               Figure 8: Causal diagrams of agent k’s effect on j’s action.
+agent cannot learn to model other agents or the environment.
+                                                                               Shaded nodes are conditioned on, and we intervene on akt
+Given the social influence reward incentivizes maximizing                      (blue node) by replacing it with counterfactuals. Nodes with
+the mutual information between agents’ actions, our work                       a green background must be modeled using the MOA module.
+also has ties to the literature on empowerment, in which                       Note that there is no backdoor path between akt and st in the
+agents maximize the mutual information between their ac-                       MOA case, since it would require traversing a collider that is
+tions and their future state (Klyubin et al., 2005; Mohamed &                  not in the conditioning set.
+Rezende, 2015). Thus, our proposed reward can be seen as a
+novel social form of empowerment.                                              Computing influence across timesteps, as in the communica-
+                                                                               tion and MOA experiments, complicates the causal diagram,
+                                                                               but ensures that each agent can influence every other agent.
+8. Details on Causal Inference                                                 Figure 8b shows the diagram in the MOA case, in which we
+The causal influence reward presented in Eq. 4 is assessed                     can isolate the causal effect of akt on ajt+1 because the back-
+using counterfactual reasoning. Unlike a do-calculus inter-                    door path through st is blocked by the collider nodes at st+1
+vention (which estimates the general expected causal effect                    and ujt+1 (Pearl et al., 2016). Note that it would be sufficient
+of one variable on another), a counterfactual involves condi-                  to condition only on skt in order to block all back-door paths
+tioning on a set of variables observed in a given situation and                in this case, but we show hukt ,skt ,ajt i as shaded because all of
+asking how would the outcome have changed if some vari-                        these are given as inputs to the MOA to help it predict ajt+1 .
+able were different, and all other variables remained the same                 For the MOA to accurately estimate p(ajt+1 |akt ,skt ), it must
+(Pearl et al., 2016). This type of inquiry allows us to measure                model both the environment transition function T , as well as
+the precise causal effect of agent k’s action at timestep t, akt ,             aspects of the internal LSTM state of the other agent, ujt+1 ,
+on agent j’s action, ajt , in the specific environment state st ,              as shown by the shaded green variables in Figure 8b.
+providing a richer and less sparse reward for agent k. Com-                    This is a simple case of counterfactual reasoning, that does
+puting counterfactuals requires conditioning on the correct                    not require using abduction to update the probability of any
+set of observed variables to ensure there are no confounds.                    unobserved variables (Pearl, 2013). This is because we have
+In our case, the conditioning set must include not only an                     built all relevant models, know all of their inputs, and can
+agent’s partially observed view of the environment state, sjt ,                easily store the values for those variables at every step of the
+but also the agent’s internal LSTM state ujt , to remove any                   trajectory in order to condition on them so that there are no
+dependency on previous timesteps in the trajectory. Thus, the                  unobserved variables that could act as a confounder.
+basic causal influence reward can be more accurately written:
+            N
+            X h                                                       i        9. Conclusions and Future Work
+  ckt =              DKL [p(ajt | akt ,sjt ,ujt )||p(ajt | sjt ,ujt )] . (3)
+          j=0,j6=k                                                             All three experiments have shown that the proposed intrinsic
+                                                                               social influence reward consistently leads to higher collec-
+Figure 8 shows the causal diagrams for computing the influ-                    tive return. Despite variation in the tasks, hyper-parameters,
+ence reward in both the basic case (8a) and the MOA case (8b).                 neural network architectures and experimental setups, the
+Because basic influence looks at influence between agents’                     learning curves for agents trained with the influence reward
+                               Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+are significantly better than the curves of powerful agents        and Clark, S. Emergent communication through negotia-
+such as A3C and their improved baselines. In some cases,           tion. arXiv preprint arXiv:1804.03980, 2018.
+it is clear that influence is essential to achieve any form of
+learning, attesting to the promise of this idea and highlight-   Capdepuy, P., Polani, D., and Nehaniv, C. L. Maximization
+ing the complexity of learning general deep neural network         of potential information flow as a universal utility for col-
+multi-agent policies.                                              lective behaviour. In Artificial Life, 2007. ALIFE’07. IEEE
+                                                                   Symposium on, pp. 207–213. Ieee, 2007.
+Experiment I also showed that the influence reward can lead
+to the emergence of communication protocols. In experiment       Choi, E., Lazaridou, A., and de Freitas, N. Compositional
+II, which included an explicit communication channel, we           obverter communication learning from raw visual input.
+saw that influence improved communication. Experiment              arXiv preprint arXiv:1804.02341, 2018.
+III showed that influence can be computed by augmenting
+                                                                 Crandall, J. W., Oudah, M., Chenlinangjia, T., Ishowo-
+agents with an internal model of other agents. The influ-
+                                                                   Oloko, F., Abdallah, S., Bonnefon, J., Cebrián, M., Shar-
+ence reward can thus be computed without having access to
+                                                                   iff, A., Goodrich, M. A., and Rahwan, I. Cooperating
+another agent’s reward function, or requiring a centralized
+                                                                   with machines. CoRR, abs/1703.06207, 2017. URL
+controller. We were able to surpass state-of-the-art perfor-
+                                                                   http://arxiv.org/abs/1703.06207.
+mance on the SSDs studied here, despite the fact that previous
+work relied on agents’ ability to view other agents’ rewards.    Crawford, V. P. and Sobel, J. Strategic information transmis-
+Using counterfactuals to allow agents to understand the ef-        sion. Econometrica: Journal of the Econometric Society,
+fects of their actions on others is a promising approach with      pp. 1431–1451, 1982.
+many extensions. Agents could use counterfactuals to de-         Devlin, S., Yliniemi, L., Kudenko, D., and Tumer, K.
+velop a form of ‘empathy’, by simulating how their actions         Potential-based difference rewards for multiagent rein-
+affect another agent’s value function. Influence could also        forcement learning. In Proceedings of the 2014 interna-
+be used to drive coordinated behavior in robots attempting to      tional conference on Autonomous agents and multi-agent
+do cooperative manipulation and control tasks. Finally, if we      systems, pp. 165–172. International Foundation for Au-
+view multi-agent networks as single agents, influence could        tonomous Agents and Multiagent Systems, 2014.
+be used as a regularizer to encourage different modules of the
+network to integrate information from other networks; for        Ferguson, H. J., Scheepers, C., and Sanford, A. J. Ex-
+example, to hopefully prevent collapse in hierarchical RL.         pectations in counterfactual and theory of mind reason-
+                                                                   ing. Language and Cognitive Processes, 25(3):297–346,
+Acknowledgements                                                   2010. doi: 10.1080/01690960903041174. URL https:
+                                                                   //doi.org/10.1080/01690960903041174.
+We are grateful to Eugene Vinitsky for his help in reproduc-
+ing the SSD environments in open source to improve the           Foerster, J., Assael, I. A., de Freitas, N., and Whiteson, S.
+replicability of the paper. We also thank Steven Wheelwright,      Learning to communicate with deep multi-agent reinforce-
+Neil Rabinowitz, Thore Graepel, Alexander Novikov, Scott           ment learning. In Advances in Neural Information Pro-
+Reed, Pedro Mediano, Jane Wang, Max Kleiman-Weiner, An-            cessing Systems, pp. 2137–2145, 2016.
+drea Tacchetti, Kevin McKee, Yannick Schroecker, Matthias        Foerster, J., Farquhar, G., Afouras, T., Nardelli, N., and
+Bauer, David Rolnick, Francis Song, David Budden, and              Whiteson, S. Counterfactual multi-agent policy gradients.
+Csaba Szepesvari, as well as everyone on the DeepMind              arXiv preprint arXiv:1705.08926, 2017.
+Machine Learning and Multi-Agent teams for their helpful
+discussions and support.                                         Foerster, J., Chen, R. Y., Al-Shedivat, M., Whiteson, S.,
+                                                                   Abbeel, P., and Mordatch, I. Learning with opponent-
+References                                                         learning awareness. In Proceedings of the 17th Interna-
+                                                                   tional Conference on Autonomous Agents and MultiAgent
+Barton, S. L., Waytowich, N. R., Zaroukian, E., and                Systems, pp. 122–130. International Foundation for Au-
+  Asher, D. E. Measuring collaborative emergent behav-             tonomous Agents and Multiagent Systems, 2018.
+  ior in multi-agent reinforcement learning. arXiv preprint
+  arXiv:1807.08663, 2018.                                        Forestier, S. and Oudeyer, P.-Y. A unified model of speech
+                                                                   and tool use early development. In 39th Annual Con-
+Bogin, B., Geva, M., and Berant, J. Emergence of commu-            ference of the Cognitive Science Society (CogSci 2017),
+  nication in an interactive world with consistent speakers.       2017.
+  arXiv preprint arXiv:1809.00549, 2018.
+                                                                 Gers, F. A., Schmidhuber, J., and Cummins, F. Learning to
+Cao, K., Lazaridou, A., Lanctot, M., Leibo, J. Z., Tuyls, K.,      forget: Continual prediction with lstm. 1999.
+                                Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+Guckelsberger, C., Salge, C., and Togelius, J. New                Lowe, R., Wu, Y., Tamar, A., Harb, J., Abbeel, O. P., and Mor-
+  and surprising ways to be mean. adversarial npcs with             datch, I. Multi-agent actor-critic for mixed cooperative-
+  coupled empowerment minimisation. arXiv preprint                  competitive environments. In Advances in Neural Infor-
+  arXiv:1806.01387, 2018.                                           mation Processing Systems, pp. 6379–6390, 2017.
+Harari, Y. N. Sapiens: A brief history of humankind. Random       Melis, A. P. and Semmann, D. How is human cooperation
+  House, 2014.                                                     different? Philosophical Transactions of the Royal Society
+                                                                   of London B: Biological Sciences, 365(1553):2663–2674,
+Henrich, J. The Secret of Our Success: How culture is driving
+                                                                   2010.
+  human evolution, domesticating our species, and making
+  us smart. Princeton University Press, Princeton, NJ, 2015.      Mnih, V., Badia, A. P., Mirza, M., Graves, A., Lillicrap, T.,
+  URL http://press.princeton.edu/titles/                           Harley, T., Silver, D., and Kavukcuoglu, K. Asynchronous
+  10543.html.                                                      methods for deep reinforcement learning. In International
+                                                                   conference on machine learning, pp. 1928–1937, 2016.
+Herrmann, E., Call, J., Hernàndez-Lloreda, M. V., Hare,
+  B., and Tomasello, M. Humans have evolved spe-                  Mohamed, S. and Rezende, D. J. Variational information
+  cialized skills of social cognition: The cultural intel-         maximisation for intrinsically motivated reinforcement
+  ligence hypothesis. Science, 317(5843):1360–1366,                learning. In Advances in neural information processing
+  2007.     ISSN 0036-8075.        doi: 10.1126/science.           systems, pp. 2125–2133, 2015.
+ 1146282. URL http://science.sciencemag.
+  org/content/317/5843/1360.                                      Oudeyer, P.-Y. and Kaplan, F. Discovering communication.
+                                                                   Connection Science, 18(2):189–206, 2006.
+Hughes, E., Leibo, J. Z., Phillips, M. G., Tuyls, K., Duéñez-
+  Guzmán, E. A., Castañeda, A. G., Dunning, I., Zhu, T.,        Oudeyer, P.-Y. and Smith, L. B. How evolution may work
+  McKee, K. R., Koster, R., et al. Inequity aversion improves       through curiosity-driven developmental process. Topics
+  cooperation in intertemporal social dilemmas. In Advances         in Cognitive Science, 8(2):492–502, 2016.
+  in neural information processing systems (NIPS), Mon-
+  treal, Canada, 2018.                                            Pathak, D., Agrawal, P., Efros, A. A., and Darrell, T.
+                                                                    Curiosity-driven exploration by self-supervised predic-
+Klyubin, A. S., Polani, D., and Nehaniv, C. L. Empowerment:         tion. In International Conference on Machine Learning
+  A universal agent-centric measure of control. In Evolu-           (ICML), volume 2017, 2017.
+  tionary Computation, 2005. The 2005 IEEE Congress on,
+  volume 1, pp. 128–135. IEEE, 2005.                              Pearl, J. Structural counterfactuals: A brief introduction.
+                                                                    Cognitive science, 37(6):977–985, 2013.
+Laland, K. N. Darwin’s unfinished symphony : how cul-
+  ture made the human mind / Kevin N. Laland. Princeton           Pearl, J., Glymour, M., and Jewell, N. P. Causal inference in
+  University Press Princeton, 2017. ISBN 9781400884872              statistics: a primer. John Wiley & Sons, 2016.
+  140088487.
+                                                                  Perolat, J., Leibo, J. Z., Zambaldi, V., Beattie, C., Tuyls,
+Lazaridou, A., Hermann, K. M., Tuyls, K., and Clark, S.             K., and Graepel, T. A multi-agent reinforcement learn-
+  Emergence of linguistic communication from referential            ing model of common-pool resource appropriation. In
+  games with symbolic and pixel input. arXiv preprint               Advances in Neural Information Processing Systems, pp.
+  arXiv:1804.03984, 2018.                                           3643–3652, 2017.
+
+Leibo, J. Z., Zambaldi, V., Lanctot, M., Marecki, J., and Grae-   Peysakhovich, A. and Lerer, A. Consequentialist conditional
+  pel, T. Multi-agent reinforcement learning in sequential          cooperation in social dilemmas with imperfect informa-
+  social dilemmas. In Proceedings of the 16th Conference            tion. arXiv preprint arXiv:1710.06975, 2017.
+  on Autonomous Agents and MultiAgent Systems, pp. 464–
+                                                                  Peysakhovich, A. and Lerer, A. Prosocial learning agents
+  473. International Foundation for Autonomous Agents and
+                                                                    solve generalized stag hunts better than selfish ones. In
+  Multiagent Systems, 2017.
+                                                                    Proceedings of the 17th International Conference on Au-
+Liu, B., Singh, S., Lewis, R. L., and Qin, S. Optimal rewards       tonomous Agents and MultiAgent Systems, pp. 2043–2044.
+  for cooperative agents. IEEE Transactions on Autonomous           International Foundation for Autonomous Agents and
+  Mental Development, 6(4):286–297, 2014.                           Multiagent Systems, 2018.
+
+Lizier, J. T. and Prokopenko, M. Differentiating information      Rabinowitz, N. C., Perbet, F., Song, H. F., Zhang, C., Eslami,
+  transfer and causal effect. The European Physical Journal         S., and Botvinick, M. Machine theory of mind. arXiv
+  B, 73(4):605–615, 2010.                                           preprint arXiv:1802.07740, 2018.
+                                 Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+Schelling, T. C. Hockey helmets, concealed weapons, and            where zt represents all relevant u and s background variables
+  daylight saving: A study of binary choices with exter-           at timestep t. The influence reward to the mutual information
+  nalities. Journal of Conflict resolution, 17(3):381–428,         (MI) between the actions of agents k and j, which is given by
+  1973.
+                                                                                      X                            p(aj ,ak |z)
+Schmidhuber, J. Formal theory of creativity, fun, and in-           I(Aj ;Ak |z) =             p(aj ,ak |z)log
+                                                                                                                 p(aj |z)p(ak |z)
+  trinsic motivation (1990–2010). IEEE Transactions on                                ak ,aj
+                                                                                                  h                     i
+                                                                                      X
+  Autonomous Mental Development, 2(3):230–247, 2010.                              =    p(ak |z)DKL p(aj |ak ,z) p(aj |z) , (5)
+Sequeira, P., Melo, F. S., Prada, R., and Paiva, A. Emerging                          ak
+
+  social awareness: Exploring intrinsic motivation in mul-         where we see that the DKL factor in Eq. 5 is the causal
+  tiagent learning. In Development and Learning (ICDL),            influence reward given in Eq. 4.
+  2011 IEEE International Conference on, volume 2, pp.
+  1–6. IEEE, 2011.                                                 By sampling N independent trajectories τn from the environ-
+                                                                   ment, where k’s actions akn are drawn according to p(ak |z),
+Singh, S. P., Barto, A. G., and Chentanez, N. Intrinsically        we perform a Monte-Carlo approximation of the MI (see e.g.
+  motivated reinforcement learning. In Advances in Neural          Strouse et al. (2018)),
+  Information Processing Systems 17 [Neural Information                                  h                          i
+  Processing Systems, NIPS 2004, December 13-18, 2004,                I(Ak ;Aj |z) = Eτ DKL p(Aj |Ak ,z) p(Aj |z) z
+  Vancouver, British Columbia, Canada], pp. 1281–1288,
+                                                                                       1X                            
+  2004.                                                                             ≈      DKL p(Aj |akn ,z) p(Aj |z) . (6)
+                                                                                      N n
+Stavropoulos, K. K. and Carver, L. J. Research review: social
+  motivation and oxytocin in autism–implications for joint         Thus, in expectation, the social influence reward is the MI
+  attention development and intervention. Journal of Child         between agents’ actions.
+  Psychology and Psychiatry, 54(6):603–618, 2013.
+                                                                   Whether the policy trained with Eq. 4 actually learns to ap-
+Strouse, D., Kleiman-Weiner, M., Tenenbaum, J., Botvinick,         proximate the MI depends on the learning dynamics. We
+   M., and Schwab, D. Learning to share and hide inten-            calculate the intrinsic social influence reward using Eq. 4, be-
+   tions using information regularization. arXiv preprint          cause unlike Eq. 5, which gives an estimate of the symmetric
+   arXiv:1808.02093, 2018.                                         bandwidth between k and j, Eq. 4 gives the directed causal
+                                                                   effect of the specific action taken by agent k, akt . We believe
+Tajima, S., Yanagawa, T., Fujii, N., and Toyoizumi, T.
+                                                                   this will result in an easier reward to learn, since it allows for
+  Untangling brain-wide dynamics in consciousness by
+                                                                   better credit assignment; agent k can more easily learn which
+  cross-embedding. PLoS computational biology, 11(11):
+                                                                   of its actions lead to high influence.
+  e1004537, 2015.
+                                                                   The connection to mutual information is interesting, because
+Tomasello, M. Why we cooperate. MIT press, 2009.
+                                                                   a frequently used intrinsic motivation for single agent RL
+van Schaik, C. P. and Burkart, J. M. Social learning and evo-      is empowerment, which rewards the agent for having high
+  lution: the cultural intelligence hypothesis. Philosophical      mutual information between its actions and the future state
+  Transactions of the Royal Society B: Biological Sciences,        of the environment (e.g. Klyubin et al. (2005); Capdepuy
+  366(1567):1008–1016, 2011.                                       et al. (2007)). To the extent that the social influence reward
+                                                                   approximates the MI, k is rewarded for having empowerment
+von Frisch, K. The dance language and orientation of bees.
+                                                                   over j’s actions.
+  5, 06 1969.
+                                                                   The social influence reward can also be computed using
+Yu, C., Zhang, M., and Ren, F. Emotional multiagent rein-
+                                                                   other divergence measures besides KL-divergence. Lizier &
+  forcement learning in social dilemmas. In International
+                                                                   Prokopenko (2010) propose local information flow as a mea-
+  Conference on Principles and Practice of Multi-Agent
+                                                                   sure of direct causal effect; this is equivalent to the pointwise
+  Systems, pp. 372–387. Springer, 2013.
+                                                                   mutual information (the innermost term of Eq. 6), given by:
+
+                                                                                                            p(aj | ak ,z)
+10. Supplementary Material                                                  pmi(ak ;aj | Z = z) = log
+                                                                                                             p(aj | z)
+10.1. Influence as Mutual Information                                                                         p(ak ,aj | z)
+                                                                                                      = log                    .    (7)
+The causal influence of agent k on agent j is:                                                              p(ak | z)p(aj | z)
+                   h                            i
+                                                                   The PMI gives us a measure of influence of a single action of
+              DKL p(ajt | akt ,zt ) p(ajt | zt ) ,         (4)
+                                                                   k on the single action taken by j. The expectation of the PMI
+                                Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+over p(aj ,ak |z) is the MI. We experiment with using the PMI      is available at: https://youtu.be/C8SE9_YKzxI,
+and a number of divergence measures, including the Jensen-         which shows that the purple agent leaves its compatriot
+Shannon Divergence (JSD), and find that the influence reward       trapped in the box throughout the trajectory.
+is robust to the choice of measure.
+                                                                   In contrast, an agent trained with the social influence re-
+                                                                   ward chooses the open box action in 88% of trajectories,
+10.2. Sequential Social Dilemmas                                   releasing its fellow agent so that they are both able to
+Figure 9 depicts the SSD games under investigation. In each        consume apples. A video of this behavior is shown at:
+of the games, an agent is rewarded +1 for every apple it           https://youtu.be/Gfo248-qt3c. Further, as Fig-
+collects, but the apples are a limited resource. Agents have       ure 12 reveals, the purple influencer agent usually chooses to
+the ability to punish each other with a fining beam, which         open the box within the first few steps of the trajetory, giving
+costs −1 reward to fire, and fines any agent it hits −50 reward.   its fellow agent more time to collect reward.
+In Cleanup (a public goods game) agents must clean a               Most importantly though, Figure 13 shows the influence
+river before apples can grow, but are not able to harvest          reward over the course of a trajectory in the Box trapped
+apples while cleaning. In Harvest (a common pool resource          environment. The agent chooses the open box action in the
+game), apples respawn at a rate proportional to the amount         second timestep; at this point, we see a corresponding spike
+of nearby apples; if apples are harvested too quickly, they        in the influence reward. This reveals that the influence reward
+will not grow back. Both coordination, and cooperation             works as expected, incentivizing an action which has a strong
+are required to solve both games. In Cleanup, agents               — and in this case, prosocial — effect on the other agent’s
+must efficiently time harvesting apples and cleaning               behavior.
+the river, and allow agents cleaning the river a chance
+to consume apples. In Harvest, agents must spatially               10.4. Implementation details
+distribute their harvesting, and abstain from consuming
+                                                                   All models are trained with a single convolutional layer with
+apples too quickly in order to harvest sustainably. The
+                                                                   a kernel of size 3, stride of size 1, and 6 output channels.
+code for these games, including hyperparameter settings
+                                                                   This is connected to two fully connected layers of size 32
+and apple and waste respawn probabilities, can be found
+                                                                   each, and an LSTM with 128 cells. We use a discount factor
+at      https://github.com/eugenevinitsky/
+                                                                   γ = .99. The number of agents N is fixed to 5.
+sequential_social_dilemma_games.
+                                                                   In addition to the comparison function used to compute influ-
+The reward structure of the games is shown in Figure 10,
+                                                                   ence (e.g. KL-divergence, PMI, JSD), there are many other
+which gives the Schelling diagram for both SSD tasks under
+                                                                   hyperparameters that can be tuned for each model. We use a
+investigation. A Schelling diagram (Schelling, 1973; Perolat
+                                                                   random search over hyperparameters, ensuring a fair compar-
+et al., 2017) depicts the relative payoffs for a single agent’s
+                                                                   ison with the search size over the baseline parameters that are
+strategy given a fixed number of other agents who are coop-
+                                                                   shared with the influence models. For all models we search
+erative. These diagrams show that all agents would benefit
+                                                                   for the optimal entropy reward and learning rate, where we
+from learning to cooperate, because even the agents that are
+                                                                   anneal the learning rate from an initial value lr init to
+being exploited get higher reward than in the regime where
+                                                                   lr final. The below sections give the parameters found
+all agents defect. However, traditional RL agents struggle to
+                                                                   to be most effective for each of the three experiments.
+learn to cooperate and solve these tasks effectively (Hughes
+et al., 2018).
+                                                                   10.4.1. BASIC INFLUENCE HYPERPARAMETERS
+10.3. Additional experiment - Box Trapped                          In this setting we vary the number of influencers from 1−4,
+                                                                   the influence reward weight β, and the number of curriculum
+As a proof-of-concept experiment to test whether the influ-        steps over which the weight of the influence reward is lin-
+ence reward works as expected, we constructed a special            early increased C. In this setting, since we have a centralised
+environment, shown in Figure 11. In this environment, one          controller, we also experiment with giving the influence re-
+agent (teal) is trapped in a box. The other agent (purple) has     ward to the agent being influenced as well, and find that this
+a special action it can use to open the box... or it can simply    sometimes helps. This ‘influencee’ reward is not used in the
+choose to consume apples, which exist outside the box and          other two experiments, since it precludes independent train-
+are inexhaustible in this environment.                             ing. The hyperparameters found to give the best performance
+As expected, a vanilla A3C agent learns to act selfishly; the      for each model are shown in Table 1.
+purple agent will simply consume apples, and chooses the
+open box action in 0% of trajectories once the policy has con-
+verged. A video of A3C agents trained in this environment
+                               Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+
+
+
+Figure 9: The two SSD environments, Cleanup (left) and Harvest (right). Agents can exploit other agents for immediate
+payoff, but at the expense of the long-term collective reward of the group. Reproduced with permission from Hughes et al.
+(2018).
+
+
+
+
+                                     (a) Cleanup                                     (b) Harvest
+
+
+
+Figure 10: Schelling diagrams for the two social dilemma tasks show that an individual agent is motivated to defect, though
+everyone benefits when more agents cooperate. Reproduced with permission from Hughes et al. (2018).
+                                                       Cleanup                                   Harvest
+                                       A3C         Visible actions                A3C        Visible actions
+             Hyperparameter                                          Influence                                 Influence
+                                       baseline    baseline                       baseline   baseline
+             Entropy reg.              .00176      .00176            .000248      .000687    .00184            .00025
+             lr init                   .00126      .00126            .00107       .00136     .00215            .00107
+             lr end                    .000012     .000012           .000042      .000028    .000013           .000042
+             Number of influencers     -           3                 1            -          3                 3
+             Influence weight β        -           0                 .146         -          0                 .224
+             Curriculum C              -           -                 140          -          -                 140
+             Policy comparison         -           -                 JSD          -          -                 PMI
+             Influencee reward         -           -                 1            -          -                 0
+
+                Table 1: Optimal hyperparameter settings for the models in the basic influence experiment.
+
+
+                                                                     entropy regularization term just for this head, and apply a
+                                                                     weight to the communication loss in the loss function. We
+                                                                     also vary the number of communication symbols that the
+                                                                     agents can emit, and the size of the linear layer that connects
+                                                                     the LSTM to the communication policy layer, which we term
+                                                                     the communication embedding size. Finally, in the commu-
+                                                                     nication regime, we experiment to setting the weight on the
+                                                                     extrinsic reward E, α, to zero. The best hyperparameters for
+                                                                     each of the communication models are shown in Table 2.
+Figure 11: The Box trapped environment in which the teal             10.4.3. M ODEL OF OTHER AGENTS (MOA)
+agent is trapped, and the purple agent can release it with a                     HYPERPARAMETERS
+special open box action.
+                                                                     The MOA hyperparameters include whether to only train the
+                                                                     MOA with cross-entropy loss on the actions of agents that
+10.4.2. C OMMUNICATION HYPERPARAMETERS                               are visible, and how much to weight the supervised loss in
+                                                                     the overall loss of the model. The best hyperparameters are
+Because the communication models have an extra A2C out-
+                                                                     shown in Table 3.
+put head for the communication policy, we use an additional
+                             Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+                                                    Cleanup                                 Harvest
+                                        A3C        Comm.      Influence    A3C            Comm.        Influence
+                  Hyperparameter
+                                        baseline   baseline   comm.        baseline       baseline     comm.
+                  Entropy reg.          .00176     .000249    .00305       .000687        .000174      .00220
+                  lr init               .00126     .00223     .00249       .00136         .00137       .000413
+                  lr end                .000012    .000022    .0000127     .000028        .0000127     .000049
+                  Influence weight β    -          0          2.752        -              0            4.825
+                  Extrinsic reward
+                                        -          -          0            -              -            1.0
+                  weight α
+                  Curriculum C          -          -          1            -              -            8
+                  Policy comparison     -          -          KL           -              -            KL
+                  Comm. entropy reg.    -          -          .000789      -              -            .00208
+                  Comm. loss weight     -          -          .0758        -              -            .0709
+                  Symbol vocab size     -          -          9            -              -            7
+                  Comm. embedding       -          -          32           -              -            16
+
+               Table 2: Optimal hyperparameter settings for the models in the communication experiment.
+
+                                                    Cleanup                                Harvest
+                                        A3C        MOA        Influence    A3C            MOA         Influence
+                   Hyperparameter
+                                        baseline   baseline   MOA          baseline       baseline    MOA
+                   Entropy reg.         .00176     .00176     .00176       .000687        .00495      .00223
+                   lr init              .00126     .00123     .00123       .00136         .00206      .00120
+                   lr end               .000012    .000012    .000012      .000028        .000022     .000044
+                   Influence weight β   -          0          .620         -              0           2.521
+                   MOA loss weight      -          1.312      15.007       -              1.711       10.911
+                   Curriculum C         -          -          40           -              -           226
+                   Policy comparison    -          -          KL           -              -           KL
+                   Train MOA only
+                                        -          False      True         -              False       True
+                   when visible
+
+        Table 3: Optimal hyperparameter settings for the models in the model of other agents (MOA) experiment.
+
+
+
+
+Figure 12: Number of times the open box action occurs at          Figure 13: Influence reward over a trajectory in Box trapped.
+each trajectory step over 100 trajectories.                       An agent gets high influence for letting another agent out of
+                                                                  the box in which it is trapped.
+
+                                                                  10.4.4. C OMMUNICATION ANALYSIS
+                                                                  The speaker consistency metric is calculated as:
+                                                                               N
+                                                                               X          X    H(p(ak |mk = c))
+                                                                                   0.5[     1−
+                                                                                          c
+                                                                                                   Hmax
+                                                                               k=1
+                                                                                              X    H(p(mk |ak = a))
+                                                                                          +     1−                  ],     (8)
+                                                                                              a
+                                                                                                       Hmax
+                                Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+where H is the entropy function and Hmax is the maximum            In this section we include the results of training explicitly
+entropy based on the number of discrete symbols or actions.        prosocial agents, which directly optimize for the collective
+The goal of the metric is to measure how much of a 1:1             reward of all agents. Previous work (e.g. Peysakhovich &
+correspondence exists between a speaker’s action and the           Lerer (2018)) has shown that training agents to optimize
+speaker’s communication message.                                   for the rewards of other agents can help the group to obtain
+                                                                   better collective outcomes. Following a similar principle, we
+10.5. Additional results                                           implemented agents that optimize for a convex combination
+                                                                   of their own individual reward ekt and the collective reward
+10.5.1. BASIC INFLUENCE EMERGENT COMMUNICATION                                          PN
+                                                                   of all other agents, i=1,i6=k eit . Thus, the reward function
+                                                                                               PN
+Figure 14 shows an additional moment of high influence in          for agent k is rtk = ekt + η i=1,i6=k eit . We conducted the
+the Cleanup game. The purple influencer agent can see the          same hyperparameter search over the parameters mentioned
+area within the white box, and therefore all of the apple patch.   in Section 10.4.1 varying the weight placed on the collective
+The field-of-view of the magenta influencee is outlined with       reward, η ∈ [0,2].
+the magenta box; it cannot see if apples have appeared, even
+though it has been cleaning the river, which is the action re-     As expected, we find that agents trained to optimize for col-
+quired to cause apples to appear. When the purple influencer       lective reward attain higher collective reward in both Cleanup
+turns left and does not move towards the apple patch, this         and Harvest, as is shown in Figure 15. In both games, the
+signals to the magenta agent that no apples have appeared,         optimal value for η = 0.85. Interestingly, however, the equal-
+since otherwise the influence would move right.                    ity in the individual returns for these agents is extremely low.
+                                                                   Across the hyperparameter sweep, no solution to the Cleanup
+                                                                   game which scored more than 20 points in terms of collective
+                                                                   return was found in which all agents scored an individual
+                                                                   return above 0. It seems that in Cleanup, when agents are
+                                                                   trained to optimize for collective return, they converge on a
+                                                                   solution in which some agents never receive any reward.
+                                                                   Note that training agents to optimize for collective reward
+                                                                   requires that each agent can view the rewards obtained by
+                                                                   other agents. As discussed previously, the social influence
+                                                                   reward is a novel way to obtain cooperative behavior, that
+                                                                   does not require making this assumption.
+
+                                                                   10.5.3. C OLLECTIVE REWARD AND EQUALITY
+                                                                   It is important to note that collective reward is not always the
+                                                                   perfect metric of cooperative behavior, a finding that was also
+Figure 14: A moment of high influence between the purple           discovered by Barton et al. (2018) and emphasized by Leibo
+influencer and magenta influencee.                                 et al. (2017). In the case, we find that there is a spurious
+                                                                   solution to the Harvest game, in which one agent fails to
+                                                                   learn and fails to collect any apples. This leads to very high
+10.5.2. O PTIMIZING FOR COLLECTIVE REWARD
+                                                                   collective reward, since it means there is one fewer agent
+                                                                   that can exploit the others, and makes sustainable harvesting
+                                                                   easier to achieve. Therefore, for the results shown in the
+                                                                   paper, we eliminate any random seed in Harvest for which
+                                                                   one of the agents has failed to learn to collect apples, as in
+                                                                   previous work (Hughes et al., 2018).
+                                                                   However, here we also present an alternative strategy for
+                                                                   assessing the overall collective outcomes: weighting the total
+          (a) Cleanup                     (b) Tragedy              collective reward by an index of equality of the individual
+                                                                   rewards. Specifically, we compute the Gini coefficient over
+Figure 15: Total collective reward obtained by agents trained      the N agents’ individual environmental rewards ekt :
+to optimize for the collective reward, for the 5 best hyperpa-
+rameter settings with 5 random seeds each. Error bars show                                PN PN       i   j
+a 99.5% confidence interval (CI) computed within a sliding                                  i=1 j=1 |et −et |
+                                                                                    G=          PN            ,                (9)
+window of 200 agent steps.                                                                    2N i=1 eit
+                               Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+which gives us a measure of the inequality of the returns,
+where G ∈ [0,1], with G = 0 indicating perfect equality. Thus,
+1 − G is a measure of equality; we use this to weight the
+collective reward for each experiment, and plot the results in
+Figure 16. Once again, we see that the influence models give
+the highest final performance, even with this new metric.
+
+10.5.4. C OLLECTIVE REWARD OVER MULTIPLE
+        HYPERPARAMETERS
+
+Finally, we would like to show that the influence reward is
+robust to the choice of hyperparameter settings. Therefore,
+in Figure 17, we plot the collective reward of the top 5 best
+hyperparameter settings for each experiment, over 5 random
+seeds each. Once again, the influence models result in higher
+collective reward, which provides evidence that the model is
+robust to the choice of hyperparameters.
+
+10.5.5. P ERFORMANCE COMPARISON BETWEEN MODELS
+        AND RELATED WORK
+
+Table 4 presents the final collective reward obtained by each
+of the models tested in the experiments presented in the
+paper. We see that in several cases, the influence agents are
+even able to out-perform the state-of-the-art results on these
+tasks reported by (Hughes et al., 2018), despite the fact that
+the solution proposed by (Hughes et al., 2018) requires that
+agents can view other agents’ rewards, whereas we do not
+make this assumption, and instead only require that agents
+can view each others’ actions.
+
+                                       Cleanup     Harvest
+  A3C baseline                         89          485
+  Inequity aversion (Hughes et al.)    275         750
+  Influence - Basic                    190         1073
+  Influence - Communication            166         951
+  Influence - Model of other agents    392         588
+
+Table 4: Final collective reward over the last 50 agent steps
+for each of the models considered. Bolded entries represent
+experiments in which the influence models significantly out-
+performed the scores reported in previous work on inequity
+aversion (Hughes et al., 2018). This is impressive, consid-
+ering the inequity averse agents are able to view all other
+agents’ rewards. We make no such assumption, and yet are
+able to achieve similar or superior performance.
+                               Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+
+
+
+                (a) Cleanup - Basic influence                                     (b) Harvest - Basic influence
+
+
+
+
+                (c) Cleanup - Communication                                       (d) Harvest - Communication
+
+
+
+
+             (e) Cleanup - Model of other agents                               (f) Harvest - Model of other agents
+
+Figure 16: Total collective reward times equality, R∗(1−G), obtained in all experiments. Error bars show a 99.5% confidence
+interval (CI) over 5 random seeds, computed within a sliding window of 200 agent steps. Once again, the models trained with
+influence reward (red) significantly outperform the baseline and ablated models.
+                               Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+
+
+
+                (a) Cleanup - Basic influence                                      (b) Harvest - Basic influence
+
+
+
+
+                (c) Cleanup - Communication                                       (d) Harvest - Communication
+
+
+
+
+             (e) Cleanup - Model of other agents                                (f) Harvest - Model of other agents
+
+Figure 17: Total collective reward over the top 5 hyperparameter settings, with 5 random seeds each, for all experiments. Error
+bars show a 99.5% confidence interval (CI) computed within a sliding window of 200 agent steps. The influence models
+still maintain an advantage over the baselines and ablated models, suggesting the technique is robust to the hyperparameter
+settings.
+                   000
+                   001
+                   002                            Supplementary Material for Social Influence as Intrinsic Motivation
+                   003
+                   004
+                                                           for Multi-Agent Deep Reinforcement Learning
+                   005
+                   006
+                   007
+                   008                                                                            Anonymous Authors1
+                   009
+                   010
+                   011
+                                         1. Influence as Mutual Information                                       believe this will result in an easier reward to learn, since it
+                                                                                                                  allows for better credit assignment; agent k can more easily
+                   012                   The causal influence of agent k on agent j is:
+arXiv:1810.08647v4 [cs.LG] 18 Jun 2019
+
+
+
+
+                                                                                                                  learn which of its actions lead to high influence.
+                   013                                     h                             i
+                   014                                DKL p(ajt | akt , zt ) p(ajt | zt ) ,                 (1)   The connection to mutual information is interesting, because
+                   015                                                                                            a frequently used intrinsic motivation for single agent RL
+                   016                   where zt represents the conditioning variables at timestep               is empowerment, which rewards the agent for having high
+                   017                   t, zt = hujt , sjt i. The influence reward to the mutual infor-          mutual information between its actions and the future state
+                   018                   mation (MI) between the actions of agents k and j, which                 of the environment (e.g. ??). To the extent that the social
+                   019                   is given by                                                              influence reward approximates the MI, k is rewarded for
+                   020                                                                                            having empowerment over j’s actions.
+                   021                                      X                              p(aj , ak |z)
+                                          I(Aj ; Ak |z) =            p(aj , ak |z) log                            The social influence reward can also be computed using
+                   022                                                                   p(aj |z)p(ak |z)         other divergence measures besides KL-divergence. ? pro-
+                   023                                      ak ,aj
+                                                                            h                      i
+                                                            X                                                     pose local information flow as a measure of direct causal
+                   024                                  =        p(ak |z)DKL p(aj |ak , z) p(aj |z) ,             effect; this is equivalent to the pointwise mutual information
+                   025                                      ak                                                    (the innermost term of Eq. 3), given by:
+                   026                                                                                      (2)
+                   027                                                                                                                             p(aj | ak , z)
+                   028                   where we see that the DKL factor in Eq. 2 is the causal                      pmi(ak ; aj | Z = z) = log
+                                                                                                                                                     p(aj | z)
+                   029                   influence reward given in Eq. 1.                                                                             p(ak , aj | z)
+                   030                                                                                                                       = log                    .      (4)
+                                         By sampling N independent trajectories τn from the en-                                                    p(ak | z)p(aj | z)
+                   031
+                                         vironment, where k’s actions akn are drawn according to                  The PMI gives us a measure of influence of a single action
+                   032
+                                         p(ak |z), we perform a Monte-Carlo approximation of the                  of k on the single action taken by j. The expectation of the
+                   033
+                                         MI (see e.g. ?),                                                         PMI over p(aj , ak |z) is the MI. We experiment with using
+                   034
+                   035                                       h                           i                      the PMI and a number of divergence measures, including
+                                           I(Ak ; Aj |z) = Eτ DKL p(Aj |Ak , z) p(Aj |z) z                        the Jensen-Shannon Divergence (JSD), and find that the
+                   036
+                   037                                     1 X                                                  influence reward is robust to the choice of measure.
+                                                         ≈       DKL p(Aj |akn , z) p(Aj |z) . (3)
+                   038                                     N n
+                   039                                                                                            2. Sequential Social Dilemmas
+                   040                   Thus, in expectation, the social influence reward is the MI
+                   041                   between agents’ actions.                                                 Figure 1 depicts the SSD games under investigation. In
+                   042                                                                                            each of the games, an agent is rewarded +1 for every apple
+                   043                   Whether the policy trained with Eq. 1 actually learns to                 it collects, but the apples are a limited resource. Agents
+                   044                   approximate the MI depends on the learning dynamics. We                  have the ability to punish each other with a fining beam,
+                   045                   calculate the intrinsic social influence reward using Eq. 1,             which costs −1 reward to fire, and fines any agent it hits
+                   046                   because unlike Eq. 2, which gives an estimate of the sym-                −50 reward.
+                   047                   metric bandwidth between k and j, Eq. 1 gives the directed
+                                         causal effect of the specific action taken by agent k, akt . We          In Cleanup (a public goods game) agents must clean a
+                   048                                                                                            river before apples can grow, but are not able to harvest
+                   049                     1
+                                             Anonymous Institution, Anonymous City, Anonymous Region,             apples while cleaning. In Harvest (a common pool resource
+                   050                   Anonymous Country. Correspondence to: Anonymous Author                   game), apples respawn at a rate proportional to the amount
+                   051                   <anon.email@domain.com>.
+                                                                                                                  of nearby apples; if apples are harvested too quickly, they
+                   052                                                                                            will not grow back. Both coordination, and cooperation
+                                         Preliminary work. Under review by the International Conference
+                   053                   on Machine Learning (ICML). Do not distribute.                           are required to solve both games. In Cleanup, agents
+                   054
+                      Supplementary Material for Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+055
+056
+057
+058
+059
+060
+061
+062
+063   Figure 1: The two SSD environments, Cleanup (left) and Harvest (right). Agents can exploit other agents for immediate
+064   payoff, but at the expense of the long-term collective reward of the group. Reproduced with permission from ?.
+065
+066
+067
+068
+069
+070
+071
+                                          (a) Cleanup                                 (b) Harvest
+072
+073
+074
+075   Figure 2: Schelling diagrams for the two social dilemma tasks show that an individual agent is motivated to defect, though
+076   everyone benefits when more agents cooperate. Reproduced with permission from ?.
+077
+078   must efficiently time harvesting apples and cleaning
+079   the river, and allow agents cleaning the river a chance
+080   to consume apples. In Harvest, agents must spatially
+081   distribute their harvesting, and abstain from consuming
+082   apples too quickly in order to harvest sustainably. The
+083   code for these games, including hyperparameter settings
+084   and apple and waste respawn probabilities, can be found
+085   at      https://github.com/eugenevinitsky/
+086   sequential_social_dilemma_games.
+087
+088   The reward structure of the games is shown in Figure 2,           Figure 3: The Box trapped environment in which the teal
+089   which gives the Schelling diagram for both SSD tasks under        agent is trapped, and the purple agent can release it with a
+090   investigation. A Schelling diagram (??) depicts the relative      special open box action.
+091   payoffs for a single agent’s strategy given a fixed number
+092   of other agents who are cooperative. These diagrams show
+093   that all agents would benefit from learning to cooperate,
+      because even the agents that are being exploited get higher       purple agent will simply consume apples, and chooses the
+094                                                                     open box action in 0% of trajectories once the policy has con-
+095   reward than in the regime where all agents defect. However,
+      traditional RL agents struggle to learn to cooperate and solve    verged. A video of A3C agents trained in this environment
+096                                                                     is available at: https://youtu.be/C8SE9_YKzxI,
+097   these tasks effectively (?).
+                                                                        which shows that the purple agent leaves its compatriot
+098                                                                     trapped in the box throughout the trajectory.
+099   3. Additional experiment - Box Trapped
+100                                                                     In contrast, an agent trained with the social influence re-
+101   As a proof-of-concept experiment to test whether the influ-       ward chooses the open box action in 88% of trajectories,
+102   ence reward works as expected, we constructed a special           releasing its fellow agent so that they are both able to
+103   environment, shown in Figure 3. In this environment, one          consume apples. A video of this behavior is shown at:
+104   agent (teal) is trapped in a box. The other agent (purple) has    https://youtu.be/Gfo248-qt3c. Further, as Fig-
+105   a special action it can use to open the box... or it can simply   ure 4 reveals, the purple influencer agent usually chooses
+106   choose to consume apples, which exist outside the box and         to open the box within the first few steps of the trajetory,
+107   are inexhaustible in this environment.                            giving its fellow agent more time to collect reward.
+108   As expected, a vanilla A3C agent learns to act selfishly; the     Most importantly though, Figure 5 shows the influence re-
+109
+                      Supplementary Material for Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+110   ward over the course of a trajectory in the Box trapped          a fair comparison with the search size over the baseline
+111   environment. The agent chooses the open box action in            parameters that are shared with the influence models. For
+112   the second timestep; at this point, we see a corresponding       all models we search for the optimal entropy reward and
+113   spike in the influence reward. This reveals that the influence   learning rate, where we anneal the learning rate from an
+114   reward works as expected, incentivizing an action which          initial value lr init to lr final. The below sections
+115   has a strong — and in this case, prosocial — effect on the       give the parameters found to be most effective for each of
+116   other agent’s behavior.                                          the three experiments.
+117
+118                                                                    4.1. Basic influence hyperparameters
+119
+120                                                                    In this setting we vary the number of influencers from 1 − 4,
+121                                                                    the influence reward weight β, and the number of curricu-
+122                                                                    lum steps over which the weight of the influence reward
+123                                                                    is linearly increased C. In this setting, since we have a
+124                                                                    centralised controller, we also experiment with giving the
+125                                                                    influence reward to the agent being influenced as well, and
+126                                                                    find that this sometimes helps. This ‘influencee’ reward is
+127                                                                    not used in the other two experiments, since it precludes
+128                                                                    independent training. The hyperparameters found to give
+129                                                                    the best performance for each model are shown in Table 1.
+130
+131                                                                    4.2. Communication hyperparameters
+132   Figure 4: Number of times the open box action occurs at
+      each trajectory step over 100 trajectories.                      Because the communication models have an extra A2C out-
+133                                                                    put head for the communication policy, we use an additional
+134                                                                    entropy regularization term just for this head, and apply a
+135                                                                    weight to the communication loss in the loss function. We
+136                                                                    also vary the number of communication symbols that the
+137                                                                    agents can emit, and the size of the linear layer that con-
+138                                                                    nects the LSTM to the communication policy layer, which
+139                                                                    we term the communication embedding size. Finally, in the
+140                                                                    communication regime, we experiment to setting the weight
+141                                                                    on the extrinsic reward E, α, to zero. The best hyperparam-
+142                                                                    eters for each of the communication models are shown in
+143                                                                    Table 2.
+144
+145
+                                                                       4.3. Model of other agents (MOA) hyperparameters
+146
+147                                                                    The MOA hyperparameters include whether to only train
+148   Figure 5: Influence reward over a trajectory in Box trapped.     the MOA with cross-entropy loss on the actions of agents
+149   An agent gets high influence for letting another agent out of    that are visible, and how much to weight the supervised loss
+150   the box in which it is trapped.                                  in the overall loss of the model. The best hyperparameters
+151                                                                    are shown in Table 3.
+152
+153   4. Implementation details                                        4.4. Communication analysis
+154
+155   All models are trained with a single convolutional layer with    The speaker consistency metric is calculated as:
+156   a kernel of size 3, stride of size 1, and 6 output channels.              N
+                                                                                X            X        H(p(ak |mk = c))
+157   This is connected to two fully connected layers of size 32                      0.5[       1−
+158   each, and an LSTM with 128 cells. We use a discount factor                k=1          c
+                                                                                                           Hmax
+159   γ = .99. The number of agents N is fixed to 5.                                             X        H(p(mk |ak = a))
+160                                                                                          +       1−                    ],   (5)
+      In addition to the comparison function used to compute                                                  Hmax
+161   influence (e.g. KL-divergence, PMI, JSD), there are many
+                                                                                                 a
+162   other hyperparameters that can be tuned for each model.          where H is the entropy function and Hmax is the maximum
+163   We use a random search over hyperparameters, ensuring            entropy based on the number of discrete symbols or actions.
+164
+                      Supplementary Material for Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+165                                                       Cleanup                                              Harvest
+                                           A3C        Visible actions                       A3C            Visible actions
+166                Hyperparameter                                           Influence                                          Influence
+                                           baseline   baseline                              baseline       baseline
+167                Entropy reg.            .00176     .00176                .000248         .000687        .00184              .00025
+168                lr init                 .00126     .00126                .00107          .00136         .00215              .00107
+169                lr end                  .000012    .000012               .000042         .000028        .000013             .000042
+170                Number of influencers   -          3                     1               -              3                   3
+171                Influence weight β      -          0                     .146            -              0                   .224
+                   Curriculum C            -          -                     140             -              -                   140
+172                Policy comparison       -          -                     JSD             -              -                   PMI
+173                Influencee reward       -          -                     1               -              -                   0
+174
+175                  Table 1: Optimal hyperparameter settings for the models in the basic influence experiment.
+176
+177                                                        Cleanup                                       Harvest
+178                                            A3C        Comm.         Influence       A3C            Comm.          Influence
+                         Hyperparameter
+                                               baseline   baseline      comm.           baseline       baseline       comm.
+179                      Entropy reg.          .00176     .000249       .00305          .000687        .000174        .00220
+180                      lr init               .00126     .00223        .00249          .00136         .00137         .000413
+181                      lr end                .000012    .000022       .0000127        .000028        .0000127       .000049
+182                      Influence weight β    -          0             2.752           -              0              4.825
+183                      Extrinsic reward
+                                               -          -             0               -              -              1.0
+                         weight α
+184                      Curriculum C          -          -             1               -              -              8
+185                      Policy comparison     -          -             KL              -              -              KL
+186                      Comm. entropy reg.    -          -             .000789         -              -              .00208
+187                      Comm. loss weight     -          -             .0758           -              -              .0709
+188                      Symbol vocab size     -          -             9               -              -              7
+                         Comm. embedding       -          -             32              -              -              16
+189
+190                  Table 2: Optimal hyperparameter settings for the models in the communication experiment.
+191
+192
+193   The goal of the metric is to measure how much of a 1:1
+194   correspondence exists between a speaker’s action and the
+195   speaker’s communication message.
+196
+197
+      5. Additional results
+198
+199   5.1. Basic influence emergent communication
+200
+201   Figure 6 shows an additional moment of high influence in
+202   the Cleanup game. The purple influencer agent can see the
+203   area within the white box, and therefore all of the apple
+204   patch. The field-of-view of the magenta influencee is out-
+205   lined with the magenta box; it cannot see if apples have
+206   appeared, even though it has been cleaning the river, which
+      is the action required to cause apples to appear. When the            Figure 6: A moment of high influence between the purple
+207
+      purple influencer turns left and does not move towards the            influencer and magenta influencee.
+208
+209   apple patch, this signals to the magenta agent that no apples
+      have appeared, since otherwise the influence would move               Following a similar principle, we implemented agents that
+210
+      right.                                                                optimize for a convex combination of their own individual
+211
+                                                                            reward ekt and the collective reward of all other agents,
+212                                                                         PN
+                                                                                i=1,i6=k et . Thus, the reward function for agent k is rt =
+                                                                                          i                                             k
+213   5.2. Optimizing for collective reward
+                                                                                    P  N
+214                                                                         ekt +η i=1,i6=k eit . We conducted the same hyperparameter
+      In this section we include the results of training explicitly
+215                                                                         search over the parameters mentioned in Section 4.1 varying
+      prosocial agents, which directly optimize for the collective
+216                                                                         the weight placed on the collective reward, η ∈ [0, 2].
+      reward of all agents. Previous work (e.g. ?) has shown that
+217   training agents to optimize for the rewards of other agents           As expected, we find that agents trained to optimize for
+218   can help the group to obtain better collective outcomes.              collective reward attain higher collective reward in both
+219
+                      Supplementary Material for Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+220                                                              Cleanup                           Harvest
+                                                   A3C          MOA        Influence   A3C        MOA         Influence
+221                          Hyperparameter
+                                                   baseline     baseline   MOA         baseline   baseline    MOA
+222                          Entropy reg.          .00176       .00176     .00176      .000687    .00495      .00223
+223                          lr init               .00126       .00123     .00123      .00136     .00206      .00120
+224                          lr end                .000012      .000012    .000012     .000028    .000022     .000044
+225                          Influence weight β    -            0          .620        -          0           2.521
+226                          MOA loss weight       -            1.312      15.007      -          1.711       10.911
+                             Curriculum C          -            -          40          -          -           226
+227                          Policy comparison     -            -          KL          -          -           KL
+228                          Train MOA only
+                                                   -            False      True        -          False       True
+229                          when visible
+230
+231           Table 3: Optimal hyperparameter settings for the models in the model of other agents (MOA) experiment.
+232
+233
+                                                                             agents’ rewards, whereas we do not make this assumption,
+234
+                                                                             and instead only require that agents can view each others’
+235
+                                                                             actions.
+236
+237
+238                                                                          5.4. Collective reward and equality
+239                                                                          It is important to note that collective reward is not always
+240            (a) Cleanup                        (b) Tragedy                the perfect metric of cooperative behavior, a finding that was
+241                                                                          also discovered by ? and emphasized by ?. In the case, we
+242   Figure 7: Total collective reward obtained by agents trained           find that there is a spurious solution to the Harvest game, in
+243   to optimize for the collective reward, for the 5 best hyperpa-         which one agent fails to learn and fails to collect any apples.
+244   rameter settings with 5 random seeds each. Error bars show             This leads to very high collective reward, since it means
+245   a 99.5% confidence interval (CI) computed within a sliding             there is one fewer agent that can exploit the others, and
+246   window of 200 agent steps.                                             makes sustainable harvesting easier to achieve. Therefore,
+247                                                                          for the results shown in the paper, we eliminate any random
+248                                                                          seed in Harvest for which one of the agents has failed to
+249   Cleanup and Harvest, as is shown in Figure 7. In both                  learn to collect apples, as in previous work (?).
+250   games, the optimal value for η = 0.85. Interestingly, how-
+251                                                                          However, here we also present an alternative strategy for as-
+      ever, the equality in the individual returns for these agents
+252                                                                          sessing the overall collective outcomes: weighting the total
+      is extremely low. Across the hyperparameter sweep, no
+253                                                                          collective reward by an index of equality of the individual
+      solution to the Cleanup game which scored more than 20
+254                                                                          rewards. Specifically, we compute the Gini coefficient over
+      points in terms of collective return was found in which all
+255                                                                          the N agents’ individual environmental rewards ekt :
+      agents scored an individual return above 0. It seems that in
+256   Cleanup, when agents are trained to optimize for collective                                  PN PN          i    j
+257                                                                                                  i=1    j=1 |et − et |
+      return, they converge on a solution in which some agents                               G=             PN             ,            (6)
+258   never receive any reward.                                                                           2N i=1 eit
+259
+260   Note that training agents to optimize for collective reward            which gives us a measure of the inequality of the returns,
+261   requires that each agent can view the rewards obtained by              where G ∈ [0, 1], with G = 0 indicating perfect equality.
+262   other agents. As discussed previously, the social influence            Thus, 1 − G is a measure of equality; we use this to weight
+263   reward is a novel way to obtain cooperative behavior, that             the collective reward for each experiment, and plot the re-
+264   does not require making this assumption.                               sults in Figure 8. Once again, we see that the influence
+265                                                                          models give the highest final performance, even with this
+266   5.3. Performance comparison between models and                         new metric.
+267        related work
+268                                                                          5.5. Collective reward over multiple hyperparameters
+      Table 4 presents the final collective reward obtained by each
+269   of the models tested in the experiments presented in the               Finally, we would like to show that the influence reward is
+270   paper. We see that in several cases, the influence agents              robust to the choice of hyperparameter settings. Therefore,
+271   are even able to out-perform the state-of-the-art results on           in Figure 9, we plot the collective reward of the top 5 best
+272   these tasks reported by (?), despite the fact that the solu-           hyperparameter settings for each experiment, over 5 random
+273   tion proposed by (?) requires that agents can view other               seeds each. Once again, the influence models result in higher
+274
+                      Supplementary Material for Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+275                                                                         Cleanup    Harvest
+276                                    A3C baseline                         89         485
+277                                    Inequity aversion (?)                275        750
+278                                    Influence - Basic                    190        1073
+279                                    Influence - Communication            166        951
+280                                    Influence - Model of other agents    392        588
+281
+282   Table 4: Final collective reward over the last 50 agent steps for each of the models considered. Bolded entries represent
+283   experiments in which the influence models significantly outperformed the scores reported in previous work on inequity
+284   aversion(?). This is impressive, considering the inequity averse agents are able to view all other agents’ rewards. We make
+285   no such assumption, and yet are able to achieve similar or superior performance.
+286
+287
+      collective reward, which provides evidence that the model
+288
+      is robust to the choice of hyperparameters.
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+                     Supplementary Material for Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346                  (a) Cleanup - Basic influence                                   (b) Harvest - Basic influence
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361                  (c) Cleanup - Communication                                    (d) Harvest - Communication
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376               (e) Cleanup - Model of other agents                             (f) Harvest - Model of other agents
+377
+378   Figure 8: Total collective reward times equality, R ∗ (1 − G), obtained in all experiments. Error bars show a 99.5%
+379   confidence interval (CI) over 5 random seeds, computed within a sliding window of 200 agent steps. Once again, the models
+380   trained with influence reward (red) significantly outperform the baseline and ablated models.
+381
+382
+383
+384
+                      Supplementary Material for Social Influence as Intrinsic Motivation for Multi-Agent Deep RL
+
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401                   (a) Cleanup - Basic influence                                     (b) Harvest - Basic influence
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416                   (c) Cleanup - Communication                                      (d) Harvest - Communication
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431                (e) Cleanup - Model of other agents                               (f) Harvest - Model of other agents
+432
+      Figure 9: Total collective reward over the top 5 hyperparameter settings, with 5 random seeds each, for all experiments. Error
+433
+      bars show a 99.5% confidence interval (CI) computed within a sliding window of 200 agent steps. The influence models
+434
+      still maintain an advantage over the baselines and ablated models, suggesting the technique is robust to the hyperparameter
+435
+      settings.
+436
+437
+438
+439
+

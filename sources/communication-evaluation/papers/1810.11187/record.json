@@ -1,0 +1,116 @@
+{
+  "kind": "papers",
+  "id": "1810.11187",
+  "title": "TarMAC: Targeted Multi-Agent Communication",
+  "page_url": "https://arxiv.org/abs/1810.11187",
+  "pdf_url": "https://arxiv.org/pdf/1810.11187",
+  "retrieved_at": "2026-09-10T23:58:16.491193+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/1810.11187",
+      "resolved_url": "https://arxiv.org/abs/1810.11187",
+      "path": "sources/communication-evaluation/papers/1810.11187/page.html",
+      "bytes": 43890,
+      "sha256": "993d8dcb620e447b8642b12222388a166b7331cfd17804cfcf5934bbc005367d"
+    },
+    {
+      "url": "https://arxiv.org/pdf/1810.11187",
+      "resolved_url": "https://arxiv.org/pdf/1810.11187",
+      "path": "sources/communication-evaluation/papers/1810.11187/paper.pdf",
+      "bytes": 3396420,
+      "sha256": "7818a0d02e517a0ba4a45e4aedfa8a6743ef0a41803cbcdada73284a0aee129e"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 1810.11187: TarMAC: Targeted Multi-Agent Communication"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "TarMAC: Targeted Multi-Agent Communication"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/1810.11187v2"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "We propose a targeted communication architecture for multi-agent reinforcement learning, where agents learn both what messages to send and whom to address them to while performing cooperative tasks in partially-observable environments. This targeting behavior is learnt solely from downstream task-specific reward without any communication supervision. We additionally augment this with a multi-round communication approach where agents coordinate via multiple rounds of communication before taking actions in the environment. We evaluate our approach on a diverse set of cooperative multi-agent tasks, of varying difficulties, with varying number of agents, in a variety of environments ranging from 2D grid layouts of shapes and simulated traffic junctions to 3D indoor environments, and demonstrate the benefits of targeted and multi-round communication. Moreover, we show that the targeted communication strategies learned by agents are interpretable and intuitive. Finally, we show that our architecture can be easily extended to mixed and competitive environments, leading to improved performance and sample complexity over recent state-of-the-art approaches."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "TarMAC: Targeted Multi-Agent Communication"
+    ],
+    "twitter:description": [
+      "We propose a targeted communication architecture for multi-agent reinforcement learning, where agents learn both what messages to send and whom to address them to while performing cooperative..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "TarMAC: Targeted Multi-Agent Communication"
+    ],
+    "citation_author": [
+      "Das, Abhishek",
+      "Gervet, Th\u00e9ophile",
+      "Romoff, Joshua",
+      "Batra, Dhruv",
+      "Parikh, Devi",
+      "Rabbat, Michael",
+      "Pineau, Joelle"
+    ],
+    "citation_date": [
+      "2018/10/26"
+    ],
+    "citation_online_date": [
+      "2020/02/22"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/1810.11187"
+    ],
+    "citation_arxiv_id": [
+      "1810.11187"
+    ],
+    "citation_abstract": [
+      "We propose a targeted communication architecture for multi-agent reinforcement learning, where agents learn both what messages to send and whom to address them to while performing cooperative tasks in partially-observable environments. This targeting behavior is learnt solely from downstream task-specific reward without any communication supervision. We additionally augment this with a multi-round communication approach where agents coordinate via multiple rounds of communication before taking actions in the environment. We evaluate our approach on a diverse set of cooperative multi-agent tasks, of varying difficulties, with varying number of agents, in a variety of environments ranging from 2D grid layouts of shapes and simulated traffic junctions to 3D indoor environments, and demonstrate the benefits of targeted and multi-round communication. Moreover, we show that the targeted communication strategies learned by agents are interpretable and intuitive. Finally, we show that our architecture can be easily extended to mixed and competitive environments, leading to improved performance and sample complexity over recent state-of-the-art approaches."
+    ]
+  },
+  "extracted_text_characters": 53418,
+  "text_searchable": true
+}

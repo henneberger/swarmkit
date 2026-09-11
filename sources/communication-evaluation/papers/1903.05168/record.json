@@ -1,0 +1,114 @@
+{
+  "kind": "papers",
+  "id": "1903.05168",
+  "title": "On the Pitfalls of Measuring Emergent Communication",
+  "page_url": "https://arxiv.org/abs/1903.05168",
+  "pdf_url": "https://arxiv.org/pdf/1903.05168",
+  "retrieved_at": "2026-09-10T23:58:16.491527+00:00",
+  "artifacts": [
+    {
+      "url": "https://arxiv.org/abs/1903.05168",
+      "resolved_url": "https://arxiv.org/abs/1903.05168",
+      "path": "sources/communication-evaluation/papers/1903.05168/page.html",
+      "bytes": 44218,
+      "sha256": "221515bfe9d97690f8577cf9dfeaf6b8f5cbb5806fc79569e05dbd56178707fb"
+    },
+    {
+      "url": "https://arxiv.org/pdf/1903.05168",
+      "resolved_url": "https://arxiv.org/pdf/1903.05168",
+      "path": "sources/communication-evaluation/papers/1903.05168/paper.pdf",
+      "bytes": 1525101,
+      "sha256": "844a0a5475dc919cf822e467f53ad6ae45187f59f84ce1d094dbd26abf5dfeb4"
+    }
+  ],
+  "status": "ok",
+  "metadata": {
+    "viewport": [
+      "width=device-width, initial-scale=1"
+    ],
+    "msapplication-TileColor": [
+      "#da532c"
+    ],
+    "theme-color": [
+      "#ffffff"
+    ],
+    "description": [
+      "Abstract page for arXiv paper 1903.05168: On the Pitfalls of Measuring Emergent Communication"
+    ],
+    "og:type": [
+      "website"
+    ],
+    "og:site_name": [
+      "arXiv.org"
+    ],
+    "og:title": [
+      "On the Pitfalls of Measuring Emergent Communication"
+    ],
+    "og:url": [
+      "https://arxiv.org/abs/1903.05168v1"
+    ],
+    "og:image": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:secure_url": [
+      "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+    ],
+    "og:image:width": [
+      "1200"
+    ],
+    "og:image:height": [
+      "700"
+    ],
+    "og:image:alt": [
+      "arXiv logo"
+    ],
+    "og:description": [
+      "How do we know if communication is emerging in a multi-agent system? The vast majority of recent papers on emergent communication show that adding a communication channel leads to an increase in reward or task success. This is a useful indicator, but provides only a coarse measure of the agent's learned communication abilities. As we move towards more complex environments, it becomes imperative to have a set of finer tools that allow qualitative and quantitative insights into the emergence of communication. This may be especially useful to allow humans to monitor agents' behaviour, whether for fault detection, assessing performance, or even building trust. In this paper, we examine a few intuitive existing metrics for measuring communication, and show that they can be misleading. Specifically, by training deep reinforcement learning agents to play simple matrix games augmented with a communication channel, we find a scenario where agents appear to communicate (their messages provide information about their subsequent action), and yet the messages do not impact the environment or other agent in any way. We explain this phenomenon using ablation studies and by visualizing the representations of the learned policies. We also survey some commonly used metrics for measuring emergent communication, and provide recommendations as to when these metrics should be used."
+    ],
+    "twitter:site": [
+      "@arxiv"
+    ],
+    "twitter:card": [
+      "summary"
+    ],
+    "twitter:title": [
+      "On the Pitfalls of Measuring Emergent Communication"
+    ],
+    "twitter:description": [
+      "How do we know if communication is emerging in a multi-agent system? The vast majority of recent papers on emergent communication show that adding a communication channel leads to an increase in..."
+    ],
+    "twitter:image": [
+      "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+    ],
+    "twitter:image:alt": [
+      "arXiv logo"
+    ],
+    "citation_title": [
+      "On the Pitfalls of Measuring Emergent Communication"
+    ],
+    "citation_author": [
+      "Lowe, Ryan",
+      "Foerster, Jakob",
+      "Boureau, Y-Lan",
+      "Pineau, Joelle",
+      "Dauphin, Yann"
+    ],
+    "citation_date": [
+      "2019/03/12"
+    ],
+    "citation_online_date": [
+      "2019/03/12"
+    ],
+    "citation_pdf_url": [
+      "https://arxiv.org/pdf/1903.05168"
+    ],
+    "citation_arxiv_id": [
+      "1903.05168"
+    ],
+    "citation_abstract": [
+      "How do we know if communication is emerging in a multi-agent system? The vast majority of recent papers on emergent communication show that adding a communication channel leads to an increase in reward or task success. This is a useful indicator, but provides only a coarse measure of the agent's learned communication abilities. As we move towards more complex environments, it becomes imperative to have a set of finer tools that allow qualitative and quantitative insights into the emergence of communication. This may be especially useful to allow humans to monitor agents' behaviour, whether for fault detection, assessing performance, or even building trust. In this paper, we examine a few intuitive existing metrics for measuring communication, and show that they can be misleading. Specifically, by training deep reinforcement learning agents to play simple matrix games augmented with a communication channel, we find a scenario where agents appear to communicate (their messages provide information about their subsequent action), and yet the messages do not impact the environment or other agent in any way. We explain this phenomenon using ablation studies and by visualizing the representations of the learned policies. We also survey some commonly used metrics for measuring emergent communication, and provide recommendations as to when these metrics should be used."
+    ]
+  },
+  "extracted_text_characters": 92028,
+  "text_searchable": true
+}

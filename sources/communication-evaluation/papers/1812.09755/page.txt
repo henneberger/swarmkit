@@ -1,0 +1,244 @@
+
+
+  [1812.09755] Learning when to Communicate at Scale in Multiagent Cooperative and Competitive Tasks
+
+    Skip to main content
+
+      Search
+
+    Submit
+    Donate
+
+      Log in
+
+      Search arXiv
+
+      Press Enter to search · Advanced search
+
+Computer Science > Machine Learning
+
+      arXiv:1812.09755 (cs)
+
+  [Submitted on 23 Dec 2018]
+
+Title:Learning when to Communicate at Scale in Multiagent Cooperative and Competitive Tasks
+
+Authors:Amanpreet Singh, Tushar Jain, Sainbayar Sukhbaatar            
+View a PDF of the paper titled Learning when to Communicate at Scale in Multiagent Cooperative and Competitive Tasks, by Amanpreet Singh and 2 other authors
+    View PDF
+    HTML (experimental)
+
+            Abstract:Learning when to communicate and doing that effectively is essential in multi-agent tasks. Recent works show that continuous communication allows efficient training with back-propagation in multi-agent scenarios, but have been restricted to fully-cooperative tasks. In this paper, we present Individualized Controlled Continuous Communication Model (IC3Net) which has better training efficiency than simple continuous communication model, and can be applied to semi-cooperative and competitive settings along with the cooperative settings. IC3Net controls continuous communication with a gating mechanism and uses individualized rewards foreach agent to gain better performance and scalability while fixing credit assignment issues. Using variety of tasks including StarCraft BroodWars explore and combat scenarios, we show that our network yields improved performance and convergence rates than the baselines as the scale increases. Our results convey that IC3Net agents learn when to communicate based on the scenario and profitability.
+
+          Comments:
+          Accepted to ICLR 2019
+
+          Subjects:
+
+            Machine Learning (cs.LG); Artificial Intelligence (cs.AI); Multiagent Systems (cs.MA); Machine Learning (stat.ML)
+
+          Cite as:
+          arXiv:1812.09755 [cs.LG]
+
+          (or 
+              arXiv:1812.09755v1 [cs.LG] for this version)
+
+                        https://doi.org/10.48550/arXiv.1812.09755
+
+                Focus to learn more
+
+                                  arXiv-issued DOI via DataCite
+
+Submission history From: Amanpreet Singh [view email]      
+    [v1]
+        Sun, 23 Dec 2018 19:07:36 UTC (2,322 KB)
+
+      Full-text links:
+
+Access Paper:
+
+View a PDF of the paper titled Learning when to Communicate at Scale in Multiagent Cooperative and Competitive Tasks, by Amanpreet Singh and 2 other authors
+View PDF
+HTML (experimental)
+TeX Source
+
+view license
+
+Current browse context:
+
+cs.LG
+
+      < prev
+
+      |      
+      next >
+
+    new
+     | 
+    recent
+     | 2018-12
+
+    Change to browse by:
+
+        cs
+
+        cs.AI
+
+        cs.MA
+
+        stat
+
+        stat.ML
+
+References & Citations
+
+NASA ADS
+Google Scholar
+
+Semantic Scholar
+
+DBLP - CS Bibliography
+
+      listing | bibtex    
+
+Amanpreet Singh
+Tushar Jain
+Sainbayar Sukhbaatar    
+
+    export BibTeX citation
+    Loading...
+
+BibTeX formatted citation
+            ×
+
+            loading...
+
+            Data provided by: 
+
+Bookmark
+
+    Bibliographic Tools
+
+Bibliographic and Citation Tools
+
+              Bibliographic Explorer Toggle
+
+            Bibliographic Explorer (What is the Explorer?)
+
+              Connected Papers Toggle
+
+            Connected Papers (What is Connected Papers?)
+
+              Litmaps Toggle
+
+            Litmaps (What is Litmaps?)
+
+              scite.ai Toggle
+
+            scite Smart Citations (What are Smart Citations?)
+
+    Code, Data, Media
+
+Code, Data and Media Associated with this Article
+
+              alphaXiv Toggle
+
+            alphaXiv (What is alphaXiv?)
+
+              Links to Code Toggle
+
+            CatalyzeX Code Finder for Papers (What is CatalyzeX?)
+
+              DagsHub Toggle
+
+            DagsHub (What is DagsHub?)
+
+              GotitPub Toggle
+
+            Gotit.pub (What is GotitPub?)
+
+              Huggingface Toggle
+
+            Hugging Face (What is Huggingface?)
+
+              ScienceCast Toggle
+
+            ScienceCast (What is ScienceCast?)
+
+      Demos
+
+Demos
+
+                Replicate Toggle
+
+              Replicate (What is Replicate?)
+
+                Spaces Toggle
+
+              Hugging Face Spaces (What is Spaces?)
+
+                Spaces Toggle
+
+              TXYZ.AI (What is TXYZ.AI?)
+
+      Related Papers
+
+Recommenders and Search Tools
+
+                Link to Influence Flower
+
+              Influence Flower (What are Influence Flowers?)
+
+                Core recommender toggle
+
+              CORE Recommender (What is CORE?)
+
+                IArxiv recommender toggle
+
+              IArxiv Recommender
+              (What is IArxiv?)
+
+Author
+
+Venue
+
+Institution
+
+Topic
+
+        About arXivLabs
+
+arXivLabs: experimental projects with community collaborators
+
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+
+Have an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.
+
+    Which authors of this paper are endorsers? |
+    Disable MathJax (What is MathJax?)
+
+        We gratefully acknowledge support from
+        our major funders,
+        member institutions, ,
+        and all contributors.
+
+        About
+        ·
+        Help
+        ·
+        Contact
+        ·
+        Subscribe
+        ·
+        Copyright
+        ·
+        Privacy
+        ·
+        Accessibility
+        ·
+        Operational Status (opens in new tab)
+
+Major funding support from
+

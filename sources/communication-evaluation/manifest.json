@@ -1,0 +1,464 @@
+{
+  "updated_at": "2026-09-10T23:58:17.442822+00:00",
+  "items": [
+    {
+      "kind": "papers",
+      "id": "1903.05168",
+      "title": "On the Pitfalls of Measuring Emergent Communication",
+      "page_url": "https://arxiv.org/abs/1903.05168",
+      "pdf_url": "https://arxiv.org/pdf/1903.05168",
+      "retrieved_at": "2026-09-10T23:58:16.491527+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/1903.05168",
+          "resolved_url": "https://arxiv.org/abs/1903.05168",
+          "path": "sources/communication-evaluation/papers/1903.05168/page.html",
+          "bytes": 44218,
+          "sha256": "221515bfe9d97690f8577cf9dfeaf6b8f5cbb5806fc79569e05dbd56178707fb"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1903.05168",
+          "resolved_url": "https://arxiv.org/pdf/1903.05168",
+          "path": "sources/communication-evaluation/papers/1903.05168/paper.pdf",
+          "bytes": 1525101,
+          "sha256": "844a0a5475dc919cf822e467f53ad6ae45187f59f84ce1d094dbd26abf5dfeb4"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 1903.05168: On the Pitfalls of Measuring Emergent Communication"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "On the Pitfalls of Measuring Emergent Communication"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/1903.05168v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "How do we know if communication is emerging in a multi-agent system? The vast majority of recent papers on emergent communication show that adding a communication channel leads to an increase in reward or task success. This is a useful indicator, but provides only a coarse measure of the agent's learned communication abilities. As we move towards more complex environments, it becomes imperative to have a set of finer tools that allow qualitative and quantitative insights into the emergence of communication. This may be especially useful to allow humans to monitor agents' behaviour, whether for fault detection, assessing performance, or even building trust. In this paper, we examine a few intuitive existing metrics for measuring communication, and show that they can be misleading. Specifically, by training deep reinforcement learning agents to play simple matrix games augmented with a communication channel, we find a scenario where agents appear to communicate (their messages provide information about their subsequent action), and yet the messages do not impact the environment or other agent in any way. We explain this phenomenon using ablation studies and by visualizing the representations of the learned policies. We also survey some commonly used metrics for measuring emergent communication, and provide recommendations as to when these metrics should be used."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "On the Pitfalls of Measuring Emergent Communication"
+        ],
+        "twitter:description": [
+          "How do we know if communication is emerging in a multi-agent system? The vast majority of recent papers on emergent communication show that adding a communication channel leads to an increase in..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "On the Pitfalls of Measuring Emergent Communication"
+        ],
+        "citation_author": [
+          "Lowe, Ryan",
+          "Foerster, Jakob",
+          "Boureau, Y-Lan",
+          "Pineau, Joelle",
+          "Dauphin, Yann"
+        ],
+        "citation_date": [
+          "2019/03/12"
+        ],
+        "citation_online_date": [
+          "2019/03/12"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/1903.05168"
+        ],
+        "citation_arxiv_id": [
+          "1903.05168"
+        ],
+        "citation_abstract": [
+          "How do we know if communication is emerging in a multi-agent system? The vast majority of recent papers on emergent communication show that adding a communication channel leads to an increase in reward or task success. This is a useful indicator, but provides only a coarse measure of the agent's learned communication abilities. As we move towards more complex environments, it becomes imperative to have a set of finer tools that allow qualitative and quantitative insights into the emergence of communication. This may be especially useful to allow humans to monitor agents' behaviour, whether for fault detection, assessing performance, or even building trust. In this paper, we examine a few intuitive existing metrics for measuring communication, and show that they can be misleading. Specifically, by training deep reinforcement learning agents to play simple matrix games augmented with a communication channel, we find a scenario where agents appear to communicate (their messages provide information about their subsequent action), and yet the messages do not impact the environment or other agent in any way. We explain this phenomenon using ablation studies and by visualizing the representations of the learned policies. We also survey some commonly used metrics for measuring emergent communication, and provide recommendations as to when these metrics should be used."
+        ]
+      },
+      "extracted_text_characters": 92028,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "1810.08647",
+      "title": "Social Influence as Intrinsic Motivation for Multi-Agent Deep Reinforcement Learning",
+      "page_url": "https://arxiv.org/abs/1810.08647",
+      "pdf_url": "https://arxiv.org/pdf/1810.08647",
+      "retrieved_at": "2026-09-10T23:58:16.491543+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/1810.08647",
+          "resolved_url": "https://arxiv.org/abs/1810.08647",
+          "path": "sources/communication-evaluation/papers/1810.08647/page.html",
+          "bytes": 45232,
+          "sha256": "9e4e7fceb087a8cfb3f628152f553b43c4c1c87ad1a9026a370a74b2b8599ee4"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1810.08647",
+          "resolved_url": "https://arxiv.org/pdf/1810.08647",
+          "path": "sources/communication-evaluation/papers/1810.08647/paper.pdf",
+          "bytes": 3071958,
+          "sha256": "4192bb78cef1c95a6013d7727d4ff6ced136f66b3ef0ff1870df7054ba6cc92b"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 1810.08647: Social Influence as Intrinsic Motivation for Multi-Agent Deep Reinforcement Learning"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Social Influence as Intrinsic Motivation for Multi-Agent Deep Reinforcement Learning"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/1810.08647v4"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "We propose a unified mechanism for achieving coordination and communication in Multi-Agent Reinforcement Learning (MARL), through rewarding agents for having causal influence over other agents' actions. Causal influence is assessed using counterfactual reasoning. At each timestep, an agent simulates alternate actions that it could have taken, and computes their effect on the behavior of other agents. Actions that lead to bigger changes in other agents' behavior are considered influential and are rewarded. We show that this is equivalent to rewarding agents for having high mutual information between their actions. Empirical results demonstrate that influence leads to enhanced coordination and communication in challenging social dilemma environments, dramatically increasing the learning curves of the deep RL agents, and leading to more meaningful learned communication protocols. The influence rewards for all agents can be computed in a decentralized way by enabling agents to learn a model of other agents using deep neural networks. In contrast, key previous works on emergent communication in the MARL setting were unable to learn diverse policies in a decentralized manner and had to resort to centralized training. Consequently, the influence reward opens up a window of new opportunities for research in this area."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Social Influence as Intrinsic Motivation for Multi-Agent Deep..."
+        ],
+        "twitter:description": [
+          "We propose a unified mechanism for achieving coordination and communication in Multi-Agent Reinforcement Learning (MARL), through rewarding agents for having causal influence over other agents'..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Social Influence as Intrinsic Motivation for Multi-Agent Deep Reinforcement Learning"
+        ],
+        "citation_author": [
+          "Jaques, Natasha",
+          "Lazaridou, Angeliki",
+          "Hughes, Edward",
+          "Gulcehre, Caglar",
+          "Ortega, Pedro A.",
+          "Strouse, DJ",
+          "Leibo, Joel Z.",
+          "de Freitas, Nando"
+        ],
+        "citation_date": [
+          "2018/10/19"
+        ],
+        "citation_online_date": [
+          "2019/06/18"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/1810.08647"
+        ],
+        "citation_arxiv_id": [
+          "1810.08647"
+        ],
+        "citation_abstract": [
+          "We propose a unified mechanism for achieving coordination and communication in Multi-Agent Reinforcement Learning (MARL), through rewarding agents for having causal influence over other agents' actions. Causal influence is assessed using counterfactual reasoning. At each timestep, an agent simulates alternate actions that it could have taken, and computes their effect on the behavior of other agents. Actions that lead to bigger changes in other agents' behavior are considered influential and are rewarded. We show that this is equivalent to rewarding agents for having high mutual information between their actions. Empirical results demonstrate that influence leads to enhanced coordination and communication in challenging social dilemma environments, dramatically increasing the learning curves of the deep RL agents, and leading to more meaningful learned communication protocols. The influence rewards for all agents can be computed in a decentralized way by enabling agents to learn a model of other agents using deep neural networks. In contrast, key previous works on emergent communication in the MARL setting were unable to learn diverse policies in a decentralized manner and had to resort to centralized training. Consequently, the influence reward opens up a window of new opportunities for research in this area."
+        ]
+      },
+      "extracted_text_characters": 140880,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "1810.11187",
+      "title": "TarMAC: Targeted Multi-Agent Communication",
+      "page_url": "https://arxiv.org/abs/1810.11187",
+      "pdf_url": "https://arxiv.org/pdf/1810.11187",
+      "retrieved_at": "2026-09-10T23:58:16.491193+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/1810.11187",
+          "resolved_url": "https://arxiv.org/abs/1810.11187",
+          "path": "sources/communication-evaluation/papers/1810.11187/page.html",
+          "bytes": 43890,
+          "sha256": "993d8dcb620e447b8642b12222388a166b7331cfd17804cfcf5934bbc005367d"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1810.11187",
+          "resolved_url": "https://arxiv.org/pdf/1810.11187",
+          "path": "sources/communication-evaluation/papers/1810.11187/paper.pdf",
+          "bytes": 3396420,
+          "sha256": "7818a0d02e517a0ba4a45e4aedfa8a6743ef0a41803cbcdada73284a0aee129e"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 1810.11187: TarMAC: Targeted Multi-Agent Communication"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "TarMAC: Targeted Multi-Agent Communication"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/1810.11187v2"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "We propose a targeted communication architecture for multi-agent reinforcement learning, where agents learn both what messages to send and whom to address them to while performing cooperative tasks in partially-observable environments. This targeting behavior is learnt solely from downstream task-specific reward without any communication supervision. We additionally augment this with a multi-round communication approach where agents coordinate via multiple rounds of communication before taking actions in the environment. We evaluate our approach on a diverse set of cooperative multi-agent tasks, of varying difficulties, with varying number of agents, in a variety of environments ranging from 2D grid layouts of shapes and simulated traffic junctions to 3D indoor environments, and demonstrate the benefits of targeted and multi-round communication. Moreover, we show that the targeted communication strategies learned by agents are interpretable and intuitive. Finally, we show that our architecture can be easily extended to mixed and competitive environments, leading to improved performance and sample complexity over recent state-of-the-art approaches."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "TarMAC: Targeted Multi-Agent Communication"
+        ],
+        "twitter:description": [
+          "We propose a targeted communication architecture for multi-agent reinforcement learning, where agents learn both what messages to send and whom to address them to while performing cooperative..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "TarMAC: Targeted Multi-Agent Communication"
+        ],
+        "citation_author": [
+          "Das, Abhishek",
+          "Gervet, Th\u00e9ophile",
+          "Romoff, Joshua",
+          "Batra, Dhruv",
+          "Parikh, Devi",
+          "Rabbat, Michael",
+          "Pineau, Joelle"
+        ],
+        "citation_date": [
+          "2018/10/26"
+        ],
+        "citation_online_date": [
+          "2020/02/22"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/1810.11187"
+        ],
+        "citation_arxiv_id": [
+          "1810.11187"
+        ],
+        "citation_abstract": [
+          "We propose a targeted communication architecture for multi-agent reinforcement learning, where agents learn both what messages to send and whom to address them to while performing cooperative tasks in partially-observable environments. This targeting behavior is learnt solely from downstream task-specific reward without any communication supervision. We additionally augment this with a multi-round communication approach where agents coordinate via multiple rounds of communication before taking actions in the environment. We evaluate our approach on a diverse set of cooperative multi-agent tasks, of varying difficulties, with varying number of agents, in a variety of environments ranging from 2D grid layouts of shapes and simulated traffic junctions to 3D indoor environments, and demonstrate the benefits of targeted and multi-round communication. Moreover, we show that the targeted communication strategies learned by agents are interpretable and intuitive. Finally, we show that our architecture can be easily extended to mixed and competitive environments, leading to improved performance and sample complexity over recent state-of-the-art approaches."
+        ]
+      },
+      "extracted_text_characters": 53418,
+      "text_searchable": true
+    },
+    {
+      "kind": "papers",
+      "id": "1812.09755",
+      "title": "Learning when to Communicate at Scale in Multiagent Cooperative and Competitive Tasks",
+      "page_url": "https://arxiv.org/abs/1812.09755",
+      "pdf_url": "https://arxiv.org/pdf/1812.09755",
+      "retrieved_at": "2026-09-10T23:58:16.491512+00:00",
+      "artifacts": [
+        {
+          "url": "https://arxiv.org/abs/1812.09755",
+          "resolved_url": "https://arxiv.org/abs/1812.09755",
+          "path": "sources/communication-evaluation/papers/1812.09755/page.html",
+          "bytes": 42832,
+          "sha256": "11dd72e7f2d23eda1a2f57116de69b2a7737aae82d786675ce52943410522f71"
+        },
+        {
+          "url": "https://arxiv.org/pdf/1812.09755",
+          "resolved_url": "https://arxiv.org/pdf/1812.09755",
+          "path": "sources/communication-evaluation/papers/1812.09755/paper.pdf",
+          "bytes": 1666929,
+          "sha256": "ce68b412be766ff61aa6d75cf04a74836af505b23ac8b96d14f6e906889daed1"
+        }
+      ],
+      "status": "ok",
+      "metadata": {
+        "viewport": [
+          "width=device-width, initial-scale=1"
+        ],
+        "msapplication-TileColor": [
+          "#da532c"
+        ],
+        "theme-color": [
+          "#ffffff"
+        ],
+        "description": [
+          "Abstract page for arXiv paper 1812.09755: Learning when to Communicate at Scale in Multiagent Cooperative and Competitive Tasks"
+        ],
+        "og:type": [
+          "website"
+        ],
+        "og:site_name": [
+          "arXiv.org"
+        ],
+        "og:title": [
+          "Learning when to Communicate at Scale in Multiagent Cooperative and Competitive Tasks"
+        ],
+        "og:url": [
+          "https://arxiv.org/abs/1812.09755v1"
+        ],
+        "og:image": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:secure_url": [
+          "/static/browse/0.3.4/images/arxiv-logo-fb.png"
+        ],
+        "og:image:width": [
+          "1200"
+        ],
+        "og:image:height": [
+          "700"
+        ],
+        "og:image:alt": [
+          "arXiv logo"
+        ],
+        "og:description": [
+          "Learning when to communicate and doing that effectively is essential in multi-agent tasks. Recent works show that continuous communication allows efficient training with back-propagation in multi-agent scenarios, but have been restricted to fully-cooperative tasks. In this paper, we present Individualized Controlled Continuous Communication Model (IC3Net) which has better training efficiency than simple continuous communication model, and can be applied to semi-cooperative and competitive settings along with the cooperative settings. IC3Net controls continuous communication with a gating mechanism and uses individualized rewards foreach agent to gain better performance and scalability while fixing credit assignment issues. Using variety of tasks including StarCraft BroodWars explore and combat scenarios, we show that our network yields improved performance and convergence rates than the baselines as the scale increases. Our results convey that IC3Net agents learn when to communicate based on the scenario and profitability."
+        ],
+        "twitter:site": [
+          "@arxiv"
+        ],
+        "twitter:card": [
+          "summary"
+        ],
+        "twitter:title": [
+          "Learning when to Communicate at Scale in Multiagent Cooperative..."
+        ],
+        "twitter:description": [
+          "Learning when to communicate and doing that effectively is essential in multi-agent tasks. Recent works show that continuous communication allows efficient training with back-propagation in..."
+        ],
+        "twitter:image": [
+          "https://static.arxiv.org/icons/twitter/arxiv-logo-twitter-square.png"
+        ],
+        "twitter:image:alt": [
+          "arXiv logo"
+        ],
+        "citation_title": [
+          "Learning when to Communicate at Scale in Multiagent Cooperative and Competitive Tasks"
+        ],
+        "citation_author": [
+          "Singh, Amanpreet",
+          "Jain, Tushar",
+          "Sukhbaatar, Sainbayar"
+        ],
+        "citation_date": [
+          "2018/12/23"
+        ],
+        "citation_online_date": [
+          "2018/12/23"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/1812.09755"
+        ],
+        "citation_arxiv_id": [
+          "1812.09755"
+        ],
+        "citation_abstract": [
+          "Learning when to communicate and doing that effectively is essential in multi-agent tasks. Recent works show that continuous communication allows efficient training with back-propagation in multi-agent scenarios, but have been restricted to fully-cooperative tasks. In this paper, we present Individualized Controlled Continuous Communication Model (IC3Net) which has better training efficiency than simple continuous communication model, and can be applied to semi-cooperative and competitive settings along with the cooperative settings. IC3Net controls continuous communication with a gating mechanism and uses individualized rewards foreach agent to gain better performance and scalability while fixing credit assignment issues. Using variety of tasks including StarCraft BroodWars explore and combat scenarios, we show that our network yields improved performance and convergence rates than the baselines as the scale increases. Our results convey that IC3Net agents learn when to communicate based on the scenario and profitability."
+        ]
+      },
+      "extracted_text_characters": 60978,
+      "text_searchable": true
+    }
+  ]
+}

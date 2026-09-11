@@ -494,6 +494,8 @@ The communication graph and the context graph serve different purposes: the firs
 
 ## Swarm benchmarks and evaluations
 
+**To experiment with communication strategies, start with [Evaluating swarm communication](docs/COMMUNICATION_EVALUATION.md).** It covers routing, timing, message contents and compression; controls that separate communication gains from extra computation; outcome and cost measurements; and existing shared-state paths that affect experiments. It includes a small proposed pilot and [downloaded foundational papers](sources/communication-evaluation/README.md). This is research guidance, not a new benchmark implementation.
+
 Use the [benchmark research review](docs/BENCHMARK_RESEARCH.md) and [evaluation suite specification](docs/BENCHMARK_SUITE.md) when designing experiments to determine **whether a collective mechanism improves useful outcomes at a known cost**. The review covers current multi-agent benchmarks, realistic workflow and coding tasks, decentralized coordination, strategic interaction, and continual learning. It includes code-level grading limitations that matter when interpreting published results.
 
 The suite specifies eight primary tracks:
