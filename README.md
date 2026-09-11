@@ -506,6 +506,8 @@ python examples/research_foundry.py
 
 Use the Foundry when you want to study discovery, commitment, execution, and incentives together. It includes a paired 16-condition primary study plus silent controls, optional artifact/pooled controls, message-removal replay, and strategy cross-play. The provided scientists are offline reference policies; use the canonical `Agent` interface to supply your own models. The [guide](docs/RESEARCH_FOUNDRY.md) documents all observation channels, usage accounting, and implementation limits.
 
+Read the [whole-system findings from the live run](docs/experiments/FOUNDRY_SYNTHESIS.md): shared plans and memory emerged, while economic behavior remained mostly fixed.
+
 **For real model-agent experimentation, use the [integrated DeepSeek program](docs/FOUNDRY_MODEL_EXPERIMENT.md).** Agents choose research, messages, bids, partner preferences, commitments, forecasts, and publication. The program crosses communication institutions, incentives and disruption, then tests mixed partners, archive removal and message interventions within the same economic task. It freezes prompts after development and saves full API traces, usage, outcomes and paired analyses.
 
 ```sh
