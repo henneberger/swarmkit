@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import copy
 import inspect
 import itertools
@@ -70,8 +71,18 @@ class FoundryConfig:
     institution: str = "contract"  # contract, first_price, second_price, vcg priority slots
     checkpoint: bool = False
     trust_reported_usage: bool = False
+    agent_concurrency: int = 1
+    agent_teams: bool = False
+    agent_publication: bool = False
+    artifact_visibility: str = "incentives"
 
     def __post_init__(self):
+        if type(self.agent_concurrency) is not int or self.agent_concurrency < 1:
+            raise ValueError("agent_concurrency must be a positive integer")
+        if self.agent_teams and self.rounds < 3:
+            raise ValueError("agent-selected teams need bid, contract and commit rounds")
+        if self.artifact_visibility not in ("incentives", "public", "firm"):
+            raise ValueError("invalid artifact visibility")
         if self.communication not in ("none", "broadcast", "request", "targeted", "gated"):
             raise ValueError("unknown communication strategy")
         if self.incentives not in ("shared", "private") or self.topology not in (
@@ -173,6 +184,12 @@ class FoundryExperiment:
             for a in self.world.agents
         }
 
+    def _authorized_artifact(self, agent, artifact):
+        public = self.config.artifact_visibility == "public" or (
+            self.config.artifact_visibility == "incentives" and self.config.incentives == "shared"
+        )
+        return public or agent.split(".")[0] == artifact.author.split(".")[0]
+
     def _initial(self, agents, seed):
         material_supply = (
             self.world.firms * self.world.generations
@@ -263,12 +280,13 @@ class FoundryExperiment:
             }
         )
         data["started"], data["bids"], data["decisions"], data["exposure"] = generation, {}, {}, {}
+        data["preferences"], data["assignments"] = {}, {}
         data["message_count"], data["message_bytes"], data["research_used"] = 0, 0, 0
         data["memory"]._advance(generation)
         visible_ids = {a.id for a in data["memory"].available(generation)} if cfg.artifacts else set()
 
         def transfer_evaluator(agent, artifact, task):
-            authorized = cfg.incentives == "shared" or agent.id.split(".")[0] == artifact.author.split(".")[0]
+            authorized = self._authorized_artifact(agent.id, artifact)
             valid = authorized and artifact.id in visible_ids and artifact.metadata["version"] == version
             return Feedback(float(artifact.score or 0), verified=valid)
 
@@ -338,11 +356,7 @@ class FoundryExperiment:
         # Archive visibility is explicit. Old-version recipes remain visible but are labeled stale.
         contexts = {}
         for a in world.agents:
-            visible = tuple(
-                art
-                for art in available
-                if cfg.incentives == "shared" or art.author.split(".")[0] == a.split(".")[0]
-            )
+            visible = tuple(art for art in available if self._authorized_artifact(a, art))
             data["stats"]["artifact_reads"] += len(visible)
             data["stats"]["artifact_read_bytes"] += sum(
                 len(json.dumps(asdict(art), sort_keys=True, default=sorted).encode()) for art in visible
@@ -359,6 +373,11 @@ class FoundryExperiment:
                 )
             public = {
                 "generation": generation,
+                "total_generations": world.generations,
+                "rounds": cfg.rounds,
+                "agent_teams": cfg.agent_teams,
+                "agent_publication": cfg.agent_publication,
+                "artifact_visibility": cfg.artifact_visibility,
                 "round": round_index,
                 "version": version,
                 "members": world.agents,
@@ -391,7 +410,9 @@ class FoundryExperiment:
                 copy.deepcopy(state.agents[a]),
                 tuple(copy.deepcopy(state.agents[a].inbox)),
                 copy.deepcopy(visible),
-                "commit" if round_index == cfg.rounds - 1 else "research",
+                "commit"
+                if round_index == cfg.rounds - 1
+                else ("contract" if cfg.agent_teams and round_index == 1 else "research"),
                 state.step,
             )
             data["stats"]["receiver_input_bytes"] += sum(wire_bytes(m) for m in contexts[a].messages)
@@ -417,6 +438,23 @@ class FoundryExperiment:
             raise ValueError("forecast must be a probability")
         if context.phase == "commit":
             self.world.validate_recipe(json.loads(output.decision.answer))
+            if self.config.agent_publication and type(output.decision.metadata.get("publish")) is not bool:
+                raise ValueError("commit requires a boolean publication decision")
+        if self.config.agent_teams and context.phase == "contract":
+            prefs = output.decision.metadata.get("preferences")
+            if not isinstance(prefs, dict):
+                raise ValueError("contract requires partner preferences")
+            role = agent.split(".")[1]
+            targets = ("power", "firmware") if role == "sensor" else ("sensor",)
+            if set(prefs) != set(targets):
+                raise ValueError("preferences must name complementary roles")
+            for target, members in prefs.items():
+                if not isinstance(members, list) or any(not isinstance(m, str) for m in members):
+                    raise ValueError("preferences must contain agent identifiers")
+                if len(set(members)) != len(members) or any(
+                    m not in self.world.agents or not m.endswith("." + target) for m in members
+                ):
+                    raise ValueError("invalid partner preferences")
         for message in output.messages:
             if message.sender != agent or any(r not in self.world.agents for r in message.recipients):
                 raise ValueError("spoofed message sender or unknown recipient")
@@ -495,9 +533,17 @@ class FoundryExperiment:
         cfg, world, state = self.config, self.world, data["state"]
         generation, round_index = divmod(tick, cfg.rounds)
         for a, output in outputs.items():
+            audit = output.decision.metadata.get("model_audit")
+            if audit:
+                data["events"].append(
+                    {"channel": "model", "kind": "decision", "tick": tick, "agent": a, **copy.deepcopy(audit)}
+                )
+                data["stats"]["protocol_errors"] += int(audit.get("protocol_error") is not None)
             state.agents[a].memory.update(copy.deepcopy(output.memory_updates))
             if round_index == 0:
                 data["bids"][a] = float(output.decision.metadata["bid"])
+            if cfg.agent_teams and round_index == 1:
+                data["preferences"][a] = copy.deepcopy(output.decision.metadata["preferences"])
             if round_index == cfg.rounds - 1:
                 data["decisions"][a] = output.decision
                 data["events"].append(
@@ -581,12 +627,22 @@ class FoundryExperiment:
         data["assignments"] = {}
         matches = {}
         coordinators = [o["coordinator"] for o in world.orders(generation)]
-        if self.config.team_selection == "matching":
+        if self.config.team_selection == "matching" or self.config.agent_teams:
             for role in ("power", "firmware"):
                 candidates = [a for a in world.agents if a.endswith("." + role)]
                 matches[role] = DeferredAcceptance().clear(
-                    {c: sorted(candidates, key=lambda a: (data["bids"][a], a)) for c in coordinators},
-                    {a: sorted(coordinators) for a in candidates},
+                    {
+                        c: data["preferences"][c][role]
+                        if self.config.agent_teams
+                        else sorted(candidates, key=lambda a: (data["bids"][a], a))
+                        for c in coordinators
+                    },
+                    {
+                        a: data["preferences"][a]["sensor"]
+                        if self.config.agent_teams
+                        else sorted(coordinators)
+                        for a in candidates
+                    },
                 )
         for order in world.orders(generation):
             coordinator = order["coordinator"]
@@ -599,8 +655,9 @@ class FoundryExperiment:
                 [a for a in world.agents if a.endswith(".power")],
                 [a for a in world.agents if a.endswith(".firmware")],
             ):
-                if self.config.team_selection == "matching" and (
-                    power != matches["power"][coordinator] or firmware != matches["firmware"][coordinator]
+                if (self.config.team_selection == "matching" or self.config.agent_teams) and (
+                    power != matches["power"].get(coordinator)
+                    or firmware != matches["firmware"].get(coordinator)
                 ):
                     continue
                 if chosen and (power != chosen["power"] or firmware != chosen["firmware"]):
@@ -767,7 +824,7 @@ class FoundryExperiment:
             )
             artifact = Artifact(
                 "device:" + oid,
-                team[2],
+                coordinator if cfg.agent_publication else team[2],
                 {"recipe": actual[oid], "quality": result["quality"]},
                 metadata={
                     "generation": generation,
@@ -778,8 +835,19 @@ class FoundryExperiment:
                 },
             )
             if result["success"]:
-                admitted = data["store"].admit(artifact)
-                data["memory"].write(admitted, generation)
+                publish = not cfg.agent_publication or data["decisions"][coordinator].metadata["publish"]
+                if publish:
+                    admitted = data["store"].admit(artifact)
+                    data["memory"].write(admitted, generation)
+                data["events"].append(
+                    {
+                        "channel": "artifact",
+                        "kind": "publication",
+                        "order": oid,
+                        "generation": generation,
+                        "published": publish,
+                    }
+                )
                 data["contracts"].complete(oid, artifact, DeviceVerifier(world))
             else:
                 data["contracts"].complete(oid, artifact, lambda a: Feedback(0, verified=False))
@@ -901,19 +969,28 @@ class FoundryExperiment:
                 data["pending"].sort(key=lambda p: keyed(seed, self.world.id, "order", tick, p[1].id))
             self._deliver(data, tick, suppressed, replacements)
             contexts = self._contexts(data, generation, round_index)
-            outputs = {}
-            # Construct every private context before invoking any agent.
-            for a in self.world.agents:
-                call = data["agents"][a].act(copy.deepcopy(contexts[a]))
-                output = await call if inspect.isawaitable(call) else call
-                self._validate(a, output, contexts[a])
-                outputs[a] = copy.deepcopy(output)
+            # Concurrency changes wall time, never synchronous observation/action ordering.
+            semaphore = asyncio.Semaphore(self.config.agent_concurrency)
+
+            async def invoke(a, semaphore=semaphore, contexts=contexts):
+                async with semaphore:
+                    call = data["agents"][a].act(copy.deepcopy(contexts[a]))
+                    output = await call if inspect.isawaitable(call) else call
+                    self._validate(a, output, contexts[a])
+                    return copy.deepcopy(output)
+
+            results = await asyncio.gather(*(invoke(a) for a in self.world.agents), return_exceptions=True)
+            failures = [r for r in results if isinstance(r, BaseException)]
+            if failures:
+                raise failures[0]
+            outputs = dict(zip(self.world.agents, results, strict=True))
+            for output in outputs.values():
                 data["stats"]["agent_calls"] += 1
                 if self.config.trust_reported_usage:
                     data["stats"]["tokens"] += output.usage.tokens
                     data["stats"]["model_cost"] += output.usage.cost
             self._apply(data, contexts, outputs, tick, seed)
-            if round_index == 0:
+            if round_index == (1 if self.config.agent_teams else 0):
                 self._award(data, generation)
             if round_index == self.config.rounds - 1:
                 await self._produce(data, generation, seed)

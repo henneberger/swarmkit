@@ -354,6 +354,8 @@ Unsupported objects fail explicitly. A snapshot contains private population stat
 
 The optional [`DeepSeekClient` and `SQLiteCallGate`](src/swarmkit/providers/deepseek.py) add provider-level accounting. A gate transaction reserves estimated input and maximum output before each dispatch and enforces call, token, estimated-spending, concurrency, and rate limits across processes using the same ledger. Reopening a ledger preserves usage and pause/enable flags. Completed requests reconcile usage; unknown outcomes retain conservative reservations. Retries, if configured, count as separate attempts.
 
+The client defaults to DeepSeek V4.1 Flash (`deepseek-flash`) and accepts `DEEPSEEK_API_KEY` or `DEEPSEEK_API`. Reported dollar cost is a conservative price bound, not the cache/time-discounted invoice.
+
 The generic runtime's token and cost limits use returned usage and stop future dispatch after it arrives. For paid concurrent calls, enforce reservations at the provider boundary. The DeepSeek integration supplies that boundary for its client; other provider callbacks must implement their own. Applications own credential configuration and deliberate enablement of live calls.
 
 
@@ -503,6 +505,16 @@ python examples/research_foundry.py
 ```
 
 Use the Foundry when you want to study discovery, commitment, execution, and incentives together. It includes a paired 16-condition primary study plus silent controls, optional artifact/pooled controls, message-removal replay, and strategy cross-play. The provided scientists are offline reference policies; use the canonical `Agent` interface to supply your own models. The [guide](docs/RESEARCH_FOUNDRY.md) documents all observation channels, usage accounting, and implementation limits.
+
+**For real model-agent experimentation, use the [integrated DeepSeek program](docs/FOUNDRY_MODEL_EXPERIMENT.md).** Agents choose research, messages, bids, partner preferences, commitments, forecasts, and publication. The program crosses communication institutions, incentives and disruption, then tests mixed partners, archive removal and message interventions within the same economic task. It freezes prompts after development and saves full API traces, usage, outcomes and paired analyses.
+
+```sh
+# Live API calls; first export DEEPSEEK_API or DEEPSEEK_API_KEY.
+python -m swarmkit.foundry.model_study --phase dev --output var/foundry/my-development
+python -m swarmkit.foundry.model_study --phase test --development var/foundry/my-development --output var/foundry/my-test
+```
+
+Use this program to investigate end-to-end communication/incentive interactions with actual models. Use the offline Foundry commands for simulator checks. Development acceptance checks must pass before testing, and a persistent $15 upper-bound spending gate covers the live program. Reusing an output directory resumes the same frozen experiment.
 
 
 **To experiment with communication strategies, use the [executable evaluation guide](docs/COMMUNICATION_EVAL_USAGE.md).** It covers private observations, routing, timing, compression, measured delivery/cost, paired controls, and message-removal replay. The [research note](docs/COMMUNICATION_EVALUATION.md) explains the design.

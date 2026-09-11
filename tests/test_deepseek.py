@@ -309,3 +309,18 @@ def test_existing_gate_reads_other_instance_limit_changes(tmp_path):
     with pytest.raises(ValueError, match="charged/reserved"):
         observer.set_limits(old)
     assert len(limiter.limits_history()) == 1
+
+
+async def test_v41_alias_response_identity_and_alternate_env(tmp_path, monkeypatch):
+    monkeypatch.delenv("DEEPSEEK_API_KEY", raising=False)
+    monkeypatch.setenv("DEEPSEEK_API", "test-only-alternate-key")
+    client = DeepSeekClient(gate=gate(tmp_path))
+    assert client.model == "deepseek-flash"
+
+    def request(body):
+        assert json.loads(body)["model"] == "deepseek-flash"
+        return response() | {"model": "deepseek-flash"}
+
+    monkeypatch.setattr(client, "_request", request)
+    result = await client.complete([{"role": "user", "content": "hello"}])
+    assert result.response_model == "deepseek-flash"

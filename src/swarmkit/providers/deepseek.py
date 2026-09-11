@@ -1,4 +1,4 @@
-"""Opt-in DeepSeek V4 Flash access through a durable, process-shared budget gate.
+"""Opt-in DeepSeek V4.1 Flash access through a durable, process-shared budget gate.
 
 Official contracts checked 2026-09-09:
 https://api-docs.deepseek.com/api/create-chat-completion/
@@ -35,7 +35,10 @@ from typing import Any, Mapping, Sequence
 from swarmkit.types import Usage
 
 ENDPOINT = "https://api.deepseek.com/chat/completions"
-MODEL = "deepseek-v4-flash"
+MODEL = "deepseek-flash"
+# Retain the historical, higher price bound so reopening an existing ledger
+# never reprices its previous charges downward. V4.1 peak prices checked
+# 2026-09-10 are $0.30/$1.20; reported cost is a conservative bound, not a bill.
 # Integer nanodollars per token avoids floating point admission errors.
 INPUT_NANODOLLARS = 440
 OUTPUT_NANODOLLARS = 1320
@@ -314,6 +317,7 @@ class CompletionResult:
     input_tokens: int
     output_tokens: int
     finish_reason: str
+    response_model: str = ""
 
 
 class _NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -339,14 +343,18 @@ class DeepSeekClient:
         timeout: float = 60.0,
         max_retries: int = 0,
     ):
-        if model != MODEL:
-            raise ValueError("this pricing gate supports deepseek-v4-flash only")
+        if model not in (MODEL, "deepseek-v4-flash"):
+            raise ValueError("this pricing gate supports DeepSeek Flash only")
         if not math.isfinite(timeout) or timeout <= 0:
             raise ValueError("timeout must be positive and finite")
         if type(max_retries) is not int or not 0 <= max_retries <= 5:
             raise ValueError("max_retries must be between 0 and 5")
         self.gate, self.model, self.timeout, self.max_retries = gate, model, timeout, max_retries
-        self._api_key = api_key if api_key is not None else os.environ.get("DEEPSEEK_API_KEY", "")
+        self._api_key = (
+            api_key
+            if api_key is not None
+            else (os.environ.get("DEEPSEEK_API_KEY") or os.environ.get("DEEPSEEK_API", ""))
+        )
         if not self._api_key or any(c in self._api_key for c in "\r\n"):
             raise ValueError("a valid DEEPSEEK_API_KEY is required")
 
@@ -413,6 +421,7 @@ class DeepSeekClient:
                 inputs,
                 outputs,
                 finish,
+                str(data.get("model", "")),
             )
         except BaseException:
             self.gate.mark_unknown(call_id)

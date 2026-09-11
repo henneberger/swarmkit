@@ -151,7 +151,7 @@ There are **77 registered entries**. Some entries expose several operations (for
 
 | Registry name / API | Implemented operation | Fidelity and limits | Sources |
 |---|---|---|---|
-| `research_foundry` · [swarmkit.foundry.FoundryExperiment](../src/swarmkit/foundry/experiment.py#L159) | Private discovery, team procurement, resource scheduling and independently verified production. | **design**. Synthetic physics and scripted controls; provider-backed agents require explicit adapters and usage accounting. | [source 1](https://arxiv.org/abs/2505.11556) · [source 2](https://arxiv.org/abs/2601.13295) |
+| `research_foundry` · [swarmkit.foundry.FoundryExperiment](../src/swarmkit/foundry/experiment.py#L170) | Private discovery, team procurement, resource scheduling and independently verified production. | **design**. Synthetic physics and scripted controls; provider-backed agents require explicit adapters and usage accounting. | [source 1](https://arxiv.org/abs/2505.11556) · [source 2](https://arxiv.org/abs/2601.13295) |
 
 ## What the package does not bundle
 

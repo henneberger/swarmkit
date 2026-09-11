@@ -2,6 +2,8 @@
 
 A runnable, synthetic research-and-production economy for experiments on **how private discoveries become useful collective work**. Agents investigate components, communicate, bid for team membership, commit to designs, execute resource-constrained jobs and receive independently verified outcomes. Successful devices become persistent artifacts. Physics changes and staff turnover test recovery.
 
+For the live DeepSeek V4.1 Flash program, see the [integrated model experiment](FOUNDRY_MODEL_EXPERIMENT.md). It uses model-chosen partner rankings and publication instead of the offline defaults below, and independently controls artifact visibility and incentives.
+
 ## Run it
 
 ```sh
@@ -112,6 +114,8 @@ Callbacks implement `act(AgentContext) -> AgentOutput`, synchronously or asynchr
 At `phase="commit"`, the decision answer must be a JSON list of three legal component indices. Persist private state through `memory_updates`. Message metadata must be finite JSON data; binary/latent transports need an explicit adapter and accurate traffic metering. Agents cannot inject verified artifacts through outputs.
 
 Custom providers own prompt construction, model/tool determinism, side effects and usage accounting. `trust_reported_usage=True` sums explicitly reported tokens and monetary cost. `agent_calls` counts harness invocations, not hidden provider calls. The driver invokes agents sequentially within synchronous rounds; simulated production time is separate from Python/model wall time.
+
+Set `agent_concurrency` to overlap provider requests while preserving synchronous observations and action application. `agent_teams=True` delays matching until round 1: every decision in the `contract` phase supplies `preferences`, mapping complementary specialty names to ordered acceptable agent IDs. Empty lists refuse partners. `agent_publication=True` requires a boolean `publish` at commitment; the coordinator chooses whether a successful recipe enters the archive. Payment still depends on verification. Set `artifact_visibility="public"` or `"firm"` to decouple archive access from objectives; the default `"incentives"` retains offline behavior.
 
 ## Replay and metrics
 
