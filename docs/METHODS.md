@@ -4,7 +4,7 @@ This table is generated from `swarmkit.catalog.methods()`. All listed targets ar
 
 Fidelity labels: **primitive** is general infrastructure; **mechanism** implements the stated local operation; **component** supplies one part of a larger method; **adaptation** changes the published method for a common API; **baseline** is a deliberately simpler comparator; **design** is an explicit synthesis; **metric** measures a limited property. **implemented_core** is a self-contained economic component; **numpy_adaptation** is a small numerical research adaptation; **callback_training** executes caller-supplied learning; **optional_adapter** invokes an external solver. None claims to reproduce a paper’s full experimental results.
 
-There are **76 registered entries**. Some entries expose several operations (for example graph sampling, learning and pruning).
+There are **77 registered entries**. Some entries expose several operations (for example graph sampling, learning and pruning).
 
 ## Topology
 
@@ -146,6 +146,12 @@ There are **76 registered entries**. Some entries expose several operations (for
 | `economic_language_self_play` · [swarmkit.economics.NegotiationSelfPlay](../src/swarmkit/economics/learning.py#L201) | Improve structured language offers | **callback_training**. Validate structured outcomes and hold out partners | [source 1](https://arxiv.org/abs/1706.05125) |
 | `economic_information_design` · [swarmkit.economics.FramingAndDisclosurePolicy](../src/swarmkit/economics/learning.py#L251) | Study evidence framing and disclosure | **numpy_adaptation**. Belief oracle is a modeling assumption; no general behavior guarantee | [source 1](https://arxiv.org/abs/2509.25565) |
 | `economic_leader_follower` · [swarmkit.economics.StackelbergContractGame](../src/swarmkit/economics/games.py#L179) | Model scheduler incentives and worker effort | **numpy_adaptation**. Tentative extension; full principal-agent literature not covered | [source 1](https://arxiv.org/abs/2108.02755) |
+
+## Experiments
+
+| Registry name / API | Implemented operation | Fidelity and limits | Sources |
+|---|---|---|---|
+| `research_foundry` · [swarmkit.foundry.FoundryExperiment](../src/swarmkit/foundry/experiment.py#L159) | Private discovery, team procurement, resource scheduling and independently verified production. | **design**. Synthetic physics and scripted controls; provider-backed agents require explicit adapters and usage accounting. | [source 1](https://arxiv.org/abs/2505.11556) · [source 2](https://arxiv.org/abs/2601.13295) |
 
 ## What the package does not bundle
 

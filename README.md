@@ -4,7 +4,7 @@
 
 SwarmKit is a Python library for building populations of agents that explore independently, exchange evidence, challenge conclusions, and reuse discoveries. It brings communication, deliberation, learning, and evaluation into one shared type system, so you can combine mechanisms and test what each contributes.
 
-The library includes **76 registered methods**, a provider-neutral async runtime, deterministic offline examples, and an optional DeepSeek client with persistent spending controls. Python **3.10+** is required; **NumPy is the only required third-party runtime dependency**.
+The library includes **77 registered methods**, a provider-neutral async runtime, deterministic offline examples, and an optional DeepSeek client with persistent spending controls. Python **3.10+** is required; **NumPy is the only required third-party runtime dependency**.
 
 [Method catalog](docs/METHODS.md) · [API and composition guide](docs/API.md) · [Research background](SWARMS_REPORT.md) · [Attribution](THIRD_PARTY_NOTICES.md)
 
@@ -494,6 +494,17 @@ The communication graph and the context graph serve different purposes: the firs
 
 ## Swarm benchmarks and evaluations
 
+**For a complete communication experiment, start with [Research Foundry](docs/RESEARCH_FOUNDRY.md).** Twelve specialists discover hidden component interactions, communicate, form paid teams, schedule shared equipment, and deliver independently tested devices. Persistent artifacts, changing physics, turnover, material budgets, and private incentives make communication affect useful work.
+
+```sh
+python -m swarmkit.foundry run --traces --output foundry-run.json
+python -m swarmkit.foundry study --worlds 3 --extra-controls --output foundry-study.json
+python examples/research_foundry.py
+```
+
+Use the Foundry when you want to study discovery, commitment, execution, and incentives together. It includes a paired 16-condition primary study plus silent controls, optional artifact/pooled controls, message-removal replay, and strategy cross-play. The provided scientists are offline reference policies; use the canonical `Agent` interface to supply your own models. The [guide](docs/RESEARCH_FOUNDRY.md) documents all observation channels, usage accounting, and implementation limits.
+
+
 **To experiment with communication strategies, use the [executable evaluation guide](docs/COMMUNICATION_EVAL_USAGE.md).** It covers private observations, routing, timing, compression, measured delivery/cost, paired controls, and message-removal replay. The [research note](docs/COMMUNICATION_EVALUATION.md) explains the design.
 
 ```sh
@@ -639,6 +650,7 @@ Tests use synthetic fixtures and fake provider transports; API credentials are n
 | `examples/` | Offline library compositions |
 | `tests/` | Unit and integration tests |
 | `docs/` | Method catalog, API contracts, and application documentation |
+| `src/swarmkit/foundry/` | Integrated research/production world, private agent views, communication experiments, and population comparisons |
 | `src/swarmkit/economics/` | Economic models, mechanisms, strategies, settlement, training and optional adapters |
 | `src/swarmkit/benchmarks/` | Communication experiments, exact diagnostic tasks, offline pilot CLI |
 | `sources/`, `repositories/` | Research inventory and pinned upstream Git submodules |

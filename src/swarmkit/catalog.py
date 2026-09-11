@@ -428,6 +428,14 @@ _ENTRIES += (
 )
 
 
+_ENTRIES += (
+    _entry("research_foundry", "experiments", "foundry.FoundryExperiment",
+           ("https://arxiv.org/abs/2505.11556", "https://arxiv.org/abs/2601.13295"),
+           "design", "Private discovery, team procurement, resource scheduling and independently verified production.",
+           "Synthetic physics and scripted controls; provider-backed agents require explicit adapters and usage accounting."),
+)
+
+
 def methods(family: str | None = None) -> tuple[MethodInfo, ...]:
     return tuple(info for info in _ENTRIES if family is None or info.family == family)
 
