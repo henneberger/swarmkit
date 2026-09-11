@@ -288,3 +288,32 @@ def test_hub_protocol_is_enforced(tmp_path):
         agent.parse(json.dumps(obj), ctx)
     obj["messages"][0]["recipients"] = ["firm0.sensor"]
     assert agent.parse(json.dumps(obj), ctx).messages[0].recipients == ("firm0.sensor",)
+
+
+async def test_invalid_commit_cannot_receive_accidental_default_payment(tmp_path):
+    from swarmkit.types import AgentOutput, Decision
+
+    # Choose a world in which index-zero fallback is physically acceptable.
+    world = next(
+        w
+        for seed in range(100)
+        if (w := FoundryWorld(seed=seed, firms=2, components=2, generations=1)).verify(
+            0, [0, 0, 0], 5, w.orders(0)[0]
+        )["success"]
+    )
+
+    class Agent:
+        def act(self, ctx):
+            metadata = {"bid": 3, "query": None, "publish": True}
+            if ctx.phase == "commit":
+                metadata["model_audit"] = {"protocol_error": "invalid JSON"}
+            return AgentOutput(decision=Decision(ctx.agent.id, "[0,0,0]", metadata=metadata))
+
+    run = await FoundryExperiment(world, FoundryConfig(rounds=3, agent_publication=True)).run(
+        {a: Agent() for a in world.agents}
+    )
+    assert run.metrics["accepted_value"] == 0
+    assert run.metrics["outstanding_reservations"] == 0
+    assert all(o["reason"] == "invalid_commitment" for o in run.outcomes)
+    assert not run.artifacts
+    assert all(run.metrics["balances"][a] == 100 for a in world.agents)

@@ -6,6 +6,46 @@ from collections import Counter
 from pathlib import Path
 
 
+def audit(episodes):
+    from swarmkit.foundry import FoundryWorld
+
+    checked = 0
+    for r in episodes:
+        world = FoundryWorld(**r["world"])
+        metrics = r["metrics"]
+        assert metrics["agent_calls"] == world.generations * r["config"]["rounds"] * len(world.agents)
+        assert abs(metrics["ledger_conservation_error"]) < 1e-7
+        assert metrics["outstanding_reservations"] == 0
+        for role in ("sensor", "power", "firmware"):
+            assert (
+                metrics["remaining_materials"].get(role, 0) + metrics["consumed_materials"].get(role, 0)
+                == world.firms * world.generations
+            )
+        invalid = {
+            (e["agent"], e["tick"]) for e in r["events"] if e["channel"] == "model" and e["protocol_error"]
+        }
+        for o in r["outcomes"]:
+            if "assembled_recipe" not in o:
+                assert o["accepted_value"] == 0
+                continue
+            order = next(x for x in world.orders(o["generation"]) if x["id"] == o["order"])
+            expected = world.verify(o["generation"], o["assembled_recipe"], o["completion"], order)
+            bad = any((a, (o["generation"] + 1) * r["config"]["rounds"] - 1) in invalid for a in o["team"])
+            assert o["quality"] == expected["quality"]
+            assert o["success"] == (expected["success"] and o["tested"] and not bad)
+            assert o["accepted_value"] == (order["value"] if o["success"] else 0)
+            checked += 1
+        assert metrics["accepted_value"] == sum(o["accepted_value"] for o in r["outcomes"])
+        if r["case"]["protocol"] == "silent":
+            assert not any(d["status"] == "delivered" for d in r["deliveries"])
+    return {
+        "episodes_checked": len(episodes),
+        "assembled_devices_checked": checked,
+        "cash_materials_escrow_calls_and_silent_controls": "passed",
+        "invalid_commitments_cannot_earn_value": "passed",
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("study", type=Path)
@@ -58,6 +98,7 @@ def main():
         "summary": summary,
         "response_model_counts": dict(models),
         "protocol_error_counts": dict(errors),
+        "independent_audit": audit(complete),
         "primary_behavior_counts": dict(activity),
         "primary_valid_bid_histogram": dict(bids),
         "episodes": [

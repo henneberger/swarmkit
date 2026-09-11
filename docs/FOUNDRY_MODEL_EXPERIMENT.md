@@ -55,6 +55,8 @@ The primary matrix has 48 episodes. Cross-play adds six mixed episodes while reu
 
 Development interface repairs: the first calibration rejected optional message IDs/sender fields copied from inboxes. The adapter now discards caller-supplied IDs and verifies optional sender identity. The second rejected citations of visible artifacts as if they were forged component measurements; these now remain artifact-reference metadata, with no invented measurement cards. One remaining malformed JSON response was counted as an invalid turn. No decision policy was replaced with a scripted solver.
 
+Scoring correction after the first held-out pass: an invalid final response originally substituted `[0,0,0]`, which could accidentally satisfy an already-awarded order. The corrected verifier rejects any order with an invalid model commitment, regardless of physical quality. Actual dispatched work and its measured outcome still incur costs; no payment or archive admission follows. The first implementation is preserved in commit `fdf54db`. Prompts and model policies stayed unchanged; development was revalidated and the entire held-out design replayed with exact-context cache reuse. This is an explicitly documented test-informed scoring bug fix, not a claim that the first pass was flawless or that only favorable cases were rerun.
+
 Transport/provider failures stop the affected episode and prevent a complete-results claim. Other in-flight requests finish and remain accounted for. Study summaries expose incomplete episodes. A credential is never included in a prompt, manifest or report.
 
 ## Use the components for your own experiment

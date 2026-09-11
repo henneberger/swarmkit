@@ -814,8 +814,13 @@ class FoundryExperiment:
                 continue
             last = oid + ":verify"
             ran = physical_success.get(last, False)
+            invalid_commitment = any(
+                data["decisions"][a].metadata.get("model_audit", {}).get("protocol_error") for a in team
+            )
             result = world.verify(generation, actual[oid], finishes[last], order)
-            result["success"] &= ran
+            # A parser fallback is not a valid commitment, even if index zero
+            # accidentally assembles a physically acceptable device.
+            result["success"] &= ran and not invalid_commitment
             card_ids = world.required(world.version(generation), planned[oid])
             exposed = set(data["exposure"][coordinator])
             coverage = len(exposed & set(card_ids)) / len(card_ids)
@@ -869,6 +874,7 @@ class FoundryExperiment:
                     **result,
                     "accepted_value": reward,
                     "tested": ran,
+                    "invalid_commitment": invalid_commitment,
                     "version": world.version(generation),
                     "planned_recipe": planned[oid],
                     "assembled_recipe": actual[oid],
@@ -883,7 +889,9 @@ class FoundryExperiment:
                     "reason": "accepted"
                     if result["success"]
                     else (
-                        "execution_failed"
+                        "invalid_commitment"
+                        if invalid_commitment
+                        else "execution_failed"
                         if not ran
                         else "late"
                         if not result["on_time"]
